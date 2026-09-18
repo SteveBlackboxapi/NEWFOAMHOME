@@ -227,7 +227,7 @@ function RosterView() {
         </div>
       </div>
       {/* Talent cards */}
-      <div className="overflow-y-auto flex-1">
+      <div className="overflow-hidden flex-1">
         {TALENT_DATA.map(t => <TalentCard key={t.name} t={t} />)}
       </div>
     </div>
@@ -237,7 +237,7 @@ function RosterView() {
 // ─── Content search view ──────────────────────────────────────────────────────
 function FilterSidebar() {
   return (
-    <div className="w-[160px] shrink-0 border-r border-[#eeefef] overflow-y-auto bg-white py-3 px-3 flex flex-col gap-3">
+    <div className="w-[160px] shrink-0 border-r border-[#eeefef] overflow-hidden bg-white py-3 px-3 flex flex-col gap-3">
       <div className="flex items-center gap-1">
         <img alt="" className="size-[12px] opacity-60" src={icFilters} />
         <span className="font-founders font-medium text-[11px] text-[#101828]">Filters</span>
@@ -360,7 +360,7 @@ function ContentSearchView() {
       <div className="flex flex-1 overflow-hidden">
         <FilterSidebar />
         {/* Masonry grid */}
-        <div className="flex-1 overflow-y-auto p-3">
+        <div className="flex-1 overflow-hidden p-3">
           <div className="columns-4 gap-2 space-y-2">
             {contentImgs.map((src, i) => (
               <div key={i} className="break-inside-avoid mb-2">
