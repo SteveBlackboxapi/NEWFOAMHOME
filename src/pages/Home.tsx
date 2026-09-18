@@ -16,11 +16,23 @@ const icYT = `${A}/d0b8e.svg`;
 // Gmail embed
 export function GmailView() {
   const [step, setStep] = useState(0);
+  const [play, setPlay] = useState(false);
+  const root = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) setPlay(true);
+    }, { threshold: 0.45 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!play) return;
     setStep(0);
     const ids = [700, 1600, 2400].map((ms, i) => window.setTimeout(() => setStep(i + 1), ms));
     return () => ids.forEach(clearTimeout);
-  }, []);
+  }, [play]);
 
   const people = [
     { name: "Ren Cole", img: `${A}/9e849.png` },
@@ -29,7 +41,7 @@ export function GmailView() {
   ];
 
   return (
-    <div className="bg-[#e9eef6] overflow-hidden relative">
+    <div ref={root} className="bg-[#e9eef6] overflow-hidden relative">
       {step === 2 && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-[#101828] text-white text-[11px] px-3 h-7 rounded-full inline-flex items-center">
           Copied!
