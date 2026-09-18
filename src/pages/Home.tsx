@@ -49,8 +49,8 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
       <div
         className="pointer-events-none absolute z-50 size-10 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 shadow-[0_0_0_6px_rgba(198,243,30,0.25)] transition-all duration-300"
         style={{
-          left: ["18%", "62%", "62%", "22%"][step],
-          top: ["42%", "28%", "52%", "38%"][step],
+          left: ["72%", "78%", "28%", "28%"][Math.min(step, 3)],
+          top: ["78%", "78%", "42%", "42%"][Math.min(step, 3)],
         }}
       />
       {step === 2 && (
@@ -124,7 +124,7 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
               <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Portland</p>
               <div className="flex justify-center gap-1.5 mt-3">
                 <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
-                <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: step >= 2 ? "#7ddec0" : "#f4f5f6" }}>Detail</span>
+                <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: step >= 2 ? "#7ddec0" : "#f4f5f6" }}>{step === 2 ? "Copied!" : "Detail"}</span>
                 <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Text</span>
               </div>
             </div>
