@@ -388,42 +388,42 @@ function PitchStory() {
             </div>
           </div>
           <div className="rounded-[28px] p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
-            <div className="bg-white rounded-[22px] overflow-hidden min-h-[400px] grid grid-rows-[auto_1fr] grid-cols-[120px_1fr] border border-[#e8eaed]">
-              <div className="bg-[#f4f6fb] p-4 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
-                <div className="flex items-center gap-1.5 mb-4">
-                  <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
-                  <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
-                </div>
-                <p className={`${FG_M} bg-[#d3e3fd] text-[#041e49] rounded-full px-3 py-1.5 mb-3 inline-block`}>Compose</p>
-                <div className={`${FG_M} bg-[#e8f0fe] text-[#041e49] rounded-full px-3 py-1.5 mb-3 flex items-center justify-between`}>Inbox <span>12</span></div>
-                <p className="mt-2 px-1">Starred</p>
-                <p className="mt-2 px-1">Sent</p>
-                <p className="mt-2 px-1 flex justify-between">Drafts <span>2</span></p>
-              </div>
-              <div className="col-span-2 flex items-center gap-3 px-4 py-3 border-b border-[#eef0f3]">
+            <div className="bg-white rounded-[22px] overflow-hidden border border-[#e8eaed] flex flex-col min-h-[400px]">
+              <div className="flex items-center gap-3 px-4 py-3 border-b border-[#eef0f3]">
                 <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
-                <span className={`${FG_SB} text-[14px] text-[#202124] mr-2`}>Gmail</span>
+                <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
                 <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
                 <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
               </div>
-              <div className="p-5 col-start-2">
-                <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px]">S</div>
-                  <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+              <div className="flex flex-1 min-h-0">
+                <div className="w-[120px] shrink-0 bg-[#f4f6fb] p-3 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
+                  <p className={`${FG_M} bg-[#d3e3fd] text-[#041e49] rounded-full px-3 py-1.5 mb-2 text-center`}>Compose</p>
+                  <div className={`${FG_M} bg-[#e8f0fe] text-[#041e49] rounded-full px-3 py-1.5 mb-3 flex items-center justify-between`}>Inbox <span>12</span></div>
+                  <p className="px-2 py-1">Starred</p>
+                  <p className="px-2 py-1">Sent</p>
+                  <p className="px-2 py-1 flex justify-between">Drafts <span>2</span></p>
                 </div>
-                <p className={`${FG_R} text-[11px] text-[#5f6368] mb-3`}>to me · 10:42 AM</p>
-                <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
-                <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
-                  We’re looking for a creator running Boston. Someone whose audience is already following their training.
-                </p>
-                <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124]">
-                  <p>100K+ on Instagram</p>
-                  <p>Primarily US audience</p>
-                  <p>Running the Boston Marathon</p>
+                <div className="flex-1 p-5">
+                  <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">S</div>
+                    <div>
+                      <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                      <p className={`${FG_R} text-[11px] text-[#5f6368]`}>to me · 10:42 AM</p>
+                    </div>
+                  </div>
+                  <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
+                  <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
+                    We’re looking for a creator running Boston. Someone whose audience is already following their training.
+                  </p>
+                  <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124] space-y-1">
+                    <p>100K+ on Instagram</p>
+                    <p>Primarily US audience</p>
+                    <p>Running the Boston Marathon</p>
+                  </div>
+                  <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
+                  <p className={`${FG_R} text-[13px] text-[#202124] mt-3`}>Thanks!<br />Sam</p>
                 </div>
-                <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
-                <p className={`${FG_R} text-[13px] text-[#202124] mt-3`}>Thanks!<br />Sam</p>
               </div>
             </div>
           </div>
