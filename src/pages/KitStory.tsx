@@ -48,7 +48,7 @@ export function KitStory() {
   const publicize = range(p, 0.9, 0.93);
   const fold = range(p, 0.93, 0.97);
   const fly = range(p, 0.97, 1);
-  const headlineOp = 1 - range(p, 0.02, 0.12);
+  const headlineOp = 1 - range(p, 0.02, 0.16);
 
   useEffect(() => {
     if (landed) {
@@ -59,14 +59,14 @@ export function KitStory() {
     }
   }, [landed]);
 
-  const photoW = lerp(100, 26, pack);
-  const photoH = lerp(100, 30, pack);
-  const photoL = lerp(0, 24.5, pack);
-  const photoT = lerp(0, 20, pack);
+  const photoW = lerp(100, 31.5, pack);
+  const photoH = lerp(100, 34, pack);
+  const photoL = lerp(0, 20.8, pack);
+  const photoT = lerp(0, 19.2, pack);
 
-  const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(62, 93.6, aimShare);
-  const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(42, 8.4, aimShare);
-  const cursorOn = landed && fold < 0.2;
+  const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
+  const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
+  const cursorOn = aimShare > 0.02 && fold < 0.2;
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
@@ -171,13 +171,18 @@ export function KitStory() {
               }}
             >
               <video ref={flyVid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
+              <div className="absolute inset-0 bg-black/20" />
             </div>
           )}
 
-          <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-24 pointer-events-none" style={{ opacity: headlineOp }}>
-            <h1 className="text-white text-[52px] md:text-[78px] leading-[0.92] tracking-[-2px] font-semibold drop-shadow-lg">
-              From a clip<br />to a kit you can send.
+          <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-20 pointer-events-none" style={{ opacity: headlineOp }}>
+            <p className="text-[11px] uppercase tracking-[1.6px] text-white/70 mb-5">The truth layer</p>
+            <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">
+              Numbers everyone in the deal can trust.
             </h1>
+            <p className="mt-5 max-w-[34em] text-[16px] md:text-[18px] leading-7 text-white/85">
+              Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”
+            </p>
           </div>
 
           <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
