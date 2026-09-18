@@ -35,15 +35,6 @@ function KitNav() {
   );
 }
 
-function Card({ n, l }: { n: string; l: string }) {
-  return (
-    <div className="rounded-xl bg-[#ead9b8]/55 p-4">
-      <p className="text-[22px] font-semibold">{n}</p>
-      <p className="text-[11px] text-[#6a7282]">{l}</p>
-    </div>
-  );
-}
-
 function AfterShare() {
   const LOGOS = [
     ["tbh talent", "0% 66.6667%"],
@@ -162,6 +153,7 @@ export function KitStory() {
   const fly = range(p, 0.97, 1);
   const sharedIn = range(p, 0.96, 1);
   const headlineOp = 1 - range(p, 0.02, 0.16);
+  const light = kitIn > 0.2 || fold > 0 || sharedIn > 0;
 
   useEffect(() => {
     const v = vid.current;
@@ -179,13 +171,13 @@ export function KitStory() {
   const cursorOn = aimShare > 0.02 && fold < 0.2;
 
   return (
-    <div className="bg-black text-[#101828]">
-      <div className="fixed top-4 left-4 z-40 flex items-center gap-3">
-        <Link to="/" className={`text-[12px] ${kitIn > 0.5 ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
-        <span className={`text-[10px] uppercase tracking-[1px] ${kitIn > 0.5 ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
+    <div className="text-[#101828]" style={{ background: light ? "#eef0f4" : "#000" }}>
+      <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
+        <Link to="/" className={`text-[12px] ${light ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
+        <span className={`text-[10px] uppercase tracking-[1px] ${light ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
       </div>
       <section ref={track} className="relative h-[360vh]">
-        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-black">
+        <div ref={stage} className="sticky top-0 h-screen overflow-hidden" style={{ background: light ? "#eef0f4" : "#000" }}>
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: kitIn }}>
               <div className="h-12 shrink-0" />
@@ -216,16 +208,16 @@ export function KitStory() {
                       </div>
                     </div>
                     <div className="bg-[#6b0030] text-[#F4E6C8] px-8 py-8">
-                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">Io is a movement creator known for rooftop sessions and late miles. Illustrative Vale Studio talent — figures for demonstration only.</p>
+                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">Io is a movement creator known for rooftop sessions and late miles.</p>
                       <div className="border-t border-white/20 pt-6 flex items-end justify-between gap-6">
                         <div>
                           <p className="text-[22px] font-semibold">Platforms</p>
                           <p className="text-[34px] leading-none font-semibold mt-1">164K</p>
                         </div>
                         <div className="flex gap-10 text-right">
-                          <div><p className="text-[24px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
-                          <div><p className="text-[24px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
-                          <div><p className="text-[24px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
+                          <div><p className="text-[24px] font-semibold">89K</p></div>
+                          <div><p className="text-[24px] font-semibold">62K</p></div>
+                          <div><p className="text-[24px] font-semibold">13K</p></div>
                         </div>
                       </div>
                     </div>
@@ -235,11 +227,11 @@ export function KitStory() {
             </div>
           )}
           {fold < 0.2 && (
-            <div className="absolute z-[22] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px`, opacity: 1 }}>
+            <div className="absolute z-[22] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
             </div>
           )}
-          {kitIn > 0 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: kitIn }} />}
+          {kitIn > 0 && fold < 0.2 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: kitIn }} />}
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: kitIn }}>
               <KitNav />
@@ -269,7 +261,7 @@ export function KitStory() {
             <p className="text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px] font-semibold">Media Kit</p>
             <p className="mt-4 text-[18px] text-[#6a7282]">On its way</p>
           </div>
-          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold * (1 - fly * 0.4), left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
+          <svg viewBox="0 0 120 72" className="absolute z-[80] drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold * (1 - fly * 0.35), left: `${lerp(38, 118, fly)}%`, top: `${lerp(42, 4, fly) + Math.sin(fly * Math.PI) * -10}%`, transform: `rotate(${lerp(-24, 18, fly)}deg)` }}>
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#6b0030" />
             <path d="M44 40 L114 6 L60 40 Z" fill="#F4E6C8" />
           </svg>
