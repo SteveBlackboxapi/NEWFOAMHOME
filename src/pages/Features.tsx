@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { FoamAppScreen } from "../components/FoamAppScreen";
+import { GmailView } from "./Home";
 
 const FEATURES = [
   {
@@ -115,7 +116,11 @@ function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
           </div>
           {/* Real app screen for roster/search, styled card otherwise */}
           <div className="flex-1 min-w-0">
-            {appVariant ? (
+            {f.name === "Chrome extension" ? (
+              <div className="rounded-[20px] overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] min-h-[420px]">
+                <GmailView />
+              </div>
+            ) : appVariant ? (
               <FoamAppScreen variant={appVariant} />
             ) : (
               <div className={`${f.dark ? "bg-white/5 border-white/10" : "bg-surface border-border"} border rounded-[20px] p-8 flex flex-col gap-6`}>
