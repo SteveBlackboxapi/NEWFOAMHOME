@@ -36,9 +36,9 @@ function Hero() {
                   </div>
                   <div className="p-4 flex flex-col gap-3">
                     {[
-                      { icon: img.instagram, name: "Instagram", handle: "@alexrivera", status: "Connected", color: "bg-brand-light" },
-                      { icon: img.tiktok,    name: "TikTok",    handle: "@alexrivera", status: "Connected", color: "bg-blue-light" },
-                      { icon: img.youtube,   name: "YouTube",   handle: "Alex Rivera",  status: "Pending",   color: "bg-raised"    },
+                      { icon: img.instagram, name: "Instagram", handle: "@ren.cole", status: "Connected", color: "bg-brand-light" },
+                      { icon: img.tiktok,    name: "TikTok",    handle: "@ren.cole", status: "Connected", color: "bg-blue-light" },
+                      { icon: img.youtube,   name: "YouTube",   handle: "Ren Cole",  status: "Pending",   color: "bg-raised"    },
                     ].map(a => (
                       <div key={a.name} className="bg-raised rounded-xl p-3 flex items-center gap-3">
                         <div className={`${a.color} size-10 rounded-xl flex items-center justify-center shrink-0`}>

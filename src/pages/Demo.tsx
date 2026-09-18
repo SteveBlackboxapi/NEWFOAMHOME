@@ -78,7 +78,7 @@ export function Demo() {
                 <input
                   type="text"
                   required
-                  placeholder="Alex Rivera"
+                  placeholder="Ren Cole"
                   value={form.name}
                   onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   className={`${FG_R} h-11 rounded-[10px] border border-border bg-surface px-4 text-sm text-text placeholder:text-subtle outline-none focus:border-brand transition-colors`}
@@ -89,7 +89,7 @@ export function Demo() {
                 <input
                   type="email"
                   required
-                  placeholder="alex@sixteenthtalent.com"
+                  placeholder="ren@vale.studio"
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   className={`${FG_R} h-11 rounded-[10px] border border-border bg-surface px-4 text-sm text-text placeholder:text-subtle outline-none focus:border-brand transition-colors`}
@@ -99,7 +99,7 @@ export function Demo() {
                 <label className={`${FG_M} text-sm text-text`}>Agency or company</label>
                 <input
                   type="text"
-                  placeholder="Sixteenth Talent"
+                  placeholder="Vale Studio"
                   value={form.company}
                   onChange={e => setForm(f => ({ ...f, company: e.target.value }))}
                   className={`${FG_R} h-11 rounded-[10px] border border-border bg-surface px-4 text-sm text-text placeholder:text-subtle outline-none focus:border-brand transition-colors`}

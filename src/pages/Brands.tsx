@@ -39,8 +39,8 @@ function Hero() {
                 <img alt="Creator" className="absolute inset-0 size-full object-cover object-top" src={img.talent1} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60" />
                 <div className="absolute bottom-3 left-3 right-3">
-                  <p className={`${FG_SB} text-white text-lg leading-tight`}>Alex Rivera</p>
-                  <p className={`${FG_R} text-white/70 text-sm`}>Fitness · Boston, MA</p>
+                  <p className={`${FG_SB} text-white text-lg leading-tight`}>Ren Cole</p>
+                  <p className={`${FG_R} text-white/70 text-sm`}>Fitness · Portland, OR</p>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-3 bg-raised rounded-xl p-3 mb-4">

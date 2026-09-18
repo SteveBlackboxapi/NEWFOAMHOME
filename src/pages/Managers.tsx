@@ -129,19 +129,19 @@ function GmailSection() {
               </div>
               <div className="p-5">
                 <p className={`${FG_R} text-sm text-muted mb-4 leading-5`}>
-                  Hi Sarah, here's Carolyn — she's a great fit for your spring wellness brief:
+                  Hi Eden, here's Io — she's a great fit for your spring wellness brief:
                 </p>
                 <div className="bg-raised border border-border rounded-xl p-[14px] flex items-center gap-3">
                   <div className="relative rounded-[8px] size-12 shrink-0 overflow-hidden">
-                    <img alt="Carolyn" className="absolute h-[115%] left-[-7%] max-w-none top-0 w-[114%]" src={img.talent2} />
+                    <img alt="Io Marin" className="absolute h-[115%] left-[-7%] max-w-none top-0 w-[114%]" src={img.talent2} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`${FG_M} text-sm text-text`}>Carolyn Clarke</p>
+                    <p className={`${FG_M} text-sm text-text`}>Io Marin</p>
                     <div className="flex items-center gap-2 mt-[3px]">
                       {[img.instagram, img.tiktok].map((icon, i) => (
                         <div key={i} className="flex items-center gap-[3px]">
                           <img alt="" className="size-3 shrink-0" src={icon} />
-                          <span className={`${FG_R} text-xs text-muted`}>231K</span>
+                          <span className={`${FG_R} text-xs text-muted`}>164K</span>
                         </div>
                       ))}
                     </div>
@@ -160,9 +160,9 @@ function GmailSection() {
 
 function RosterSection() {
   const TALENT = [
-    { name: "Aliedy Almonte",   age: "32y", loc: "New York, NY",   img: img.talent1 },
-    { name: "Carolyn Clarke",   age: "28y", loc: "New York, NY",   img: img.talent2 },
-    { name: "Cassandra Thorpe", age: "33y", loc: "San Francisco",  img: img.talent3 },
+    { name: "Ren Cole",   age: "32y", loc: "New York, NY",   img: img.talent1 },
+    { name: "Io Marin",   age: "28y", loc: "New York, NY",   img: img.talent2 },
+    { name: "Sable Quinn", age: "33y", loc: "Glasgow",  img: img.talent3 },
   ];
   return (
     <section className="py-24 px-6 bg-surface">
@@ -180,7 +180,7 @@ function RosterSection() {
           </div>
         </div>
         <div className="flex items-center gap-3 mb-5">
-          <img alt="Sixteenth" className="h-[22px]" src={img.group} />
+          <img alt="Vale Studio" className="h-[22px]" src={img.group} />
           <div className="h-px flex-1 bg-border-dark" />
           <span className={`${FG_R} text-sm text-muted`}>14 talent</span>
         </div>
@@ -197,7 +197,7 @@ function RosterSection() {
                   {[img.instagram, img.tiktok, img.youtube].map((icon, i) => (
                     <div key={i} className="flex items-center gap-1">
                       <img alt="" className="size-3 shrink-0" src={icon} />
-                      <span className={`${FG_M} text-xs text-text`}>231K</span>
+                      <span className={`${FG_M} text-xs text-text`}>164K</span>
                     </div>
                   ))}
                 </div>

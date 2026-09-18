@@ -63,7 +63,7 @@ function GmailView() {
         {/* Email content */}
         <div className="flex-1 min-w-0 px-5 py-4">
           <h3 className={`${FG_SB} text-[16px] text-[#202124] mb-3`} style={{ fontFamily: "var(--font-sans)" }}>
-            Re: Boston Marathon — who should we meet?
+            Re: Portland Marathon — who should we meet?
           </h3>
 
           {/* Sender row */}
@@ -72,14 +72,14 @@ function GmailView() {
               <span className="text-[12px] font-semibold text-[#00326e]" style={{ fontFamily: "var(--font-sans)" }}>J</span>
             </div>
             <div>
-              <span className="text-[13px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Jamie · North Talent</span>
-              <div className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>to Sam · 10:42 AM</div>
+              <span className="text-[13px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Rowan · Vale Studio</span>
+              <div className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>to Eden · 10:42 AM</div>
             </div>
           </div>
 
           <p className="text-[13px] text-[#202124] mb-2" style={{ fontFamily: "var(--font-sans)" }}>Hi Sam,</p>
           <p className="text-[13px] text-[#202124] mb-4 leading-5" style={{ fontFamily: "var(--font-sans)" }}>
-            Alex is training for Boston. Their audience follows every mile.
+            Ren is training for Portland. Their audience follows every mile.
           </p>
 
           {/* Embedded creator card */}
@@ -89,18 +89,18 @@ function GmailView() {
                 <span className="text-[13px] font-semibold text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>A</span>
               </div>
               <div>
-                <p className="text-[14px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Alex</p>
-                <p className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Boston, MA · Running</p>
+                <p className="text-[14px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Ren</p>
+                <p className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Portland, OR · Running</p>
               </div>
             </div>
             <div className="px-4 pb-3 flex items-center gap-4">
               <div className="flex items-center gap-[6px]">
                 <img alt="IG" className="size-[14px]" src={icIG} />
-                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>148K</span>
+                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>131K</span>
               </div>
               <div className="flex items-center gap-[6px]">
                 <img alt="TT" className="size-[14px]" src={icTT} />
-                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>112K</span>
+                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>97K</span>
               </div>
               <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>YouTube <strong>64K</strong></span>
             </div>
@@ -126,7 +126,7 @@ function GmailView() {
           </div>
 
           <p className="text-[13px] text-[#202124] mb-1" style={{ fontFamily: "var(--font-sans)" }}>Happy to make the introduction.</p>
-          <p className="text-[13px] text-[#202124] mb-4" style={{ fontFamily: "var(--font-sans)" }}>Jamie</p>
+          <p className="text-[13px] text-[#202124] mb-4" style={{ fontFamily: "var(--font-sans)" }}>Rowan</p>
 
           <div className="flex items-center justify-between border-t border-[#e8eaed] pt-3">
             <span className="text-[10px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Added with Foam for Chrome</span>
@@ -145,7 +145,7 @@ function MediaKitView() {
       {/* Kit header */}
       <div className="px-5 pt-4 pb-3 flex items-start justify-between border-b border-[#e8e6e2]">
         <div>
-          <p className={`${FG_SB} text-[18px] text-[#101828] leading-tight`}>North <span className="font-normal">/</span></p>
+          <p className={`${FG_SB} text-[18px] text-[#101828] leading-tight`}>Vale <span className="font-normal">/</span></p>
           <p className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[1px] mt-[2px]`}>Talent Studio</p>
         </div>
         <button className={`${FG_M} text-[10px] text-[#101828] border border-[#101828] rounded-full px-3 h-6 uppercase tracking-[0.5px]`}>
@@ -158,9 +158,9 @@ function MediaKitView() {
         <div className="flex-1 min-w-0">
           <p className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[0.8px] mb-2`}>Running · Everyday Progress</p>
           <p className="font-founders font-semibold text-[#7a0036] leading-[1.0]" style={{ fontSize: "clamp(48px, 8vw, 72px)" }}>
-            Alex.
+            Ren.
           </p>
-          <p className={`${FG_R} text-[12px] text-[#6a7282] mt-1`}>Boston, Massachusetts</p>
+          <p className={`${FG_R} text-[12px] text-[#6a7282] mt-1`}>Portland, Oregon</p>
           <p className={`${FG_R} text-[12px] text-[#6a7282] mt-2 leading-5 max-w-[200px]`}>
             Early miles. Long runs. Bringing an audience along for the journey.
           </p>
@@ -182,10 +182,10 @@ function MediaKitView() {
       {/* Stats bar */}
       <div className="mt-4 bg-[#6b0030] grid grid-cols-4">
         {[
-          { label: "Total followers", val: "324K" },
-          { label: "Instagram",       val: "148K" },
-          { label: "TikTok",          val: "112K" },
-          { label: "YouTube",         val: "64K"  },
+          { label: "Total followers", val: "286K" },
+          { label: "Instagram",       val: "131K" },
+          { label: "TikTok",          val: "97K" },
+          { label: "YouTube",         val: "58K"  },
         ].map((s, i) => (
           <div key={s.label} className={`px-4 py-4 ${i < 3 ? "border-r border-white/10" : ""}`}>
             <p className={`${FG_R} text-[9px] text-white/60 uppercase tracking-[0.5px] mb-1`}>{s.label}</p>
@@ -213,7 +213,7 @@ function MediaKitView() {
       {/* Content footer */}
       <div className="px-4 py-3 border-t border-[#e8e6e2] flex items-center gap-3">
         <span className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[0.5px] shrink-0`}>Selected content</span>
-        <span className={`${FG_M} text-[12px] text-[#101828]`}>The road to Boston</span>
+        <span className={`${FG_M} text-[12px] text-[#101828]`}>Morning miles</span>
         <span className={`${FG_R} text-[11px] text-[#6a7282]`}>Training, one morning at a time.</span>
       </div>
 
@@ -434,31 +434,31 @@ function FeatureHighlight() {
                   <span className={`${FG_SB} text-white text-sm`}>TS</span>
                 </div>
                 <div>
-                  <p className={`${FG_M} text-sm text-text`}>Tony Sanchez</p>
-                  <p className={`${FG_R} text-xs text-muted`}>tony@sixteenth.io</p>
+                  <p className={`${FG_M} text-sm text-text`}>Rowan Hale</p>
+                  <p className={`${FG_R} text-xs text-muted`}>rowan@vale.studio</p>
                 </div>
               </div>
               <p className={`${FG_R} text-sm text-muted leading-6`}>
-                Hi Sarah — here's Carolyn, she's a perfect fit for the spring wellness brief:
+                Hi Eden — here's Io, she's a perfect fit for the spring wellness brief:
               </p>
               <div className="bg-surface border border-border-dark rounded-[12px] p-4 flex items-center gap-4">
                 <div className="relative size-12 rounded-[10px] overflow-hidden shrink-0 bg-[#f4f5f6]">
                   <img
-                    alt="Carolyn"
+                    alt="Io Marin"
                     src={`${A}/3546d.png`}
                     className="absolute top-0 left-[-4%] w-[108%] h-[115%] object-cover object-top"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`${FG_M} text-sm text-text`}>Carolyn Clarke</p>
+                  <p className={`${FG_M} text-sm text-text`}>Io Marin</p>
                   <div className="flex items-center gap-3 mt-1">
                     <div className="flex items-center gap-1">
                       <img alt="IG" className="size-3" src={icIG} />
-                      <span className={`${FG_M} text-xs text-text`}>231K</span>
+                      <span className={`${FG_M} text-xs text-text`}>164K</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <img alt="TT" className="size-3" src={icTT} />
-                      <span className={`${FG_M} text-xs text-text`}>231K</span>
+                      <span className={`${FG_M} text-xs text-text`}>89K</span>
                     </div>
                   </div>
                 </div>
