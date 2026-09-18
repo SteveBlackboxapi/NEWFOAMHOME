@@ -384,6 +384,8 @@ function PitchStory() {
     ["04 / Sent", "A kit a brand can believe, in your reply.", "Connected audience data. The relevant content. Your agency's colours. Put the introduction into Gmail from the Foam extension.", "Now the interesting part."],
     ["05 / They opened it", "They came back. You know.", "See which client opened your shared list, which creator profiles they viewed, and when they returned for another look.", "Make the next conversation count."],
   ];
+  const go = (n: number) => setStep((s) => (s + n + 5) % 5);
+  const touchX = useRef<number | null>(null);
   useEffect(() => {
     const id = setInterval(() => {
       if (!hover.current) setStep((s) => (s + 1) % 5);
@@ -396,6 +398,14 @@ function PitchStory() {
       className="py-24 px-6 bg-white"
       onMouseEnter={() => { hover.current = true; }}
       onMouseLeave={() => { hover.current = false; }}
+      onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
+      onTouchEnd={(e) => {
+        if (touchX.current == null) return;
+        const dx = e.changedTouches[0].clientX - touchX.current;
+        if (dx < -40) go(1);
+        if (dx > 40) go(-1);
+        touchX.current = null;
+      }}
     >
       <div className="max-w-[1200px] mx-auto">
         <div className="flex items-end justify-between mb-12">
@@ -464,7 +474,11 @@ function PitchStory() {
             </button>
           ))}
         </div>
-        <p className={`${FG_R} text-[12px] text-muted mt-6`}>Staged product example · illustrative content and figures.</p>
+        <div className="mt-4 flex items-center gap-3">
+          <button type="button" aria-label="Previous pitch step" onClick={() => go(-1)} className="size-9 rounded-full border border-border text-text hover:bg-surface">←</button>
+          <button type="button" aria-label="Next pitch step" onClick={() => go(1)} className="size-9 rounded-full border border-border text-text hover:bg-surface">→</button>
+          <p className={`${FG_R} text-[12px] text-muted`}>Staged product example · illustrative content and figures.</p>
+        </div>
       </div>
     </section>
   );
