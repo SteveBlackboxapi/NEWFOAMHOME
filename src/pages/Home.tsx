@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
 
@@ -291,8 +291,17 @@ function LogoMarquee() {
 }
 
 function ProofBar() {
+  const ref = useRef<HTMLElement | null>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setOn(true); }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   return (
-    <section className="bg-white py-16 px-6">
+    <section ref={ref} className="bg-white py-16 px-6">
       <div className="max-w-[1200px] mx-auto">
         <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted text-center mb-10`}>The network in use</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
@@ -301,9 +310,9 @@ function ProofBar() {
             { val: "800+", label: "creator agencies active every month" },
             { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
             { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
-          ].map(s => (
+          ].map((s, i) => (
             <div key={s.val} className="text-center min-w-[160px]">
-              <p className={`${FG_SB} text-[40px] tracking-[-1px] text-text leading-none mb-2 animate-[statReveal_0.9s_ease_both]`}>{s.val}</p>
+              <p className={`${FG_SB} text-[40px] tracking-[-1px] text-text leading-none mb-2 ${on ? "animate-[statReveal_0.9s_ease_both]" : "opacity-0"}`} style={{ animationDelay: on ? `${i * 0.12}s` : undefined }}>{s.val}</p>
               <p className={`${FG_R} text-sm text-muted max-w-[180px] mx-auto`}>{s.label}</p>
             </div>
           ))}
@@ -360,15 +369,34 @@ function ValueProp() {
 
 function PitchStory() {
   const [step, setStep] = useState(0);
+  const hover = useRef(false);
   const STEPS = [
-    ["01", "The brief"],
-    ["02", "Your roster"],
-    ["03", "The proof"],
-    ["04", "Sent"],
-    ["05", "They opened it"],
+    ["01", "The brief", "Type it the way you'd say it." if False else "“Anyone on your roster running the marathon?”"],
+    ["02", "Your roster", "Type it the way you'd say it."],
+    ["03", "The proof", "Seen. Heard. Captioned."],
+    ["04", "Sent", "A kit a brand can believe, in your reply."],
+    ["05", "They opened it", "They came back. You know."],
   ];
+  const COPY = [
+    ["01 / The brief", "“Anyone on your roster running the marathon?”", "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.", "You already know who."],
+    ["02 / Your roster", "Type it the way you'd say it.", "Search your talent's content for “marathon”. Find the training post that backs up the creator you have in mind.", "Now prove it."],
+    ["03 / The proof", "Seen. Heard. Captioned.", "See what matched and where. The bib in frame. The word out loud. The caption. Follow the evidence to the moment.", "Put it in a kit."],
+    ["04 / Sent", "A kit a brand can believe, in your reply.", "Connected audience data. The relevant content. Your agency's colours. Put the introduction into Gmail from the Foam extension.", "Now the interesting part."],
+    ["05 / They opened it", "They came back. You know.", "See which client opened your shared list, which creator profiles they viewed, and when they returned for another look.", "Make the next conversation count."],
+  ];
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!hover.current) setStep((s) => (s + 1) % 5);
+    }, 4500);
+    return () => clearInterval(id);
+  }, []);
   return (
-    <section id="pitch-loop" className="py-24 px-6 bg-white">
+    <section
+      id="pitch-loop"
+      className="py-24 px-6 bg-white"
+      onMouseEnter={() => { hover.current = true; }}
+      onMouseLeave={() => { hover.current = false; }}
+    >
       <div className="max-w-[1200px] mx-auto">
         <div className="flex items-end justify-between mb-12">
           <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
@@ -376,15 +404,15 @@ function PitchStory() {
         </div>
         <div className="grid lg:grid-cols-[0.85fr_1.25fr] gap-10 xl:gap-16 items-start">
           <div>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>01 / The brief</p>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{COPY[step][0]}</p>
             <h2 className={`${FG_SB} text-[40px] leading-[1.05] tracking-[-1px] text-text mb-6`}>
-              “Anyone on your roster running the marathon?”
+              {COPY[step][1]}
             </h2>
             <p className={`${FG_R} text-[17px] leading-7 text-muted mb-8 max-w-[420px]`}>
-              A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.
+              {COPY[step][2]}
             </p>
             <div className="border-t border-border pt-6">
-              <p className={`${FG_M} text-sm text-text`}>You already know who.</p>
+              <p className={`${FG_M} text-sm text-text`}>{COPY[step][3]}</p>
             </div>
           </div>
           <div className="rounded-[28px] p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
