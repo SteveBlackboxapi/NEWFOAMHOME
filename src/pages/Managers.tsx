@@ -133,7 +133,7 @@ function GmailSection() {
                 </p>
                 <div className="bg-raised border border-border rounded-xl p-[14px] flex items-center gap-3">
                   <div className="relative rounded-[8px] size-12 shrink-0 overflow-hidden">
-                    <img alt="Io Marin" className="absolute h-[115%] left-[-7%] max-w-none top-0 w-[114%]" src={img.talent2} />
+                    <img alt="Io Marin" className="size-full object-cover object-top" src={img.talent2} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className={`${FG_M} text-sm text-text`}>Io Marin</p>
