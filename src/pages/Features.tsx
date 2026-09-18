@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 import { ClosingCTA } from "../components/ClosingCTA";
@@ -95,8 +96,23 @@ const APP_SCREEN_VARIANTS: Record<string, "roster" | "search"> = {
 function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
   const isReversed = i % 2 === 1;
   const appVariant = APP_SCREEN_VARIANTS[f.name];
+  const pin = useRef<HTMLElement | null>(null);
+  const [gStep, setGStep] = useState(0);
+  useEffect(() => {
+    if (f.name !== "Chrome extension") return;
+    const el = pin.current;
+    if (!el) return;
+    const onScroll = () => {
+      const total = el.offsetHeight - window.innerHeight;
+      const passed = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
+      setGStep(Math.min(3, Math.floor((passed / Math.max(total, 1)) * 4)));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [f.name]);
   return (
-    <section className={`${f.name === "Chrome extension" ? "relative h-[160vh]" : "py-20"} px-6 ${f.color}`}>
+    <section ref={pin} className={`${f.name === "Chrome extension" ? "relative h-[200vh]" : "py-20"} px-6 ${f.color}`}>
       <div className={`${f.name === "Chrome extension" ? "sticky top-0 h-screen flex items-center" : ""} max-w-[1200px] mx-auto`}>
         <div className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-16 w-full`}>
           <div className="flex-1 min-w-0 max-w-[480px]">
@@ -118,7 +134,7 @@ function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
           <div className="flex-1 min-w-0">
             {f.name === "Chrome extension" ? (
               <div className="rounded-[20px] overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] min-h-[520px] w-full">
-                <GmailView />
+                <GmailView step={gStep} />
               </div>
             ) : appVariant ? (
               <FoamAppScreen variant={appVariant} />

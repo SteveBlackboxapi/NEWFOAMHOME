@@ -14,25 +14,29 @@ const icTT = `${A}/8509e.svg`;
 const icYT = `${A}/d0b8e.svg`;
 
 // Gmail embed
-export function GmailView() {
+export export function GmailView({ step: controlled }: { step?: number } = {}) {
   const [step, setStep] = useState(0);
-  const [play, setPlay] = useState(false);
   const root = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
+    if (controlled != null) {
+      setStep(controlled);
+      return;
+    }
     const el = root.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) setPlay(true);
-    }, { threshold: 0.45 });
+      if (!e.isIntersecting) { setStep(0); return; }
+      setStep(0);
+      const ids = [700, 1600, 2400].map((ms, i) => window.setTimeout(() => setStep(i + 1), ms));
+      (el as any)._ids = ids;
+    }, { threshold: 0.4 });
     io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  useEffect(() => {
-    if (!play) return;
-    setStep(0);
-    const ids = [700, 1600, 2400].map((ms, i) => window.setTimeout(() => setStep(i + 1), ms));
-    return () => ids.forEach(clearTimeout);
-  }, [play]);
+    return () => {
+      io.disconnect();
+      const ids = (root.current as any)?._ids;
+      if (ids) ids.forEach(clearTimeout);
+    };
+  }, [controlled]);
 
   const people = [
     { name: "Ren Cole", img: `${A}/9e849.png` },
@@ -42,6 +46,13 @@ export function GmailView() {
 
   return (
     <div ref={root} className="bg-[#e9eef6] overflow-hidden relative">
+      <div
+        className="pointer-events-none absolute z-20 size-8 rounded-full border-2 border-white bg-black/30 shadow-lg transition-all duration-500"
+        style={{
+          left: ["18%", "62%", "62%", "22%"][step],
+          top: ["42%", "28%", "52%", "38%"][step],
+        }}
+      />
       {step === 2 && (
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-[#101828] text-white text-[11px] px-3 h-7 rounded-full inline-flex items-center">
           Copied!
