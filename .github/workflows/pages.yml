@@ -19,8 +19,10 @@ jobs:
         with:
           node-version: 22
       - run: corepack enable && corepack prepare pnpm@10 --activate
-      - run: pnpm install
-      - run: pnpm build
+      - run: npm install
+      - run: npm run build
+        env:
+          GITHUB_PAGES: "true"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

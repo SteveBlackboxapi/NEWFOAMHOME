@@ -11,21 +11,24 @@ import { Updates } from "./pages/Updates";
 import { Demo } from "./pages/Demo";
 import { NotFound } from "./pages/NotFound";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: Root,
-    children: [
-      { index: true, Component: Home },
-      { path: "managers",   Component: Managers  },
-      { path: "brands",     Component: Brands    },
-      { path: "features",   Component: Features  },
-      { path: "about",      Component: About     },
-      { path: "creators",   Component: Creators  },
-      { path: "data-trust", Component: DataTrust },
-      { path: "updates",    Component: Updates   },
-      { path: "demo",       Component: Demo      },
-      { path: "*",          Component: NotFound  },
-    ],
-  },
-]);
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      Component: Root,
+      children: [
+        { index: true, Component: Home },
+        { path: "managers",   Component: Managers  },
+        { path: "brands",     Component: Brands    },
+        { path: "features",   Component: Features  },
+        { path: "about",      Component: About     },
+        { path: "creators",   Component: Creators  },
+        { path: "data-trust", Component: DataTrust },
+        { path: "updates",    Component: Updates   },
+        { path: "demo",       Component: Demo      },
+        { path: "*",          Component: NotFound  },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" },
+);
