@@ -420,9 +420,6 @@ function PitchStory() {
           <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
           <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
         </div>
-        <div className="relative">
-          <button type="button" aria-label="Previous pitch step" onClick={() => go(-1)} className="hidden lg:flex absolute left-[-28px] top-1/2 -translate-y-1/2 z-10 size-12 rounded-full border border-border bg-white text-text items-center justify-center hover:bg-surface shadow-sm">←</button>
-          <button type="button" aria-label="Next pitch step" onClick={() => go(1)} className="hidden lg:flex absolute right-[-28px] top-1/2 -translate-y-1/2 z-10 size-12 rounded-full border border-border bg-white text-text items-center justify-center hover:bg-surface shadow-sm">→</button>
         <div className="grid lg:grid-cols-[0.85fr_1.25fr] gap-10 xl:gap-16 items-start">
           <div>
             <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{COPY[step][0]}</p>
