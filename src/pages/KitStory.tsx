@@ -227,6 +227,8 @@ export function KitStory() {
             </div>
           )}
 
+          <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" />
+
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
               <KitNav />
