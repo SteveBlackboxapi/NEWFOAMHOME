@@ -18,11 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: corepack enable && corepack prepare pnpm@10 --activate
       - run: npm install
       - run: npm run build
         env:
           GITHUB_PAGES: "true"
+      - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
