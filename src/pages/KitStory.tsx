@@ -3,6 +3,9 @@ import { Link } from "react-router";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const CLIP = `${A}/ren-kit.mp4`;
+const FG_R = "font-founders font-normal";
+const FG_M = "font-founders font-medium";
+const FG_SB = "font-founders font-semibold";
 
 function clamp(n: number, a = 0, b = 1) {
   return Math.min(b, Math.max(a, n));
@@ -37,6 +40,75 @@ function Card({ n, l }: { n: string; l: string }) {
     <div className="rounded-xl bg-[#ead9b8]/55 p-4">
       <p className="text-[22px] font-semibold">{n}</p>
       <p className="text-[11px] text-[#6a7282]">{l}</p>
+    </div>
+  );
+}
+
+function AfterShare() {
+  const LOGOS = [
+    ["tbh talent", "0% 66.6667%"],
+    ["The Brand Row", "33.3333% 66.6667%"],
+    ["Eleven Eleven Collective", "66.6667% 66.6667%"],
+    ["Hiller Media Group", "100% 66.6667%"],
+    ["Good Answer", "0% 100%"],
+    ["Gersh Agency", "0% 0%"],
+    ["Select Management Group", "33.3333% 0%"],
+  ];
+  const sheet = `${A}/agency-logos.png`;
+  const CARDS = [
+    { kicker: "I manage talent", headline: "Pitch your roster with numbers a brand can believe.", cta: "For managers", to: "/managers" },
+    { kicker: "I'm a creator", headline: "Connect your accounts. Help your manager make the case.", cta: "For creators", to: "/creators" },
+    { kicker: "I'm a brand or agency", headline: "Someone sent you a Foam link. Here's what's behind it.", cta: "For brands", to: "/brands" },
+  ];
+  const STATS = [
+    { val: "1,300+", label: "talent managers active every month" },
+    { val: "800+", label: "creator agencies active every month" },
+    { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
+    { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
+  ];
+  return (
+    <div className="bg-white">
+      <section className="pt-16 pb-6">
+        <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>In good company. Across 800+ creator agencies.</p>
+        <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+          <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-10 pr-10">
+                {LOGOS.map(([label, pos]) => (
+                  <div key={`${copy}-${label}`} role="img" aria-label={label} className="w-52 h-16 shrink-0" style={{ backgroundImage: `url(${sheet})`, backgroundSize: "400% 400%", backgroundPosition: pos }} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-center mt-6">
+          <span className="h-9 px-4 rounded-full border border-[#e8e8e8] text-[13px] text-[#6a7282] inline-flex items-center">Pause</span>
+        </div>
+      </section>
+      <section className="px-6 py-10">
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-4">
+          {CARDS.map((card) => (
+            <Link key={card.to} to={card.to} className="rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col hover:border-[#cfcfcf]">
+              <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-4`}>{card.kicker}</p>
+              <p className={`${FG_SB} text-[22px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}>{card.headline}</p>
+              <p className={`${FG_M} text-sm text-[#6a7282] mt-8 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="px-6 pb-24 pt-6">
+        <div className="max-w-[1200px] mx-auto">
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {STATS.map((s) => (
+              <div key={s.val}>
+                <p className={`${FG_SB} text-[40px] tracking-[-1px] text-[#101828] leading-none mb-2`}>{s.val}</p>
+                <p className={`${FG_R} text-sm text-[#6a7282] max-w-[200px]`}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -123,12 +195,6 @@ export function KitStory() {
                   <div className="p-4 w-[220px]">
                     <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
                     <p className="text-[15px] font-medium mb-4">Io Marin's Media Kit</p>
-                    <p className="text-[11px] text-[#6a7282] mb-2">Platform analytics</p>
-                    <div className="grid grid-cols-3 gap-1 mb-4">
-                      {["IG", "TT", "YT"].map((x) => (
-                        <div key={x} className="rounded-lg bg-[#f4f5f7] h-11 text-[10px] text-[#6a7282] flex items-end p-1">{x}</div>
-                      ))}
-                    </div>
                     <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
                     {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
                       <div key={x} className="rounded-xl bg-[#f4f5f7] h-9 mb-2 flex items-center justify-between px-3 text-[11px]">{x}<span>+</span></div>
@@ -155,7 +221,7 @@ export function KitStory() {
                       </div>
                     </div>
                     <div className="bg-[#6b0030] text-[#F4E6C8] px-8 py-8">
-                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">Io is a movement creator known for rooftop sessions and late miles. The work is physical, city-bound and built to be watched more than once. Illustrative Vale Studio talent — figures for demonstration only.</p>
+                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">Io is a movement creator known for rooftop sessions and late miles. Illustrative Vale Studio talent — figures for demonstration only.</p>
                       <div className="border-t border-white/20 pt-6 flex items-end justify-between gap-6">
                         <div>
                           <p className="text-[22px] font-semibold">Platforms</p>
@@ -179,39 +245,6 @@ export function KitStory() {
                         <Card n="966.7" l="Avg. Reels Views" />
                         <Card n="247.5" l="Avg. Story Views" />
                         <Card n="688.9" l="Avg. Reach" />
-                      </div>
-                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
-                        <p className="text-[13px] font-semibold">Total followers</p>
-                        <p className="text-[28px] font-semibold leading-none mt-1">89K</p>
-                        <p className="text-[11px] text-[#6a7282] mb-4">+2,140 new followers</p>
-                        <svg viewBox="0 0 360 90" className="w-full h-20">
-                          <polyline fill="none" stroke="#6b0030" strokeWidth="2.5" points="0,70 40,70 80,68 120,68 160,66 200,48 240,28 280,22 320,20 360,20" />
-                        </svg>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
-                          <p className="text-[13px] font-semibold mb-4">Gender distribution</p>
-                          <p className="text-[12px] mb-1 flex justify-between"><span>Female</span><span>61%</span></p>
-                          <div className="h-3 bg-[#6b0030] w-[61%] mb-3" />
-                          <p className="text-[12px] mb-1 flex justify-between"><span>Male</span><span>39%</span></p>
-                          <div className="h-3 bg-[#6b0030] w-[39%]" />
-                        </div>
-                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
-                          <p className="text-[13px] font-semibold mb-3">Age distribution</p>
-                          {[["18-24", 18], ["25-34", 41], ["35-44", 24], ["45+", 15]].map(([l, n]) => (
-                            <div key={String(l)} className="flex items-center gap-2 mb-1 text-[12px]">
-                              <span className="w-10 text-[#6a7282]">{l}</span>
-                              <div className="h-2 bg-[#6b0030]" style={{ width: `${Number(n) * 1.6}px` }} />
-                              <span>{n}%</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
-                        <p className="text-[13px] font-semibold mb-3">Country distribution</p>
-                        {[["Portugal", "54%"], ["United Kingdom", "18%"], ["Spain", "11%"]].map(([c, n]) => (
-                          <p key={c} className="text-[13px] flex justify-between py-1"><span>{c}</span><span>{n}</span></p>
-                        ))}
                       </div>
                     </div>
                   </div>
@@ -238,15 +271,11 @@ export function KitStory() {
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-20 pointer-events-none" style={{ opacity: headlineOp }}>
             <p className="text-[11px] uppercase tracking-[1.6px] text-white/70 mb-5">The truth layer</p>
             <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">Numbers everyone in the deal can trust.</h1>
-            <p className="mt-5 max-w-[34em] text-[16px] md:text-[18px] leading-7 text-white/85">Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
           </div>
 
           <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
           <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
-            <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between">
-              <p className="text-[16px] font-medium">Share</p>
-              <span>×</span>
-            </div>
+            <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between"><p className="text-[16px] font-medium">Share</p><span>×</span></div>
             <div className="p-5">
               <p className="text-[13px] mb-4">Io Marin's Media Kit</p>
               {generated < 0.4 ? (
@@ -273,6 +302,8 @@ export function KitStory() {
           </svg>
         </div>
       </section>
+
+      <AfterShare />
     </div>
   );
 }
