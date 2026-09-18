@@ -10,21 +10,21 @@ function Hero() {
           <div className="flex-1 min-w-0">
             <div className="inline-flex items-center gap-2 bg-raised border border-border rounded-full px-[14px] py-[6px] mb-8">
               <div className="size-[6px] rounded-full bg-blue" />
-              <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>For brands & agencies</span>
+              <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>For brands and marketing agencies</span>
             </div>
             <h1 className={`${FG_SB} text-[56px] md:text-[68px] leading-[1.02] tracking-[-2px] text-text mb-6`}>
-              You've been sent<br />
-              <em className="text-blue not-italic">a Foam link</em>
+              You've been sent a Foam link.<br />
+              <em className="text-blue not-italic">Here's what's behind it.</em>
             </h1>
             <p className={`${FG_R} text-lg leading-7 text-muted mb-10 max-w-[500px]`}>
-              A talent manager just shared a media kit, a roster, or a shortlist with you. Here's what that means — and why Foam makes it easy to say yes.
+              A network of talent managers who pitch from Foam. Creator-connected audience data, relevant content and the person who represents the talent, in one place.
             </p>
             <div className="flex items-center gap-4 flex-wrap">
               <Link to="/demo" className={`${FG_M} bg-blue text-white text-[15px] px-8 h-12 rounded-full inline-flex items-center hover:opacity-90 transition-opacity`}>
-                Book a brand walkthrough
+                Get in touch
               </Link>
               <Link to="/data-trust" className={`${FG_M} text-[15px] text-blue hover:opacity-80 transition-opacity`}>
-                See our data standards →
+                How Foam's data works →
               </Link>
             </div>
           </div>
@@ -133,10 +133,10 @@ function DataCredibility() {
       <div className="max-w-[760px] mx-auto text-center">
         <p className={`${FG_M} text-xs text-blue uppercase tracking-[0.8px] mb-4`}>Data & trust</p>
         <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-6`}>
-          Live numbers, not last month's screenshot
+          Numbers you can take into a meeting.
         </h2>
         <p className={`${FG_R} text-lg leading-7 text-muted mb-10`}>
-          Every stat in a Foam kit is pulled directly from the creator's connected accounts at the moment you open the link. No manual updates. No outdated claims. Just accurate data when you need it.
+          Connected metrics come from the social platforms through the creator's own authorised accounts. Available figures differ by platform and connection status. No composite scores. No estimates dressed as platform data.
         </p>
         <div className="flex items-center justify-center gap-4">
           <div className="flex items-center gap-2 bg-raised border border-border rounded-[10px] px-4 py-[10px]">
@@ -144,7 +144,7 @@ function DataCredibility() {
             <span className={`${FG_M} text-sm text-text`}>440K+ kits opened</span>
           </div>
           <Link to="/data-trust" className={`${FG_M} text-[15px] text-blue hover:opacity-80 transition-opacity`}>
-            Our data standards →
+            How Foam's data works →
           </Link>
         </div>
       </div>
@@ -158,24 +158,24 @@ function WorkspaceSection() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
           <div className="flex-1 min-w-0">
-            <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>For brand teams</p>
+            <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>Early access</p>
             <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-5`}>
-              Want your own Foam workspace?
+              A place to keep what you're sent.
             </h2>
             <p className={`${FG_R} text-base leading-7 text-muted mb-8`}>
-              If you're a brand or agency running campaigns at scale, Foam's brand workspace gives you a searchable database of pre-vetted, data-connected creators — filtered by audience, niche, and performance.
+              Keep the creators worth coming back to. The managers who represent them. Their connected numbers. The content that made the case. Foam's brand workspace brings the other side of the pitch into one place, so your next brief can start from what you already know.
             </p>
             <Link
               to="/demo"
               className={`${FG_M} mt-2 inline-flex bg-blue text-white text-sm px-6 h-10 rounded-full items-center hover:opacity-90 transition-opacity`}
             >
-              Book a brand demo
+              Talk to us about the brand side
             </Link>
           </div>
           <div className="flex-1 min-w-0">
             <div className="bg-navy rounded-[20px] p-8 text-white flex flex-col gap-6">
               <div className={`${FG_SB} text-[56px] leading-none tracking-[-2px] text-white`}>440K+</div>
-              <p className={`${FG_R} text-base text-subtle`}>media kit opens per year across Foam's network</p>
+              <p className={`${FG_R} text-base text-subtle`}>Foam media kits, lists and rosters were opened more than 440,000 times by brands and agencies.</p>
               <div className="border-t border-white/10 pt-6 flex flex-col gap-3">
                 {["1,300+ active talent managers", "7,000+ creator cards shared via Gmail/month", "Live data from Instagram, TikTok, YouTube"].map(s => (
                   <div key={s} className="flex items-center gap-3">
@@ -200,9 +200,9 @@ export function Brands() {
       <DataCredibility />
       <WorkspaceSection />
       <ClosingCTA
-        headline="Ready to evaluate creators faster?"
-        sub="See how Foam gives brand teams accurate data exactly when they need it."
-        primaryLabel="Book a walkthrough"
+        headline="One conversation starts the next."
+        sub="Foam media kits, lists and rosters were opened more than 440,000 times by brands and agencies."
+        primaryLabel="Get in touch"
         secondaryLabel="Our data standards"
         secondaryTo="/data-trust"
       />

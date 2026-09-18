@@ -19,7 +19,7 @@ function Hero() {
       <div className="max-w-[760px] mx-auto">
         <div className="inline-flex items-center gap-2 bg-raised border border-border rounded-full px-[14px] py-[6px] mb-8">
           <div className="size-[6px] rounded-full bg-brand" />
-          <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>For talent managers</span>
+          <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>Managers</span>
         </div>
         <h1 className={`${FG_SB} text-[60px] md:text-[72px] leading-[1.02] tracking-[-2px] text-text mb-6`}>
           Your roster is full of{" "}
