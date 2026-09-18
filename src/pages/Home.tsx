@@ -386,18 +386,26 @@ function PitchStory() {
   ];
   const go = (n: number) => setStep((s) => (s + n + 5) % 5);
   const touchX = useRef<number | null>(null);
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (!hover.current) setStep((s) => (s + 1) % 5);
-    }, 4500);
-    return () => clearInterval(id);
-  }, []);
+  const lock = useRef(false);
+  const onWheel = (e: React.WheelEvent) => {
+    if (lock.current) { e.preventDefault(); return; }
+    if (e.deltaY > 20 && step < 4) {
+      e.preventDefault();
+      lock.current = true;
+      setStep(step + 1);
+      setTimeout(() => { lock.current = false; }, 420);
+    } else if (e.deltaY < -20 && step > 0) {
+      e.preventDefault();
+      lock.current = true;
+      setStep(step - 1);
+      setTimeout(() => { lock.current = false; }, 420);
+    }
+  };
   return (
     <section
       id="pitch-loop"
       className="py-24 px-6 bg-white"
-      onMouseEnter={() => { hover.current = true; }}
-      onMouseLeave={() => { hover.current = false; }}
+      onWheel={onWheel}
       onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
       onTouchEnd={(e) => {
         if (touchX.current == null) return;
@@ -468,7 +476,6 @@ function PitchStory() {
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div className="mt-12 grid grid-cols-5 gap-3">
           {STEPS.map(([n, label], i) => (
