@@ -9,10 +9,12 @@ import { Creators } from "./pages/Creators";
 import { DataTrust } from "./pages/DataTrust";
 import { Updates } from "./pages/Updates";
 import { Demo } from "./pages/Demo";
+import { KitStory } from "./pages/KitStory";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter(
   [
+    { path: "kit-story", Component: KitStory },
     {
       path: "/",
       Component: Root,
