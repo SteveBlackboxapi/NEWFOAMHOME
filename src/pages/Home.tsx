@@ -303,7 +303,7 @@ function ProofBar() {
             { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
           ].map(s => (
             <div key={s.val} className="text-center min-w-[160px]">
-              <p className={`${FG_SB} text-[40px] tracking-[-1px] text-text leading-none mb-2`}>{s.val}</p>
+              <p className={`${FG_SB} text-[40px] tracking-[-1px] text-text leading-none mb-2 animate-[statReveal_0.9s_ease_both]`}>{s.val}</p>
               <p className={`${FG_R} text-sm text-muted max-w-[180px] mx-auto`}>{s.label}</p>
             </div>
           ))}

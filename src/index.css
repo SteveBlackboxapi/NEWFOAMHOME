@@ -133,3 +133,9 @@ body {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+
+@keyframes statReveal {
+  from { opacity: 0; filter: blur(12px); transform: translateY(8px); }
+  to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+}
