@@ -222,7 +222,7 @@ function Hero() {
                 </svg>
               </Link>
               <a
-                href="#how-it-works"
+                href="#pitch-loop"
                 className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/30 hover:border-white/70 transition-colors pb-[2px]`}
               >
                 Follow a pitch
@@ -357,6 +357,79 @@ function ValueProp() {
   );
 }
 
+
+function PitchStory() {
+  const [step, setStep] = useState(0);
+  const STEPS = [
+    ["01", "The brief"],
+    ["02", "Your roster"],
+    ["03", "The proof"],
+    ["04", "Sent"],
+    ["05", "They opened it"],
+  ];
+  return (
+    <section id="pitch-loop" className="py-24 px-6 bg-white">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="flex items-end justify-between mb-12">
+          <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
+          <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>01 / The brief</p>
+            <h2 className={`${FG_SB} text-[40px] leading-[1.05] tracking-[-1px] text-text mb-6`}>
+              “Anyone on your roster running the marathon?”
+            </h2>
+            <p className={`${FG_R} text-[17px] leading-7 text-muted mb-8 max-w-[420px]`}>
+              A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.
+            </p>
+            <div className="border-t border-border pt-6">
+              <p className={`${FG_M} text-sm text-text`}>You already know who.</p>
+            </div>
+          </div>
+          <div className="bg-[#f4f6fb] rounded-[24px] p-4 shadow-[0_20px_60px_rgba(16,24,40,0.08)]">
+            <div className="bg-white rounded-[16px] overflow-hidden min-h-[320px] grid grid-cols-[88px_1fr]">
+              <div className="bg-[#f6f8fc] p-3 text-[10px] text-[#5f6368]">
+                <p className={`${FG_SB} text-[12px] text-[#202124] mb-3`}>Gmail</p>
+                <p className="bg-[#d3e3fd] text-[#001d35] rounded-full px-2 py-1 mb-2 inline-block">Compose</p>
+                <p className="mt-2">Inbox 12</p>
+                <p className="mt-1">Starred</p>
+                <p className="mt-1">Sent</p>
+                <p className="mt-1">Drafts 2</p>
+              </div>
+              <div className="p-5">
+                <p className={`${FG_SB} text-[15px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
+                <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                <p className={`${FG_R} text-[11px] text-[#5f6368] mb-3`}>to me · 10:42 AM</p>
+                <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
+                <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
+                  We’re looking for a creator running Boston. Someone whose audience is already following their training.
+                </p>
+                <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124]">
+                  <p>100K+ on Instagram</p>
+                  <p>Primarily US audience</p>
+                  <p>Running the Boston Marathon</p>
+                </div>
+                <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
+                <p className={`${FG_R} text-[13px] text-[#202124] mt-3`}>Thanks!<br />Sam</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 grid grid-cols-5 gap-3">
+          {STEPS.map(([n, label], i) => (
+            <button key={n} type="button" onClick={() => setStep(i)} className="text-left">
+              <div className={`h-[3px] mb-3 ${i === step ? "bg-[#c6f31e]" : "bg-[#e5e5e5]"}`} />
+              <p className={`${FG_M} text-[12px] ${i === step ? "text-text" : "text-muted"}`}>{n}  {label}</p>
+            </button>
+          ))}
+        </div>
+        <p className={`${FG_R} text-[12px] text-muted mt-6`}>Staged product example · illustrative content and figures.</p>
+      </div>
+    </section>
+  );
+}
+
 function FeatureHighlight() {
   return (
     <section className="py-28 px-6 bg-surface">
@@ -443,6 +516,7 @@ export function Home() {
       <LogoMarquee />
       <ValueProp />
       <ProofBar />
+      <PitchStory />
       <FeatureHighlight />
       <ClosingCTA
         headline="Get a demo."
