@@ -292,8 +292,9 @@ function LogoMarquee() {
 
 function ProofBar() {
   return (
-    <section className="bg-surface border-b border-border py-6 px-6">
+    <section className="bg-white py-16 px-6">
       <div className="max-w-[1200px] mx-auto">
+        <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted text-center mb-10`}>The network in use</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
           {[
             { val: "1,300+", label: "talent managers active every month" },
@@ -301,9 +302,9 @@ function ProofBar() {
             { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
             { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
           ].map(s => (
-            <div key={s.val} className="flex items-baseline gap-2">
-              <span className={`${FG_SB} text-[28px] tracking-[-0.5px] text-text`}>{s.val}</span>
-              <span className={`${FG_R} text-sm text-muted`}>{s.label}</span>
+            <div key={s.val} className="text-center min-w-[160px]">
+              <p className={`${FG_SB} text-[40px] tracking-[-1px] text-text leading-none mb-2`}>{s.val}</p>
+              <p className={`${FG_R} text-sm text-muted max-w-[180px] mx-auto`}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -440,8 +441,8 @@ export function Home() {
     <>
       <Hero />
       <LogoMarquee />
-      <ProofBar />
       <ValueProp />
+      <ProofBar />
       <FeatureHighlight />
       <ClosingCTA
         headline="Get a demo."
