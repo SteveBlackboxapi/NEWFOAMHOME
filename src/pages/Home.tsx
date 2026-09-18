@@ -296,9 +296,10 @@ function ProofBar() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
           {[
-            { val: "1,300+", label: "talent managers" },
-            { val: "440K+",  label: "media kit opens / year" },
-            { val: "7,000+", label: "creator cards via Gmail / month" },
+            { val: "1,300+", label: "talent managers active every month" },
+            { val: "800+", label: "creator agencies active every month" },
+            { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
+            { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
           ].map(s => (
             <div key={s.val} className="flex items-baseline gap-2">
               <span className={`${FG_SB} text-[28px] tracking-[-0.5px] text-text`}>{s.val}</span>
@@ -361,12 +362,12 @@ function FeatureHighlight() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-20">
           <div className="flex-1 min-w-0">
-            <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>Chrome extension</p>
+            <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>The work between a brief and a yes</p>
             <h2 className={`${FG_SB} text-text leading-[1.05] tracking-[-1px] mb-5`} style={{ fontSize: "clamp(32px, 4vw, 48px)" }}>
-              Pitch from your inbox, not a new tab.
+              You know your talent.<br />Make the brand see what you see.
             </h2>
             <p className={`${FG_R} text-[17px] leading-7 text-muted mb-8`}>
-              The Foam Chrome extension drops a live creator card into any Gmail reply — follower counts, photo, and kit link — in two clicks.
+              One opportunity, followed from the inbox to the next conversation.
             </p>
             <div className="flex flex-col gap-3 mb-8">
               {[
@@ -443,8 +444,8 @@ export function Home() {
       <ValueProp />
       <FeatureHighlight />
       <ClosingCTA
-        headline="Ready to pitch with numbers everyone trusts?"
-        sub="Join 1,300+ talent managers who use Foam to close more deals."
+        headline="Get a demo."
+        sub="Creators connect their data at source. Managers pitch with it."
       />
     </>
   );
