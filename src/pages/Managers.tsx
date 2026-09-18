@@ -160,9 +160,9 @@ function GmailSection() {
 
 function RosterSection() {
   const TALENT = [
-    { name: "Ren Cole",   age: "32y", loc: "New York, NY",   img: img.talent1 },
-    { name: "Io Marin",   age: "28y", loc: "New York, NY",   img: img.talent2 },
-    { name: "Sable Quinn", age: "33y", loc: "Glasgow",  img: img.talent3 },
+    { name: "Ren Cole",   age: "32y", loc: "Portland, OR",  img: img.talent1, gender: "Male",   ig: "131K", tt: "97K", yt: "58K" },
+    { name: "Io Marin",   age: "28y", loc: "Lisbon",        img: img.talent2, gender: "Female", ig: "164K", tt: "89K", yt: "12K" },
+    { name: "Sable Quinn", age: "33y", loc: "Glasgow",      img: img.talent3, gender: "Female", ig: "84K", tt: "61K", yt: "19K" },
   ];
   return (
     <section className="py-24 px-6 bg-surface">
@@ -180,7 +180,7 @@ function RosterSection() {
           </div>
         </div>
         <div className="flex items-center gap-3 mb-5">
-          <img alt="Vale Studio" className="h-[22px]" src={img.group} />
+          <span className={`${FG_SB} text-[22px] text-brand tracking-[-0.4px]`}>Vale</span>
           <div className="h-px flex-1 bg-border-dark" />
           <span className={`${FG_R} text-sm text-muted`}>14 talent</span>
         </div>
@@ -188,16 +188,16 @@ function RosterSection() {
           {TALENT.map(t => (
             <div key={t.name} className="bg-surface border border-border-dark rounded-[16px] p-5 flex items-center gap-4">
               <div className="relative rounded-xl size-14 shrink-0 overflow-hidden">
-                <img alt={t.name} className="absolute h-[115%] left-[-7%] max-w-none top-0 w-[114%]" src={t.img} />
+                <img alt={t.name} className="size-full object-cover object-top" src={t.img} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className={`${FG_M} text-base text-text`}>{t.name}</p>
-                <p className={`${FG_R} text-sm text-muted`}>{t.age} · Female · {t.loc}</p>
+                <p className={`${FG_R} text-sm text-muted`}>{t.age} · {t.gender} · {t.loc}</p>
                 <div className="flex items-center gap-[10px] mt-1">
-                  {[img.instagram, img.tiktok, img.youtube].map((icon, i) => (
-                    <div key={i} className="flex items-center gap-1">
+                  {[[img.instagram, t.ig], [img.tiktok, t.tt], [img.youtube, t.yt]].map(([icon, val]) => (
+                    <div key={val+String(icon)} className="flex items-center gap-1">
                       <img alt="" className="size-3 shrink-0" src={icon} />
-                      <span className={`${FG_M} text-xs text-text`}>164K</span>
+                      <span className={`${FG_M} text-xs text-text`}>{val}</span>
                     </div>
                   ))}
                 </div>
