@@ -96,9 +96,9 @@ function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
   const isReversed = i % 2 === 1;
   const appVariant = APP_SCREEN_VARIANTS[f.name];
   return (
-    <section className={`py-20 px-6 ${f.color}`}>
-      <div className="max-w-[1200px] mx-auto">
-        <div className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-16`}>
+    <section className={`${f.name === "Chrome extension" ? "relative h-[160vh]" : "py-20"} px-6 ${f.color}`}>
+      <div className={`${f.name === "Chrome extension" ? "sticky top-0 h-screen flex items-center" : ""} max-w-[1200px] mx-auto`}>
+        <div className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-16 w-full`}>
           <div className="flex-1 min-w-0 max-w-[480px]">
             <p className={`${FG_M} text-xs uppercase tracking-[0.8px] mb-4 ${f.dark ? "text-muted" : "text-subtle"}`}>{f.name}</p>
             <h2 className={`${FG_SB} text-[36px] leading-[1.1] tracking-[-0.6px] mb-4 ${f.dark ? "text-white" : "text-text"}`}>
@@ -117,7 +117,7 @@ function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
           {/* Real app screen for roster/search, styled card otherwise */}
           <div className="flex-1 min-w-0">
             {f.name === "Chrome extension" ? (
-              <div className="rounded-[20px] overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] min-h-[420px]">
+              <div className="rounded-[20px] overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] min-h-[520px] w-full">
                 <GmailView />
               </div>
             ) : appVariant ? (
