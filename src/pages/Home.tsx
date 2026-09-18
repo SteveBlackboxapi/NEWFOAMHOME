@@ -111,10 +111,6 @@ const icYT = `${A}/d0b8e.svg`;
   );
 }
 
-v>
-  );
-}
-
 function MediaKitView() {
   return (
     <div className="overflow-hidden" style={{ background: "#F4E6C8" }}>
