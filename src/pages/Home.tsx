@@ -16,129 +16,67 @@ const icYT = `${A}/d0b8e.svg`;
 // ─── Gmail embed view ─────────────────────────────────────────────────────────
 function GmailView() {
   return (
-    <div className="bg-white rounded-b-[20px] overflow-hidden" style={{ fontFamily: "var(--font-sf)" }}>
-      {/* Gmail header */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-[#e8eaed]">
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="size-6 rounded-sm bg-[#ea4335] flex items-center justify-center">
-            <span className="text-white text-[11px] font-bold leading-none" style={{ fontFamily: "var(--font-sans)" }}>M</span>
-          </div>
-          <span className={`${FG_SB} text-[18px] text-[#5f6368]`} style={{ fontFamily: "var(--font-sans)" }}>Gmail</span>
-        </div>
-        <div className="flex-1 bg-[#eaf1fb] rounded-full px-4 h-9 flex items-center">
-          <span className={`${FG_R} text-[13px] text-[#444746]`} style={{ fontFamily: "var(--font-sans)" }}>Search mail</span>
-        </div>
-        <div className="size-8 rounded-full bg-[#a8c7fa] flex items-center justify-center shrink-0">
-          <span className={`${FG_M} text-[12px] text-[#00326e]`} style={{ fontFamily: "var(--font-sans)" }}>J</span>
+    <div className="bg-white overflow-hidden" style={{ fontFamily: "var(--font-sf)" }}>
+      <div className="px-4 pt-3 pb-2 flex items-center justify-between border-b border-[#eeefef]">
+        <div className="flex items-center gap-4">
+          <span className={`${FG_SB} text-[13px] text-[#101828] border-b-2 border-[#f5a524] pb-2`}>Talent</span>
+          <span className={`${FG_R} text-[13px] text-[#6a7282] pb-2`}>Lists</span>
+          <span className={`${FG_R} text-[13px] text-[#6a7282] pb-2`}>Media Kits</span>
         </div>
       </div>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="w-[110px] shrink-0 py-3 border-r border-[#e8eaed]">
-          <div className="mx-2 mb-3">
-            <button className="w-full bg-[#c2e7ff] rounded-2xl h-10 flex items-center justify-center">
-              <span className="text-[13px] text-[#001d35]" style={{ fontFamily: "var(--font-sans)" }}>Compose</span>
-            </button>
+      <div className="px-4 pt-4 pb-2 flex items-center justify-between">
+        <span className={`${FG_M} text-[12px] text-[#101828] bg-[#f4f5f6] rounded-full px-3 h-7 inline-flex items-center`}>All Talent</span>
+        <span className={`${FG_R} text-[11px] text-[#99a1af]`}>Vale Studio · demo</span>
+      </div>
+      <div className="px-4 pt-3 pb-5 text-center">
+        <div className="size-[88px] rounded-[12px] overflow-hidden mx-auto bg-[#eee]">
+          <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+        </div>
+        <p className={`${FG_SB} text-[16px] text-[#101828] mt-3`}>Io Marin</p>
+        <p className={`${FG_R} text-[11px] text-[#6a7282] mt-1`}>Lisbon · Wellness</p>
+        <div className="flex justify-center gap-5 mt-3">
+          <div className="text-center">
+            <p className={`${FG_SB} text-[13px] text-[#101828]`}>164K</p>
+            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>IG</p>
           </div>
-          {[
-            { label: "Inbox", count: "12", active: true },
-            { label: "Starred" },
-            { label: "Sent" },
-            { label: "Drafts", count: "2" },
-          ].map(item => (
-            <div
-              key={item.label}
-              className={`flex items-center justify-between px-3 py-[6px] rounded-r-full mr-1 ${item.active ? "bg-[#d3e3fd]" : ""}`}
-            >
-              <span className={`text-[12px] ${item.active ? "font-semibold text-[#001d35]" : "text-[#444746]"}`}
-                style={{ fontFamily: "var(--font-sans)" }}>{item.label}</span>
-              {item.count && (
-                <span className="text-[11px] font-semibold text-[#001d35]" style={{ fontFamily: "var(--font-sans)" }}>{item.count}</span>
-              )}
-            </div>
+          <div className="text-center">
+            <p className={`${FG_SB} text-[13px] text-[#101828]`}>89K</p>
+            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>TT</p>
+          </div>
+          <div className="text-center">
+            <p className={`${FG_SB} text-[13px] text-[#101828]`}>12K</p>
+            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>YT</p>
+          </div>
+        </div>
+        <div className="flex justify-center gap-2 mt-3">
+          {["Wellness", "Rituals"].map((tag) => (
+            <span key={tag} className={`${FG_M} text-[10px] text-[#101828] bg-[#f4f5f6] rounded-full px-2.5 h-6 inline-flex items-center`}>{tag}</span>
           ))}
         </div>
-
-        {/* Email content */}
-        <div className="flex-1 min-w-0 px-5 py-4">
-          <h3 className={`${FG_SB} text-[16px] text-[#202124] mb-3`} style={{ fontFamily: "var(--font-sans)" }}>
-            Re: Portland Marathon — who should we meet?
-          </h3>
-
-          {/* Sender row */}
-          <div className="flex items-center gap-2 mb-3">
-            <div className="size-8 rounded-full bg-[#a8c7fa] flex items-center justify-center shrink-0">
-              <span className="text-[12px] font-semibold text-[#00326e]" style={{ fontFamily: "var(--font-sans)" }}>J</span>
-            </div>
-            <div>
-              <span className="text-[13px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Rowan · Vale Studio</span>
-              <div className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>to Eden · 10:42 AM</div>
-            </div>
-          </div>
-
-          <p className="text-[13px] text-[#202124] mb-2" style={{ fontFamily: "var(--font-sans)" }}>Hi Sam,</p>
-          <p className="text-[13px] text-[#202124] mb-4 leading-5" style={{ fontFamily: "var(--font-sans)" }}>
-            Ren is training for Portland. Their audience follows every mile.
-          </p>
-
-          {/* Embedded creator card */}
-          <div className="border border-[#e0e0e0] rounded-[10px] overflow-hidden mb-4">
-            <div className="px-4 py-3 flex items-center gap-3">
-              <div className="size-9 rounded-full bg-[#f1f3f4] flex items-center justify-center shrink-0">
-                <span className="text-[13px] font-semibold text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>A</span>
-              </div>
-              <div>
-                <p className="text-[14px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>Ren</p>
-                <p className="text-[11px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Portland, OR · Running</p>
-              </div>
-            </div>
-            <div className="px-4 pb-3 flex items-center gap-4">
-              <div className="flex items-center gap-[6px]">
-                <img alt="IG" className="size-[14px]" src={icIG} />
-                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>131K</span>
-              </div>
-              <div className="flex items-center gap-[6px]">
-                <img alt="TT" className="size-[14px]" src={icTT} />
-                <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>97K</span>
-              </div>
-              <span className="text-[12px] text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>YouTube <strong>64K</strong></span>
-            </div>
-            <div className="px-4 pb-3">
-              <p className="text-[12px] text-[#5f6368] leading-5" style={{ fontFamily: "var(--font-sans)" }}>
-                Early miles. Long runs. Bringing an audience along for the journey.
-              </p>
-            </div>
-            <div className="px-4 pb-3">
-              <a href="#" className="text-[12px] text-[#1a73e8] underline" style={{ fontFamily: "var(--font-sans)" }}>View media kit ↗</a>
-            </div>
-            <div className="grid grid-cols-2 border-t border-[#e0e0e0]">
-              {[
-                { label: "US audience", val: "72%" },
-                { label: "Age 25–34",   val: "46%" },
-              ].map((a, i) => (
-                <div key={a.label} className={`px-4 py-2 ${i === 0 ? "border-r border-[#e0e0e0]" : ""}`}>
-                  <p className="text-[10px] text-[#5f6368] mb-[2px]" style={{ fontFamily: "var(--font-sans)" }}>{a.label}</p>
-                  <p className="text-[16px] font-semibold text-[#202124]" style={{ fontFamily: "var(--font-sans)" }}>{a.val}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <p className="text-[13px] text-[#202124] mb-1" style={{ fontFamily: "var(--font-sans)" }}>Happy to make the introduction.</p>
-          <p className="text-[13px] text-[#202124] mb-4" style={{ fontFamily: "var(--font-sans)" }}>Rowan</p>
-
-          <div className="flex items-center justify-between border-t border-[#e8eaed] pt-3">
-            <span className="text-[10px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Added with Foam for Chrome</span>
-            <span className="text-[10px] text-[#5f6368]" style={{ fontFamily: "var(--font-sans)" }}>Detail embed</span>
-          </div>
+        <p className={`${FG_R} text-[11px] text-[#6a7282] leading-4 mt-3 px-2`}>
+          Illustrative demo profile. Used to pitch from Gmail without leaving the draft.
+        </p>
+      </div>
+      <div className="px-4 pb-4">
+        <p className={`${FG_R} text-[10px] text-[#99a1af] mb-2`}>Choose what is included in embeds</p>
+        <div className="flex items-center justify-between py-1.5">
+          <span className={`${FG_M} text-[12px] text-[#101828]`}>Include biography</span>
+          <span className="w-8 h-5 rounded-full bg-[#f5a524] relative"><span className="absolute right-0.5 top-0.5 size-4 bg-white rounded-full" /></span>
+        </div>
+        <div className="flex items-center justify-between py-1.5 mb-3">
+          <span className={`${FG_M} text-[12px] text-[#101828]`}>Include primary media kit</span>
+          <span className="w-8 h-5 rounded-full bg-[#f5a524] relative"><span className="absolute right-0.5 top-0.5 size-4 bg-white rounded-full" /></span>
+        </div>
+        <div className="flex gap-2">
+          <span className={`${FG_M} text-[11px] border border-[#e8eaed] rounded-full px-3 h-8 inline-flex items-center`}>Basic</span>
+          <span className={`${FG_M} text-[11px] rounded-full px-3 h-8 inline-flex items-center text-[#101828]`} style={{ background: "#7ddec0" }}>Detail</span>
+          <span className={`${FG_M} text-[11px] border border-[#e8eaed] rounded-full px-3 h-8 inline-flex items-center`}>Text</span>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── Media Kit tab view ────────────────────────────────────────────────────────
 function MediaKitView() {
   return (
     <div className="overflow-hidden" style={{ background: "#F4E6C8" }}>
