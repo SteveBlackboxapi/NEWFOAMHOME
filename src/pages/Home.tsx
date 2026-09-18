@@ -371,11 +371,11 @@ function PitchStory() {
   const [step, setStep] = useState(0);
   const hover = useRef(false);
   const STEPS = [
-    ["01", "The brief", "Type it the way you'd say it." if False else "“Anyone on your roster running the marathon?”"],
-    ["02", "Your roster", "Type it the way you'd say it."],
-    ["03", "The proof", "Seen. Heard. Captioned."],
-    ["04", "Sent", "A kit a brand can believe, in your reply."],
-    ["05", "They opened it", "They came back. You know."],
+    ["01", "The brief"],
+    ["02", "Your roster"],
+    ["03", "The proof"],
+    ["04", "Sent"],
+    ["05", "They opened it"],
   ];
   const COPY = [
     ["01 / The brief", "“Anyone on your roster running the marathon?”", "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.", "You already know who."],
