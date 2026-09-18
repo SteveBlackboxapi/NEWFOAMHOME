@@ -14,7 +14,7 @@ const icTT = `${A}/8509e.svg`;
 const icYT = `${A}/d0b8e.svg`;
 
 // Gmail embed
-export export function GmailView({ step: controlled }: { step?: number } = {}) {
+export function GmailView({ step: controlled }: { step?: number } = {}) {
   const [step, setStep] = useState(0);
   const root = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
