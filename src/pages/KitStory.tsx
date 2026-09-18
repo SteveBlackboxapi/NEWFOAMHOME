@@ -85,13 +85,10 @@ export function KitStory() {
   const aimCopy = range(p, 0.79, 0.86);
   const copied = range(p, 0.86, 0.9);
   const publicize = range(p, 0.9, 0.93);
-  const crease = range(p, 0.93, 0.97);
+  const fold = range(p, 0.93, 0.97);
   const fly = range(p, 0.97, 1);
   const sharedIn = range(p, 0.96, 1);
   const headlineOp = 1 - range(p, 0.02, 0.16);
-  const fold1 = ease(range(crease, 0, 0.45));
-  const fold2 = ease(range(crease, 0.35, 0.85));
-  const compact = ease(range(crease, 0.6, 1));
 
   useEffect(() => {
     const v = vid.current;
@@ -101,13 +98,13 @@ export function KitStory() {
   }, [landed]);
 
   const photoL = lerp(0, slot.l, pack);
-  const photoT = lerp(0, Math.max(slot.t, 14), pack);
+  const photoT = lerp(0, slot.t, pack);
   const photoW = lerp(100, slot.w, pack);
   const photoH = lerp(100, slot.h, pack);
 
   const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
   const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
-  const cursorOn = aimShare > 0.02 && crease < 0.15;
+  const cursorOn = aimShare > 0.02 && fold < 0.2;
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
@@ -117,16 +114,9 @@ export function KitStory() {
       </div>
 
       <section ref={track} className="relative h-[360vh]">
-        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]" style={{ perspective: "1400px" }}>
-          {crease < 0.92 && (
-            <div
-              className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col"
-              style={{
-                opacity: pack * (1 - compact),
-                transform: `rotateX(${crease * 28}deg) rotateZ(${crease * -10}deg) scale(${lerp(1, 0.28, compact)})`,
-                transformOrigin: "50% 40%",
-              }}
-            >
+        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
+          {fold < 0.2 && (
+            <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
               <div className="h-12 shrink-0" />
               <div className="flex min-h-0 flex-1">
                 <aside className="shrink-0 bg-white border-r border-[#e6e8ec] overflow-hidden" style={{ width: `${lerp(220, 0, publicize)}px` }}>
@@ -190,6 +180,39 @@ export function KitStory() {
                         <Card n="247.5" l="Avg. Story Views" />
                         <Card n="688.9" l="Avg. Reach" />
                       </div>
+                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                        <p className="text-[13px] font-semibold">Total followers</p>
+                        <p className="text-[28px] font-semibold leading-none mt-1">89K</p>
+                        <p className="text-[11px] text-[#6a7282] mb-4">+2,140 new followers</p>
+                        <svg viewBox="0 0 360 90" className="w-full h-20">
+                          <polyline fill="none" stroke="#6b0030" strokeWidth="2.5" points="0,70 40,70 80,68 120,68 160,66 200,48 240,28 280,22 320,20 360,20" />
+                        </svg>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                          <p className="text-[13px] font-semibold mb-4">Gender distribution</p>
+                          <p className="text-[12px] mb-1 flex justify-between"><span>Female</span><span>61%</span></p>
+                          <div className="h-3 bg-[#6b0030] w-[61%] mb-3" />
+                          <p className="text-[12px] mb-1 flex justify-between"><span>Male</span><span>39%</span></p>
+                          <div className="h-3 bg-[#6b0030] w-[39%]" />
+                        </div>
+                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                          <p className="text-[13px] font-semibold mb-3">Age distribution</p>
+                          {[["18-24", 18], ["25-34", 41], ["35-44", 24], ["45+", 15]].map(([l, n]) => (
+                            <div key={String(l)} className="flex items-center gap-2 mb-1 text-[12px]">
+                              <span className="w-10 text-[#6a7282]">{l}</span>
+                              <div className="h-2 bg-[#6b0030]" style={{ width: `${Number(n) * 1.6}px` }} />
+                              <span>{n}%</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                        <p className="text-[13px] font-semibold mb-3">Country distribution</p>
+                        {[["Portugal", "54%"], ["United Kingdom", "18%"], ["Spain", "11%"]].map(([c, n]) => (
+                          <p key={c} className="text-[13px] flex justify-between py-1"><span>{c}</span><span>{n}</span></p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -197,60 +220,16 @@ export function KitStory() {
             </div>
           )}
 
-          {crease < 0.5 && pack > 0 && (
-            <div
-              className="absolute z-[15] overflow-hidden bg-black pointer-events-none"
-              style={{
-                left: `${photoL}%`,
-                top: `${photoT}%`,
-                width: `${photoW}%`,
-                height: `${photoH}%`,
-                borderRadius: `${lerp(0, 14, pack)}px`,
-                clipPath: pack > 0.85 ? "none" : undefined,
-              }}
-            >
+          {fold < 0.2 && (
+            <div className="absolute z-[15] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
               <div className="absolute inset-0 bg-black/20" style={{ opacity: 1 - pack }} />
             </div>
           )}
 
-          {crease < 0.85 && (
-            <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack * (1 - compact) }}>
+          {fold < 0.2 && (
+            <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
               <KitNav />
-            </div>
-          )}
-
-          {crease > 0.02 && fly < 1 && (
-            <div className="absolute inset-0 z-40 pointer-events-none flex items-center justify-center" style={{ perspective: "900px" }}>
-              <div
-                className="relative"
-                style={{
-                  width: lerp(280, 150, compact),
-                  height: lerp(200, 90, compact),
-                  transformStyle: "preserve-3d",
-                  transform: `rotateX(${lerp(0, 18, crease)}deg) rotateZ(${lerp(0, -16, crease)}deg)`,
-                  opacity: crease * (1 - fly),
-                }}
-              >
-                <div className="absolute inset-0 bg-[#F4E6C8]" style={{ clipPath: "polygon(0 100%, 50% 0, 100% 100%)", opacity: 1 - fold2 }} />
-                <div
-                  className="absolute inset-0 origin-bottom-left"
-                  style={{
-                    background: "#6b0030",
-                    clipPath: "polygon(0 100%, 50% 0, 0 0)",
-                    transform: `rotate3d(1,1,0,${fold1 * -170}deg)`,
-                    opacity: 1 - compact * 0.3,
-                  }}
-                />
-                <div
-                  className="absolute inset-0 origin-bottom-right"
-                  style={{
-                    background: "#8a1844",
-                    clipPath: "polygon(100% 100%, 50% 0, 100% 0)",
-                    transform: `rotate3d(1,-1,0,${fold2 * -170}deg)`,
-                  }}
-                />
-              </div>
             </div>
           )}
 
@@ -260,8 +239,8 @@ export function KitStory() {
             <p className="mt-5 max-w-[34em] text-[16px] md:text-[18px] leading-7 text-white/85">Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
           </div>
 
-          <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - crease) }} />
-          <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - crease), transform: "translate(-50%,-50%)" }}>
+          <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
+          <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
             <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between">
               <p className="text-[16px] font-medium">Share</p>
               <span>×</span>
@@ -286,7 +265,7 @@ export function KitStory() {
             <p className="mt-4 text-[18px] text-[#6a7282]">On its way</p>
           </div>
 
-          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(90, 170, fly), opacity: compact * (fly > 0 ? 1 : 0.15), left: `${lerp(42, 118, fly)}%`, top: `${lerp(38, 10, fly) + Math.sin(fly * Math.PI) * -14}%`, transform: `rotate(${lerp(-28, 18, fly)}deg)` }}>
+          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold * (1 - fly * 0.4), left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#6b0030" />
             <path d="M44 40 L114 6 L60 40 Z" fill="#F4E6C8" />
           </svg>
