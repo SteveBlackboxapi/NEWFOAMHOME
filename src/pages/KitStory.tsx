@@ -35,97 +35,131 @@ export function KitStory() {
     };
   }, []);
 
-  const pack = range(p, 0.08, 0.42);
-  const kitIn = range(p, 0.22, 0.5);
-  const restIn = range(p, 0.48, 0.68);
-  const shareIn = range(p, 0.66, 0.88);
+  const pack = range(p, 0.02, 0.38);
+  const landed = pack > 0.92;
+  const clickShare = range(p, 0.42, 0.58);
+  const publicize = range(p, 0.58, 0.82);
+  const headlineOp = 1 - range(p, 0.04, 0.22);
 
-  const photoW = lerp(100, 38, pack);
-  const photoH = lerp(100, 52, pack);
-  const photoL = lerp(0, 8, pack);
-  const photoT = lerp(0, 22, pack);
-  const photoR = lerp(0, 16, pack);
-  const headlineOp = 1 - range(p, 0.12, 0.32);
-  const darkWash = 0.35 + pack * 0.15;
+  const photoW = lerp(100, 28, pack);
+  const photoH = lerp(100, 42, pack);
+  const photoL = lerp(0, 38, pack);
+  const photoT = lerp(0, 24, pack);
+
+  const editorOp = pack * (1 - publicize * 0.92);
+  const cursorL = lerp(72, 88, clickShare);
+  const cursorT = lerp(18, 8, clickShare);
 
   return (
-    <div className="bg-[#0b0d12] text-white min-h-screen">
-      <div className="fixed top-4 left-4 z-30 flex items-center gap-3">
-        <Link to="/" className="text-[12px] tracking-[0.4px] text-white/60 hover:text-white">
-          ← Home
-        </Link>
+    <div className="bg-[#0b0d12] text-[#101828]">
+      <div className="fixed top-4 left-4 z-40 flex items-center gap-3">
+        <Link to="/" className="text-[12px] text-white/70 hover:text-white">← Home</Link>
         <span className="text-[10px] uppercase tracking-[1px] text-[#c6f31e]">Kit story test</span>
       </div>
 
-      <section ref={track} className="relative h-[380vh]">
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <div
-            className="absolute inset-0 bg-[#0b0d12]"
-            style={{ opacity: pack }}
-          />
-
+      <section ref={track} className="relative h-[240vh]">
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#0b0d12]">
           <img
             alt="Ren Cole"
             src={REN}
-            className="absolute object-cover object-[center_20%] z-10"
+            className="absolute object-cover object-[center_18%] z-20"
             style={{
               left: `${photoL}%`,
               top: `${photoT}%`,
               width: `${photoW}%`,
               height: `${photoH}%`,
-              borderRadius: `${lerp(0, 18, pack)}px`,
-              filter: `brightness(${lerp(0.72, 1, pack)})`,
+              borderRadius: `${lerp(0, 16, pack)}px`,
+              filter: landed ? "none" : `brightness(${lerp(0.7, 1, pack)})`,
+              boxShadow: landed ? "0 12px 40px rgba(0,0,0,0.25)" : "none",
             }}
           />
-          <div
-            className="absolute inset-0 z-10 pointer-events-none"
-            style={{ background: `rgba(8,10,16,${darkWash * (1 - pack)})` }}
-          />
+
+          {!landed && (
+            <div className="absolute z-30 left-6 top-20 rounded-full bg-black/50 text-white text-[10px] px-2 py-1 tracking-[0.8px] uppercase">
+              Live
+            </div>
+          )}
+          {landed && clickShare < 0.9 && (
+            <div className="absolute z-30 text-[10px] uppercase tracking-[0.8px] text-white/80" style={{ left: `${photoL + 1}%`, top: `${photoT + photoH + 1}%` }}>
+              Still
+            </div>
+          )}
 
           <div
-            className="absolute inset-0 z-20 flex flex-col justify-end px-8 md:px-16 pb-24 max-w-[920px]"
-            style={{ opacity: headlineOp, transform: `translateY(${pack * -24}px)` }}
+            className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-24 pointer-events-none"
+            style={{ opacity: headlineOp }}
           >
             <p className="text-[11px] uppercase tracking-[1.4px] text-white/60 mb-4">The truth layer</p>
-            <h1 className="text-[52px] md:text-[80px] leading-[0.92] tracking-[-2px] font-semibold mb-6">
-              Numbers everyone<br />in the deal can trust.
+            <h1 className="text-white text-[52px] md:text-[78px] leading-[0.92] tracking-[-2px] font-semibold mb-5">
+              From a clip<br />to a kit you can send.
             </h1>
-            <p className="text-[17px] text-white/70 max-w-[460px]">
-              Start with the person. The kit is just the frame that makes them sendable.
-            </p>
+            <p className="text-[16px] text-white/70 max-w-[420px]">Scroll. The picture lands. Share. That is the public link.</p>
           </div>
 
           <div
-            className="absolute z-20 right-[6%] top-[12%] w-[min(420px,42vw)]"
-            style={{ opacity: kitIn, transform: `translateY(${(1 - kitIn) * 28}px)` }}
+            className="absolute inset-x-6 top-[10%] bottom-[8%] z-10 rounded-[20px] bg-[#eef0f4] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
+            style={{ opacity: editorOp }}
           >
-            <div className="rounded-[22px] overflow-hidden border border-[#ead9b8] shadow-[0_30px_80px_rgba(0,0,0,0.35)] bg-[#F4E6C8]">
-              <div className="flex items-center justify-between px-5 py-4">
-                <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
-                <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+            <div className="h-12 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3">
+              <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
+              <p className="text-[13px] text-[#6a7282]">Media kits / <span className="text-[#101828] font-medium">Ren Cole's Media Kit</span></p>
+              <div className="ml-auto flex items-center gap-2">
+                <span className="size-8 rounded-full border border-[#e6e8ec]" />
+                <span
+                  className="h-8 px-3 rounded-full text-white text-[12px] flex items-center gap-1"
+                  style={{ background: clickShare > 0.55 ? "#0f9d58" : "#185abc" }}
+                >
+                  {clickShare > 0.55 ? "Copied link" : "Share"}
+                </span>
               </div>
-              <div className="px-5 pb-5 pl-[42%]">
-                <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Ren Cole</p>
-                <p className="text-[#6b0030]/70 text-[12px] mb-3">Portland, OR · 32 · Male</p>
-                <p className="text-[10px] uppercase tracking-[1px] text-[#6b0030]/50 mb-1">Verticals</p>
-                <p className="text-[#6b0030] text-[13px]">Running · Everyday Progress</p>
-              </div>
-              <div
-                className="bg-[#6b0030] text-[#F4E6C8] px-5 py-4"
-                style={{ opacity: restIn }}
+            </div>
+
+            <div className="flex h-[calc(100%-48px)]">
+              <aside
+                className="w-[240px] shrink-0 bg-white border-r border-[#e6e8ec] p-4 overflow-hidden"
+                style={{ opacity: 1 - publicize, width: `${lerp(240, 0, publicize)}px`, padding: publicize > 0.7 ? 0 : undefined }}
               >
-                <p className="text-[13px] leading-5 mb-4">
-                  Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.
-                </p>
-                <div className="flex items-end justify-between">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.8px] opacity-70">Total audience</p>
-                    <p className="text-[28px] leading-none font-semibold">286K</p>
+                <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
+                <p className="text-[15px] font-medium mb-5">Ren Cole's Media Kit</p>
+                <p className="text-[11px] text-[#6a7282] mb-2">Platform analytics</p>
+                <div className="grid grid-cols-3 gap-2 mb-5">
+                  {["IG", "TT", "YT"].map((x) => (
+                    <div key={x} className="rounded-xl bg-[#f4f5f7] h-14 flex items-end p-2 text-[10px] text-[#6a7282]">{x}</div>
+                  ))}
+                </div>
+                <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
+                {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
+                  <div key={x} className="rounded-xl bg-[#f4f5f7] h-10 mb-2 flex items-center justify-between px-3 text-[12px]">
+                    {x}<span className="text-[#99a1af]">+</span>
                   </div>
-                  <div className="flex gap-5 text-right">
-                    <div><p className="text-[16px] font-semibold">131K</p><p className="text-[10px] opacity-70">@ren.cole</p></div>
-                    <div><p className="text-[16px] font-semibold">97K</p><p className="text-[10px] opacity-70">@ren.cole</p></div>
-                    <div><p className="text-[16px] font-semibold">58K</p><p className="text-[10px] opacity-70">Ren Cole</p></div>
+                ))}
+              </aside>
+
+              <div className="flex-1 p-5 overflow-hidden">
+                <div className="h-full rounded-[18px] bg-[#F4E6C8] border border-[#ead9b8] relative">
+                  <div className="flex justify-between p-5">
+                    <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
+                    <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+                  </div>
+                  <div className="absolute left-[42%] top-[22%] right-6">
+                    <p className="text-[#6b0030] text-[36px] leading-none font-semibold mb-2">Ren Cole</p>
+                    <p className="text-[#6b0030]/70 text-[13px] mb-4">Portland, OR · 32 years old · Male</p>
+                    <p className="text-[10px] uppercase tracking-[1px] text-[#6b0030]/50 mb-1">Verticals</p>
+                    <p className="text-[#6b0030] text-[14px]">Running · Everyday Progress</p>
+                  </div>
+                  <div className="absolute left-0 right-0 bottom-0 bg-[#6b0030] text-[#F4E6C8] px-6 py-5">
+                    <p className="text-[14px] leading-5 mb-3 max-w-[640px]">
+                      Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.
+                    </p>
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.8px] opacity-70">Total audience</p>
+                        <p className="text-[28px] leading-none font-semibold">286K</p>
+                      </div>
+                      <div className="flex gap-6 text-right text-[13px]">
+                        <span>131K</span><span>97K</span><span>58K</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -133,17 +167,47 @@ export function KitStory() {
           </div>
 
           <div
-            className="absolute z-30 left-1/2 -translate-x-1/2 bottom-8 w-[min(720px,90vw)]"
-            style={{ opacity: shareIn, transform: `translate(-50%, ${(1 - shareIn) * 16}px)` }}
-          >
-            <div className="bg-white text-[#101828] rounded-full h-10 px-4 flex items-center gap-3 shadow-lg">
-              <span className="size-2.5 rounded-full bg-[#c6f31e]" />
-              <span className="text-[12px] truncate">foam.io/m/ren-cole</span>
-              <span className="ml-auto text-[11px] text-[#185abc]">Public link · no login</span>
+            className="pointer-events-none absolute z-40 size-10 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/25 shadow-[0_0_0_6px_rgba(198,243,30,0.2)]"
+            style={{
+              opacity: landed && publicize < 0.85 ? 1 : 0,
+              left: `${cursorL}%`,
+              top: `${cursorT}%`,
+              transition: "left 200ms linear, top 200ms linear",
+            }}
+          />
+        </div>
+      </section>
+
+      <section className="min-h-screen bg-[#eef0f4] px-6 py-16">
+        <div className="max-w-[980px] mx-auto">
+          <p className="text-[12px] uppercase tracking-[1px] text-[#6a7282] mb-3">The link they open</p>
+          <h2 className="text-[36px] tracking-[-1px] font-semibold mb-8">No editor. No login. Just the kit.</h2>
+          <div className="rounded-[22px] overflow-hidden bg-[#F4E6C8] border border-[#ead9b8] shadow-[0_24px_60px_rgba(16,24,40,0.12)]">
+            <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 p-6 items-start">
+              <img alt="Ren Cole" src={REN} className="w-full h-[340px] object-cover object-top rounded-[16px]" />
+              <div className="pt-2">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
+                  <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+                </div>
+                <p className="text-[#6b0030] text-[40px] leading-none font-semibold mb-3">Ren Cole</p>
+                <p className="text-[#6b0030]/70 text-[14px] mb-5">Portland, OR · 32 years old · Male</p>
+                <p className="text-[10px] uppercase tracking-[1px] text-[#6b0030]/50 mb-1">Verticals</p>
+                <p className="text-[#6b0030] text-[15px]">Running · Everyday Progress</p>
+              </div>
             </div>
-            <p className="text-center text-[12px] text-white/55 mt-3">
-              The photo is the person. The kit is what you send.
-            </p>
+            <div className="bg-[#6b0030] text-[#F4E6C8] px-6 py-6">
+              <p className="text-[16px] leading-6 mb-5 max-w-[720px]">
+                Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.
+              </p>
+              <div className="flex items-end justify-between">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.8px] opacity-70">Total audience</p>
+                  <p className="text-[32px] leading-none font-semibold">286K</p>
+                </div>
+                <p className="text-[13px] opacity-80">foam.io/m/ren-cole</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
