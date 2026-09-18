@@ -7,7 +7,7 @@
  *   variant="search"  → content search masonry grid
  */
 
-const A = "/assets";
+const A = `${import.meta.env.BASE_URL}assets`;
 
 // ─── Sidebar icons (from Figma design assets) ──────────────────────────────
 const icNavHome    = `${A}/db233.svg`; // people/roster
@@ -174,27 +174,27 @@ function TalentCard({ t }: { t: TalentRow }) {
 const TALENT_DATA: TalentRow[] = [
   {
     photo: photoAliedy,
-    name: "Aliedy Almonte", age: "32y", gender: "Female", location: "New York, NY, US",
-    ig: "231K", tt: "231K", yt: "231K",
-    bio: "I was born and raised in the vibrant city of Veridia, nestled in the heart of the Azure Coast. From a young age, I was captivated by the bustling energy of the city...",
+    name: "Ren Cole", age: "32y", gender: "Male", location: "Portland, OR",
+    ig: "131K", tt: "97K", yt: "58K",
+    bio: "Early miles and long runs. A roster example for demonstration only.",
     tags: ["Beauty", "Advocacy", "BIPOC"],
-    manager: "Tony Sanchez",
+    manager: "Rowan Hale",
   },
   {
     photo: photoCarolyn,
-    name: "Carolyn Clarke", age: "32y", gender: "Female", location: "New York, NY, US",
-    ig: "231K", tt: "231K", yt: "231K",
-    bio: "I was born and raised in the vibrant city of Veridia, nestled in the heart of the Azure Coast. From a young age, I was captivated by the bustling energy of the city...",
+    name: "Io Marin", age: "28y", gender: "Female", location: "Lisbon",
+    ig: "164K", tt: "89K", yt: "12K",
+    bio: "Early miles and long runs. A roster example for demonstration only.",
     tags: ["Beauty", "Advocacy", "BIPOC"],
-    manager: "Tony Sanchez",
+    manager: "Rowan Hale",
   },
   {
     photo: photoCassandra,
-    name: "Cassandra Thorpe", age: "32y", gender: "Female", location: "New York, NY, US",
-    ig: "231K", tt: "231K", yt: "231K",
-    bio: "I was captivated by the bustling energy of the city, the colorful markets, and the diverse tapestry of cultures that intertwined to create a unique and dynamic environment...",
+    name: "Sable Quinn", age: "33y", gender: "Female", location: "Glasgow",
+    ig: "131K", tt: "97K", yt: "58K",
+    bio: "Studio sessions and late rooms. A roster example for demonstration only.",
     tags: ["Beauty", "Advocacy", "BIPOC"],
-    manager: "Tony Sanchez",
+    manager: "Rowan Hale",
   },
 ];
 
@@ -204,10 +204,10 @@ function RosterView() {
       {/* Top bar */}
       <div className="border-b border-[#eeefef] px-4 py-3 flex items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <img alt="Sixteenth" className="h-5 shrink-0" src={`${A}/cb650.svg`} />
+          <img alt="Vale Studio" className="h-5 shrink-0" src={`${A}/cb650.svg`} />
           <span className="font-founders font-normal text-[11px] text-[#99a1af]">/</span>
           <div>
-            <p className="font-founders font-medium text-[13px] leading-tight text-[#101828]">Amazon Prime Collaborators '26</p>
+            <p className="font-founders font-medium text-[13px] leading-tight text-[#101828]">Harbor Spring Roster</p>
             <p className="font-founders font-normal text-[10px] text-[#6a7282]">14 talent</p>
           </div>
         </div>
@@ -370,7 +370,7 @@ function ContentSearchView() {
                   views="980.2K"
                   likes="293.2K"
                   comments="124.8K"
-                  creator="Aliedy Almonte"
+                  creator="Ren Cole"
                   match={i % 3 === 0}
                 />
               </div>
