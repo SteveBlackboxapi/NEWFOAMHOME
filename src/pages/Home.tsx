@@ -13,7 +13,8 @@ const icIG = `${A}/20684.svg`;
 const icTT = `${A}/8509e.svg`;
 const icYT = `${A}/d0b8e.svg`;
 
-// ─── Gmail embed view ───────────────────────────────────────────────function GmailView() {
+// Gmail embed
+function GmailView() {
   const [step, setStep] = useState(0);
   useEffect(() => {
     setStep(0);
