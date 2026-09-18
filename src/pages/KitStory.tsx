@@ -32,6 +32,15 @@ function KitNav() {
   );
 }
 
+function Card({ n, l }: { n: string; l: string }) {
+  return (
+    <div className="rounded-xl bg-[#ead9b8]/55 p-4">
+      <p className="text-[22px] font-semibold">{n}</p>
+      <p className="text-[11px] text-[#6a7282]">{l}</p>
+    </div>
+  );
+}
+
 export function KitStory() {
   const track = useRef<HTMLElement | null>(null);
   const stage = useRef<HTMLDivElement | null>(null);
@@ -69,11 +78,11 @@ export function KitStory() {
 
   const pack = ease(range(p, 0.02, 0.22));
   const landed = pack >= 0.995;
-  const read = range(p, 0.24, 0.56);
-  const aimShare = range(p, 0.56, 0.64);
-  const shareOpen = range(p, 0.64, 0.72);
-  const generated = range(p, 0.72, 0.78);
-  const aimCopy = range(p, 0.78, 0.86);
+  const read = range(p, 0.24, 0.58);
+  const aimShare = range(p, 0.58, 0.65);
+  const shareOpen = range(p, 0.65, 0.73);
+  const generated = range(p, 0.73, 0.79);
+  const aimCopy = range(p, 0.79, 0.86);
   const copied = range(p, 0.86, 0.9);
   const publicize = range(p, 0.9, 0.93);
   const fold = range(p, 0.93, 0.97);
@@ -104,7 +113,7 @@ export function KitStory() {
         <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Kit story test</span>
       </div>
 
-      <section ref={track} className="relative h-[340vh]">
+      <section ref={track} className="relative h-[360vh]">
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
@@ -114,6 +123,12 @@ export function KitStory() {
                   <div className="p-4 w-[220px]">
                     <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
                     <p className="text-[15px] font-medium mb-4">Io Marin's Media Kit</p>
+                    <p className="text-[11px] text-[#6a7282] mb-2">Platform analytics</p>
+                    <div className="grid grid-cols-3 gap-1 mb-4">
+                      {["IG", "TT", "YT"].map((x) => (
+                        <div key={x} className="rounded-lg bg-[#f4f5f7] h-11 text-[10px] text-[#6a7282] flex items-end p-1">{x}</div>
+                      ))}
+                    </div>
                     <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
                     {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
                       <div key={x} className="rounded-xl bg-[#f4f5f7] h-9 mb-2 flex items-center justify-between px-3 text-[11px]">{x}<span>+</span></div>
@@ -121,7 +136,7 @@ export function KitStory() {
                   </div>
                 </aside>
                 <div className="relative flex-1 overflow-hidden bg-[#F4E6C8]">
-                  <div style={{ transform: `translateY(${-read * 36}%)` }}>
+                  <div style={{ transform: `translateY(${-read * 42}%)` }}>
                     <div className="p-5">
                       <div className="flex justify-between mb-4">
                         <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
@@ -139,34 +154,105 @@ export function KitStory() {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-[#6b0030] text-[#F4E6C8] px-6 py-6">
-                      <p className="text-[14px] leading-6 mb-6">Rooftop sessions and late miles. Illustrative Vale Studio talent.</p>
-                      <div className="flex items-end justify-between border-t border-white/15 pt-5">
+
+                    <div className="bg-[#6b0030] text-[#F4E6C8] px-8 py-8">
+                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">
+                        Io is a movement creator known for rooftop sessions and late miles. The work is physical, city-bound and built to be watched more than once. Illustrative Vale Studio talent — figures for demonstration only.
+                      </p>
+                      <div className="border-t border-white/20 pt-6 flex items-end justify-between gap-6">
                         <div>
-                          <p className="text-[18px] font-semibold">Platforms</p>
-                          <p className="text-[28px] leading-none font-semibold">164K</p>
+                          <p className="text-[22px] font-semibold">Platforms</p>
+                          <p className="text-[34px] leading-none font-semibold mt-1">164K</p>
+                          <p className="text-[12px] opacity-70 mt-1">Total audience</p>
                         </div>
-                        <div className="flex gap-8 text-right">
-                          <div><p className="text-[22px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
-                          <div><p className="text-[22px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
-                          <div><p className="text-[22px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
+                        <div className="flex gap-10 text-right">
+                          <div>
+                            <p className="text-[11px] opacity-70 mb-1">IG</p>
+                            <p className="text-[24px] font-semibold">89K</p>
+                            <p className="text-[11px] opacity-70">@iomarin</p>
+                          </div>
+                          <div>
+                            <p className="text-[11px] opacity-70 mb-1">TT</p>
+                            <p className="text-[24px] font-semibold">62K</p>
+                            <p className="text-[11px] opacity-70">@iomarin_tt</p>
+                          </div>
+                          <div>
+                            <p className="text-[11px] opacity-70 mb-1">YT</p>
+                            <p className="text-[24px] font-semibold">13K</p>
+                            <p className="text-[11px] opacity-70">@iomarin_yt</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="p-5 grid grid-cols-2 gap-3 bg-[#F4E6C8] min-h-[52vh]">
-                      {[["247.5", "Avg. Views"], ["966.7", "Avg. Reels Views"], ["196.0", "Avg. Story Reach"], ["2.9%", "Reach engagement"]].map(([n, l]) => (
-                        <div key={l} className="rounded-xl bg-[#ead9b8]/50 p-4">
-                          <p className="text-[22px] font-semibold">{n}</p>
-                          <p className="text-[11px] text-[#6a7282]">{l}</p>
-                        </div>
-                      ))}
-                      <div className="col-span-2 rounded-xl bg-[#ead9b8]/50 p-4">
-                        <p className="text-[12px] font-medium mb-3">Followers</p>
-                        <div className="h-16 flex items-end gap-2">
-                          {[20, 22, 24, 28, 40, 62, 78, 86, 90].map((h, i) => (
-                            <div key={i} className="flex-1 bg-[#6b0030] rounded-sm" style={{ height: `${h}%` }} />
+
+                    <div className="p-6 bg-[#F4E6C8] space-y-4">
+                      <div className="flex items-center justify-between">
+                        <p className="text-[16px] font-semibold">Instagram <span className="text-[#6a7282] font-normal text-[13px]">@iomarin</span></p>
+                        <p className="text-[12px] text-[#6b0030]">Data: Last 30 days</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <Card n="247.5" l="Avg. Views" />
+                        <Card n="966.7" l="Avg. Reels Views" />
+                        <Card n="247.5" l="Avg. Story Views" />
+                        <Card n="688.9" l="Avg. Reach" />
+                      </div>
+
+                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                        <p className="text-[13px] font-semibold">Total followers</p>
+                        <p className="text-[28px] font-semibold leading-none mt-1">89K</p>
+                        <p className="text-[11px] text-[#6a7282] mb-4">+2,140 new followers</p>
+                        <svg viewBox="0 0 360 90" className="w-full h-20">
+                          <polyline fill="none" stroke="#6b0030" strokeWidth="2.5" points="0,70 40,70 80,68 120,68 160,66 200,48 240,28 280,22 320,20 360,20" />
+                          {[0, 40, 80, 120, 160, 200, 240, 280, 320, 360].map((x, i) => (
+                            <circle key={i} cx={x} cy={[70, 70, 68, 68, 66, 48, 28, 22, 20, 20][i]} r="3" fill="#6b0030" />
+                          ))}
+                        </svg>
+                        <div className="flex justify-between text-[10px] text-[#6a7282] mt-1">
+                          {"Jan Feb Mar Apr May Jun Jul Aug Sep".split(" ").map((m) => (
+                            <span key={m}>{m}</span>
                           ))}
                         </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                          <p className="text-[13px] font-semibold mb-4">Gender distribution</p>
+                          <p className="text-[12px] mb-1 flex justify-between"><span>Female</span><span>61%</span></p>
+                          <div className="h-3 bg-[#6b0030] w-[61%] mb-3" />
+                          <p className="text-[12px] mb-1 flex justify-between"><span>Male</span><span>39%</span></p>
+                          <div className="h-3 bg-[#6b0030] w-[39%]" />
+                        </div>
+                        <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                          <p className="text-[13px] font-semibold mb-3">Age distribution</p>
+                          {[
+                            ["13-17", 2],
+                            ["18-24", 18],
+                            ["25-34", 41],
+                            ["35-44", 24],
+                            ["45+", 15],
+                          ].map(([l, n]) => (
+                            <div key={String(l)} className="flex items-center gap-2 mb-1 text-[12px]">
+                              <span className="w-10 text-[#6a7282]">{l}</span>
+                              <div className="h-2 bg-[#6b0030]" style={{ width: `${Number(n) * 1.6}px` }} />
+                              <span>{n}%</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl bg-[#ead9b8]/55 p-5">
+                        <p className="text-[13px] font-semibold mb-3">Country distribution</p>
+                        {[
+                          ["Portugal", "54%"],
+                          ["United Kingdom", "18%"],
+                          ["Spain", "11%"],
+                          ["France", "7%"],
+                          ["United States", "4%"],
+                        ].map(([c, n]) => (
+                          <p key={c} className="text-[13px] flex justify-between py-1 border-b border-[#6b0030]/10 last:border-0">
+                            <span>{c}</span><span>{n}</span>
+                          </p>
+                        ))}
                       </div>
                     </div>
                   </div>
