@@ -374,7 +374,7 @@ function PitchStory() {
           <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
           <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-[0.85fr_1.25fr] gap-10 xl:gap-16 items-start">
           <div>
             <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>01 / The brief</p>
             <h2 className={`${FG_SB} text-[40px] leading-[1.05] tracking-[-1px] text-text mb-6`}>
@@ -388,7 +388,7 @@ function PitchStory() {
             </div>
           </div>
           <div className="rounded-[28px] p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
-            <div className="bg-white rounded-[22px] overflow-hidden min-h-[360px] grid grid-cols-[108px_1fr] border border-[#e8eaed]">
+            <div className="bg-white rounded-[22px] overflow-hidden min-h-[400px] grid grid-rows-[auto_1fr] grid-cols-[120px_1fr] border border-[#e8eaed]">
               <div className="bg-[#f4f6fb] p-4 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
                 <div className="flex items-center gap-1.5 mb-4">
                   <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
@@ -400,11 +400,13 @@ function PitchStory() {
                 <p className="mt-2 px-1">Sent</p>
                 <p className="mt-2 px-1 flex justify-between">Drafts <span>2</span></p>
               </div>
-              <div className="p-5">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
-                  <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
-                </div>
+              <div className="col-span-2 flex items-center gap-3 px-4 py-3 border-b border-[#eef0f3]">
+                <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
+                <span className={`${FG_SB} text-[14px] text-[#202124] mr-2`}>Gmail</span>
+                <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
+                <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
+              </div>
+              <div className="p-5 col-start-2">
                 <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
                 <div className="flex items-center gap-2 mb-1">
                   <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px]">S</div>
