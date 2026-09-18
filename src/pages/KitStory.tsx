@@ -58,7 +58,7 @@ function AfterShare() {
     { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
   ];
   return (
-    <div className="bg-white">
+    <div className="bg-white" id="after-share">
       <section className="pt-16 pb-6">
         <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>In good company. Across 800+ creator agencies.</p>
         <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
@@ -237,9 +237,20 @@ export function KitStory() {
               <KitNav />
             </div>
           )}
-          <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-20 pointer-events-none" style={{ opacity: headlineOp }}>
-            <p className="text-[11px] uppercase tracking-[1.6px] text-white/70 mb-5">The truth layer</p>
-            <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">Numbers everyone in the deal can trust.</h1>
+          <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
+            <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
+            <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
+            <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
+              <Link to="/demo" className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`} style={{ background: "#c6f31e" }}>
+                Get a demo
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+              </Link>
+              <a href="#after-share" className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}>
+                Follow a pitch
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2V10M6 10L2 6M6 10L10 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
+              </a>
+            </div>
           </div>
           <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
           <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
