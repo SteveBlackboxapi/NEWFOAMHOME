@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
 
@@ -13,38 +13,64 @@ const icIG = `${A}/20684.svg`;
 const icTT = `${A}/8509e.svg`;
 const icYT = `${A}/d0b8e.svg`;
 
-// ─── Gmail embed view ─────────────────────────────────────────────────────────
-function GmailView() {
+// ─── Gmail embed view ───────────────────────────────────────────────function GmailView() {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    setStep(0);
+    const ids = [700, 1600, 2400].map((ms, i) => window.setTimeout(() => setStep(i + 1), ms));
+    return () => ids.forEach(clearTimeout);
+  }, []);
+
+  const people = [
+    { name: "Ren Cole", img: `${A}/9e849.png` },
+    { name: "Io Marin", img: `${A}/3546d.png` },
+    { name: "Sable Quinn", img: `${A}/b93cd.png` },
+  ];
+
   return (
-    <div className="bg-[#e9eef6] overflow-hidden">
-      <div className="grid grid-cols-[1.15fr_0.85fr] min-h-[420px]">
+    <div className="bg-[#e9eef6] overflow-hidden relative">
+      {step === 2 && (
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-[#101828] text-white text-[11px] px-3 h-7 rounded-full inline-flex items-center">
+          Copied!
+        </div>
+      )}
+      <div className="grid grid-cols-[1.2fr_0.8fr] min-h-[440px]">
         <div className="bg-white m-3 rounded-[12px] shadow-sm overflow-hidden flex flex-col">
           <div className="px-3 py-2 border-b border-[#e8eaed] flex items-center justify-between">
-            <span className={`${FG_M} text-[12px] text-[#202124]`}>New message</span>
-            <span className={`${FG_R} text-[10px] text-[#5f6368]`}>Draft</span>
+            <span className={`${FG_M} text-[12px] text-[#202124]`}>{step >= 3 ? "Draft saved" : "New message"}</span>
           </div>
           <div className="px-3 py-2 border-b border-[#e8eaed]">
-            <p className={`${FG_R} text-[11px] text-[#5f6368]`}>To: eden@brand.example</p>
-            <p className={`${FG_M} text-[12px] text-[#202124] mt-1`}>Spring wellness — Io</p>
+            <p className={`${FG_R} text-[11px] text-[#5f6368]`}>To</p>
+            <p className={`${FG_R} text-[11px] text-[#5f6368] mt-1`}>Subject</p>
           </div>
-          <div className="px-3 py-3 flex-1">
-            <p className={`${FG_R} text-[12px] text-[#202124] mb-3`}>Hi Eden, here is Io for the brief.</p>
-            <div className="border border-[#e0e0e0] rounded-[10px] overflow-hidden">
-              <div className="p-3 flex gap-3">
-                <div className="size-12 rounded-[8px] overflow-hidden shrink-0 bg-[#eee]">
-                  <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+          <div className="px-3 py-3 flex-1 overflow-hidden">
+            {step < 3 ? (
+              <p className={`${FG_R} text-[12px] text-[#9aa0a6]`}>Compose</p>
+            ) : (
+              <div className="animate-[fadeIn_400ms_ease]">
+                <div className="flex gap-3">
+                  <div className="size-12 rounded-[8px] overflow-hidden shrink-0 bg-[#eee]">
+                    <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+                  </div>
+                  <div>
+                    <p className={`${FG_SB} text-[13px] text-[#202124]`}>Io Marin</p>
+                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Lisbon · 28</p>
+                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 164K · TT 89K · YT 12K</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className={`${FG_SB} text-[13px] text-[#202124]`}>Io Marin</p>
-                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Lisbon · Wellness</p>
-                  <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 164K · TT 89K</p>
+                <p className={`${FG_R} text-[11px] text-[#202124] leading-4 mt-2`}>
+                  Early rituals, not noise. Illustrative demo talent for Vale Studio.
+                </p>
+                <p className={`${FG_M} text-[11px] text-[#1a73e8] mt-2`}>View media kit →</p>
+                <div className="mt-3 border border-[#e8eaed] rounded-[10px] p-3 grid grid-cols-2 gap-2">
+                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Avg reach <b className="text-[#202124]">18.4K</b></p>
+                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>PT 62%</p>
+                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Avg views <b className="text-[#202124]">9.1K</b></p>
+                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>25–34 41%</p>
                 </div>
+                <p className={`${FG_R} text-[10px] text-[#137333] mt-2`}>Certified directly from the Instagram API</p>
               </div>
-              <div className="px-3 pb-3">
-                <span className={`${FG_M} text-[11px] text-[#1a73e8]`}>View media kit</span>
-              </div>
-            </div>
-            <p className={`${FG_R} text-[10px] text-[#5f6368] mt-2`}>Added with Foam for Chrome · Detail</p>
+            )}
           </div>
         </div>
         <div className="bg-white border-l border-[#eeefef] flex flex-col">
@@ -53,22 +79,39 @@ function GmailView() {
             <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Lists</span>
             <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Kits</span>
           </div>
-          <div className="px-3 py-4 text-center flex-1">
-            <div className="size-16 rounded-[10px] overflow-hidden mx-auto bg-[#eee]">
-              <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+          {step === 0 && (
+            <div className="p-3 grid grid-cols-3 gap-2">
+              {people.map((person) => (
+                <div key={person.name}>
+                  <div className="aspect-square rounded-[8px] overflow-hidden bg-[#eee]">
+                    <img alt={person.name} src={person.img} className="size-full object-cover object-top" />
+                  </div>
+                  <p className={`${FG_R} text-[9px] text-[#6a7282] mt-1 truncate`}>{person.name}</p>
+                </div>
+              ))}
             </div>
-            <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Io Marin</p>
-            <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Lisbon</p>
-            <p className={`${FG_M} text-[11px] text-[#101828] mt-2`}>164K · 89K · 12K</p>
-            <div className="flex justify-center gap-1.5 mt-3">
-              <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
-              <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: "#7ddec0" }}>Detail</span>
-              <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Text</span>
+          )}
+          {step >= 1 && (
+            <div className="px-3 py-4 text-center">
+              <div className="size-16 rounded-[10px] overflow-hidden mx-auto bg-[#eee]">
+                <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+              </div>
+              <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Io Marin</p>
+              <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Lisbon</p>
+              <div className="flex justify-center gap-1.5 mt-3">
+                <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
+                <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: step >= 2 ? "#7ddec0" : "#f4f5f6" }}>Detail</span>
+                <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Text</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
+  );
+}
+
+v>
   );
 }
 
