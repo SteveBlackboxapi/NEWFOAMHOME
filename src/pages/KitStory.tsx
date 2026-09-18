@@ -98,7 +98,7 @@ function AfterShare() {
       </section>
       <section className="px-6 pb-24 pt-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10">The network in use</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {STATS.map((s) => (
               <div key={s.val}>
@@ -179,14 +179,14 @@ export function KitStory() {
   const cursorOn = aimShare > 0.02 && fold < 0.2;
 
   return (
-    <div className="bg-[#eef0f4] text-[#101828]">
+    <div className="bg-black text-[#101828]">
       <div className="fixed top-4 left-4 z-40 flex items-center gap-3">
-        <Link to="/" className="text-[12px] text-[#101828]/70 hover:text-[#101828]">← Home</Link>
-        <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Kit story test</span>
+        <Link to="/" className={`text-[12px] ${pack > 0.5 ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
+        <span className={`text-[10px] uppercase tracking-[1px] ${pack > 0.5 ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
       </div>
 
       <section ref={track} className="relative h-[360vh]">
-        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
+        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-black">
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
               <div className="h-12 shrink-0" />
@@ -260,7 +260,9 @@ export function KitStory() {
             </div>
           )}
 
-          <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" />
+          {pack > 0.35 && (
+            <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: pack }} />
+          )}
 
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
