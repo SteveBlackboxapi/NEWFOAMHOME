@@ -149,6 +149,7 @@ export function KitStory() {
   }, []);
 
   const pack = ease(range(p, 0.02, 0.22));
+  const kitIn = clamp((pack - 0.72) / 0.28);
   const landed = pack >= 0.995;
   const read = range(p, 0.24, 0.58);
   const aimShare = range(p, 0.58, 0.65);
@@ -180,13 +181,13 @@ export function KitStory() {
   return (
     <div className="bg-black text-[#101828]">
       <div className="fixed top-4 left-4 z-40 flex items-center gap-3">
-        <Link to="/" className={`text-[12px] ${pack > 0.5 ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
-        <span className={`text-[10px] uppercase tracking-[1px] ${pack > 0.5 ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
+        <Link to="/" className={`text-[12px] ${kitIn > 0.5 ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
+        <span className={`text-[10px] uppercase tracking-[1px] ${kitIn > 0.5 ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
       </div>
       <section ref={track} className="relative h-[360vh]">
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-black">
           {fold < 0.2 && (
-            <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
+            <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: kitIn }}>
               <div className="h-12 shrink-0" />
               <div className="flex min-h-0 flex-1">
                 <aside className="shrink-0 bg-white border-r border-[#e6e8ec] overflow-hidden" style={{ width: `${lerp(220, 0, publicize)}px` }}>
@@ -211,10 +212,6 @@ export function KitStory() {
                         <div className="flex-1 pt-2">
                           <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
                           <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
-                          <div className="rounded-xl bg-[#ead9b8]/70 p-3">
-                            <p className="text-[11px] text-[#6b0030]/60 mb-1">Verticals</p>
-                            <p className="text-[#6b0030] text-[13px]">Movement · City · Performance</p>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -224,18 +221,13 @@ export function KitStory() {
                         <div>
                           <p className="text-[22px] font-semibold">Platforms</p>
                           <p className="text-[34px] leading-none font-semibold mt-1">164K</p>
-                          <p className="text-[12px] opacity-70 mt-1">Total audience</p>
                         </div>
                         <div className="flex gap-10 text-right">
-                          <div><p className="text-[11px] opacity-70 mb-1">IG</p><p className="text-[24px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
-                          <div><p className="text-[11px] opacity-70 mb-1">TT</p><p className="text-[24px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
-                          <div><p className="text-[11px] opacity-70 mb-1">YT</p><p className="text-[24px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
+                          <div><p className="text-[24px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
+                          <div><p className="text-[24px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
+                          <div><p className="text-[24px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
                         </div>
                       </div>
-                    </div>
-                    <div className="p-6 bg-[#F4E6C8] grid grid-cols-2 gap-3">
-                      <Card n="247.5" l="Avg. Views" />
-                      <Card n="966.7" l="Avg. Reels Views" />
                     </div>
                   </div>
                 </div>
@@ -243,14 +235,13 @@ export function KitStory() {
             </div>
           )}
           {fold < 0.2 && (
-            <div className="absolute z-[15] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
+            <div className="absolute z-[22] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px`, opacity: 1 }}>
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
-              <div className="absolute inset-0 bg-black/20" style={{ opacity: 1 - pack }} />
             </div>
           )}
-          {pack > 0.35 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: pack }} />}
+          {kitIn > 0 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: kitIn }} />}
           {fold < 0.2 && (
-            <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
+            <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: kitIn }}>
               <KitNav />
             </div>
           )}
