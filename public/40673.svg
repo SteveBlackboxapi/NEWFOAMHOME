@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 19">
+<circle id="Ellipse 14" cx="4.5" cy="11.5" r="3.5" stroke="#1E2939" stroke-width="2"/>
+<circle id="Ellipse 15" cx="15.5" cy="11.5" r="3.5" stroke="#1E2939" stroke-width="2"/>
+<line id="Line 23" x1="7" y1="8.25" x2="13" y2="8.25" stroke="#1E2939" stroke-width="1.5"/>
+<line id="Line 25" x1="7" y1="4.25" x2="13" y2="4.25" stroke="#1E2939" stroke-width="1.5"/>
+<line id="Line 24" x1="7" y1="11.25" x2="13" y2="11.25" stroke="#1E2939" stroke-width="1.5"/>
+<path id="Rectangle 2" d="M5.33429 1C6.48003 1.00023 7.39026 1.96237 7.32745 3.10645L7.02667 8.5791L6.09894 8.14453C5.09937 7.67664 3.95068 7.64206 2.92511 8.0498L1.89288 8.45996L3.39777 2.50781C3.62181 1.62121 4.41981 1 5.33429 1Z" stroke="#1E2939" stroke-width="2"/>
+<path id="Rectangle 3" d="M14.127 1.20117C15.0784 1.12208 15.9534 1.72654 16.2158 2.64453L17.7676 8.07812C16.5175 7.41217 14.9918 7.45033 13.7686 8.21484L12.7627 8.84277L11.9639 3.52051C11.7923 2.37702 12.6241 1.32649 13.7764 1.23047L14.127 1.20117Z" stroke="#1E2939" stroke-width="2"/>
+</g>
+</svg>
