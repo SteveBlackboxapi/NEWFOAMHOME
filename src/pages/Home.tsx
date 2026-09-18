@@ -24,7 +24,7 @@ function GmailView() {
 
   const people = [
     { name: "Ren Cole", img: `${A}/9e849.png` },
-    { name: "Io Marin", img: `${A}/3546d.png` },
+    { name: "Ren Cole", img: `${A}/9e849.png` },
     { name: "Sable Quinn", img: `${A}/b93cd.png` },
   ];
 
@@ -51,16 +51,16 @@ function GmailView() {
               <div className="animate-[fadeIn_400ms_ease]">
                 <div className="flex gap-3">
                   <div className="size-12 rounded-[8px] overflow-hidden shrink-0 bg-[#eee]">
-                    <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+                    <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
                   </div>
                   <div>
-                    <p className={`${FG_SB} text-[13px] text-[#202124]`}>Io Marin</p>
-                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Lisbon · 28</p>
-                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 164K · TT 89K · YT 12K</p>
+                    <p className={`${FG_SB} text-[13px] text-[#202124]`}>Ren Cole</p>
+                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Portland · 32</p>
+                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 131K · TT 97K · YT 58K</p>
                   </div>
                 </div>
                 <p className={`${FG_R} text-[11px] text-[#202124] leading-4 mt-2`}>
-                  Early rituals, not noise. Illustrative demo talent for Vale Studio.
+                  Early miles. Long runs. Illustrative demo talent for Vale Studio.
                 </p>
                 <p className={`${FG_M} text-[11px] text-[#1a73e8] mt-2`}>View media kit →</p>
                 <div className="mt-3 border border-[#e8eaed] rounded-[10px] p-3 grid grid-cols-2 gap-2">
@@ -95,10 +95,10 @@ function GmailView() {
           {step >= 1 && (
             <div className="px-3 py-4 text-center">
               <div className="size-16 rounded-[10px] overflow-hidden mx-auto bg-[#eee]">
-                <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+                <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
               </div>
-              <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Io Marin</p>
-              <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Lisbon</p>
+              <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Ren Cole</p>
+              <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Portland</p>
               <div className="flex justify-center gap-1.5 mt-3">
                 <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
                 <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: step >= 2 ? "#7ddec0" : "#f4f5f6" }}>Detail</span>
