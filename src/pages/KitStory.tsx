@@ -38,26 +38,24 @@ export function KitStory() {
   }, []);
 
   const pack = range(p, 0.02, 0.2);
-  const landed = pack > 0.96;
-  const read = range(p, 0.22, 0.58);
-  const aimShare = range(p, 0.58, 0.66);
-  const shareOpen = range(p, 0.66, 0.74);
-  const generated = range(p, 0.74, 0.8);
-  const copied = range(p, 0.8, 0.86);
-  const publicize = range(p, 0.86, 0.91);
-  const fold = range(p, 0.91, 0.96);
-  const fly = range(p, 0.96, 1);
+  const landed = pack >= 1;
+  const read = range(p, 0.22, 0.56);
+  const aimShare = range(p, 0.56, 0.64);
+  const shareOpen = range(p, 0.64, 0.72);
+  const generated = range(p, 0.72, 0.78);
+  const aimCopy = range(p, 0.78, 0.86);
+  const copied = range(p, 0.86, 0.9);
+  const publicize = range(p, 0.9, 0.93);
+  const fold = range(p, 0.93, 0.97);
+  const fly = range(p, 0.97, 1);
   const headlineOp = 1 - range(p, 0.02, 0.12);
 
   useEffect(() => {
-    const a = flyVid.current;
-    const b = wellVid.current;
     if (landed) {
-      a?.pause();
-      b?.pause();
+      flyVid.current?.pause();
+      wellVid.current?.pause();
     } else {
-      a?.play().catch(() => undefined);
-      b?.play().catch(() => undefined);
+      flyVid.current?.play().catch(() => undefined);
     }
   }, [landed]);
 
@@ -65,6 +63,10 @@ export function KitStory() {
   const photoH = lerp(100, 30, pack);
   const photoL = lerp(0, 24.5, pack);
   const photoT = lerp(0, 20, pack);
+
+  const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(62, 93.6, aimShare);
+  const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(42, 8.4, aimShare);
+  const cursorOn = landed && fold < 0.2;
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
@@ -106,8 +108,10 @@ export function KitStory() {
                         <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
                       </div>
                       <div className="flex gap-5 items-start">
-                        <div className="w-[40%] rounded-[14px] overflow-hidden bg-black aspect-[4/3]">
-                          <video ref={wellVid} className="size-full object-cover" src={CLIP} muted loop playsInline />
+                        <div className="w-[40%] rounded-[14px] overflow-hidden bg-[#ead9b8] aspect-[4/3]">
+                          {landed && (
+                            <video ref={wellVid} className="size-full object-cover" src={CLIP} muted playsInline />
+                          )}
                         </div>
                         <div className="flex-1 pt-2">
                           <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
@@ -155,20 +159,20 @@ export function KitStory() {
             </div>
           )}
 
-          <div
-            className="absolute z-20 overflow-hidden bg-black"
-            style={{
-              left: `${photoL}%`,
-              top: `${photoT}%`,
-              width: `${photoW}%`,
-              height: `${photoH}%`,
-              borderRadius: `${lerp(0, 14, pack)}px`,
-              opacity: landed ? 0 : 1,
-              pointerEvents: "none",
-            }}
-          >
-            <video ref={flyVid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
-          </div>
+          {!landed && (
+            <div
+              className="absolute z-20 overflow-hidden bg-black"
+              style={{
+                left: `${photoL}%`,
+                top: `${photoT}%`,
+                width: `${photoW}%`,
+                height: `${photoH}%`,
+                borderRadius: `${lerp(0, 14, pack)}px`,
+              }}
+            >
+              <video ref={flyVid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
+            </div>
+          )}
 
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-24 pointer-events-none" style={{ opacity: headlineOp }}>
             <h1 className="text-white text-[52px] md:text-[78px] leading-[0.92] tracking-[-2px] font-semibold drop-shadow-lg">
@@ -187,9 +191,9 @@ export function KitStory() {
               {generated < 0.4 ? (
                 <div className="h-11 rounded-full border border-[#d0d5dd] flex items-center justify-center text-[13px]">Generate share link</div>
               ) : (
-                <div className={`h-11 rounded-full border flex items-center px-3 gap-2 ${copied > 0.5 ? "border-[#185abc]" : "border-[#d0d5dd]"}`}>
+                <div className={`h-11 rounded-full border flex items-center px-3 gap-2 ${copied > 0.35 ? "border-[#185abc]" : "border-[#d0d5dd]"}`}>
                   <span className="text-[12px] truncate flex-1">https://foam.io/m/io-marin</span>
-                  <span className={`text-[12px] rounded-full px-3 py-1 ${copied > 0.5 ? "bg-[#185abc] text-white" : "border border-[#d0d5dd]"}`}>{copied > 0.5 ? "Copied" : "Copy link"}</span>
+                  <span className={`text-[12px] rounded-full px-3 py-1 ${copied > 0.35 ? "bg-[#185abc] text-white" : "border border-[#d0d5dd]"}`}>{copied > 0.35 ? "Copied" : "Copy link"}</span>
                 </div>
               )}
             </div>
@@ -197,7 +201,7 @@ export function KitStory() {
 
           <div
             className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2"
-            style={{ opacity: landed && fold < 0.15 ? 1 : 0, left: `${lerp(62, 93.6, aimShare)}%`, top: `${lerp(42, 8.4, aimShare)}%` }}
+            style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }}
           />
 
           <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold, left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
