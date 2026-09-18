@@ -387,25 +387,35 @@ function PitchStory() {
   const go = (n: number) => setStep((s) => (s + n + 5) % 5);
   const touchX = useRef<number | null>(null);
   const lock = useRef(false);
-  const onWheel = (e: React.WheelEvent) => {
-    if (lock.current) { e.preventDefault(); return; }
-    if (e.deltaY > 20 && step < 4) {
-      e.preventDefault();
-      lock.current = true;
-      setStep(step + 1);
-      setTimeout(() => { lock.current = false; }, 420);
-    } else if (e.deltaY < -20 && step > 0) {
-      e.preventDefault();
-      lock.current = true;
-      setStep(step - 1);
-      setTimeout(() => { lock.current = false; }, 420);
-    }
-  };
+  const root = useRef<HTMLElement | null>(null);
+  const stepRef = useRef(step);
+  stepRef.current = step;
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      const s = stepRef.current;
+      if (lock.current) { e.preventDefault(); return; }
+      if (e.deltaY > 12 && s < 4) {
+        e.preventDefault();
+        lock.current = true;
+        setStep(s + 1);
+        window.setTimeout(() => { lock.current = false; }, 650);
+      } else if (e.deltaY < -12 && s > 0) {
+        e.preventDefault();
+        lock.current = true;
+        setStep(s - 1);
+        window.setTimeout(() => { lock.current = false; }, 650);
+      }
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
   return (
     <section
+      ref={root}
       id="pitch-loop"
       className="py-24 px-6 bg-white"
-      onWheel={onWheel}
       onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
       onTouchEnd={(e) => {
         if (touchX.current == null) return;
