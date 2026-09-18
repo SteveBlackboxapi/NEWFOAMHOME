@@ -387,19 +387,29 @@ function PitchStory() {
               <p className={`${FG_M} text-sm text-text`}>You already know who.</p>
             </div>
           </div>
-          <div className="bg-[#f4f6fb] rounded-[24px] p-4 shadow-[0_20px_60px_rgba(16,24,40,0.08)]">
-            <div className="bg-white rounded-[16px] overflow-hidden min-h-[320px] grid grid-cols-[88px_1fr]">
-              <div className="bg-[#f6f8fc] p-3 text-[10px] text-[#5f6368]">
-                <p className={`${FG_SB} text-[12px] text-[#202124] mb-3`}>Gmail</p>
-                <p className="bg-[#d3e3fd] text-[#001d35] rounded-full px-2 py-1 mb-2 inline-block">Compose</p>
-                <p className="mt-2">Inbox 12</p>
-                <p className="mt-1">Starred</p>
-                <p className="mt-1">Sent</p>
-                <p className="mt-1">Drafts 2</p>
+          <div className="rounded-[28px] p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
+            <div className="bg-white rounded-[22px] overflow-hidden min-h-[360px] grid grid-cols-[108px_1fr] border border-[#e8eaed]">
+              <div className="bg-[#f4f6fb] p-4 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
+                <div className="flex items-center gap-1.5 mb-4">
+                  <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
+                  <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
+                </div>
+                <p className={`${FG_M} bg-[#d3e3fd] text-[#041e49] rounded-full px-3 py-1.5 mb-3 inline-block`}>Compose</p>
+                <div className={`${FG_M} bg-[#e8f0fe] text-[#041e49] rounded-full px-3 py-1.5 mb-3 flex items-center justify-between`}>Inbox <span>12</span></div>
+                <p className="mt-2 px-1">Starred</p>
+                <p className="mt-2 px-1">Sent</p>
+                <p className="mt-2 px-1 flex justify-between">Drafts <span>2</span></p>
               </div>
               <div className="p-5">
-                <p className={`${FG_SB} text-[15px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
-                <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
+                  <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
+                </div>
+                <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px]">S</div>
+                  <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                </div>
                 <p className={`${FG_R} text-[11px] text-[#5f6368] mb-3`}>to me · 10:42 AM</p>
                 <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
                 <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
