@@ -141,121 +141,71 @@ function GmailView() {
 // ─── Media Kit tab view ────────────────────────────────────────────────────────
 function MediaKitView() {
   return (
-    <>
-      {/* Kit header */}
-      <div className="px-5 pt-4 pb-3 flex items-start justify-between border-b border-[#e8e6e2]">
-        <div>
-          <p className={`${FG_SB} text-[18px] text-[#101828] leading-tight`}>Vale <span className="font-normal">/</span></p>
-          <p className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[1px] mt-[2px]`}>Talent Studio</p>
+    <div className="overflow-hidden" style={{ background: "#F4E6C8" }}>
+      <div className="px-5 pt-4 pb-3 flex items-center justify-between">
+        <div className="size-6 rounded-[4px] bg-[#6b0030] flex items-center justify-center">
+          <span className="text-white text-[11px] font-semibold leading-none">F</span>
         </div>
-        <button className={`${FG_M} text-[10px] text-[#101828] border border-[#101828] rounded-full px-3 h-6 uppercase tracking-[0.5px]`}>
-          Media Kit
+        <button className={`${FG_M} text-[11px] text-[#6b0030] border border-[#6b0030]/40 rounded-full px-3 h-7`}>
+          Contact
         </button>
       </div>
-
-      {/* Creator section */}
-      <div className="px-5 pt-4 pb-0 flex gap-4">
-        <div className="flex-1 min-w-0">
-          <p className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[0.8px] mb-2`}>Running · Everyday Progress</p>
-          <p className="font-founders font-semibold text-[#7a0036] leading-[1.0]" style={{ fontSize: "clamp(48px, 8vw, 72px)" }}>
-            Ren.
-          </p>
-          <p className={`${FG_R} text-[12px] text-[#6a7282] mt-1`}>Portland, Oregon</p>
-          <p className={`${FG_R} text-[12px] text-[#6a7282] mt-2 leading-5 max-w-[200px]`}>
-            Early miles. Long runs. Bringing an audience along for the journey.
-          </p>
-          <div className="flex items-center gap-3 mt-3">
-            <img alt="Instagram" className="size-4 opacity-60" src={icIG} />
-            <img alt="TikTok"    className="size-4 opacity-60" src={icTT} />
-            <span className={`${FG_R} text-[11px] text-[#6a7282]`}>YouTube</span>
-          </div>
+      <div className="px-5 pb-5 flex gap-4 items-start">
+        <div className="rounded-[14px] overflow-hidden shrink-0 bg-[#e8d4b0]" style={{ width: 168, height: 168 }}>
+          <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
         </div>
-        <div className="rounded-[12px] shrink-0 overflow-hidden bg-[#c4a882]" style={{ width: 160, height: 160 }}>
-          <div className="size-full bg-gradient-to-br from-[#b8976a] via-[#a07c52] to-[#7a5c35] flex items-end p-3">
-            <div className="bg-white/20 rounded-lg px-2 py-1">
-              <span className={`${FG_SB} text-white text-[14px]`}>026</span>
-            </div>
+        <div className="min-w-0 pt-1">
+          <p className={`${FG_SB} text-[#6b0030] leading-[1.05] tracking-[-0.5px]`} style={{ fontSize: "clamp(22px, 3.2vw, 28px)" }}>
+            Ren Cole
+          </p>
+          <p className={`${FG_R} text-[11px] text-[#6b0030]/70 mt-2`}>
+            Portland, OR&nbsp;|&nbsp;32 years old&nbsp;|&nbsp;Male
+          </p>
+          <div className="flex items-center gap-2.5 mt-3">
+            <img alt="" className="size-4 opacity-80" src={icIG} />
+            <img alt="" className="size-4 opacity-80" src={icTT} />
+            <img alt="" className="size-4 opacity-80" src={icYT} />
+          </div>
+          <div className="mt-3 rounded-[10px] px-3 py-2" style={{ background: "rgba(107,0,48,0.08)" }}>
+            <p className={`${FG_R} text-[10px] text-[#6b0030]/55 uppercase tracking-[0.4px]`}>Verticals</p>
+            <p className={`${FG_M} text-[12px] text-[#6b0030] mt-0.5`}>Running · Everyday Progress</p>
           </div>
         </div>
       </div>
-
-      {/* Stats bar */}
-      <div className="mt-4 bg-[#6b0030] grid grid-cols-4">
-        {[
-          { label: "Total followers", val: "286K" },
-          { label: "Instagram",       val: "131K" },
-          { label: "TikTok",          val: "97K" },
-          { label: "YouTube",         val: "58K"  },
-        ].map((s, i) => (
-          <div key={s.label} className={`px-4 py-4 ${i < 3 ? "border-r border-white/10" : ""}`}>
-            <p className={`${FG_R} text-[9px] text-white/60 uppercase tracking-[0.5px] mb-1`}>{s.label}</p>
-            <p className={`${FG_SB} text-[22px] text-white leading-tight`}>{s.val}</p>
+      <div className="px-5 py-4" style={{ background: "#6b0030" }}>
+        <p className={`${FG_R} text-[13px] text-[#F4E6C8] leading-5`}>
+          Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.
+        </p>
+      </div>
+      <div className="px-5 pb-5" style={{ background: "#6b0030" }}>
+        <div className="flex items-end justify-between gap-3 border-t border-white/15 pt-4">
+          <div>
+            <p className={`${FG_SB} text-[11px] text-[#F4E6C8]`}>Platforms</p>
+            <p className={`${FG_SB} text-[28px] text-[#F4E6C8] leading-none mt-1`}>286K</p>
+            <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>Total audience</p>
           </div>
-        ))}
-      </div>
-
-      {/* Audience */}
-      <div className="grid grid-cols-2 border-t border-[#e8e6e2]">
-        {[
-          { label: "Top audience country", sub: "United States", pct: "72%" },
-          { label: "Top audience age",     sub: "25–34",         pct: "46%" },
-        ].map((a, i) => (
-          <div key={a.label} className={`px-4 py-3 ${i === 0 ? "border-r border-[#e8e6e2]" : ""}`}>
-            <p className={`${FG_R} text-[9px] text-[#99a1af] uppercase tracking-[0.5px] mb-1`}>{a.label}</p>
-            <div className="flex items-baseline justify-between">
-              <span className={`${FG_M} text-[13px] text-[#101828]`}>{a.sub}</span>
-              <span className={`${FG_SB} text-[15px] text-[#101828]`}>{a.pct}</span>
-            </div>
+          <div className="flex gap-5">
+            {[{ n: "131K", h: "@ren.cole" }, { n: "97K", h: "@ren.cole" }, { n: "58K", h: "Ren Cole" }].map((row) => (
+              <div key={row.n} className="text-right">
+                <p className={`${FG_SB} text-[18px] text-[#F4E6C8] leading-none`}>{row.n}</p>
+                <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>{row.h}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-
-      {/* Content footer */}
-      <div className="px-4 py-3 border-t border-[#e8e6e2] flex items-center gap-3">
-        <span className={`${FG_R} text-[10px] text-[#99a1af] uppercase tracking-[0.5px] shrink-0`}>Selected content</span>
-        <span className={`${FG_M} text-[12px] text-[#101828]`}>Morning miles</span>
-        <span className={`${FG_R} text-[11px] text-[#6a7282]`}>Training, one morning at a time.</span>
-      </div>
-
-      <p className={`${FG_R} text-[9px] text-[#99a1af] text-center pb-3`}>
-        Staged product example · illustrative content and figures
-      </p>
-    </>
+    </div>
   );
 }
 
-// ─── Media Kit mockup (tabbed) ────────────────────────────────────────────────
 function MediaKitCard() {
   const [tab, setTab] = useState<"kit" | "gmail">("kit");
   return (
-    <div
-      className="bg-[#f7f5f2] rounded-[20px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.45)] w-full"
-      style={{ maxWidth: 500 }}
-    >
-      {/* Tab bar */}
-      <div className="flex items-center gap-1 px-4 pt-4 pb-3">
-        <button
-          onClick={() => setTab("kit")}
-          className={`${FG_M} text-[13px] px-4 h-8 rounded-full transition-colors ${
-            tab === "kit"
-              ? "text-[#101828] bg-white border border-[#dedede] shadow-sm"
-              : "text-[#6a7282] hover:text-[#101828]"
-          }`}
-        >
-          Media kit
-        </button>
-        <button
-          onClick={() => setTab("gmail")}
-          className={`${tab === "gmail" ? FG_M : FG_R} text-[13px] px-4 h-8 rounded-full transition-colors ${
-            tab === "gmail"
-              ? "text-[#101828] bg-white border border-[#dedede] shadow-sm"
-              : "text-[#6a7282] hover:text-[#101828]"
-          }`}
-        >
-          Gmail embed
-        </button>
+    <div className="rounded-[20px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.45)] w-full" style={{ maxWidth: 500 }}>
+      <div className="flex items-center gap-1 px-4 pt-4 pb-3 bg-[#f3eee6]">
+        <button onClick={() => setTab("kit")} className={`${FG_M} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "kit" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Media kit</button>
+        <button onClick={() => setTab("gmail")} className={`${tab === "gmail" ? FG_M : FG_R} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "gmail" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Gmail embed</button>
       </div>
-
       {tab === "kit" ? <MediaKitView /> : <GmailView />}
     </div>
   );
