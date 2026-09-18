@@ -265,20 +265,20 @@ function LogoMarquee() {
   ];
   const sheet = `${A}/agency-logos.png`;
   const row = (
-    <div className="flex shrink-0">
+    <div className="flex shrink-0 gap-10 pr-10">
       {LOGOS.map(([label, pos]) => (
         <div
           key={label}
           role="img"
           aria-label={label}
-          className="w-44 h-14 shrink-0"
+          className="w-52 h-16 shrink-0"
           style={{ backgroundImage: `url(${sheet})`, backgroundSize: "400% 400%", backgroundPosition: pos, backgroundRepeat: "no-repeat" }}
         />
       ))}
     </div>
   );
   return (
-    <section className="bg-white py-10 border-b border-border">
+    <section className="bg-white pt-12 pb-8 border-b border-border">
       <p className={`${FG_R} text-sm text-muted text-center mb-6`}>In good company. Across 800+ creator agencies.</p>
       <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
         <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]">
