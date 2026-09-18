@@ -19,23 +19,36 @@ function ease(t: number) {
 
 export function KitStory() {
   const track = useRef<HTMLElement | null>(null);
+  const stage = useRef<HTMLDivElement | null>(null);
+  const well = useRef<HTMLDivElement | null>(null);
   const vid = useRef<HTMLVideoElement | null>(null);
   const [p, setProg] = useState(0);
+  const [slot, setSlot] = useState({ l: 22, t: 20, w: 32, h: 34 });
 
   useEffect(() => {
     const el = track.current;
     if (!el) return;
-    const onScroll = () => {
+    const measure = () => {
       const total = el.offsetHeight - window.innerHeight;
       const passed = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
       setProg(passed / Math.max(total, 1));
+      const s = stage.current?.getBoundingClientRect();
+      const w = well.current?.getBoundingClientRect();
+      if (s && w && w.width > 8) {
+        setSlot({
+          l: ((w.left - s.left) / s.width) * 100,
+          t: ((w.top - s.top) / s.height) * 100,
+          w: (w.width / s.width) * 100,
+          h: (w.height / s.height) * 100,
+        });
+      }
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    measure();
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
     };
   }, []);
 
@@ -60,11 +73,10 @@ export function KitStory() {
     else v.play().catch(() => undefined);
   }, [landed]);
 
-  const photoW = lerp(100, 31.2, pack);
-  const photoH = lerp(100, 33.6, pack);
-  const photoL = lerp(0, 21, pack);
-  const photoT = lerp(0, 19.4, pack);
-  const followY = landed ? -read * 36 : 0;
+  const photoL = lerp(0, slot.l, pack);
+  const photoT = lerp(0, slot.t, pack);
+  const photoW = lerp(100, slot.w, pack);
+  const photoH = lerp(100, slot.h, pack);
 
   const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
   const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
@@ -78,7 +90,7 @@ export function KitStory() {
       </div>
 
       <section ref={track} className="relative h-[340vh]">
-        <div className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
+        <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
               <div className="h-12 shrink-0 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3">
@@ -110,7 +122,7 @@ export function KitStory() {
                         <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
                       </div>
                       <div className="flex gap-5 items-start">
-                        <div className="w-[40%] rounded-[14px] bg-[#ead9b8] aspect-[4/3]" />
+                        <div ref={well} className="w-[40%] rounded-[14px] bg-[#ead9b8] aspect-[4/3]" />
                         <div className="flex-1 pt-2">
                           <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
                           <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
@@ -159,14 +171,13 @@ export function KitStory() {
 
           {fold < 0.2 && (
             <div
-              className="absolute z-20 overflow-hidden bg-black"
+              className="absolute z-20 overflow-hidden bg-black pointer-events-none"
               style={{
                 left: `${photoL}%`,
                 top: `${photoT}%`,
                 width: `${photoW}%`,
                 height: `${photoH}%`,
                 borderRadius: `${lerp(0, 14, pack)}px`,
-                transform: `translateY(${followY}%)`,
               }}
             >
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
