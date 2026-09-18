@@ -313,58 +313,48 @@ function ProofBar() {
 
 // ─── Value prop section ───────────────────────────────────────────────────────
 function ValueProp() {
-  const ROWS = [
+  const CARDS = [
     {
-      who: "Managers",
-      headline: "Pitch with live numbers.",
-      body: "Build branded media kits from connected platform data. Share a link. Know when it's opened.",
+      kicker: "I manage talent",
+      headline: "Pitch your roster with numbers a brand can believe.",
+      cta: "For managers",
       to: "/managers",
-      accent: "text-brand",
     },
     {
-      who: "Brands",
-      headline: "Decide on real data.",
-      body: "Receive a kit and see live follower counts, audience demographics, and top content — right now, not last month.",
-      to: "/brands",
-      accent: "text-blue",
-    },
-    {
-      who: "Creators",
-      headline: "Authorise once. Trust always.",
-      body: "Connect your accounts in minutes. Your manager gets accurate data; you keep full control.",
+      kicker: "I'm a creator",
+      headline: "Connect your accounts. Help your manager make the case.",
+      cta: "For creators",
       to: "/creators",
-      accent: "text-text",
+    },
+    {
+      kicker: "I'm a brand or agency",
+      headline: "Someone sent you a Foam link. Here's what's behind it.",
+      cta: "For brands",
+      to: "/brands",
     },
   ];
   return (
-    <section id="how-it-works" className="py-28 px-6 bg-raised">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-20">
-          <h2 className={`${FG_SB} text-text leading-[1.05] tracking-[-1px] mb-5`} style={{ fontSize: "clamp(36px, 4vw, 52px)" }}>
-            One source of truth.<br />Three audiences that trust it.
-          </h2>
-          <p className={`${FG_R} text-[17px] text-muted leading-7 max-w-[480px] mx-auto`}>
-            Foam connects creators, managers, and brands through the same live data — no one's working off a stale screenshot.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {ROWS.map(r => (
-            <div key={r.who} className="bg-surface border border-border rounded-[20px] p-8 flex flex-col gap-4">
-              <p className={`${FG_M} text-xs uppercase tracking-[0.8px] text-subtle`}>{r.who}</p>
-              <h3 className={`${FG_SB} text-[28px] leading-tight tracking-[-0.5px] ${r.accent}`}>{r.headline}</h3>
-              <p className={`${FG_R} text-[15px] leading-6 text-muted flex-1`}>{r.body}</p>
-              <Link to={r.to} className={`${FG_M} text-sm text-muted hover:text-text transition-colors mt-2`}>
-                Learn more →
-              </Link>
-            </div>
-          ))}
-        </div>
+    <section className="bg-white py-16 px-6">
+      <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-4">
+        {CARDS.map((card) => (
+          <Link
+            key={card.to}
+            to={card.to}
+            className="rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col hover:border-[#cfcfcf] transition-colors"
+          >
+            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{card.kicker}</p>
+            <p className={`${FG_SB} text-[22px] leading-7 tracking-[-0.4px] text-text flex-1`}>{card.headline}</p>
+            <p className={`${FG_M} text-sm text-muted mt-8 flex items-center justify-between`}>
+              {card.cta}
+              <span>↗</span>
+            </p>
+          </Link>
+        ))}
       </div>
     </section>
   );
 }
 
-// ─── Feature highlight ────────────────────────────────────────────────────────
 function FeatureHighlight() {
   return (
     <section className="py-28 px-6 bg-surface">
