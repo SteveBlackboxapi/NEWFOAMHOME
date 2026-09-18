@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 const A = `${import.meta.env.BASE_URL}assets`;
@@ -17,43 +17,24 @@ function range(p: number, a: number, b: number) {
 export function KitStory() {
   const track = useRef<HTMLElement | null>(null);
   const vid = useRef<HTMLVideoElement | null>(null);
-  const pRef = useRef(0);
+  const [p, setProg] = useState(0);
 
   useEffect(() => {
     const el = track.current;
     if (!el) return;
-    let raf = 0;
-    const tick = () => {
-      const total = el.offsetHeight - window.innerHeight;
-      const passed = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
-      pRef.current = passed / Math.max(total, 1);
-      el.dataset.p = String(pRef.current);
-      const v = vid.current;
-      if (v) {
-        if (pRef.current > 0.32) v.pause();
-        else v.play().catch(() => undefined);
-      }
-      raf = requestAnimationFrame(tick);
-    };
     const onScroll = () => {
       const total = el.offsetHeight - window.innerHeight;
       const passed = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
-      const p = passed / Math.max(total, 1);
-      pRef.current = p;
-      (window as unknown as { __kitP?: number }).__kitP = p;
-      setProg(p);
+      setProg(passed / Math.max(total, 1));
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
-      cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
   }, []);
-
-  const [p, setProg] = useStateSafe();
 
   const pack = range(p, 0.02, 0.22);
   const landed = pack > 0.94;
@@ -131,7 +112,7 @@ export function KitStory() {
                 </aside>
 
                 <div className="relative flex-1 overflow-hidden bg-[#d9dde3]">
-                  <div className="absolute inset-0" style={{ transform: `translateY(${-read * 58}%)` }}>
+                  <div className="absolute inset-x-0 top-0" style={{ transform: `translateY(${-read * 58}%)` }}>
                     <div className="m-4 rounded-[16px] overflow-hidden bg-[#F4E6C8]">
                       <div className="relative min-h-[420px] p-5">
                         <div className="flex justify-between mb-4">
@@ -145,11 +126,6 @@ export function KitStory() {
                           <div className="flex-1 pt-2">
                             <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
                             <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
-                            <div className="flex gap-2 mb-4 text-[#6b0030] text-[16px]">
-                              <span className="size-7 rounded-full border border-[#6b0030]/40 flex items-center justify-center">IG</span>
-                              <span className="size-7 rounded-full border border-[#6b0030]/40 flex items-center justify-center">TT</span>
-                              <span className="size-7 rounded-full border border-[#6b0030]/40 flex items-center justify-center">YT</span>
-                            </div>
                             <div className="rounded-xl bg-[#ead9b8]/70 p-3">
                               <p className="text-[11px] text-[#6b0030]/60 mb-1">Verticals</p>
                               <p className="text-[#6b0030] text-[13px]">Movement · City · Performance</p>
@@ -158,9 +134,7 @@ export function KitStory() {
                         </div>
                       </div>
                       <div className="bg-[#6b0030] text-[#F4E6C8] px-6 py-6">
-                        <p className="text-[14px] leading-6 mb-6 max-w-[640px]">
-                          Rooftop sessions and late miles. Io builds a following that shows up for the work, not the costume. Illustrative Vale Studio talent.
-                        </p>
+                        <p className="text-[14px] leading-6 mb-6 max-w-[640px]">Rooftop sessions and late miles. Illustrative Vale Studio talent.</p>
                         <div className="flex items-end justify-between gap-4 border-t border-white/15 pt-5">
                           <div>
                             <p className="text-[18px] font-semibold">Platforms</p>
@@ -175,19 +149,14 @@ export function KitStory() {
                         </div>
                       </div>
                       <div className="p-5 grid grid-cols-2 gap-3 bg-[#F4E6C8]">
-                        {[
-                          ["247.5", "Avg. Views"],
-                          ["966.7", "Avg. Reels Views"],
-                          ["196.0", "Avg. Story Reach"],
-                          ["2.9%", "Reach engagement"],
-                        ].map(([n, l]) => (
+                        {[["247.5", "Avg. Views"], ["966.7", "Avg. Reels Views"], ["196.0", "Avg. Story Reach"], ["2.9%", "Reach engagement"]].map(([n, l]) => (
                           <div key={l} className="rounded-xl bg-[#ead9b8]/50 p-4">
                             <p className="text-[22px] font-semibold">{n}</p>
                             <p className="text-[11px] text-[#6a7282]">{l}</p>
                           </div>
                         ))}
                         <div className="col-span-2 rounded-xl bg-[#ead9b8]/50 p-4">
-                          <p className="text-[12px] font-medium mb-3">Total followers 164K</p>
+                          <p className="text-[12px] font-medium mb-3">Followers</p>
                           <div className="h-16 flex items-end gap-2">
                             {[20, 22, 24, 28, 40, 62, 78, 86, 90].map((h, i) => (
                               <div key={i} className="flex-1 bg-[#6b0030] rounded-sm" style={{ height: `${h}%` }} />
@@ -196,16 +165,16 @@ export function KitStory() {
                         </div>
                         <div className="rounded-xl bg-[#ead9b8]/50 p-4">
                           <p className="text-[12px] font-medium mb-3">Gender</p>
-                          <p className="text-[12px] mb-1">Female 61%</p>
-                          <div className="h-2 bg-[#6b0030] w-[61%] mb-2" />
-                          <p className="text-[12px] mb-1">Male 39%</p>
+                          <p className="text-[12px]">Female 61%</p>
+                          <div className="h-2 bg-[#6b0030] w-[61%] my-1" />
+                          <p className="text-[12px]">Male 39%</p>
                           <div className="h-2 bg-[#6b0030] w-[39%]" />
                         </div>
-                        <div className="rounded-xl bg-[#ead9b8]/50 p-4">
-                          <p className="text-[12px] font-medium mb-3">Countries</p>
-                          <p className="text-[12px] flex justify-between"><span>Portugal</span><span>54%</span></p>
-                          <p className="text-[12px] flex justify-between"><span>UK</span><span>18%</span></p>
-                          <p className="text-[12px] flex justify-between"><span>Spain</span><span>11%</span></p>
+                        <div className="rounded-xl bg-[#ead9b8]/50 p-4 text-[12px]">
+                          <p className="font-medium mb-2">Countries</p>
+                          <p className="flex justify-between"><span>Portugal</span><span>54%</span></p>
+                          <p className="flex justify-between"><span>UK</span><span>18%</span></p>
+                          <p className="flex justify-between"><span>Spain</span><span>11%</span></p>
                         </div>
                       </div>
                     </div>
@@ -214,18 +183,7 @@ export function KitStory() {
               </div>
             </div>
 
-            <div
-              className="absolute z-20 overflow-hidden bg-black"
-              style={{
-                left: `${photoL}%`,
-                top: `${photoT}%`,
-                width: `${photoW}%`,
-                height: `${photoH}%`,
-                borderRadius: `${lerp(0, 16, pack)}px`,
-                opacity: 1 - pack,
-                pointerEvents: "none",
-              }}
-            >
+            <div className="absolute z-20 overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 16, pack)}px`, opacity: 1 - pack }}>
               <video className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
             </div>
           </div>
@@ -257,9 +215,4 @@ export function KitStory() {
       </section>
     </div>
   );
-}
-
-function useStateSafe() {
-  const React = require("react") as typeof import("react");
-  return React.useState(0);
 }
