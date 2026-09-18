@@ -412,6 +412,9 @@ function PitchStory() {
           <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
           <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
         </div>
+        <div className="relative">
+          <button type="button" aria-label="Previous pitch step" onClick={() => go(-1)} className="hidden lg:flex absolute left-[-28px] top-1/2 -translate-y-1/2 z-10 size-12 rounded-full border border-border bg-white text-text items-center justify-center hover:bg-surface shadow-sm">←</button>
+          <button type="button" aria-label="Next pitch step" onClick={() => go(1)} className="hidden lg:flex absolute right-[-28px] top-1/2 -translate-y-1/2 z-10 size-12 rounded-full border border-border bg-white text-text items-center justify-center hover:bg-surface shadow-sm">→</button>
         <div className="grid lg:grid-cols-[0.85fr_1.25fr] gap-10 xl:gap-16 items-start">
           <div>
             <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{COPY[step][0]}</p>
@@ -466,6 +469,7 @@ function PitchStory() {
             </div>
           </div>
         </div>
+        </div>
         <div className="mt-12 grid grid-cols-5 gap-3">
           {STEPS.map(([n, label], i) => (
             <button key={n} type="button" onClick={() => setStep(i)} className="text-left">
@@ -474,11 +478,7 @@ function PitchStory() {
             </button>
           ))}
         </div>
-        <div className="mt-4 flex items-center gap-3">
-          <button type="button" aria-label="Previous pitch step" onClick={() => go(-1)} className="size-9 rounded-full border border-border text-text hover:bg-surface">←</button>
-          <button type="button" aria-label="Next pitch step" onClick={() => go(1)} className="size-9 rounded-full border border-border text-text hover:bg-surface">→</button>
-          <p className={`${FG_R} text-[12px] text-muted`}>Staged product example · illustrative content and figures.</p>
-        </div>
+        <p className={`${FG_R} text-[12px] text-muted mt-6`}>Staged product example · illustrative content and figures.</p>
       </div>
     </section>
   );
