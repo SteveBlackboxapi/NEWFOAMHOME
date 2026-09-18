@@ -246,6 +246,50 @@ function Hero() {
 }
 
 // ─── Social proof bar ─────────────────────────────────────────────────────────
+
+function LogoMarquee() {
+  const LOGOS = [
+    ["Gersh Agency", "0% 0%"],
+    ["Select Management Group", "33.3333% 0%"],
+    ["Underscore Talent", "66.6667% 0%"],
+    ["Grail Talent", "100% 0%"],
+    ["Kensington Grey", "0% 33.3333%"],
+    ["Odyssey Entertainment Group", "33.3333% 33.3333%"],
+    ["Platform Talent", "66.6667% 33.3333%"],
+    ["CMG Talent", "100% 33.3333%"],
+    ["tbh talent", "0% 66.6667%"],
+    ["The Brand Row", "33.3333% 66.6667%"],
+    ["Eleven Eleven Collective", "66.6667% 66.6667%"],
+    ["Hiller Media Group", "100% 66.6667%"],
+    ["Good Answer", "0% 100%"],
+  ];
+  const sheet = `${A}/agency-logos.png`;
+  const row = (
+    <div className="flex shrink-0">
+      {LOGOS.map(([label, pos]) => (
+        <div
+          key={label}
+          role="img"
+          aria-label={label}
+          className="w-44 h-14 shrink-0"
+          style={{ backgroundImage: `url(${sheet})`, backgroundSize: "400% 400%", backgroundPosition: pos, backgroundRepeat: "no-repeat" }}
+        />
+      ))}
+    </div>
+  );
+  return (
+    <section className="bg-white py-10 border-b border-border">
+      <p className={`${FG_R} text-sm text-muted text-center mb-6`}>In good company. Across 800+ creator agencies.</p>
+      <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+        <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]">
+          {row}
+          {row}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProofBar() {
   return (
     <section className="bg-surface border-b border-border py-6 px-6">
@@ -404,6 +448,7 @@ export function Home() {
   return (
     <>
       <Hero />
+      <LogoMarquee />
       <ProofBar />
       <ValueProp />
       <FeatureHighlight />

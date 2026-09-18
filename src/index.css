@@ -128,3 +128,8 @@ body {
   background: var(--surface);
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes logoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
