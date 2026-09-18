@@ -386,36 +386,27 @@ function PitchStory() {
   ];
   const go = (n: number) => setStep((s) => (s + n + 5) % 5);
   const touchX = useRef<number | null>(null);
-  const lock = useRef(false);
   const root = useRef<HTMLElement | null>(null);
-  const stepRef = useRef(step);
-  stepRef.current = step;
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      const s = stepRef.current;
-      if (lock.current) { e.preventDefault(); return; }
-      if (e.deltaY > 12 && s < 4) {
-        e.preventDefault();
-        lock.current = true;
-        setStep(s + 1);
-        window.setTimeout(() => { lock.current = false; }, 650);
-      } else if (e.deltaY < -12 && s > 0) {
-        e.preventDefault();
-        lock.current = true;
-        setStep(s - 1);
-        window.setTimeout(() => { lock.current = false; }, 650);
-      }
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect();
+      const total = el.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const passed = Math.min(Math.max(-rect.top, 0), total);
+      const next = Math.min(4, Math.floor((passed / total) * 5));
+      setStep((s) => (s === next ? s : next));
     };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
     <section
       ref={root}
       id="pitch-loop"
-      className="py-24 px-6 bg-white"
+      className="relative h-[500vh] bg-white"
       onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
       onTouchEnd={(e) => {
         if (touchX.current == null) return;
@@ -425,7 +416,8 @@ function PitchStory() {
         touchX.current = null;
       }}
     >
-      <div className="max-w-[1200px] mx-auto">
+      <div className="sticky top-0 h-screen overflow-hidden px-6 py-16 flex flex-col justify-center">
+      <div className="max-w-[1200px] mx-auto w-full">
         <div className="flex items-end justify-between mb-12">
           <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
           <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
@@ -493,6 +485,7 @@ function PitchStory() {
           ))}
         </div>
         <p className={`${FG_R} text-[12px] text-muted mt-6`}>Staged product example · illustrative content and figures.</p>
+      </div>
       </div>
     </section>
   );
