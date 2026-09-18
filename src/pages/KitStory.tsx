@@ -13,11 +13,13 @@ function lerp(a: number, b: number, t: number) {
 function range(p: number, a: number, b: number) {
   return clamp((p - a) / (b - a));
 }
+function ease(t: number) {
+  return t * t * (3 - 2 * t);
+}
 
 export function KitStory() {
   const track = useRef<HTMLElement | null>(null);
-  const flyVid = useRef<HTMLVideoElement | null>(null);
-  const wellVid = useRef<HTMLVideoElement | null>(null);
+  const vid = useRef<HTMLVideoElement | null>(null);
   const [p, setProg] = useState(0);
 
   useEffect(() => {
@@ -37,9 +39,9 @@ export function KitStory() {
     };
   }, []);
 
-  const pack = range(p, 0.02, 0.2);
-  const landed = pack >= 1;
-  const read = range(p, 0.22, 0.56);
+  const pack = ease(range(p, 0.02, 0.22));
+  const landed = pack >= 0.995;
+  const read = range(p, 0.24, 0.56);
   const aimShare = range(p, 0.56, 0.64);
   const shareOpen = range(p, 0.64, 0.72);
   const generated = range(p, 0.72, 0.78);
@@ -52,18 +54,17 @@ export function KitStory() {
   const headlineOp = 1 - range(p, 0.02, 0.16);
 
   useEffect(() => {
-    if (landed) {
-      flyVid.current?.pause();
-      wellVid.current?.pause();
-    } else {
-      flyVid.current?.play().catch(() => undefined);
-    }
+    const v = vid.current;
+    if (!v) return;
+    if (landed) v.pause();
+    else v.play().catch(() => undefined);
   }, [landed]);
 
-  const photoW = lerp(100, 31.5, pack);
-  const photoH = lerp(100, 34, pack);
-  const photoL = lerp(0, 20.8, pack);
-  const photoT = lerp(0, 19.2, pack);
+  const photoW = lerp(100, 31.2, pack);
+  const photoH = lerp(100, 33.6, pack);
+  const photoL = lerp(0, 21, pack);
+  const photoT = lerp(0, 19.4, pack);
+  const followY = landed ? -read * 36 : 0;
 
   const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
   const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
@@ -109,11 +110,7 @@ export function KitStory() {
                         <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
                       </div>
                       <div className="flex gap-5 items-start">
-                        <div className="w-[40%] rounded-[14px] overflow-hidden bg-[#ead9b8] aspect-[4/3]">
-                          {landed && (
-                            <video ref={wellVid} className="size-full object-cover" src={CLIP} muted playsInline />
-                          )}
-                        </div>
+                        <div className="w-[40%] rounded-[14px] bg-[#ead9b8] aspect-[4/3]" />
                         <div className="flex-1 pt-2">
                           <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
                           <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
@@ -160,10 +157,20 @@ export function KitStory() {
             </div>
           )}
 
-          {!landed && (
-            <div className="absolute z-20 overflow-hidden bg-black" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
-              <video ref={flyVid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
-              <div className="absolute inset-0 bg-black/20" />
+          {fold < 0.2 && (
+            <div
+              className="absolute z-20 overflow-hidden bg-black"
+              style={{
+                left: `${photoL}%`,
+                top: `${photoT}%`,
+                width: `${photoW}%`,
+                height: `${photoH}%`,
+                borderRadius: `${lerp(0, 14, pack)}px`,
+                transform: `translateY(${followY}%)`,
+              }}
+            >
+              <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
+              <div className="absolute inset-0 bg-black/20" style={{ opacity: 1 - pack }} />
             </div>
           )}
 
