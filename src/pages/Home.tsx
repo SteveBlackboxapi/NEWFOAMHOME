@@ -24,7 +24,7 @@ function GmailView() {
 
   const people = [
     { name: "Ren Cole", img: `${A}/9e849.png` },
-    { name: "Ren Cole", img: `${A}/9e849.png` },
+    { name: "Io Marin", img: `${A}/3546d.png` },
     { name: "Sable Quinn", img: `${A}/b93cd.png` },
   ];
 
