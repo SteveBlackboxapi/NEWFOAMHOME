@@ -446,9 +446,9 @@ function PitchStory() {
                 <h3 className={`${FG_SB} text-[28px] text-text mb-2`}>Your pitch has company.</h3>
                 <p className={`${FG_R} text-sm text-muted mb-6`}>Sam at Pace Running</p>
                 {[
-                  ["10:18 AM", "Opened your list", "Boston Marathon shortlist", False],
-                  ["10:21 AM", "Viewed Alex's profile", "A closer look at your recommendation", False],
-                  ["2:46 PM", "Returned to your list", "Another look, later that afternoon", True],
+                  ["10:18 AM", "Opened your list", "Boston Marathon shortlist", false],
+                  ["10:21 AM", "Viewed Alex's profile", "A closer look at your recommendation", false],
+                  ["2:46 PM", "Returned to your list", "Another look, later that afternoon", true],
                 ].map(([time, title, sub, fresh]) => (
                   <div key={title} className="border-t border-border py-4 flex items-start justify-between gap-4">
                     <div>
