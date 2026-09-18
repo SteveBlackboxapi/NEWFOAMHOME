@@ -36,16 +36,17 @@ export function KitStory() {
     };
   }, []);
 
-  const pack = range(p, 0.02, 0.22);
-  const landed = pack > 0.94;
-  const read = range(p, 0.24, 0.62);
+  const pack = range(p, 0.02, 0.2);
+  const landed = pack > 0.96;
+  const read = range(p, 0.22, 0.58);
+  const aimShare = range(p, 0.58, 0.64);
   const shareOpen = range(p, 0.64, 0.72);
   const generated = range(p, 0.72, 0.78);
   const copied = range(p, 0.78, 0.84);
   const publicize = range(p, 0.84, 0.9);
   const fold = range(p, 0.9, 0.95);
   const fly = range(p, 0.95, 1);
-  const headlineOp = 1 - range(p, 0.02, 0.14);
+  const headlineOp = 1 - range(p, 0.02, 0.12);
 
   useEffect(() => {
     const v = vid.current;
@@ -54,14 +55,14 @@ export function KitStory() {
     else v.play().catch(() => undefined);
   }, [landed]);
 
-  const photoW = lerp(100, 34, pack);
-  const photoH = lerp(100, 38, pack);
-  const photoL = lerp(0, 28, pack);
-  const photoT = lerp(0, 16, pack);
-  const kitScale = lerp(1, 0.1, fold);
-  const kitRot = lerp(0, -34, fold) + fly * -16;
-  const kitX = fly * 130;
-  const kitY = Math.sin(fly * Math.PI) * -14 + fold * -6;
+  const photoW = lerp(100, 28, pack);
+  const photoH = lerp(100, 34, pack);
+  const photoL = lerp(0, 30, pack);
+  const photoT = lerp(0, 22, pack);
+  const showHero = pack < 0.98;
+  const cursorOn = pack > 0.9 && fold < 0.2;
+  const cursorL = lerp(70, 91, aimShare);
+  const cursorT = lerp(48, 8.5, aimShare);
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
@@ -72,125 +73,114 @@ export function KitStory() {
 
       <section ref={track} className="relative h-[340vh]">
         <div className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
-          <div
-            className="absolute inset-0 origin-center"
-            style={{
-              transform: `translate(${kitX}vw, ${kitY}vh) rotate(${kitRot}deg) scale(${kitScale})`,
-              opacity: 1 - fly * 0.35,
-            }}
-          >
-            <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-24 pointer-events-none" style={{ opacity: headlineOp }}>
-              <p className="text-[11px] uppercase tracking-[1.4px] text-white/80 mb-4 drop-shadow">The truth layer</p>
-              <h1 className="text-white text-[52px] md:text-[78px] leading-[0.92] tracking-[-2px] font-semibold drop-shadow-lg">
-                From a clip<br />to a kit you can send.
-              </h1>
-            </div>
-
-            <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-[#eef0f4] border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
+          {fold < 0.35 && (
+            <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
               <div className="h-12 shrink-0 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3">
-                <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm" style={{ opacity: 1 - publicize }}>‹</span>
+                <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
                 <p className="text-[13px] text-[#6a7282] truncate">Media kits / <span className="text-[#101828] font-medium">Io Marin's Media Kit</span></p>
-                <span className="ml-auto h-8 px-3 rounded-full bg-[#185abc] text-white text-[12px]" style={{ opacity: 1 - publicize }}>Share</span>
+                <span className="ml-auto h-8 px-3 rounded-full bg-[#185abc] text-white text-[12px]">Share</span>
               </div>
-
               <div className="flex min-h-0 flex-1">
-                <aside className="shrink-0 bg-white border-r border-[#e6e8ec] overflow-hidden" style={{ width: `${lerp(220, 0, publicize)}px` }}>
-                  <div className="p-4 w-[220px]">
-                    <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
-                    <p className="text-[15px] font-medium mb-4">Io Marin's Media Kit</p>
-                    <p className="text-[11px] text-[#6a7282] mb-2">Platform analytics</p>
-                    <div className="grid grid-cols-3 gap-1 mb-4">
-                      {["IG", "TT", "YT"].map((x) => (
-                        <div key={x} className="rounded-lg bg-[#f4f5f7] h-12 text-[10px] text-[#6a7282] flex items-end p-1">{x}</div>
-                      ))}
-                    </div>
-                    <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
-                    {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
-                      <div key={x} className="rounded-xl bg-[#f4f5f7] h-9 mb-2 flex items-center justify-between px-3 text-[11px]">{x}<span>+</span></div>
-                    ))}
-                  </div>
+                <aside className="w-[220px] shrink-0 bg-white border-r border-[#e6e8ec] p-4" style={{ opacity: 1 - publicize, width: `${lerp(220, 0, publicize)}px`, padding: publicize > 0.6 ? 0 : undefined }}>
+                  <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
+                  <p className="text-[15px] font-medium mb-4">Io Marin's Media Kit</p>
+                  <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
+                  {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
+                    <div key={x} className="rounded-xl bg-[#f4f5f7] h-9 mb-2 flex items-center justify-between px-3 text-[11px]">{x}<span>+</span></div>
+                  ))}
                 </aside>
-
-                <div className="relative flex-1 overflow-hidden bg-[#d9dde3]">
-                  <div className="absolute inset-x-0 top-0" style={{ transform: `translateY(${-read * 58}%)` }}>
-                    <div className="m-4 rounded-[16px] overflow-hidden bg-[#F4E6C8]">
-                      <div className="relative min-h-[420px] p-5">
-                        <div className="flex justify-between mb-4">
-                          <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
-                          <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
-                        </div>
-                        <div className="flex gap-5 items-start">
-                          <div className="w-[42%] rounded-[14px] overflow-hidden bg-black aspect-[4/3]">
-                            <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
-                          </div>
-                          <div className="flex-1 pt-2">
-                            <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
-                            <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
-                            <div className="rounded-xl bg-[#ead9b8]/70 p-3">
-                              <p className="text-[11px] text-[#6b0030]/60 mb-1">Verticals</p>
-                              <p className="text-[#6b0030] text-[13px]">Movement · City · Performance</p>
-                            </div>
+                <div className="relative flex-1 overflow-hidden bg-[#F4E6C8]">
+                  <div style={{ transform: `translateY(${-read * 36}%)` }}>
+                    <div className="p-5">
+                      <div className="flex justify-between mb-4">
+                        <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
+                        <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+                      </div>
+                      <div className="flex gap-5">
+                        <div className="w-[40%] rounded-[14px] overflow-hidden bg-[#ead9b8] aspect-[4/3]" />
+                        <div className="flex-1 pt-2">
+                          <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
+                          <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
+                          <div className="rounded-xl bg-[#ead9b8]/70 p-3">
+                            <p className="text-[11px] text-[#6b0030]/60 mb-1">Verticals</p>
+                            <p className="text-[#6b0030] text-[13px]">Movement · City · Performance</p>
                           </div>
                         </div>
                       </div>
-                      <div className="bg-[#6b0030] text-[#F4E6C8] px-6 py-6">
-                        <p className="text-[14px] leading-6 mb-6 max-w-[640px]">Rooftop sessions and late miles. Illustrative Vale Studio talent.</p>
-                        <div className="flex items-end justify-between gap-4 border-t border-white/15 pt-5">
-                          <div>
-                            <p className="text-[18px] font-semibold">Platforms</p>
-                            <p className="text-[28px] leading-none font-semibold">164K</p>
-                            <p className="text-[11px] opacity-70">Total audience</p>
-                          </div>
-                          <div className="flex gap-8 text-right">
-                            <div><p className="text-[22px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
-                            <div><p className="text-[22px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
-                            <div><p className="text-[22px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
-                          </div>
+                    </div>
+                    <div className="bg-[#6b0030] text-[#F4E6C8] px-6 py-6">
+                      <p className="text-[14px] leading-6 mb-6">Rooftop sessions and late miles. Illustrative Vale Studio talent.</p>
+                      <div className="flex items-end justify-between border-t border-white/15 pt-5">
+                        <div>
+                          <p className="text-[18px] font-semibold">Platforms</p>
+                          <p className="text-[28px] leading-none font-semibold">164K</p>
+                        </div>
+                        <div className="flex gap-8 text-right">
+                          <div><p className="text-[22px] font-semibold">89K</p><p className="text-[11px] opacity-70">@iomarin</p></div>
+                          <div><p className="text-[22px] font-semibold">62K</p><p className="text-[11px] opacity-70">@iomarin_tt</p></div>
+                          <div><p className="text-[22px] font-semibold">13K</p><p className="text-[11px] opacity-70">@iomarin_yt</p></div>
                         </div>
                       </div>
-                      <div className="p-5 grid grid-cols-2 gap-3 bg-[#F4E6C8]">
-                        {[["247.5", "Avg. Views"], ["966.7", "Avg. Reels Views"], ["196.0", "Avg. Story Reach"], ["2.9%", "Reach engagement"]].map(([n, l]) => (
-                          <div key={l} className="rounded-xl bg-[#ead9b8]/50 p-4">
-                            <p className="text-[22px] font-semibold">{n}</p>
-                            <p className="text-[11px] text-[#6a7282]">{l}</p>
-                          </div>
-                        ))}
-                        <div className="col-span-2 rounded-xl bg-[#ead9b8]/50 p-4">
-                          <p className="text-[12px] font-medium mb-3">Followers</p>
-                          <div className="h-16 flex items-end gap-2">
-                            {[20, 22, 24, 28, 40, 62, 78, 86, 90].map((h, i) => (
-                              <div key={i} className="flex-1 bg-[#6b0030] rounded-sm" style={{ height: `${h}%` }} />
-                            ))}
-                          </div>
+                    </div>
+                    <div className="p-5 grid grid-cols-2 gap-3 bg-[#F4E6C8] min-h-[52vh]">
+                      {[["247.5", "Avg. Views"], ["966.7", "Avg. Reels Views"], ["196.0", "Avg. Story Reach"], ["2.9%", "Reach engagement"]].map(([n, l]) => (
+                        <div key={l} className="rounded-xl bg-[#ead9b8]/50 p-4">
+                          <p className="text-[22px] font-semibold">{n}</p>
+                          <p className="text-[11px] text-[#6a7282]">{l}</p>
                         </div>
-                        <div className="rounded-xl bg-[#ead9b8]/50 p-4">
-                          <p className="text-[12px] font-medium mb-3">Gender</p>
-                          <p className="text-[12px]">Female 61%</p>
-                          <div className="h-2 bg-[#6b0030] w-[61%] my-1" />
-                          <p className="text-[12px]">Male 39%</p>
-                          <div className="h-2 bg-[#6b0030] w-[39%]" />
+                      ))}
+                      <div className="col-span-2 rounded-xl bg-[#ead9b8]/50 p-4">
+                        <p className="text-[12px] font-medium mb-3">Followers</p>
+                        <div className="h-16 flex items-end gap-2">
+                          {[20, 22, 24, 28, 40, 62, 78, 86, 90].map((h, i) => (
+                            <div key={i} className="flex-1 bg-[#6b0030] rounded-sm" style={{ height: `${h}%` }} />
+                          ))}
                         </div>
-                        <div className="rounded-xl bg-[#ead9b8]/50 p-4 text-[12px]">
-                          <p className="font-medium mb-2">Countries</p>
-                          <p className="flex justify-between"><span>Portugal</span><span>54%</span></p>
-                          <p className="flex justify-between"><span>UK</span><span>18%</span></p>
-                          <p className="flex justify-between"><span>Spain</span><span>11%</span></p>
-                        </div>
+                      </div>
+                      <div className="rounded-xl bg-[#ead9b8]/50 p-4">
+                        <p className="text-[12px] font-medium mb-2">Gender</p>
+                        <p className="text-[12px]">Female 61%</p>
+                        <div className="h-2 bg-[#6b0030] w-[61%] my-1" />
+                        <p className="text-[12px]">Male 39%</p>
+                        <div className="h-2 bg-[#6b0030] w-[39%]" />
+                      </div>
+                      <div className="rounded-xl bg-[#ead9b8]/50 p-4 text-[12px]">
+                        <p className="font-medium mb-2">Countries</p>
+                        <p className="flex justify-between"><span>Portugal</span><span>54%</span></p>
+                        <p className="flex justify-between"><span>UK</span><span>18%</span></p>
+                        <p className="flex justify-between"><span>Spain</span><span>11%</span></p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          )}
 
-            <div className="absolute z-20 overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 16, pack)}px`, opacity: 1 - pack }}>
-              <video className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
+          {showHero && (
+            <div
+              className="absolute z-20 overflow-hidden bg-black"
+              style={{
+                left: `${photoL}%`,
+                top: `${photoT}%`,
+                width: `${photoW}%`,
+                height: `${photoH}%`,
+                borderRadius: `${lerp(0, 14, pack)}px`,
+              }}
+            >
+              <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
             </div>
+          )}
+
+          <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-24 pointer-events-none" style={{ opacity: headlineOp }}>
+            <h1 className="text-white text-[52px] md:text-[78px] leading-[0.92] tracking-[-2px] font-semibold drop-shadow-lg">
+              From a clip<br />to a kit you can send.
+            </h1>
           </div>
 
-          <div className="absolute inset-0 z-30 pointer-events-none bg-black/20" style={{ opacity: shareOpen * (1 - fold) }} />
-          <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - publicize), transform: "translate(-50%,-50%)" }}>
-            <div className="px-5 py-3 border-b border-[#eeefef] flex items-center justify-between">
+          <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
+          <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
+            <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between">
               <p className="text-[16px] font-medium">Share</p>
               <span>×</span>
             </div>
@@ -207,9 +197,25 @@ export function KitStory() {
             </div>
           </div>
 
-          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_12px_24px_rgba(16,24,40,0.25)]" style={{ width: lerp(24, 150, fold), opacity: fold, left: `${lerp(42, 118, fly)}%`, top: `${lerp(44, 16, fly) + Math.sin(fly * Math.PI) * -8}%`, transform: `rotate(${lerp(-30, 14, fly)}deg)` }}>
-            <path d="M8 36 L112 8 L58 40 L48 64 L44 40 Z" fill="#6b0030" />
-            <path d="M44 40 L112 8 L58 40 Z" fill="#F4E6C8" />
+          <div
+            className="pointer-events-none absolute z-50 size-9 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/25"
+            style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }}
+          />
+
+          <svg
+            viewBox="0 0 120 72"
+            className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]"
+            style={{
+              width: lerp(80, 170, fly),
+              opacity: fold,
+              left: `${lerp(38, 120, fly)}%`,
+              top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`,
+              transform: `rotate(${lerp(-24, 16, fly)}deg)`,
+            }}
+          >
+            <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#6b0030" />
+            <path d="M44 40 L114 6 L60 40 Z" fill="#F4E6C8" />
+            <path d="M60 40 L74 46 L50 66 Z" fill="#4a0022" />
           </svg>
         </div>
       </section>
