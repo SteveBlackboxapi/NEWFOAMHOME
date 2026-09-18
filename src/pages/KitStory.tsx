@@ -48,6 +48,7 @@ export function KitStory() {
   const publicize = range(p, 0.9, 0.93);
   const fold = range(p, 0.93, 0.97);
   const fly = range(p, 0.97, 1);
+  const sharedIn = range(p, 0.96, 1);
   const headlineOp = 1 - range(p, 0.02, 0.16);
 
   useEffect(() => {
@@ -160,16 +161,7 @@ export function KitStory() {
           )}
 
           {!landed && (
-            <div
-              className="absolute z-20 overflow-hidden bg-black"
-              style={{
-                left: `${photoL}%`,
-                top: `${photoT}%`,
-                width: `${photoW}%`,
-                height: `${photoH}%`,
-                borderRadius: `${lerp(0, 14, pack)}px`,
-              }}
-            >
+            <div className="absolute z-20 overflow-hidden bg-black" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
               <video ref={flyVid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
               <div className="absolute inset-0 bg-black/20" />
             </div>
@@ -177,12 +169,8 @@ export function KitStory() {
 
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-20 pointer-events-none" style={{ opacity: headlineOp }}>
             <p className="text-[11px] uppercase tracking-[1.6px] text-white/70 mb-5">The truth layer</p>
-            <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">
-              Numbers everyone in the deal can trust.
-            </h1>
-            <p className="mt-5 max-w-[34em] text-[16px] md:text-[18px] leading-7 text-white/85">
-              Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”
-            </p>
+            <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">Numbers everyone in the deal can trust.</h1>
+            <p className="mt-5 max-w-[34em] text-[16px] md:text-[18px] leading-7 text-white/85">Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
           </div>
 
           <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
@@ -204,12 +192,14 @@ export function KitStory() {
             </div>
           </div>
 
-          <div
-            className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2"
-            style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }}
-          />
+          <div className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2" style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }} />
 
-          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold, left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
+          <div className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center text-center" style={{ opacity: sharedIn, transform: `translateY(${(1 - sharedIn) * 12}px)` }}>
+            <p className="text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px] font-semibold">Shared.</p>
+            <p className="mt-4 text-[15px] text-[#6a7282]">The kit is on its way.</p>
+          </div>
+
+          <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold * (1 - fly * 0.4), left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#6b0030" />
             <path d="M44 40 L114 6 L60 40 Z" fill="#F4E6C8" />
           </svg>
