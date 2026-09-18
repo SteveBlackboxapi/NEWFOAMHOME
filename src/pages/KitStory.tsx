@@ -98,7 +98,7 @@ function AfterShare() {
       </section>
       <section className="px-6 pb-24 pt-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10">The network in use</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {STATS.map((s) => (
               <div key={s.val}>
@@ -173,7 +173,6 @@ export function KitStory() {
   const photoT = lerp(0, slot.t, pack);
   const photoW = lerp(100, slot.w, pack);
   const photoH = lerp(100, slot.h, pack);
-
   const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
   const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
   const cursorOn = aimShare > 0.02 && fold < 0.2;
@@ -184,7 +183,6 @@ export function KitStory() {
         <Link to="/" className={`text-[12px] ${pack > 0.5 ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
         <span className={`text-[10px] uppercase tracking-[1px] ${pack > 0.5 ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
       </div>
-
       <section ref={track} className="relative h-[360vh]">
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-black">
           {fold < 0.2 && (
@@ -235,46 +233,31 @@ export function KitStory() {
                         </div>
                       </div>
                     </div>
-                    <div className="p-6 bg-[#F4E6C8] space-y-4">
-                      <div className="flex items-center justify-between">
-                        <p className="text-[16px] font-semibold">Instagram <span className="text-[#6a7282] font-normal text-[13px]">@iomarin</span></p>
-                        <p className="text-[12px] text-[#6b0030]">Data: Last 30 days</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Card n="247.5" l="Avg. Views" />
-                        <Card n="966.7" l="Avg. Reels Views" />
-                        <Card n="247.5" l="Avg. Story Views" />
-                        <Card n="688.9" l="Avg. Reach" />
-                      </div>
+                    <div className="p-6 bg-[#F4E6C8] grid grid-cols-2 gap-3">
+                      <Card n="247.5" l="Avg. Views" />
+                      <Card n="966.7" l="Avg. Reels Views" />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           )}
-
           {fold < 0.2 && (
             <div className="absolute z-[15] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
               <div className="absolute inset-0 bg-black/20" style={{ opacity: 1 - pack }} />
             </div>
           )}
-
-          {pack > 0.35 && (
-            <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: pack }} />
-          )}
-
+          {pack > 0.35 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: pack }} />}
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
               <KitNav />
             </div>
           )}
-
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-20 pointer-events-none" style={{ opacity: headlineOp }}>
             <p className="text-[11px] uppercase tracking-[1.6px] text-white/70 mb-5">The truth layer</p>
             <h1 className="text-white text-[48px] md:text-[72px] leading-[0.94] tracking-[-2px] font-semibold max-w-[14ch]">Numbers everyone in the deal can trust.</h1>
           </div>
-
           <div className="absolute inset-0 z-30 pointer-events-none bg-black/15" style={{ opacity: shareOpen * (1 - fold) }} />
           <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
             <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between"><p className="text-[16px] font-medium">Share</p><span>×</span></div>
@@ -290,21 +273,17 @@ export function KitStory() {
               )}
             </div>
           </div>
-
           <div className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2" style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }} />
-
           <div className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center text-center" style={{ opacity: sharedIn, transform: `translateY(${(1 - sharedIn) * 12}px)` }}>
             <p className="text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px] font-semibold">Media Kit</p>
             <p className="mt-4 text-[18px] text-[#6a7282]">On its way</p>
           </div>
-
           <svg viewBox="0 0 120 72" className="absolute z-50 drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(80, 170, fly), opacity: fold * (1 - fly * 0.4), left: `${lerp(38, 120, fly)}%`, top: `${lerp(40, 12, fly) + Math.sin(fly * Math.PI) * -12}%`, transform: `rotate(${lerp(-24, 16, fly)}deg)` }}>
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#6b0030" />
             <path d="M44 40 L114 6 L60 40 Z" fill="#F4E6C8" />
           </svg>
         </div>
       </section>
-
       <AfterShare />
     </div>
   );
