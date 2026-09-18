@@ -17,6 +17,21 @@ function ease(t: number) {
   return t * t * (3 - 2 * t);
 }
 
+function KitNav() {
+  return (
+    <div className="h-12 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3 rounded-t-[20px]">
+      <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
+      <p className="text-[13px] text-[#6a7282] truncate">Media kits / <span className="text-[#101828] font-medium">Io Marin's Media Kit</span></p>
+      <button type="button" className="ml-auto h-8 rounded-full bg-[#185abc] text-white text-[13px] px-3.5 inline-flex items-center gap-1.5">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+          <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" />
+        </svg>
+        Share
+      </button>
+    </div>
+  );
+}
+
 export function KitStory() {
   const track = useRef<HTMLElement | null>(null);
   const stage = useRef<HTMLDivElement | null>(null);
@@ -93,16 +108,7 @@ export function KitStory() {
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden bg-[#eef0f4]">
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: pack }}>
-              <div className="h-12 shrink-0 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3">
-                <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
-                <p className="text-[13px] text-[#6a7282] truncate">Media kits / <span className="text-[#101828] font-medium">Io Marin's Media Kit</span></p>
-                <button type="button" className="ml-auto h-8 rounded-full bg-[#185abc] text-white text-[13px] px-3.5 inline-flex items-center gap-1.5">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-                    <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" />
-                  </svg>
-                  Share
-                </button>
-              </div>
+              <div className="h-12 shrink-0" />
               <div className="flex min-h-0 flex-1">
                 <aside className="shrink-0 bg-white border-r border-[#e6e8ec] overflow-hidden" style={{ width: `${lerp(220, 0, publicize)}px` }}>
                   <div className="p-4 w-[220px]">
@@ -170,18 +176,15 @@ export function KitStory() {
           )}
 
           {fold < 0.2 && (
-            <div
-              className="absolute z-20 overflow-hidden bg-black pointer-events-none"
-              style={{
-                left: `${photoL}%`,
-                top: `${photoT}%`,
-                width: `${photoW}%`,
-                height: `${photoH}%`,
-                borderRadius: `${lerp(0, 14, pack)}px`,
-              }}
-            >
+            <div className="absolute z-[15] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
               <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
               <div className="absolute inset-0 bg-black/20" style={{ opacity: 1 - pack }} />
+            </div>
+          )}
+
+          {fold < 0.2 && (
+            <div className="absolute inset-x-4 top-[6%] z-30 pointer-events-none" style={{ opacity: pack }}>
+              <KitNav />
             </div>
           )}
 
