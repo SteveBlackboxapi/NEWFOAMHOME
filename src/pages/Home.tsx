@@ -16,61 +16,56 @@ const icYT = `${A}/d0b8e.svg`;
 // ─── Gmail embed view ─────────────────────────────────────────────────────────
 function GmailView() {
   return (
-    <div className="bg-white overflow-hidden" style={{ fontFamily: "var(--font-sf)" }}>
-      <div className="px-4 pt-3 pb-2 flex items-center justify-between border-b border-[#eeefef]">
-        <div className="flex items-center gap-4">
-          <span className={`${FG_SB} text-[13px] text-[#101828] border-b-2 border-[#f5a524] pb-2`}>Talent</span>
-          <span className={`${FG_R} text-[13px] text-[#6a7282] pb-2`}>Lists</span>
-          <span className={`${FG_R} text-[13px] text-[#6a7282] pb-2`}>Media Kits</span>
-        </div>
-      </div>
-      <div className="px-4 pt-4 pb-2 flex items-center justify-between">
-        <span className={`${FG_M} text-[12px] text-[#101828] bg-[#f4f5f6] rounded-full px-3 h-7 inline-flex items-center`}>All Talent</span>
-        <span className={`${FG_R} text-[11px] text-[#99a1af]`}>Vale Studio · demo</span>
-      </div>
-      <div className="px-4 pt-3 pb-5 text-center">
-        <div className="size-[88px] rounded-[12px] overflow-hidden mx-auto bg-[#eee]">
-          <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
-        </div>
-        <p className={`${FG_SB} text-[16px] text-[#101828] mt-3`}>Io Marin</p>
-        <p className={`${FG_R} text-[11px] text-[#6a7282] mt-1`}>Lisbon · Wellness</p>
-        <div className="flex justify-center gap-5 mt-3">
-          <div className="text-center">
-            <p className={`${FG_SB} text-[13px] text-[#101828]`}>164K</p>
-            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>IG</p>
+    <div className="bg-[#e9eef6] overflow-hidden">
+      <div className="grid grid-cols-[1.15fr_0.85fr] min-h-[420px]">
+        <div className="bg-white m-3 rounded-[12px] shadow-sm overflow-hidden flex flex-col">
+          <div className="px-3 py-2 border-b border-[#e8eaed] flex items-center justify-between">
+            <span className={`${FG_M} text-[12px] text-[#202124]`}>New message</span>
+            <span className={`${FG_R} text-[10px] text-[#5f6368]`}>Draft</span>
           </div>
-          <div className="text-center">
-            <p className={`${FG_SB} text-[13px] text-[#101828]`}>89K</p>
-            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>TT</p>
+          <div className="px-3 py-2 border-b border-[#e8eaed]">
+            <p className={`${FG_R} text-[11px] text-[#5f6368]`}>To: eden@brand.example</p>
+            <p className={`${FG_M} text-[12px] text-[#202124] mt-1`}>Spring wellness — Io</p>
           </div>
-          <div className="text-center">
-            <p className={`${FG_SB} text-[13px] text-[#101828]`}>12K</p>
-            <p className={`${FG_R} text-[10px] text-[#99a1af]`}>YT</p>
+          <div className="px-3 py-3 flex-1">
+            <p className={`${FG_R} text-[12px] text-[#202124] mb-3`}>Hi Eden, here is Io for the brief.</p>
+            <div className="border border-[#e0e0e0] rounded-[10px] overflow-hidden">
+              <div className="p-3 flex gap-3">
+                <div className="size-12 rounded-[8px] overflow-hidden shrink-0 bg-[#eee]">
+                  <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+                </div>
+                <div className="min-w-0">
+                  <p className={`${FG_SB} text-[13px] text-[#202124]`}>Io Marin</p>
+                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Lisbon · Wellness</p>
+                  <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 164K · TT 89K</p>
+                </div>
+              </div>
+              <div className="px-3 pb-3">
+                <span className={`${FG_M} text-[11px] text-[#1a73e8]`}>View media kit</span>
+              </div>
+            </div>
+            <p className={`${FG_R} text-[10px] text-[#5f6368] mt-2`}>Added with Foam for Chrome · Detail</p>
           </div>
         </div>
-        <div className="flex justify-center gap-2 mt-3">
-          {["Wellness", "Rituals"].map((tag) => (
-            <span key={tag} className={`${FG_M} text-[10px] text-[#101828] bg-[#f4f5f6] rounded-full px-2.5 h-6 inline-flex items-center`}>{tag}</span>
-          ))}
-        </div>
-        <p className={`${FG_R} text-[11px] text-[#6a7282] leading-4 mt-3 px-2`}>
-          Illustrative demo profile. Used to pitch from Gmail without leaving the draft.
-        </p>
-      </div>
-      <div className="px-4 pb-4">
-        <p className={`${FG_R} text-[10px] text-[#99a1af] mb-2`}>Choose what is included in embeds</p>
-        <div className="flex items-center justify-between py-1.5">
-          <span className={`${FG_M} text-[12px] text-[#101828]`}>Include biography</span>
-          <span className="w-8 h-5 rounded-full bg-[#f5a524] relative"><span className="absolute right-0.5 top-0.5 size-4 bg-white rounded-full" /></span>
-        </div>
-        <div className="flex items-center justify-between py-1.5 mb-3">
-          <span className={`${FG_M} text-[12px] text-[#101828]`}>Include primary media kit</span>
-          <span className="w-8 h-5 rounded-full bg-[#f5a524] relative"><span className="absolute right-0.5 top-0.5 size-4 bg-white rounded-full" /></span>
-        </div>
-        <div className="flex gap-2">
-          <span className={`${FG_M} text-[11px] border border-[#e8eaed] rounded-full px-3 h-8 inline-flex items-center`}>Basic</span>
-          <span className={`${FG_M} text-[11px] rounded-full px-3 h-8 inline-flex items-center text-[#101828]`} style={{ background: "#7ddec0" }}>Detail</span>
-          <span className={`${FG_M} text-[11px] border border-[#e8eaed] rounded-full px-3 h-8 inline-flex items-center`}>Text</span>
+        <div className="bg-white border-l border-[#eeefef] flex flex-col">
+          <div className="px-3 pt-3 pb-2 flex items-center gap-3 border-b border-[#eeefef]">
+            <span className={`${FG_SB} text-[11px] text-[#101828] border-b-2 border-[#f5a524] pb-1`}>Talent</span>
+            <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Lists</span>
+            <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Kits</span>
+          </div>
+          <div className="px-3 py-4 text-center flex-1">
+            <div className="size-16 rounded-[10px] overflow-hidden mx-auto bg-[#eee]">
+              <img alt="Io Marin" src={`${A}/3546d.png`} className="size-full object-cover object-top" />
+            </div>
+            <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Io Marin</p>
+            <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Lisbon</p>
+            <p className={`${FG_M} text-[11px] text-[#101828] mt-2`}>164K · 89K · 12K</p>
+            <div className="flex justify-center gap-1.5 mt-3">
+              <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
+              <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: "#7ddec0" }}>Detail</span>
+              <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Text</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -139,7 +134,7 @@ function MediaKitView() {
 function MediaKitCard() {
   const [tab, setTab] = useState<"kit" | "gmail">("kit");
   return (
-    <div className="rounded-[20px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.45)] w-full" style={{ maxWidth: 500 }}>
+    <div className="rounded-[20px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.45)] w-full" style={{ maxWidth: tab === "gmail" ? 640 : 500 }}>
       <div className="flex items-center gap-1 px-4 pt-4 pb-3 bg-[#f3eee6]">
         <button onClick={() => setTab("kit")} className={`${FG_M} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "kit" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Media kit</button>
         <button onClick={() => setTab("gmail")} className={`${tab === "gmail" ? FG_M : FG_R} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "gmail" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Gmail embed</button>
