@@ -75,24 +75,32 @@ function AppSidebar({ active }: { active: "roster" | "search" }) {
     { id: "chat",   icon: icNavChat   },
   ];
   return (
-    <div className="w-12 bg-[#0a0e1a] flex flex-col items-center py-3 gap-1 shrink-0">
-      {/* Foam logo */}
-      <div className="size-8 bg-[#7a0036] rounded-[8px] flex items-center justify-center mb-2 shrink-0">
-        <img alt="Foam" className="size-[18px]" src={icFoamLogo} />
+    <div className="w-[168px] bg-[#f7f8fa] border-r border-[#eeefef] flex flex-col py-3 px-3 gap-1 shrink-0">
+      <div className="flex items-center gap-2 mb-4 px-1">
+        <div className="size-7 bg-[#101828] rounded-[8px] flex items-center justify-center shrink-0">
+          <img alt="Foam" className="size-3.5" src={icFoamLogo} />
+        </div>
+        <div>
+          <p className="font-founders font-medium text-[12px] text-[#101828] leading-none">foam</p>
+          <p className="font-founders text-[9px] text-[#99a1af]">Beta</p>
+        </div>
       </div>
+      <p className="font-founders text-[9px] text-[#99a1af] px-2 mb-1">Overview</p>
       {items.map(it => (
         <div
           key={it.id}
-          className={`size-9 rounded-[8px] flex items-center justify-center ${
-            it.id === active ? "bg-white/10" : ""
+          className={`h-8 rounded-[8px] px-2 flex items-center gap-2 ${
+            it.id === active || it.id === "lists" ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"
           }`}
         >
-          <img alt="" className="size-4 opacity-60" src={it.icon} />
+          <img alt="" className="size-3.5 opacity-70" src={it.icon} />
+          <span className="font-founders text-[11px] capitalize">{it.id === "roster" ? "Talent directory" : it.id === "search" ? "Explore content" : it.id === "lists" ? "Lists" : it.id === "watch" ? "Watchlists" : "Help"}</span>
         </div>
       ))}
       <div className="flex-1" />
-      <div className="size-7 rounded-full bg-[#1e2939] flex items-center justify-center mb-1">
-        <span className="font-founders font-medium text-[10px] text-white">A</span>
+      <div className="mt-auto rounded-[10px] border border-[#eeefef] bg-white p-2">
+        <p className="font-founders font-medium text-[11px] text-[#101828]">Vale Studio</p>
+        <p className="font-founders text-[10px] text-[#6a7282]">Harbor Spring Roster</p>
       </div>
     </div>
   );
@@ -204,12 +212,9 @@ function RosterView() {
       {/* Top bar */}
       <div className="border-b border-[#eeefef] px-4 py-3 flex items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
-          <img alt="Vale Studio" className="h-5 shrink-0" src={`${A}/cb650.svg`} />
-          <span className="font-founders font-normal text-[11px] text-[#99a1af]">/</span>
-          <div>
-            <p className="font-founders font-medium text-[13px] leading-tight text-[#101828]">Harbor Spring Roster</p>
-            <p className="font-founders font-normal text-[10px] text-[#6a7282]">14 talent</p>
-          </div>
+          <span className="font-founders text-[12px] text-[#6a7282]">Lists</span>
+          <span className="text-[#99a1af]">/</span>
+          <p className="font-founders font-medium text-[13px] text-[#101828]">Harbor Spring Roster</p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <div className="flex items-center gap-2 bg-[#f4f5f6] border border-[#eeefef] rounded-[6px] px-2 h-7">
@@ -220,9 +225,9 @@ function RosterView() {
             <img alt="" className="size-3" src={icPlus} />
             <span className="font-founders font-medium text-[10px]">Add talent</span>
           </button>
-          <button className="flex items-center gap-1 border border-[#eeefef] rounded-full px-2 h-6 shrink-0">
-            <img alt="" className="size-3" src={icShare} />
-            <span className="font-founders font-medium text-[10px] text-[#101828]">Share</span>
+          <button className="flex items-center gap-1 bg-[#185abc] text-white rounded-full px-2.5 h-6 shrink-0">
+            <img alt="" className="size-3 brightness-0 invert" src={icShare} />
+            <span className="font-founders font-medium text-[10px]">Share</span>
           </button>
         </div>
       </div>
