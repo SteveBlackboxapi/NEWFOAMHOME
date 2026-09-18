@@ -47,7 +47,7 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
   return (
     <div ref={root} className="bg-[#e9eef6] overflow-hidden relative">
       <div
-        className="pointer-events-none absolute z-20 size-8 rounded-full border-2 border-white bg-black/30 shadow-lg transition-all duration-500"
+        className="pointer-events-none absolute z-50 size-10 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 shadow-[0_0_0_6px_rgba(198,243,30,0.25)] transition-all duration-300"
         style={{
           left: ["18%", "62%", "62%", "22%"][step],
           top: ["42%", "28%", "52%", "38%"][step],
@@ -429,7 +429,7 @@ function PitchStory() {
     <section
       ref={root}
       id="pitch-loop"
-      className="relative h-[280vh] bg-white"
+      className="relative h-[180vh] bg-white"
       onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
       onTouchEnd={(e) => {
         if (touchX.current == null) return;

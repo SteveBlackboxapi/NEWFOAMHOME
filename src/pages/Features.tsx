@@ -112,7 +112,7 @@ function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [f.name]);
   return (
-    <section ref={pin} className={`${f.name === "Chrome extension" ? "relative h-[200vh]" : "py-20"} px-6 ${f.color}`}>
+    <section ref={pin} className={`${f.name === "Chrome extension" ? "relative h-[130vh]" : "py-20"} px-6 ${f.color}`}>
       <div className={`${f.name === "Chrome extension" ? "sticky top-0 h-screen flex items-center" : ""} max-w-[1200px] mx-auto`}>
         <div className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-16 w-full`}>
           <div className="flex-1 min-w-0 max-w-[480px]">
