@@ -20,19 +20,19 @@ function ease(t: number) {
 }
 
 const TALENT = [
-  { name: "Ren Cole", short: "Ren Cole", img: img.talent1 },
-  { name: "Io Marin", short: "Io Marin", img: img.talent2 },
-  { name: "Sable Voss", short: "Sable Voss", img: img.talent3 },
+  { name: "Ren Cole", img: img.talent1 },
+  { name: "Io Marin", img: img.talent2 },
+  { name: "Sable Voss", img: img.talent3 },
 ];
 
-function StatCol({ title, rows }: { title: string; rows: [string, string][] }) {
+function StatBlock({ title, rows }: { title: string; rows: [string, string][] }) {
   return (
     <div>
-      <p className={`${FG_M} text-[11px] text-[#101828] mb-2`}>{title}</p>
-      {rows.map(([k, v]) => (
-        <div key={k} className="flex justify-between gap-6 text-[11px] leading-5 text-[#4a5565]">
-          <span>{v}</span>
-          <span className="text-[#6a7282]">{k}</span>
+      <p className={`${FG_M} text-[11px] text-[#101828] mb-1.5`}>{title}</p>
+      {rows.map(([label, val]) => (
+        <div key={label} className="flex gap-2 text-[11px] leading-5">
+          <span className="text-[#101828] w-10">{val}</span>
+          <span className="text-[#6a7282]">{label}</span>
         </div>
       ))}
     </div>
@@ -60,28 +60,20 @@ export function ChromeStory() {
     };
   }, []);
 
-  const enter = ease(range(p, 0.0, 0.08));
-  const aim = ease(range(p, 0.08, 0.18));
-  const copied = range(p, 0.18, 0.26);
-  const fly = ease(range(p, 0.26, 0.48));
-  const land = ease(range(p, 0.46, 0.62));
-  const proof = ease(range(p, 0.58, 0.78));
-  const hold = range(p, 0.78, 0.92);
-  const release = range(p, 0.92, 1);
+  const enter = ease(range(p, 0.0, 0.06));
+  const aimTile = ease(range(p, 0.06, 0.16));
+  const openProfile = range(p, 0.16, 0.22);
+  const inProfile = openProfile > 0.55;
+  const aimDetail = ease(range(p, 0.24, 0.36));
+  const detailOn = range(p, 0.36, 0.42) > 0.4;
+  const aimPaste = ease(range(p, 0.42, 0.58));
+  const paste = ease(range(p, 0.56, 0.7));
+  const proof = ease(range(p, 0.66, 0.82));
+  const hold = range(p, 0.82, 0.94);
 
-  const panelW = lerp(34, 26, fly);
-  const mailScale = lerp(0.92, 1, land);
-  const cardL = lerp(72.5, 18, fly);
-  const cardT = lerp(36, 28, fly);
-  const cardW = lerp(9.2, 58, fly);
-  const cardH = lerp(16, 46, fly);
-  const cardR = lerp(14, 12, fly);
-  const cursorL = fly > 0.02 ? lerp(77, 46, fly) : lerp(62, 77, aim);
-  const cursorT = fly > 0.02 ? lerp(44, 34, fly) : lerp(22, 44, aim);
-  const cursorOn = aim > 0.05 && land < 0.85;
-  const flyingVisible = copied > 0.2 && land < 0.98;
-  const embedOp = land;
-  const stageShift = lerp(0, -4, release);
+  const cursorL = aimPaste > 0.02 ? lerp(86, 42, aimPaste) : aimDetail > 0.02 ? lerp(84, 86, aimDetail) : lerp(58, 84, aimTile);
+  const cursorT = aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
+  const cursorOn = aimTile > 0.08 && paste < 0.95;
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
@@ -94,110 +86,121 @@ export function ChromeStory() {
       <section className="px-6 pt-24 pb-10 max-w-[1100px] mx-auto">
         <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>Foam for Chrome</p>
         <h1 className={`${FG_SB} text-[40px] md:text-[64px] leading-[0.96] tracking-[-1.8px] max-w-[16ch]`}>
-          Pitch from the inbox. Numbers travel with the name.
+          Pick the talent. Choose Detail. Paste the pitch.
         </h1>
-        <p className={`${FG_R} mt-5 max-w-[34em] text-[17px] leading-7 text-[#6a7282]`}>
-          Copy a creator from the side panel. Paste into Gmail. The brand gets a live card — photo, platforms, audience — not a screenshot.
+        <p className={`${FG_R} mt-5 max-w-[36em] text-[17px] leading-7 text-[#6a7282]`}>
+          The side panel stays on Gmail. Open a creator, decide what the brand sees, drop it into the draft.
         </p>
       </section>
 
-      <section ref={track} className="relative h-[340vh]">
-        <div className="sticky top-0 h-screen overflow-hidden" style={{ transform: `translateY(${stageShift}vh)` }}>
-          <div className="absolute inset-x-3 md:inset-x-8 top-[8%] bottom-[6%] rounded-[18px] bg-[#2b2b2f] shadow-[0_30px_80px_rgba(16,24,40,0.28)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.4, 1, enter) }}>
+      <section ref={track} className="relative h-[360vh]">
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <div className="absolute inset-x-3 md:inset-x-6 top-[7%] bottom-[5%] rounded-[16px] bg-[#2b2b2f] shadow-[0_30px_80px_rgba(16,24,40,0.28)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) }}>
             <div className="h-10 shrink-0 bg-[#3c3c42] flex items-center px-3 gap-2">
               <span className="size-2.5 rounded-full bg-[#ff5f57]" />
               <span className="size-2.5 rounded-full bg-[#febc2e]" />
               <span className="size-2.5 rounded-full bg-[#28c840]" />
-              <div className="ml-4 h-6 flex-1 max-w-[420px] rounded-md bg-[#2b2b2f] text-[11px] text-white/50 flex items-center px-3">mail.google.com</div>
-              <div className="ml-auto flex items-center gap-1.5 pr-1">
-                <span className="size-6 rounded bg-[#185abc] text-white text-[10px] font-semibold flex items-center justify-center">F</span>
-              </div>
+              <div className="ml-3 h-6 flex-1 max-w-[480px] rounded-md bg-[#2b2b2f] text-[11px] text-white/50 flex items-center px-3">mail.google.com</div>
+              <span className="size-6 rounded bg-[#185abc] text-white text-[10px] font-semibold flex items-center justify-center">F</span>
             </div>
 
-            <div className="flex min-h-0 flex-1 bg-[#e9eef6]">
-              <div className="relative flex-1 min-w-0 p-4 md:p-7 flex items-start justify-center">
-                <div
-                  className="w-full max-w-[720px] bg-white rounded-[12px] shadow-[0_16px_48px_rgba(16,24,40,0.18)] overflow-hidden"
-                  style={{ transform: `scale(${mailScale})`, transformOrigin: "top center" }}
-                >
+            <div className="flex min-h-0 flex-1 bg-[#d3d8de]">
+              <div className="relative flex-1 min-w-0 p-5 md:p-8 flex items-start justify-center">
+                <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden">
                   <div className="h-11 border-b border-[#eeefef] flex items-center px-4">
                     <p className={`${FG_M} text-[14px] flex-1`}>New Message</p>
                     <span className="text-[#6a7282] text-sm">—   ☐   ×</span>
                   </div>
                   <div className="px-4 py-2 border-b border-[#f1f2f4] text-[12px] text-[#6a7282]">Recipients</div>
                   <div className="px-4 py-2 border-b border-[#f1f2f4] text-[12px] text-[#6a7282]">Subject</div>
-                  <div className="p-4 min-h-[340px] relative">
-                    <div style={{ opacity: embedOp }}>
+                  <div className="p-4 min-h-[360px]">
+                    <div style={{ opacity: paste }}>
                       <div className="flex gap-3 items-start mb-3">
-                        <img src={img.talent2} alt="" className="size-12 rounded-full object-cover" />
+                        <img src={img.talent2} alt="" className="size-11 rounded-full object-cover" />
                         <div>
-                          <p className={`${FG_SB} text-[14px] leading-none`}>Io Marin</p>
-                          <p className="text-[11px] text-[#6a7282] mt-1">Lisbon · 28 · Female</p>
-                          <p className="text-[11px] text-[#185abc] mt-1">164K · 89K · 12K</p>
+                          <p className={`${FG_SB} text-[14px]`}>Io Marin</p>
+                          <p className="text-[11px] text-[#6a7282]">Lisbon · 28</p>
+                          <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[540px] mb-3`}>
-                        Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster example for demonstration only.
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>
+                        Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.
                       </p>
-                      <a className="text-[12px] text-[#185abc]" href="#">View Media Kit →</a>
-                      <div className="mt-3 rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-4" style={{ opacity: proof }}>
-                        <StatCol title="Instagram Posts" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
-                        <StatCol title="Audience" rows={[["ES", "85.8%"], ["Female", "68.6%"], ["25–34", "31%"]]} />
-                        <StatCol title="Age" rows={[["18–24", "20%"], ["25–34", "31%"], ["35–44", "18%"]]} />
+                      <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
+                      <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
+                        <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
+                        <StatBlock title="Instagram Audience Summary" rows={[["ES 85.8%", ""], ["Female 68.6%", ""], ["25–34 31%", ""]]} />
+                        <StatBlock title="Age" rows={[["18–24", "20%"], ["25–34", "31%"], ["35–44", "18%"]]} />
                       </div>
                     </div>
-                    {embedOp < 0.15 && (
-                      <p className={`${FG_R} text-[13px] text-[#98a2b3]`} style={{ opacity: 1 - copied }}>Start writing, or paste a Foam card…</p>
-                    )}
+                  </div>
+                  <div className="h-12 border-t border-[#eeefef] flex items-center px-3 gap-2">
+                    <span className="h-8 px-4 rounded-full bg-[#0b57d0] text-white text-[13px] inline-flex items-center">Send</span>
                   </div>
                 </div>
               </div>
 
-              <aside className="shrink-0 bg-white border-l border-[#e6e8ec] flex flex-col" style={{ width: `${panelW}%` }}>
-                <div className="h-12 border-b border-[#eef0f3] flex items-center px-3 gap-2">
-                  <span className="size-6 rounded bg-[#185abc] text-white text-[10px] font-semibold flex items-center justify-center">F</span>
-                  <p className={`${FG_M} text-[12px] truncate`}>Foam</p>
+              <aside className="w-[300px] shrink-0 bg-white border-l border-[#e6e8ec] flex flex-col overflow-hidden">
+                <div className="h-11 border-b border-[#eef0f3] flex items-center px-3 gap-2">
+                  <span className="text-[#6a7282]">{inProfile ? "‹" : ""}</span>
+                  <p className={`${FG_M} text-[13px]`}>{inProfile ? "Talent" : "Foam"}</p>
                 </div>
-                <div className="px-3 pt-3 flex gap-4 text-[12px] text-[#6a7282]">
-                  <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2`}>Talent</span>
-                  <span className="pb-2">Lists</span>
-                  <span className="pb-2">Media Kits</span>
-                </div>
-                <div className="px-3 py-3 flex items-center justify-between">
-                  <span className="h-7 px-3 rounded-full border border-[#e6e8ec] text-[11px]">All Talent</span>
-                  <span className="text-[#6a7282] text-sm">+</span>
-                </div>
-                <div className="px-3 grid grid-cols-2 gap-2">
-                  {TALENT.map((t, i) => (
-                    <div key={t.name} className="relative">
-                      <img src={t.img} alt="" className="w-full aspect-square object-cover rounded-[10px]" />
-                      <p className="text-[10px] mt-1 truncate text-[#344054]">{t.short}</p>
-                      {i === 1 && copied > 0.15 && copied < 0.95 && (
-                        <span className="absolute top-1.5 right-1.5 text-[9px] bg-[#185abc] text-white rounded-full px-2 py-0.5">Copied</span>
-                      )}
+
+                {!inProfile ? (
+                  <>
+                    <div className="px-3 pt-3 flex gap-4 text-[12px] text-[#6a7282]">
+                      <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2`}>Talent</span>
+                      <span className="pb-2">Lists</span>
+                      <span className="pb-2">Media Kits</span>
                     </div>
-                  ))}
-                </div>
+                    <div className="px-3 py-3 flex items-center justify-between">
+                      <span className="h-7 px-3 rounded-full border border-[#e6e8ec] text-[11px]">All Talent</span>
+                    </div>
+                    <div className="px-3 grid grid-cols-2 gap-2">
+                      {TALENT.map((t) => (
+                        <div key={t.name}>
+                          <img src={t.img} alt="" className="w-full aspect-square object-cover rounded-[10px]" />
+                          <p className="text-[10px] mt-1 truncate">{t.name}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex-1 overflow-hidden px-4 py-4 text-center">
+                    <img src={img.talent2} alt="" className="size-24 mx-auto rounded-[12px] object-cover mb-3" />
+                    <p className={`${FG_SB} text-[16px]`}>Io Marin</p>
+                    <p className="text-[11px] text-[#6a7282] mb-2">Lisbon · 28</p>
+                    <p className="text-[12px] text-[#185abc] mb-3">164K · 89K · 12K</p>
+                    <div className="flex justify-center gap-2 mb-3">
+                      {["Movement", "City", "Film"].map((tag) => (
+                        <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>
+                      ))}
+                    </div>
+                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>
+                      Io is a movement creator known for rooftop sessions and late miles.
+                    </p>
+                    <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
+                    <div className="text-left text-[12px] space-y-2 mb-4">
+                      <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
+                      <div className="flex justify-between"><span>Include primary media kit</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
+                    </div>
+                    <div className="flex gap-2">
+                      {(["Basic", "Detail", "Text"] as const).map((lab) => (
+                        <span
+                          key={lab}
+                          className={`flex-1 h-8 rounded-full text-[11px] inline-flex items-center justify-center border ${
+                            lab === "Detail" && detailOn ? "bg-[#c6f31e] border-[#c6f31e] text-[#101828]" : "border-[#d0d5dd]"
+                          }`}
+                        >
+                          {lab}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </aside>
             </div>
           </div>
-
-          {flyingVisible && (
-            <div
-              className="absolute z-40 overflow-hidden bg-white shadow-[0_24px_60px_rgba(16,24,40,0.28)] pointer-events-none"
-              style={{
-                left: `${cardL}%`,
-                top: `${cardT}%`,
-                width: `${cardW}%`,
-                height: `${cardH}%`,
-                borderRadius: `${cardR}px`,
-                opacity: 1 - land * 0.85,
-                transform: `rotate(${lerp(6, 0, fly)}deg)`,
-              }}
-            >
-              <img src={img.talent2} alt="" className="size-full object-cover" />
-            </div>
-          )}
 
           <div
             className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2"
@@ -206,15 +209,15 @@ export function ChromeStory() {
         </div>
       </section>
 
-      <section className="px-6 py-24 max-w-[1100px] mx-auto" style={{ opacity: lerp(0.35, 1, hold) }}>
+      <section className="px-6 py-24 max-w-[1100px] mx-auto" style={{ opacity: lerp(0.4, 1, hold) }}>
         <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>What just happened</p>
         <h2 className={`${FG_SB} text-[36px] md:text-[48px] leading-[1.02] tracking-[-1.2px] max-w-[18ch] mb-6`}>
-          The extension is the shortest path from roster to send.
+          Grid. Profile. Detail. Inbox.
         </h2>
         <div className="grid md:grid-cols-3 gap-8 text-[15px] leading-7 text-[#6a7282]">
-          <p>Side panel stays on Gmail, Instagram, anywhere you work. Talent, lists and kits in one strip.</p>
-          <p>Copy drops a live card, not a screenshot. Platforms and audience travel with the name.</p>
-          <p>Brand opens the mail and can go straight to the kit. No “I’ll send numbers later.”</p>
+          <p>Open the creator in the panel. The roster never leaves Gmail.</p>
+          <p>Basic, Detail or Text. You choose how much proof the brand gets.</p>
+          <p>Paste. The draft carries the card and a link to the kit.</p>
         </div>
         <div className="mt-10 flex gap-4">
           <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center`}>Get a demo</Link>
