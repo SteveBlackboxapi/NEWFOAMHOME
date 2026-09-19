@@ -37,6 +37,9 @@ function KitNav() {
 }
 
 function AfterShare() {
+  const [paused, setPaused] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const halt = paused || hovering;
   const LOGOS = [
     ["tbh talent", "0% 66.6667%"],
     ["The Brand Row", "33.3333% 66.6667%"],
@@ -62,8 +65,8 @@ function AfterShare() {
     <div className="bg-white" id="after-share">
       <section className="pt-16 pb-6">
         <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>In good company. Across 800+ creator agencies.</p>
-        <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
-          <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]">
+        <div className="overflow-hidden" onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)} style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+          <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]" style={{ animationPlayState: halt ? "paused" : "running" }}>
             {[0, 1].map((copy) => (
               <div key={copy} className="flex shrink-0 gap-10 pr-10">
                 {LOGOS.map(([label, pos]) => (
@@ -74,7 +77,9 @@ function AfterShare() {
           </div>
         </div>
         <div className="flex justify-center mt-6">
-          <span className="h-9 px-4 rounded-full border border-[#e8e8e8] text-[13px] text-[#6a7282] inline-flex items-center">Pause</span>
+          <button type="button" onClick={() => setPaused((v) => !v)} className="h-9 px-4 rounded-full border border-[#e8e8e8] text-[13px] text-[#6a7282] inline-flex items-center hover:border-[#cfcfcf]">
+            {halt ? "Play" : "Pause"}
+          </button>
         </div>
       </section>
       <section className="px-6 py-10">
