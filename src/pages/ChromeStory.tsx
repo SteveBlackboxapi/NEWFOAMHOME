@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { img } from "../lib/assets";
 
+const A = `${import.meta.env.BASE_URL}assets`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
@@ -39,6 +40,75 @@ function StatBlock({ title, rows }: { title: string; rows: [string, string][] })
           <span className="text-[#6a7282]">{label}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+function AfterStory() {
+  const LOGOS = [
+    ["tbh talent", "0% 66.6667%"],
+    ["The Brand Row", "33.3333% 66.6667%"],
+    ["Eleven Eleven Collective", "66.6667% 66.6667%"],
+    ["Hiller Media Group", "100% 66.6667%"],
+    ["Good Answer", "0% 100%"],
+    ["Gersh Agency", "0% 0%"],
+    ["Select Management Group", "33.3333% 0%"],
+  ];
+  const sheet = `${A}/agency-logos.png`;
+  const CARDS = [
+    { kicker: "I manage talent", headline: "Pitch your roster with numbers a brand can believe.", cta: "For managers", to: "/managers" },
+    { kicker: "I'm a creator", headline: "Connect your accounts. Help your manager make the case.", cta: "For creators", to: "/creators" },
+    { kicker: "I'm a brand or agency", headline: "Someone sent you a Foam link. Here's what's behind it.", cta: "For brands", to: "/brands" },
+  ];
+  const STATS = [
+    { val: "1,300+", label: "talent managers active every month" },
+    { val: "800+", label: "creator agencies active every month" },
+    { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
+    { val: "440,000+", label: "brand and agency opens of kits, lists and rosters" },
+  ];
+  return (
+    <div className="bg-white" id="after-story">
+      <section className="pt-16 pb-6">
+        <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>In good company. Across 800+ creator agencies.</p>
+        <div className="overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+          <div className="flex w-max animate-[logoMarquee_90s_linear_infinite]">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-10 pr-10">
+                {LOGOS.map(([label, pos]) => (
+                  <div key={`${copy}-${label}`} role="img" aria-label={label} className="w-52 h-16 shrink-0" style={{ backgroundImage: `url(${sheet})`, backgroundSize: "400% 400%", backgroundPosition: pos }} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-center mt-6">
+          <span className="h-9 px-4 rounded-full border border-[#e8e8e8] text-[13px] text-[#6a7282] inline-flex items-center">Pause</span>
+        </div>
+      </section>
+      <section className="px-6 py-10">
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-4">
+          {CARDS.map((card) => (
+            <Link key={card.to} to={card.to} className="rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col hover:border-[#cfcfcf]">
+              <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-4`}>{card.kicker}</p>
+              <p className={`${FG_SB} text-[22px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}>{card.headline}</p>
+              <p className={`${FG_M} text-sm text-[#6a7282] mt-8 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="px-6 pb-24 pt-6">
+        <div className="max-w-[1200px] mx-auto">
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {STATS.map((s) => (
+              <div key={s.val}>
+                <p className={`${FG_SB} text-[40px] tracking-[-1px] text-[#101828] leading-none mb-2`}>{s.val}</p>
+                <p className={`${FG_R} text-sm text-[#6a7282] max-w-[200px]`}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -231,6 +301,8 @@ export function ChromeStory() {
           <Link to="/features" className={`${FG_M} h-12 px-6 rounded-full border border-[#d0d5dd] inline-flex items-center`}>All features</Link>
         </div>
       </section>
+
+      <AfterStory />
     </div>
   );
 }
