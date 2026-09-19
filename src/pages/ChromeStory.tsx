@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { img } from "../lib/assets";
 
 const A = `${import.meta.env.BASE_URL}assets`;
-const BAG = `${A}/chrome-store.png`;
+const BAG = `${A}/chrome-store.jpg`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
@@ -186,7 +186,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       </section>
       <section className="min-h-screen bg-white flex items-center justify-center px-6">
         <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
-          <img src={BAG} alt="Chrome Extension" width={192} height={192} className="w-44 h-44 md:w-52 md:h-52 object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
+          <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
           <span className={`${FG_SB} mt-10 text-[48px] md:text-[72px] leading-none tracking-[-2px] text-[#101828]`}>Chrome Extension</span>
         </a>
       </section>
