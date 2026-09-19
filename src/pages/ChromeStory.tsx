@@ -77,8 +77,9 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
   const proof = ease(range(p, 0.62, 0.74));
   const aimSend = ease(range(p, 0.74, 0.84));
   const sent = range(p, 0.84, 0.88);
-  const foldMail = range(p, 0.88, 0.94);
-  const flyMail = range(p, 0.94, 1);
+  const foldMail = range(p, 0.86, 0.91);
+  const flyMail = range(p, 0.90, 0.97);
+  const lockupIn = ease(range(p, 0.91, 0.99));
   const cursorL = aimSend > 0.02 ? lerp(42, 24, aimSend) : aimPaste > 0.02 ? lerp(86, 42, aimPaste) : aimDetail > 0.02 ? lerp(84, 86, aimDetail) : lerp(58, 84, aimTile);
   const cursorT = aimSend > 0.02 ? lerp(48, 78, aimSend) : aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
   const cursorOn = aimTile > 0.08 && foldMail < 0.15;
@@ -95,7 +96,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
         <h1 className={`${FG_SB} text-[40px] md:text-[64px] leading-[0.96] tracking-[-1.8px] max-w-[16ch]`}>Pick the talent. Choose Detail. Paste the pitch.</h1>
         <p className={`${FG_R} mt-5 max-w-[36em] text-[17px] leading-7 text-[#6a7282]`}>The side panel stays on Gmail. Open a creator, decide what the brand sees, drop it into the draft.</p>
       </section>
-      <section ref={track} className="relative h-[400vh]">
+      <section ref={track} className="relative h-[320vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)", opacity: 1 - foldMail }} />
           <div className="absolute inset-0" style={{ background: WALLPAPER, opacity: 0.4 * (1 - foldMail) }} />
@@ -186,17 +187,15 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
             </div>
           </div>
           <div className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2" style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }} />
-          <svg viewBox="0 0 120 72" className="absolute z-[80] drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(90, 170, flyMail), opacity: foldMail * (1 - flyMail * 0.3), left: `${lerp(28, 118, flyMail)}%`, top: `${lerp(58, 8, flyMail) + Math.sin(flyMail * Math.PI) * -8}%`, transform: `rotate(${lerp(-18, 16, flyMail)}deg)` }}>
+          <svg viewBox="0 0 120 72" className="absolute z-[80] drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(90, 160, flyMail), opacity: foldMail * (1 - lockupIn), left: `${lerp(28, 118, flyMail)}%`, top: `${lerp(58, 18, flyMail) + Math.sin(flyMail * Math.PI) * -8}%`, transform: `rotate(${lerp(-18, 16, flyMail)}deg)` }}>
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#0b57d0" />
             <path d="M44 40 L114 6 L60 40 Z" fill="#d6e4ff" />
           </svg>
+          <a href={STORE} target="_blank" rel="noreferrer" className="absolute inset-0 z-[70] flex flex-col items-center justify-center px-6" style={{ opacity: lockupIn, transform: `translateY(${(1 - lockupIn) * 18}px)` }}>
+            <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain" />
+            <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center`}>That's the Chrome Extension</span>
+          </a>
         </div>
-      </section>
-      <section className="min-h-screen bg-white flex items-center justify-center px-6">
-        <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
-          <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
-          <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center`}>That's the Chrome Extension</span>
-        </a>
       </section>
     </div>
   );
