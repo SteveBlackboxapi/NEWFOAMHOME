@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { img } from "../lib/assets";
 
 const A = `${import.meta.env.BASE_URL}assets`;
+const BAG = `${A}/chrome-store.png`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
@@ -121,7 +122,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
@@ -185,17 +186,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       </section>
       <section className="min-h-screen bg-white flex items-center justify-center px-6">
         <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
-          <span className="transition-transform duration-200 group-hover:scale-[1.04]">
-            <svg width="168" height="144" viewBox="0 0 112 96" fill="none" aria-hidden>
-              <rect x="8" y="18" width="96" height="70" rx="16" fill="#E8EAED" />
-              <rect x="8" y="18" width="96" height="28" rx="16" fill="#F1F3F4" />
-              <rect x="8" y="34" width="96" height="12" fill="#F1F3F4" />
-              <rect x="40" y="10" width="32" height="14" rx="7" fill="#E8EAED" />
-              <rect x="44" y="14" width="24" height="6" rx="3" fill="#fff" />
-              <circle cx="56" cy="64" r="22" fill="#c6f31e" />
-              <text x="56" y="73" textAnchor="middle" fontSize="22" fontWeight="700" fill="#101828">F</text>
-            </svg>
-          </span>
+          <img src={BAG} alt="Chrome Extension" width={192} height={192} className="w-40 h-40 md:w-48 md:h-48 object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
           <span className={`${FG_SB} mt-10 text-[48px] md:text-[72px] leading-none tracking-[-2px] text-[#101828]`}>Chrome Extension</span>
         </a>
       </section>
