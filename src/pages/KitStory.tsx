@@ -124,7 +124,7 @@ function AfterShare() {
           <div className="max-w-[1200px] mx-auto w-full">
             <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] text-center mb-3`}>Start here</p>
             <p className={`${FG_SB} text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] text-[#101828] text-center mb-10`}>Who are you in the deal?</p>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-5 items-stretch" onMouseLeave={() => setActive(0)}>
+            <div className="grid md:grid-cols-3 gap-6 md:gap-8 items-center" onMouseLeave={() => setActive(0)}>
               {CARDS.map((card, i) => {
                 const on = active === i;
                 return (
@@ -132,16 +132,16 @@ function AfterShare() {
                     key={card.to}
                     to={card.to}
                     onMouseEnter={() => setActive(i)}
-                    className={`relative z-0 rounded-[24px] border p-8 md:p-10 min-h-[260px] md:min-h-[340px] flex flex-col overflow-hidden ${on ? "border-[#c6f31e] bg-[#c6f31e]" : "border-[#e8e8e8] bg-white"}`}
+                    className={`aspect-square rounded-[24px] border p-8 md:p-9 flex flex-col ${on ? "border-[#c6f31e] bg-[#c6f31e] z-10" : "border-[#e8e8e8] bg-white z-0"}`}
                     style={{
-                      flex: on ? "1.42 1 0" : "0.79 1 0",
-                      transform: on ? "scale(1.04)" : "scale(0.96)",
-                      transition: "flex 280ms ease, transform 280ms ease, background-color 220ms ease, border-color 220ms ease",
+                      transform: on ? "scale(1.08)" : "scale(0.92)",
+                      transformOrigin: "center",
+                      transition: "transform 280ms ease, background-color 220ms ease, border-color 220ms ease",
                     }}
                   >
-                    <p className={`${FG_M} uppercase tracking-[0.8px] mb-5 ${on ? "text-[13px] text-[#3d4a08]" : "text-[11px] text-[#6a7282]"}`}>{card.kicker}</p>
-                    <p className={`${FG_SB} text-[#101828] flex-1 ${on ? "text-[32px] md:text-[40px] leading-[1.08] tracking-[-1px]" : "text-[22px] md:text-[26px] leading-8 tracking-[-0.5px]"}`}>{card.headline}</p>
-                    <p className={`${FG_M} mt-10 flex items-center justify-between ${on ? "text-[17px] text-[#101828]" : "text-[14px] text-[#6a7282]"}`}>{card.cta}<span>↗</span></p>
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] mb-5 ${on ? "text-[#3d4a08]" : "text-[#6a7282]"}`}>{card.kicker}</p>
+                    <p className={`${FG_SB} text-[22px] md:text-[26px] leading-8 tracking-[-0.5px] text-[#101828] flex-1`}>{card.headline}</p>
+                    <p className={`${FG_M} text-[15px] mt-auto pt-6 flex items-center justify-between ${on ? "text-[#101828]" : "text-[#6a7282]"}`}>{card.cta}<span>↗</span></p>
                   </Link>
                 );
               })}
