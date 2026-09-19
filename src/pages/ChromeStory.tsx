@@ -127,7 +127,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
@@ -193,7 +193,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
           </svg>
           <a href={STORE} target="_blank" rel="noreferrer" className="absolute inset-0 z-[70] flex flex-col items-center justify-center px-6" style={{ opacity: lockupIn, transform: `translateY(${(1 - lockupIn) * 18}px)` }}>
             <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain" />
-            <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center">That's the Chrome Extension</span>
+            <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center`}>That's the Chrome Extension</span>
           </a>
         </div>
       </section>
