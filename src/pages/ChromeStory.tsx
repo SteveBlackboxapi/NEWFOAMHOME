@@ -22,20 +22,6 @@ function ease(t: number) {
 
 const STORE = "https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf";
 
-function ChromeStoreMark() {
-  return (
-    <svg width="112" height="96" viewBox="0 0 112 96" fill="none" aria-hidden>
-      <rect x="8" y="18" width="96" height="70" rx="16" fill="#E8EAED" />
-      <rect x="8" y="18" width="96" height="28" rx="16" fill="#F1F3F4" />
-      <rect x="8" y="34" width="96" height="12" fill="#F1F3F4" />
-      <rect x="40" y="10" width="32" height="14" rx="7" fill="#E8EAED" />
-      <rect x="44" y="14" width="24" height="6" rx="3" fill="#fff" />
-      <circle cx="56" cy="64" r="22" fill="#c6f31e" />
-      <text x="56" y="72" textAnchor="middle" fontSize="22" fontWeight="700" fill="#101828">F</text>
-    </svg>
-  );
-}
-
 const WALLPAPER =
   "radial-gradient(ellipse 36% 90% at 100% 42%, rgba(198,243,30,0.95) 0%, rgba(198,243,30,0.18) 38%, transparent 62%)," +
   "linear-gradient(180deg, #070707 0%, #111111 26%, #f3efe6 46%, #c9daf0 68%, #8eb6de 100%)";
@@ -88,7 +74,6 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
   const aimPaste = ease(range(p, 0.42, 0.58));
   const paste = ease(range(p, 0.56, 0.7));
   const proof = ease(range(p, 0.66, 0.82));
-  const hold = range(p, 0.82, 0.94);
   const cursorL = aimPaste > 0.02 ? lerp(86, 42, aimPaste) : aimDetail > 0.02 ? lerp(84, 86, aimDetail) : lerp(58, 84, aimTile);
   const cursorT = aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
   const cursorOn = aimTile > 0.08 && paste < 0.95;
@@ -179,7 +164,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                     <p className="text-[11px] text-[#6a7282] mb-2">Lisbon · 28</p>
                     <p className="text-[12px] text-[#185abc] mb-3">164K · 89K · 12K</p>
                     <div className="flex justify-center gap-2 mb-3">{["Movement", "City", "Film"].map((tag) => (<span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>))}</div>
-                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>Io is a movement creator known for rooftop sessions and late miles.</p>
+                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4">Io is a movement creator known for rooftop sessions and late miles.</p>
                     <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
                     <div className="text-left text-[12px] space-y-2 mb-4">
                       <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
@@ -198,24 +183,20 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
           <div className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2" style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }} />
         </div>
       </section>
-      <section className="px-6 py-24 max-w-[1100px] mx-auto" style={{ opacity: lerp(0.4, 1, hold) }}>
-        <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>What just happened</p>
-        <h2 className={`${FG_SB} text-[36px] md:text-[48px] leading-[1.02] tracking-[-1.2px] max-w-[18ch] mb-6`}>Grid. Profile. Detail. Inbox.</h2>
-        <div className="grid md:grid-cols-3 gap-8 text-[15px] leading-7 text-[#6a7282]">
-          <p>Open the creator in the panel. The roster never leaves Gmail.</p>
-          <p>Basic, Detail or Text. You choose how much proof the brand gets.</p>
-          <p>Paste. The draft carries the card and a link to the kit.</p>
-        </div>
-        <div className="mt-10 flex gap-4">
-          <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center`}>Get a demo</Link>
-          <Link to="/features" className={`${FG_M} h-12 px-6 rounded-full border border-[#d0d5dd] inline-flex items-center`}>All features</Link>
-        </div>
-      </section>
-      <section className="px-6 py-28 text-center">
+      <section className="min-h-screen bg-white flex items-center justify-center px-6">
         <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
-          <span className="transition-transform duration-200 group-hover:scale-105"><ChromeStoreMark /></span>
-          <span className={`${FG_SB} mt-8 text-[40px] md:text-[56px] leading-none tracking-[-1.5px] text-[#101828]`}>Chrome Extension</span>
-          <span className={`${FG_M} mt-4 text-[15px] text-[#6a7282] group-hover:text-[#101828]`}>Add Foam for Chrome ↗</span>
+          <span className="transition-transform duration-200 group-hover:scale-[1.04]">
+            <svg width="168" height="144" viewBox="0 0 112 96" fill="none" aria-hidden>
+              <rect x="8" y="18" width="96" height="70" rx="16" fill="#E8EAED" />
+              <rect x="8" y="18" width="96" height="28" rx="16" fill="#F1F3F4" />
+              <rect x="8" y="34" width="96" height="12" fill="#F1F3F4" />
+              <rect x="40" y="10" width="32" height="14" rx="7" fill="#E8EAED" />
+              <rect x="44" y="14" width="24" height="6" rx="3" fill="#fff" />
+              <circle cx="56" cy="64" r="22" fill="#c6f31e" />
+              <text x="56" y="73" textAnchor="middle" fontSize="22" fontWeight="700" fill="#101828">F</text>
+            </svg>
+          </span>
+          <span className={`${FG_SB} mt-10 text-[48px] md:text-[72px] leading-none tracking-[-2px] text-[#101828]`}>Chrome Extension</span>
         </a>
       </section>
     </div>
