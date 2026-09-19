@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { img } from "../lib/assets";
 
 const A = `${import.meta.env.BASE_URL}assets`;
-const BAG = `${A}/chrome-store.jpg`;
+const BAG = `${A}/chrome-store.webp`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
