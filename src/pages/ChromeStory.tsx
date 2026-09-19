@@ -19,6 +19,10 @@ function ease(t: number) {
   return t * t * (3 - 2 * t);
 }
 
+const WALLPAPER =
+  "radial-gradient(ellipse 36% 90% at 100% 42%, rgba(198,243,30,0.95) 0%, rgba(198,243,30,0.18) 38%, transparent 62%)," +
+  "linear-gradient(180deg, #070707 0%, #111111 26%, #f3efe6 46%, #c9daf0 68%, #8eb6de 100%)";
+
 const TALENT = [
   { name: "Ren Cole", img: img.talent1 },
   { name: "Io Marin", img: img.talent2 },
@@ -95,7 +99,10 @@ export function ChromeStory() {
 
       <section ref={track} className="relative h-[360vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="absolute inset-x-3 md:inset-x-6 top-[7%] bottom-[5%] rounded-[16px] bg-[#2b2b2f] shadow-[0_30px_80px_rgba(16,24,40,0.28)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) }}>
+          <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)" }} />
+          <div className="absolute inset-0 opacity-40" style={{ background: WALLPAPER }} />
+
+          <div className="absolute inset-x-3 md:inset-x-8 top-[8%] bottom-[6%] rounded-[16px] bg-[#2b2b2f] shadow-[0_40px_90px_rgba(0,0,0,0.38)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) }}>
             <div className="h-10 shrink-0 bg-[#3c3c42] flex items-center px-3 gap-2">
               <span className="size-2.5 rounded-full bg-[#ff5f57]" />
               <span className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -220,7 +227,7 @@ export function ChromeStory() {
           <p>Paste. The draft carries the card and a link to the kit.</p>
         </div>
         <div className="mt-10 flex gap-4">
-          <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center`}>Get a demo</Link>
+          <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center">Get a demo</Link>
           <Link to="/features" className={`${FG_M} h-12 px-6 rounded-full border border-[#d0d5dd] inline-flex items-center`}>All features</Link>
         </div>
       </section>
