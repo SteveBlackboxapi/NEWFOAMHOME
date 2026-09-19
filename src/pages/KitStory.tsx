@@ -203,14 +203,14 @@ export function KitStory() {
   const pack = ease(range(p, 0.02, 0.22));
   const kitIn = clamp((pack - 0.72) / 0.28);
   const landed = pack >= 0.995;
-  const read = range(p, 0.24, 0.58);
-  const aimShare = range(p, 0.58, 0.65);
-  const shareOpen = range(p, 0.65, 0.73);
-  const generated = range(p, 0.73, 0.79);
-  const aimCopy = range(p, 0.79, 0.86);
-  const copied = range(p, 0.86, 0.9);
-  const publicize = range(p, 0.9, 0.93);
-  const fold = range(p, 0.93, 0.97);
+  const read = range(p, 0.22, 0.68);
+  const aimShare = range(p, 0.70, 0.76);
+  const shareOpen = range(p, 0.76, 0.82);
+  const generated = range(p, 0.82, 0.86);
+  const aimCopy = range(p, 0.86, 0.90);
+  const copied = range(p, 0.90, 0.93);
+  const publicize = range(p, 0.93, 0.95);
+  const fold = range(p, 0.95, 0.98);
   const fly = range(p, 0.97, 1);
   const sharedIn = range(p, 0.96, 1);
   const headlineOp = 1 - range(p, 0.02, 0.16);
@@ -237,7 +237,7 @@ export function KitStory() {
         <Link to="/" className={`text-[12px] ${light ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
         <span className={`text-[10px] uppercase tracking-[1px] ${light ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
       </div>
-      <section ref={track} className="relative h-[360vh]">
+      <section ref={track} className="relative h-[420vh]">
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden" style={{ background: light ? "#eef0f4" : "#000" }}>
           {fold < 0.2 && (
             <div className="absolute inset-x-4 top-[6%] bottom-[5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col" style={{ opacity: kitIn }}>
@@ -254,7 +254,7 @@ export function KitStory() {
                   </div>
                 </aside>
                 <div className="relative flex-1 overflow-hidden bg-[#e8ebe4]">
-                  <div style={{ transform: `translateY(${-read * 42}%)` }}>
+                  <div style={{ transform: `translateY(${-read * 62}%)` }}>
                     <div className="m-4 md:m-5 rounded-[18px] overflow-hidden bg-[#F4E6C8]">
                       <div className="px-7 pt-6 pb-8 md:px-10 md:pt-8 md:pb-10">
                         <div className="flex justify-end mb-10">
@@ -291,7 +291,68 @@ export function KitStory() {
                             <Plat label="LinkedIn" val="10K" handle="" />
                           </div>
                         </div>
-                        <p className="text-[15px] leading-7 max-w-[720px]">Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun.</p>
+                        <p className="text-[16px] leading-7 max-w-[820px]">Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.</p>
+                      </div>
+                      <div className="bg-[#F4E6C8] px-6 md:px-8 py-6">
+                        <div className="grid grid-cols-4 gap-3">
+                          {[["116k", "4.6k"], ["110k", "34.6k"], ["93.2k", "31.2k"], ["154.3k", "74.9k"]].map(([views, likes], i) => (
+                            <div key={views} className="relative rounded-[12px] overflow-hidden aspect-[3/4] bg-[#ead9b8]">
+                              <img src={POSTER} alt="" className="size-full object-cover" style={{ objectPosition: `${20 + i * 18}% 20%` }} />
+                              <div className="absolute inset-x-0 bottom-0 p-2 text-white text-[11px] flex items-center gap-2 bg-gradient-to-t from-black/60 to-transparent">
+                                <span>{views}</span>
+                                <span>{likes}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="bg-[#F4E6C8] px-6 md:px-8 pb-10">
+                        <div className="rounded-[16px] bg-[#f7efe0] border border-[#ead9b8] p-5">
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <p className="text-[16px] font-semibold">Instagram</p>
+                              <p className="text-[12px] text-[#6a7282]">@samanthapikka3</p>
+                            </div>
+                            <p className="text-[12px] text-[#6b0030]">Data synced: Last 28d</p>
+                          </div>
+                          <div className="grid grid-cols-2 gap-3 mb-4">
+                            {[["672.0K", "Avg. Views"], ["22K", "Avg. Likes"], ["8.3K", "Avg. Comments"], ["31.8K", "Avg. Shares"]].map(([val, lab]) => (
+                              <div key={lab} className="rounded-[12px] bg-white/70 px-4 py-3">
+                                <p className="text-[22px] font-semibold leading-none mb-1">{val}</p>
+                                <p className="text-[12px] text-[#6a7282]">{lab}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="rounded-[12px] bg-white/70 px-4 py-4 mb-3">
+                            <p className="text-[12px] text-[#6a7282] mb-1">Total subscribers</p>
+                            <p className="text-[28px] font-semibold leading-none mb-1">72.9K</p>
+                            <p className="text-[12px] text-[#6b0030] mb-4">+5,976 new followers</p>
+                            <svg viewBox="0 0 320 72" className="w-full h-16">
+                              <polyline fill="none" stroke="#6b0030" strokeWidth="2.4" points="4,64 32,60 60,58 88,54 116,50 144,46 172,38 200,34 228,36 256,30 284,24 316,18" />
+                              <circle cx="316" cy="18" r="3.5" fill="#6b0030" />
+                            </svg>
+                          </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="rounded-[12px] bg-white/70 px-4 py-4">
+                              <p className="text-[13px] font-medium mb-3">Age distribution</p>
+                              {[["13-17", "14%"], ["18-24", "20%"], ["25-34", "20%"]].map(([lab, val]) => (
+                                <div key={lab} className="flex items-center gap-2 text-[12px] mb-2">
+                                  <span className="w-10 text-[#6a7282]">{lab}</span>
+                                  <span className="h-2 rounded-full bg-[#6b0030]" style={{ width: val }} />
+                                  <span>{val}</span>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="rounded-[12px] bg-white/70 px-4 py-4">
+                              <p className="text-[13px] font-medium mb-3">Gender distribution</p>
+                              <div className="flex items-center gap-2 text-[12px]">
+                                <span className="w-14 text-[#6a7282]">Female</span>
+                                <span className="h-2 rounded-full bg-[#6b0030] w-[60%]" />
+                                <span>60%</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
