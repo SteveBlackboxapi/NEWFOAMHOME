@@ -227,7 +227,7 @@ export function ChromeStory() {
           <p>Paste. The draft carries the card and a link to the kit.</p>
         </div>
         <div className="mt-10 flex gap-4">
-          <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center">Get a demo</Link>
+          <Link to="/demo" className={`${FG_SB} h-12 px-6 rounded-full bg-[#c6f31e] text-[#101828] inline-flex items-center`}>Get a demo</Link>
           <Link to="/features" className={`${FG_M} h-12 px-6 rounded-full border border-[#d0d5dd] inline-flex items-center`}>All features</Link>
         </div>
       </section>
