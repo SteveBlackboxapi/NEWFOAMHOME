@@ -90,7 +90,7 @@ function AfterShare() {
       </section>
       <section className="px-6 pb-24 pt-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10">The network in use</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {STATS.map((s) => (
               <div key={s.val}>
@@ -241,7 +241,7 @@ export function KitStory() {
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
             <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
             <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
-            <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
+            <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85">Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
               <Link to="/demo" className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`} style={{ background: "#c6f31e" }}>
                 Get a demo
