@@ -113,7 +113,7 @@ function AfterStory() {
   );
 }
 
-export function ChromeStory() {
+export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
   const track = useRef<HTMLElement | null>(null);
   const [p, setProg] = useState(0);
 
@@ -151,13 +151,15 @@ export function ChromeStory() {
 
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
-      <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
-        <Link to="/" className="text-[12px] text-[#101828]/70">← Home</Link>
-        <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Chrome story test</span>
-        <Link to="/kit-story" className="text-[12px] text-[#101828]/50">Kit story</Link>
-      </div>
+      {!embedded && (
+        <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
+          <Link to="/" className="text-[12px] text-[#101828]/70">← Home</Link>
+          <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Chrome story test</span>
+          <Link to="/kit-story" className="text-[12px] text-[#101828]/50">Kit story</Link>
+        </div>
+      )}
 
-      <section className="px-6 pt-24 pb-10 max-w-[1100px] mx-auto">
+      <section className={`px-6 pb-10 max-w-[1100px] mx-auto ${embedded ? "pt-16" : "pt-24"}`}>
         <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>Foam for Chrome</p>
         <h1 className={`${FG_SB} text-[40px] md:text-[64px] leading-[0.96] tracking-[-1.8px] max-w-[16ch]`}>
           Pick the talent. Choose Detail. Paste the pitch.
@@ -302,7 +304,7 @@ export function ChromeStory() {
         </div>
       </section>
 
-      <AfterStory />
+      {!embedded && <AfterStory />}
     </div>
   );
 }
