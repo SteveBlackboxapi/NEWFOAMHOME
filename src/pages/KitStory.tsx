@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { ChromeStory } from "./ChromeStory";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const CLIP = `${A}/ren-kit.mp4`;
@@ -89,7 +90,7 @@ function AfterShare() {
       </section>
       <section className="px-6 pb-24 pt-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10">The network in use</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {STATS.map((s) => (
               <div key={s.val}>
@@ -279,6 +280,7 @@ export function KitStory() {
         </div>
       </section>
       <AfterShare />
+      <ChromeStory />
     </div>
   );
 }
