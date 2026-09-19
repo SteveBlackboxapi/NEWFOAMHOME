@@ -76,6 +76,7 @@ function AfterShare() {
   const [paused, setPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
   const halt = paused || hovering;
+  const [active, setActive] = useState(0);
   const LOGOS = [
     ["tbh talent", "0% 66.6667%"],
     ["The Brand Row", "33.3333% 66.6667%"],
@@ -123,15 +124,27 @@ function AfterShare() {
           <div className="max-w-[1200px] mx-auto w-full">
             <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] text-center mb-3`}>Start here</p>
             <p className={`${FG_SB} text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] text-[#101828] text-center mb-10`}>Who are you in the deal?</p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {CARDS.map((card) => (
-                <Link key={card.to} to={card.to} className="group relative z-0 rounded-[24px] border border-[#e8e8e8] bg-white p-8 md:p-10 min-h-[280px] md:min-h-[340px] flex flex-col transition-colors duration-200 hover:bg-[#c6f31e] hover:border-[#c6f31e]">
-                  <span className="pointer-events-none absolute -inset-3 rounded-[32px] bg-[#c6f31e] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
-                  <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-5`}>{card.kicker}</p>
-                  <p className={`${FG_SB} text-[26px] md:text-[30px] leading-8 tracking-[-0.6px] text-[#101828] flex-1`}>{card.headline}</p>
-                  <p className={`${FG_M} text-[15px] text-[#6a7282] mt-10 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
-                </Link>
-              ))}
+            <div className="flex flex-col md:flex-row gap-4 md:gap-5 items-stretch" onMouseLeave={() => setActive(0)}>
+              {CARDS.map((card, i) => {
+                const on = active === i;
+                return (
+                  <Link
+                    key={card.to}
+                    to={card.to}
+                    onMouseEnter={() => setActive(i)}
+                    className={`relative z-0 rounded-[24px] border p-8 md:p-10 min-h-[260px] md:min-h-[340px] flex flex-col overflow-hidden ${on ? "border-[#c6f31e] bg-[#c6f31e]" : "border-[#e8e8e8] bg-white"}`}
+                    style={{
+                      flex: on ? "1.28 1 0" : "0.86 1 0",
+                      transform: on ? "scale(1.03)" : "scale(0.97)",
+                      transition: "flex 280ms ease, transform 280ms ease, background-color 220ms ease, border-color 220ms ease",
+                    }}
+                  >
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] mb-5 ${on ? "text-[#3d4a08]" : "text-[#6a7282]"}`}>{card.kicker}</p>
+                    <p className={`${FG_SB} text-[24px] md:text-[30px] leading-8 tracking-[-0.6px] text-[#101828] flex-1`}>{card.headline}</p>
+                    <p className={`${FG_M} text-[15px] mt-10 flex items-center justify-between ${on ? "text-[#101828]" : "text-[#6a7282]"}`}>{card.cta}<span>↗</span></p>
+                  </Link>
+                );
+              })}
             </div>
             <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8`}>Pick a path, or keep scrolling.</p>
           </div>
