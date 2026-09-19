@@ -134,14 +134,14 @@ function AfterShare() {
                     onMouseEnter={() => setActive(i)}
                     className={`relative z-0 rounded-[24px] border p-8 md:p-10 min-h-[260px] md:min-h-[340px] flex flex-col overflow-hidden ${on ? "border-[#c6f31e] bg-[#c6f31e]" : "border-[#e8e8e8] bg-white"}`}
                     style={{
-                      flex: on ? "1.28 1 0" : "0.86 1 0",
-                      transform: on ? "scale(1.03)" : "scale(0.97)",
+                      flex: on ? "1.42 1 0" : "0.79 1 0",
+                      transform: on ? "scale(1.04)" : "scale(0.96)",
                       transition: "flex 280ms ease, transform 280ms ease, background-color 220ms ease, border-color 220ms ease",
                     }}
                   >
-                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] mb-5 ${on ? "text-[#3d4a08]" : "text-[#6a7282]"}`}>{card.kicker}</p>
-                    <p className={`${FG_SB} text-[24px] md:text-[30px] leading-8 tracking-[-0.6px] text-[#101828] flex-1`}>{card.headline}</p>
-                    <p className={`${FG_M} text-[15px] mt-10 flex items-center justify-between ${on ? "text-[#101828]" : "text-[#6a7282]"}`}>{card.cta}<span>↗</span></p>
+                    <p className={`${FG_M} uppercase tracking-[0.8px] mb-5 ${on ? "text-[13px] text-[#3d4a08]" : "text-[11px] text-[#6a7282]"}`}>{card.kicker}</p>
+                    <p className={`${FG_SB} text-[#101828] flex-1 ${on ? "text-[32px] md:text-[40px] leading-[1.08] tracking-[-1px]" : "text-[22px] md:text-[26px] leading-8 tracking-[-0.5px]"}`}>{card.headline}</p>
+                    <p className={`${FG_M} mt-10 flex items-center justify-between ${on ? "text-[17px] text-[#101828]" : "text-[14px] text-[#6a7282]"}`}>{card.cta}<span>↗</span></p>
                   </Link>
                 );
               })}
