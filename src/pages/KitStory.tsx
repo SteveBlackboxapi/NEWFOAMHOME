@@ -26,7 +26,7 @@ function KitNav() {
   return (
     <div className="h-12 bg-white border-b border-[#e6e8ec] flex items-center px-4 gap-3 rounded-t-[20px]">
       <span className="size-7 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
-      <p className="text-[13px] text-[#6a7282] truncate">Media kits / <span className="text-[#101828] font-medium">Io Marin's Media Kit</span></p>
+      <p className="text-[13px] text-[#6a7282] truncate">Media kits / <span className="text-[#101828] font-medium">Samantha-Pikka-haircare'26</span></p>
       <button type="button" className="ml-auto h-8 rounded-full bg-[#185abc] text-white text-[13px] px-3.5 inline-flex items-center gap-1.5">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
           <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" />
@@ -246,7 +246,7 @@ export function KitStory() {
                 <aside className="shrink-0 bg-white border-r border-[#e6e8ec] overflow-hidden" style={{ width: `${lerp(220, 0, publicize)}px` }}>
                   <div className="p-4 w-[220px]">
                     <p className="text-[11px] text-[#6a7282] mb-1">Media kit name</p>
-                    <p className="text-[15px] font-medium mb-4">Io Marin's Media Kit</p>
+                    <p className="text-[15px] font-medium mb-4">Samantha-Pikka-haircare'26</p>
                     <p className="text-[11px] text-[#6a7282] mb-2">Types</p>
                     {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
                       <div key={x} className="rounded-xl bg-[#f4f5f7] h-9 mb-2 flex items-center justify-between px-3 text-[11px]">{x}<span>+</span></div>
@@ -262,14 +262,14 @@ export function KitStory() {
                         </div>
                         <div className="flex gap-6 md:gap-10 items-start">
                           <div className="flex-1 min-w-0 pt-1">
-                            <p className="text-[#6b0030] text-[32px] md:text-[40px] leading-none font-semibold mb-3">Io Marin</p>
-                            <p className="text-[#6b0030]/75 text-[13px] mb-4">Lisbon · 28 yo · Female</p>
+                            <p className="text-[#6b0030] text-[32px] md:text-[40px] leading-none font-semibold mb-3">Samantha Pikka</p>
+                            <p className="text-[#6b0030]/75 text-[13px] mb-4">Los Angeles, CA · 26 yo · Female</p>
                             <div className="flex gap-2 mb-4">
                               {["IG", "TT", "YT"].map((lab) => (
                                 <span key={lab} className="size-7 rounded-full border border-[#6b0030]/25 text-[#6b0030] text-[9px] font-semibold inline-flex items-center justify-center">{lab}</span>
                               ))}
                             </div>
-                            <div className="inline-flex rounded-xl bg-[#6b0030]/8 text-[#6b0030] text-[12px] px-3 py-2">Movement · City · Film</div>
+                            <div className="inline-flex rounded-xl bg-[#6b0030]/8 text-[#6b0030] text-[12px] px-3 py-2">Beauty · Advocacy · Education</div>
                           </div>
                           <div ref={well} className="w-[42%] shrink-0 rounded-[14px] bg-[#ead9b8] aspect-[4/5]" />
                         </div>
@@ -278,16 +278,17 @@ export function KitStory() {
                         <div className="flex items-end justify-between gap-8 flex-wrap mb-8">
                           <div>
                             <p className="text-[22px] font-semibold">Platforms</p>
-                            <p className="text-[36px] leading-none font-semibold mt-1">164K</p>
+                            <p className="text-[36px] leading-none font-semibold mt-1">1,155,300</p>
                             <p className="text-[12px] opacity-70 mt-1">Total audience</p>
                           </div>
-                          <div className="flex gap-8">
-                            <Plat label="Instagram" val="89K" handle="@iomarin" />
-                            <Plat label="TikTok" val="62K" handle="@iomarin" />
-                            <Plat label="YouTube" val="13K" handle="@iomarin" />
+                          <div className="flex gap-6 md:gap-8">
+                            <Plat label="Instagram" val="570.1K" handle="@samanthapikka3" />
+                            <Plat label="TikTok" val="157.2K" handle="@sampikka" />
+                            <Plat label="YouTube" val="418K" handle="@samiepikka4" />
+                            <Plat label="LinkedIn" val="10K" handle="" />
                           </div>
                         </div>
-                        <p className="text-[15px] leading-7 max-w-[720px]">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                        <p className="text-[15px] leading-7 max-w-[720px]">Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun.</p>
                       </div>
                     </div>
                   </div>
@@ -309,7 +310,7 @@ export function KitStory() {
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
             <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
             <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
-            <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
+            <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85">Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
               <Link to="/demo" className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`} style={{ background: "#c6f31e" }}>
                 Get a demo
@@ -325,12 +326,12 @@ export function KitStory() {
           <div className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]" style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}>
             <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between"><p className="text-[16px] font-medium">Share</p><span>×</span></div>
             <div className="p-5">
-              <p className="text-[13px] mb-4">Io Marin's Media Kit</p>
+              <p className="text-[13px] mb-4">Samantha-Pikka-haircare'26</p>
               {generated < 0.4 ? (
                 <div className="h-11 rounded-full border border-[#d0d5dd] flex items-center justify-center text-[13px]">Generate share link</div>
               ) : (
                 <div className={`h-11 rounded-full border flex items-center px-3 gap-2 ${copied > 0.35 ? "border-[#185abc]" : "border-[#d0d5dd]"}`}>
-                  <span className="text-[12px] truncate flex-1">https://foam.io/m/io-marin</span>
+                  <span className="text-[12px] truncate flex-1">https://foam.io/m/samantha-pikka</span>
                   <span className={`text-[12px] rounded-full px-3 py-1 ${copied > 0.35 ? "bg-[#185abc] text-white" : "border border-[#d0d5dd]"}`}>{copied > 0.35 ? "Copied" : "Copy link"}</span>
                 </div>
               )}
