@@ -10,11 +10,13 @@ import { DataTrust } from "./pages/DataTrust";
 import { Updates } from "./pages/Updates";
 import { Demo } from "./pages/Demo";
 import { KitStory } from "./pages/KitStory";
+import { ChromeStory } from "./pages/ChromeStory";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter(
   [
     { path: "kit-story", Component: KitStory },
+    { path: "chrome-story", Component: ChromeStory },
     {
       path: "/",
       Component: Root,
