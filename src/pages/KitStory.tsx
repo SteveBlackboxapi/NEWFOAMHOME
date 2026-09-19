@@ -37,6 +37,41 @@ function KitNav() {
   );
 }
 
+function NetworkStats({ stats }: { stats: { val: string; label: string }[] }) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) setOn(true); }, { threshold: 0.28 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <section ref={ref} className="bg-[#0a0a0a] text-white px-6 py-28 md:py-36">
+      <div className="max-w-[1200px] mx-auto">
+        <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-white/45 mb-14`}>The network in use</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          {stats.map((s, i) => (
+            <div
+              key={s.val}
+              style={{
+                opacity: on ? 1 : 0,
+                filter: on ? "blur(0px)" : "blur(18px)",
+                transform: on ? "translateY(0)" : "translateY(22px)",
+                transition: `opacity 700ms ease ${i * 90}ms, filter 800ms ease ${i * 90}ms, transform 700ms ease ${i * 90}ms`,
+              }}
+            >
+              <p className={`${FG_SB} text-[56px] md:text-[72px] tracking-[-2px] leading-none mb-4`}>{s.val}</p>
+              <p className={`${FG_R} text-[15px] leading-6 text-white/55 max-w-[220px]`}>{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AfterShare() {
   const [paused, setPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -102,19 +137,7 @@ function AfterShare() {
           </div>
         </div>
       </section>
-      <section className="px-6 pb-24 pt-6">
-        <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {STATS.map((s) => (
-              <div key={s.val}>
-                <p className={`${FG_SB} text-[40px] tracking-[-1px] text-[#101828] leading-none mb-2`}>{s.val}</p>
-                <p className={`${FG_R} text-sm text-[#6a7282] max-w-[200px]`}>{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <NetworkStats stats={STATS} />
     </div>
   );
 }
