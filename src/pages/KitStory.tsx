@@ -78,9 +78,10 @@ function AfterShare() {
         </div>
       </section>
       <section className="px-6 py-10">
-        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-4">
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-6">
           {CARDS.map((card) => (
-            <Link key={card.to} to={card.to} className="rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col hover:border-[#cfcfcf]">
+            <Link key={card.to} to={card.to} className="group relative z-0 rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col transition-colors duration-200 hover:bg-[#c6f31e] hover:border-[#c6f31e]">
+              <span className="pointer-events-none absolute -inset-3 rounded-[28px] bg-[#c6f31e] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
               <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-4`}>{card.kicker}</p>
               <p className={`${FG_SB} text-[22px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}>{card.headline}</p>
               <p className={`${FG_M} text-sm text-[#6a7282] mt-8 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
