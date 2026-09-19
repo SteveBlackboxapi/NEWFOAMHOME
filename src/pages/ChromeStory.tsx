@@ -144,7 +144,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                 {!inProfile ? (
                   <>
                     <div className="px-3 pt-3 flex gap-4 text-[12px] text-[#6a7282]">
-                      <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2">Talent</span>
+                      <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2`}>Talent</span>
                       <span className="pb-2">Lists</span>
                       <span className="pb-2">Media Kits</span>
                     </div>
