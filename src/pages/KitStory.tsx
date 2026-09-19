@@ -294,13 +294,18 @@ export function KitStory() {
                         <p className="text-[16px] leading-7 max-w-[820px]">Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.</p>
                       </div>
                       <div className="bg-[#F4E6C8] px-6 md:px-8 py-6">
-                        <div className="grid grid-cols-4 gap-3">
-                          {[["116k", "4.6k"], ["110k", "34.6k"], ["93.2k", "31.2k"], ["154.3k", "74.9k"]].map(([views, likes], i) => (
-                            <div key={views} className="relative rounded-[12px] overflow-hidden aspect-[3/4] bg-[#ead9b8]">
-                              <img src={POSTER} alt="" className="size-full object-cover" style={{ objectPosition: `${20 + i * 18}% 20%` }} />
-                              <div className="absolute inset-x-0 bottom-0 p-2 text-white text-[11px] flex items-center gap-2 bg-gradient-to-t from-black/60 to-transparent">
-                                <span>{views}</span>
-                                <span>{likes}</span>
+                        <div className="grid grid-cols-4 gap-3 items-start">
+                          {[
+                            { views: "116k", likes: "4.6k", h: 340, mt: 0, pos: "28% 18%" },
+                            { views: "110k", likes: "34.6k", h: 210, mt: 36, pos: "62% 22%" },
+                            { views: "93.2k", likes: "31.2k", h: 300, mt: 10, pos: "48% 30%" },
+                            { views: "154.3k", likes: "74.9k", h: 236, mt: 48, pos: "70% 16%" },
+                          ].map((tile) => (
+                            <div key={tile.views} className="relative rounded-[14px] overflow-hidden bg-[#ead9b8]" style={{ height: tile.h, marginTop: tile.mt }}>
+                              <img src={POSTER} alt="" className="size-full object-cover" style={{ objectPosition: tile.pos }} />
+                              <div className="absolute inset-x-0 bottom-0 px-2.5 py-2 text-white text-[11px] flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent">
+                                <span>{tile.views}</span>
+                                <span>{tile.likes}</span>
                               </div>
                             </div>
                           ))}
