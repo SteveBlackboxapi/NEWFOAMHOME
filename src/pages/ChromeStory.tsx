@@ -97,9 +97,9 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       </section>
       <section ref={track} className="relative h-[400vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)" }} />
-          <div className="absolute inset-0 opacity-40" style={{ background: WALLPAPER }} />
-          <div className="absolute inset-x-3 md:inset-x-8 top-[8%] bottom-[6%] rounded-[16px] bg-[#2b2b2f] shadow-[0_40px_90px_rgba(0,0,0,0.38)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) }}>
+          <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)", opacity: 1 - foldMail }} />
+          <div className="absolute inset-0" style={{ background: WALLPAPER, opacity: 0.4 * (1 - foldMail) }} />
+          <div className="absolute inset-x-3 md:inset-x-8 top-[8%] bottom-[6%] rounded-[16px] bg-[#2b2b2f] shadow-[0_40px_90px_rgba(0,0,0,0.38)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) * (1 - foldMail) }}>
             <div className="h-10 shrink-0 bg-[#3c3c42] flex items-center px-3 gap-2">
               <span className="size-2.5 rounded-full bg-[#ff5f57]" />
               <span className="size-2.5 rounded-full bg-[#febc2e]" />
@@ -109,7 +109,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
             </div>
             <div className="flex min-h-0 flex-1 bg-[#d3d8de]">
               <div className="relative flex-1 min-w-0 p-5 md:p-8 flex items-start justify-center">
-                <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden" style={{ opacity: 1 - foldMail, transform: `scale(${lerp(1, 0.86, foldMail)})` }}>
+                <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden">
                   <div className="h-11 border-b border-[#eeefef] flex items-center px-4">
                     <p className={`${FG_M} text-[14px] flex-1`}>New Message</p>
                     <span className="text-[#6a7282] text-sm">—   ☐   ×</span>
@@ -169,7 +169,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                     <p className="text-[11px] text-[#6a7282] mb-2">Lisbon · 28</p>
                     <p className="text-[12px] text-[#185abc] mb-3">164K · 89K · 12K</p>
                     <div className="flex justify-center gap-2 mb-3">{["Movement", "City", "Film"].map((tag) => (<span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>))}</div>
-                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>Io is a movement creator known for rooftop sessions and late miles.</p>
+                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4">Io is a movement creator known for rooftop sessions and late miles.</p>
                     <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
                     <div className="text-left text-[12px] space-y-2 mb-4">
                       <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
