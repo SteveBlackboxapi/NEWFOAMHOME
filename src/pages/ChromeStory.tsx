@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { img } from "../lib/assets";
 
 const A = `${import.meta.env.BASE_URL}assets`;
+const BAG = `${A}/chrome-store.png`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
@@ -21,28 +22,6 @@ function ease(t: number) {
 }
 
 const STORE = "https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf";
-
-function ChromeBagMark() {
-  return (
-    <svg width="192" height="168" viewBox="0 0 192 168" fill="none" aria-hidden className="overflow-visible">
-      <path d="M16 36h160a16 16 0 0 1 16 16v100a16 16 0 0 1-16 16H16A16 16 0 0 1 0 152V52A16 16 0 0 1 16 36Z" fill="#E8EAED" />
-      <path d="M16 36h160a16 16 0 0 1 16 16v28H0V52A16 16 0 0 1 16 36Z" fill="#F1F3F4" />
-      <rect x="70" y="18" width="52" height="22" rx="11" fill="#E8EAED" />
-      <rect x="78" y="26" width="36" height="10" rx="5" fill="#fff" />
-      <g clipPath="url(#bag)">
-        <circle cx="96" cy="128" r="56" fill="#4285F4" />
-        <path d="M96 128 L40 80 A56 56 0 0 1 152 80 Z" fill="#EA4335" />
-        <path d="M96 128 L152 80 A56 56 0 0 1 144 168 Z" fill="#FBBC05" />
-        <path d="M96 128 L40 80 A56 56 0 0 0 48 168 Z" fill="#34A853" />
-        <circle cx="96" cy="128" r="22" fill="#fff" />
-        <circle cx="96" cy="128" r="16" fill="#4285F4" />
-      </g>
-      <clipPath id="bag">
-        <path d="M16 36h160a16 16 0 0 1 16 16v100a16 16 0 0 1-16 16H16A16 16 0 0 1 0 152V52A16 16 0 0 1 16 36Z" />
-      </clipPath>
-    </svg>
-  );
-}
 
 const WALLPAPER =
   "radial-gradient(ellipse 36% 90% at 100% 42%, rgba(198,243,30,0.95) 0%, rgba(198,243,30,0.18) 38%, transparent 62%)," +
@@ -165,7 +144,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                 {!inProfile ? (
                   <>
                     <div className="px-3 pt-3 flex gap-4 text-[12px] text-[#6a7282]">
-                      <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2`}>Talent</span>
+                      <span className={`${FG_M} text-[#101828] border-b-2 border-[#101828] pb-2">Talent</span>
                       <span className="pb-2">Lists</span>
                       <span className="pb-2">Media Kits</span>
                     </div>
@@ -207,9 +186,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       </section>
       <section className="min-h-screen bg-white flex items-center justify-center px-6">
         <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
-          <span className="transition-transform duration-200 group-hover:scale-[1.04]">
-            <ChromeBagMark />
-          </span>
+          <img src={BAG} alt="Chrome Extension" width={192} height={192} className="w-44 h-44 md:w-52 md:h-52 object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
           <span className={`${FG_SB} mt-10 text-[48px] md:text-[72px] leading-none tracking-[-2px] text-[#101828]`}>Chrome Extension</span>
         </a>
       </section>
