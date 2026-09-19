@@ -83,16 +83,23 @@ function AfterShare() {
           </button>
         </div>
       </section>
-      <section className="px-6 py-10">
-        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-6">
-          {CARDS.map((card) => (
-            <Link key={card.to} to={card.to} className="group relative z-0 rounded-[20px] border border-[#e8e8e8] bg-white p-8 min-h-[220px] flex flex-col transition-colors duration-200 hover:bg-[#c6f31e] hover:border-[#c6f31e]">
-              <span className="pointer-events-none absolute -inset-3 rounded-[28px] bg-[#c6f31e] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
-              <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-4`}>{card.kicker}</p>
-              <p className={`${FG_SB} text-[22px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}>{card.headline}</p>
-              <p className={`${FG_M} text-sm text-[#6a7282] mt-8 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
-            </Link>
-          ))}
+      <section className="relative h-[160vh]">
+        <div className="sticky top-0 h-screen flex flex-col justify-center px-6">
+          <div className="max-w-[1200px] mx-auto w-full">
+            <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] text-center mb-3`}>Start here</p>
+            <p className={`${FG_SB} text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] text-[#101828] text-center mb-10`}>Who are you in the deal?</p>
+            <div className="grid md:grid-cols-3 gap-5">
+              {CARDS.map((card) => (
+                <Link key={card.to} to={card.to} className="group relative z-0 rounded-[24px] border border-[#e8e8e8] bg-white p-8 md:p-10 min-h-[280px] md:min-h-[340px] flex flex-col transition-colors duration-200 hover:bg-[#c6f31e] hover:border-[#c6f31e]">
+                  <span className="pointer-events-none absolute -inset-3 rounded-[32px] bg-[#c6f31e] opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
+                  <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-5`}>{card.kicker}</p>
+                  <p className={`${FG_SB} text-[26px] md:text-[30px] leading-8 tracking-[-0.6px] text-[#101828] flex-1`}>{card.headline}</p>
+                  <p className={`${FG_M} text-[15px] text-[#6a7282] mt-10 flex items-center justify-between`}>{card.cta}<span>↗</span></p>
+                </Link>
+              ))}
+            </div>
+            <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8`}>Pick a path, or keep scrolling.</p>
+          </div>
         </div>
       </section>
       <section className="px-6 pb-24 pt-6">
