@@ -146,7 +146,7 @@ function AfterShare() {
                 );
               })}
             </div>
-            <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8">Pick a path, or keep scrolling.</p>
+            <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8`}>Pick a path, or keep scrolling.</p>
           </div>
         </div>
       </section>
@@ -307,7 +307,7 @@ export function KitStory() {
             </div>
           )}
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6">The truth layer</p>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
             <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
             <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
