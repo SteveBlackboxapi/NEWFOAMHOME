@@ -146,11 +146,21 @@ function AfterShare() {
                 );
               })}
             </div>
-            <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8`}>Pick a path, or keep scrolling.</p>
+            <p className={`${FG_R} text-[13px] text-[#6a7282] text-center mt-8">Pick a path, or keep scrolling.</p>
           </div>
         </div>
       </section>
       <NetworkStats stats={STATS} />
+    </div>
+  );
+}
+
+function Plat({ label, val, handle }: { label: string; val: string; handle: string }) {
+  return (
+    <div className="min-w-[88px]">
+      <p className="text-[11px] opacity-70 mb-1">{label}</p>
+      <p className="text-[24px] font-semibold leading-none">{val}</p>
+      <p className="text-[11px] opacity-70 mt-1">{handle}</p>
     </div>
   );
 }
@@ -161,7 +171,7 @@ export function KitStory() {
   const well = useRef<HTMLDivElement | null>(null);
   const vid = useRef<HTMLVideoElement | null>(null);
   const [p, setProg] = useState(0);
-  const [slot, setSlot] = useState({ l: 22, t: 20, w: 32, h: 34 });
+  const [slot, setSlot] = useState({ l: 58, t: 22, w: 28, h: 38 });
 
   useEffect(() => {
     const el = track.current;
@@ -243,33 +253,41 @@ export function KitStory() {
                     ))}
                   </div>
                 </aside>
-                <div className="relative flex-1 overflow-hidden bg-[#F4E6C8]">
+                <div className="relative flex-1 overflow-hidden bg-[#e8ebe4]">
                   <div style={{ transform: `translateY(${-read * 42}%)` }}>
-                    <div className="p-5">
-                      <div className="flex justify-between mb-4">
-                        <div className="size-7 rounded-[7px] bg-[#6b0030] text-[#F4E6C8] flex items-center justify-center text-[11px] font-semibold">F</div>
-                        <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
-                      </div>
-                      <div className="flex gap-5 items-start">
-                        <div ref={well} className="w-[40%] rounded-[14px] bg-[#ead9b8] aspect-[4/3]" />
-                        <div className="flex-1 pt-2">
-                          <p className="text-[#6b0030] text-[28px] leading-none font-semibold mb-2">Io Marin</p>
-                          <p className="text-[#6b0030]/70 text-[12px] mb-3">Lisbon · 28 years old · Female</p>
+                    <div className="m-4 md:m-5 rounded-[18px] overflow-hidden bg-[#F4E6C8]">
+                      <div className="p-6 md:p-8">
+                        <div className="flex justify-end mb-6">
+                          <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+                        </div>
+                        <div className="flex gap-6 md:gap-10 items-start">
+                          <div className="flex-1 min-w-0 pt-1">
+                            <p className="text-[#6b0030] text-[32px] md:text-[40px] leading-none font-semibold mb-3">Io Marin</p>
+                            <p className="text-[#6b0030]/75 text-[13px] mb-4">Lisbon · 28 yo · Female</p>
+                            <div className="flex gap-2 mb-4">
+                              {["IG", "TT", "YT"].map((lab) => (
+                                <span key={lab} className="size-7 rounded-full border border-[#6b0030]/25 text-[#6b0030] text-[9px] font-semibold inline-flex items-center justify-center">{lab}</span>
+                              ))}
+                            </div>
+                            <div className="inline-flex rounded-xl bg-[#6b0030]/8 text-[#6b0030] text-[12px] px-3 py-2">Movement · City · Film</div>
+                          </div>
+                          <div ref={well} className="w-[42%] shrink-0 rounded-[14px] bg-[#ead9b8] aspect-[4/5]" />
                         </div>
                       </div>
-                    </div>
-                    <div className="bg-[#6b0030] text-[#F4E6C8] px-8 py-8">
-                      <p className="text-[15px] leading-7 max-w-[720px] mb-8">Io is a movement creator known for rooftop sessions and late miles.</p>
-                      <div className="border-t border-white/20 pt-6 flex items-end justify-between gap-6">
-                        <div>
-                          <p className="text-[22px] font-semibold">Platforms</p>
-                          <p className="text-[34px] leading-none font-semibold mt-1">164K</p>
+                      <div className="bg-[#6b0030] text-[#F4E6C8] px-6 md:px-8 py-8">
+                        <div className="flex items-end justify-between gap-8 flex-wrap mb-8">
+                          <div>
+                            <p className="text-[22px] font-semibold">Platforms</p>
+                            <p className="text-[36px] leading-none font-semibold mt-1">164K</p>
+                            <p className="text-[12px] opacity-70 mt-1">Total audience</p>
+                          </div>
+                          <div className="flex gap-8">
+                            <Plat label="Instagram" val="89K" handle="@iomarin" />
+                            <Plat label="TikTok" val="62K" handle="@iomarin" />
+                            <Plat label="YouTube" val="13K" handle="@iomarin" />
+                          </div>
                         </div>
-                        <div className="flex gap-10 text-right">
-                          <div><p className="text-[24px] font-semibold">89K</p></div>
-                          <div><p className="text-[24px] font-semibold">62K</p></div>
-                          <div><p className="text-[24px] font-semibold">13K</p></div>
-                        </div>
+                        <p className="text-[15px] leading-7 max-w-[720px]">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
                       </div>
                     </div>
                   </div>
@@ -289,7 +307,7 @@ export function KitStory() {
             </div>
           )}
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6">The truth layer</p>
             <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
             <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
