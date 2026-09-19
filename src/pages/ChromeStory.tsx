@@ -84,7 +84,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
   const cursorT = aimSend > 0.02 ? lerp(48, 78, aimSend) : aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
   const cursorOn = aimTile > 0.08 && foldMail < 0.15;
   return (
-    <div className="bg-[#eef0f4] text-[#101828]">
+    <div className="bg-white text-[#101828]">
       {!embedded && (
         <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
           <Link to="/" className="text-[12px] text-[#101828]/70">← Home</Link>
@@ -97,7 +97,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
         <p className={`${FG_R} mt-5 max-w-[36em] text-[17px] leading-7 text-[#6a7282]`}>The side panel stays on Gmail. Open a creator, decide what the brand sees, drop it into the draft.</p>
       </section>
       <section ref={track} className="relative h-[320vh]">
-        <div className="sticky top-0 h-screen overflow-hidden">
+        <div className="sticky top-0 h-screen overflow-hidden bg-white">
           <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)", opacity: 1 - foldMail }} />
           <div className="absolute inset-0" style={{ background: WALLPAPER, opacity: 0.4 * (1 - foldMail) }} />
           <div className="absolute inset-x-3 md:inset-x-8 top-[8%] bottom-[6%] rounded-[16px] bg-[#2b2b2f] shadow-[0_40px_90px_rgba(0,0,0,0.38)] overflow-hidden flex flex-col" style={{ opacity: lerp(0.45, 1, enter) * (1 - foldMail) }}>
@@ -127,7 +127,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
@@ -193,7 +193,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
           </svg>
           <a href={STORE} target="_blank" rel="noreferrer" className="absolute inset-0 z-[70] flex flex-col items-center justify-center px-6" style={{ opacity: lockupIn, transform: `translateY(${(1 - lockupIn) * 18}px)` }}>
             <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain" />
-            <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center`}>That's the Chrome Extension</span>
+            <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center">That's the Chrome Extension</span>
           </a>
         </div>
       </section>
