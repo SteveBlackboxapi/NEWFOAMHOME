@@ -256,22 +256,25 @@ export function KitStory() {
                 <div className="relative flex-1 overflow-hidden bg-[#e8ebe4]">
                   <div style={{ transform: `translateY(${-read * 42}%)` }}>
                     <div className="m-4 md:m-5 rounded-[18px] overflow-hidden bg-[#F4E6C8]">
-                      <div className="p-6 md:p-8">
-                        <div className="flex justify-end mb-6">
-                          <span className="border border-[#6b0030]/35 text-[#6b0030] rounded-full px-3 py-1 text-[11px]">Contact</span>
+                      <div className="px-7 pt-6 pb-8 md:px-10 md:pt-8 md:pb-10">
+                        <div className="flex justify-end mb-10">
+                          <span className="border border-[#6b0030]/40 text-[#6b0030] rounded-full px-4 py-1.5 text-[13px]">Contact</span>
                         </div>
-                        <div className="flex gap-6 md:gap-10 items-start">
-                          <div className="flex-1 min-w-0 pt-1">
-                            <p className="text-[#6b0030] text-[32px] md:text-[40px] leading-none font-semibold mb-3">Samantha Pikka</p>
-                            <p className="text-[#6b0030]/75 text-[13px] mb-4">Los Angeles, CA · 26 yo · Female</p>
-                            <div className="flex gap-2 mb-4">
+                        <div className="flex gap-8 md:gap-12 items-center">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[#6b0030] text-[42px] md:text-[56px] leading-[0.95] font-semibold tracking-[-1.2px] mb-5">Samantha Pikka</p>
+                            <p className="text-[#101828] text-[15px] md:text-[16px] mb-6">Los Angeles, CA&nbsp;&nbsp;|&nbsp;&nbsp;26 yo&nbsp;&nbsp;|&nbsp;&nbsp;Female</p>
+                            <div className="flex gap-3 mb-6">
                               {["IG", "TT", "YT"].map((lab) => (
-                                <span key={lab} className="size-7 rounded-full border border-[#6b0030]/25 text-[#6b0030] text-[9px] font-semibold inline-flex items-center justify-center">{lab}</span>
+                                <span key={lab} className="size-10 rounded-full border border-[#6b0030]/40 text-[#6b0030] text-[12px] font-semibold inline-flex items-center justify-center">{lab}</span>
                               ))}
                             </div>
-                            <div className="inline-flex rounded-xl bg-[#6b0030]/8 text-[#6b0030] text-[12px] px-3 py-2">Beauty · Advocacy · Education</div>
+                            <div className="inline-flex flex-col rounded-2xl bg-[#6b0030]/10 text-[#6b0030] px-5 py-3.5">
+                              <span className="text-[12px] opacity-70 mb-1">Verticals</span>
+                              <span className="text-[16px]">Beauty · Advocacy · Education</span>
+                            </div>
                           </div>
-                          <div ref={well} className="w-[42%] shrink-0 rounded-[14px] bg-[#ead9b8] aspect-[4/5]" />
+                          <div ref={well} className="w-[44%] shrink-0 rounded-[16px] bg-[#ead9b8] aspect-square" />
                         </div>
                       </div>
                       <div className="bg-[#6b0030] text-[#F4E6C8] px-6 md:px-8 py-8">
