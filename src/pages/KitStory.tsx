@@ -296,12 +296,12 @@ export function KitStory() {
                       <div className="bg-[#F4E6C8] px-6 md:px-8 py-6">
                         <div className="grid grid-cols-4 gap-3 items-start">
                           {[
-                            { views: "116k", likes: "4.6k", h: 340, mt: 0, pos: "28% 18%" },
-                            { views: "110k", likes: "34.6k", h: 210, mt: 36, pos: "62% 22%" },
-                            { views: "93.2k", likes: "31.2k", h: 300, mt: 10, pos: "48% 30%" },
-                            { views: "154.3k", likes: "74.9k", h: 236, mt: 48, pos: "70% 16%" },
+                            { views: "116k", likes: "4.6k", h: 340, pos: "28% 18%" },
+                            { views: "110k", likes: "34.6k", h: 248, pos: "62% 22%" },
+                            { views: "93.2k", likes: "31.2k", h: 320, pos: "48% 30%" },
+                            { views: "154.3k", likes: "74.9k", h: 236, pos: "70% 16%" },
                           ].map((tile) => (
-                            <div key={tile.views} className="relative rounded-[14px] overflow-hidden bg-[#ead9b8]" style={{ height: tile.h, marginTop: tile.mt }}>
+                            <div key={tile.views} className="relative rounded-[14px] overflow-hidden bg-[#ead9b8]" style={{ height: tile.h }}>
                               <img src={POSTER} alt="" className="size-full object-cover" style={{ objectPosition: tile.pos }} />
                               <div className="absolute inset-x-0 bottom-0 px-2.5 py-2 text-white text-[11px] flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent">
                                 <span>{tile.views}</span>
@@ -377,7 +377,7 @@ export function KitStory() {
             </div>
           )}
           <div className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none" style={{ opacity: headlineOp }}>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}>The truth layer</p>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6">The truth layer</p>
             <h1 className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`} style={{ fontSize: "clamp(52px, 8vw, 96px)" }}>Numbers everyone in the deal can trust.</h1>
             <p className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}>Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no “let me check and get back to you.”</p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
