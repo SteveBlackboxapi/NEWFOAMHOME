@@ -122,7 +122,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3">Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
@@ -165,7 +165,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                     <p className="text-[11px] text-[#6a7282] mb-2">Lisbon · 28</p>
                     <p className="text-[12px] text-[#185abc] mb-3">164K · 89K · 12K</p>
                     <div className="flex justify-center gap-2 mb-3">{["Movement", "City", "Film"].map((tag) => (<span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>))}</div>
-                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4">Io is a movement creator known for rooftop sessions and late miles.</p>
+                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>Io is a movement creator known for rooftop sessions and late miles.</p>
                     <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
                     <div className="text-left text-[12px] space-y-2 mb-4">
                       <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
