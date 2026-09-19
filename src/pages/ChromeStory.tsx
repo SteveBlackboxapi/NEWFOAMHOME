@@ -73,11 +73,15 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
   const aimDetail = ease(range(p, 0.24, 0.36));
   const detailOn = range(p, 0.36, 0.42) > 0.4;
   const aimPaste = ease(range(p, 0.42, 0.58));
-  const paste = ease(range(p, 0.56, 0.7));
-  const proof = ease(range(p, 0.66, 0.82));
-  const cursorL = aimPaste > 0.02 ? lerp(86, 42, aimPaste) : aimDetail > 0.02 ? lerp(84, 86, aimDetail) : lerp(58, 84, aimTile);
-  const cursorT = aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
-  const cursorOn = aimTile > 0.08 && paste < 0.95;
+  const paste = ease(range(p, 0.52, 0.64));
+  const proof = ease(range(p, 0.62, 0.74));
+  const aimSend = ease(range(p, 0.74, 0.84));
+  const sent = range(p, 0.84, 0.88);
+  const foldMail = range(p, 0.88, 0.94);
+  const flyMail = range(p, 0.94, 1);
+  const cursorL = aimSend > 0.02 ? lerp(42, 24, aimSend) : aimPaste > 0.02 ? lerp(86, 42, aimPaste) : aimDetail > 0.02 ? lerp(84, 86, aimDetail) : lerp(58, 84, aimTile);
+  const cursorT = aimSend > 0.02 ? lerp(48, 78, aimSend) : aimPaste > 0.02 ? lerp(86, 48, aimPaste) : aimDetail > 0.02 ? lerp(42, 86, aimDetail) : lerp(28, 42, aimTile);
+  const cursorOn = aimTile > 0.08 && foldMail < 0.15;
   return (
     <div className="bg-[#eef0f4] text-[#101828]">
       {!embedded && (
@@ -91,7 +95,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
         <h1 className={`${FG_SB} text-[40px] md:text-[64px] leading-[0.96] tracking-[-1.8px] max-w-[16ch]`}>Pick the talent. Choose Detail. Paste the pitch.</h1>
         <p className={`${FG_R} mt-5 max-w-[36em] text-[17px] leading-7 text-[#6a7282]`}>The side panel stays on Gmail. Open a creator, decide what the brand sees, drop it into the draft.</p>
       </section>
-      <section ref={track} className="relative h-[360vh]">
+      <section ref={track} className="relative h-[400vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="absolute inset-0 scale-110" style={{ background: WALLPAPER, filter: "blur(28px)" }} />
           <div className="absolute inset-0 opacity-40" style={{ background: WALLPAPER }} />
@@ -105,7 +109,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
             </div>
             <div className="flex min-h-0 flex-1 bg-[#d3d8de]">
               <div className="relative flex-1 min-w-0 p-5 md:p-8 flex items-start justify-center">
-                <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden">
+                <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden" style={{ opacity: 1 - foldMail, transform: `scale(${lerp(1, 0.86, foldMail)})` }}>
                   <div className="h-11 border-b border-[#eeefef] flex items-center px-4">
                     <p className={`${FG_M} text-[14px] flex-1`}>New Message</p>
                     <span className="text-[#6a7282] text-sm">—   ☐   ×</span>
@@ -132,7 +136,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                     </div>
                   </div>
                   <div className="h-12 border-t border-[#eeefef] flex items-center px-3 gap-2">
-                    <span className="h-8 px-4 rounded-full bg-[#0b57d0] text-white text-[13px] inline-flex items-center">Send</span>
+                    <span className={`h-8 px-4 rounded-full text-[13px] inline-flex items-center ${sent > 0.4 ? "bg-[#185abc] text-white scale-95" : "bg-[#0b57d0] text-white"}`}>{sent > 0.55 ? "Sent" : "Send"}</span>
                   </div>
                 </div>
               </div>
@@ -182,12 +186,16 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
             </div>
           </div>
           <div className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2" style={{ opacity: cursorOn ? 1 : 0, left: `${cursorL}%`, top: `${cursorT}%` }} />
+          <svg viewBox="0 0 120 72" className="absolute z-[80] drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]" style={{ width: lerp(90, 170, flyMail), opacity: foldMail * (1 - flyMail * 0.3), left: `${lerp(28, 118, flyMail)}%`, top: `${lerp(58, 8, flyMail) + Math.sin(flyMail * Math.PI) * -8}%`, transform: `rotate(${lerp(-18, 16, flyMail)}deg)` }}>
+            <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#0b57d0" />
+            <path d="M44 40 L114 6 L60 40 Z" fill="#d6e4ff" />
+          </svg>
         </div>
       </section>
       <section className="min-h-screen bg-white flex items-center justify-center px-6">
         <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center group">
           <img src={BAG} alt="Chrome Extension" width={200} height={174} className="w-[200px] h-[174px] object-contain transition-transform duration-200 group-hover:scale-[1.04]" />
-          <span className={`${FG_SB} mt-10 text-[48px] md:text-[72px] leading-none tracking-[-2px] text-[#101828]`}>Chrome Extension</span>
+          <span className={`${FG_SB} mt-10 text-[40px] md:text-[64px] leading-none tracking-[-2px] text-[#101828] text-center`}>That's the Chrome Extension</span>
         </a>
       </section>
     </div>
