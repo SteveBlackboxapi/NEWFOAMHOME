@@ -3,7 +3,8 @@ import { Link } from "react-router";
 import { ChromeStory } from "./ChromeStory";
 
 const A = `${import.meta.env.BASE_URL}assets`;
-const CLIP = `${A}/ren-kit.mp4`;
+const CLIP = `${A}/io-portrait-web.mp4`;
+const POSTER = `${A}/io-portrait-poster.webp`;
 const FG_R = "font-founders font-normal";
 const FG_M = "font-founders font-medium";
 const FG_SB = "font-founders font-semibold";
@@ -96,7 +97,7 @@ function AfterShare() {
       </section>
       <section className="px-6 pb-24 pt-6">
         <div className="max-w-[1200px] mx-auto">
-          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10`}>The network in use</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-10">The network in use</p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {STATS.map((s) => (
               <div key={s.val}>
@@ -235,7 +236,7 @@ export function KitStory() {
           )}
           {fold < 0.2 && (
             <div className="absolute z-[22] overflow-hidden bg-black pointer-events-none" style={{ left: `${photoL}%`, top: `${photoT}%`, width: `${photoW}%`, height: `${photoH}%`, borderRadius: `${lerp(0, 14, pack)}px` }}>
-              <video ref={vid} className="size-full object-cover" src={CLIP} muted loop playsInline autoPlay />
+              <video ref={vid} className="size-full object-cover object-[center_20%]" src={CLIP} poster={POSTER} muted loop playsInline autoPlay />
             </div>
           )}
           {kitIn > 0 && fold < 0.2 && <div className="absolute inset-x-0 top-0 z-[25] h-[calc(6%+48px)] bg-[#eef0f4] pointer-events-none" style={{ opacity: kitIn }} />}
