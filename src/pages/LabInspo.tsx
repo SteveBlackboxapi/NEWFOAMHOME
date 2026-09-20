@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 
-type Verdict = "Steal" | "Later" | "Skip";
+type Verdict = "Inspo" | "Later" | "Skip";
 
 type Resource = {
   name: string;
@@ -18,29 +18,29 @@ const RESOURCES: Resource[] = [
     url: "https://inspomcp.dev",
     blurb: "800+ real sites indexed for coding agents.",
     note: "Primary reference bank for Foam polish. Pull layout, type, and section craft from live products, not moodboards.",
-    verdict: "Steal",
+    verdict: "Inspo",
     priority: true,
   },
   {
     name: "obsidianui.dev",
     url: "https://obsidianui.dev",
     blurb: "Motion-first React components.",
-    note: "Steal scroll and transition craft only. Do not import the kit as Foam chrome.",
-    verdict: "Steal",
+    note: "Use for scroll and transition craft only. Do not import the kit as Foam chrome.",
+    verdict: "Inspo",
   },
   {
     name: "motionsites.ai",
     url: "https://motionsites.ai",
     blurb: "AI prompts for animated marketing sites.",
-    note: "Use only when motion clarifies the product story. Skip decorative animation.",
-    verdict: "Steal",
+    note: "Use only when motion clarifies the product story. Skip decorative animation for now.",
+    verdict: "Inspo",
   },
   {
     name: "goatedui.dev",
     url: "https://goatedui.dev",
     blurb: "Web, UI, icon, and OG inspiration.",
     note: "Light browsing for icon and OG ideas. Keep Foam’s own mark and type.",
-    verdict: "Steal",
+    verdict: "Inspo",
   },
   {
     name: "reelfolio.io",
@@ -60,7 +60,7 @@ const RESOURCES: Resource[] = [
     name: "ui.halaska.com",
     url: "https://ui.halaska.com",
     blurb: "One-file AI UI kit.",
-    note: "Skip as Foam identity. Useful only for throwaway prototypes.",
+    note: "Skip for now as Foam identity. Useful only for throwaway prototypes.",
     verdict: "Skip",
   },
   {
@@ -74,15 +74,21 @@ const RESOURCES: Resource[] = [
     name: "on.design",
     url: "https://on.design",
     blurb: "Invite-only design community.",
-    note: "Low priority for now. Skip until there is a concrete need.",
+    note: "Low priority. Skip for now until there is a concrete need.",
     verdict: "Skip",
   },
 ];
 
 const VERDICT_STYLE: Record<Verdict, string> = {
-  Steal: "bg-lime/25 text-[#1a2e05] border-lime/60",
+  Inspo: "bg-lime/25 text-[#1a2e05] border-lime/60",
   Later: "bg-blue-light text-blue border-blue/25",
   Skip: "bg-raised text-muted border-border-dark",
+};
+
+const VERDICT_LABEL: Record<Verdict, string> = {
+  Inspo: "INSPO",
+  Later: "Later",
+  Skip: "Skip for now",
 };
 
 export function LabInspo() {
@@ -121,8 +127,8 @@ export function LabInspo() {
           explicitly merged.
         </p>
         <p className={`${FG_R} text-[15px] leading-6 text-subtle max-w-[560px] mb-14`}>
-          Short notes on what to steal, what to park, and what to skip. Prefer real
-          product references over generic kits.
+          Short notes on what to use, what to park, and what to skip for now. Prefer
+          real product references over generic kits.
         </p>
 
         <ul className="flex flex-col gap-3">
@@ -158,14 +164,14 @@ export function LabInspo() {
                   <span
                     className={`${FG_M} text-[11px] uppercase tracking-[1px] rounded-full border px-2.5 py-1 ${VERDICT_STYLE[r.verdict]}`}
                   >
-                    {r.verdict} for Foam
+                    {VERDICT_LABEL[r.verdict]}
                   </span>
                 </div>
                 <p className={`${FG_R} text-[15px] leading-6 text-muted mb-3`}>
                   {r.blurb}
                 </p>
                 <p className={`${FG_R} text-[14px] leading-6 text-text/80`}>
-                  <span className={`${FG_M} text-subtle`}>Steal for Foam · </span>
+                  <span className={`${FG_M} text-subtle`}>INSPO · </span>
                   {r.note}
                 </p>
               </a>
