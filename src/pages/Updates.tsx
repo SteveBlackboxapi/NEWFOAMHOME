@@ -6,14 +6,14 @@ const UPDATES = [
     tagColor: "bg-brand-light text-brand",
     date: "September 2026",
     title: "Tracking notifications in Gmail",
-    desc: "When a brand opens a media kit you shared via the Chrome extension, you now get an instant Gmail notification — including time spent and which creator they spent the most time on.",
+    desc: "When a brand opens a media kit you shared via the Chrome extension, you now get an instant Gmail notification, including time spent and which creator they spent the most time on.",
   },
   {
     tag: "Improved",
     tagColor: "bg-blue-light text-blue",
     date: "August 2026",
     title: "Audience demographics now include age × gender breakdown",
-    desc: "Media kits now show a cross-tab of age range and gender for each platform's audience. Brands asked for this — we shipped it in 3 weeks.",
+    desc: "Media kits now show a cross-tab of age range and gender for each platform's audience. Brands asked for this. We shipped it in 3 weeks.",
   },
   {
     tag: "New",
@@ -34,13 +34,13 @@ const UPDATES = [
     tagColor: "bg-raised text-muted border border-border",
     date: "May 2026",
     title: "TikTok follower counts were showing 24h-delayed data",
-    desc: "An API caching bug caused TikTok follower counts to reflect data from 24 hours earlier. Now fixed — all platforms pull live at kit-open time.",
+    desc: "An API caching bug caused TikTok follower counts to reflect data from 24 hours earlier. Now fixed. All platforms pull live at kit-open time.",
   },
   {
     tag: "New",
     tagColor: "bg-brand-light text-brand",
     date: "April 2026",
-    title: "Watchlists — track creators before you sign them",
+    title: "Watchlists: track creators before you sign them",
     desc: "Monitor growth across Instagram, TikTok, and YouTube for creators you haven't signed yet. Private to your account. Converts to roster when you're ready.",
   },
 ];

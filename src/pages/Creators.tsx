@@ -17,11 +17,11 @@ function Hero() {
               <em className="not-italic text-brand">Your connection.</em>
             </h1>
             <p className={`${FG_R} text-lg leading-7 text-muted mb-10`}>
-              Foam connects to your Instagram, TikTok, and YouTube once. From that point on, your manager always has the numbers they need to close deals — without asking you for a screenshot.
+              Foam connects to your Instagram, TikTok, and YouTube once. From that point on, your manager always has the numbers they need to close deals, without asking you for a screenshot.
             </p>
             <div className="flex items-center gap-3 bg-raised border border-border rounded-[14px] px-5 py-4 max-w-[360px]">
               <div className="size-2 rounded-full bg-success-dot shrink-0" />
-              <p className={`${FG_R} text-sm text-muted`}>No account control transferred — read-only access only</p>
+              <p className={`${FG_R} text-sm text-muted`}>No account control transferred: read-only access only</p>
             </div>
           </div>
           {/* iOS app mockup */}
@@ -79,7 +79,7 @@ function HowItWorks() {
     {
       n: "02",
       title: "Connect your accounts",
-      desc: "Authorize Instagram, TikTok, and YouTube once. Foam gets read-only access — your manager can't post, message, or take any action on your behalf.",
+      desc: "Authorize Instagram, TikTok, and YouTube once. Foam gets read-only access. Your manager can't post, message, or take any action on your behalf.",
     },
     {
       n: "03",
@@ -89,7 +89,7 @@ function HowItWorks() {
     {
       n: "04",
       title: "You always see what's shared",
-      desc: "Every media kit your manager sends is visible to you. You can see exactly what brands receive — always.",
+      desc: "Every media kit your manager sends is visible to you. You can see exactly what brands receive, always.",
     },
   ];
   return (
@@ -97,7 +97,7 @@ function HowItWorks() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-16">
           <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-4`}>Your setup takes five minutes</h2>
-          <p className={`${FG_R} text-base text-muted max-w-[480px] mx-auto`}>After that, your numbers are always current — no screenshots, no check-ins with your manager.</p>
+          <p className={`${FG_R} text-base text-muted max-w-[480px] mx-auto`}>After that, your numbers are always current: no screenshots, no check-ins with your manager.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {SECTIONS.map(s => (
@@ -119,7 +119,7 @@ function Transparency() {
       <div className="max-w-[760px] mx-auto text-center">
         <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-6`}>You're always in the picture</h2>
         <p className={`${FG_R} text-lg leading-7 text-muted mb-10`}>
-          Foam is built on the principle that creators should see everything their manager sends. Every kit, every roster, every link — it's all visible to you through your creator account.
+          Foam is built on the principle that creators should see everything their manager sends. Every kit, every roster, every link: it's all visible to you through your creator account.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[

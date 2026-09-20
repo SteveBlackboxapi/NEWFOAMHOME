@@ -52,7 +52,7 @@ export function Demo() {
               We'll bring the platform.
             </h1>
             <p className={`${FG_R} text-base leading-7 text-muted mb-10`}>
-              In 30 minutes we'll walk you through Foam using a real creator and a real brief — so you see exactly how it fits your workflow, not a generic sales deck.
+              In 30 minutes we'll walk you through Foam using a real creator and a real brief, so you see exactly how it fits your workflow, not a generic sales deck.
             </p>
             <div className="flex flex-col gap-4">
               {[

@@ -26,7 +26,7 @@ function Hero() {
           <em className="text-brand not-italic">reasons</em> to say yes
         </h1>
         <p className={`${FG_R} text-lg leading-7 text-muted mb-10 max-w-[560px] mx-auto`}>
-          Foam surfaces your creators' best data right inside your existing workflow — so every pitch lands exactly right.
+          Foam surfaces your creators' best data right inside your existing workflow, so every pitch lands exactly right.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <Link to="/demo" className={`${FG_M} bg-brand text-white text-[15px] px-7 h-11 rounded-full flex items-center hover:bg-brand-hover transition-colors`}>
@@ -52,7 +52,7 @@ function MediaKitSection() {
               Every creator's best data, always ready to send
             </h2>
             <p className={`${FG_R} text-base leading-7 text-muted mb-8`}>
-              Foam assembles live cross-platform stats, audience demographics, and top content into a single polished kit — branded to your agency, updated automatically.
+              Foam assembles live cross-platform stats, audience demographics, and top content into a single polished kit, branded to your agency, updated automatically.
             </p>
             <div className="flex flex-col gap-4">
               {[
@@ -81,8 +81,8 @@ function MediaKitSection() {
 
 function ThreeSteps() {
   const STEPS = [
-    { n: "01", verb: "Find",     desc: "Search your roster for creators matching any brand brief — by niche, audience size, location, or demographic.", accent: "text-brand", dark: false },
-    { n: "02", verb: "Assemble", desc: "Pull live platform data and agency branding into a polished kit in seconds — no screenshots, no spreadsheets.",   accent: "text-blue",  dark: false },
+    { n: "01", verb: "Find",     desc: "Search your roster for creators matching any brand brief: by niche, audience size, location, or demographic.", accent: "text-brand", dark: false },
+    { n: "02", verb: "Assemble", desc: "Pull live platform data and agency branding into a polished kit in seconds: no screenshots, no spreadsheets.",   accent: "text-blue",  dark: false },
     { n: "03", verb: "Send",     desc: "Share via Gmail or a direct link. Brands get a professional kit; you get confirmation when they open it.",           accent: "text-white", dark: true  },
   ];
   return (
@@ -90,7 +90,7 @@ function ThreeSteps() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-16">
           <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-4`}>Three steps. One pitch.</h2>
-          <p className={`${FG_R} text-base text-muted max-w-[480px] mx-auto`}>The fastest path from brief to booked — inside the tools you already use.</p>
+          <p className={`${FG_R} text-base text-muted max-w-[480px] mx-auto`}>The fastest path from brief to booked, inside the tools you already use.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {STEPS.map(s => (
@@ -115,7 +115,7 @@ function GmailSection() {
             <p className={`${FG_M} text-xs text-blue uppercase tracking-[0.8px] mb-4`}>Chrome extension</p>
             <h2 className={`${FG_SB} text-[40px] leading-[1.1] tracking-[-0.8px] text-text mb-5`}>Drop a creator card mid-reply</h2>
             <p className={`${FG_R} text-base leading-7 text-muted mb-7`}>
-              The Foam Chrome extension lets you insert a live creator card into any Gmail draft — stats, photo, and kit link — without leaving your inbox.
+              The Foam Chrome extension lets you insert a live creator card into any Gmail draft: stats, photo, and kit link, without leaving your inbox.
             </p>
             <div className={`${FG_SB} text-[52px] tracking-[-1.5px] text-text mb-1`}>7,000+</div>
             <p className={`${FG_R} text-sm text-muted`}>Gmail embeds generated every month</p>
@@ -129,7 +129,7 @@ function GmailSection() {
               </div>
               <div className="p-5">
                 <p className={`${FG_R} text-sm text-muted mb-4 leading-5`}>
-                  Hi Eden, here's Io — she's a great fit for your spring wellness brief:
+                  Hi Eden, here's Io. She's a great fit for your spring wellness brief:
                 </p>
                 <div className="bg-raised border border-border rounded-xl p-[14px] flex items-center gap-3">
                   <div className="relative rounded-[8px] size-12 shrink-0 overflow-hidden">
@@ -254,7 +254,7 @@ function FeatureGrid() {
 
 function Onboarding() {
   const STEPS = [
-    { n: 1, title: "Bring a brief",         desc: "Tell Foam about your open deal — brand category, budget, audience target." },
+    { n: 1, title: "Bring a brief",         desc: "Tell Foam about your open deal: brand category, budget, audience target." },
     { n: 2, title: "Invite your creators",  desc: "Creators authorize their accounts once. Their live stats flow in automatically." },
     { n: 3, title: "Send your first pitch", desc: "Foam builds the kit. You hit send. Track when it's opened." },
   ];

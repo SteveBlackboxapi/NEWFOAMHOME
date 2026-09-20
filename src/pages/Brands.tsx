@@ -86,7 +86,7 @@ function KitExplainer() {
               Everything you need to say yes to a deal
             </h2>
             <p className={`${FG_R} text-base leading-7 text-muted mb-8`}>
-              Every Foam media kit is built from live, connected platform data — not screenshots, not copy-pasted numbers. What you see is what's true today.
+              Every Foam media kit is built from live, connected platform data, not screenshots, not copy-pasted numbers. What you see is what's true today.
             </p>
             <div className="flex flex-col gap-3">
               {FIELDS.map(f => (
