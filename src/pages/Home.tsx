@@ -8,12 +8,57 @@ const FG_SB = "font-founders font-semibold";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 
-// Platform icons from the Figma asset set
 const icIG = `${A}/20684.svg`;
 const icTT = `${A}/8509e.svg`;
 const icYT = `${A}/d0b8e.svg`;
+const icFoam = `${A}/fdb3b.svg`;
+const icMagnify = `${A}/333bb.svg`;
+const icShare = `${A}/a2840.svg`;
+const icPlus = `${A}/30501.svg`;
+const icFilters = `${A}/462ac.svg`;
+const icGrid = `${A}/8b982.svg`;
+const icSort = `${A}/de843.svg`;
+const icCheck = `${A}/875ea.svg`;
+const icNavHome = `${A}/db233.svg`;
+const icNavSearch = `${A}/5630d.svg`;
+const icNavLists = `${A}/26407.svg`;
+const icNavWatch = `${A}/5c880.svg`;
+const icNavChat = `${A}/4f583.svg`;
 
-// Gmail embed
+/** One staged talent for the whole home pitch thread. Fake handles only. */
+const STAGE = {
+  name: "Ren Cole",
+  photo: `${A}/9e849.png`,
+  loc: "Portland, OR",
+  age: "32",
+  gender: "Male",
+  verticals: "Running · Everyday Progress",
+  bio: "Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.",
+  total: "286K",
+  ig: { n: "131K", h: "@ren.cole" },
+  tt: { n: "97K", h: "@ren.cole" },
+  yt: { n: "58K", h: "Ren Cole" },
+  kitName: "Ren-Cole-marathon-26",
+  agency: "Vale Studio",
+  manager: "Rowan Hale",
+};
+
+const CONTENT = [
+  { src: `${A}/5f2d5.png`, views: "28.4K", likes: "1.8K" },
+  { src: `${A}/3cf05.png`, views: "19.1K", likes: "940" },
+  { src: `${A}/d52d8.png`, views: "12.6K", likes: "612" },
+  { src: `${A}/fe72f.png`, views: "9.7K", likes: "481" },
+  { src: `${A}/boston-track.jpg`, views: "34.2K", likes: "2.1K" },
+  { src: `${A}/53bfb.png`, views: "15.8K", likes: "720" },
+];
+
+const ROSTER = [
+  { name: "Ren Cole", img: `${A}/9e849.png` },
+  { name: "Io Marin", img: `${A}/3546d.png` },
+  { name: "Sable Quinn", img: `${A}/b93cd.png` },
+];
+
+// ─── Gmail embed (exported for Features) ─────────────────────────────────────
 export function GmailView({ step: controlled }: { step?: number } = {}) {
   const [step, setStep] = useState(0);
   const root = useRef<HTMLDivElement | null>(null);
@@ -37,12 +82,6 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
       if (ids) ids.forEach(clearTimeout);
     };
   }, [controlled]);
-
-  const people = [
-    { name: "Ren Cole", img: `${A}/9e849.png` },
-    { name: "Io Marin", img: `${A}/3546d.png` },
-    { name: "Sable Quinn", img: `${A}/b93cd.png` },
-  ];
 
   return (
     <div ref={root} className="bg-[#e9eef6] overflow-hidden relative">
@@ -74,12 +113,12 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
               <div className="animate-[fadeIn_400ms_ease]">
                 <div className="flex gap-3">
                   <div className="size-12 rounded-[8px] overflow-hidden shrink-0 bg-[#eee]">
-                    <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
+                    <img alt={STAGE.name} src={STAGE.photo} className="size-full object-cover object-top" />
                   </div>
                   <div>
-                    <p className={`${FG_SB} text-[13px] text-[#202124]`}>Ren Cole</p>
-                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Portland · 32</p>
-                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG 131K · TT 97K · YT 58K</p>
+                    <p className={`${FG_SB} text-[13px] text-[#202124]`}>{STAGE.name}</p>
+                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Portland · {STAGE.age}</p>
+                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG {STAGE.ig.n} · TT {STAGE.tt.n} · YT {STAGE.yt.n}</p>
                   </div>
                 </div>
                 <p className={`${FG_R} text-[11px] text-[#202124] leading-4 mt-2`}>
@@ -105,7 +144,7 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
           </div>
           {step === 0 && (
             <div className="p-3 grid grid-cols-3 gap-2">
-              {people.map((person) => (
+              {ROSTER.map((person) => (
                 <div key={person.name}>
                   <div className="aspect-square rounded-[8px] overflow-hidden bg-[#eee]">
                     <img alt={person.name} src={person.img} className="size-full object-cover object-top" />
@@ -118,9 +157,9 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
           {step >= 1 && (
             <div className="px-3 py-4 text-center">
               <div className="size-16 rounded-[10px] overflow-hidden mx-auto bg-[#eee]">
-                <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
+                <img alt={STAGE.name} src={STAGE.photo} className="size-full object-cover object-top" />
               </div>
-              <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>Ren Cole</p>
+              <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>{STAGE.name}</p>
               <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Portland</p>
               <div className="flex justify-center gap-1.5 mt-3">
                 <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
@@ -135,59 +174,162 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
   );
 }
 
-function MediaKitView() {
+// ─── Product-faithful media kit (cream / burgundy) ───────────────────────────
+function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?: boolean }) {
+  const cream = "#F4E6C8";
+  const burgundy = "#6b0030";
   return (
-    <div className="overflow-hidden" style={{ background: "#F4E6C8" }}>
+    <div className="overflow-hidden" style={{ background: cream }}>
       <div className="px-5 pt-4 pb-3 flex items-center justify-between">
         <div className="size-6 rounded-[4px] bg-[#6b0030] flex items-center justify-center">
           <span className="text-white text-[11px] font-semibold leading-none">F</span>
         </div>
-        <button className={`${FG_M} text-[11px] text-[#6b0030] border border-[#6b0030]/40 rounded-full px-3 h-7`}>
+        <button type="button" className={`${FG_M} text-[11px] text-[#6b0030] border border-[#6b0030]/40 rounded-full px-3 h-7`}>
           Contact
         </button>
       </div>
-      <div className="px-5 pb-5 flex gap-4 items-start">
-        <div className="rounded-[14px] overflow-hidden shrink-0 bg-[#e8d4b0]" style={{ width: 168, height: 168 }}>
-          <img alt="Ren Cole" src={`${A}/9e849.png`} className="size-full object-cover object-top" />
+      <div
+        className="transition-transform duration-300 ease-out"
+        style={{ transform: `translateY(${-scrollY}%)` }}
+      >
+        <div className="px-5 pb-5 flex gap-4 items-start">
+          <div className="rounded-[14px] overflow-hidden shrink-0 bg-[#e8d4b0]" style={{ width: dense ? 140 : 168, height: dense ? 140 : 168 }}>
+            <img alt={STAGE.name} src={STAGE.photo} className="size-full object-cover object-top" />
+          </div>
+          <div className="min-w-0 pt-1">
+            <p className={`${FG_SB} text-[#6b0030] leading-[1.05] tracking-[-0.5px]`} style={{ fontSize: dense ? 22 : "clamp(22px, 3.2vw, 28px)" }}>
+              {STAGE.name}
+            </p>
+            <p className={`${FG_R} text-[11px] text-[#6b0030]/70 mt-2`}>
+              {STAGE.loc}&nbsp;|&nbsp;{STAGE.age} years old&nbsp;|&nbsp;{STAGE.gender}
+            </p>
+            <div className="flex items-center gap-2 mt-3">
+              {[icIG, icTT, icYT].map((src) => (
+                <span key={src} className="size-7 rounded-full border border-[#6b0030]/35 inline-flex items-center justify-center bg-[#6b0030]/08">
+                  <img alt="" className="size-3.5 opacity-90" src={src} />
+                </span>
+              ))}
+            </div>
+            <div className="mt-3 rounded-[10px] px-3 py-2" style={{ background: "rgba(107,0,48,0.08)" }}>
+              <p className={`${FG_R} text-[10px] text-[#6b0030]/55 uppercase tracking-[0.4px]`}>Verticals</p>
+              <p className={`${FG_M} text-[12px] text-[#6b0030] mt-0.5`}>{STAGE.verticals}</p>
+            </div>
+          </div>
         </div>
-        <div className="min-w-0 pt-1">
-          <p className={`${FG_SB} text-[#6b0030] leading-[1.05] tracking-[-0.5px]`} style={{ fontSize: "clamp(22px, 3.2vw, 28px)" }}>
-            Ren Cole
-          </p>
-          <p className={`${FG_R} text-[11px] text-[#6b0030]/70 mt-2`}>
-            Portland, OR&nbsp;|&nbsp;32 years old&nbsp;|&nbsp;Male
-          </p>
-          <div className="flex items-center gap-2.5 mt-3">
-            <img alt="" className="size-4 opacity-80" src={icIG} />
-            <img alt="" className="size-4 opacity-80" src={icTT} />
-            <img alt="" className="size-4 opacity-80" src={icYT} />
+
+        <div className="px-5 py-5" style={{ background: burgundy }}>
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <div>
+              <p className={`${FG_SB} text-[15px] text-[#F4E6C8]`}>Platforms</p>
+              <p className={`${FG_SB} text-[32px] text-[#F4E6C8] leading-none mt-1`}>{STAGE.total}</p>
+              <p className={`${FG_R} text-[11px] text-[#F4E6C8]/70 mt-1`}>Total audience</p>
+            </div>
+            <div className="flex gap-5">
+              {[
+                { icon: icIG, ...STAGE.ig },
+                { icon: icTT, ...STAGE.tt },
+                { icon: icYT, ...STAGE.yt },
+              ].map((row) => (
+                <div key={row.h + row.n} className="text-right min-w-[64px]">
+                  <img alt="" src={row.icon} className="size-3.5 ml-auto mb-1 brightness-0 invert opacity-80" />
+                  <p className={`${FG_SB} text-[18px] text-[#F4E6C8] leading-none`}>{row.n}</p>
+                  <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>{row.h}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="mt-3 rounded-[10px] px-3 py-2" style={{ background: "rgba(107,0,48,0.08)" }}>
-            <p className={`${FG_R} text-[10px] text-[#6b0030]/55 uppercase tracking-[0.4px]`}>Verticals</p>
-            <p className={`${FG_M} text-[12px] text-[#6b0030] mt-0.5`}>Running · Everyday Progress</p>
-          </div>
+          <p className={`${FG_R} text-[13px] text-[#F4E6C8] leading-5 mt-5 max-w-[520px]`}>{STAGE.bio}</p>
         </div>
-      </div>
-      <div className="px-5 py-4" style={{ background: "#6b0030" }}>
-        <p className={`${FG_R} text-[13px] text-[#F4E6C8] leading-5`}>
-          Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.
-        </p>
-      </div>
-      <div className="px-5 pb-5" style={{ background: "#6b0030" }}>
-        <div className="flex items-end justify-between gap-3 border-t border-white/15 pt-4">
-          <div>
-            <p className={`${FG_SB} text-[11px] text-[#F4E6C8]`}>Platforms</p>
-            <p className={`${FG_SB} text-[28px] text-[#F4E6C8] leading-none mt-1`}>286K</p>
-            <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>Total audience</p>
-          </div>
-          <div className="flex gap-5">
-            {[{ n: "131K", h: "@ren.cole" }, { n: "97K", h: "@ren.cole" }, { n: "58K", h: "Ren Cole" }].map((row) => (
-              <div key={row.n} className="text-right">
-                <p className={`${FG_SB} text-[18px] text-[#F4E6C8] leading-none`}>{row.n}</p>
-                <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>{row.h}</p>
+
+        <div className="px-5 py-5" style={{ background: cream }}>
+          <div className="grid grid-cols-3 gap-2">
+            {CONTENT.slice(0, dense ? 6 : 6).map((tile) => (
+              <div key={tile.src + tile.views} className="relative rounded-[10px] overflow-hidden bg-[#ead9b8] aspect-[3/4]">
+                <img alt="" src={tile.src} className="size-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 px-2 py-1.5 flex items-center justify-between bg-gradient-to-t from-black/65 to-transparent">
+                  <span className={`${FG_M} text-[10px] text-white`}>{tile.views}</span>
+                  <img alt="" src={icIG} className="size-3 brightness-0 invert opacity-80" />
+                </div>
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="px-5 pb-6" style={{ background: cream }}>
+          <div className="rounded-[14px] border border-[#ead9b8] bg-[#f7efe0] p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <img alt="" src={icIG} className="size-4" />
+                <div>
+                  <p className={`${FG_SB} text-[14px] text-[#101828]`}>Instagram</p>
+                  <p className={`${FG_R} text-[11px] text-[#6a7282]`}>{STAGE.ig.h}</p>
+                </div>
+              </div>
+              <p className={`${FG_R} text-[11px] text-[#6b0030]`}>Data: Last 28 days</p>
+            </div>
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {[
+                ["18.4K", "Avg. Views"],
+                ["1.2K", "Avg. Likes"],
+                ["96", "Avg. Comments"],
+                ["2.9%", "Eng. rate"],
+              ].map(([val, lab]) => (
+                <div key={lab} className="rounded-[10px] bg-white/70 px-3 py-2.5">
+                  <p className={`${FG_SB} text-[18px] leading-none text-[#101828]`}>{val}</p>
+                  <p className={`${FG_R} text-[11px] text-[#6a7282] mt-1`}>{lab}</p>
+                </div>
+              ))}
+            </div>
+            <div className="rounded-[10px] bg-white/70 px-3 py-3">
+              <p className={`${FG_R} text-[11px] text-[#6a7282]`}>Total followers</p>
+              <p className={`${FG_SB} text-[24px] leading-none text-[#101828] mt-1`}>{STAGE.ig.n}</p>
+              <p className={`${FG_R} text-[11px] text-[#6b0030] mt-1`}>+2,140 new followers</p>
+              <svg viewBox="0 0 320 56" className="w-full h-12 mt-3" aria-hidden>
+                <polyline fill="none" stroke="#6b0030" strokeWidth="2.4" points="4,48 36,44 68,42 100,38 132,34 164,30 196,28 228,24 260,20 292,16 316,12" />
+                <circle cx="316" cy="12" r="3.5" fill="#6b0030" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function KitEditorChrome({ children, scrollHint = false }: { children: React.ReactNode; scrollHint?: boolean }) {
+  return (
+    <div className="rounded-[18px] overflow-hidden border border-[#e2e4e8] bg-white shadow-[0_28px_70px_rgba(16,24,40,0.28)]">
+      <div className="h-11 border-b border-[#e6e8ec] flex items-center px-3 gap-2 bg-white">
+        <span className="size-6 rounded-full border border-[#e6e8ec] text-[#6a7282] flex items-center justify-center text-sm">‹</span>
+        <p className={`${FG_R} text-[12px] text-[#6a7282] truncate`}>
+          Media kits / <span className={`${FG_M} text-[#101828]`}>{STAGE.kitName}</span>
+        </p>
+        <button type="button" className={`${FG_M} ml-auto h-8 rounded-full bg-[#185abc] text-white text-[12px] px-3.5 inline-flex items-center gap-1.5`}>
+          <img alt="" src={icShare} className="size-3 brightness-0 invert" />
+          Share
+        </button>
+      </div>
+      <div className="flex min-h-0" style={{ height: scrollHint ? 460 : 420 }}>
+        <aside className="hidden sm:block w-[168px] shrink-0 border-r border-[#e6e8ec] bg-white p-3 overflow-hidden">
+          <p className={`${FG_R} text-[10px] text-[#6a7282] mb-1`}>Media kit name</p>
+          <p className={`${FG_M} text-[12px] text-[#101828] mb-3 truncate`}>{STAGE.kitName}</p>
+          <p className={`${FG_R} text-[10px] text-[#6a7282] mb-2`}>Platform analytics</p>
+          <div className="flex gap-1.5 mb-3">
+            {[icIG, icTT, icYT].map((src) => (
+              <div key={src} className="size-8 rounded-[8px] bg-[#f4f5f7] border border-[#eeefef] flex items-center justify-center">
+                <img alt="" src={src} className="size-3.5" />
+              </div>
+            ))}
+          </div>
+          <p className={`${FG_R} text-[10px] text-[#6a7282] mb-2`}>Types</p>
+          {["Platform content", "Text", "Video", "Brand Experience"].map((x) => (
+            <div key={x} className={`${FG_R} rounded-[10px] bg-[#f4f5f7] h-8 mb-1.5 flex items-center justify-between px-2.5 text-[10px] text-[#4a5565]`}>
+              {x}<span>+</span>
+            </div>
+          ))}
+        </aside>
+        <div className="flex-1 min-w-0 overflow-hidden bg-[#e8ebe4]">
+          {children}
         </div>
       </div>
     </div>
@@ -197,39 +339,230 @@ function MediaKitView() {
 function MediaKitCard() {
   const [tab, setTab] = useState<"kit" | "gmail">("kit");
   return (
-    <div className="rounded-[20px] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.45)] w-full" style={{ maxWidth: tab === "gmail" ? 640 : 500 }}>
-      <div className="flex items-center gap-1 px-4 pt-4 pb-3 bg-[#f3eee6]">
-        <button onClick={() => setTab("kit")} className={`${FG_M} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "kit" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Media kit</button>
-        <button onClick={() => setTab("gmail")} className={`${tab === "gmail" ? FG_M : FG_R} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "gmail" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Gmail embed</button>
+    <div className="w-full" style={{ maxWidth: tab === "gmail" ? 640 : 560 }}>
+      <div className="flex items-center gap-1 px-1 pb-3">
+        <button type="button" onClick={() => setTab("kit")} className={`${FG_M} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "kit" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Media kit</button>
+        <button type="button" onClick={() => setTab("gmail")} className={`${tab === "gmail" ? FG_M : FG_R} text-[13px] px-4 h-8 rounded-full transition-colors ${tab === "gmail" ? "text-[#101828] bg-white border border-[#dedede] shadow-sm" : "text-[#6a7282] hover:text-[#101828]"}`}>Gmail embed</button>
       </div>
-      {tab === "kit" ? <MediaKitView /> : <GmailView />}
+      {tab === "kit" ? (
+        <KitEditorChrome scrollHint>
+          <div className="h-full overflow-hidden">
+            <MediaKitView dense />
+          </div>
+        </KitEditorChrome>
+      ) : (
+        <div className="rounded-[18px] overflow-hidden shadow-[0_28px_70px_rgba(16,24,40,0.28)] border border-[#e2e4e8]">
+          <GmailView />
+        </div>
+      )}
     </div>
   );
 }
 
-// ─── Hero section ─────────────────────────────────────────────────────────────
+// ─── App chrome: Lists + Explore (staged names only) ─────────────────────────
+function AppRail({ active }: { active: "lists" | "explore" }) {
+  const items = [
+    { id: "talent", icon: icNavHome, label: "Talent directory" },
+    { id: "explore", icon: icNavSearch, label: "Explore content" },
+    { id: "watch", icon: icNavWatch, label: "Watchlists" },
+    { id: "lists", icon: icNavLists, label: "Lists" },
+    { id: "kits", icon: icNavChat, label: "Media kits" },
+  ];
+  return (
+    <div className="w-[158px] shrink-0 bg-[#f7f8fa] border-r border-[#eeefef] flex flex-col py-3 px-2.5">
+      <div className="flex items-center gap-2 mb-4 px-1">
+        <div className="size-7 bg-[#101828] rounded-[8px] flex items-center justify-center">
+          <img alt="Foam" className="size-3.5" src={icFoam} />
+        </div>
+        <div>
+          <p className={`${FG_M} text-[12px] text-[#101828] leading-none`}>foam</p>
+          <p className={`${FG_R} text-[9px] text-[#99a1af]`}>Beta</p>
+        </div>
+      </div>
+      <p className={`${FG_R} text-[9px] text-[#99a1af] px-2 mb-1`}>Overview</p>
+      {items.slice(0, 3).map((it) => (
+        <div key={it.id} className={`h-8 rounded-[8px] px-2 flex items-center gap-2 mb-0.5 ${active === "explore" && it.id === "explore" ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"}`}>
+          <img alt="" className="size-3.5 opacity-70" src={it.icon} />
+          <span className={`${FG_R} text-[10px]`}>{it.label}</span>
+        </div>
+      ))}
+      <p className={`${FG_R} text-[9px] text-[#99a1af] px-2 mt-3 mb-1`}>Share</p>
+      {items.slice(3).map((it) => (
+        <div key={it.id} className={`h-8 rounded-[8px] px-2 flex items-center gap-2 mb-0.5 ${active === "lists" && it.id === "lists" ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"}`}>
+          <img alt="" className="size-3.5 opacity-70" src={it.icon} />
+          <span className={`${FG_R} text-[10px]`}>{it.label}</span>
+        </div>
+      ))}
+      <div className="mt-auto rounded-[10px] border border-[#eeefef] bg-white p-2">
+        <p className={`${FG_M} text-[11px] text-[#101828]`}>{STAGE.agency}</p>
+        <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Harbor Spring Roster</p>
+      </div>
+    </div>
+  );
+}
+
+function ListsAppView() {
+  const rows = [
+    { name: "Boston Marathon shortlist", talent: "3 Talent", owner: STAGE.manager, created: "Mar 12", modified: "2d ago" },
+    { name: "Harbor Spring Roster", talent: "12 Talent", owner: STAGE.manager, created: "Jan 8", modified: "5d ago" },
+    { name: "Vale Studio runners", talent: "4 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
+    { name: "US audience 100K+", talent: "6 Talent", owner: STAGE.manager, created: "Apr 2", modified: "1w ago" },
+  ];
+  return (
+    <div className="flex flex-col flex-1 min-w-0 bg-white overflow-hidden">
+      <div className="px-4 pt-4 pb-3 flex items-center gap-3">
+        <p className={`${FG_SB} text-[20px] text-[#101828]`}>Lists</p>
+        <div className="flex-1 max-w-[280px] mx-auto h-9 rounded-full border border-[#e8eaed] bg-[#f9fafb] px-3 flex items-center gap-2">
+          <img alt="" src={icMagnify} className="size-3.5 opacity-50" />
+          <span className={`${FG_R} text-[12px] text-[#99a1af]`}>Search lists</span>
+        </div>
+        <button type="button" className={`${FG_M} h-8 rounded-full bg-[#185abc] text-white text-[12px] px-3 inline-flex items-center gap-1`}>
+          <img alt="" src={icPlus} className="size-3 brightness-0 invert" />
+          Create
+        </button>
+      </div>
+      <div className="px-4 pb-2 flex items-center gap-2 text-[11px]">
+        <span className={`${FG_R} h-7 px-2.5 rounded-full border border-[#e8eaed] text-[#4a5565] inline-flex items-center`}>Talent ▾</span>
+        <span className={`${FG_R} h-7 px-2.5 rounded-full border border-[#e8eaed] text-[#4a5565] inline-flex items-center`}>Owner ▾</span>
+        <span className={`${FG_R} text-[#185abc] ml-1`}>Reset</span>
+        <span className={`${FG_R} text-[#6a7282] ml-auto`}>Date created (Most recent)</span>
+      </div>
+      <div className="px-4 overflow-hidden">
+        {rows.map((row) => (
+          <div key={row.name} className="flex items-center gap-3 border-t border-[#eeefef] py-3">
+            <span className="size-3.5 rounded-[3px] border border-[#d0d5dd]" />
+            <img alt="" src={icNavLists} className="size-3.5 opacity-50" />
+            <div className="flex-1 min-w-0">
+              <p className={`${FG_M} text-[13px] text-[#101828] truncate`}>{row.name}</p>
+              <p className={`${FG_R} text-[11px] text-[#6a7282]`}>{row.talent}</p>
+            </div>
+            <p className={`${FG_R} text-[11px] text-[#6a7282] w-[88px] truncate hidden sm:block`}>{row.owner}</p>
+            <p className={`${FG_R} text-[11px] text-[#6a7282] w-[52px] hidden md:block`}>{row.created}</p>
+            <p className={`${FG_R} text-[11px] text-[#6a7282] w-[52px]`}>{row.modified}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ExploreAppView({ query = "marathon" }: { query?: string }) {
+  return (
+    <div className="flex flex-col flex-1 min-w-0 bg-[#f9fafb] overflow-hidden">
+      <div className="bg-white border-b border-[#eeefef] px-4 py-3 flex items-center gap-3">
+        <p className={`${FG_SB} text-[15px] text-[#101828] shrink-0`}>Explore content</p>
+        <div className="flex-1 h-9 rounded-full border border-[#e8eaed] bg-white px-3 flex items-center gap-2 shadow-sm">
+          <img alt="" src={icMagnify} className="size-3.5 opacity-50" />
+          <span className={`${FG_M} text-[12px] text-[#101828]`}>{query}</span>
+          <span className={`${FG_R} text-[11px] text-[#99a1af] ml-auto`}>×</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-2">
+          <span className={`${FG_R} h-7 px-2 rounded-[6px] border border-[#eeefef] text-[10px] text-[#6a7282] inline-flex items-center gap-1`}>
+            <img alt="" src={icSort} className="size-3 opacity-60" /> Sort
+          </span>
+          <span className={`${FG_R} h-7 px-2 rounded-[6px] border border-[#eeefef] text-[10px] text-[#6a7282] inline-flex items-center gap-1`}>
+            <img alt="" src={icGrid} className="size-3 opacity-60" /> Grid
+          </span>
+        </div>
+      </div>
+      <div className="flex flex-1 min-h-0 overflow-hidden">
+        <div className="w-[150px] shrink-0 border-r border-[#eeefef] bg-white p-3 hidden sm:block">
+          <div className="flex items-center gap-1 mb-3">
+            <img alt="" src={icFilters} className="size-3 opacity-60" />
+            <span className={`${FG_M} text-[11px]`}>Filters</span>
+          </div>
+          <p className={`${FG_M} text-[10px] mb-1`}>Talent</p>
+          <div className="h-7 rounded-[6px] border border-[#eeefef] bg-[#f4f5f6] px-2 flex items-center gap-1 mb-3">
+            <img alt="" src={icMagnify} className="size-2.5 opacity-40" />
+            <span className={`${FG_R} text-[9px] text-[#99a1af]`}>Name or handle</span>
+          </div>
+          <p className={`${FG_M} text-[10px] mb-2`}>Platform</p>
+          {["Any", "Instagram", "TikTok", "YouTube"].map((p, i) => (
+            <div key={p} className="flex items-center gap-1.5 mb-1.5">
+              <span className={`size-2.5 rounded-[2px] border flex items-center justify-center ${i === 0 ? "bg-[#155fef] border-[#155fef]" : "border-[#dedede]"}`}>
+                {i === 0 ? <img alt="" src={icCheck} className="size-1.5" /> : null}
+              </span>
+              <span className={`${FG_R} text-[10px]`}>{p}</span>
+            </div>
+          ))}
+          <p className={`${FG_M} text-[10px] mt-3 mb-2`}>Performance</p>
+          {["Views", "Likes", "Comments"].map((m) => (
+            <div key={m} className="flex items-center justify-between mb-1.5">
+              <span className={`${FG_R} text-[10px] text-[#6a7282]`}>{m}</span>
+              <span className={`${FG_R} text-[9px] text-[#6a7282] border border-[#eeefef] rounded px-1`}>Any</span>
+            </div>
+          ))}
+          <div className="mt-4 flex items-center justify-between">
+            <span className={`${FG_R} text-[10px] text-[#185abc]`}>Reset all</span>
+            <span className={`${FG_M} text-[10px] text-white bg-[#185abc] rounded-full px-2.5 h-6 inline-flex items-center`}>Apply</span>
+          </div>
+        </div>
+        <div className="flex-1 p-3 overflow-hidden">
+          <div className="grid grid-cols-3 gap-2">
+            {CONTENT.map((tile, i) => (
+              <div key={tile.src} className="relative rounded-[10px] overflow-hidden bg-[#101828] aspect-[3/4]">
+                <img alt="" src={tile.src} className="absolute inset-0 size-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                {i === 0 && (
+                  <span className={`${FG_M} absolute top-1.5 left-1.5 bg-white/95 text-[8px] text-[#101828] rounded px-1.5 py-0.5`}>Strong Match</span>
+                )}
+                <div className="absolute bottom-0 inset-x-0 p-1.5">
+                  <div className={`${FG_R} text-[9px] text-white/90 flex gap-2 mb-1`}>
+                    <span>{tile.views} views</span>
+                    <span>{tile.likes} likes</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <img alt="" src={STAGE.photo} className="size-4 rounded-full object-cover" />
+                    <span className={`${FG_M} text-[9px] text-white truncate`}>{STAGE.name}</span>
+                    <img alt="" src={icIG} className="size-2.5 ml-auto brightness-0 invert opacity-80" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FoamProductFrame({ children, height = 420 }: { children: React.ReactNode; height?: number }) {
+  return (
+    <div className="rounded-[16px] overflow-hidden border border-[#dedede] shadow-[0_24px_64px_rgba(16,24,40,0.14)] bg-white">
+      <div className="bg-[#f4f5f6] border-b border-[#eeefef] px-4 h-9 flex items-center gap-3">
+        <div className="flex gap-[6px]">
+          <div className="size-2.5 rounded-full bg-[#ff5f57]" />
+          <div className="size-2.5 rounded-full bg-[#febc2e]" />
+          <div className="size-2.5 rounded-full bg-[#28c840]" />
+        </div>
+        <div className="flex-1 bg-white border border-[#eeefef] rounded-[6px] h-[20px] flex items-center px-3 max-w-[220px] mx-auto">
+          <span className={`${FG_R} text-[10px] text-[#99a1af]`}>Foam.io</span>
+        </div>
+      </div>
+      <div className="flex overflow-hidden" style={{ height }}>{children}</div>
+    </div>
+  );
+}
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
     <section className="min-h-screen bg-navy flex items-center px-6 pt-20 pb-16">
       <div className="max-w-[1200px] mx-auto w-full">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          {/* Left */}
-          <div className="flex-1 min-w-0 max-w-[640px]">
-            <p
-              className={`${FG_M} text-[11px] uppercase tracking-[2px] mb-8`}
-              style={{ color: "var(--text-subtle)" }}
-            >
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-14">
+          <div className="flex-1 min-w-0 max-w-[520px]">
+            <p className={`${FG_M} text-[11px] uppercase tracking-[2px] mb-8`} style={{ color: "var(--text-subtle)" }}>
               The truth layer
             </p>
             <h1
               className={`${FG_SB} text-white leading-[1.0] tracking-[-2px] mb-7`}
-              style={{ fontSize: "clamp(52px, 7vw, 88px)" }}
+              style={{ fontSize: "clamp(48px, 6.5vw, 80px)" }}
             >
               Numbers everyone in the deal can trust.
             </h1>
             <p
               className={`${FG_R} text-[17px] leading-7 mb-12`}
-              style={{ color: "var(--text-subtle)", maxWidth: 520 }}
+              style={{ color: "var(--text-subtle)", maxWidth: 480 }}
             >
               Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no "let me check and get back to you."
             </p>
@@ -240,7 +573,7 @@ function Hero() {
                 style={{ background: "var(--lime)" }}
               >
                 Get a demo
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
@@ -249,26 +582,20 @@ function Hero() {
                 className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/30 hover:border-white/70 transition-colors pb-[2px]`}
               >
                 Follow a pitch
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                   <path d="M6 2V10M6 10L2 6M6 10L10 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </div>
           </div>
-
-          {/* Right — media kit mockup */}
           <div className="flex-1 min-w-0 w-full flex justify-center lg:justify-end">
-            <div className="w-full" style={{ maxWidth: 500 }}>
-              <MediaKitCard />
-            </div>
+            <MediaKitCard />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-// ─── Social proof bar ─────────────────────────────────────────────────────────
 
 function LogoMarquee() {
   const LOGOS = [
@@ -345,7 +672,6 @@ function ProofBar() {
   );
 }
 
-// ─── Value prop section ───────────────────────────────────────────────────────
 function ValueProp() {
   const CARDS = [
     {
@@ -389,23 +715,22 @@ function ValueProp() {
   );
 }
 
-
+// ─── Continuous pitch-on-scroll (same staged talent end to end) ──────────────
 function PitchStory() {
   const [step, setStep] = useState(0);
-  const hover = useRef(false);
   const STEPS = [
     ["01", "The brief"],
-    ["02", "Your roster"],
-    ["03", "The proof"],
-    ["04", "Sent"],
-    ["05", "They opened it"],
+    ["02", "Explore"],
+    ["03", "The list"],
+    ["04", "The kit"],
+    ["05", "Shared"],
   ];
   const COPY = [
-    ["01 / The brief", "“Anyone on your roster running the marathon?”", "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.", "You already know who."],
-    ["02 / Your roster", "Type it the way you'd say it.", "Search your talent's content for “marathon”. Find the training post that backs up the creator you have in mind.", "Now prove it."],
-    ["03 / The proof", "Seen. Heard. Captioned.", "See what matched and where. The bib in frame. The word out loud. The caption. Follow the evidence to the moment.", "Put it in a kit."],
-    ["04 / Sent", "A kit a brand can believe, in your reply.", "Connected audience data. The relevant content. Your agency's colours. Put the introduction into Gmail from the Foam extension.", "Now the interesting part."],
-    ["05 / They opened it", "They came back. You know.", "See which client opened your shared list, which creator profiles they viewed, and when they returned for another look.", "Make the next conversation count."],
+    ["01 / The brief", "Anyone on your roster running the marathon?", "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.", "You already know who."],
+    ["02 / Explore", "Type it the way you'd say it.", `Search ${STAGE.agency}'s content for "marathon". Find the training post that backs up ${STAGE.name}.`, "Now put them on a list."],
+    ["03 / The list", "One shortlist. Shareable.", "Boston Marathon shortlist holds Ren Cole, Io Marin, and Sable Quinn. Same roster, staged figures throughout.", "Open the kit."],
+    ["04 / The kit", "Connected numbers. Your colours.", `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}. Content and receipts on the same scroll.`, "Share it."],
+    ["05 / Shared", "They opened it. You know.", "Paste into Gmail from Foam. See which client opened the list, which profiles they viewed, and when they came back.", "Make the next conversation count."],
   ];
   const go = (n: number) => setStep((s) => (s + n + 5) % 5);
   const touchX = useRef<number | null>(null);
@@ -425,11 +750,12 @@ function PitchStory() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <section
       ref={root}
       id="pitch-loop"
-      className="relative h-[180vh] bg-white"
+      className="relative h-[220vh] bg-[#f7f8fb]"
       onTouchStart={(e) => { touchX.current = e.changedTouches[0].clientX; }}
       onTouchEnd={(e) => {
         if (touchX.current == null) return;
@@ -439,250 +765,186 @@ function PitchStory() {
         touchX.current = null;
       }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden px-6 py-16 flex flex-col justify-center">
-      <div className="max-w-[1200px] mx-auto w-full">
-        <div className="flex items-end justify-between mb-12">
-          <p className={`${FG_R} text-sm text-muted`}>One pitch. From brief to follow-up.</p>
-          <p className={`${FG_R} text-sm text-muted`}>Marathon brief / Staged example</p>
-        </div>
-        <div className="grid lg:grid-cols-[0.85fr_1.25fr] gap-10 xl:gap-16 items-start">
-          <div>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{COPY[step][0]}</p>
-            <h2 className={`${FG_SB} text-[40px] leading-[1.05] tracking-[-1px] text-text mb-6`}>
-              {COPY[step][1]}
-            </h2>
-            <p className={`${FG_R} text-[17px] leading-7 text-muted mb-8 max-w-[420px]`}>
-              {COPY[step][2]}
-            </p>
-            <div className="border-t border-border pt-6">
-              <p className={`${FG_M} text-sm text-text`}>{COPY[step][3]}</p>
-            </div>
+      <div className="sticky top-0 h-screen overflow-hidden px-6 py-10 flex flex-col justify-center">
+        <div className="max-w-[1200px] mx-auto w-full">
+          <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
+            <p className={`${FG_R} text-sm text-muted`}>One pitch. Same talent. Foam working on scroll.</p>
+            <p className={`${FG_R} text-sm text-muted`}>Marathon brief · Staged example · {STAGE.name}</p>
           </div>
-          <div className="rounded-[28px] p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
-            {step === 4 ? (
-              <div className="bg-[#f4f5f7] rounded-[22px] border border-[#e8eaed] min-h-[400px] p-6">
-                <div className="flex items-center justify-between mb-8">
-                  <p className={`${FG_SB} text-[18px] text-text`}>foam <span className={`${FG_R} text-sm text-muted ml-3`}>Notifications</span></p>
-                  <div className="size-8 rounded-full bg-[#e6c9a8] flex items-center justify-center text-[12px]">J</div>
-                </div>
-                <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list / Boston Marathon</p>
-                <h3 className={`${FG_SB} text-[28px] text-text mb-2`}>Your pitch has company.</h3>
-                <p className={`${FG_R} text-sm text-muted mb-6`}>Sam at Pace Running</p>
-                {[
-                  ["10:18 AM", "Opened your list", "Boston Marathon shortlist", false],
-                  ["10:21 AM", "Viewed Alex's profile", "A closer look at your recommendation", false],
-                  ["2:46 PM", "Returned to your list", "Another look, later that afternoon", true],
-                ].map(([time, title, sub, fresh]) => (
-                  <div key={title} className="border-t border-border py-4 flex items-start justify-between gap-4">
-                    <div>
-                      <p className={`${FG_R} text-[11px] text-muted`}>{time}</p>
-                      <p className={`${FG_SB} text-sm text-text`}>{title}</p>
-                      <p className={`${FG_R} text-sm text-muted`}>{sub}</p>
-                    </div>
-                    {fresh ? <span className="text-[11px] bg-[#e8f0fe] text-[#185abc] rounded-full px-2 py-0.5">New</span> : null}
-                  </div>
-                ))}
+          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-8 xl:gap-12 items-start">
+            <div>
+              <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-4`}>{COPY[step][0]}</p>
+              <h2 className={`${FG_SB} text-[34px] md:text-[40px] leading-[1.05] tracking-[-1px] text-text mb-5`}>
+                {COPY[step][1]}
+              </h2>
+              <p className={`${FG_R} text-[16px] leading-7 text-muted mb-6 max-w-[400px]`}>
+                {COPY[step][2]}
+              </p>
+              <div className="border-t border-border pt-5">
+                <p className={`${FG_M} text-sm text-text`}>{COPY[step][3]}</p>
               </div>
-            ) : step === 3 ? (
-              <div className="bg-[#F4E6C8] rounded-[22px] overflow-hidden border border-[#ead9b8] min-h-[400px]">
-                <div className="flex justify-center gap-2 bg-[#f3f4f6] py-3">
-                  <span className="bg-white rounded-lg px-3 py-1 text-[12px]">Media kit</span>
-                  <span className="px-3 py-1 text-[12px] text-muted">Gmail embed</span>
-                </div>
-                <div className="px-6 pt-5 flex justify-between items-start">
-                  <div>
-                    <p className={`${FG_SB} text-[22px] text-[#6b0030]`}>North /</p>
-                    <p className={`${FG_M} text-[10px] tracking-[1px] text-[#6b0030]`}>TALENT STUDIO</p>
-                  </div>
-                  <span className="border border-[#6b0030]/30 rounded-full px-3 py-1 text-[10px] text-[#6b0030]">MEDIA KIT</span>
-                </div>
-                <div className="px-6 py-4 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className={`${FG_M} text-[10px] tracking-[1px] text-[#6b0030] mb-2`}>RUNNING · EVERYDAY PROGRESS</p>
-                    <p className={`${FG_SB} text-[40px] text-[#6b0030] leading-none mb-2`}>Alex.</p>
-                    <p className={`${FG_R} text-xs text-[#6b0030]/80 mb-2`}>Boston, Massachusetts</p>
-                    <p className={`${FG_R} text-xs text-[#6b0030]/80`}>Early miles. Long runs. Bringing an audience along for the journey.</p>
-                  </div>
-                  <img alt="" src={`${A}/boston-track.jpg`} className="w-full h-32 object-cover rounded-xl" />
-                </div>
-                <div className="bg-[#6b0030] text-[#F4E6C8] grid grid-cols-4 px-4 py-3 text-center">
-                  {[["Total","324K"],["IG","148K"],["TT","112K"],["YT","64K"]].map(([l,v]) => (
-                    <div key={l}><p className="text-[10px] opacity-70">{l}</p><p className={`${FG_SB} text-xl`}>{v}</p></div>
+              {step === 3 && (
+                <div className="mt-6 grid grid-cols-3 gap-3 max-w-[360px]">
+                  {[
+                    [STAGE.total, "Total audience"],
+                    [STAGE.ig.n, "Instagram"],
+                    [CONTENT[0].views, "Top post views"],
+                  ].map(([v, l]) => (
+                    <div key={l}>
+                      <p className={`${FG_SB} text-[22px] text-text leading-none`}>{v}</p>
+                      <p className={`${FG_R} text-[11px] text-muted mt-1`}>{l}</p>
+                    </div>
                   ))}
                 </div>
-              </div>
-            ) : step >= 1 ? (
-              <div className="bg-[#f4f5f7] rounded-[22px] border border-[#e8eaed] min-h-[400px] p-5">
-                <div className="flex items-center gap-4 mb-4">
-                  <p className={`${FG_SB} text-[18px]`}>foam</p>
-                  <p className="text-sm text-muted">Content</p>
-                  <p className="text-sm text-muted">My talent</p>
-                </div>
-                <div className="h-10 rounded-xl border border-[#e5e5e5] bg-white px-3 flex items-center text-sm text-muted mb-4">marathon</div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl overflow-hidden bg-navy text-white relative min-h-[220px]">
-                    <img alt="" src={`${A}/boston-track.jpg`} className="absolute inset-0 size-full object-cover" />
-                    <div className="absolute top-3 left-3 bg-black/50 rounded-full px-2 py-0.5 text-[11px]">Strong Match</div>
-                    <div className="absolute bottom-3 left-3 right-3 flex justify-between text-[11px]">
-                      <span>28.4K views</span><span>1.8K likes</span><span>126 comments</span>
-                    </div>
-                  </div>
-                  <div>
-                    {step === 2 ? (
-                      <>
-                        <div className="bg-[#e7f6ea] rounded-xl p-3 mb-3 text-sm">Strong match<br />Here's what matched.</div>
-                        <p className={`${FG_SB} text-lg mb-1`}>Race bib in frame</p>
-                        <p className={`${FG_R} text-sm text-muted`}>Running shoes and a race bib appear together on the track.</p>
-                      </>
-                    ) : (
-                      <>
-                        <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Your talent's content</p>
-                        <p className={`${FG_SB} text-[22px] mb-2`}>A post worth putting in the pitch.</p>
-                        <p className={`${FG_R} text-sm text-muted mb-4`}>Training for Boston. An audience that follows every mile.</p>
-                        <p className={`${FG_M} text-sm mb-1`}>3 ways this post matches</p>
-                        <p className={`${FG_R} text-sm text-muted`}>Seen on screen · Heard in the audio · Written in the caption</p>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ) : null}
-            {step === 0 ? (
-            <div className="bg-white rounded-[22px] overflow-hidden border border-[#e8eaed] flex flex-col min-h-[400px]">
-              <div className="flex items-center gap-3 px-4 py-3 border-b border-[#eef0f3]">
-                <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
-                <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
-                <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
-                <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
-              </div>
-              <div className="flex flex-1 min-h-0">
-                <div className="w-[120px] shrink-0 bg-[#f4f6fb] p-3 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
-                  <p className={`${FG_M} bg-[#d3e3fd] text-[#041e49] rounded-full px-3 py-1.5 mb-2 text-center`}>Compose</p>
-                  <div className={`${FG_M} bg-[#e8f0fe] text-[#041e49] rounded-full px-3 py-1.5 mb-3 flex items-center justify-between`}>Inbox <span>12</span></div>
-                  <p className="px-2 py-1">Starred</p>
-                  <p className="px-2 py-1">Sent</p>
-                  <p className="px-2 py-1 flex justify-between">Drafts <span>2</span></p>
-                </div>
-                <div className="flex-1 p-5">
-                  <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon: who should we meet?</p>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">S</div>
-                    <div>
-                      <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
-                      <p className={`${FG_R} text-[11px] text-[#5f6368]`}>to me · 10:42 AM</p>
-                    </div>
-                  </div>
-                  <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
-                  <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
-                    We’re looking for a creator running Boston. Someone whose audience is already following their training.
-                  </p>
-                  <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124] space-y-1">
-                    <p>100K+ on Instagram</p>
-                    <p>Primarily US audience</p>
-                    <p>Running the Boston Marathon</p>
-                  </div>
-                  <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
-                  <p className={`${FG_R} text-[13px] text-[#202124] mt-3`}>Thanks!<br />Sam</p>
-                </div>
-              </div>
+              )}
             </div>
-            ) : null}
+
+            <div className="rounded-[24px] p-2.5 md:p-3" style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 30px 80px rgba(16,24,40,0.12)" }}>
+              {step === 0 && (
+                <div className="bg-white rounded-[18px] overflow-hidden border border-[#e8eaed] flex flex-col min-h-[400px]">
+                  <div className="flex items-center gap-3 px-4 py-3 border-b border-[#eef0f3]">
+                    <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
+                    <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
+                    <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
+                    <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
+                  </div>
+                  <div className="flex flex-1 min-h-0">
+                    <div className="w-[110px] shrink-0 bg-[#f4f6fb] p-3 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
+                      <p className={`${FG_M} bg-[#d3e3fd] text-[#041e49] rounded-full px-3 py-1.5 mb-2 text-center`}>Compose</p>
+                      <div className={`${FG_M} bg-[#e8f0fe] text-[#041e49] rounded-full px-3 py-1.5 mb-3 flex items-center justify-between`}>Inbox <span>12</span></div>
+                      <p className="px-2 py-1">Starred</p>
+                      <p className="px-2 py-1">Sent</p>
+                    </div>
+                    <div className="flex-1 p-5">
+                      <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon: who should we meet?</p>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">S</div>
+                        <div>
+                          <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                          <p className={`${FG_R} text-[11px] text-[#5f6368]`}>to me · 10:42 AM</p>
+                        </div>
+                      </div>
+                      <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
+                      <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
+                        We're looking for a creator running Boston. Someone whose audience is already following their training.
+                      </p>
+                      <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124] space-y-1">
+                        <p>100K+ on Instagram</p>
+                        <p>Primarily US audience</p>
+                        <p>Running the Boston Marathon</p>
+                      </div>
+                      <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {step === 1 && (
+                <FoamProductFrame height={420}>
+                  <AppRail active="explore" />
+                  <ExploreAppView query="marathon" />
+                </FoamProductFrame>
+              )}
+
+              {step === 2 && (
+                <FoamProductFrame height={420}>
+                  <AppRail active="lists" />
+                  <ListsAppView />
+                </FoamProductFrame>
+              )}
+
+              {step === 3 && (
+                <KitEditorChrome>
+                  <div className="h-full overflow-hidden">
+                    <MediaKitView dense scrollY={18} />
+                  </div>
+                </KitEditorChrome>
+              )}
+
+              {step === 4 && (
+                <div className="grid md:grid-cols-2 gap-3 min-h-[400px]">
+                  <div className="rounded-[18px] overflow-hidden border border-[#e8eaed] bg-white">
+                    <GmailView step={3} />
+                  </div>
+                  <div className="bg-[#f4f5f7] rounded-[18px] border border-[#e8eaed] p-5">
+                    <div className="flex items-center justify-between mb-6">
+                      <p className={`${FG_SB} text-[16px] text-text`}>foam <span className={`${FG_R} text-sm text-muted ml-2`}>Notifications</span></p>
+                      <div className="size-8 rounded-full bg-[#e6c9a8] flex items-center justify-center text-[12px]">J</div>
+                    </div>
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Boston Marathon shortlist</p>
+                    <h3 className={`${FG_SB} text-[24px] text-text mb-1`}>Your pitch has company.</h3>
+                    <p className={`${FG_R} text-sm text-muted mb-5`}>Sam at Pace Running</p>
+                    {[
+                      ["10:18 AM", "Opened your list", "Boston Marathon shortlist", false],
+                      ["10:21 AM", `Viewed ${STAGE.name}'s profile`, "A closer look at your recommendation", false],
+                      ["2:46 PM", "Returned to your list", "Another look, later that afternoon", true],
+                    ].map(([time, title, sub, fresh]) => (
+                      <div key={String(title)} className="border-t border-border py-3.5 flex items-start justify-between gap-3">
+                        <div>
+                          <p className={`${FG_R} text-[11px] text-muted`}>{time}</p>
+                          <p className={`${FG_SB} text-sm text-text`}>{title}</p>
+                          <p className={`${FG_R} text-sm text-muted`}>{sub}</p>
+                        </div>
+                        {fresh ? <span className="text-[11px] bg-[#e8f0fe] text-[#185abc] rounded-full px-2 py-0.5">New</span> : null}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
+
+          <div className="mt-10 grid grid-cols-5 gap-3">
+            {STEPS.map(([n, label], i) => (
+              <button key={n} type="button" onClick={() => setStep(i)} className="text-left">
+                <div className={`h-[3px] mb-3 transition-colors ${i === step ? "bg-[#c6f31e]" : "bg-[#e5e5e5]"}`} />
+                <p className={`${FG_M} text-[12px] ${i === step ? "text-text" : "text-muted"}`}>{n}  {label}</p>
+              </button>
+            ))}
+          </div>
+          <p className={`${FG_R} text-[12px] text-muted mt-5`}>Staged product example. Illustrative content and figures. {STAGE.name} only.</p>
         </div>
-        <div className="mt-12 grid grid-cols-5 gap-3">
-          {STEPS.map(([n, label], i) => (
-            <button key={n} type="button" onClick={() => setStep(i)} className="text-left">
-              <div className={`h-[3px] mb-3 ${i === step ? "bg-[#c6f31e]" : "bg-[#e5e5e5]"}`} />
-              <p className={`${FG_M} text-[12px] ${i === step ? "text-text" : "text-muted"}`}>{n}  {label}</p>
-            </button>
-          ))}
-        </div>
-        <p className={`${FG_R} text-[12px] text-muted mt-6`}>Staged product example · illustrative content and figures.</p>
-      </div>
       </div>
     </section>
   );
 }
 
-function FeatureHighlight() {
+function ShareProof() {
   return (
-    <section className="py-28 px-6 bg-surface">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col lg:flex-row items-center gap-20">
-          <div className="flex-1 min-w-0">
-            <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>The work between a brief and a yes</p>
-            <h2 className={`${FG_SB} text-text leading-[1.05] tracking-[-1px] mb-5`} style={{ fontSize: "clamp(32px, 4vw, 48px)" }}>
-              You know your talent.<br />Make the brand see what you see.
-            </h2>
-            <p className={`${FG_R} text-[17px] leading-7 text-muted mb-8`}>
-              One opportunity, followed from the inbox to the next conversation.
-            </p>
-            <div className="flex flex-col gap-3 mb-8">
-              {[
-                "Works directly inside Gmail",
-                "Live stats at the moment of send",
-                "Brand opens tracked automatically",
-              ].map(f => (
-                <div key={f} className="flex items-center gap-3">
-                  <div className="size-[6px] rounded-full bg-brand shrink-0" />
-                  <span className={`${FG_R} text-[15px] text-muted`}>{f}</span>
-                </div>
-              ))}
-            </div>
-            <Link to="/features" className={`${FG_M} text-[15px] text-brand hover:opacity-80 transition-opacity`}>
-              See all features →
-            </Link>
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="bg-raised border border-border rounded-[20px] p-8 flex flex-col gap-6">
-              <div className="flex items-center gap-3 border-b border-border pb-6">
-                <div className="size-10 rounded-full bg-navy flex items-center justify-center shrink-0">
-                  <span className={`${FG_SB} text-white text-sm`}>TS</span>
-                </div>
-                <div>
-                  <p className={`${FG_M} text-sm text-text`}>Rowan Hale</p>
-                  <p className={`${FG_R} text-xs text-muted`}>rowan@vale.studio</p>
-                </div>
+    <section className="py-20 px-6 bg-white">
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1fr_1.05fr] gap-12 items-center">
+        <div>
+          <p className={`${FG_M} text-xs text-brand uppercase tracking-[0.8px] mb-4`}>From kit to inbox</p>
+          <h2 className={`${FG_SB} text-text leading-[1.05] tracking-[-1px] mb-5`} style={{ fontSize: "clamp(28px, 3.6vw, 42px)" }}>
+            Same numbers in the reply the brand opens.
+          </h2>
+          <p className={`${FG_R} text-[16px] leading-7 text-muted mb-6 max-w-[420px]`}>
+            {STAGE.name}'s kit, list, and Gmail embed stay on one thread: {STAGE.total} total, IG {STAGE.ig.n}, TT {STAGE.tt.n}, YT {STAGE.yt.n}.
+          </p>
+          <div className="flex flex-col gap-2.5 mb-8">
+            {[
+              "Live stats at the moment of send",
+              "Brand opens tracked automatically",
+              "Works directly inside Gmail",
+            ].map((f) => (
+              <div key={f} className="flex items-center gap-3">
+                <div className="size-[6px] rounded-full bg-brand shrink-0" />
+                <span className={`${FG_R} text-[15px] text-muted`}>{f}</span>
               </div>
-              <p className={`${FG_R} text-sm text-muted leading-6`}>
-                Hi Eden. Here's Io, she's a perfect fit for the spring wellness brief:
-              </p>
-              <div className="bg-surface border border-border-dark rounded-[12px] p-4 flex items-center gap-4">
-                <div className="relative size-12 rounded-[10px] overflow-hidden shrink-0 bg-[#f4f5f6]">
-                  <img
-                    alt="Io Marin"
-                    src={`${A}/3546d.png`}
-                    className="absolute top-0 left-[-4%] w-[108%] h-[115%] object-cover object-top"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className={`${FG_M} text-sm text-text`}>Io Marin</p>
-                  <div className="flex items-center gap-3 mt-1">
-                    <div className="flex items-center gap-1">
-                      <img alt="IG" className="size-3" src={icIG} />
-                      <span className={`${FG_M} text-xs text-text`}>164K</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <img alt="TT" className="size-3" src={icTT} />
-                      <span className={`${FG_M} text-xs text-text`}>89K</span>
-                    </div>
-                  </div>
-                </div>
-                <button className={`${FG_M} bg-brand text-white text-xs px-3 h-7 rounded-full shrink-0`}>
-                  View kit →
-                </button>
-              </div>
-              <div className={`${FG_SB} text-[40px] tracking-[-1px] text-text`}>7,000+</div>
-              <p className={`${FG_R} text-sm text-muted`}>creator cards embedded via Gmail every month</p>
-            </div>
+            ))}
           </div>
+          <Link to="/demo" className={`${FG_M} text-[15px] text-brand hover:opacity-80 transition-opacity`}>
+            Get a demo →
+          </Link>
+        </div>
+        <div className="rounded-[20px] overflow-hidden border border-[#e8eaed] shadow-[0_20px_50px_rgba(16,24,40,0.1)]">
+          <GmailView step={3} />
         </div>
       </div>
     </section>
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export function Home() {
   return (
     <>
@@ -691,7 +953,7 @@ export function Home() {
       <ValueProp />
       <ProofBar />
       <PitchStory />
-      <FeatureHighlight />
+      <ShareProof />
       <ClosingCTA
         headline="Get a demo."
         sub="Creators connect their data at source. Managers pitch with it."

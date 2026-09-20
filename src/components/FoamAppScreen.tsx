@@ -66,14 +66,20 @@ function BrowserChrome({ children }: { children: React.ReactNode }) {
 }
 
 // ─── App sidebar ─────────────────────────────────────────────────────────────
-function AppSidebar({ active }: { active: "roster" | "search" }) {
-  const items = [
-    { id: "roster", icon: icNavHome   },
-    { id: "search", icon: icNavSearch },
-    { id: "lists",  icon: icNavLists  },
-    { id: "watch",  icon: icNavWatch  },
-    { id: "chat",   icon: icNavChat   },
+function AppSidebar({ active }: { active: "roster" | "search" | "lists" }) {
+  const overview = [
+    { id: "roster", icon: icNavHome, label: "Talent directory" },
+    { id: "search", icon: icNavSearch, label: "Explore content" },
+    { id: "watch", icon: icNavWatch, label: "Watchlists" },
   ];
+  const share = [
+    { id: "lists", icon: icNavLists, label: "Lists" },
+    { id: "kits", icon: icNavChat, label: "Media kits" },
+  ];
+  const isActive = (id: string) =>
+    (active === "roster" && id === "roster") ||
+    (active === "search" && id === "search") ||
+    (active === "lists" && id === "lists");
   return (
     <div className="w-[168px] bg-[#f7f8fa] border-r border-[#eeefef] flex flex-col py-3 px-3 gap-1 shrink-0">
       <div className="flex items-center gap-2 mb-4 px-1">
@@ -86,15 +92,27 @@ function AppSidebar({ active }: { active: "roster" | "search" }) {
         </div>
       </div>
       <p className="font-founders text-[9px] text-[#99a1af] px-2 mb-1">Overview</p>
-      {items.map(it => (
+      {overview.map(it => (
         <div
           key={it.id}
           className={`h-8 rounded-[8px] px-2 flex items-center gap-2 ${
-            it.id === active || it.id === "lists" ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"
+            isActive(it.id) ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"
           }`}
         >
           <img alt="" className="size-3.5 opacity-70" src={it.icon} />
-          <span className="font-founders text-[11px] capitalize">{it.id === "roster" ? "Talent directory" : it.id === "search" ? "Explore content" : it.id === "lists" ? "Lists" : it.id === "watch" ? "Watchlists" : "Help"}</span>
+          <span className="font-founders text-[11px]">{it.label}</span>
+        </div>
+      ))}
+      <p className="font-founders text-[9px] text-[#99a1af] px-2 mt-3 mb-1">Share</p>
+      {share.map(it => (
+        <div
+          key={it.id}
+          className={`h-8 rounded-[8px] px-2 flex items-center gap-2 ${
+            isActive(it.id) ? "bg-[#e8eefc] text-[#185abc]" : "text-[#4a5565]"
+          }`}
+        >
+          <img alt="" className="size-3.5 opacity-70" src={it.icon} />
+          <span className="font-founders text-[11px]">{it.label}</span>
         </div>
       ))}
       <div className="flex-1" />
@@ -239,6 +257,51 @@ function RosterView() {
   );
 }
 
+function ListsView() {
+  const rows = [
+    { name: "Boston Marathon shortlist", talent: "3 Talent", owner: "Rowan Hale", created: "Mar 12", modified: "2d ago" },
+    { name: "Harbor Spring Roster", talent: "12 Talent", owner: "Rowan Hale", created: "Jan 8", modified: "5d ago" },
+    { name: "Vale Studio runners", talent: "4 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
+    { name: "US audience 100K+", talent: "6 Talent", owner: "Rowan Hale", created: "Apr 2", modified: "1w ago" },
+  ];
+  return (
+    <div className="flex flex-col flex-1 overflow-hidden bg-white">
+      <div className="px-4 pt-4 pb-3 flex items-center gap-3">
+        <p className="font-founders font-semibold text-[18px] text-[#101828]">Lists</p>
+        <div className="flex-1 max-w-[240px] mx-auto h-8 rounded-full border border-[#e8eaed] bg-[#f9fafb] px-3 flex items-center gap-2">
+          <img alt="" src={icMagnify} className="size-3 opacity-50" />
+          <span className="font-founders text-[11px] text-[#99a1af]">Search lists</span>
+        </div>
+        <button type="button" className="h-7 rounded-full bg-[#185abc] text-white text-[11px] px-3 inline-flex items-center gap-1 font-founders font-medium">
+          <img alt="" src={icPlus} className="size-3 brightness-0 invert" />
+          Create
+        </button>
+      </div>
+      <div className="px-4 pb-2 flex items-center gap-2 text-[10px]">
+        <span className="h-6 px-2 rounded-full border border-[#e8eaed] text-[#4a5565] inline-flex items-center font-founders">Talent ▾</span>
+        <span className="h-6 px-2 rounded-full border border-[#e8eaed] text-[#4a5565] inline-flex items-center font-founders">Owner ▾</span>
+        <span className="font-founders text-[#185abc]">Reset</span>
+        <span className="font-founders text-[#6a7282] ml-auto">Date created (Most recent)</span>
+      </div>
+      <div className="px-4 overflow-hidden">
+        {rows.map((row) => (
+          <div key={row.name} className="flex items-center gap-3 border-t border-[#eeefef] py-2.5">
+            <span className="size-3 rounded-[3px] border border-[#d0d5dd]" />
+            <img alt="" src={icNavLists} className="size-3.5 opacity-50" />
+            <div className="flex-1 min-w-0">
+              <p className="font-founders font-medium text-[12px] text-[#101828] truncate">{row.name}</p>
+              <p className="font-founders text-[10px] text-[#6a7282]">{row.talent}</p>
+            </div>
+            <p className="font-founders text-[10px] text-[#6a7282] w-[72px] truncate">{row.owner}</p>
+            <p className="font-founders text-[10px] text-[#6a7282] w-[44px]">{row.created}</p>
+            <p className="font-founders text-[10px] text-[#6a7282] w-[44px]">{row.modified}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Content search view ──────────────────────────────────────────────────────
 function FilterSidebar() {
   return (
@@ -328,7 +391,7 @@ function ContentCard({ imgSrc, platform, views, likes, comments, creator, match 
         </div>
         <div className="flex items-center gap-1">
           <div className="size-[14px] rounded-full bg-[#7a0036] flex items-center justify-center shrink-0">
-            <span className="font-founders font-medium text-[7px] text-white">A</span>
+            <span className="font-founders font-medium text-[7px] text-white">{creator.charAt(0)}</span>
           </div>
           <span className="font-founders font-normal text-[8px] text-white">{creator}</span>
           <img alt="" className="size-[10px] opacity-70 ml-auto" src={platformIcons[platform]} />
@@ -348,7 +411,7 @@ function ContentSearchView() {
         <p className="font-founders font-medium text-[13px] text-[#101828] shrink-0">Explore content</p>
         <div className="flex-1 flex items-center gap-2 bg-[#f4f5f6] border border-[#eeefef] rounded-[20px] px-3 h-8">
           <img alt="" className="size-3 opacity-50" src={icMagnify} />
-          <span className="font-founders font-normal text-[11px] text-[#99a1af]">Describe the content you're searching for</span>
+          <span className="font-founders font-normal text-[11px] text-[#99a1af]">Describe the content you're looking for</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <div className="flex items-center gap-1 border border-[#eeefef] rounded-[6px] px-2 h-7">
@@ -389,17 +452,19 @@ function ContentSearchView() {
 
 // ─── Public component ─────────────────────────────────────────────────────────
 type Props = {
-  variant?: "roster" | "search";
+  variant?: "roster" | "search" | "lists";
   className?: string;
 };
 
 export function FoamAppScreen({ variant = "roster", className = "" }: Props) {
+  const active = variant === "search" ? "search" : variant === "lists" ? "lists" : "roster";
+  const height = variant === "roster" ? 380 : 420;
   return (
     <div className={className}>
       <BrowserChrome>
-        <div className="flex overflow-hidden" style={{ height: variant === "roster" ? 380 : 420 }}>
-          <AppSidebar active={variant === "roster" ? "roster" : "search"} />
-          {variant === "roster" ? <RosterView /> : <ContentSearchView />}
+        <div className="flex overflow-hidden" style={{ height }}>
+          <AppSidebar active={active} />
+          {variant === "search" ? <ContentSearchView /> : variant === "lists" ? <ListsView /> : <RosterView />}
         </div>
       </BrowserChrome>
     </div>
