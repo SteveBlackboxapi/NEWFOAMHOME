@@ -22,7 +22,14 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: "true"
-      - run: cp dist/index.html dist/404.html
+      # SPA fallback: 404.html for unknown paths, plus real route folders so
+      # /kit-story and siblings return 200 on GitHub Pages (basename intact).
+      - run: |
+          cp dist/index.html dist/404.html
+          for route in kit-story chrome-story managers brands features about creators data-trust updates demo; do
+            mkdir -p "dist/$route"
+            cp dist/index.html "dist/$route/index.html"
+          done
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
