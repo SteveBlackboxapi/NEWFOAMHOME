@@ -330,21 +330,25 @@ export function KitStory() {
   const pack = ease(range(p, 0.02, 0.20));
   const kitIn = clamp((pack - 0.68) / 0.32);
   const landed = pack >= 0.995;
-  const read = range(p, 0.20, 0.66);
-  const aimShare = range(p, 0.68, 0.74);
-  const shareOpen = range(p, 0.74, 0.80);
-  const generated = range(p, 0.80, 0.84);
-  const aimCopy = range(p, 0.84, 0.88);
-  const copied = range(p, 0.88, 0.92);
-  const publicize = range(p, 0.91, 0.94);
+  const read = range(p, 0.20, 0.64);
+  const aimShare = range(p, 0.66, 0.72);
+  const shareOpen = range(p, 0.72, 0.78);
+  const generated = range(p, 0.78, 0.82);
+  const aimCopy = range(p, 0.82, 0.86);
+  const copied = range(p, 0.86, 0.90);
+  const shareFade = range(p, 0.90, 0.93);
+  const publicize = range(p, 0.90, 0.93);
+  const kitOut = range(p, 0.91, 0.94);
   const fold = range(p, 0.93, 0.97);
   const fly = range(p, 0.95, 1);
-  const sharedIn = range(p, 0.93, 0.98);
-  const handoff = range(p, 0.97, 1);
+  const sharedIn = ease(range(p, 0.925, 0.95));
+  const sharedOut = range(p, 0.975, 1);
+  const sharedOp = sharedIn * (1 - ease(sharedOut));
+  const shareModalOp = shareOpen * (1 - shareFade);
   const headlineOp = 1 - range(p, 0.02, 0.14);
-  const canvasLight = kitIn > 0.12 || fold > 0 || sharedIn > 0;
-  const kitVisible = kitIn > 0.01 && fold < 0.92;
-  const kitFade = kitIn * (1 - ease(fold));
+  const canvasLight = kitIn > 0.12 || sharedIn > 0 || fold > 0;
+  const kitVisible = kitIn > 0.01 && kitOut < 0.98;
+  const kitFade = kitIn * (1 - ease(kitOut));
 
   useEffect(() => {
     const v = vid.current;
@@ -359,7 +363,7 @@ export function KitStory() {
   const photoH = lerp(100, slot.h, pack);
   const cursorL = aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
   const cursorT = aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
-  const cursorOn = aimShare > 0.02 && fold < 0.15;
+  const cursorOn = aimShare > 0.02 && shareFade < 0.2;
   const stageBg = canvasLight ? "#eef0f4" : "#000";
 
   return (
@@ -568,10 +572,10 @@ export function KitStory() {
           </div>
 
           {/* Share modal */}
-          <div className="absolute inset-0 z-30 pointer-events-none bg-black/20" style={{ opacity: shareOpen * (1 - fold) }} />
+          <div className="absolute inset-0 z-30 pointer-events-none bg-black/20" style={{ opacity: shareModalOp }} />
           <div
             className="absolute z-40 left-1/2 top-1/2 w-[min(420px,88vw)] bg-white rounded-[16px] shadow-[0_24px_80px_rgba(16,24,40,0.25)]"
-            style={{ opacity: shareOpen * (1 - fold), transform: "translate(-50%,-50%)" }}
+            style={{ opacity: shareModalOp, transform: "translate(-50%,-50%)" }}
           >
             <div className="px-5 py-3 border-b border-[#eeefef] flex justify-between">
               <p className={`${FG_M} text-[16px]`}>Share</p>
@@ -601,33 +605,36 @@ export function KitStory() {
           <div
             className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-6"
             style={{
-              opacity: sharedIn * (1 - handoff * 0.85),
-              transform: `translateY(${(1 - sharedIn) * 16 + handoff * -8}px)`,
+              opacity: sharedOp,
+              transform: `translateY(${(1 - sharedIn) * 14}px)`,
             }}
           >
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>Shared</p>
-            <p className={`${FG_SB} text-[#101828] text-[42px] md:text-[64px] leading-[0.98] tracking-[-2px] text-center max-w-[14ch]`}>
-              What you see is what they get.
-            </p>
-            <p className={`${FG_R} mt-4 text-[16px] md:text-[18px] text-[#6a7282] text-center max-w-[28em]`}>
-              Link copied. Same kit. Same connected numbers. Ready for the inbox.
-            </p>
-            <div
-              className="mt-8 w-[min(360px,90vw)] rounded-[18px] overflow-hidden border border-[#ead9b8] shadow-[0_18px_50px_rgba(16,24,40,0.12)]"
-              style={{ background: CREAM }}
-            >
-              <div className="px-4 pt-4 pb-3 flex items-center gap-3">
-                <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
-                  <img src={POSTER} alt="" className="size-full object-cover object-[center_20%]" />
+            <div className="absolute inset-0" style={{ background: "#eef0f4" }} />
+            <div className="relative flex flex-col items-center">
+              <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}>Shared</p>
+              <p className={`${FG_SB} text-[#101828] text-[42px] md:text-[64px] leading-[0.98] tracking-[-2px] text-center max-w-[14ch]`}>
+                What you see is what they get.
+              </p>
+              <p className={`${FG_R} mt-4 text-[16px] md:text-[18px] text-[#6a7282] text-center max-w-[28em]`}>
+                Link copied. Same kit. Same connected numbers. Ready for the inbox.
+              </p>
+              <div
+                className="mt-8 w-[min(360px,90vw)] rounded-[18px] overflow-hidden border border-[#ead9b8] shadow-[0_18px_50px_rgba(16,24,40,0.14)]"
+                style={{ background: CREAM }}
+              >
+                <div className="px-4 pt-4 pb-3 flex items-center gap-3">
+                  <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
+                    <img src={POSTER} alt="" className="size-full object-cover object-[center_18%]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className={`${FG_SB} text-[16px]`} style={{ color: BURGUNDY }}>{STAGE.name}</p>
+                    <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{STAGE.totalShort} total audience</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className={`${FG_SB} text-[16px]`} style={{ color: BURGUNDY }}>{STAGE.name}</p>
-                  <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{STAGE.totalShort} total audience</p>
+                <div className="px-4 py-3 flex items-center justify-between" style={{ background: BURGUNDY, color: CREAM }}>
+                  <span className={`${FG_R} text-[12px] truncate`}>{STAGE.shareUrl.replace("https://", "")}</span>
+                  <span className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}>Sent</span>
                 </div>
-              </div>
-              <div className="px-4 py-3 flex items-center justify-between" style={{ background: BURGUNDY, color: CREAM }}>
-                <span className={`${FG_R} text-[12px] truncate`}>{STAGE.shareUrl.replace("https://", "")}</span>
-                <span className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}>Sent</span>
               </div>
             </div>
           </div>
