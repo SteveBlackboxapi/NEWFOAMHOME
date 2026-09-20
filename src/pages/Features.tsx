@@ -9,7 +9,7 @@ const FEATURES = [
   {
     name: "Media kits",
     tagline: "Connected numbers. Your agency's colours. One link.",
-    desc: "Foam pulls live follower counts, audience demographics, and top content from each creator's connected platforms and wraps it in your agency's branding. Every kit updates automatically — no manual refreshes.",
+    desc: "Foam pulls live follower counts, audience demographics, and top content from each creator's connected platforms and wraps it in your agency's branding. Every kit updates automatically. No manual refreshes.",
     bullets: ["Live cross-platform stats", "Agency branding built in", "Shareable link, no login required", "Audience age & geo breakdown"],
     color: "bg-raised",
     dark: false,
@@ -17,7 +17,7 @@ const FEATURES = [
   {
     name: "Lists & rosters",
     tagline: "Group creators, share via a single link.",
-    desc: "Build campaign-specific shortlists or export your full agency roster. Share one link with a brand and they see every creator in context — stats, content, and the manager behind each one.",
+    desc: "Build campaign-specific shortlists or export your full agency roster. Share one link with a brand and they see every creator in context: stats, content, and the manager behind each one.",
     bullets: ["Campaign-scoped shortlists", "Full agency roster view", "Single shareable link per list", "Filter by niche, audience, location"],
     color: "bg-surface",
     dark: false,
@@ -25,7 +25,7 @@ const FEATURES = [
   {
     name: "Content search",
     tagline: "Find the moment that makes the case.",
-    desc: "Search across your roster's published content by keyword, platform, or performance. Surface the exact post that proves a creator's fit for a brand's brief — without digging through profiles manually.",
+    desc: "Search across your roster's published content by keyword, platform, or performance. Surface the exact post that proves a creator's fit for a brand's brief, without digging through profiles manually.",
     bullets: ["Keyword and platform search", "Performance-ranked results", "Direct link to original post", "Works across Instagram, TikTok, YouTube"],
     color: "bg-raised",
     dark: false,
@@ -33,7 +33,7 @@ const FEATURES = [
   {
     name: "Chrome extension",
     tagline: "Embeds a pitch directly into Gmail replies.",
-    desc: "Install the Foam Chrome extension and drop a live creator card into any Gmail draft. The recipient sees real follower counts, a photo, and a link to the full media kit — without you leaving the inbox.",
+    desc: "Install the Foam Chrome extension and drop a live creator card into any Gmail draft. The recipient sees real follower counts, a photo, and a link to the full media kit, without you leaving the inbox.",
     bullets: ["Works inside Gmail", "Live stats in every embed", "7,000+ embeds per month", "No copy-paste required"],
     color: "bg-dark",
     dark: true,
@@ -41,7 +41,7 @@ const FEATURES = [
   {
     name: "Watchlists",
     tagline: "Your recruitment starting point.",
-    desc: "Add creators you're tracking but haven't signed yet. Monitor their growth across platforms without them knowing — then reach out when the timing is right.",
+    desc: "Add creators you're tracking but haven't signed yet. Monitor their growth across platforms without them knowing, then reach out when the timing is right.",
     bullets: ["Track unsigned creators", "Growth monitoring over time", "Private to your account", "Converts to roster when signed"],
     color: "bg-surface",
     dark: false,
@@ -49,7 +49,7 @@ const FEATURES = [
   {
     name: "Talent notes",
     tagline: "Private, close-kept creator details.",
-    desc: "Keep internal notes on any creator in your roster — deal history, brand preferences, rate card notes. Notes are private to your account and never visible to creators or brands.",
+    desc: "Keep internal notes on any creator in your roster: deal history, brand preferences, rate card notes. Notes are private to your account and never visible to creators or brands.",
     bullets: ["Fully private to your team", "Attached to creator profile", "Never shared in media kits", "Searchable across your roster"],
     color: "bg-raised",
     dark: false,
@@ -57,7 +57,7 @@ const FEATURES = [
   {
     name: "Tracking",
     tagline: "See who viewed. Inform your follow-up.",
-    desc: "Know when a brand opens your kit — and how long they spent on it. Use that signal to time your follow-up with confidence rather than guessing.",
+    desc: "Know when a brand opens your kit, and how long they spent on it. Use that signal to time your follow-up with confidence rather than guessing.",
     bullets: ["Open notifications", "Time-spent per kit", "Per-creator view data", "Follow-up timing signal"],
     color: "bg-surface",
     dark: false,
@@ -77,7 +77,7 @@ function Hero() {
           <em className="text-brand not-italic">the pitch</em>
         </h1>
         <p className={`${FG_R} text-lg leading-7 text-muted mb-10 max-w-[520px] mx-auto`}>
-          Seven tools covering the full creator pitch lifecycle — from finding proof to delivering the pitch to a brand, then tracking if they opened it.
+          Seven tools covering the full creator pitch lifecycle: from finding proof to delivering the pitch to a brand, then tracking if they opened it.
         </p>
         <Link to="/demo" className={`${FG_M} bg-brand text-white text-[15px] px-8 h-12 rounded-full inline-flex items-center hover:bg-brand-hover transition-colors`}>
           Get a demo

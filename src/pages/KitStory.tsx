@@ -235,7 +235,7 @@ export function KitStory() {
     <div className="text-[#101828]" style={{ background: light ? "#eef0f4" : "#000" }}>
       <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
         <Link to="/" className={`text-[12px] ${light ? "text-[#101828]/70" : "text-white/80"}`}>← Home</Link>
-        <span className={`text-[10px] uppercase tracking-[1px] ${light ? "text-[#5a6408]" : "text-white/50"}`}>Kit story test</span>
+        <span className={`text-[10px] uppercase tracking-[1px] ${light ? "text-[#5a6408]" : "text-white/50"}`}>Kit story</span>
       </div>
       <section ref={track} className="relative h-[420vh]">
         <div ref={stage} className="sticky top-0 h-screen overflow-hidden" style={{ background: light ? "#eef0f4" : "#000" }}>

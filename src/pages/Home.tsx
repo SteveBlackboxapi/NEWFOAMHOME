@@ -564,7 +564,7 @@ function PitchStory() {
                   <p className="px-2 py-1 flex justify-between">Drafts <span>2</span></p>
                 </div>
                 <div className="flex-1 p-5">
-                  <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon — who should we meet?</p>
+                  <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon: who should we meet?</p>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">S</div>
                     <div>
@@ -645,7 +645,7 @@ function FeatureHighlight() {
                 </div>
               </div>
               <p className={`${FG_R} text-sm text-muted leading-6`}>
-                Hi Eden — here's Io, she's a perfect fit for the spring wellness brief:
+                Hi Eden. Here's Io, she's a perfect fit for the spring wellness brief:
               </p>
               <div className="bg-surface border border-border-dark rounded-[12px] p-4 flex items-center gap-4">
                 <div className="relative size-12 rounded-[10px] overflow-hidden shrink-0 bg-[#f4f5f6]">

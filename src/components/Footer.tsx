@@ -43,7 +43,7 @@ export function Footer() {
               <span className={`${FG_SB} text-lg tracking-[-0.3px]`}>foam</span>
             </div>
             <p className={`${FG_R} text-sm text-subtle leading-6 max-w-[220px]`}>
-              The pitch platform for talent managers — built around how deals actually get done.
+              The pitch platform for talent managers, built around how deals actually get done.
             </p>
             <p className={`${FG_R} text-xs text-subtle`}>1,300+ talent managers active monthly</p>
           </div>

@@ -88,7 +88,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       {!embedded && (
         <div className="fixed top-4 left-4 z-[70] flex items-center gap-3">
           <Link to="/" className="text-[12px] text-[#101828]/70">← Home</Link>
-          <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Chrome story test</span>
+          <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Chrome story</span>
         </div>
       )}
       <section className={`px-6 pb-10 max-w-[1100px] mx-auto ${embedded ? "pt-16" : "pt-24"}`}>
@@ -127,7 +127,7 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster — demonstration only.</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster; demonstration only.</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />

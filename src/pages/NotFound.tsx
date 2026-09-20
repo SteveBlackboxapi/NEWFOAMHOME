@@ -10,7 +10,7 @@ export function NotFound() {
           Nothing here
         </h1>
         <p className={`${FG_R} text-base leading-7 text-muted mb-10`}>
-          The page you're looking for doesn't exist — or it moved. Try heading back to the managers page.
+          The page you're looking for doesn't exist, or it moved. Try heading back to the managers page.
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link to="/managers" className={`${FG_M} bg-brand text-white text-[15px] px-7 h-11 rounded-full flex items-center hover:bg-brand-hover transition-colors`}>

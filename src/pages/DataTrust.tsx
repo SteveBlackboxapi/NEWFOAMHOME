@@ -54,7 +54,7 @@ function Hero() {
           <em className="text-brand not-italic">creator data</em>
         </h1>
         <p className={`${FG_R} text-lg leading-7 text-muted max-w-[520px] mx-auto`}>
-          We believe creators should know exactly what Foam does with their accounts. This page explains our six core data principles — plainly.
+          We believe creators should know exactly what Foam does with their accounts. This page explains our six core data principles, plainly.
         </p>
       </div>
     </section>

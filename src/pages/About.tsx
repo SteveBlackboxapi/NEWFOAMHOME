@@ -15,7 +15,7 @@ function Hero() {
           <em className="text-brand not-italic">too hard to close</em>
         </h1>
         <p className={`${FG_R} text-lg leading-7 text-muted max-w-[560px] mx-auto`}>
-          Foam exists to change that. We build software that gives talent managers the proof they need to get a yes — and the tools to get it in front of the right people, fast.
+          Foam exists to change that. We build software that gives talent managers the proof they need to get a yes, and the tools to get it in front of the right people, fast.
         </p>
       </div>
     </section>
@@ -27,21 +27,21 @@ function ThreeRoles() {
     {
       role: "Managers",
       tagline: "Close more deals, faster",
-      desc: "Foam gives talent managers live, branded media kits and the ability to pitch directly from Gmail — so every conversation starts with the right data.",
+      desc: "Foam gives talent managers live, branded media kits and the ability to pitch directly from Gmail, so every conversation starts with the right data.",
       to: "/managers",
       accent: "text-brand",
     },
     {
       role: "Brands",
       tagline: "Evaluate creators confidently",
-      desc: "When a manager shares a Foam kit, brands see live follower counts, audience demographics, and top content — all in one clean link.",
+      desc: "When a manager shares a Foam kit, brands see live follower counts, audience demographics, and top content, all in one clean link.",
       to: "/brands",
       accent: "text-blue",
     },
     {
       role: "Creators",
       tagline: "Your accounts. Your connection.",
-      desc: "Creators authorise their own accounts once. Their data flows to their manager's kits automatically — no screenshots, no chasing.",
+      desc: "Creators authorise their own accounts once. Their data flows to their manager's kits automatically: no screenshots, no chasing.",
       to: "/creators",
       accent: "text-text",
     },
