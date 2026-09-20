@@ -11,12 +11,14 @@ import { Updates } from "./pages/Updates";
 import { Demo } from "./pages/Demo";
 import { KitStory } from "./pages/KitStory";
 import { ChromeStory } from "./pages/ChromeStory";
+import { LabInspo } from "./pages/LabInspo";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter(
   [
     { path: "kit-story", Component: KitStory },
     { path: "chrome-story", Component: ChromeStory },
+    { path: "lab/inspo", Component: LabInspo },
     {
       path: "/",
       Component: Root,
