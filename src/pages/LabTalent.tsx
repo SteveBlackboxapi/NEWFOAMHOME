@@ -127,14 +127,14 @@ function ExploreCard({
 
       {tile.caption ? (
         <p
-          className={`${FG_SB} absolute left-3 right-3 top-[28%] text-center text-[13px] sm:text-[14px] leading-snug tracking-[-0.2px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]`}
+          className={`${FG_SB} absolute left-3 right-3 top-[26%] mx-auto max-w-[90%] text-center text-[13px] sm:text-[14px] leading-snug tracking-[-0.2px] text-white px-2.5 py-1.5 rounded-[10px] bg-black/35 backdrop-blur-[2px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]`}
         >
           {tile.caption}
         </p>
       ) : null}
 
       <div className="absolute inset-x-0 bottom-0 p-2.5 flex flex-col gap-1.5">
-        <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-black/45 px-2 py-1 text-white backdrop-blur-[6px] border border-white/10">
+        <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 text-white backdrop-blur-[6px] border border-white/10">
           <span className={`${FG_M} text-[10px] tracking-[0.2px]`}>Strong:</span>
           <StrongIcon kind={tile.strongKind} />
         </div>
