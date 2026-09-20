@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { useIsDesktop } from "../hooks/useMediaQuery";
 import { img } from "../lib/assets";
+import { ChromeStoryMobile } from "./ChromeStoryMobile";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const BAG = `${A}/chrome-store.webp`;
@@ -47,7 +49,7 @@ function StatBlock({ title, rows }: { title: string; rows: [string, string][] })
   );
 }
 
-export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
+function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
   const track = useRef<HTMLElement | null>(null);
   const [p, setProg] = useState(0);
   useEffect(() => {
@@ -199,4 +201,12 @@ export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
       </section>
     </div>
   );
+}
+
+export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
+  const isDesktop = useIsDesktop();
+  if (isDesktop === null) {
+    return <div className="min-h-[40vh] bg-white" aria-hidden />;
+  }
+  return isDesktop ? <ChromeStoryDesktop embedded={embedded} /> : <ChromeStoryMobile embedded={embedded} />;
 }

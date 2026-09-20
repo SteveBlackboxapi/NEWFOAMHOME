@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { useIsDesktop } from "../hooks/useMediaQuery";
 import { ChromeStory } from "./ChromeStory";
+import { KitStoryMobile } from "./KitStoryMobile";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const CLIP = `${A}/io-portrait-web.mp4`;
@@ -165,7 +167,7 @@ function Plat({ label, val, handle }: { label: string; val: string; handle: stri
   );
 }
 
-export function KitStory() {
+function KitStoryDesktop() {
   const track = useRef<HTMLElement | null>(null);
   const stage = useRef<HTMLDivElement | null>(null);
   const well = useRef<HTMLDivElement | null>(null);
@@ -421,4 +423,13 @@ export function KitStory() {
       <AfterShare />
     </div>
   );
+}
+
+/** Desktop keeps scroll-scrub theatre; mobile (< md / 768px) uses stacked sections. */
+export function KitStory() {
+  const isDesktop = useIsDesktop();
+  if (isDesktop === null) {
+    return <div className="min-h-screen bg-black" aria-hidden />;
+  }
+  return isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />;
 }

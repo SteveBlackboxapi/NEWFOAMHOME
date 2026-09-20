@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { MobileFade } from "../components/MobileFade";
+import { useIsDesktop } from "../hooks/useMediaQuery";
 
 const FG_R  = "font-founders font-normal";
 const FG_M  = "font-founders font-medium";
@@ -716,7 +718,7 @@ function ValueProp() {
 }
 
 // ─── Continuous pitch-on-scroll (same staged talent end to end) ──────────────
-function PitchStory() {
+function PitchStoryDesktop() {
   const [step, setStep] = useState(0);
   const STEPS = [
     ["01", "The brief"],
@@ -907,6 +909,172 @@ function PitchStory() {
       </div>
     </section>
   );
+}
+
+function PitchBeatFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-[20px] p-2 mt-6"
+      style={{ background: "linear-gradient(180deg,#eef2f8 0%,#f7f8fb 100%)", boxShadow: "0 18px 48px rgba(16,24,40,0.1)" }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Mobile home pitch: same five beats as stacked sections, no sticky scrub. */
+function PitchStoryMobile() {
+  const COPY = [
+    {
+      kicker: "01 / The brief",
+      title: "Anyone on your roster running the marathon?",
+      body: "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.",
+      next: "You already know who.",
+      frame: "brief" as const,
+    },
+    {
+      kicker: "02 / Explore",
+      title: "Type it the way you'd say it.",
+      body: `Search ${STAGE.agency}'s content for "marathon". Find the training post that backs up ${STAGE.name}.`,
+      next: "Now put them on a list.",
+      frame: "explore" as const,
+    },
+    {
+      kicker: "03 / The list",
+      title: "One shortlist. Shareable.",
+      body: "Boston Marathon shortlist holds Ren Cole, Io Marin, and Sable Quinn. Same roster, staged figures throughout.",
+      next: "Open the kit.",
+      frame: "lists" as const,
+    },
+    {
+      kicker: "04 / The kit",
+      title: "Connected numbers. Your colours.",
+      body: `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}. Content and receipts on the same page.`,
+      next: "Share it.",
+      frame: "kit" as const,
+    },
+    {
+      kicker: "05 / Shared",
+      title: "They opened it. You know.",
+      body: "Paste into Gmail from Foam. See which client opened the list, which profiles they viewed, and when they came back.",
+      next: "Make the next conversation count.",
+      frame: "shared" as const,
+    },
+  ];
+
+  return (
+    <section id="pitch-loop" className="bg-[#f7f8fb]">
+      <div className="px-5 pt-12 pb-4">
+        <MobileFade>
+          <p className={`${FG_R} text-sm text-muted`}>One pitch. Same talent. Foam from brief to open.</p>
+          <p className={`${FG_R} text-sm text-muted mt-1`}>Marathon brief · Staged example · {STAGE.name}</p>
+        </MobileFade>
+      </div>
+
+      {COPY.map((beat, i) => (
+        <div key={beat.kicker} className="px-5 py-10 border-t border-[#e8eaed]/80">
+          <MobileFade delayMs={i === 0 ? 0 : 40}>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-3`}>{beat.kicker}</p>
+            <h2 className={`${FG_SB} text-[28px] leading-[1.08] tracking-[-0.8px] text-text mb-4`}>
+              {beat.title}
+            </h2>
+            <p className={`${FG_R} text-[15px] leading-6 text-muted mb-5`}>{beat.body}</p>
+            <div className="border-t border-border pt-4">
+              <p className={`${FG_M} text-sm text-text`}>{beat.next}</p>
+            </div>
+            {beat.frame === "kit" && (
+              <div className="mt-5 grid grid-cols-3 gap-3">
+                {[
+                  [STAGE.total, "Total audience"],
+                  [STAGE.ig.n, "Instagram"],
+                  [CONTENT[0].views, "Top post views"],
+                ].map(([v, l]) => (
+                  <div key={l}>
+                    <p className={`${FG_SB} text-[20px] text-text leading-none`}>{v}</p>
+                    <p className={`${FG_R} text-[11px] text-muted mt-1`}>{l}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </MobileFade>
+
+          <MobileFade delayMs={80}>
+            <PitchBeatFrame>
+              {beat.frame === "brief" && (
+                <div className="bg-white rounded-[16px] overflow-hidden border border-[#e8eaed] p-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className={`${FG_SB} text-[14px] text-[#d93025]`}>M</span>
+                    <span className={`${FG_SB} text-[13px] text-[#202124]`}>Gmail</span>
+                  </div>
+                  <p className={`${FG_SB} text-[15px] text-[#202124] mb-3`}>Boston Marathon: who should we meet?</p>
+                  <p className={`${FG_M} text-[12px] text-[#202124] mb-1`}>Sam · Pace Running</p>
+                  <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
+                    Looking for a creator running Boston. 100K+ on Instagram. US audience. Options by Friday?
+                  </p>
+                  <div className="border-l-2 border-[#d3e3fd] pl-3 text-[12px] text-[#202124] space-y-1">
+                    <p>100K+ on Instagram</p>
+                    <p>Primarily US audience</p>
+                    <p>Running the Boston Marathon</p>
+                  </div>
+                </div>
+              )}
+              {beat.frame === "explore" && (
+                <FoamProductFrame height={360}>
+                  <ExploreAppView query="marathon" />
+                </FoamProductFrame>
+              )}
+              {beat.frame === "lists" && (
+                <FoamProductFrame height={360}>
+                  <ListsAppView />
+                </FoamProductFrame>
+              )}
+              {beat.frame === "kit" && (
+                <KitEditorChrome>
+                  <div className="h-full overflow-hidden">
+                    <MediaKitView dense scrollY={8} />
+                  </div>
+                </KitEditorChrome>
+              )}
+              {beat.frame === "shared" && (
+                <div className="flex flex-col gap-3">
+                  <div className="rounded-[16px] overflow-hidden border border-[#e8eaed] bg-white">
+                    <GmailView step={3} />
+                  </div>
+                  <div className="bg-[#f4f5f7] rounded-[16px] border border-[#e8eaed] p-4">
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Boston Marathon shortlist</p>
+                    <h3 className={`${FG_SB} text-[20px] text-text mb-1`}>Your pitch has company.</h3>
+                    <p className={`${FG_R} text-sm text-muted mb-4`}>Sam at Pace Running</p>
+                    {[
+                      ["10:18 AM", "Opened your list"],
+                      ["10:21 AM", `Viewed ${STAGE.name}'s profile`],
+                      ["2:46 PM", "Returned to your list"],
+                    ].map(([time, title]) => (
+                      <div key={title} className="border-t border-border py-3">
+                        <p className={`${FG_R} text-[11px] text-muted`}>{time}</p>
+                        <p className={`${FG_SB} text-sm text-text`}>{title}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </PitchBeatFrame>
+          </MobileFade>
+        </div>
+      ))}
+
+      <p className={`${FG_R} text-[12px] text-muted px-5 pb-10`}>
+        Staged product example. Illustrative content and figures. {STAGE.name} only.
+      </p>
+    </section>
+  );
+}
+
+function PitchStory() {
+  const isDesktop = useIsDesktop();
+  if (isDesktop === null) {
+    return <section id="pitch-loop" className="min-h-[40vh] bg-[#f7f8fb]" aria-hidden />;
+  }
+  return isDesktop ? <PitchStoryDesktop /> : <PitchStoryMobile />;
 }
 
 function ShareProof() {
