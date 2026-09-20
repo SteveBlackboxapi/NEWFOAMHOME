@@ -12,6 +12,7 @@ import { Demo } from "./pages/Demo";
 import { KitStory } from "./pages/KitStory";
 import { ChromeStory } from "./pages/ChromeStory";
 import { LabInspo } from "./pages/LabInspo";
+import { LabTalent } from "./pages/LabTalent";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter(
@@ -19,6 +20,7 @@ export const router = createBrowserRouter(
     { path: "kit-story", Component: KitStory },
     { path: "chrome-story", Component: ChromeStory },
     { path: "lab/inspo", Component: LabInspo },
+    { path: "lab/talent", Component: LabTalent },
     {
       path: "/",
       Component: Root,
