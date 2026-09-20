@@ -644,10 +644,10 @@ export function KitStory() {
             className="absolute z-[80] drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]"
             style={{
               width: lerp(80, 170, fly),
-              opacity: fold * (1 - fly * 0.4),
-              left: `${lerp(38, 118, fly)}%`,
-              top: `${lerp(42, 4, fly) + Math.sin(fly * Math.PI) * -10}%`,
-              transform: `rotate(${lerp(-24, 18, fly)}deg)`,
+              opacity: sharedOut * (1 - fly * 0.45),
+              left: `${lerp(42, 118, fly)}%`,
+              top: `${lerp(48, 6, fly) + Math.sin(fly * Math.PI) * -10}%`,
+              transform: `rotate(${lerp(-18, 18, fly)}deg)`,
             }}
           >
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill={BURGUNDY} />
