@@ -1,0 +1,367 @@
+.ka-analytics {
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  background: #fff6eb;
+  border-radius: 18px;
+}
+
+.ka-section {
+  --ka-burgundy: #7a0036;
+  --ka-cream: #fff6eb;
+  --ka-card: #f6ece4;
+  --ka-ink: #2b1921;
+  --ka-muted: #76606a;
+  width: 100%;
+  min-width: 0;
+  color: var(--ka-ink);
+  font-family: "Founders Grotesk", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  container-type: inline-size;
+}
+
+.ka-section *,
+.ka-section *::before,
+.ka-section *::after {
+  box-sizing: border-box;
+  transition: none;
+  animation: none;
+}
+
+.ka-section h3,
+.ka-section p,
+.ka-section dl,
+.ka-section dt,
+.ka-section dd {
+  margin: 0;
+}
+
+.ka-account-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+
+.ka-account-identity {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+.ka-account-avatar {
+  display: block;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.ka-account-identity h3 {
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--ka-burgundy);
+}
+
+.ka-account-identity p {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--ka-muted);
+}
+
+.ka-account-identity p > span:last-child {
+  white-space: nowrap;
+}
+
+.ka-period {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--ka-muted);
+}
+
+.ka-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ka-metric-card,
+.ka-growth-card,
+.ka-demographic-card {
+  background: var(--ka-card);
+  border: 1px solid #e9dcd4;
+  border-radius: 14px;
+}
+
+.ka-metric-card {
+  padding: 19px 21px 20px;
+}
+
+.ka-metric-card dt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--ka-muted);
+}
+
+.ka-icon-box {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #d7bac7;
+  background: #fff9f4;
+  color: var(--ka-burgundy);
+}
+
+.ka-metric-card dd {
+  padding-top: 16px;
+  font-size: clamp(30px, 4.4cqw, 40px);
+  line-height: 1;
+  letter-spacing: -1.2px;
+  font-weight: 600;
+  color: var(--ka-burgundy);
+}
+
+.ka-growth-card {
+  padding: 24px 25px 20px;
+}
+
+.ka-growth-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ka-growth-heading h3 {
+  color: var(--ka-muted);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.ka-growth-heading .ka-followers {
+  margin-top: 8px;
+  font-size: clamp(36px, 5.4cqw, 48px);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  color: var(--ka-burgundy);
+}
+
+.ka-chart-tag {
+  border: 1px solid #ddc8d0;
+  border-radius: 5px;
+  padding: 5px 8px;
+  color: var(--ka-muted);
+  font-size: 10px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ka-growth-card .ka-follower-gain {
+  margin-top: 8px;
+  color: var(--ka-burgundy);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.ka-follower-gain > span:last-child {
+  color: var(--ka-muted);
+}
+
+.ka-growth-chart {
+  display: block;
+  width: 100%;
+  height: clamp(130px, 26cqw, 196px);
+  overflow: visible;
+  margin-top: 20px;
+}
+
+.ka-chart-gridline {
+  stroke: #d8c5ca;
+  stroke-dasharray: 3 6;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+.ka-chart-area {
+  fill: var(--ka-burgundy);
+  opacity: 0.08;
+}
+
+.ka-chart-line {
+  fill: none;
+  stroke: var(--ka-burgundy);
+  stroke-width: 2.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ka-chart-point {
+  fill: var(--ka-burgundy);
+  stroke: var(--ka-card);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.ka-chart-months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  margin-top: 9px;
+  color: var(--ka-muted);
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.ka-audience-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 14px;
+}
+
+.ka-demographic-card {
+  padding: 21px;
+}
+
+.ka-demographic-card h3 {
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--ka-burgundy);
+  margin-bottom: 20px;
+}
+
+.ka-distribution {
+  display: grid;
+  gap: 15px;
+}
+
+.ka-distribution-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.ka-distribution-row dt {
+  color: var(--ka-muted);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ka-demographic-gender .ka-distribution-row {
+  grid-template-columns: 44px minmax(0, 1fr);
+}
+
+.ka-distribution-row dd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 10px;
+}
+
+.ka-bar-track {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border-radius: 3px;
+  background: #e8d9d7;
+  overflow: hidden;
+}
+
+.ka-bar-value {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--ka-burgundy);
+  transform-origin: left center;
+}
+
+.ka-percentage {
+  color: var(--ka-burgundy);
+  font-size: 12px;
+  line-height: 1;
+  text-align: right;
+}
+
+.ka-demographic-card .ka-demographic-note {
+  color: var(--ka-muted);
+  font-size: 10px;
+  line-height: 1.4;
+  margin-top: 22px;
+}
+
+.ka-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@container (min-width: 560px) {
+  .ka-audience-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container (max-width: 400px) {
+  .ka-account-identity p > span:last-child {
+    display: block;
+  }
+  .ka-account-identity p > span[aria-hidden] {
+    display: none;
+  }
+  .ka-metric-card {
+    padding: 14px;
+  }
+  .ka-metric-card dt {
+    gap: 8px;
+    font-size: 11px;
+  }
+  .ka-icon-box {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+  .ka-icon-box svg {
+    width: 17px;
+    height: 17px;
+  }
+  .ka-metric-card dd {
+    font-size: 30px;
+    padding-top: 14px;
+  }
+  .ka-growth-card {
+    padding: 20px 16px 18px;
+  }
+  .ka-chart-tag {
+    font-size: 9px;
+  }
+  .ka-chart-months {
+    font-size: 9px;
+  }
+  .ka-demographic-card {
+    padding: 19px 16px;
+  }
+}
