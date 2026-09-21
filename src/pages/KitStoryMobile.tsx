@@ -595,12 +595,12 @@ export function KitStoryMobile() {
           <p
             className={`${FG_SB} text-[32px] leading-[1.02] tracking-[-1.2px] text-[#101828] max-w-[14ch] mx-auto`}
           >
-            What you see is what they get.
+            Media Kit
           </p>
           <p
             className={`${FG_R} mt-3 text-[15px] text-[#6a7282] max-w-[28em] mx-auto`}
           >
-            Link copied. Same kit. Same connected numbers. Ready for the inbox.
+            On its way
           </p>
           <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#ead9b8] bg-[#fff6eb] text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
