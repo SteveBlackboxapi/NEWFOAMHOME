@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useId, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 import {
@@ -331,17 +331,68 @@ function toColorInputValue(hex: string): string {
   return /^#[0-9a-fA-F]{6}$/.test(hex) ? hex : "#ffffff";
 }
 
-function CaptionPanel({
+function CaptionSlidersIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 7h10M14 7a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM4 17h6M10 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM20 17H14M20 7h-2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CaptionRailSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className="border-b border-border px-4 py-4 last:border-b-0">
+      <p className={`${FG_M} mb-3 text-[13px] text-text`}>{title}</p>
+      <div className="flex flex-col gap-3">{children}</div>
+    </section>
+  );
+}
+
+function CaptionRailField({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5">
+      <span className={`${FG_R} text-[12px] text-muted`}>{label}</span>
+      {children}
+    </label>
+  );
+}
+
+const RAIL_INPUT = `${FG_R} w-full rounded-[8px] border border-border bg-white px-3 py-2 text-[14px] text-text placeholder:text-subtle disabled:opacity-50`;
+const RAIL_RANGE = "w-full accent-[var(--brand)] disabled:opacity-50";
+
+/**
+ * Explore Filters-style left rail for caption controls.
+ * Vertical stacked sections + sticky Reset / Done footer.
+ */
+function CaptionRail({
   settings,
   onChange,
+  onReset,
+  onDone,
   tileLabel,
-  embedded = false,
 }: {
   settings: TileCaptionSettings;
   onChange: (next: TileCaptionSettings) => void;
+  onReset: () => void;
+  onDone: () => void;
   tileLabel: string;
-  /** When true, drop outer card chrome (parent already frames the workspace). */
-  embedded?: boolean;
 }) {
   const panelId = useId();
 
@@ -350,168 +401,173 @@ function CaptionPanel({
   };
 
   return (
-    <div
-      className={
-        embedded
-          ? "min-w-0"
-          : "rounded-[12px] border border-border bg-surface px-4 py-4 md:px-5"
-      }
+    <aside
+      className="flex h-full min-h-0 w-full flex-col border-border bg-white md:w-[300px] md:shrink-0 md:border-r"
+      aria-label="Caption controls"
     >
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <div>
-          <p className={`${FG_M} text-[11px] uppercase tracking-[1.2px] text-subtle`}>
-            Caption
-          </p>
-          <p className={`${FG_R} text-[12px] text-muted mt-0.5`}>{tileLabel}</p>
+      <div className="flex items-center gap-2 border-b border-border px-4 py-3.5">
+        <span className="text-text" aria-hidden>
+          <CaptionSlidersIcon />
+        </span>
+        <div className="min-w-0">
+          <p className={`${FG_M} text-[15px] text-text`}>Caption</p>
+          <p className={`${FG_R} truncate text-[12px] text-muted`}>{tileLabel}</p>
         </div>
-        <label className="inline-flex items-center gap-2 cursor-pointer select-none">
-          <span className={`${FG_M} text-[12px] text-muted`}>Visible</span>
-          <input
-            type="checkbox"
-            checked={settings.visible}
-            onChange={(e) => patch({ visible: e.target.checked })}
-            className="size-4 accent-[var(--brand)]"
-            aria-describedby={panelId}
-          />
-        </label>
       </div>
 
-      <div id={panelId} className="grid gap-3 sm:grid-cols-2">
-        <label className="sm:col-span-2 flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>Text</span>
-          <input
-            type="text"
-            value={settings.text}
-            onChange={(e) => patch({ text: e.target.value })}
-            disabled={!settings.visible}
-            placeholder="Caption or slogan"
-            className={`${FG_R} w-full rounded-[8px] border border-border bg-[#faf8f5] px-3 py-2 text-[14px] text-text placeholder:text-subtle disabled:opacity-50`}
-          />
-        </label>
-
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>
-            Vertical · {settings.y}%
-          </span>
-          <input
-            type="range"
-            min={10}
-            max={90}
-            step={1}
-            value={settings.y}
-            disabled={!settings.visible}
-            onChange={(e) => patch({ y: Number(e.target.value) })}
-            className="w-full accent-[var(--brand)] disabled:opacity-50"
-          />
-        </label>
-
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>
-            Horizontal · {settings.x}%
-          </span>
-          <input
-            type="range"
-            min={10}
-            max={90}
-            step={1}
-            value={settings.x}
-            disabled={!settings.visible}
-            onChange={(e) => patch({ x: Number(e.target.value) })}
-            className="w-full accent-[var(--brand)] disabled:opacity-50"
-          />
-        </label>
-
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>Font</span>
-          <select
-            value={settings.font}
-            disabled={!settings.visible}
-            onChange={(e) =>
-              patch({ font: e.target.value as CaptionFontFamily })
-            }
-            className={`${FG_R} w-full rounded-[8px] border border-border bg-[#faf8f5] px-3 py-2 text-[14px] text-text disabled:opacity-50`}
-          >
-            {CAPTION_FONT_OPTIONS.map((f) => (
-              <option key={f.id} value={f.id}>
-                {f.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>
-            Size · {settings.size}px
-          </span>
-          <input
-            type="range"
-            min={10}
-            max={36}
-            step={1}
-            value={settings.size}
-            disabled={!settings.visible}
-            onChange={(e) => patch({ size: Number(e.target.value) })}
-            className="w-full accent-[var(--brand)] disabled:opacity-50"
-          />
-        </label>
-
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>Fill colour</span>
-          <div className="flex items-center gap-2">
+      <div id={panelId} className="min-h-0 flex-1 overflow-y-auto">
+        <CaptionRailSection title="Visibility">
+          <label className="inline-flex cursor-pointer select-none items-center gap-2.5">
             <input
-              type="color"
-              value={toColorInputValue(settings.fill)}
-              disabled={!settings.visible}
-              onChange={(e) => patch({ fill: e.target.value })}
-              className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
+              type="checkbox"
+              checked={settings.visible}
+              onChange={(e) => patch({ visible: e.target.checked })}
+              className="size-4 accent-[var(--brand)]"
             />
+            <span className={`${FG_R} text-[14px] text-text`}>Show caption</span>
+          </label>
+        </CaptionRailSection>
+
+        <CaptionRailSection title="Text">
+          <CaptionRailField label="Caption or slogan">
             <input
               type="text"
-              value={settings.fill}
+              value={settings.text}
+              onChange={(e) => patch({ text: e.target.value })}
               disabled={!settings.visible}
-              onChange={(e) => patch({ fill: e.target.value })}
-              className={`${FG_R} flex-1 rounded-[8px] border border-border bg-[#faf8f5] px-2.5 py-2 text-[13px] text-text disabled:opacity-50`}
+              placeholder="Caption or slogan"
+              className={RAIL_INPUT}
             />
-          </div>
-        </label>
+          </CaptionRailField>
+        </CaptionRailSection>
 
-        <label className="flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>Outline colour</span>
-          <div className="flex items-center gap-2">
+        <CaptionRailSection title="Position">
+          <CaptionRailField label={`Vertical · ${settings.y}%`}>
             <input
-              type="color"
-              value={toColorInputValue(settings.stroke)}
+              type="range"
+              min={10}
+              max={90}
+              step={1}
+              value={settings.y}
               disabled={!settings.visible}
-              onChange={(e) => patch({ stroke: e.target.value })}
-              className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
+              onChange={(e) => patch({ y: Number(e.target.value) })}
+              className={RAIL_RANGE}
             />
+          </CaptionRailField>
+          <CaptionRailField label={`Horizontal · ${settings.x}%`}>
             <input
-              type="text"
-              value={settings.stroke}
+              type="range"
+              min={10}
+              max={90}
+              step={1}
+              value={settings.x}
               disabled={!settings.visible}
-              onChange={(e) => patch({ stroke: e.target.value })}
-              className={`${FG_R} flex-1 rounded-[8px] border border-border bg-[#faf8f5] px-2.5 py-2 text-[13px] text-text disabled:opacity-50`}
+              onChange={(e) => patch({ x: Number(e.target.value) })}
+              className={RAIL_RANGE}
             />
-          </div>
-        </label>
+          </CaptionRailField>
+        </CaptionRailSection>
 
-        <label className="sm:col-span-2 flex flex-col gap-1.5">
-          <span className={`${FG_M} text-[11px] text-subtle`}>
-            Outline width · {settings.strokeWidth}px
-          </span>
-          <input
-            type="range"
-            min={0}
-            max={6}
-            step={0.5}
-            value={settings.strokeWidth}
-            disabled={!settings.visible}
-            onChange={(e) => patch({ strokeWidth: Number(e.target.value) })}
-            className="w-full accent-[var(--brand)] disabled:opacity-50"
-          />
-        </label>
+        <CaptionRailSection title="Type">
+          <CaptionRailField label="Font">
+            <select
+              value={settings.font}
+              disabled={!settings.visible}
+              onChange={(e) =>
+                patch({ font: e.target.value as CaptionFontFamily })
+              }
+              className={RAIL_INPUT}
+            >
+              {CAPTION_FONT_OPTIONS.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.label}
+                </option>
+              ))}
+            </select>
+          </CaptionRailField>
+          <CaptionRailField label={`Size · ${settings.size}px`}>
+            <input
+              type="range"
+              min={10}
+              max={36}
+              step={1}
+              value={settings.size}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ size: Number(e.target.value) })}
+              className={RAIL_RANGE}
+            />
+          </CaptionRailField>
+        </CaptionRailSection>
+
+        <CaptionRailSection title="Colour">
+          <CaptionRailField label="Fill">
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={toColorInputValue(settings.fill)}
+                disabled={!settings.visible}
+                onChange={(e) => patch({ fill: e.target.value })}
+                className="size-9 cursor-pointer rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50"
+              />
+              <input
+                type="text"
+                value={settings.fill}
+                disabled={!settings.visible}
+                onChange={(e) => patch({ fill: e.target.value })}
+                className={`${RAIL_INPUT} flex-1`}
+              />
+            </div>
+          </CaptionRailField>
+          <CaptionRailField label="Outline">
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={toColorInputValue(settings.stroke)}
+                disabled={!settings.visible}
+                onChange={(e) => patch({ stroke: e.target.value })}
+                className="size-9 cursor-pointer rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50"
+              />
+              <input
+                type="text"
+                value={settings.stroke}
+                disabled={!settings.visible}
+                onChange={(e) => patch({ stroke: e.target.value })}
+                className={`${RAIL_INPUT} flex-1`}
+              />
+            </div>
+          </CaptionRailField>
+          <CaptionRailField label={`Outline width · ${settings.strokeWidth}px`}>
+            <input
+              type="range"
+              min={0}
+              max={6}
+              step={0.5}
+              value={settings.strokeWidth}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ strokeWidth: Number(e.target.value) })}
+              className={RAIL_RANGE}
+            />
+          </CaptionRailField>
+        </CaptionRailSection>
       </div>
-    </div>
+
+      <div className="sticky bottom-0 z-[1] flex items-center justify-between gap-3 border-t border-border bg-white px-4 py-3">
+        <button
+          type="button"
+          onClick={onReset}
+          className={`${FG_M} text-[13px] text-muted transition-colors hover:text-text`}
+        >
+          Reset caption
+        </button>
+        <button
+          type="button"
+          onClick={onDone}
+          className={`${FG_M} rounded-[8px] bg-brand px-4 py-2 text-[13px] text-white transition-colors hover:bg-brand-hover`}
+        >
+          Done
+        </button>
+      </div>
+    </aside>
   );
 }
 
@@ -589,7 +645,6 @@ function DetailPanel({
   onClose: () => void;
 }) {
   const titleId = useId();
-  const captionWorkspaceRef = useRef<HTMLDivElement>(null);
   const [activeTile, setActiveTile] = useState(0);
   const [captions, setCaptions] = useState<TileCaptionSettings[]>(() =>
     talent.content.map((tile, i) =>
@@ -623,24 +678,21 @@ function DetailPanel({
     saveCaptionOverride(talent.id, index, next);
   };
 
-  const selectTile = (index: number) => {
-    setActiveTile(index);
-    // Keep preview + controls in view when picking a tile further down the sheet.
-    requestAnimationFrame(() => {
-      captionWorkspaceRef.current?.scrollIntoView({
-        block: "nearest",
-        behavior: "smooth",
-      });
-    });
+  const resetCaption = () => {
+    const tile = talent.content[activeTile];
+    if (!tile) return;
+    updateCaption(activeTile, resolveCaptionSettings(tile));
   };
 
-  const activeCaption = captions[activeTile] ?? resolveCaptionSettings(
-    talent.content[activeTile] ?? talent.content[0],
-  );
+  const activeCaption =
+    captions[activeTile] ??
+    resolveCaptionSettings(talent.content[activeTile] ?? talent.content[0]);
+
+  const activeTileData = talent.content[activeTile] ?? talent.content[0];
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-end md:items-center justify-center p-0 md:p-6"
+      className="fixed inset-0 z-40 flex items-end justify-center p-0 md:items-center md:p-5"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -651,155 +703,150 @@ function DetailPanel({
         aria-label="Close detail"
         onClick={onClose}
       />
-      <div className="relative z-10 w-full md:max-w-[980px] max-h-[92vh] overflow-y-auto rounded-t-[20px] md:rounded-[20px] border border-border bg-[#faf8f5] shadow-[0_24px_64px_rgba(16,24,40,0.28)]">
-        <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-border bg-[#faf8f5]/95 px-5 md:px-7 h-14 backdrop-blur-sm">
-          <span className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle`}>
-            Profile · {talent.id}
-          </span>
+      <div className="relative z-10 flex h-[94vh] w-full max-h-[940px] flex-col overflow-hidden rounded-t-[20px] border border-border bg-[#f7f4ef] shadow-[0_24px_64px_rgba(16,24,40,0.28)] md:h-[min(92vh,900px)] md:max-w-[1120px] md:rounded-[20px]">
+        <div className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-white px-5 md:px-6">
+          <div className="min-w-0">
+            <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle`}>
+              Lab · Caption editor
+            </p>
+            <h2
+              id={titleId}
+              className={`${FG_SB} truncate text-[16px] tracking-[-0.2px] text-text`}
+            >
+              {talent.displayName}
+            </h2>
+          </div>
           <button
             type="button"
             onClick={onClose}
-            className={`${FG_M} text-[13px] text-muted hover:text-text transition-colors`}
+            className={`${FG_M} shrink-0 text-[13px] text-muted transition-colors hover:text-text`}
           >
             Close
           </button>
         </div>
 
-        <div className="grid md:grid-cols-[260px_1fr] gap-0 md:gap-8 p-5 md:p-7">
-          <div className="order-2 md:order-1 mt-8 md:mt-0">
-            <div className="aspect-[4/5] rounded-[14px] overflow-hidden bg-raised border border-border mb-4 relative">
-              <img
-                src={talent.portrait}
-                alt=""
-                className="size-full object-cover"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/50 to-transparent" />
-            </div>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1px] text-subtle mb-1`}>
-              Motion
-            </p>
-            <p className={`${FG_R} text-[14px] text-muted mb-4`}>
-              {talent.motionStatus === "ready" && talent.motion
-                ? "Short loop attached"
-                : "Placeholder · clip thumbs stand in until a loop is ready"}
-            </p>
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1px] text-subtle mb-2`}>
-              Platforms
-            </p>
-            <ul className="flex flex-col gap-2 mb-1">
-              {talent.platforms.map((p) => (
-                <li
-                  key={`${p.network}-${p.handle}`}
-                  className="flex items-center justify-between gap-3 rounded-[10px] border border-border bg-surface px-3 py-2.5"
-                >
-                  <div className="min-w-0">
-                    <p className={`${FG_M} text-[13px] text-text`}>
-                      {NETWORK_LABEL[p.network]}
-                    </p>
-                    <p className={`${FG_R} text-[12px] text-subtle truncate`}>
-                      {p.handle}
-                    </p>
-                  </div>
-                  <span className={`${FG_SB} text-[14px] text-text shrink-0`}>
-                    {formatAudience(p.followers)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Explore-shaped shell: left caption rail, right live preview */}
+        <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+          {/* Mobile: preview first so the edited tile stays in view while scrolling controls */}
+          <div className="order-1 min-h-0 flex-1 overflow-y-auto md:order-2">
+            <div className="px-5 py-5 md:px-8 md:py-6">
+              <p
+                className={`${FG_M} mb-1 text-[11px] uppercase tracking-[1.6px] text-brand`}
+              >
+                Live preview
+              </p>
+              <p className={`${FG_R} mb-4 max-w-[48ch] text-[14px] text-muted`}>
+                Adjust caption on the left. Changes show on this tile as you edit.
+              </p>
 
-          <div className="order-1 md:order-2">
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-brand mb-2`}>
-              Staged talent
-            </p>
-            <h2
-              id={titleId}
-              className={`${FG_SB} text-[32px] md:text-[40px] leading-[1.05] tracking-[-1.2px] text-text mb-3`}
-            >
-              {talent.displayName}
-            </h2>
-            <p className={`${FG_R} text-[15px] text-muted mb-4`}>
-              {talent.location} · {talent.age} · total{" "}
-              <span className={`${FG_M} text-text`}>
-                {formatAudience(talent.totalAudience)}
-              </span>
-            </p>
-            <div className="flex flex-wrap gap-1.5 mb-5">
-              {talent.verticals.map((v) => (
-                <span
-                  key={v}
-                  className={`${FG_M} rounded-full border border-brand/20 bg-brand-light px-2.5 py-1 text-[11px] text-brand`}
-                >
-                  {v}
-                </span>
-              ))}
-            </div>
-
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle mb-2`}>
-              Explore cards · {talent.content.length}
-            </p>
-            <p className={`${FG_R} text-[13px] text-muted mb-3`}>
-              Select a tile below. Live preview and caption controls stay together
-              in view while you edit.
-            </p>
-
-            {/* Sticky caption workspace: live preview + controls in one view */}
-            <div
-              ref={captionWorkspaceRef}
-              className="sticky top-14 z-[5] -mx-1 mb-4 rounded-[14px] border border-border bg-[#faf8f5]/95 p-3 shadow-[0_8px_24px_rgba(16,24,40,0.08)] backdrop-blur-sm sm:p-4"
-            >
-              <div className="flex max-h-[min(70vh,calc(92vh-4.5rem))] flex-col gap-3 overflow-y-auto md:grid md:grid-cols-[minmax(140px,200px)_minmax(0,1fr)] md:items-start md:gap-4">
-                <div className="mx-auto w-[min(100%,180px)] shrink-0 md:mx-0 md:w-full">
-                  <p
-                    className={`${FG_M} mb-2 text-[10px] uppercase tracking-[1.2px] text-subtle`}
-                  >
-                    Live preview
-                  </p>
-                  <ExploreCard
-                    tile={talent.content[activeTile] ?? talent.content[0]}
-                    portrait={talent.portrait}
-                    name={talent.displayName}
-                    caption={activeCaption}
-                  />
-                </div>
-                <CaptionPanel
-                  embedded
-                  settings={activeCaption}
-                  onChange={(next) => updateCaption(activeTile, next)}
-                  tileLabel={`Tile ${activeTile + 1} · ${talent.content[activeTile]?.platform ?? ""}`}
-                />
-              </div>
-            </div>
-
-            <p className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1.2px] text-subtle`}>
-              Choose tile
-            </p>
-            <div className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-4">
-              {talent.content.map((tile, i) => (
+              <div className="mx-auto mb-6 w-full max-w-[280px] sm:max-w-[320px] md:mx-0 md:max-w-[300px]">
                 <ExploreCard
-                  key={`${talent.id}-tile-${i}`}
-                  tile={tile}
+                  tile={activeTileData}
                   portrait={talent.portrait}
                   name={talent.displayName}
-                  caption={captions[i] ?? resolveCaptionSettings(tile)}
-                  selected={activeTile === i}
-                  onSelect={() => selectTile(i)}
+                  caption={activeCaption}
                 />
-              ))}
-            </div>
+              </div>
 
-            <p className={`${FG_R} text-[16px] leading-7 text-text/90 mb-8 max-w-[52ch]`}>
-              {talent.bio}
-            </p>
+              <p
+                className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1.2px] text-subtle`}
+              >
+                Choose tile · {talent.content.length}
+              </p>
+              <div className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5">
+                {talent.content.map((tile, i) => (
+                  <ExploreCard
+                    key={`${talent.id}-tile-${i}`}
+                    tile={tile}
+                    portrait={talent.portrait}
+                    name={talent.displayName}
+                    caption={captions[i] ?? resolveCaptionSettings(tile)}
+                    selected={activeTile === i}
+                    onSelect={() => setActiveTile(i)}
+                  />
+                ))}
+              </div>
 
-            <div className="rounded-[12px] border border-dashed border-border-dark bg-surface/70 px-4 py-3">
-              <p className={`${FG_M} text-[11px] uppercase tracking-[1.2px] text-subtle mb-1`}>
-                Fields for reuse
+              <div className="mb-6 flex flex-wrap items-center gap-3 rounded-[12px] border border-border bg-white p-3">
+                <img
+                  src={talent.portrait}
+                  alt=""
+                  className="size-12 rounded-[10px] object-cover"
+                />
+                <div className="min-w-0">
+                  <p className={`${FG_M} text-[14px] text-text`}>
+                    {talent.displayName}
+                  </p>
+                  <p className={`${FG_R} text-[12px] text-muted`}>
+                    {talent.location} · {talent.age} ·{" "}
+                    {formatAudience(talent.totalAudience)}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-1.5 sm:ml-auto">
+                  {talent.verticals.slice(0, 3).map((v) => (
+                    <span
+                      key={v}
+                      className={`${FG_M} rounded-full border border-brand/20 bg-brand-light px-2.5 py-1 text-[11px] text-brand`}
+                    >
+                      {v}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <p className={`${FG_R} mb-6 max-w-[52ch] text-[15px] leading-7 text-text/90`}>
+                {talent.bio}
               </p>
-              <p className={`${FG_R} text-[12px] leading-5 text-muted break-all`}>
-                {FIELD_HINT.join(" · ")}
-              </p>
+
+              <div className="mb-4">
+                <p
+                  className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1px] text-subtle`}
+                >
+                  Platforms
+                </p>
+                <ul className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
+                  {talent.platforms.map((p) => (
+                    <li
+                      key={`${p.network}-${p.handle}`}
+                      className="flex items-center justify-between gap-3 rounded-[10px] border border-border bg-white px-3 py-2.5"
+                    >
+                      <div className="min-w-0">
+                        <p className={`${FG_M} text-[13px] text-text`}>
+                          {NETWORK_LABEL[p.network]}
+                        </p>
+                        <p className={`${FG_R} truncate text-[12px] text-subtle`}>
+                          {p.handle}
+                        </p>
+                      </div>
+                      <span className={`${FG_SB} shrink-0 text-[14px] text-text`}>
+                        {formatAudience(p.followers)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-[12px] border border-dashed border-border-dark bg-white/70 px-4 py-3">
+                <p
+                  className={`${FG_M} mb-1 text-[11px] uppercase tracking-[1.2px] text-subtle`}
+                >
+                  Fields for reuse
+                </p>
+                <p className={`${FG_R} break-all text-[12px] leading-5 text-muted`}>
+                  {FIELD_HINT.join(" · ")}
+                </p>
+              </div>
             </div>
+          </div>
+
+          <div className="order-2 max-h-[48vh] shrink-0 border-t border-border md:order-1 md:h-full md:max-h-none md:border-t-0">
+            <CaptionRail
+              settings={activeCaption}
+              onChange={(next) => updateCaption(activeTile, next)}
+              onReset={resetCaption}
+              onDone={onClose}
+              tileLabel={`Tile ${activeTile + 1} · ${activeTileData?.platform ?? ""}`}
+            />
           </div>
         </div>
       </div>
