@@ -291,36 +291,6 @@
   flex-direction: column;
   gap: 14px;
 }
-.ks-chapters {
-  position: absolute;
-  z-index: 35;
-  bottom: 9px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px;
-  background: #ffffffee;
-  border: 1px solid #e6e8ec;
-  border-radius: 40px;
-  box-shadow: 0 3px 15px #10182806;
-  white-space: nowrap;
-}
-.ks-chapters button {
-  font-size: 10px;
-  padding: 6px 10px;
-  border-radius: 25px;
-  color: #6a7282;
-}
-.ks-chapters button[aria-current="step"] {
-  color: #7a0036;
-  background: #f2e2dd;
-}
-.ks-chapters button:focus-visible {
-  outline: 2px solid #155fef;
-  outline-offset: 2px;
-}
 @media (max-width: 1150px) {
   .ks-kit {
     margin: 18px;
@@ -361,15 +331,6 @@
     padding: 22px 16px;
   }
 }
-@media (max-height: 650px) {
-  .ks-chapters {
-    bottom: 3px;
-  }
-  .ks-chapters button {
-    padding: 3px 8px;
-  }
-}
-
 @media (max-height: 650px) {
   .ks-sidebar-inner {
     padding-block: 16px;

@@ -1,6 +1,7 @@
 import {
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
   useSyncExternalStore,
@@ -24,10 +25,11 @@ import {
 } from "../components/KitDetails";
 import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
 import {
-  KIT_CHAPTERS,
   kitPan,
+  kitRevealStarts,
   kitStoryTimeline,
   type KitPanTargets,
+  type KitRevealLayout,
 } from "../lib/kitStoryMotion";
 import "./kit-story.css";
 
@@ -429,6 +431,9 @@ function KitStoryDesktop() {
     growth: 0,
     audience: 0,
   });
+  const [revealLayout, setRevealLayout] = useState<KitRevealLayout | null>(
+    null,
+  );
 
   useLayoutEffect(() => {
     const el = track.current;
@@ -445,6 +450,13 @@ function KitStoryDesktop() {
       const bodyRect = body.getBoundingClientRect();
       const maxPan = Math.max(0, body.offsetHeight - panel.clientHeight);
       const next = {} as KitPanTargets;
+      const nextReveal: KitRevealLayout = {
+        viewportHeight: panel.clientHeight,
+        platforms: 0,
+        metrics: 0,
+        growth: 0,
+        audience: 0,
+      };
       for (const key of [
         "platforms",
         "content",
@@ -456,6 +468,9 @@ function KitStoryDesktop() {
           `[data-kit-section="${key}"]`,
         );
         const rect = section?.getBoundingClientRect();
+        if (key !== "content" && rect) {
+          nextReveal[key] = rect.top - bodyRect.top;
+        }
         next[key] = rect
           ? clamp(
               rect.top -
@@ -476,6 +491,18 @@ function KitStoryDesktop() {
         )
           ? previous
           : next,
+      );
+      setRevealLayout((previous) =>
+        previous &&
+        Object.keys(nextReveal).every(
+          (key) =>
+            Math.abs(
+              previous[key as keyof KitRevealLayout] -
+                nextReveal[key as keyof KitRevealLayout],
+            ) < 0.25,
+        )
+          ? previous
+          : nextReveal,
       );
       const s = stage.current?.getBoundingClientRect();
       const w = well.current?.getBoundingClientRect();
@@ -541,7 +568,11 @@ function KitStoryDesktop() {
       behavior: "instant",
     });
   };
-  const timeline = kitStoryTimeline(p);
+  const revealStarts = useMemo(
+    () => (revealLayout ? kitRevealStarts(targets, revealLayout) : undefined),
+    [targets, revealLayout],
+  );
+  const timeline = kitStoryTimeline(p, revealStarts);
   const {
     pack,
     aimShare,
@@ -687,6 +718,7 @@ function KitStoryDesktop() {
                     <section
                       className="ks-platforms"
                       data-kit-section="platforms"
+                      data-progress={timeline.platforms}
                       aria-label="Platform audience"
                     >
                       <KitEditHandle />
@@ -1005,27 +1037,6 @@ function KitStoryDesktop() {
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill={BURGUNDY} />
             <path d="M44 40 L114 6 L60 40 Z" fill={CREAM} />
           </svg>
-          {kitVisible && (
-            <nav className="ks-chapters" aria-label="Media kit story chapters">
-              {KIT_CHAPTERS.map((chapter, index) => (
-                <button
-                  key={chapter.label}
-                  type="button"
-                  aria-current={
-                    p >= [0, 0.19, 0.315, 0.415, 0.54, 0.665, 0.795][index] &&
-                    p <
-                      ([0, 0.19, 0.315, 0.415, 0.54, 0.665, 0.795][index + 1] ??
-                        1)
-                      ? "step"
-                      : undefined
-                  }
-                  onClick={() => jumpTo(chapter.progress)}
-                >
-                  {chapter.label}
-                </button>
-              ))}
-            </nav>
-          )}
         </div>
       </section>
 

@@ -36,6 +36,11 @@
   margin: 0;
 }
 
+.ka-metrics {
+  --ka-ink: #101828;
+  --ka-muted: #667085;
+}
+
 .ka-account-header {
   display: flex;
   align-items: center;
@@ -66,7 +71,7 @@
   font-size: 20px;
   line-height: 1.1;
   font-weight: 600;
-  color: var(--ka-burgundy);
+  color: var(--ka-ink);
 }
 
 .ka-account-identity p {
@@ -101,36 +106,54 @@
 }
 
 .ka-metric-card {
-  padding: 19px 21px 20px;
+  position: relative;
+  display: grid;
+  align-content: center;
+  row-gap: 5px;
+  min-height: 112px;
+  padding: 22px 52px 22px 82px;
+  border: 0;
 }
 
 .ka-metric-card dt {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  font-size: 13px;
-  line-height: 1.2;
-  color: var(--ka-muted);
+  grid-row: 2;
+  font-size: 14px;
+  line-height: 1.25;
+  color: #344054;
+  text-transform: capitalize;
 }
 
 .ka-icon-box {
+  position: absolute;
+  left: 21px;
+  top: 50%;
+  transform: translateY(-50%);
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  border: 1px solid #d7bac7;
-  background: #fff9f4;
-  color: var(--ka-burgundy);
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  background: #eedfd9;
+  color: #785e68;
 }
 
 .ka-metric-card dd {
-  padding-top: 16px;
-  font-size: clamp(30px, 4.4cqw, 40px);
+  grid-row: 1;
+  min-width: 0;
+  font-size: clamp(34px, 5cqw, 44px);
   line-height: 1;
   letter-spacing: -1.2px;
   font-weight: 600;
+  color: var(--ka-ink);
+}
+
+.ka-metric-shield {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 22px;
   color: var(--ka-burgundy);
 }
 
@@ -325,6 +348,13 @@
   }
 }
 
+@container (max-width: 480px) {
+  .ka-metric-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 @container (max-width: 400px) {
   .ka-account-identity p > span:last-child {
     display: block;
@@ -333,24 +363,21 @@
     display: none;
   }
   .ka-metric-card {
-    padding: 14px;
-  }
-  .ka-metric-card dt {
-    gap: 8px;
-    font-size: 11px;
+    min-height: 104px;
+    padding: 20px 48px 20px 72px;
   }
   .ka-icon-box {
-    width: 28px;
-    height: 28px;
+    left: 18px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
   }
   .ka-icon-box svg {
-    width: 17px;
-    height: 17px;
+    width: 20px;
+    height: 20px;
   }
   .ka-metric-card dd {
-    font-size: 30px;
-    padding-top: 14px;
+    font-size: 34px;
   }
   .ka-growth-card {
     padding: 20px 16px 18px;

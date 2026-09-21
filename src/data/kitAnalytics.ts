@@ -79,8 +79,9 @@ export function kitBarProgress(
   index: number,
   count: number,
 ): number {
-  const start = count > 1 ? (index / (count - 1)) * 0.25 : 0;
-  return clampKitProgress((clampKitProgress(progress) - start) / 0.75);
+  // Every visible row starts moving together; stagger completion, not its start.
+  const finish = count > 1 ? 0.75 + (index / (count - 1)) * 0.25 : 1;
+  return clampKitProgress(clampKitProgress(progress) / finish);
 }
 
 const compactNumber = new Intl.NumberFormat("en-US", {

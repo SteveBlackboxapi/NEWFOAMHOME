@@ -7,15 +7,50 @@ export const smoothProgress = (p: number) => {
   return t * t * (3 - 2 * t);
 };
 
+export type KitRevealStarts = {
+  platforms: number;
+  metrics: number;
+  growth: number;
+  audience: number;
+};
+
+export type KitRevealLayout = KitRevealStarts & { viewportHeight: number };
+
+// Start early until the real section positions have been measured.
+const DEFAULT_REVEAL_STARTS: KitRevealStarts = {
+  platforms: 0.08,
+  metrics: 0.34,
+  growth: 0.45,
+  audience: 0.56,
+};
+const REVEAL_ENDS: KitRevealStarts = {
+  platforms: 0.31,
+  metrics: 0.535,
+  growth: 0.66,
+  audience: 0.78,
+};
+
 /** Every value is a pure function of scroll position: no playback clocks or one-shot flags. */
-export function kitStoryTimeline(value: number) {
+export function kitStoryTimeline(
+  value: number,
+  revealStarts?: Partial<KitRevealStarts>,
+) {
   const p = clampProgress(value);
+  const reveal = (section: keyof KitRevealStarts) => {
+    const end = REVEAL_ENDS[section];
+    const supplied = revealStarts?.[section];
+    const start =
+      supplied !== undefined && Number.isFinite(supplied)
+        ? Math.max(0, Math.min(end - 0.001, supplied))
+        : DEFAULT_REVEAL_STARTS[section];
+    return progressBetween(p, start, end);
+  };
   return {
     pack: smoothProgress(progressBetween(p, 0.015, 0.14)),
-    platforms: progressBetween(p, 0.255, 0.31),
-    metrics: progressBetween(p, 0.475, 0.535),
-    growth: progressBetween(p, 0.585, 0.66),
-    audience: progressBetween(p, 0.71, 0.78),
+    platforms: reveal("platforms"),
+    metrics: reveal("metrics"),
+    growth: reveal("growth"),
+    audience: reveal("audience"),
     aimShare: progressBetween(p, 0.795, 0.825),
     shareOpen: progressBetween(p, 0.825, 0.85),
     generated: progressBetween(p, 0.85, 0.87),
@@ -40,7 +75,7 @@ export type KitPanTargets = {
   audience: number;
 };
 
-/** Settle each panel before drawing its data. Targets come from measured layout, not percentages. */
+/** Measured pan stages include reading holds; counters span both movement and holds. */
 export function kitPan(value: number, targets: KitPanTargets) {
   const p = clampProgress(value);
   const segments = [
@@ -57,6 +92,39 @@ export function kitPan(value: number, targets: KitPanTargets) {
       from + (to - from) * smoothProgress(progressBetween(p, start, end));
   }
   return position;
+}
+
+/** Find when each section approaches the viewport, in the same scroll space as the pan. */
+export function kitRevealStarts(
+  targets: KitPanTargets,
+  layout: KitRevealLayout,
+): KitRevealStarts {
+  const starts = { ...DEFAULT_REVEAL_STARTS };
+  if (!Number.isFinite(layout.viewportHeight) || layout.viewportHeight <= 0)
+    return starts;
+  for (const section of Object.keys(starts) as (keyof KitRevealStarts)[]) {
+    const top = layout[section];
+    if (!Number.isFinite(top) || top < 0) continue;
+    const entryPan = Math.max(0, top - layout.viewportHeight - 70);
+    if (entryPan === 0) {
+      starts[section] = 0.08;
+      continue;
+    }
+    const end = REVEAL_ENDS[section];
+    if (!Number.isFinite(kitPan(end, targets)) || kitPan(end, targets) < entryPan)
+      continue;
+    let low = 0.08;
+    let high = end;
+    // kitPan is monotonic for measured document sections. Inverting it avoids
+    // restarting or flattening a count when the panel settles into a reading hold.
+    for (let step = 0; step < 48; step++) {
+      const middle = (low + high) / 2;
+      if (kitPan(middle, targets) >= entryPan) high = middle;
+      else low = middle;
+    }
+    starts[section] = Math.min(high, end - 0.001);
+  }
+  return starts;
 }
 
 export const KIT_CHAPTERS = [

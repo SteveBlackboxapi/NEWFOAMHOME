@@ -54,6 +54,22 @@ function MetricIcon({ name }: { name: KitMetricId }) {
   );
 }
 
+function MetricShield() {
+  return (
+    <svg className="ka-metric-shield" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 3h16v8c0 5.1-8 10-8 10S4 16.1 4 11V3Z" fill="currentColor" />
+      <path
+        d="m8 11 2.7 2.8L16.5 8"
+        fill="none"
+        stroke="#fff6eb"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function Counter({
   value,
   progress,
@@ -113,14 +129,13 @@ export function KitMetrics({
       <dl className="ka-metric-grid">
         {KIT_METRICS.map((metric) => (
           <div className="ka-metric-card" key={metric.id}>
-            <dt>
+            <dt>{metric.label}</dt>
+            <dd>
               <span className="ka-icon-box">
                 <MetricIcon name={metric.id} />
               </span>
-              <span>{metric.label}</span>
-            </dt>
-            <dd>
               <Counter value={metric.value} progress={p} />
+              <MetricShield />
             </dd>
           </div>
         ))}
@@ -278,7 +293,9 @@ function Distribution({
                   />
                 </span>
                 <span className="ka-percentage">
-                  <span aria-hidden="true">{Math.round(row.percent * p)}%</span>
+                  <span aria-hidden="true">
+                    {p > 0 ? Math.max(1, Math.round(row.percent * p)) : 0}%
+                  </span>
                   <span className="ka-sr-only">{row.percent}%</span>
                 </span>
               </dd>
