@@ -13,6 +13,7 @@ import {
   readCaption,
   writeCaption,
   readSaved,
+  readyVideoSources,
   SAVED_KEY,
   NETWORK_NAMES,
   SHORT_NAMES,
@@ -44,6 +45,8 @@ const EMPTY: Filters = {
 };
 const allAssets = stagedTalent.flatMap(assetsFor);
 const contentAssets = allAssets.filter((a) => a.tile);
+const imageAssetCount = allAssets.filter((asset) => !asset.tile?.video).length;
+const readyVideoCount = new Set(stagedTalent.flatMap(readyVideoSources)).size;
 const categories = [
   ...new Set(stagedTalent.flatMap((t) => t.verticals)),
 ].sort();
@@ -368,7 +371,13 @@ export function LabTalent() {
                 : "Your picks, ready for the next story."}
           </p>
           <span>
-            {stagedTalent.length} creators <i /> {allAssets.length} images
+            {stagedTalent.length} creators <i /> {imageAssetCount} images
+            {readyVideoCount > 0 && (
+              <>
+                <i /> {readyVideoCount}{" "}
+                {readyVideoCount === 1 ? "video" : "videos"}
+              </>
+            )}
           </span>
         </div>
         <section
@@ -729,7 +738,7 @@ export function LabTalent() {
                 </h2>
                 <p>
                   {view === "saved" && !saved.length
-                    ? "Save images from the talent library or content feed. They’ll be here when you need them."
+                    ? "Save images and videos from the talent library or content feed. They’ll be here when you need them."
                     : filters.kind === "video"
                       ? "Planned videos currently have a still image. Switch to Video planned to explore those assets."
                       : "Try another name, interest or combination of filters."}

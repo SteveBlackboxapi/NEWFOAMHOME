@@ -88,13 +88,13 @@ export type TalentContentTile = {
   type: "still" | "clip";
   thumb: string;
   /** Keep the photographed framing in the feed and exports. */
-  aspectRatio?: "9/16" | "4/5";
+  aspectRatio?: "9/16" | "4/5" | "16/9";
   /** Preserved image from the earlier character set. */
   original?: string;
   generation?: { version: string; approach: string; prompt?: string };
   /** Playable source, when available. A clip thumbnail alone is not a video. */
   video?: string;
-  views: number;
+  views?: number;
   /** Default caption text; used when captionSettings.text is unset */
   caption?: string;
   /** Optional caption style defaults for this tile */
@@ -306,6 +306,21 @@ export const stagedTalent: StagedTalent[] = [
           version: "Realism v2",
           approach:
             "Unstyled haircare detail with everyday wear; unpublished demo asset.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${A}/io-portrait-poster.webp`,
+        video: `${A}/io-portrait-web.mp4`,
+        aspectRatio: "16/9",
+        caption: "Samantha · portrait in motion",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Original motion",
+          approach:
+            "Existing 15-second portrait video (960 × 540, 24 fps, no audio), preserved from the original site. No new animation has been generated.",
         },
       },
     ],

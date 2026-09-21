@@ -14,8 +14,10 @@ import {
   downloadArchivedOriginal,
   downloadCaptioned,
   downloadOriginal,
+  downloadVideo,
   exportData,
   profileData,
+  readyVideoSources,
   type LabAsset,
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
@@ -286,16 +288,13 @@ export function TalentLabProfile({
                   <span>Total audience</span>
                 </div>
                 <div>
-                  <strong>{assets.length}</strong>
+                  <strong>
+                    {assets.filter((asset) => !asset.tile?.video).length}
+                  </strong>
                   <span>Image assets</span>
                 </div>
                 <div>
-                  <strong>
-                    {talent.content.filter((c) => c.video).length +
-                      (talent.motion && talent.motionStatus === "ready"
-                        ? 1
-                        : 0)}
-                  </strong>
+                  <strong>{readyVideoSources(talent).length}</strong>
                   <span>Ready videos</span>
                 </div>
               </div>
@@ -331,7 +330,11 @@ export function TalentLabProfile({
                     className="tl-profile-motion"
                     controls
                     preload="metadata"
-                    poster={talent.portrait}
+                    poster={
+                      talent.content.find(
+                        (tile) => tile.video === talent.motion,
+                      )?.thumb || talent.portrait
+                    }
                     src={talent.motion}
                     aria-label={`${talent.displayName} profile video`}
                   />
@@ -493,11 +496,14 @@ export function TalentLabProfile({
                       poster={active.src}
                       controls
                       preload="metadata"
+                      aria-label={active.title}
                     />
                   ) : (
                     <img src={active.src} alt={active.title} />
                   )}
-                  {!showingOriginal && <Caption settings={caption} />}
+                  {!showingOriginal && !active.tile?.video && (
+                    <Caption settings={caption} />
+                  )}
                 </div>
                 <AIDisclosure className="tl-preview-disclosure" />
               </div>
@@ -507,7 +513,10 @@ export function TalentLabProfile({
                 target="_blank"
                 rel="noreferrer"
               >
-                <LabIcon name="external" size={13} /> Open full-size image
+                <LabIcon name="external" size={13} />
+                {active.tile?.video
+                  ? "Open full-size poster"
+                  : "Open full-size image"}
               </a>
               {assetKind(active) === "planned" && !showingOriginal && (
                 <p className="tl-placeholder-note">
@@ -546,13 +555,15 @@ export function TalentLabProfile({
                 </div>
                 <div>
                   <dt>Available file</dt>
-                  <dd>{active.tile?.video ? "Image + video" : "Image"}</dd>
+                  <dd>{active.tile?.video ? "Video + poster" : "Image"}</dd>
                 </div>
                 {active.tile && (
                   <>
                     <div>
                       <dt>Views</dt>
-                      <dd>{active.tile.views.toLocaleString()}</dd>
+                      <dd>
+                        {active.tile.views?.toLocaleString() ?? "Not supplied"}
+                      </dd>
                     </div>
                     <div>
                       <dt>Engagements</dt>
@@ -581,7 +592,7 @@ export function TalentLabProfile({
                   {caption && <p>Switch to Current to edit the caption.</p>}
                 </div>
               )}
-              {caption && !showingOriginal && (
+              {caption && !showingOriginal && !active.tile?.video && (
                 <section className="tl-caption-controls">
                   <div className="tl-control-heading">
                     <h3>Caption overlay</h3>
@@ -722,15 +733,27 @@ export function TalentLabProfile({
                 </section>
               )}
               <div className="tl-editor-downloads">
+                {active.tile?.video && (
+                  <button
+                    className="tl-button tl-primary"
+                    disabled={downloading}
+                    onClick={() => action(() => downloadVideo(active))}
+                  >
+                    <LabIcon name="download" size={16} />
+                    Download video
+                  </button>
+                )}
                 <button
                   className="tl-button"
                   disabled={downloading}
                   onClick={() => action(() => downloadOriginal(active))}
                 >
                   <LabIcon name="download" size={16} />
-                  {active.original
-                    ? "Download current image"
-                    : "Download image"}
+                  {active.tile?.video
+                    ? "Download poster"
+                    : active.original
+                      ? "Download current image"
+                      : "Download image"}
                 </button>
                 {active.original && (
                   <button
@@ -744,7 +767,7 @@ export function TalentLabProfile({
                     image
                   </button>
                 )}
-                {caption && !showingOriginal && (
+                {caption && !showingOriginal && !active.tile?.video && (
                   <button
                     className="tl-button tl-primary"
                     disabled={downloading}

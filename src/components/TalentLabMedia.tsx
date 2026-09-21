@@ -90,20 +90,24 @@ export function AssetCard({
             </span>
           )}
           <span className="tl-content-bottom">
-            {asset.tile && (
-              <span className="tl-metrics">
-                <span title="Views">
-                  <LabIcon name="eye" size={15} />
-                  {formatAudience(asset.tile.views)}
+            {asset.tile &&
+              (asset.tile.views !== undefined ||
+                asset.tile.engagements !== undefined) && (
+                <span className="tl-metrics">
+                  {asset.tile.views !== undefined && (
+                    <span title="Views">
+                      <LabIcon name="eye" size={15} />
+                      {formatAudience(asset.tile.views)}
+                    </span>
+                  )}
+                  {asset.tile.engagements !== undefined && (
+                    <span title="Engagements">
+                      <LabIcon name="heart" size={14} />
+                      {formatAudience(asset.tile.engagements)}
+                    </span>
+                  )}
                 </span>
-                {asset.tile.engagements !== undefined && (
-                  <span title="Engagements">
-                    <LabIcon name="heart" size={14} />
-                    {formatAudience(asset.tile.engagements)}
-                  </span>
-                )}
-              </span>
-            )}
+              )}
             <span className="tl-content-person">
               <img src={asset.talent.portrait} alt="" loading="lazy" />
               <span>{asset.talent.displayName}</span>

@@ -61,6 +61,17 @@ export function assetKind(asset: LabAsset) {
   return "still";
 }
 
+export function readyVideoSources(talent: StagedTalent): string[] {
+  return [
+    ...new Set([
+      ...talent.content.flatMap((tile) => (tile.video ? [tile.video] : [])),
+      ...(talent.motion && talent.motionStatus === "ready"
+        ? [talent.motion]
+        : []),
+    ]),
+  ];
+}
+
 /** Validate browser drafts so stale or malformed storage cannot break the editor. */
 export function cleanCaption(
   input: unknown,
@@ -261,6 +272,18 @@ export async function downloadOriginal(asset: LabAsset) {
   saveBlob(await response.blob(), assetFilename(asset));
 }
 
+export async function downloadVideo(asset: LabAsset) {
+  if (!asset.tile?.video)
+    throw new Error("No video is available for this asset.");
+  const response = await fetch(asset.tile.video);
+  if (
+    !response.ok ||
+    !(response.headers.get("content-type") || "").startsWith("video/")
+  )
+    throw new Error("The video could not be downloaded.");
+  saveBlob(await response.blob(), assetFilename(asset, asset.tile.video));
+}
+
 export async function downloadArchivedOriginal(asset: LabAsset) {
   if (!asset.original) throw new Error("No earlier original is available.");
   const response = await fetch(asset.original);
@@ -312,7 +335,11 @@ export async function downloadPack(
         src: reference.src,
       });
     }
-    if (talent.motion && talent.motionStatus === "ready")
+    if (
+      talent.motion &&
+      talent.motionStatus === "ready" &&
+      !jobs.some((job) => absolute(job.src) === absolute(talent.motion!))
+    )
       jobs.push({
         path: `${talent.id}/${talent.id}-motion.${extension(talent.motion)}`,
         src: talent.motion,
@@ -366,7 +393,10 @@ export async function downloadCaptioned(
   await document.fonts.ready;
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
-  canvas.height = asset.tile?.aspectRatio === "4/5" ? 1350 : 1920;
+  const [ratioWidth, ratioHeight] = (asset.tile?.aspectRatio || "9/16")
+    .split("/")
+    .map(Number);
+  canvas.height = Math.round((canvas.width * ratioHeight) / ratioWidth);
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Image export is unavailable in this browser.");
   const scale = Math.max(
