@@ -95,6 +95,23 @@ function fontCss(font: CaptionFontFamily): string {
 
 function captionOverlayStyle(settings: TileCaptionSettings): CSSProperties {
   const stroke = Math.max(0, settings.strokeWidth);
+  const strokeColor = settings.stroke;
+  // Prefer text-shadow outlines so fill colour stays visible across browsers
+  // (-webkit-text-stroke often eats the fill on thin display sizes).
+  const outlineShadows =
+    stroke > 0
+      ? [
+          `${stroke}px 0 0 ${strokeColor}`,
+          `-${stroke}px 0 0 ${strokeColor}`,
+          `0 ${stroke}px 0 ${strokeColor}`,
+          `0 -${stroke}px 0 ${strokeColor}`,
+          `${stroke}px ${stroke}px 0 ${strokeColor}`,
+          `-${stroke}px ${stroke}px 0 ${strokeColor}`,
+          `${stroke}px -${stroke}px 0 ${strokeColor}`,
+          `-${stroke}px -${stroke}px 0 ${strokeColor}`,
+        ].join(", ")
+      : "0 1px 2px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.25)";
+
   return {
     left: `${settings.x}%`,
     top: `${settings.y}%`,
@@ -102,13 +119,8 @@ function captionOverlayStyle(settings: TileCaptionSettings): CSSProperties {
     fontFamily: fontCss(settings.font),
     fontSize: `${settings.size}px`,
     color: settings.fill,
-    WebkitTextStroke:
-      stroke > 0 ? `${stroke}px ${settings.stroke}` : undefined,
-    paintOrder: stroke > 0 ? "stroke fill" : undefined,
-    textShadow:
-      stroke > 0
-        ? undefined
-        : "0 1px 2px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.25)",
+    WebkitTextFillColor: settings.fill,
+    textShadow: outlineShadows,
   };
 }
 
@@ -181,6 +193,8 @@ function CaptionOverlay({ settings }: { settings: TileCaptionSettings }) {
     <p
       className="absolute z-[2] max-w-[88%] px-1 text-center font-semibold leading-snug tracking-[-0.2px] pointer-events-none whitespace-pre-wrap break-words"
       style={captionOverlayStyle(settings)}
+      data-caption-visible={settings.visible ? "true" : "false"}
+      data-caption-font={settings.font}
     >
       {settings.text}
     </p>
@@ -313,6 +327,10 @@ function ExploreCard({
   );
 }
 
+function toColorInputValue(hex: string): string {
+  return /^#[0-9a-fA-F]{6}$/.test(hex) ? hex : "#ffffff";
+}
+
 function CaptionPanel({
   settings,
   onChange,
@@ -433,7 +451,7 @@ function CaptionPanel({
           <div className="flex items-center gap-2">
             <input
               type="color"
-              value={settings.fill}
+              value={toColorInputValue(settings.fill)}
               disabled={!settings.visible}
               onChange={(e) => patch({ fill: e.target.value })}
               className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
@@ -453,7 +471,7 @@ function CaptionPanel({
           <div className="flex items-center gap-2">
             <input
               type="color"
-              value={settings.stroke}
+              value={toColorInputValue(settings.stroke)}
               disabled={!settings.visible}
               onChange={(e) => patch({ stroke: e.target.value })}
               className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
