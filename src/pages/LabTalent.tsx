@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 import {
@@ -335,10 +335,13 @@ function CaptionPanel({
   settings,
   onChange,
   tileLabel,
+  embedded = false,
 }: {
   settings: TileCaptionSettings;
   onChange: (next: TileCaptionSettings) => void;
   tileLabel: string;
+  /** When true, drop outer card chrome (parent already frames the workspace). */
+  embedded?: boolean;
 }) {
   const panelId = useId();
 
@@ -347,7 +350,13 @@ function CaptionPanel({
   };
 
   return (
-    <div className="rounded-[12px] border border-border bg-surface px-4 py-4 md:px-5">
+    <div
+      className={
+        embedded
+          ? "min-w-0"
+          : "rounded-[12px] border border-border bg-surface px-4 py-4 md:px-5"
+      }
+    >
       <div className="flex items-center justify-between gap-3 mb-3">
         <div>
           <p className={`${FG_M} text-[11px] uppercase tracking-[1.2px] text-subtle`}>
@@ -580,6 +589,7 @@ function DetailPanel({
   onClose: () => void;
 }) {
   const titleId = useId();
+  const captionWorkspaceRef = useRef<HTMLDivElement>(null);
   const [activeTile, setActiveTile] = useState(0);
   const [captions, setCaptions] = useState<TileCaptionSettings[]>(() =>
     talent.content.map((tile, i) =>
@@ -611,6 +621,17 @@ function DetailPanel({
       return copy;
     });
     saveCaptionOverride(talent.id, index, next);
+  };
+
+  const selectTile = (index: number) => {
+    setActiveTile(index);
+    // Keep preview + controls in view when picking a tile further down the sheet.
+    requestAnimationFrame(() => {
+      captionWorkspaceRef.current?.scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    });
   };
 
   const activeCaption = captions[activeTile] ?? resolveCaptionSettings(
@@ -645,7 +666,7 @@ function DetailPanel({
         </div>
 
         <div className="grid md:grid-cols-[260px_1fr] gap-0 md:gap-8 p-5 md:p-7">
-          <div>
+          <div className="order-2 md:order-1 mt-8 md:mt-0">
             <div className="aspect-[4/5] rounded-[14px] overflow-hidden bg-raised border border-border mb-4 relative">
               <img
                 src={talent.portrait}
@@ -687,7 +708,7 @@ function DetailPanel({
             </ul>
           </div>
 
-          <div>
+          <div className="order-1 md:order-2">
             <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-brand mb-2`}>
               Staged talent
             </p>
@@ -713,17 +734,47 @@ function DetailPanel({
                 </span>
               ))}
             </div>
-            <p className={`${FG_R} text-[16px] leading-7 text-text/90 mb-8 max-w-[52ch]`}>
-              {talent.bio}
-            </p>
 
             <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle mb-2`}>
               Explore cards · {talent.content.length}
             </p>
             <p className={`${FG_R} text-[13px] text-muted mb-3`}>
-              Select a tile to edit its caption overlay.
+              Select a tile below. Live preview and caption controls stay together
+              in view while you edit.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4">
+
+            {/* Sticky caption workspace: live preview + controls in one view */}
+            <div
+              ref={captionWorkspaceRef}
+              className="sticky top-14 z-[5] -mx-1 mb-4 rounded-[14px] border border-border bg-[#faf8f5]/95 p-3 shadow-[0_8px_24px_rgba(16,24,40,0.08)] backdrop-blur-sm sm:p-4"
+            >
+              <div className="flex max-h-[min(70vh,calc(92vh-4.5rem))] flex-col gap-3 overflow-y-auto md:grid md:grid-cols-[minmax(140px,200px)_minmax(0,1fr)] md:items-start md:gap-4">
+                <div className="mx-auto w-[min(100%,180px)] shrink-0 md:mx-0 md:w-full">
+                  <p
+                    className={`${FG_M} mb-2 text-[10px] uppercase tracking-[1.2px] text-subtle`}
+                  >
+                    Live preview
+                  </p>
+                  <ExploreCard
+                    tile={talent.content[activeTile] ?? talent.content[0]}
+                    portrait={talent.portrait}
+                    name={talent.displayName}
+                    caption={activeCaption}
+                  />
+                </div>
+                <CaptionPanel
+                  embedded
+                  settings={activeCaption}
+                  onChange={(next) => updateCaption(activeTile, next)}
+                  tileLabel={`Tile ${activeTile + 1} · ${talent.content[activeTile]?.platform ?? ""}`}
+                />
+              </div>
+            </div>
+
+            <p className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1.2px] text-subtle`}>
+              Choose tile
+            </p>
+            <div className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-4">
               {talent.content.map((tile, i) => (
                 <ExploreCard
                   key={`${talent.id}-tile-${i}`}
@@ -732,18 +783,14 @@ function DetailPanel({
                   name={talent.displayName}
                   caption={captions[i] ?? resolveCaptionSettings(tile)}
                   selected={activeTile === i}
-                  onSelect={() => setActiveTile(i)}
+                  onSelect={() => selectTile(i)}
                 />
               ))}
             </div>
 
-            <div className="mb-8">
-              <CaptionPanel
-                settings={activeCaption}
-                onChange={(next) => updateCaption(activeTile, next)}
-                tileLabel={`Tile ${activeTile + 1} · ${talent.content[activeTile]?.platform ?? ""}`}
-              />
-            </div>
+            <p className={`${FG_R} text-[16px] leading-7 text-text/90 mb-8 max-w-[52ch]`}>
+              {talent.bio}
+            </p>
 
             <div className="rounded-[12px] border border-dashed border-border-dark bg-surface/70 px-4 py-3">
               <p className={`${FG_M} text-[11px] uppercase tracking-[1.2px] text-subtle mb-1`}>
