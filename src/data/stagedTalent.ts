@@ -11,7 +11,15 @@ export type ContentPlatform = "instagram" | "tiktok" | "youtube";
 export type StrongKind = "photo" | "hashtag" | "link" | "question";
 
 /** Fonts available for caption overlays on explore cards. */
-export type CaptionFontFamily = "founders" | "sf" | "georgia" | "mono";
+export type CaptionFontFamily =
+  | "founders"
+  | "sf"
+  | "georgia"
+  | "mono"
+  | "anton"
+  | "bebas"
+  | "dm-serif"
+  | "caveat";
 
 /**
  * Editable caption / slogan overlay on a content tile.
@@ -35,6 +43,17 @@ export type TileCaptionSettings = {
   stroke: string;
   /** Outline width in px (0 = none) */
   strokeWidth: number;
+  weight: 400 | 600 | 800;
+  italic: boolean;
+  uppercase: boolean;
+  align: "left" | "center" | "right";
+  background: "none" | "box" | "highlight";
+  backgroundColor: string;
+  /** Background alpha, 0–100. Text stays opaque. */
+  backgroundOpacity: number;
+  /** Padding / corner radius in the same 300px design space as size. */
+  padding: number;
+  radius: number;
 };
 
 export const CAPTION_FONT_OPTIONS: {
@@ -52,6 +71,18 @@ export const CAPTION_FONT_OPTIONS: {
     label: "SF Pro",
     css: "'SF Pro Text', system-ui, -apple-system, sans-serif",
   },
+  { id: "anton", label: "Anton · bold headline", css: "'Anton', sans-serif" },
+  {
+    id: "bebas",
+    label: "Bebas Neue · condensed",
+    css: "'Bebas Neue', sans-serif",
+  },
+  {
+    id: "dm-serif",
+    label: "DM Serif · editorial",
+    css: "'DM Serif Display', Georgia, serif",
+  },
+  { id: "caveat", label: "Caveat · handwritten", css: "'Caveat', cursive" },
   {
     id: "georgia",
     label: "Georgia",
@@ -62,6 +93,17 @@ export const CAPTION_FONT_OPTIONS: {
     label: "Mono",
     css: "ui-monospace, 'SF Mono', Menlo, monospace",
   },
+];
+
+export const CAPTION_COLOR_SWATCHES = [
+  { label: "White", value: "#ffffff" },
+  { label: "Ink", value: "#101828" },
+  { label: "Lime", value: "#d5f26a" },
+  { label: "Butter", value: "#fff29a" },
+  { label: "Pale blue", value: "#dcecff" },
+  { label: "Burgundy", value: "#7a0036" },
+  { label: "Pink", value: "#f6cde1" },
+  { label: "Blue", value: "#155fef" },
 ];
 
 export const DEFAULT_CAPTION_SETTINGS: Omit<
@@ -75,7 +117,130 @@ export const DEFAULT_CAPTION_SETTINGS: Omit<
   fill: "#ffffff",
   stroke: "#000000",
   strokeWidth: 0,
+  weight: 600,
+  italic: false,
+  uppercase: false,
+  align: "center",
+  background: "none",
+  backgroundColor: "#ffffff",
+  backgroundOpacity: 100,
+  padding: 6,
+  radius: 5,
 };
+
+/** Presets change typography only; retain each caption's words and position. */
+const {
+  x: _captionX,
+  y: _captionY,
+  ...captionStyleDefaults
+} = DEFAULT_CAPTION_SETTINGS;
+
+export const CAPTION_PRESETS: {
+  id: string;
+  label: string;
+  sample: string;
+  settings: Omit<TileCaptionSettings, "text" | "visible" | "x" | "y">;
+}[] = [
+  {
+    id: "subtitle",
+    label: "Subtitle",
+    sample: "A little everyday",
+    settings: { ...captionStyleDefaults, font: "sf", size: 15, strokeWidth: 1 },
+  },
+  {
+    id: "headline",
+    label: "Headline",
+    sample: "THE EVERYDAY EDIT",
+    settings: {
+      ...captionStyleDefaults,
+      font: "anton",
+      size: 23,
+      weight: 400,
+      uppercase: true,
+    },
+  },
+  {
+    id: "white-box",
+    label: "White box",
+    sample: "One good thing",
+    settings: {
+      ...captionStyleDefaults,
+      fill: "#101828",
+      weight: 800,
+      italic: true,
+      uppercase: true,
+      background: "box",
+      size: 17,
+    },
+  },
+  {
+    id: "black-box",
+    label: "Black box",
+    sample: "Wait for it…",
+    settings: {
+      ...captionStyleDefaults,
+      font: "sf",
+      background: "box",
+      backgroundColor: "#101828",
+      size: 16,
+    },
+  },
+  {
+    id: "highlight",
+    label: "Highlighter",
+    sample: "Little things matter",
+    settings: {
+      ...captionStyleDefaults,
+      font: "dm-serif",
+      weight: 400,
+      fill: "#101828",
+      background: "highlight",
+      backgroundColor: "#fff29a",
+      size: 21,
+      radius: 0,
+      padding: 3,
+    },
+  },
+  {
+    id: "editorial",
+    label: "Editorial",
+    sample: "Slow mornings",
+    settings: {
+      ...captionStyleDefaults,
+      font: "dm-serif",
+      weight: 400,
+      italic: true,
+      size: 23,
+    },
+  },
+  {
+    id: "handwritten",
+    label: "Handwritten",
+    sample: "a note to myself",
+    settings: {
+      ...captionStyleDefaults,
+      font: "caveat",
+      size: 26,
+      fill: "#fff29a",
+    },
+  },
+  {
+    id: "foam",
+    label: "Foam lime",
+    sample: "A FRESH PERSPECTIVE",
+    settings: {
+      ...captionStyleDefaults,
+      font: "bebas",
+      size: 23,
+      weight: 400,
+      uppercase: true,
+      fill: "#101828",
+      background: "box",
+      backgroundColor: "#d5f26a",
+      radius: 2,
+    },
+  },
+];
 
 export type TalentPlatform = {
   network: TalentNetwork;
@@ -550,7 +715,7 @@ export const stagedTalent: StagedTalent[] = [
     motionStatus: "placeholder",
     content: [
       { type: "clip", thumb: tile("lena-croft", 1), views: 276_000, caption: "mirror outfit check", platform: "tiktok", strongKind: "photo", engagements: 32_400 },
-      { type: "still", thumb: tile("lena-croft", 2), views: 148_900, caption: "PACKING FOR WEEKEND", platform: "instagram", strongKind: "hashtag", engagements: 10_200 },
+      { type: "still", thumb: tile("lena-croft", 2), views: 148_900, caption: "PACKING FOR WEEKEND", captionSettings: { font: "dm-serif", weight: 400, italic: true, size: 21, y: 65 }, platform: "instagram", strongKind: "hashtag", engagements: 10_200 },
       { type: "still", thumb: tile("lena-croft", 3), views: 58_400, caption: "thrift haul flatlay", platform: "instagram", strongKind: "photo" },
       { type: "clip", thumb: tile("lena-croft", 4), views: 121_000, caption: "mend kit close-up", platform: "tiktok", strongKind: "photo", engagements: 9_800 },
       { type: "still", thumb: tile("lena-croft", 5), views: 87_600, caption: "getting ready glow", platform: "instagram", strongKind: "question", engagements: 6_400 },
@@ -574,7 +739,7 @@ export const stagedTalent: StagedTalent[] = [
     motionStatus: "placeholder",
     content: [
       { type: "clip", thumb: tile("zane-holt", 1), views: 198_000, caption: "dawn path tempo", platform: "tiktok", strongKind: "photo", engagements: 14_600 },
-      { type: "still", thumb: tile("zane-holt", 2), views: 72_400, caption: "lace up before miles", platform: "instagram", strongKind: "photo", engagements: 5_100 },
+      { type: "still", thumb: tile("zane-holt", 2), views: 72_400, caption: "lace up before miles", captionSettings: { font: "anton", weight: 400, uppercase: true, size: 23, y: 63 }, platform: "instagram", strongKind: "photo", engagements: 5_100 },
       { type: "still", thumb: tile("zane-holt", 3), views: 48_900, caption: "gear flatlay check", platform: "instagram", strongKind: "hashtag" },
       { type: "clip", thumb: tile("zane-holt", 4), views: 112_000, caption: "post run stretch", platform: "youtube", strongKind: "photo", engagements: 8_300 },
       { type: "still", thumb: tile("zane-holt", 5), views: 86_700, caption: "track interval split", platform: "tiktok", strongKind: "link", engagements: 7_200 },
@@ -623,7 +788,7 @@ export const stagedTalent: StagedTalent[] = [
     content: [
       { type: "clip", thumb: tile("bode-niles", 1), views: 305_000, caption: "shelf day one install", platform: "youtube", strongKind: "photo", engagements: 22_100 },
       { type: "still", thumb: tile("bode-niles", 2), views: 271_400, caption: "this corner finally done", platform: "instagram", strongKind: "hashtag", engagements: 15_600 },
-      { type: "still", thumb: tile("bode-niles", 3), views: 148_000, caption: "drill tip that saves time", platform: "tiktok", strongKind: "photo", engagements: 12_400 },
+      { type: "still", thumb: tile("bode-niles", 3), views: 148_000, caption: "drill tip that saves time", captionSettings: { background: "box", backgroundColor: "#ffffff", fill: "#101828", weight: 800, italic: true, uppercase: true, size: 16, y: 69 }, platform: "tiktok", strongKind: "photo", engagements: 12_400 },
       { type: "still", thumb: tile("bode-niles", 4), views: 46_700, caption: "budget board check", platform: "instagram", strongKind: "link" },
       { type: "clip", thumb: tile("bode-niles", 5), views: 189_000, caption: "sage wall reset", platform: "youtube", strongKind: "photo", engagements: 14_800 },
     ],
@@ -647,7 +812,7 @@ export const stagedTalent: StagedTalent[] = [
     content: [
       { type: "clip", thumb: tile("rue-dante", 1), views: 196_000, caption: "storytime still hits", platform: "tiktok", strongKind: "photo", engagements: 18_400 },
       { type: "still", thumb: tile("rue-dante", 2), views: 141_200, caption: "play rug sunday", platform: "instagram", strongKind: "hashtag", engagements: 9_200 },
-      { type: "still", thumb: tile("rue-dante", 3), views: 168_500, caption: "lunchbox assembly line", platform: "instagram", strongKind: "photo", engagements: 14_700 },
+      { type: "still", thumb: tile("rue-dante", 3), views: 168_500, caption: "lunchbox assembly line", captionSettings: { background: "box", backgroundColor: "#fff29a", fill: "#101828", size: 17, y: 68, radius: 3 }, platform: "instagram", strongKind: "photo", engagements: 14_700 },
       { type: "clip", thumb: tile("rue-dante", 4), views: 154_100, caption: "tiny laundry night", platform: "tiktok", strongKind: "photo", engagements: 13_900 },
       { type: "still", thumb: tile("rue-dante", 5), views: 79_800, caption: "nursery corner calm", platform: "instagram", strongKind: "question", engagements: 5_100 },
     ],
@@ -672,7 +837,7 @@ export const stagedTalent: StagedTalent[] = [
     content: [
       { type: "clip", thumb: tile("suki-prent", 1), views: 490_000, caption: "unbox night shift", platform: "tiktok", strongKind: "photo", engagements: 44_200 },
       { type: "still", thumb: tile("suki-prent", 2), views: 184_600, caption: "desk that just works", platform: "instagram", strongKind: "hashtag", engagements: 16_100 },
-      { type: "clip", thumb: tile("suki-prent", 3), views: 311_000, caption: "earbuds face off", platform: "youtube", strongKind: "photo", engagements: 25_700 },
+      { type: "clip", thumb: tile("suki-prent", 3), views: 311_000, caption: "earbuds face off", captionSettings: { background: "box", backgroundColor: "#101828", font: "sf", size: 17, y: 70 }, platform: "youtube", strongKind: "photo", engagements: 25_700 },
       { type: "still", thumb: tile("suki-prent", 4), views: 97_400, caption: "cafe laptop day", platform: "instagram", strongKind: "photo", engagements: 7_800 },
       { type: "still", thumb: tile("suki-prent", 5), views: 152_900, caption: "cable kit flatlay", platform: "tiktok", strongKind: "link", engagements: 14_200 },
     ],
@@ -697,7 +862,7 @@ export const stagedTalent: StagedTalent[] = [
       { type: "clip", thumb: tile("jax-orin", 1), views: 310_000, caption: "patch notes live", platform: "youtube", strongKind: "photo", engagements: 26_800 },
       { type: "still", thumb: tile("jax-orin", 2), views: 173_400, caption: "cable rack glow", platform: "instagram", strongKind: "hashtag", engagements: 15_400 },
       { type: "still", thumb: tile("jax-orin", 3), views: 228_000, caption: "headphones late mix", platform: "tiktok", strongKind: "photo", engagements: 21_200 },
-      { type: "clip", thumb: tile("jax-orin", 4), views: 197_600, caption: "vinyl loft night", platform: "instagram", strongKind: "photo", engagements: 17_900 },
+      { type: "clip", thumb: tile("jax-orin", 4), views: 197_600, caption: "vinyl loft night", captionSettings: { font: "caveat", size: 27, fill: "#fff29a", y: 68 }, platform: "instagram", strongKind: "photo", engagements: 17_900 },
       { type: "still", thumb: tile("jax-orin", 5), views: 84_100, caption: "module patch close", platform: "youtube", strongKind: "link", engagements: 6_300 },
     ],
   },
@@ -721,7 +886,7 @@ export const stagedTalent: StagedTalent[] = [
       { type: "clip", thumb: tile("elio-voss", 1), views: 682_000, caption: "me waiting for everyone...", platform: "tiktok", strongKind: "photo", engagements: 71_200 },
       { type: "still", thumb: tile("elio-voss", 2), views: 264_000, caption: "cafe laugh take 3", platform: "instagram", strongKind: "hashtag", engagements: 23_800 },
       { type: "still", thumb: tile("elio-voss", 3), views: 178_400, caption: "street table still", platform: "instagram", strongKind: "photo", engagements: 12_100 },
-      { type: "clip", thumb: tile("elio-voss", 4), views: 391_000, caption: "kitchen bit energy", platform: "tiktok", strongKind: "photo", engagements: 38_600 },
+      { type: "clip", thumb: tile("elio-voss", 4), views: 391_000, caption: "kitchen bit energy", captionSettings: { background: "highlight", backgroundColor: "#d5f26a", fill: "#101828", font: "bebas", weight: 400, size: 23, y: 67, radius: 1, padding: 3 }, platform: "tiktok", strongKind: "photo", engagements: 38_600 },
       { type: "still", thumb: tile("elio-voss", 5), views: 219_000, caption: "night lights skit", platform: "youtube", strongKind: "question", engagements: 19_400 },
     ],
   },

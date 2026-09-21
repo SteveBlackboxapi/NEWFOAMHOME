@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
-  CAPTION_FONT_OPTIONS,
   formatAudience,
   resolveCaptionSettings,
   type StagedTalent,
@@ -22,6 +21,7 @@ import {
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
 import { AIDisclosure, Caption } from "./TalentLabMedia";
+import { TalentCaptionControls } from "./TalentCaptionControls";
 
 type Props = {
   talent: StagedTalent;
@@ -593,144 +593,13 @@ export function TalentLabProfile({
                 </div>
               )}
               {caption && !showingOriginal && !active.tile?.video && (
-                <section className="tl-caption-controls">
-                  <div className="tl-control-heading">
-                    <h3>Caption overlay</h3>
-                    <label className="tl-switch">
-                      <input
-                        type="checkbox"
-                        checked={caption.visible}
-                        onChange={(e) =>
-                          onCaption(active, {
-                            ...caption,
-                            visible: e.target.checked,
-                          })
-                        }
-                      />
-                      <span className="tl-sr-only">Show caption</span>
-                      <span className="tl-switch-track" />
-                    </label>
-                  </div>
-                  <label>
-                    Caption
-                    <textarea
-                      maxLength={1000}
-                      value={caption.text}
-                      onChange={(e) =>
-                        onCaption(active, { ...caption, text: e.target.value })
-                      }
-                      rows={3}
-                    />
-                  </label>
-                  <label>
-                    Typeface
-                    <select
-                      value={caption.font}
-                      onChange={(e) =>
-                        onCaption(active, {
-                          ...caption,
-                          font: e.target.value as TileCaptionSettings["font"],
-                        })
-                      }
-                    >
-                      {CAPTION_FONT_OPTIONS.map((f) => (
-                        <option key={f.id} value={f.id}>
-                          {f.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  {(
-                    [
-                      { key: "size", label: "Text size", min: 10, max: 36 },
-                      {
-                        key: "y",
-                        label: "Vertical position",
-                        min: 10,
-                        max: 90,
-                      },
-                      {
-                        key: "x",
-                        label: "Horizontal position",
-                        min: 10,
-                        max: 90,
-                      },
-                      {
-                        key: "strokeWidth",
-                        label: "Outline width",
-                        min: 0,
-                        max: 6,
-                      },
-                    ] as const
-                  ).map((control) => (
-                    <label key={control.key}>
-                      <span>
-                        {control.label}
-                        <output>
-                          {caption[control.key]}
-                          {control.key === "size"
-                            ? "px"
-                            : control.key === "strokeWidth"
-                              ? ""
-                              : "%"}
-                        </output>
-                      </span>
-                      <input
-                        type="range"
-                        min={control.min}
-                        max={control.max}
-                        step={control.key === "strokeWidth" ? 0.5 : 1}
-                        value={caption[control.key]}
-                        onChange={(e) =>
-                          onCaption(active, {
-                            ...caption,
-                            [control.key]: Number(e.target.value),
-                          })
-                        }
-                      />
-                    </label>
-                  ))}
-                  <div className="tl-colors">
-                    <label>
-                      Text colour
-                      <input
-                        type="color"
-                        value={caption.fill}
-                        onChange={(e) =>
-                          onCaption(active, {
-                            ...caption,
-                            fill: e.target.value,
-                          })
-                        }
-                      />
-                    </label>
-                    <label>
-                      Outline colour
-                      <input
-                        type="color"
-                        value={caption.stroke}
-                        onChange={(e) =>
-                          onCaption(active, {
-                            ...caption,
-                            stroke: e.target.value,
-                          })
-                        }
-                      />
-                    </label>
-                  </div>
-                  <button
-                    className="tl-text-button"
-                    onClick={() =>
-                      onCaption(active, resolveCaptionSettings(active.tile!))
-                    }
-                  >
-                    <LabIcon name="reset" size={14} /> Reset caption
-                  </button>
-                  <p className="tl-draft-note">
-                    Edits stay on this browser. Export a captioned image or data
-                    to take them with you.
-                  </p>
-                </section>
+                <TalentCaptionControls
+                  settings={caption}
+                  onChange={(settings) => onCaption(active, settings)}
+                  onReset={() =>
+                    onCaption(active, resolveCaptionSettings(active.tile!))
+                  }
+                />
               )}
               <div className="tl-editor-downloads">
                 {active.tile?.video && (

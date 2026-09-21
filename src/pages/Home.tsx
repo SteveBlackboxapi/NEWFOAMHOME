@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { MobileFade } from "../components/MobileFade";
 import { useIsDesktop } from "../hooks/useMediaQuery";
+import { LabIcon } from "../components/TalentLabIcon";
+import { formatWebsiteMetric, websiteAria, websiteContentStats, websiteProfile, websiteSamantha } from "../data/websiteTalent";
 
 const FG_R  = "font-founders font-normal";
 const FG_M  = "font-founders font-medium";
@@ -10,9 +12,6 @@ const FG_SB = "font-founders font-semibold";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 
-const icIG = `${A}/20684.svg`;
-const icTT = `${A}/8509e.svg`;
-const icYT = `${A}/d0b8e.svg`;
 const icFoam = `${A}/fdb3b.svg`;
 const icMagnify = `${A}/333bb.svg`;
 const icShare = `${A}/a2840.svg`;
@@ -27,38 +26,28 @@ const icNavLists = `${A}/26407.svg`;
 const icNavWatch = `${A}/5c880.svg`;
 const icNavChat = `${A}/4f583.svg`;
 
-/** One staged talent for the whole home pitch thread. Fake handles only. */
+/** The same approved fictional creator throughout the public pitch story. */
 const STAGE = {
-  name: "Ren Cole",
-  photo: `${A}/9e849.png`,
-  loc: "Portland, OR",
-  age: "32",
-  gender: "Male",
-  verticals: "Running · Everyday Progress",
-  bio: "Early miles. Long runs. Bringing an audience along for the journey. Illustrative demo talent for Vale Studio.",
-  total: "286K",
-  ig: { n: "131K", h: "@ren.cole" },
-  tt: { n: "97K", h: "@ren.cole" },
-  yt: { n: "58K", h: "Ren Cole" },
-  kitName: "Ren-Cole-marathon-26",
+  ...websiteProfile(websiteSamantha),
+  photo: websiteSamantha.portrait,
+  bioShort: `${websiteSamantha.bio.split(". ")[0]}.`,
+  kitName: "Samantha-Pikka-haircare'26",
   agency: "Vale Studio",
   manager: "Rowan Hale",
 };
 
-const CONTENT = [
-  { src: `${A}/5f2d5.png`, views: "28.4K", likes: "1.8K" },
-  { src: `${A}/3cf05.png`, views: "19.1K", likes: "940" },
-  { src: `${A}/d52d8.png`, views: "12.6K", likes: "612" },
-  { src: `${A}/fe72f.png`, views: "9.7K", likes: "481" },
-  { src: `${A}/boston-track.jpg`, views: "34.2K", likes: "2.1K" },
-  { src: `${A}/53bfb.png`, views: "15.8K", likes: "720" },
-];
+const POST_STILLS = websiteSamantha.content.filter((tile) => tile.type === "still");
+const CONTENT = POST_STILLS.map((tile) => ({
+  src: tile.thumb,
+  alt: `${STAGE.name}: ${tile.caption || "creator content"}`,
+  views: tile.views ? formatWebsiteMetric(tile.views) : null,
+  engagements: tile.engagements === undefined ? null : formatWebsiteMetric(tile.engagements),
+  platform: { instagram: "IG", tiktok: "TT", youtube: "YT" }[tile.platform],
+}));
+const CONTENT_STATS = websiteContentStats(POST_STILLS.filter((tile) => (tile.views ?? 0) > 0));
+const TOP_POST_VIEWS = formatWebsiteMetric(Math.max(...POST_STILLS.map((tile) => tile.views ?? 0)));
 
-const ROSTER = [
-  { name: "Ren Cole", img: `${A}/9e849.png` },
-  { name: "Io Marin", img: `${A}/3546d.png` },
-  { name: "Sable Quinn", img: `${A}/b93cd.png` },
-];
+const ROSTER = [websiteSamantha, websiteAria].map((talent) => ({ name: talent.displayName, img: talent.portrait }));
 
 // ─── Gmail embed (exported for Features) ─────────────────────────────────────
 export function GmailView({ step: controlled }: { step?: number } = {}) {
@@ -119,33 +108,32 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
                   </div>
                   <div>
                     <p className={`${FG_SB} text-[13px] text-[#202124]`}>{STAGE.name}</p>
-                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Portland · {STAGE.age}</p>
-                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG {STAGE.ig.n} · TT {STAGE.tt.n} · YT {STAGE.yt.n}</p>
+                    <p className={`${FG_R} text-[10px] text-[#5f6368]`}>{STAGE.loc} · {STAGE.age}</p>
+                    <p className={`${FG_M} text-[11px] text-[#202124] mt-1`}>IG {STAGE.ig.n} · TT {STAGE.tt.n} · YT {STAGE.yt.n} · LI {STAGE.li.n}</p>
                   </div>
                 </div>
                 <p className={`${FG_R} text-[11px] text-[#202124] leading-4 mt-2`}>
-                  Early miles. Long runs. Illustrative demo talent for Vale Studio.
+                  {STAGE.bioShort}
                 </p>
                 <p className={`${FG_M} text-[11px] text-[#1a73e8] mt-2`}>View media kit →</p>
                 <div className="mt-3 border border-[#e8eaed] rounded-[10px] p-3 grid grid-cols-2 gap-2">
-                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Avg reach <b className="text-[#202124]">18.4K</b></p>
-                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>PT 62%</p>
-                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>Avg views <b className="text-[#202124]">9.1K</b></p>
-                  <p className={`${FG_R} text-[10px] text-[#5f6368]`}>25–34 41%</p>
+                  {CONTENT_STATS.map(([value, label]) => (
+                    <p key={label} className={`${FG_R} text-[10px] text-[#5f6368]`}>{label} <b className="text-[#202124]">{value}</b></p>
+                  ))}
                 </div>
-                <p className={`${FG_R} text-[10px] text-[#137333] mt-2`}>Certified directly from the Instagram API</p>
+                <p className={`${FG_R} text-[10px] text-[#137333] mt-2`}>Illustrative demo data · AI-generated talent</p>
               </div>
             )}
           </div>
         </div>
         <div className="bg-white border-l border-[#eeefef] flex flex-col">
           <div className="px-3 pt-3 pb-2 flex items-center gap-3 border-b border-[#eeefef]">
-            <span className={`${FG_SB} text-[11px] text-[#101828] border-b-2 border-[#f5a524] pb-1`}>Talent</span>
+            <span className={`${FG_SB} text-[11px] text-[#101828] border-b-2 border-[#7a0036] pb-1`}>Talent</span>
             <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Lists</span>
             <span className={`${FG_R} text-[11px] text-[#6a7282] pb-1`}>Kits</span>
           </div>
           {step === 0 && (
-            <div className="p-3 grid grid-cols-3 gap-2">
+            <div className="p-3 grid grid-cols-2 gap-2">
               {ROSTER.map((person) => (
                 <div key={person.name}>
                   <div className="aspect-square rounded-[8px] overflow-hidden bg-[#eee]">
@@ -162,7 +150,7 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
                 <img alt={STAGE.name} src={STAGE.photo} className="size-full object-cover object-top" />
               </div>
               <p className={`${FG_SB} text-[13px] text-[#101828] mt-2`}>{STAGE.name}</p>
-              <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Portland</p>
+              <p className={`${FG_R} text-[10px] text-[#6a7282]`}>{STAGE.loc}</p>
               <div className="flex justify-center gap-1.5 mt-3">
                 <span className={`${FG_M} text-[10px] border border-[#e8eaed] rounded-full px-2 h-6 inline-flex items-center`}>Basic</span>
                 <span className={`${FG_M} text-[10px] rounded-full px-2 h-6 inline-flex items-center`} style={{ background: step >= 2 ? "#7ddec0" : "#f4f5f6" }}>{step === 2 ? "Copied!" : "Detail"}</span>
@@ -179,14 +167,14 @@ export function GmailView({ step: controlled }: { step?: number } = {}) {
 // ─── Product-faithful media kit (cream / burgundy) ───────────────────────────
 function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?: boolean }) {
   const cream = "#F4E6C8";
-  const burgundy = "#6b0030";
+  const burgundy = "#7a0036";
   return (
     <div className="overflow-hidden" style={{ background: cream }}>
       <div className="px-5 pt-4 pb-3 flex items-center justify-between">
-        <div className="size-6 rounded-[4px] bg-[#6b0030] flex items-center justify-center">
+        <div className="size-6 rounded-[4px] bg-[#7a0036] flex items-center justify-center">
           <span className="text-white text-[11px] font-semibold leading-none">F</span>
         </div>
-        <button type="button" className={`${FG_M} text-[11px] text-[#6b0030] border border-[#6b0030]/40 rounded-full px-3 h-7`}>
+        <button type="button" className={`${FG_M} text-[11px] text-[#7a0036] border border-[#7a0036]/40 rounded-full px-3 h-7`}>
           Contact
         </button>
       </div>
@@ -199,22 +187,22 @@ function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?
             <img alt={STAGE.name} src={STAGE.photo} className="size-full object-cover object-top" />
           </div>
           <div className="min-w-0 pt-1">
-            <p className={`${FG_SB} text-[#6b0030] leading-[1.05] tracking-[-0.5px]`} style={{ fontSize: dense ? 22 : "clamp(22px, 3.2vw, 28px)" }}>
+            <p className={`${FG_SB} text-[#7a0036] leading-[1.05] tracking-[-0.5px]`} style={{ fontSize: dense ? 22 : "clamp(22px, 3.2vw, 28px)" }}>
               {STAGE.name}
             </p>
-            <p className={`${FG_R} text-[11px] text-[#6b0030]/70 mt-2`}>
+            <p className={`${FG_R} text-[11px] text-[#7a0036]/70 mt-2`}>
               {STAGE.loc}&nbsp;|&nbsp;{STAGE.age} years old&nbsp;|&nbsp;{STAGE.gender}
             </p>
             <div className="flex items-center gap-2 mt-3">
-              {[icIG, icTT, icYT].map((src) => (
-                <span key={src} className="size-7 rounded-full border border-[#6b0030]/35 inline-flex items-center justify-center bg-[#6b0030]/08">
-                  <img alt="" className="size-3.5 opacity-90" src={src} />
+              {["IG", "TT", "YT", "LI"].map((label) => (
+                <span key={label} className="size-7 rounded-full border border-[#7a0036]/35 inline-flex items-center justify-center bg-[#7a0036]/08 text-[9px] text-[#7a0036] font-medium">
+                  {label}
                 </span>
               ))}
             </div>
-            <div className="mt-3 rounded-[10px] px-3 py-2" style={{ background: "rgba(107,0,48,0.08)" }}>
-              <p className={`${FG_R} text-[10px] text-[#6b0030]/55 uppercase tracking-[0.4px]`}>Verticals</p>
-              <p className={`${FG_M} text-[12px] text-[#6b0030] mt-0.5`}>{STAGE.verticals}</p>
+            <div className="mt-3 rounded-[10px] px-3 py-2" style={{ background: "rgba(122,0,54,0.08)" }}>
+              <p className={`${FG_R} text-[10px] text-[#7a0036]/55 uppercase tracking-[0.4px]`}>Verticals</p>
+              <p className={`${FG_M} text-[12px] text-[#7a0036] mt-0.5`}>{STAGE.verticals}</p>
             </div>
           </div>
         </div>
@@ -226,31 +214,27 @@ function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?
               <p className={`${FG_SB} text-[32px] text-[#F4E6C8] leading-none mt-1`}>{STAGE.total}</p>
               <p className={`${FG_R} text-[11px] text-[#F4E6C8]/70 mt-1`}>Total audience</p>
             </div>
-            <div className="flex gap-5">
-              {[
-                { icon: icIG, ...STAGE.ig },
-                { icon: icTT, ...STAGE.tt },
-                { icon: icYT, ...STAGE.yt },
-              ].map((row) => (
-                <div key={row.h + row.n} className="text-right min-w-[64px]">
-                  <img alt="" src={row.icon} className="size-3.5 ml-auto mb-1 brightness-0 invert opacity-80" />
-                  <p className={`${FG_SB} text-[18px] text-[#F4E6C8] leading-none`}>{row.n}</p>
-                  <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>{row.h}</p>
+            <div className="flex gap-x-4 gap-y-3 flex-wrap">
+              {STAGE.platforms.map((row) => (
+                <div key={row.network} className="text-right min-w-[64px]">
+                  <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mb-1`}>{row.label}</p>
+                  <p className={`${FG_SB} text-[18px] text-[#F4E6C8] leading-none`}>{row.count}</p>
+                  {row.handle && <p className={`${FG_R} text-[10px] text-[#F4E6C8]/70 mt-1`}>{row.handle}</p>}
                 </div>
               ))}
             </div>
           </div>
-          <p className={`${FG_R} text-[13px] text-[#F4E6C8] leading-5 mt-5 max-w-[520px]`}>{STAGE.bio}</p>
+          <p className={`${FG_R} text-[13px] text-[#F4E6C8] leading-5 mt-5 max-w-[520px]`}>{STAGE.bioShort}</p>
         </div>
 
         <div className="px-5 py-5" style={{ background: cream }}>
           <div className="grid grid-cols-3 gap-2">
             {CONTENT.slice(0, dense ? 6 : 6).map((tile) => (
               <div key={tile.src + tile.views} className="relative rounded-[10px] overflow-hidden bg-[#ead9b8] aspect-[3/4]">
-                <img alt="" src={tile.src} className="size-full object-cover" />
+                <img alt={tile.alt} src={tile.src} className="size-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 px-2 py-1.5 flex items-center justify-between bg-gradient-to-t from-black/65 to-transparent">
-                  <span className={`${FG_M} text-[10px] text-white`}>{tile.views}</span>
-                  <img alt="" src={icIG} className="size-3 brightness-0 invert opacity-80" />
+                  <span className={`${FG_M} text-[10px] text-white inline-flex items-center gap-1`}>{tile.views ? <><LabIcon name="eye" size={11} />{tile.views}</> : "Draft asset"}</span>
+                  <span className="text-[9px] text-white/80">{tile.platform}</span>
                 </div>
               </div>
             ))}
@@ -261,21 +245,16 @@ function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?
           <div className="rounded-[14px] border border-[#ead9b8] bg-[#f7efe0] p-4">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
-                <img alt="" src={icIG} className="size-4" />
+                <span className="text-[10px] text-[#7a0036]">IG</span>
                 <div>
                   <p className={`${FG_SB} text-[14px] text-[#101828]`}>Instagram</p>
                   <p className={`${FG_R} text-[11px] text-[#6a7282]`}>{STAGE.ig.h}</p>
                 </div>
               </div>
-              <p className={`${FG_R} text-[11px] text-[#6b0030]`}>Data: Last 28 days</p>
+              <p className={`${FG_R} text-[11px] text-[#7a0036]`}>Illustrative post data</p>
             </div>
             <div className="grid grid-cols-2 gap-2 mb-3">
-              {[
-                ["18.4K", "Avg. Views"],
-                ["1.2K", "Avg. Likes"],
-                ["96", "Avg. Comments"],
-                ["2.9%", "Eng. rate"],
-              ].map(([val, lab]) => (
+              {CONTENT_STATS.map(([val, lab]) => (
                 <div key={lab} className="rounded-[10px] bg-white/70 px-3 py-2.5">
                   <p className={`${FG_SB} text-[18px] leading-none text-[#101828]`}>{val}</p>
                   <p className={`${FG_R} text-[11px] text-[#6a7282] mt-1`}>{lab}</p>
@@ -285,10 +264,10 @@ function MediaKitView({ scrollY = 0, dense = false }: { scrollY?: number; dense?
             <div className="rounded-[10px] bg-white/70 px-3 py-3">
               <p className={`${FG_R} text-[11px] text-[#6a7282]`}>Total followers</p>
               <p className={`${FG_SB} text-[24px] leading-none text-[#101828] mt-1`}>{STAGE.ig.n}</p>
-              <p className={`${FG_R} text-[11px] text-[#6b0030] mt-1`}>+2,140 new followers</p>
+              <p className={`${FG_R} text-[11px] text-[#7a0036] mt-1`}>Illustrative audience trend</p>
               <svg viewBox="0 0 320 56" className="w-full h-12 mt-3" aria-hidden>
-                <polyline fill="none" stroke="#6b0030" strokeWidth="2.4" points="4,48 36,44 68,42 100,38 132,34 164,30 196,28 228,24 260,20 292,16 316,12" />
-                <circle cx="316" cy="12" r="3.5" fill="#6b0030" />
+                <polyline fill="none" stroke="#7a0036" strokeWidth="2.4" points="4,48 36,44 68,42 100,38 132,34 164,30 196,28 228,24 260,20 292,16 316,12" />
+                <circle cx="316" cy="12" r="3.5" fill="#7a0036" />
               </svg>
             </div>
           </div>
@@ -317,9 +296,9 @@ function KitEditorChrome({ children, scrollHint = false }: { children: React.Rea
           <p className={`${FG_M} text-[12px] text-[#101828] mb-3 truncate`}>{STAGE.kitName}</p>
           <p className={`${FG_R} text-[10px] text-[#6a7282] mb-2`}>Platform analytics</p>
           <div className="flex gap-1.5 mb-3">
-            {[icIG, icTT, icYT].map((src) => (
-              <div key={src} className="size-8 rounded-[8px] bg-[#f4f5f7] border border-[#eeefef] flex items-center justify-center">
-                <img alt="" src={src} className="size-3.5" />
+            {["IG", "TT", "YT", "LI"].map((label) => (
+              <div key={label} className="size-8 rounded-[8px] bg-[#f4f5f7] border border-[#eeefef] flex items-center justify-center text-[9px] font-medium">
+                {label}
               </div>
             ))}
           </div>
@@ -357,6 +336,7 @@ function MediaKitCard() {
           <GmailView />
         </div>
       )}
+      <p className={`${FG_R} text-[10px] text-[#b7bfce] mt-3`}>AI-generated demo talent · Illustrative metrics</p>
     </div>
   );
 }
@@ -397,7 +377,7 @@ function AppRail({ active }: { active: "lists" | "explore" }) {
       ))}
       <div className="mt-auto rounded-[10px] border border-[#eeefef] bg-white p-2">
         <p className={`${FG_M} text-[11px] text-[#101828]`}>{STAGE.agency}</p>
-        <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Harbor Spring Roster</p>
+        <p className={`${FG_R} text-[10px] text-[#6a7282]`}>Beauty roster</p>
       </div>
     </div>
   );
@@ -405,10 +385,10 @@ function AppRail({ active }: { active: "lists" | "explore" }) {
 
 function ListsAppView() {
   const rows = [
-    { name: "Boston Marathon shortlist", talent: "3 Talent", owner: STAGE.manager, created: "Mar 12", modified: "2d ago" },
-    { name: "Harbor Spring Roster", talent: "12 Talent", owner: STAGE.manager, created: "Jan 8", modified: "5d ago" },
-    { name: "Vale Studio runners", talent: "4 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
-    { name: "US audience 100K+", talent: "6 Talent", owner: STAGE.manager, created: "Apr 2", modified: "1w ago" },
+    { name: "Haircare shortlist", talent: "2 Talent", owner: STAGE.manager, created: "Mar 12", modified: "2d ago" },
+    { name: "Beauty roster", talent: "2 Talent", owner: STAGE.manager, created: "Jan 8", modified: "5d ago" },
+    { name: "Vale Studio beauty", talent: "2 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
+    { name: "Instagram 100K+", talent: "2 Talent", owner: STAGE.manager, created: "Apr 2", modified: "1w ago" },
   ];
   return (
     <div className="flex flex-col flex-1 min-w-0 bg-white overflow-hidden">
@@ -448,7 +428,7 @@ function ListsAppView() {
   );
 }
 
-function ExploreAppView({ query = "marathon" }: { query?: string }) {
+function ExploreAppView({ query = "haircare" }: { query?: string }) {
   return (
     <div className="flex flex-col flex-1 min-w-0 bg-[#f9fafb] overflow-hidden">
       <div className="bg-white border-b border-[#eeefef] px-4 py-3 flex items-center gap-3">
@@ -503,20 +483,21 @@ function ExploreAppView({ query = "marathon" }: { query?: string }) {
           <div className="grid grid-cols-3 gap-2">
             {CONTENT.map((tile, i) => (
               <div key={tile.src} className="relative rounded-[10px] overflow-hidden bg-[#101828] aspect-[3/4]">
-                <img alt="" src={tile.src} className="absolute inset-0 size-full object-cover" />
+                <img alt={tile.alt} src={tile.src} className="absolute inset-0 size-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 {i === 0 && (
                   <span className={`${FG_M} absolute top-1.5 left-1.5 bg-white/95 text-[8px] text-[#101828] rounded px-1.5 py-0.5`}>Strong Match</span>
                 )}
                 <div className="absolute bottom-0 inset-x-0 p-1.5">
                   <div className={`${FG_R} text-[9px] text-white/90 flex gap-2 mb-1`}>
-                    <span>{tile.views} views</span>
-                    <span>{tile.likes} likes</span>
+                    {tile.views && <span className="inline-flex items-center gap-1"><LabIcon name="eye" size={10} />{tile.views}</span>}
+                    {tile.engagements && <span className="inline-flex items-center gap-1"><LabIcon name="heart" size={10} />{tile.engagements}</span>}
+                    {!tile.views && <span>Draft asset</span>}
                   </div>
                   <div className="flex items-center gap-1">
                     <img alt="" src={STAGE.photo} className="size-4 rounded-full object-cover" />
                     <span className={`${FG_M} text-[9px] text-white truncate`}>{STAGE.name}</span>
-                    <img alt="" src={icIG} className="size-2.5 ml-auto brightness-0 invert opacity-80" />
+                    <span className="text-[8px] text-white/80 ml-auto">{tile.platform}</span>
                   </div>
                 </div>
               </div>
@@ -728,10 +709,10 @@ function PitchStoryDesktop() {
     ["05", "Shared"],
   ];
   const COPY = [
-    ["01 / The brief", "Anyone on your roster running the marathon?", "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.", "You already know who."],
-    ["02 / Explore", "Type it the way you'd say it.", `Search ${STAGE.agency}'s content for "marathon". Find the training post that backs up ${STAGE.name}.`, "Now put them on a list."],
-    ["03 / The list", "One shortlist. Shareable.", "Boston Marathon shortlist holds Ren Cole, Io Marin, and Sable Quinn. Same roster, staged figures throughout.", "Open the kit."],
-    ["04 / The kit", "Connected numbers. Your colours.", `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}. Content and receipts on the same scroll.`, "Share it."],
+    ["01 / The brief", "Who makes haircare feel effortless?", "A haircare brand wants approachable routines, 100K+ on Instagram, and a creator who can make the product part of everyday life. Options by Friday.", "You already know who."],
+    ["02 / Explore", "Type it the way you'd say it.", `Search ${STAGE.agency}'s content for "haircare". Find the curl routine that backs up ${STAGE.name}.`, "Now put them on a list."],
+    ["03 / The list", "One shortlist. Shareable.", "A beauty shortlist brings Samantha Pikka and Aria Quen together. Compare their content, audiences and individual fit for the brief.", "Open the kit."],
+    ["04 / The kit", "Connected numbers. Your colours.", `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}, LI ${STAGE.li.n}. Content and receipts on the same scroll.`, "Share it."],
     ["05 / Shared", "They opened it. You know.", "Paste into Gmail from Foam. See which client opened the list, which profiles they viewed, and when they came back.", "Make the next conversation count."],
   ];
   const go = (n: number) => setStep((s) => (s + n + 5) % 5);
@@ -771,7 +752,7 @@ function PitchStoryDesktop() {
         <div className="max-w-[1200px] mx-auto w-full">
           <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
             <p className={`${FG_R} text-sm text-muted`}>One pitch. Same talent. Foam working on scroll.</p>
-            <p className={`${FG_R} text-sm text-muted`}>Marathon brief · Staged example · {STAGE.name}</p>
+            <p className={`${FG_R} text-sm text-muted`}>Haircare brief · Staged example · {STAGE.name}</p>
           </div>
           <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-8 xl:gap-12 items-start">
             <div>
@@ -788,9 +769,9 @@ function PitchStoryDesktop() {
               {step === 3 && (
                 <div className="mt-6 grid grid-cols-3 gap-3 max-w-[360px]">
                   {[
-                    [STAGE.total, "Total audience"],
+                    [STAGE.totalShort, "Total audience"],
                     [STAGE.ig.n, "Instagram"],
-                    [CONTENT[0].views, "Top post views"],
+                    [TOP_POST_VIEWS, "Top post views"],
                   ].map(([v, l]) => (
                     <div key={l}>
                       <p className={`${FG_SB} text-[22px] text-text leading-none`}>{v}</p>
@@ -808,7 +789,7 @@ function PitchStoryDesktop() {
                     <span className={`${FG_SB} text-[15px] text-[#d93025]`}>M</span>
                     <span className={`${FG_SB} text-[14px] text-[#202124]`}>Gmail</span>
                     <div className="flex-1 h-8 rounded-full bg-[#e8f0fe] px-4 flex items-center text-[12px] text-[#5f6368]">Search mail</div>
-                    <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">J</div>
+                    <div className="size-8 rounded-full bg-[#e6c9a8] text-[#5b4636] flex items-center justify-center text-[12px] font-medium">R</div>
                   </div>
                   <div className="flex flex-1 min-h-0">
                     <div className="w-[110px] shrink-0 bg-[#f4f6fb] p-3 text-[11px] text-[#5f6368] border-r border-[#eef0f3]">
@@ -818,22 +799,22 @@ function PitchStoryDesktop() {
                       <p className="px-2 py-1">Sent</p>
                     </div>
                     <div className="flex-1 p-5">
-                      <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Boston Marathon: who should we meet?</p>
+                      <p className={`${FG_SB} text-[16px] text-[#202124] mb-4`}>Haircare launch: who should we meet?</p>
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">S</div>
+                        <div className="size-8 rounded-full bg-[#d3e3fd] text-[#041e49] flex items-center justify-center text-[12px] shrink-0">A</div>
                         <div>
-                          <p className={`${FG_M} text-[12px] text-[#202124]`}>Sam · Pace Running</p>
+                          <p className={`${FG_M} text-[12px] text-[#202124]`}>Alex · Everyday Hair</p>
                           <p className={`${FG_R} text-[11px] text-[#5f6368]`}>to me · 10:42 AM</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi Jamie,</p>
+                      <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>Hi {STAGE.manager.split(" ")[0]},</p>
                       <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
-                        We're looking for a creator running Boston. Someone whose audience is already following their training.
+                        We're looking for a beauty creator who makes haircare feel approachable. Someone with a routine their audience can actually follow.
                       </p>
                       <div className="border-l-2 border-[#d3e3fd] pl-3 mb-3 text-[13px] text-[#202124] space-y-1">
                         <p>100K+ on Instagram</p>
-                        <p>Primarily US audience</p>
-                        <p>Running the Boston Marathon</p>
+                        <p>Approachable beauty content</p>
+                        <p>Everyday haircare routines</p>
                       </div>
                       <p className={`${FG_R} text-[13px] text-[#202124]`}>Could you send a few options by Friday?</p>
                     </div>
@@ -844,7 +825,7 @@ function PitchStoryDesktop() {
               {step === 1 && (
                 <FoamProductFrame height={420}>
                   <AppRail active="explore" />
-                  <ExploreAppView query="marathon" />
+                  <ExploreAppView query="haircare" />
                 </FoamProductFrame>
               )}
 
@@ -871,13 +852,13 @@ function PitchStoryDesktop() {
                   <div className="bg-[#f4f5f7] rounded-[18px] border border-[#e8eaed] p-5">
                     <div className="flex items-center justify-between mb-6">
                       <p className={`${FG_SB} text-[16px] text-text`}>foam <span className={`${FG_R} text-sm text-muted ml-2`}>Notifications</span></p>
-                      <div className="size-8 rounded-full bg-[#e6c9a8] flex items-center justify-center text-[12px]">J</div>
+                      <div className="size-8 rounded-full bg-[#e6c9a8] flex items-center justify-center text-[12px]">R</div>
                     </div>
-                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Boston Marathon shortlist</p>
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Haircare shortlist</p>
                     <h3 className={`${FG_SB} text-[24px] text-text mb-1`}>Your pitch has company.</h3>
-                    <p className={`${FG_R} text-sm text-muted mb-5`}>Sam at Pace Running</p>
+                    <p className={`${FG_R} text-sm text-muted mb-5`}>Alex at Everyday Hair</p>
                     {[
-                      ["10:18 AM", "Opened your list", "Boston Marathon shortlist", false],
+                      ["10:18 AM", "Opened your list", "Haircare shortlist", false],
                       ["10:21 AM", `Viewed ${STAGE.name}'s profile`, "A closer look at your recommendation", false],
                       ["2:46 PM", "Returned to your list", "Another look, later that afternoon", true],
                     ].map(([time, title, sub, fresh]) => (
@@ -904,7 +885,7 @@ function PitchStoryDesktop() {
               </button>
             ))}
           </div>
-          <p className={`${FG_R} text-[12px] text-muted mt-5`}>Staged product example. Illustrative content and figures. {STAGE.name} only.</p>
+          <p className={`${FG_R} text-[12px] text-muted mt-5`}>Staged product example. AI-generated creators and illustrative figures.</p>
         </div>
       </div>
     </section>
@@ -927,29 +908,29 @@ function PitchStoryMobile() {
   const COPY = [
     {
       kicker: "01 / The brief",
-      title: "Anyone on your roster running the marathon?",
-      body: "A running brand wants a creator in the Boston Marathon, 100K+ on Instagram, US audience. Options by Friday.",
+      title: "Who makes haircare feel effortless?",
+      body: "A haircare brand wants approachable routines, 100K+ on Instagram, and a creator who can make the product part of everyday life. Options by Friday.",
       next: "You already know who.",
       frame: "brief" as const,
     },
     {
       kicker: "02 / Explore",
       title: "Type it the way you'd say it.",
-      body: `Search ${STAGE.agency}'s content for "marathon". Find the training post that backs up ${STAGE.name}.`,
+      body: `Search ${STAGE.agency}'s content for "haircare". Find the curl routine that backs up ${STAGE.name}.`,
       next: "Now put them on a list.",
       frame: "explore" as const,
     },
     {
       kicker: "03 / The list",
       title: "One shortlist. Shareable.",
-      body: "Boston Marathon shortlist holds Ren Cole, Io Marin, and Sable Quinn. Same roster, staged figures throughout.",
+      body: "A beauty shortlist brings Samantha Pikka and Aria Quen together. Compare their content, audiences and individual fit for the brief.",
       next: "Open the kit.",
       frame: "lists" as const,
     },
     {
       kicker: "04 / The kit",
       title: "Connected numbers. Your colours.",
-      body: `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}. Content and receipts on the same page.`,
+      body: `${STAGE.name}. ${STAGE.total} total audience. IG ${STAGE.ig.n}, TT ${STAGE.tt.n}, YT ${STAGE.yt.n}, LI ${STAGE.li.n}. Content and receipts on the same page.`,
       next: "Share it.",
       frame: "kit" as const,
     },
@@ -967,7 +948,7 @@ function PitchStoryMobile() {
       <div className="px-5 pt-12 pb-4">
         <MobileFade>
           <p className={`${FG_R} text-sm text-muted`}>One pitch. Same talent. Foam from brief to open.</p>
-          <p className={`${FG_R} text-sm text-muted mt-1`}>Marathon brief · Staged example · {STAGE.name}</p>
+          <p className={`${FG_R} text-sm text-muted mt-1`}>Haircare brief · Staged example · {STAGE.name}</p>
         </MobileFade>
       </div>
 
@@ -985,9 +966,9 @@ function PitchStoryMobile() {
             {beat.frame === "kit" && (
               <div className="mt-5 grid grid-cols-3 gap-3">
                 {[
-                  [STAGE.total, "Total audience"],
+                  [STAGE.totalShort, "Total audience"],
                   [STAGE.ig.n, "Instagram"],
-                  [CONTENT[0].views, "Top post views"],
+                  [TOP_POST_VIEWS, "Top post views"],
                 ].map(([v, l]) => (
                   <div key={l}>
                     <p className={`${FG_SB} text-[20px] text-text leading-none`}>{v}</p>
@@ -1006,21 +987,21 @@ function PitchStoryMobile() {
                     <span className={`${FG_SB} text-[14px] text-[#d93025]`}>M</span>
                     <span className={`${FG_SB} text-[13px] text-[#202124]`}>Gmail</span>
                   </div>
-                  <p className={`${FG_SB} text-[15px] text-[#202124] mb-3`}>Boston Marathon: who should we meet?</p>
-                  <p className={`${FG_M} text-[12px] text-[#202124] mb-1`}>Sam · Pace Running</p>
+                  <p className={`${FG_SB} text-[15px] text-[#202124] mb-3`}>Haircare launch: who should we meet?</p>
+                  <p className={`${FG_M} text-[12px] text-[#202124] mb-1`}>Alex · Everyday Hair</p>
                   <p className={`${FG_R} text-[13px] text-[#202124] leading-5 mb-3`}>
-                    Looking for a creator running Boston. 100K+ on Instagram. US audience. Options by Friday?
+                    Looking for a beauty creator with an everyday haircare routine. 100K+ on Instagram. Options by Friday?
                   </p>
                   <div className="border-l-2 border-[#d3e3fd] pl-3 text-[12px] text-[#202124] space-y-1">
                     <p>100K+ on Instagram</p>
-                    <p>Primarily US audience</p>
-                    <p>Running the Boston Marathon</p>
+                    <p>Approachable beauty content</p>
+                    <p>Everyday haircare routines</p>
                   </div>
                 </div>
               )}
               {beat.frame === "explore" && (
                 <FoamProductFrame height={360}>
-                  <ExploreAppView query="marathon" />
+                  <ExploreAppView query="haircare" />
                 </FoamProductFrame>
               )}
               {beat.frame === "lists" && (
@@ -1041,9 +1022,9 @@ function PitchStoryMobile() {
                     <GmailView step={3} />
                   </div>
                   <div className="bg-[#f4f5f7] rounded-[16px] border border-[#e8eaed] p-4">
-                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Boston Marathon shortlist</p>
+                    <p className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-muted mb-2`}>Shared list · Haircare shortlist</p>
                     <h3 className={`${FG_SB} text-[20px] text-text mb-1`}>Your pitch has company.</h3>
-                    <p className={`${FG_R} text-sm text-muted mb-4`}>Sam at Pace Running</p>
+                    <p className={`${FG_R} text-sm text-muted mb-4`}>Alex at Everyday Hair</p>
                     {[
                       ["10:18 AM", "Opened your list"],
                       ["10:21 AM", `Viewed ${STAGE.name}'s profile`],
@@ -1063,7 +1044,7 @@ function PitchStoryMobile() {
       ))}
 
       <p className={`${FG_R} text-[12px] text-muted px-5 pb-10`}>
-        Staged product example. Illustrative content and figures. {STAGE.name} only.
+        Staged product example. AI-generated creators and illustrative figures.
       </p>
     </section>
   );
@@ -1087,7 +1068,7 @@ function ShareProof() {
             Same numbers in the reply the brand opens.
           </h2>
           <p className={`${FG_R} text-[16px] leading-7 text-muted mb-6 max-w-[420px]`}>
-            {STAGE.name}'s kit, list, and Gmail embed stay on one thread: {STAGE.total} total, IG {STAGE.ig.n}, TT {STAGE.tt.n}, YT {STAGE.yt.n}.
+            {STAGE.name}'s kit, list, and Gmail embed stay on one thread: {STAGE.total} total, IG {STAGE.ig.n}, TT {STAGE.tt.n}, YT {STAGE.yt.n}, LI {STAGE.li.n}.
           </p>
           <div className="flex flex-col gap-2.5 mb-8">
             {[

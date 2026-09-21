@@ -1,4 +1,9 @@
-import type { CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import {
+  captionBackgrounds,
+  captionFont,
+  measureCaption,
+} from "../lib/captionLayout";
 import {
   CAPTION_FONT_OPTIONS,
   formatAudience,
@@ -22,25 +27,85 @@ export function AIDisclosure({ className = "" }: { className?: string }) {
 }
 
 export function Caption({ settings }: { settings?: TileCaptionSettings }) {
-  if (!settings?.visible || !settings.text.trim()) return null;
+  const [fontRevision, setFontRevision] = useState(0);
+  const font = settings ? captionFont(settings) : "";
+  const text = settings?.text || "";
+  useEffect(() => {
+    if (!font || !text) return;
+    let active = true;
+    document.fonts
+      .load(font, text)
+      .then(() => {
+        if (active) setFontRevision((revision) => revision + 1);
+      })
+      .catch(() => {
+        /* The declared fallback font still renders and exports. */
+      });
+    return () => {
+      active = false;
+    };
+  }, [font, text]);
+  const layout = useMemo(() => {
+    if (!settings?.visible || !settings.text.trim()) return null;
+    const ctx = document.createElement("canvas").getContext("2d");
+    return ctx ? measureCaption(ctx, settings) : null;
+  }, [settings, fontRevision]);
+  if (!settings || !layout) return null;
   const style: CSSProperties = {
-    left: `${settings.x}%`,
-    top: `${settings.y}%`,
-    color: settings.fill,
-    fontSize: `${settings.size / 3}cqw`,
-    fontFamily: CAPTION_FONT_OPTIONS.find((f) => f.id === settings.font)?.css,
-    WebkitTextStroke: settings.strokeWidth
-      ? `${settings.strokeWidth / 3}cqw ${settings.stroke}`
-      : undefined,
-    paintOrder: "stroke fill",
-    textShadow: settings.strokeWidth
-      ? "none"
-      : "0 1px 3px #0008, 0 2px 8px #0005",
+    left: `clamp(${layout.width / 21.6}cqw, ${settings.x}%, calc(100% - ${layout.width / 21.6}cqw))`,
+    top: `clamp(${layout.height / 21.6}cqw, ${settings.y}%, calc(100% - ${layout.height / 21.6}cqw))`,
+    width: `${layout.width / 10.8}cqw`,
+    overflow: "visible",
   };
   return (
-    <span className="tl-caption" style={style}>
-      {settings.text}
-    </span>
+    <svg
+      className="tl-caption"
+      style={style}
+      viewBox={`0 0 ${layout.width} ${layout.height}`}
+      role="img"
+      aria-label={settings.text}
+    >
+      <g
+        fill={settings.backgroundColor}
+        opacity={settings.backgroundOpacity / 100}
+      >
+        {captionBackgrounds(layout, settings).map((rect, index) => (
+          <rect
+            key={index}
+            {...rect}
+            rx={Math.min(
+              settings.radius * 3.6,
+              rect.height / 2,
+              rect.width / 2,
+            )}
+          />
+        ))}
+      </g>
+      <g
+        fill={settings.fill}
+        stroke={settings.strokeWidth ? settings.stroke : "none"}
+        strokeWidth={settings.strokeWidth * 3.6}
+        strokeLinejoin="round"
+        paintOrder="stroke fill"
+        style={{
+          fontFamily: CAPTION_FONT_OPTIONS.find((f) => f.id === settings.font)
+            ?.css,
+          fontSize: settings.size * 3.6,
+          fontWeight: settings.weight,
+          fontStyle: settings.italic ? "italic" : "normal",
+          filter:
+            !settings.strokeWidth && settings.background === "none"
+              ? "drop-shadow(0 2px 4px #0008)"
+              : undefined,
+        }}
+      >
+        {layout.lines.map((line, index) => (
+          <text key={index} x={line.x} y={line.y}>
+            {line.text}
+          </text>
+        ))}
+      </g>
+    </svg>
   );
 }
 

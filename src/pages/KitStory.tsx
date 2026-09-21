@@ -3,6 +3,12 @@ import { Link } from "react-router";
 import { useIsDesktop } from "../hooks/useMediaQuery";
 import { ChromeStory } from "./ChromeStory";
 import { KitStoryMobile } from "./KitStoryMobile";
+import {
+  formatWebsiteMetric,
+  websiteContentStats,
+  websiteProfile,
+  websiteSamantha,
+} from "../data/websiteTalent";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const CLIP = `${A}/io-portrait-web.mp4`;
@@ -23,32 +29,21 @@ const icNavWatch = `${A}/5c880.svg`;
 const icNavChat = `${A}/4f583.svg`;
 
 const CREAM = "#F4E6C8";
-const BURGUNDY = "#6b0030";
+const BURGUNDY = "#7a0036";
 
-/** Staged talent already used on this route. Fake handles only. */
+/** The same approved fictional profile used throughout the website examples. */
 const STAGE = {
-  name: "Samantha Pikka",
+  ...websiteProfile(websiteSamantha),
   kitName: "Samantha-Pikka-haircare'26",
-  loc: "Los Angeles, CA",
-  age: "26",
-  gender: "Female",
-  verticals: "Beauty · Advocacy · Education",
-  bio: "Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.",
-  total: "1,155,300",
-  totalShort: "1.2M",
   shareUrl: "https://foam.io/m/samantha-pikka",
-  ig: { n: "570.1K", h: "@samanthapikka3" },
-  tt: { n: "157.2K", h: "@sampikka" },
-  yt: { n: "418K", h: "@samiepikka4" },
-  li: { n: "10K", h: "" },
 };
 
-const TILES = [
-  { views: "116K", h: 340, pos: "28% 18%", plat: icIG },
-  { views: "110K", h: 248, pos: "62% 22%", plat: icTT },
-  { views: "93.2K", h: 320, pos: "48% 30%", plat: icIG },
-  { views: "154.3K", h: 236, pos: "70% 16%", plat: icYT },
-];
+const TILES = websiteSamantha.content.slice(0, 4).map((tile, index) => ({
+  ...tile,
+  h: [340, 248, 320, 236][index],
+}));
+const CONTENT_STATS = websiteContentStats(TILES);
+const PLATFORM_LABELS = { instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube" };
 
 function clamp(n: number, a = 0, b = 1) {
   return Math.min(b, Math.max(a, n));
@@ -401,13 +396,18 @@ function KitStoryDesktop() {
                         </div>
                         <span
                           className={`${FG_M} rounded-full px-4 py-1.5 text-[13px] border`}
-                          style={{ borderColor: "rgba(107,0,48,0.4)", color: BURGUNDY }}
+                          style={{ borderColor: "rgba(122,0,54,0.4)", color: BURGUNDY }}
                         >
                           Contact
                         </span>
                       </div>
                       <div className="flex gap-7 md:gap-10 items-start">
-                        <div ref={well} className="w-[42%] shrink-0 rounded-[16px] bg-[#ead9b8] aspect-square" />
+                        <figure className="w-[42%] shrink-0 rounded-[16px] overflow-hidden bg-white">
+                          <div ref={well} className="bg-[#ead9b8] aspect-square">
+                            <img src={STAGE.portrait} alt={`${STAGE.name} portrait`} className="size-full object-cover object-top" />
+                          </div>
+                          <figcaption className={`${FG_R} bg-white text-[#6a7282] text-[10px] px-3 py-1.5`}>Made with AI · Fictional creator</figcaption>
+                        </figure>
                         <div className="flex-1 min-w-0 pt-1">
                           <p className={`${FG_SB} leading-[0.95] tracking-[-1.2px] mb-4`} style={{ color: BURGUNDY, fontSize: "clamp(34px, 5vw, 52px)" }}>
                             {STAGE.name}
@@ -420,13 +420,13 @@ function KitStoryDesktop() {
                               <span
                                 key={src}
                                 className="size-10 rounded-full border inline-flex items-center justify-center"
-                                style={{ borderColor: "rgba(107,0,48,0.35)", background: "rgba(107,0,48,0.08)" }}
+                                style={{ borderColor: "rgba(122,0,54,0.35)", background: "rgba(122,0,54,0.08)" }}
                               >
                                 <img alt="" src={src} className="size-4" />
                               </span>
                             ))}
                           </div>
-                          <div className="inline-flex flex-col rounded-2xl px-5 py-3.5" style={{ background: "rgba(107,0,48,0.10)", color: BURGUNDY }}>
+                          <div className="inline-flex flex-col rounded-2xl px-5 py-3.5" style={{ background: "rgba(122,0,54,0.10)", color: BURGUNDY }}>
                             <span className={`${FG_R} text-[12px] opacity-70 mb-1`}>Verticals</span>
                             <span className={`${FG_M} text-[15px]`}>{STAGE.verticals}</span>
                           </div>
@@ -454,15 +454,22 @@ function KitStoryDesktop() {
 
                     {/* Content tiles */}
                     <div className="px-6 md:px-8 py-6" style={{ background: CREAM }}>
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <p className={`${FG_SB} text-[16px]`}>Featured content</p>
+                        <span className={`${FG_R} text-[11px] text-[#6a7282]`}>Demo figures</span>
+                      </div>
                       <div className="grid grid-cols-4 gap-3 items-start">
                         {TILES.map((tile) => (
-                          <div key={tile.views + tile.pos} className="relative rounded-[14px] overflow-hidden bg-[#ead9b8]" style={{ height: tile.h }}>
-                            <img src={POSTER} alt="" className="size-full object-cover" style={{ objectPosition: tile.pos }} />
-                            <div className="absolute inset-x-0 bottom-0 px-2.5 py-2 text-white flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent">
-                              <span className={`${FG_M} text-[11px]`}>{tile.views}</span>
-                              <img alt="" src={tile.plat} className="size-3.5 brightness-0 invert opacity-85" />
+                          <figure key={tile.thumb} className="rounded-[14px] overflow-hidden bg-white">
+                            <div className="relative bg-[#ead9b8]" style={{ height: tile.h }}>
+                              <img src={tile.thumb} alt={`${STAGE.name}: ${tile.caption}`} loading="lazy" className="size-full object-cover" />
+                              <div className="absolute inset-x-0 bottom-0 px-2.5 py-2 text-white flex items-center justify-between gap-2 bg-gradient-to-t from-black/70 to-transparent">
+                                <span className={`${FG_M} text-[11px]`}>{tile.views !== undefined ? `${formatWebsiteMetric(tile.views)} views` : "New content"}</span>
+                                <span className={`${FG_R} text-[9px]`}>{PLATFORM_LABELS[tile.platform]}</span>
+                              </div>
                             </div>
-                          </div>
+                            <figcaption className={`${FG_R} bg-white text-[#6a7282] text-[10px] px-2.5 py-1.5`}>Made with AI</figcaption>
+                          </figure>
                         ))}
                       </div>
                     </div>
@@ -478,10 +485,10 @@ function KitStoryDesktop() {
                               <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{STAGE.ig.h}</p>
                             </div>
                           </div>
-                          <p className={`${FG_R} text-[12px]`} style={{ color: BURGUNDY }}>Data synced: Last 28d</p>
+                          <p className={`${FG_R} text-[12px]`} style={{ color: BURGUNDY }}>Featured posts · Demo data</p>
                         </div>
                         <div className="grid grid-cols-2 gap-3 mb-4">
-                          {[["672.0K", "Avg. Views"], ["22K", "Avg. Likes"], ["8.3K", "Avg. Comments"], ["31.8K", "Avg. Shares"]].map(([val, lab]) => (
+                          {CONTENT_STATS.map(([val, lab]) => (
                             <div key={lab} className="rounded-[12px] bg-white/70 px-4 py-3">
                               <p className={`${FG_SB} text-[22px] leading-none mb-1`}>{val}</p>
                               <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{lab}</p>
@@ -490,8 +497,8 @@ function KitStoryDesktop() {
                         </div>
                         <div className="rounded-[12px] bg-white/70 px-4 py-4 mb-3">
                           <p className={`${FG_R} text-[12px] text-[#6a7282] mb-1`}>Total followers</p>
-                          <p className={`${FG_SB} text-[28px] leading-none mb-1`}>72.9K</p>
-                          <p className={`${FG_R} text-[12px] mb-4`} style={{ color: BURGUNDY }}>+5,976 new followers</p>
+                          <p className={`${FG_SB} text-[28px] leading-none mb-1`}>{STAGE.ig.n}</p>
+                          <p className={`${FG_R} text-[12px] mb-4`} style={{ color: BURGUNDY }}>Illustrative account trend</p>
                           <svg viewBox="0 0 320 72" className="w-full h-16" aria-hidden>
                             <polyline fill="none" stroke={BURGUNDY} strokeWidth="2.4" points="4,64 32,60 60,58 88,54 116,50 144,46 172,38 200,34 228,36 256,30 284,24 316,18" />
                             <circle cx="316" cy="18" r="3.5" fill={BURGUNDY} />
@@ -499,7 +506,7 @@ function KitStoryDesktop() {
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div className="rounded-[12px] bg-white/70 px-4 py-4">
-                            <p className={`${FG_M} text-[13px] mb-3`}>Age distribution</p>
+                            <p className={`${FG_M} text-[13px] mb-3`}>Example age distribution</p>
                             {[["13-17", "14%"], ["18-24", "20%"], ["25-34", "20%"]].map(([lab, val]) => (
                               <div key={lab} className="flex items-center gap-2 text-[12px] mb-2">
                                 <span className="w-10 text-[#6a7282]">{lab}</span>
@@ -509,7 +516,7 @@ function KitStoryDesktop() {
                             ))}
                           </div>
                           <div className="rounded-[12px] bg-white/70 px-4 py-4">
-                            <p className={`${FG_M} text-[13px] mb-3`}>Gender distribution</p>
+                            <p className={`${FG_M} text-[13px] mb-3`}>Example gender distribution</p>
                             <div className="flex items-center gap-2 text-[12px]">
                               <span className="w-14 text-[#6a7282]">Female</span>
                               <span className="h-2 rounded-full w-[60%]" style={{ background: BURGUNDY }} />
@@ -535,7 +542,7 @@ function KitStoryDesktop() {
                 width: `${photoW}%`,
                 height: `${photoH}%`,
                 borderRadius: `${lerp(0, 14, pack)}px`,
-                opacity: 1 - ease(fold) * 0.9,
+                opacity: (1 - ease(fold) * 0.9) * (1 - ease(range(pack, 0.94, 1))),
               }}
             >
               <video ref={vid} className="size-full object-cover object-[center_20%]" src={CLIP} poster={POSTER} muted loop playsInline autoPlay />
@@ -626,13 +633,14 @@ function KitStoryDesktop() {
               >
                 <div className="px-4 pt-4 pb-3 flex items-center gap-3">
                   <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
-                    <img src={POSTER} alt="" className="size-full object-cover object-[center_18%]" />
+                    <img src={STAGE.portrait} alt={`${STAGE.name} portrait`} className="size-full object-cover object-top" />
                   </div>
                   <div className="min-w-0">
                     <p className={`${FG_SB} text-[16px]`} style={{ color: BURGUNDY }}>{STAGE.name}</p>
                     <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{STAGE.totalShort} total audience</p>
                   </div>
                 </div>
+                <p className={`${FG_R} bg-white px-4 py-1.5 text-[10px] text-[#6a7282]`}>Made with AI · Demo profile</p>
                 <div className="px-4 py-3 flex items-center justify-between" style={{ background: BURGUNDY, color: CREAM }}>
                   <span className={`${FG_R} text-[12px] truncate`}>{STAGE.shareUrl.replace("https://", "")}</span>
                   <span className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}>Sent</span>
@@ -672,4 +680,3 @@ export function KitStory() {
   }
   return isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />;
 }
-
