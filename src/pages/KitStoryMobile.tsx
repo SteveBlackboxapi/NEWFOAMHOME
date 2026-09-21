@@ -194,9 +194,13 @@ function MobileNetwork() {
 export function KitStoryMobile() {
   return (
     <div className="text-[#101828] bg-[#eef0f4]">
-      <div className="sticky top-0 z-[70] flex items-center gap-3 px-4 py-3 bg-black/80 backdrop-blur-sm">
-        <Link to="/" className="text-[12px] text-white/80">← Home</Link>
-        <span className="text-[10px] uppercase tracking-[1px] text-white/50">Kit story</span>
+      <div className="sticky top-0 z-[70] px-4 py-3 bg-black/80 backdrop-blur-sm">
+        <Link
+          to="/"
+          className={`${FG_M} text-[12px] inline-flex items-center gap-2 rounded-full px-3 h-8 border text-white/85 border-white/20 bg-black/30`}
+        >
+          ← Foam
+        </Link>
       </div>
 
       {/* 1. Truth layer */}
@@ -286,8 +290,28 @@ export function KitStoryMobile() {
           <MobileShareCard />
         </MobileFade>
         <MobileFade delayMs={120} className="mt-12 text-center">
-          <p className={`${FG_SB} text-[42px] leading-none tracking-[-1.5px] text-[#101828]`}>Media Kit</p>
-          <p className={`${FG_R} mt-3 text-[16px] text-[#6a7282]`}>On its way</p>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-3`}>Shared</p>
+          <p className={`${FG_SB} text-[32px] leading-[1.02] tracking-[-1.2px] text-[#101828] max-w-[14ch] mx-auto`}>
+            What you see is what they get.
+          </p>
+          <p className={`${FG_R} mt-3 text-[15px] text-[#6a7282] max-w-[28em] mx-auto`}>
+            Link copied. Same kit. Same connected numbers. Ready for the inbox.
+          </p>
+          <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#ead9b8] bg-[#F4E6C8] text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
+            <div className="px-4 pt-4 pb-3 flex items-center gap-3">
+              <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
+                <img src={POSTER} alt="" className="size-full object-cover object-[center_18%]" />
+              </div>
+              <div className="min-w-0">
+                <p className={`${FG_SB} text-[16px] text-[#6b0030]`}>{TALENT.name}</p>
+                <p className={`${FG_R} text-[12px] text-[#6a7282]`}>1.2M total audience</p>
+              </div>
+            </div>
+            <div className="px-4 py-3 flex items-center justify-between bg-[#6b0030] text-[#F4E6C8]">
+              <span className={`${FG_R} text-[12px] truncate`}>foam.io/m/samantha-pikka</span>
+              <span className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}>Sent</span>
+            </div>
+          </div>
         </MobileFade>
       </section>
 

@@ -115,7 +115,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                 <div className="w-full max-w-[740px] bg-white rounded-[12px] shadow-[0_18px_50px_rgba(16,24,40,0.2)] overflow-hidden">
                   <div className="h-11 border-b border-[#eeefef] flex items-center px-4">
                     <p className={`${FG_M} text-[14px] flex-1`}>New Message</p>
-                    <span className="text-[#6a7282] text-sm">—   ☐   ×</span>
+                    <span className="text-[#6a7282] text-sm">-   ☐   ×</span>
                   </div>
                   <div className="px-4 py-2 border-b border-[#f1f2f4] text-[12px] text-[#6a7282]">Recipients</div>
                   <div className="px-4 py-2 border-b border-[#f1f2f4] text-[12px] text-[#6a7282]">Subject</div>
@@ -133,8 +133,8 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
                         <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
-                        <StatBlock title="Instagram Audience Summary" rows={[["ES 85.8%", ""], ["Female 68.6%", ""], ["25–34 31%", ""]]} />
-                        <StatBlock title="Age" rows={[["18–24", "20%"], ["25–34", "31%"], ["35–44", "18%"]]} />
+                        <StatBlock title="Instagram Audience Summary" rows={[["ES 85.8%", ""], ["Female 68.6%", ""], ["25-34 31%", ""]]} />
+                        <StatBlock title="Age" rows={[["18-24", "20%"], ["25-34", "31%"], ["35-44", "18%"]]} />
                       </div>
                     </div>
                   </div>
@@ -175,8 +175,8 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                     <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>Io is a movement creator known for rooftop sessions and late miles.</p>
                     <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
                     <div className="text-left text-[12px] space-y-2 mb-4">
-                      <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
-                      <div className="flex justify-between"><span>Include primary media kit</span><span className="w-8 h-4 rounded-full bg-[#f59e0b]" /></div>
+                      <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#185abc]" /></div>
+                      <div className="flex justify-between"><span>Include primary media kit</span><span className="w-8 h-4 rounded-full bg-[#185abc]" /></div>
                     </div>
                     <div className="flex gap-2">
                       {(["Basic", "Detail", "Text"] as const).map((lab) => (
