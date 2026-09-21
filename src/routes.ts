@@ -12,7 +12,6 @@ import { Demo } from "./pages/Demo";
 import { KitStory } from "./pages/KitStory";
 import { ChromeStory } from "./pages/ChromeStory";
 import { LabInspo } from "./pages/LabInspo";
-import { LabTalent } from "./pages/LabTalent";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter(
@@ -20,21 +19,27 @@ export const router = createBrowserRouter(
     { path: "kit-story", Component: KitStory },
     { path: "chrome-story", Component: ChromeStory },
     { path: "lab/inspo", Component: LabInspo },
-    { path: "lab/talent", Component: LabTalent },
+    {
+      path: "lab/talent",
+      HydrateFallback: () => null,
+      lazy: async () => ({
+        Component: (await import("./pages/LabTalent")).LabTalent,
+      }),
+    },
     {
       path: "/",
       Component: Root,
       children: [
         { index: true, Component: Home },
-        { path: "managers",   Component: Managers  },
-        { path: "brands",     Component: Brands    },
-        { path: "features",   Component: Features  },
-        { path: "about",      Component: About     },
-        { path: "creators",   Component: Creators  },
+        { path: "managers", Component: Managers },
+        { path: "brands", Component: Brands },
+        { path: "features", Component: Features },
+        { path: "about", Component: About },
+        { path: "creators", Component: Creators },
         { path: "data-trust", Component: DataTrust },
-        { path: "updates",    Component: Updates   },
-        { path: "demo",       Component: Demo      },
-        { path: "*",          Component: NotFound  },
+        { path: "updates", Component: Updates },
+        { path: "demo", Component: Demo },
+        { path: "*", Component: NotFound },
       ],
     },
   ],
