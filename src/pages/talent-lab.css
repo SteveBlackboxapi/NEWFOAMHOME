@@ -848,7 +848,7 @@
   gap: 5px;
   padding: 7px 2px 0;
   color: #697587;
-  background: #fff;
+  background: transparent;
   font-size: 10px;
   font-weight: 400;
   line-height: 1.5;
@@ -860,8 +860,7 @@
   padding: 10px 15px 0;
 }
 .tl-preview-disclosure {
-  justify-content: center;
-  padding: 9px 8px;
+  padding: 8px 2px 0;
 }
 .tl-caption {
   position: absolute;
@@ -1479,18 +1478,16 @@
 .tl-preview-figure {
   width: min(100%, 300px);
   margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 8px 25px #273a4f12;
 }
 .tl-preview-media {
   position: relative;
   container-type: inline-size;
   aspect-ratio: 9/16;
   width: 100%;
+  border-radius: 10px;
   overflow: hidden;
   background: #e4e8ef;
+  box-shadow: 0 8px 25px #273a4f12;
 }
 .tl-preview-media > img,
 .tl-preview-media > video {

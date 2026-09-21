@@ -6,6 +6,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
 import { ChromeStory } from "./ChromeStory";
 import { KitStoryMobile } from "./KitStoryMobile";
 import {
@@ -678,7 +679,7 @@ function KitStoryDesktop() {
                           <img src={POSTER} alt={`${STAGE.name} portrait`} />
                         </div>
                         <figcaption className="ks-disclosure">
-                          Made with AI · Fictional creator
+                          <AIDisclosure detail="Fictional creator" />
                         </figcaption>
                       </figure>
                     </div>
@@ -767,7 +768,7 @@ function KitStoryDesktop() {
                               </div>
                             </div>
                             <figcaption className="ks-disclosure">
-                              Made with AI
+                              <AIDisclosure />
                             </figcaption>
                           </figure>
                         ))}
@@ -802,7 +803,7 @@ function KitStoryDesktop() {
                 top: `${photoT}%`,
                 width: `${photoW}%`,
                 height: `${photoH}%`,
-                borderRadius: `${lerp(0, 17, pack)}px ${lerp(0, 17, pack)}px 0 0`,
+                borderRadius: `${lerp(0, 17, pack)}px`,
                 opacity: 1 - ease(kitOut),
               }}
             >

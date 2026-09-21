@@ -1,5 +1,6 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
 import {
   KitEditHandle,
   KitPlatformIcon,
@@ -161,17 +162,15 @@ function MobileKitCard() {
                 </span>
               </div>
             </div>
-            <figure className="w-[43%] shrink-0 rounded-[12px] overflow-hidden bg-white">
+            <figure className="w-[43%] shrink-0">
               <img
                 src={TALENT.portrait}
                 alt={`${TALENT.name} portrait`}
                 loading="lazy"
-                className="w-full aspect-[3/4] object-cover object-top"
+                className="block w-full aspect-[3/4] rounded-[12px] object-cover object-top"
               />
-              <figcaption
-                className={`${FG_R} bg-white px-2 py-1.5 text-[9px] text-[#6a7282]`}
-              >
-                Made with AI
+              <figcaption>
+                <AIDisclosure className={FG_R} size={9} />
               </figcaption>
             </figure>
           </div>
@@ -221,11 +220,8 @@ function MobileKitCard() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 items-start mb-6">
             {CONTENT.map((tile) => (
-              <figure
-                key={tile.thumb}
-                className="rounded-[12px] overflow-hidden bg-white"
-              >
-                <div className="relative aspect-[9/16] bg-[#f6ece4]">
+              <figure key={tile.thumb}>
+                <div className="relative aspect-[9/16] rounded-[12px] overflow-hidden bg-[#f6ece4]">
                   <img
                     src={tile.thumb}
                     alt={`${TALENT.name}: ${tile.caption}`}
@@ -243,10 +239,8 @@ function MobileKitCard() {
                     </p>
                   </div>
                 </div>
-                <figcaption
-                  className={`${FG_R} bg-white px-2 py-1.5 text-[9px] text-[#6a7282]`}
-                >
-                  Made with AI
+                <figcaption>
+                  <AIDisclosure className={FG_R} size={9} />
                 </figcaption>
               </figure>
             ))}
@@ -642,11 +636,9 @@ export function KitStoryMobile() {
                 </p>
               </div>
             </div>
-            <p
-              className={`${FG_R} bg-white px-4 py-1.5 text-[10px] text-[#6a7282]`}
-            >
-              Made with AI · Demo profile
-            </p>
+            <div className="px-4 pb-3">
+              <AIDisclosure className={FG_R} detail="Demo profile" />
+            </div>
             <div className="px-4 py-3 flex items-center justify-between bg-[#7a0036] text-[#fff6eb]">
               <span className={`${FG_R} text-[12px] truncate`}>
                 foam.io/m/samantha-pikka
