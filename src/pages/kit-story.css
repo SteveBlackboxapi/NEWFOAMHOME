@@ -1,3 +1,8 @@
+.ks-sendoff-logo {
+  width: clamp(160px, 28vh, 220px);
+  margin-bottom: clamp(16px, 3vh, 26px);
+}
+
 .ks-rail {
   width: 54px;
   flex-shrink: 0;

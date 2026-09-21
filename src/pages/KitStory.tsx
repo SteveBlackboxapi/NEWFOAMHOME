@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
+import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
 import { KitStoryMobile } from "./KitStoryMobile";
 import {
@@ -976,7 +977,8 @@ function KitStoryDesktop() {
             }}
           >
             <div className="absolute inset-0 bg-[#eef0f4]" />
-            <div className="relative">
+            <div className="relative flex flex-col items-center">
+              <MediaKitLogo className="ks-sendoff-logo" />
               <p
                 className={`${FG_SB} text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px]`}
               >
