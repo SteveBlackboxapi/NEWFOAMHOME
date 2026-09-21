@@ -15,6 +15,11 @@ import {
 } from "../data/websiteTalent";
 
 import { KitMetrics, KitGrowth, KitAudience } from "../components/KitAnalytics";
+import {
+  KitEditHandle,
+  KitPlatformIcon,
+  KitVerifiedBadge,
+} from "../components/KitDetails";
 import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
 import {
   KIT_CHAPTERS,
@@ -651,11 +656,17 @@ function KitStoryDesktop() {
                           className="ks-socials"
                           aria-label="Instagram, TikTok and YouTube"
                         >
-                          {[icIG, icTT, icYT].map((src) => (
-                            <span key={src}>
-                              <img src={src} className="size-4" alt="" />
-                            </span>
-                          ))}
+                          {(["instagram", "tiktok", "youtube"] as const).map(
+                            (network) => (
+                              <span key={network}>
+                                <KitPlatformIcon
+                                  network={network}
+                                  label={PLATFORM_LABELS[network]}
+                                  size={16}
+                                />
+                              </span>
+                            ),
+                          )}
                         </div>
                         <div className="ks-verticals">
                           <small>Verticals</small>
@@ -676,6 +687,7 @@ function KitStoryDesktop() {
                       data-kit-section="platforms"
                       aria-label="Platform audience"
                     >
+                      <KitEditHandle />
                       <div className="ks-platform-row">
                         <div className="ks-platform-total">
                           <h3>Platforms</h3>
@@ -695,13 +707,14 @@ function KitStoryDesktop() {
                             className="ks-platform-stat"
                             key={platform.network}
                           >
-                            <span>
-                              {
+                            <KitPlatformIcon
+                              network={platform.network}
+                              label={
                                 STAGE.platforms.find(
                                   (item) => item.network === platform.network,
-                                )?.label
+                                )?.label ?? platform.network
                               }
-                            </span>
+                            />
                             <strong>
                               <span aria-hidden="true">
                                 {formatWebsiteMetric(
@@ -713,6 +726,7 @@ function KitStoryDesktop() {
                               <span className="sr-only">
                                 {formatWebsiteMetric(platform.followers)}
                               </span>
+                              <KitVerifiedBadge />
                             </strong>
                             <small>{platform.handle}</small>
                           </div>

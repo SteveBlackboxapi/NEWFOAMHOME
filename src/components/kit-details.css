@@ -1,0 +1,61 @@
+.kit-detail-mask {
+  display: inline-block;
+  background: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+.kit-platform-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+.kit-verified-badge {
+  display: inline-block;
+  width: 0.52em;
+  height: 0.58em;
+  min-width: 12px;
+  min-height: 14px;
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin-top: 0.05em;
+}
+.kit-edit-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 88px;
+  height: 42px;
+  border: 1px solid #edf0f2;
+  border-radius: 24px;
+  background: #fff;
+  color: #1e2939;
+  box-shadow:
+    0 5px 15px #ffffff65,
+    0 7px 16px #10182812;
+  pointer-events: none;
+}
+.kit-edit-grip {
+  width: 15px;
+  height: 20px;
+  transform: rotate(90deg);
+}
+.kit-edit-divider {
+  height: 23px;
+  width: 1px;
+  background: #edf0f2;
+}
+.kit-edit-pencil {
+  width: 23px;
+  height: 23px;
+}
