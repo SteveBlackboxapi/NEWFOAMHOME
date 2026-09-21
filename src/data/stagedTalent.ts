@@ -2,11 +2,7 @@ import { A } from "../lib/assets";
 
 /** Networks we stage for catalogue reuse. */
 export type TalentNetwork =
-  | "instagram"
-  | "tiktok"
-  | "youtube"
-  | "twitch"
-  | "linkedin";
+  "instagram" | "tiktok" | "youtube" | "twitch" | "linkedin";
 
 /** Content publish surface shown on explore cards. */
 export type ContentPlatform = "instagram" | "tiktok" | "youtube";
@@ -68,7 +64,10 @@ export const CAPTION_FONT_OPTIONS: {
   },
 ];
 
-export const DEFAULT_CAPTION_SETTINGS: Omit<TileCaptionSettings, "text" | "visible"> = {
+export const DEFAULT_CAPTION_SETTINGS: Omit<
+  TileCaptionSettings,
+  "text" | "visible"
+> = {
   y: 26,
   x: 50,
   font: "founders",
@@ -88,6 +87,11 @@ export type TalentPlatform = {
 export type TalentContentTile = {
   type: "still" | "clip";
   thumb: string;
+  /** Keep the photographed framing in the feed and exports. */
+  aspectRatio?: "9/16" | "4/5";
+  /** Preserved image from the earlier character set. */
+  original?: string;
+  generation?: { version: string; approach: string; prompt?: string };
   /** Playable source, when available. A clip thumbnail alone is not a video. */
   video?: string;
   views: number;
@@ -131,6 +135,13 @@ export type StagedTalent = {
   totalAudience: number;
   /** Photoreal staged portrait path (invented identity; never live kit faces). */
   portrait: string;
+  originalPortrait?: string;
+  creativeDirection?: {
+    summary: string;
+    identityNotes: string[];
+    motionBrief?: string;
+    promptFile?: string;
+  };
   /** Optional short loop; null when not ready. */
   motion: string | null;
   motionStatus: "placeholder" | "ready";
@@ -158,7 +169,7 @@ export const stagedTalent: StagedTalent[] = [
     displayName: "Aria Quen",
     age: 22,
     location: "Seoul",
-    bio: "GRWM, soft makeup hauls, and skincare callouts under quiet bathroom light. Staged demo talent only.",
+    bio: "Everyday beauty, honest skincare check-ins, and little moments around Seoul. Morning GRWMs, coffee breaks, and a makeup bag that goes everywhere. Fictional demo creator.",
     verticals: ["Beauty", "Skincare", "GRWM"],
     platforms: [
       { network: "instagram", handle: "@aria.quen.fake", followers: 419_000 },
@@ -166,15 +177,120 @@ export const stagedTalent: StagedTalent[] = [
       { network: "youtube", handle: "@aria.quen.fake", followers: 112_000 },
     ],
     totalAudience: 1_771_000,
-    portrait: portrait("aria-quen"),
+    portrait: `${T}/aria-quen-v2/aria-quen-v2-portrait.jpg`,
+    originalPortrait: portrait("aria-quen"),
+    creativeDirection: {
+      summary:
+        "Everyday beauty in Seoul. A consistent character photographed across real-feeling moments, with natural skin, mixed light and the imperfect framing of a phone camera.",
+      identityNotes: [
+        "Aria is a fictional adult, aged 22, based on her original character portrait.",
+        "Keep her face shape, eye spacing, nose, lips and long black hair consistent.",
+        "Vary expression, clothes and surroundings; preserve everyday skin texture and phone-camera detail.",
+      ],
+      motionBrief:
+        "Planned: a 6–8 second bathroom GRWM. Aria makes a small lip-balm pass, lowers it, blinks and smiles toward the mirror. Locked phone camera, quiet room tone, consistent face and hands. No clip has been generated yet.",
+      promptFile: `${T}/aria-quen-v2/creative-brief.md`,
+    },
     motion: null,
     motionStatus: "placeholder",
     content: [
-      { type: "clip", thumb: tile("aria-quen", 1), views: 820_400, caption: "soft glam lip tutorial", platform: "tiktok", strongKind: "photo", engagements: 64_200 },
-      { type: "still", thumb: tile("aria-quen", 2), views: 194_200, caption: "shelf haul morning", platform: "instagram", strongKind: "hashtag", engagements: 12_800 },
-      { type: "still", thumb: tile("aria-quen", 3), views: 410_000, caption: "AM dropper routine", platform: "tiktok", strongKind: "photo", engagements: 38_100 },
-      { type: "still", thumb: tile("aria-quen", 4), views: 88_600, caption: "palette desk still", platform: "instagram", strongKind: "photo" },
-      { type: "clip", thumb: tile("aria-quen", 5), views: 267_000, caption: "travel makeup bag", platform: "tiktok", strongKind: "link", engagements: 21_400 },
+      {
+        type: "clip",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        original: tile("aria-quen", 1),
+        aspectRatio: "9/16",
+        views: 820_400,
+        caption: "five-minute face before coffee",
+        captionSettings: { y: 72, size: 16, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 64_200,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Phone-camera GRWM; identity anchored to Aria's refreshed portrait.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c2.jpg`,
+        original: tile("aria-quen", 2),
+        aspectRatio: "4/5",
+        views: 194_200,
+        caption: "coffee first, everything else later",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "hashtag",
+        engagements: 12_800,
+        generation: {
+          version: "Realism v2",
+          approach: "Candid café moment in cool afternoon light.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c3.jpg`,
+        original: tile("aria-quen", 3),
+        aspectRatio: "9/16",
+        views: 410_000,
+        caption: "a very low-effort night routine",
+        captionSettings: { y: 74, size: 15, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 38_100,
+        generation: {
+          version: "Realism v2",
+          approach: "Evening front-camera check-in with domestic lamplight.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c4.jpg`,
+        original: tile("aria-quen", 4),
+        aspectRatio: "4/5",
+        views: 88_600,
+        caption: "what actually lives on my desk",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Used everyday makeup photographed in natural window light.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c5.jpg`,
+        original: tile("aria-quen", 5),
+        aspectRatio: "9/16",
+        views: 267_000,
+        caption: "packing the essentials (and three lip balms)",
+        captionSettings: { y: 75, size: 15, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "link",
+        engagements: 21_400,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Mid-task packing frame with ordinary bedroom surroundings.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c6.jpg`,
+        aspectRatio: "9/16",
+        views: 0,
+        caption: "one last stop on the way home",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Night selfie with mixed shop and street lighting; new unpublished demo asset.",
+        },
+      },
     ],
   },
   {

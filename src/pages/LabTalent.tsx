@@ -364,7 +364,7 @@ export function LabTalent() {
             {view === "talent"
               ? "Every character. Every asset. One place."
               : view === "content"
-                ? "Explore your characters’ content, just as it appears in Foam."
+                ? "Browse, save and download content across your talent."
                 : "Your picks, ready for the next story."}
           </p>
           <span>

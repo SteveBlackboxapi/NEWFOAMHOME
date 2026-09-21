@@ -52,7 +52,14 @@ export function AssetCard({
 }) {
   const kind = assetKind(asset);
   return (
-    <article className={`tl-content-card tl-ratio-${position % 4}`}>
+    <article
+      className={`tl-content-card tl-ratio-${position % 4}`}
+      style={
+        asset.tile?.aspectRatio
+          ? { aspectRatio: asset.tile.aspectRatio }
+          : undefined
+      }
+    >
       <button
         className="tl-media-button"
         onClick={onOpen}

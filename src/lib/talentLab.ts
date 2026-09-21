@@ -11,6 +11,7 @@ export type LabAsset = {
   talent: StagedTalent;
   index: number;
   src: string;
+  original?: string;
   title: string;
   tile?: TalentContentTile;
 };
@@ -39,6 +40,7 @@ export function assetsFor(talent: StagedTalent): LabAsset[] {
       talent,
       index: -1,
       src: talent.portrait,
+      original: talent.originalPortrait,
       title: `${talent.displayName} portrait`,
     },
     ...talent.content.map((tile, index) => ({
@@ -46,6 +48,7 @@ export function assetsFor(talent: StagedTalent): LabAsset[] {
       talent,
       index,
       src: tile.thumb,
+      original: tile.original,
       title: tile.caption || `Content ${index + 1}`,
       tile,
     })),
@@ -137,6 +140,17 @@ export function profileData(talent: StagedTalent) {
     ...talent,
     synthetic: true,
     portrait: absolute(talent.portrait),
+    originalPortrait: talent.originalPortrait
+      ? absolute(talent.originalPortrait)
+      : null,
+    creativeDirection: talent.creativeDirection
+      ? {
+          ...talent.creativeDirection,
+          promptFile: talent.creativeDirection.promptFile
+            ? absolute(talent.creativeDirection.promptFile)
+            : undefined,
+        }
+      : undefined,
     motion: talent.motion ? absolute(talent.motion) : null,
     content: assetsFor(talent)
       .filter((a) => a.tile)
@@ -144,6 +158,7 @@ export function profileData(talent: StagedTalent) {
         ...a.tile,
         id: a.id,
         thumb: absolute(a.src),
+        original: a.original ? absolute(a.original) : null,
         video: a.tile?.video ? absolute(a.tile.video) : null,
         availability: assetKind(a),
         captionSettings: readCaption(a),
@@ -192,8 +207,8 @@ function extension(src: string) {
     "jpg"
   );
 }
-export function assetFilename(asset: LabAsset) {
-  return `${asset.talent.id}-${asset.index < 0 ? "portrait" : `content-${asset.index + 1}`}.${extension(asset.src)}`;
+export function assetFilename(asset: LabAsset, src = asset.src) {
+  return `${asset.talent.id}-${asset.index < 0 ? "portrait" : `content-${asset.index + 1}`}.${extension(src)}`;
 }
 
 async function assetBytes(src: string) {
@@ -206,14 +221,50 @@ async function assetBytes(src: string) {
   return new Uint8Array(await response.arrayBuffer());
 }
 
+async function briefBytes(src: string) {
+  const response = await fetch(src);
+  const contentType = response.headers.get("content-type") || "";
+  if (
+    !response.ok ||
+    !/^(text\/(plain|markdown|x-markdown)|application\/(markdown|octet-stream))(?:;|$)/i.test(
+      contentType,
+    )
+  )
+    throw new Error(
+      "The creative brief could not be downloaded. Please try again.",
+    );
+  const text = await response.text();
+  if (
+    !text.trim() ||
+    text.includes("\0") ||
+    /^\s*(<!doctype|<html)/i.test(text)
+  )
+    throw new Error("The creative brief is unavailable. Please try again.");
+  return strToU8(text);
+}
+
 export async function downloadOriginal(asset: LabAsset) {
   const response = await fetch(asset.src);
   if (
     !response.ok ||
     !(response.headers.get("content-type") || "").startsWith("image/")
   )
-    throw new Error("The original image could not be downloaded.");
+    throw new Error("The image could not be downloaded.");
   saveBlob(await response.blob(), assetFilename(asset));
+}
+
+export async function downloadArchivedOriginal(asset: LabAsset) {
+  if (!asset.original) throw new Error("No earlier original is available.");
+  const response = await fetch(asset.original);
+  if (
+    !response.ok ||
+    !(response.headers.get("content-type") || "").startsWith("image/")
+  )
+    throw new Error("The archived image could not be downloaded.");
+  saveBlob(
+    await response.blob(),
+    assetFilename(asset, asset.original).replace(/\.[^.]+$/, "-original$&"),
+  );
 }
 
 export async function downloadPack(
@@ -225,22 +276,38 @@ export async function downloadPack(
   const talents = [
     ...new Map(assets.map((a) => [a.talent.id, a.talent])).values(),
   ];
-  const jobs = assets.flatMap((a) => [
-    { path: `${a.talent.id}/${assetFilename(a)}`, src: a.src },
-    ...(a.tile?.video
-      ? [
-          {
-            path: `${a.talent.id}/content-${a.index + 1}.${extension(a.tile.video)}`,
-            src: a.tile.video,
-          },
-        ]
-      : []),
-  ]);
+  const jobs: { path: string; src: string; kind?: "text" }[] = assets.flatMap(
+    (a) => [
+      { path: `${a.talent.id}/${assetFilename(a)}`, src: a.src },
+      ...(a.original
+        ? [
+            {
+              path: `${a.talent.id}/archive/originals/${assetFilename(a, a.original)}`,
+              src: a.original,
+            },
+          ]
+        : []),
+      ...(a.tile?.video
+        ? [
+            {
+              path: `${a.talent.id}/content-${a.index + 1}.${extension(a.tile.video)}`,
+              src: a.tile.video,
+            },
+          ]
+        : []),
+    ],
+  );
   for (const talent of talents) {
     if (talent.motion && talent.motionStatus === "ready")
       jobs.push({
         path: `${talent.id}/${talent.id}-motion.${extension(talent.motion)}`,
         src: talent.motion,
+      });
+    if (talent.creativeDirection?.promptFile)
+      jobs.push({
+        path: `${talent.id}/creative-brief.${extension(talent.creativeDirection.promptFile)}`,
+        src: talent.creativeDirection.promptFile,
+        kind: "text",
       });
   }
   let done = 0;
@@ -248,7 +315,9 @@ export async function downloadPack(
   for (let offset = 0; offset < jobs.length; offset += 4) {
     await Promise.all(
       jobs.slice(offset, offset + 4).map(async (job) => {
-        files[job.path] = await assetBytes(job.src);
+        files[job.path] = await (job.kind === "text"
+          ? briefBytes(job.src)
+          : assetBytes(job.src));
         onProgress(++done, jobs.length);
       }),
     );
@@ -266,13 +335,13 @@ export async function downloadPack(
     ),
   );
   files["README.txt"] = strToU8(
-    "Foam talent library\n\nThese are fictional demo characters and invented metrics.\nImages are original files. Caption drafts are included in talent-data.json and are not baked into these originals. Use Download with caption in the lab for a rendered image.\nA planned video has a thumbnail only; no video file exists yet.\n",
+    "Foam talent library\n\nThese are fictional demo characters and invented metrics.\nCurrent images are supplied without caption overlays. Earlier images, where available, are preserved in each character's archive/originals folder.\nCaption drafts, source URLs and creative direction are included in talent-data.json. A creative-brief file is included for characters with a full brief. Use Download with caption in the lab for a rendered image.\nA planned video has a thumbnail only; no video file exists yet.\n",
   );
   const zipped = zipSync(files, { level: 0 });
   saveBlob(new Blob([zipped as BlobPart], { type: "application/zip" }), name);
 }
 
-/** Render the same 9:16 crop and caption used by the asset editor, at export resolution. */
+/** Render the asset editor's crop and caption at 1080px wide. */
 export async function downloadCaptioned(
   asset: LabAsset,
   caption: TileCaptionSettings,
@@ -283,7 +352,7 @@ export async function downloadCaptioned(
   await document.fonts.ready;
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
-  canvas.height = 1920;
+  canvas.height = asset.tile?.aspectRatio === "4/5" ? 1350 : 1920;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Image export is unavailable in this browser.");
   const scale = Math.max(
@@ -292,8 +361,8 @@ export async function downloadCaptioned(
   );
   ctx.drawImage(
     image,
-    (1080 - image.width * scale) / 2,
-    (1920 - image.height * scale) / 2,
+    (canvas.width - image.width * scale) / 2,
+    (canvas.height - image.height * scale) / 2,
     image.width * scale,
     image.height * scale,
   );
@@ -327,9 +396,10 @@ export async function downloadCaptioned(
     ctx.lineWidth = caption.strokeWidth * 3.6;
     ctx.lineJoin = "round";
     lines.forEach((line, i) => {
-      const x = (1080 * caption.x) / 100,
+      const x = (canvas.width * caption.x) / 100,
         y =
-          (1920 * caption.y) / 100 + (i - (lines.length - 1) / 2) * size * 1.3;
+          (canvas.height * caption.y) / 100 +
+          (i - (lines.length - 1) / 2) * size * 1.3;
       if (caption.strokeWidth) ctx.strokeText(line, x, y);
       else {
         ctx.shadowColor = "rgba(0,0,0,.5)";

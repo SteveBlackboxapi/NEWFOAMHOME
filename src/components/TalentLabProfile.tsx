@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   CAPTION_FONT_OPTIONS,
   formatAudience,
@@ -11,6 +11,7 @@ import {
   assetKind,
   NETWORK_NAMES,
   SHORT_NAMES,
+  downloadArchivedOriginal,
   downloadCaptioned,
   downloadOriginal,
   exportData,
@@ -76,6 +77,14 @@ export function TalentLabProfile({
   const [activeId, setActiveId] = useState(initialAsset || assets[0].id);
   const active = assets.find((a) => a.id === activeId) || assets[0];
   const caption = captions[active.id];
+  const [version, setVersion] = useState<"current" | "original">("current");
+  const showingOriginal = version === "original" && Boolean(active.original);
+  const previewRatio = showingOriginal
+    ? "9/16"
+    : active.index < 0
+      ? "3/4"
+      : active.tile?.aspectRatio || "9/16";
+  const [ratioWidth, ratioHeight] = previewRatio.split("/").map(Number);
   const [downloading, setDownloading] = useState(false);
   const [shareLink, setShareLink] = useState("");
   const action = async (job: () => Promise<void>) => {
@@ -117,6 +126,7 @@ export function TalentLabProfile({
   };
   const chooseAsset = (id: string) => {
     setActiveId(id);
+    setVersion("current");
     setTab("assets");
   };
   return (
@@ -227,6 +237,46 @@ export function TalentLabProfile({
                 {talent.age} years old
               </p>
               <p className="tl-bio">{talent.bio}</p>
+              {talent.creativeDirection && (
+                <section
+                  className="tl-creative-direction"
+                  aria-label="Creative direction"
+                >
+                  <h4>Creative direction</h4>
+                  <p>{talent.creativeDirection.summary}</p>
+                  <details>
+                    <summary>Identity reference</summary>
+                    <ul>
+                      {talent.creativeDirection.identityNotes.map((note) => (
+                        <li key={note}>{note}</li>
+                      ))}
+                    </ul>
+                  </details>
+                  {talent.creativeDirection.motionBrief && (
+                    <details>
+                      <summary>
+                        Video direction
+                        <span>
+                          {talent.motionStatus === "ready"
+                            ? "Ready"
+                            : "Planned"}
+                        </span>
+                      </summary>
+                      <p>{talent.creativeDirection.motionBrief}</p>
+                    </details>
+                  )}
+                  {talent.creativeDirection.promptFile && (
+                    <a
+                      className="tl-text-button"
+                      href={talent.creativeDirection.promptFile}
+                      download
+                    >
+                      <LabIcon name="download" size={14} /> Download creative
+                      brief
+                    </a>
+                  )}
+                </section>
+              )}
               <div className="tl-summary-stats">
                 <div>
                   <strong>{formatAudience(talent.totalAudience)}</strong>
@@ -264,11 +314,11 @@ export function TalentLabProfile({
               <div className="tl-note">
                 <LabIcon name="image" size={18} />
                 <p>
-                  Originals and caption drafts, together.
+                  Images and their history, together.
                   <br />
                   <span>
-                    Download a pack for images and profile data. Caption drafts
-                    are saved on this browser.
+                    Download a pack for current images, preserved originals and
+                    profile data. Caption drafts stay on this browser.
                   </span>
                 </p>
               </div>
@@ -316,7 +366,9 @@ export function TalentLabProfile({
         )}
         {tab === "assets" && (
           <div className="tl-asset-editor">
-            <div className="tl-editor-stage">
+            <div
+              className={`tl-editor-stage ${active.original ? "has-versions" : ""}`}
+            >
               <div className="tl-editor-label">
                 <div>
                   <span className="tl-eyebrow">
@@ -339,8 +391,48 @@ export function TalentLabProfile({
                   <LabIcon name="bookmark" />
                 </button>
               </div>
-              <div className="tl-preview-media">
-                {active.tile?.video ? (
+              {active.original && (
+                <div className="tl-version-bar">
+                  <div
+                    className="tl-version-toggle"
+                    role="group"
+                    aria-label="Image version"
+                  >
+                    <button
+                      className={!showingOriginal ? "active" : ""}
+                      aria-pressed={!showingOriginal}
+                      onClick={() => setVersion("current")}
+                    >
+                      Current
+                    </button>
+                    <button
+                      className={showingOriginal ? "active" : ""}
+                      aria-pressed={showingOriginal}
+                      onClick={() => setVersion("original")}
+                    >
+                      Original
+                    </button>
+                  </div>
+                  <span>
+                    {showingOriginal ? "Preserved original" : "Latest image"}
+                  </span>
+                </div>
+              )}
+              <div
+                className="tl-preview-media"
+                style={
+                  {
+                    aspectRatio: previewRatio,
+                    "--tl-preview-ratio": ratioWidth / ratioHeight,
+                  } as CSSProperties
+                }
+              >
+                {showingOriginal ? (
+                  <img
+                    src={active.original}
+                    alt={`${active.title} — preserved original`}
+                  />
+                ) : active.tile?.video ? (
                   <video
                     key={active.id}
                     src={active.tile.video}
@@ -351,9 +443,17 @@ export function TalentLabProfile({
                 ) : (
                   <img src={active.src} alt={active.title} />
                 )}
-                <Caption settings={caption} />
+                {!showingOriginal && <Caption settings={caption} />}
               </div>
-              {assetKind(active) === "planned" && (
+              <a
+                className="tl-fullsize-link"
+                href={showingOriginal ? active.original : active.src}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <LabIcon name="external" size={13} /> Open full-size image
+              </a>
+              {assetKind(active) === "planned" && !showingOriginal && (
                 <p className="tl-placeholder-note">
                   <LabIcon name="image" size={14} /> Video planned · still image
                   available
@@ -366,7 +466,7 @@ export function TalentLabProfile({
                     aria-label={`Select ${a.title}`}
                     aria-pressed={a.id === activeId}
                     className={a.id === activeId ? "active" : ""}
-                    onClick={() => setActiveId(a.id)}
+                    onClick={() => chooseAsset(a.id)}
                   >
                     <img src={a.src} alt="" />
                     <span>
@@ -408,7 +508,24 @@ export function TalentLabProfile({
                   </>
                 )}
               </dl>
-              {caption && (
+              {active.tile?.generation && !showingOriginal && (
+                <div className="tl-generation-note">
+                  <span className="tl-eyebrow">
+                    {active.tile.generation.version}
+                  </span>
+                  <p>{active.tile.generation.approach}</p>
+                </div>
+              )}
+              {showingOriginal && (
+                <div className="tl-original-note">
+                  <p>
+                    This earlier image is kept as part of the character’s
+                    history.
+                  </p>
+                  {caption && <p>Switch to Current to edit the caption.</p>}
+                </div>
+              )}
+              {caption && !showingOriginal && (
                 <section className="tl-caption-controls">
                   <div className="tl-control-heading">
                     <h3>Caption overlay</h3>
@@ -555,9 +672,23 @@ export function TalentLabProfile({
                   onClick={() => action(() => downloadOriginal(active))}
                 >
                   <LabIcon name="download" size={16} />
-                  Download original
+                  {active.original
+                    ? "Download current image"
+                    : "Download image"}
                 </button>
-                {caption && (
+                {active.original && (
+                  <button
+                    className={`tl-button ${showingOriginal ? "tl-primary" : ""}`}
+                    disabled={downloading}
+                    onClick={() =>
+                      action(() => downloadArchivedOriginal(active))
+                    }
+                  >
+                    <LabIcon name="download" size={16} /> Download original
+                    image
+                  </button>
+                )}
+                {caption && !showingOriginal && (
                   <button
                     className="tl-button tl-primary"
                     disabled={downloading}
@@ -578,8 +709,8 @@ export function TalentLabProfile({
             <div>
               <h3>A complete character record</h3>
               <p>
-                Identity, social profiles, source images, demo metrics and your
-                current caption settings.
+                Identity, social profiles, current and preserved images,
+                creative direction, demo metrics and your caption settings.
               </p>
               <div className="tl-actions">
                 <button
