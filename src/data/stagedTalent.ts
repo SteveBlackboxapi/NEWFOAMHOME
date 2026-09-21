@@ -2,11 +2,7 @@ import { A } from "../lib/assets";
 
 /** Networks we stage for catalogue reuse. */
 export type TalentNetwork =
-  | "instagram"
-  | "tiktok"
-  | "youtube"
-  | "twitch"
-  | "linkedin";
+  "instagram" | "tiktok" | "youtube" | "twitch" | "linkedin";
 
 /** Content publish surface shown on explore cards. */
 export type ContentPlatform = "instagram" | "tiktok" | "youtube";
@@ -68,7 +64,10 @@ export const CAPTION_FONT_OPTIONS: {
   },
 ];
 
-export const DEFAULT_CAPTION_SETTINGS: Omit<TileCaptionSettings, "text" | "visible"> = {
+export const DEFAULT_CAPTION_SETTINGS: Omit<
+  TileCaptionSettings,
+  "text" | "visible"
+> = {
   y: 26,
   x: 50,
   font: "founders",
@@ -88,9 +87,14 @@ export type TalentPlatform = {
 export type TalentContentTile = {
   type: "still" | "clip";
   thumb: string;
+  /** Keep the photographed framing in the feed and exports. */
+  aspectRatio?: "9/16" | "4/5" | "16/9";
+  /** Preserved image from the earlier character set. */
+  original?: string;
+  generation?: { version: string; approach: string; prompt?: string };
   /** Playable source, when available. A clip thumbnail alone is not a video. */
   video?: string;
-  views: number;
+  views?: number;
   /** Default caption text; used when captionSettings.text is unset */
   caption?: string;
   /** Optional caption style defaults for this tile */
@@ -124,6 +128,7 @@ export type StagedTalent = {
   id: string;
   displayName: string;
   age: number;
+  gender?: string;
   location: string;
   bio: string;
   verticals: string[];
@@ -131,6 +136,15 @@ export type StagedTalent = {
   totalAudience: number;
   /** Photoreal staged portrait path (invented identity; never live kit faces). */
   portrait: string;
+  originalPortrait?: string;
+  /** Supplied source material retained alongside the current character assets. */
+  referenceImages?: { label: string; src: string }[];
+  creativeDirection?: {
+    summary: string;
+    identityNotes: string[];
+    motionBrief?: string;
+    promptFile?: string;
+  };
   /** Optional short loop; null when not ready. */
   motion: string | null;
   motionStatus: "placeholder" | "ready";
@@ -154,11 +168,184 @@ function tile(id: string, n: number) {
  */
 export const stagedTalent: StagedTalent[] = [
   {
+    id: "samantha-pikka",
+    displayName: "Samantha Pikka",
+    age: 26,
+    gender: "Female",
+    location: "Los Angeles, CA",
+    bio: "Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.",
+    verticals: ["Beauty", "Advocacy", "Education"],
+    platforms: [
+      { network: "instagram", handle: "@samanthapikka3", followers: 570_100 },
+      { network: "tiktok", handle: "@sampikka", followers: 157_200 },
+      { network: "youtube", handle: "@samiepikka4", followers: 418_000 },
+      { network: "linkedin", handle: "", followers: 10_000 },
+    ],
+    totalAudience: 1_155_300,
+    portrait: `${T}/samantha-pikka-v2/samantha-pikka-v2-portrait.jpg`,
+    originalPortrait: `${A}/io-portrait-poster.webp`,
+    motion: `${A}/io-portrait-web.mp4`,
+    motionStatus: "ready",
+    referenceImages: [
+      {
+        label: "Earlier content and family images",
+        src: `${T}/samantha-pikka-v2/references/earlier-content.png`,
+      },
+      {
+        label: "Original portrait reference",
+        src: `${T}/samantha-pikka-v2/references/portrait-reference.png`,
+      },
+      {
+        label: "Original profile and audience data",
+        src: `${T}/samantha-pikka-v2/references/original-profile.png`,
+      },
+    ],
+    creativeDirection: {
+      summary:
+        "Approachable beauty and real-feeling family moments in Los Angeles. Natural phone photography, quiet expressions, everyday clothes and candid activity. Keep Samantha's face and dark curls consistent with her original portrait.",
+      identityNotes: [
+        "Samantha is a fictional adult aged 26. Her original portrait and existing portrait video are the identity references.",
+        "Preserve her face shape, brown eyes, brows, nose, lips and shoulder-length dark curls. The earlier content sheet used a different highlighted hairstyle.",
+        "The two family scenes retain the fictional father and daughter from the supplied references, with relaxed everyday interactions.",
+        "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics.",
+      ],
+      motionBrief:
+        "The original portrait video remains available below. A new 10-second silent curl-refresh video, generated from Samantha's approved haircare image, is available in the content collection. Both videos are included in the download pack. No family video has been generated.",
+      promptFile: `${T}/samantha-pikka-v2/creative-brief.md`,
+    },
+    content: [
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        aspectRatio: "9/16",
+        views: 116_000,
+        engagements: 4_600,
+        caption: "a quick curl refresh",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Everyday haircare frame using Samantha's portrait as the identity anchor.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c2.jpg`,
+        aspectRatio: "9/16",
+        views: 110_000,
+        engagements: 34_600,
+        caption: "between takes",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Relaxed conversation with the adult companion from the earlier content reference.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c3.jpg`,
+        aspectRatio: "9/16",
+        views: 93_200,
+        engagements: 31_200,
+        caption: "the little things on a park walk",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Regenerated family scene with candid activity and understated expressions.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c4.jpg`,
+        aspectRatio: "4/5",
+        views: 154_300,
+        engagements: 74_900,
+        caption: "a quiet morning together",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Regenerated family scene at home, replacing the posed smiling selfie.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c5.jpg`,
+        aspectRatio: "4/5",
+        views: 0,
+        caption: "coffee before the day starts",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "New casual front-camera morning check-in; unpublished demo asset.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c6.jpg`,
+        aspectRatio: "4/5",
+        views: 0,
+        caption: "what actually gets used",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Unstyled haircare detail with everyday wear; unpublished demo asset.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${A}/io-portrait-poster.webp`,
+        video: `${A}/io-portrait-web.mp4`,
+        aspectRatio: "16/9",
+        caption: "Samantha · portrait in motion",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Original motion",
+          approach:
+            "Existing 15-second portrait video (960 × 540, 24 fps, no audio), preserved from the original site. No new animation has been generated.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        video: `${T}/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.mp4`,
+        aspectRatio: "9/16",
+        caption: "Samantha · curl refresh in motion",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · video",
+          approach:
+            "Generated from the approved curl-refresh image; natural movement, consistent fictional identity. 10-second silent video.",
+        },
+      },
+    ],
+  },
+  {
     id: "aria-quen",
     displayName: "Aria Quen",
     age: 22,
     location: "Seoul",
-    bio: "GRWM, soft makeup hauls, and skincare callouts under quiet bathroom light. Staged demo talent only.",
+    bio: "Everyday beauty, honest skincare check-ins, and little moments around Seoul. Morning GRWMs, coffee breaks, and a makeup bag that goes everywhere. Fictional demo creator.",
     verticals: ["Beauty", "Skincare", "GRWM"],
     platforms: [
       { network: "instagram", handle: "@aria.quen.fake", followers: 419_000 },
@@ -166,15 +353,135 @@ export const stagedTalent: StagedTalent[] = [
       { network: "youtube", handle: "@aria.quen.fake", followers: 112_000 },
     ],
     totalAudience: 1_771_000,
-    portrait: portrait("aria-quen"),
-    motion: null,
-    motionStatus: "placeholder",
+    portrait: `${T}/aria-quen-v2/aria-quen-v2-portrait.jpg`,
+    originalPortrait: portrait("aria-quen"),
+    creativeDirection: {
+      summary:
+        "Everyday beauty in Seoul. A consistent character photographed across real-feeling moments, with natural skin, mixed light and the imperfect framing of a phone camera.",
+      identityNotes: [
+        "Aria is a fictional adult, aged 22, based on her original character portrait.",
+        "Keep her face shape, eye spacing, nose, lips and long black hair consistent.",
+        "Vary expression, clothes and surroundings; preserve everyday skin texture and phone-camera detail.",
+      ],
+      motionBrief:
+        "A 10-second silent bathroom GRWM, generated from Aria's approved makeup image, is available below and in the content collection. Natural movement and a consistent fictional identity, with the source photograph retained as a separate asset.",
+      promptFile: `${T}/aria-quen-v2/creative-brief.md`,
+    },
+    motion: `${T}/aria-quen-v2/aria-quen-v2-makeup.mp4`,
+    motionStatus: "ready",
     content: [
-      { type: "clip", thumb: tile("aria-quen", 1), views: 820_400, caption: "soft glam lip tutorial", platform: "tiktok", strongKind: "photo", engagements: 64_200 },
-      { type: "still", thumb: tile("aria-quen", 2), views: 194_200, caption: "shelf haul morning", platform: "instagram", strongKind: "hashtag", engagements: 12_800 },
-      { type: "still", thumb: tile("aria-quen", 3), views: 410_000, caption: "AM dropper routine", platform: "tiktok", strongKind: "photo", engagements: 38_100 },
-      { type: "still", thumb: tile("aria-quen", 4), views: 88_600, caption: "palette desk still", platform: "instagram", strongKind: "photo" },
-      { type: "clip", thumb: tile("aria-quen", 5), views: 267_000, caption: "travel makeup bag", platform: "tiktok", strongKind: "link", engagements: 21_400 },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        original: tile("aria-quen", 1),
+        aspectRatio: "9/16",
+        views: 820_400,
+        caption: "five-minute face before coffee",
+        captionSettings: { y: 72, size: 16, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 64_200,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Phone-camera GRWM; identity anchored to Aria's refreshed portrait.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c2.jpg`,
+        original: tile("aria-quen", 2),
+        aspectRatio: "4/5",
+        views: 194_200,
+        caption: "coffee first, everything else later",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "hashtag",
+        engagements: 12_800,
+        generation: {
+          version: "Realism v2",
+          approach: "Candid café moment in cool afternoon light.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c3.jpg`,
+        original: tile("aria-quen", 3),
+        aspectRatio: "9/16",
+        views: 410_000,
+        caption: "a very low-effort night routine",
+        captionSettings: { y: 74, size: 15, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 38_100,
+        generation: {
+          version: "Realism v2",
+          approach: "Evening front-camera check-in with domestic lamplight.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c4.jpg`,
+        original: tile("aria-quen", 4),
+        aspectRatio: "4/5",
+        views: 88_600,
+        caption: "what actually lives on my desk",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Used everyday makeup photographed in natural window light.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c5.jpg`,
+        original: tile("aria-quen", 5),
+        aspectRatio: "9/16",
+        views: 267_000,
+        caption: "packing the essentials (and three lip balms)",
+        captionSettings: { y: 75, size: 15, strokeWidth: 1, font: "sf" },
+        platform: "tiktok",
+        strongKind: "link",
+        engagements: 21_400,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Mid-task packing frame with ordinary bedroom surroundings.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c6.jpg`,
+        aspectRatio: "9/16",
+        views: 0,
+        caption: "one last stop on the way home",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Night selfie with mixed shop and street lighting; new unpublished demo asset.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        video: `${T}/aria-quen-v2/aria-quen-v2-makeup.mp4`,
+        aspectRatio: "9/16",
+        caption: "Aria · five-minute face in motion",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · video",
+          approach:
+            "Generated from the approved makeup image; natural movement, consistent fictional identity. 10-second silent video.",
+        },
+      },
     ],
   },
   {

@@ -19,6 +19,7 @@ export type LabIconName =
   | "pin"
   | "external"
   | "reset"
+  | "sparkles"
   | "copy";
 const paths: Record<LabIconName, React.ReactNode> = {
   people: (
@@ -105,6 +106,12 @@ const paths: Record<LabIconName, React.ReactNode> = {
   reset: (
     <>
       <path d="M3 10a9 9 0 1 1 2 8M3 3v7h7" />
+    </>
+  ),
+  sparkles: (
+    <>
+      <path d="m10 3 2.2 6.8L19 12l-6.8 2.2L10 21l-2.2-6.8L1 12l6.8-2.2L10 3Z" />
+      <path d="m19 2 .8 2.2L22 5l-2.2.8L19 8l-.8-2.2L16 5l2.2-.8L19 2Z" />
     </>
   ),
   copy: (

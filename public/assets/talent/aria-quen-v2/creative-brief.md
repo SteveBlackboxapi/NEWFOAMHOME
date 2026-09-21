@@ -1,0 +1,69 @@
+# Aria Quen — realism pilot
+
+Created 21 September 2026 with built-in image generation. Aria is a fictional adult character, aged 22. All engagement and audience data in the library is invented demo data.
+
+## Direction
+
+Everyday beauty and skincare in Seoul: believable phone photography, natural skin texture, mixed domestic and street lighting, ordinary clothes, candid expressions and legible surroundings. The original character portrait anchors the identity; the new portrait anchors the six content images. Maintain face proportions, eye spacing, nose, lips and long black hair. Change framing, expression, wardrobe and light across scenes.
+
+## Image set
+
+1. Refreshed identity portrait — casual grey tee at home (3:4).
+2. Morning GRWM — lip balm in a small bathroom (9:16).
+3. Coffee break — off-camera smile, navy jacket, cloudy afternoon (4:5).
+4. Evening skincare — pale-blue sweatshirt and warm lamplight (9:16).
+5. Everyday makeup desk — used products and ordinary clutter (4:5).
+6. Packing a makeup bag — seated beside a suitcase (9:16).
+7. Late-night check-in — mixed shop and street lighting (9:16).
+
+## Generated video
+
+The approved morning GRWM image now has a separate generated video: one small lip-balm gesture, a natural pause and a quiet smile. The source still and all earlier images remain available.
+
+File: aria-quen-v2-makeup.mp4. Generated with Runway on 21 September 2026: 10.042 seconds, 1080 × 1916, 24 fps, silent. This is a single shot, not a seamless loop. It has no baked-in text; the library places Made with AI underneath it. No audience metrics are asserted for this new clip.
+
+## Preservation
+
+The six earlier assets are kept at their existing URLs. Current/original comparisons and the character ZIP retain both sets. Existing saved-asset IDs and caption-draft keys remain stable. New generated PNG masters are retained in the local workspace; full-resolution JPEG copies are used by the site.
+
+## Prompts
+
+### portrait
+
+Use case: identity-preserve.
+Asset type: refreshed identity reference photograph for Aria Quen, an existing fictional 22-year-old beauty creator in Seoul.
+Input image 1 is the identity anchor. Preserve this exact adult woman's facial proportions, eye shape and spacing, softly oval face, nose, lip shape, black hair and recognisable identity. Create a new photograph of the same person, not a different model.
+Primary request: an ordinary high-quality smartphone front-camera photo taken on a quiet afternoon at home. This should plausibly be a photo a real person selected for their profile. Loose grey cotton crew-neck T-shirt, long straight black hair casually tucked behind one ear with a few flyaways. Very minimal everyday makeup. Relaxed, almost smiling, looking into the lens.
+Composition: vertical 3:4, head and upper chest, slightly off-centre, normal arm-length smartphone perspective, no exaggerated wide angle.
+Environment and light: small lived-in apartment, off-white wall, partly visible door frame and bookshelf; soft cool daylight entering from one side, uneven gentle shadows, room stays recognisable with ordinary phone depth of field. Neutral colour and realistic phone exposure, no cinematic colour grade.
+Materials and realism: subtle pores, faint under-eye detail, individual hair strands, slight natural facial asymmetry, ordinary fabric creasing. Believable restrained sharpening and subtle sensor texture. The shot should feel casually taken, not a studio or editorial portrait.
+Constraints: preserve the adult identity; one person only; no text, caption, watermark, collage or interface; no airbrushing, excessive bokeh, waxy skin, glamour lighting or artificially added blemishes. Generate one photograph only.
+
+### grwm
+
+Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: her small apartment bathroom at 7:45am. A candid mid-sentence frame while she applies a plain unbranded tinted lip balm with her right hand. Her long black hair is loosely pulled back, some pieces escaping around the ears; cream cotton T-shirt, no jewellery. Expression engaged and distracted, looking just beside the lens toward a mirror. Image from a phone propped on a shelf; face and upper torso with the balm hand fully inside frame, believable five-finger grip. Vertical 9:16. Slightly imperfect low shelf framing and mixed cool window light with a warmer overhead bathroom light. Ordinary tiled wall, hand towel and two indistinct bottles at edge, small everyday clutter. Natural skin sheen and faint under-eye detail; looks like a real paused GRWM reel, not a composed model pose.
+
+### cafe
+
+Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: quick candid phone photograph taken by a friend at a small street-side cafe in Seoul on an overcast afternoon. Aria wears a navy zip jacket over a white cotton tee, hair down and slightly wind-tossed. She is laughing lightly, looking away to the left, shoulders relaxed, one hand resting around a plain paper coffee cup on the table. Waist-up 4:5 vertical framing, slightly tilted camera, ordinary phone lens perspective, background includes glass cafe door, pavement and indistinct passers-by far away. Cool flat daylight, realistic ungraded colours, gentle motion softness in a few hair strands. It should feel spontaneous and charming with an imperfect crop, rather than a planned cafe fashion shoot. No readable signage or brand marks.
+
+### evening
+
+Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: an intimate but nonsexual evening skincare check-in filmed from an arm's-length phone in her living room. Aria wears a roomy faded pale-blue sweatshirt, black hair casually held back by a plain cloth headband. She is sitting on a sofa, talking with a tiny amused smile, a slight natural cheek shine after skincare. Vertical 9:16, face and shoulders, front camera a little above eye level, relaxed asymmetrical expression rather than the reference's still pose. Warm domestic lamp on a side table, dark window and rumpled cushion in background. Lower light with restrained authentic phone grain, warm yellow lamp and cooler window shadows, real slight exposure falloff. Preserve skin detail without exaggerating pores or adding blemishes. No products held, no glam makeup or theatrical lighting.
+
+### flatlay
+
+Use case: photorealistic-natural. Asset type: candid beauty-creator detail photograph for Aria Quen's content feed. Generate ONE realistic casual smartphone photograph looking down at a small cluttered makeup desk. It belongs to a 22-year-old skincare creator living in a modest Seoul apartment. A used unbranded taupe eyeshadow compact with uneven powder wear and fingerprints, a lip balm with its cap beside it, a simple hair clip, cotton pads, a silver hand mirror partially cut off by the frame, a half-full ordinary water glass and an off-white cotton washcloth. Some objects overlap imperfectly; not an arranged product flatlay. 4:5 vertical composition, off-centre crop, cool cloudy window light with ordinary slightly dim corners, moderate phone depth of field keeping the desk objects reasonably sharp. Subtle dusty texture and real reflections, believable packaging and mirror geometry. Muted everyday colours. No people or body parts, no readable brand lettering, no text overlay, no watermark, no UI. No glossy advertising lighting, perfect symmetry, premium marble or decorative flowers.
+
+### packing
+
+Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: a candid frame from a packing vlog in a small bedroom. Aria is seated on the floor beside a small open suitcase, putting a plain zipped makeup pouch into a side pocket. Black hair in a loose low ponytail with flyaways, loose charcoal cotton T-shirt and comfortable grey trousers. She glances up toward the phone on a low dresser with a conversational half-smile, caught mid-task, no model pose. Vertical 9:16, medium shot includes face, both arms, pouch and suitcase; hands naturally partly occluded by pouch rather than staged open fingers. Afternoon window light from one side, everyday rumpled bedding and a folded top in background. Flat realistic phone colours, no warm colour grade, no luxurious hotel aesthetic, plausible imperfect framing. Preserve her reference face and adult identity.
+
+### night
+
+Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: a quick front-camera selfie just outside a Seoul corner shop after an evening errand, a different day. Aria wears a dark navy hooded windbreaker with the hood down; long black hair loose, a few strands across forehead. A cheerful mid-speech half-smile, lips slightly parted, looking into camera at arm length. Vertical 9:16 close upper-body framing from a mildly high phone angle, face slightly off-centre. Cool overhead shop light and warmer distant street lamps create realistic mixed lighting; dark street and softly legible storefront glass behind her, no readable signs or logos. Mild low-light phone noise, subtle background motion blur, believable imperfect white balance, no cinematic glow or polished campaign composition. Entirely everyday and nonsexual.
+
+
+## Exact video-generation prompt
+
+A single continuous candid smartphone video of the same fictional adult woman shown in the starting photograph. Keep exactly her facial structure, long black tied-back hair with flyaways, natural skin texture, white T-shirt, small lipstick, hands and ordinary bathroom setting. She finishes one small gentle pass of lipstick along her lower lip, lowers that hand naturally below her chin, lightly presses her lips together once, looks briefly toward her reflection, blinks, and gives a tiny relaxed closed-mouth smile. Quiet unperformed everyday movement, believable breathing, slight natural head movement. The phone stays fixed on the counter at this framing, with barely perceptible handheld vibration, no camera travel or zoom. Preserve the soft mixed bathroom/window light and imperfect phone-camera detail. One person, one shot, normal-speed motion, no cuts, no added text, no glamour smoothing, no dramatic gestures. Silent.
