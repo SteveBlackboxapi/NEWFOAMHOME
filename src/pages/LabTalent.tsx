@@ -21,7 +21,7 @@ import {
   type LabAsset,
 } from "../lib/talentLab";
 import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
-import { AssetCard } from "../components/TalentLabMedia";
+import { AIDisclosure, AssetCard } from "../components/TalentLabMedia";
 import { TalentLabProfile } from "../components/TalentLabProfile";
 import "./talent-lab.css";
 
@@ -773,6 +773,7 @@ export function LabTalent() {
                           <p>{talent.location}</p>
                         </div>
                       </div>
+                      <AIDisclosure className="tl-talent-disclosure" />
                       <div className="tl-talent-info">
                         <div>
                           <strong>

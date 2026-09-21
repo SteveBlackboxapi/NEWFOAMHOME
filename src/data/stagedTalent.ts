@@ -128,6 +128,7 @@ export type StagedTalent = {
   id: string;
   displayName: string;
   age: number;
+  gender?: string;
   location: string;
   bio: string;
   verticals: string[];
@@ -136,6 +137,8 @@ export type StagedTalent = {
   /** Photoreal staged portrait path (invented identity; never live kit faces). */
   portrait: string;
   originalPortrait?: string;
+  /** Supplied source material retained alongside the current character assets. */
+  referenceImages?: { label: string; src: string }[];
   creativeDirection?: {
     summary: string;
     identityNotes: string[];
@@ -164,6 +167,149 @@ function tile(id: string, n: number) {
  * No faces, avatars, or footage from Foam Explore inspo screenshots.
  */
 export const stagedTalent: StagedTalent[] = [
+  {
+    id: "samantha-pikka",
+    displayName: "Samantha Pikka",
+    age: 26,
+    gender: "Female",
+    location: "Los Angeles, CA",
+    bio: "Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.",
+    verticals: ["Beauty", "Advocacy", "Education"],
+    platforms: [
+      { network: "instagram", handle: "@samanthapikka3", followers: 570_100 },
+      { network: "tiktok", handle: "@sampikka", followers: 157_200 },
+      { network: "youtube", handle: "@samiepikka4", followers: 418_000 },
+      { network: "linkedin", handle: "", followers: 10_000 },
+    ],
+    totalAudience: 1_155_300,
+    portrait: `${T}/samantha-pikka-v2/samantha-pikka-v2-portrait.jpg`,
+    originalPortrait: `${A}/io-portrait-poster.webp`,
+    motion: `${A}/io-portrait-web.mp4`,
+    motionStatus: "ready",
+    referenceImages: [
+      {
+        label: "Earlier content and family images",
+        src: `${T}/samantha-pikka-v2/references/earlier-content.png`,
+      },
+      {
+        label: "Original portrait reference",
+        src: `${T}/samantha-pikka-v2/references/portrait-reference.png`,
+      },
+      {
+        label: "Original profile and audience data",
+        src: `${T}/samantha-pikka-v2/references/original-profile.png`,
+      },
+    ],
+    creativeDirection: {
+      summary:
+        "Approachable beauty and real-feeling family moments in Los Angeles. Natural phone photography, quiet expressions, everyday clothes and candid activity. Keep Samantha's face and dark curls consistent with her original portrait.",
+      identityNotes: [
+        "Samantha is a fictional adult aged 26. Her original portrait and existing portrait video are the identity references.",
+        "Preserve her face shape, brown eyes, brows, nose, lips and shoulder-length dark curls. The earlier content sheet used a different highlighted hairstyle.",
+        "The two family scenes retain the fictional father and daughter from the supplied references, with relaxed everyday interactions.",
+        "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics.",
+      ],
+      motionBrief:
+        "The existing portrait video is available below and included in the download pack. No new family video has been generated. Next: a short, fixed-phone haircare clip with one small curl-adjusting gesture, a blink and a natural pause; preserve face, hair and hand anatomy.",
+      promptFile: `${T}/samantha-pikka-v2/creative-brief.md`,
+    },
+    content: [
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        aspectRatio: "9/16",
+        views: 116_000,
+        engagements: 4_600,
+        caption: "a quick curl refresh",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Everyday haircare frame using Samantha's portrait as the identity anchor.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c2.jpg`,
+        aspectRatio: "9/16",
+        views: 110_000,
+        engagements: 34_600,
+        caption: "between takes",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Relaxed conversation with the adult companion from the earlier content reference.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c3.jpg`,
+        aspectRatio: "9/16",
+        views: 93_200,
+        engagements: 31_200,
+        caption: "the little things on a park walk",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Regenerated family scene with candid activity and understated expressions.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c4.jpg`,
+        aspectRatio: "4/5",
+        views: 154_300,
+        engagements: 74_900,
+        caption: "a quiet morning together",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Regenerated family scene at home, replacing the posed smiling selfie.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c5.jpg`,
+        aspectRatio: "4/5",
+        views: 0,
+        caption: "coffee before the day starts",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "New casual front-camera morning check-in; unpublished demo asset.",
+        },
+      },
+      {
+        type: "still",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c6.jpg`,
+        aspectRatio: "4/5",
+        views: 0,
+        caption: "what actually gets used",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2",
+          approach:
+            "Unstyled haircare detail with everyday wear; unpublished demo asset.",
+        },
+      },
+    ],
+  },
   {
     id: "aria-quen",
     displayName: "Aria Quen",

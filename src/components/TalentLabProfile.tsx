@@ -19,7 +19,7 @@ import {
   type LabAsset,
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
-import { Caption } from "./TalentLabMedia";
+import { AIDisclosure, Caption } from "./TalentLabMedia";
 
 type Props = {
   talent: StagedTalent;
@@ -212,16 +212,19 @@ export function TalentLabProfile({
         {tab === "overview" && (
           <div className="tl-overview">
             <div className="tl-overview-photo">
-              <img
-                src={talent.portrait}
-                alt={`Portrait of ${talent.displayName}`}
-              />
-              <button
-                className="tl-button"
-                onClick={() => chooseAsset(assets[0].id)}
-              >
-                <LabIcon name="image" size={16} /> View portrait
-              </button>
+              <div className="tl-overview-photo-frame">
+                <img
+                  src={talent.portrait}
+                  alt={`Portrait of ${talent.displayName}`}
+                />
+                <button
+                  className="tl-button"
+                  onClick={() => chooseAsset(assets[0].id)}
+                >
+                  <LabIcon name="image" size={16} /> View portrait
+                </button>
+              </div>
+              <AIDisclosure />
             </div>
             <div className="tl-overview-info">
               <div className="tl-tags">
@@ -305,7 +308,7 @@ export function TalentLabProfile({
                     <span className="tl-network">{SHORT_NAMES[p.network]}</span>
                     <div>
                       <strong>{NETWORK_NAMES[p.network]}</strong>
-                      <span>{p.handle}</span>
+                      <span>{p.handle || "Handle not supplied"}</span>
                     </div>
                     <b>{formatAudience(p.followers)}</b>
                   </div>
@@ -323,14 +326,17 @@ export function TalentLabProfile({
                 </p>
               </div>
               {talent.motion && talent.motionStatus === "ready" && (
-                <video
-                  className="tl-profile-motion"
-                  controls
-                  preload="metadata"
-                  poster={talent.portrait}
-                  src={talent.motion}
-                  aria-label={`${talent.displayName} profile video`}
-                />
+                <div className="tl-profile-motion-block">
+                  <video
+                    className="tl-profile-motion"
+                    controls
+                    preload="metadata"
+                    poster={talent.portrait}
+                    src={talent.motion}
+                    aria-label={`${talent.displayName} profile video`}
+                  />
+                  <AIDisclosure />
+                </div>
               )}
             </div>
             <section className="tl-overview-assets">
@@ -345,23 +351,68 @@ export function TalentLabProfile({
               </div>
               <div className="tl-overview-thumbs">
                 {assets.slice(1).map((a) => (
-                  <button
-                    key={a.id}
-                    onClick={() => chooseAsset(a.id)}
-                    aria-label={`View ${a.title}`}
-                  >
-                    <img src={a.src} alt={a.title} loading="lazy" />
-                    <span>
-                      {assetKind(a) === "planned"
-                        ? "Video planned"
-                        : assetKind(a) === "video"
-                          ? "Video"
-                          : "Image"}
-                    </span>
-                  </button>
+                  <div className="tl-overview-thumb" key={a.id}>
+                    <button
+                      onClick={() => chooseAsset(a.id)}
+                      aria-label={`View ${a.title}`}
+                    >
+                      <img src={a.src} alt={a.title} loading="lazy" />
+                      <span className="tl-thumb-kind">
+                        {assetKind(a) === "planned"
+                          ? "Video planned"
+                          : assetKind(a) === "video"
+                            ? "Video"
+                            : "Image"}
+                      </span>
+                    </button>
+                    <AIDisclosure />
+                  </div>
                 ))}
               </div>
             </section>
+            {Boolean(talent.referenceImages?.length) && (
+              <details className="tl-source-references">
+                <summary>
+                  <span>
+                    Source references
+                    <small>{talent.referenceImages!.length} files</small>
+                  </span>
+                  <LabIcon name="chevron" size={16} />
+                </summary>
+                <p>
+                  Earlier images and profile references, preserved as supplied.
+                  Open a reference to see the complete original file.
+                </p>
+                <div className="tl-reference-grid">
+                  {talent.referenceImages!.map((reference) => (
+                    <div className="tl-reference-card" key={reference.src}>
+                      <a
+                        href={reference.src}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Open ${reference.label} in a new tab`}
+                      >
+                        <img
+                          src={reference.src}
+                          alt={reference.label}
+                          loading="lazy"
+                        />
+                      </a>
+                      <AIDisclosure />
+                      <a
+                        className="tl-reference-link"
+                        href={reference.src}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {reference.label}
+                        <LabIcon name="external" size={12} />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
           </div>
         )}
         {tab === "assets" && (
@@ -419,31 +470,36 @@ export function TalentLabProfile({
                 </div>
               )}
               <div
-                className="tl-preview-media"
+                className="tl-preview-figure"
                 style={
                   {
-                    aspectRatio: previewRatio,
                     "--tl-preview-ratio": ratioWidth / ratioHeight,
                   } as CSSProperties
                 }
               >
-                {showingOriginal ? (
-                  <img
-                    src={active.original}
-                    alt={`${active.title} — preserved original`}
-                  />
-                ) : active.tile?.video ? (
-                  <video
-                    key={active.id}
-                    src={active.tile.video}
-                    poster={active.src}
-                    controls
-                    preload="metadata"
-                  />
-                ) : (
-                  <img src={active.src} alt={active.title} />
-                )}
-                {!showingOriginal && <Caption settings={caption} />}
+                <div
+                  className="tl-preview-media"
+                  style={{ aspectRatio: previewRatio }}
+                >
+                  {showingOriginal ? (
+                    <img
+                      src={active.original}
+                      alt={`${active.title} — preserved original`}
+                    />
+                  ) : active.tile?.video ? (
+                    <video
+                      key={active.id}
+                      src={active.tile.video}
+                      poster={active.src}
+                      controls
+                      preload="metadata"
+                    />
+                  ) : (
+                    <img src={active.src} alt={active.title} />
+                  )}
+                  {!showingOriginal && <Caption settings={caption} />}
+                </div>
+                <AIDisclosure className="tl-preview-disclosure" />
               </div>
               <a
                 className="tl-fullsize-link"
