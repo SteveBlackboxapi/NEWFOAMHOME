@@ -1,3 +1,5 @@
+@import "../caption-fonts.css";
+
 .tl-app {
   --tl-ink: #202b3b;
   --tl-muted: #77818f;
@@ -863,17 +865,13 @@
 }
 .tl-caption {
   position: absolute;
+  display: block;
   transform: translate(-50%, -50%);
-  width: max-content;
-  max-width: 88%;
-  font-weight: 600;
-  line-height: 1.3;
-  text-align: center;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  height: auto;
   z-index: 2;
   pointer-events: none;
 }
+
 .tl-content-bottom {
   position: absolute;
   inset: auto 13px 14px;
@@ -1651,6 +1649,281 @@
   font-size: 10px;
   line-height: 1.7;
   color: #919baa;
+}
+.tl-caption-studio {
+  gap: 17px;
+}
+.tl-caption-studio .tl-control-heading {
+  gap: 12px;
+}
+.tl-caption-studio .tl-control-heading p {
+  font-size: 10px;
+  color: #7b8798;
+  margin-top: 4px;
+}
+.tl-caption-studio fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.tl-caption-studio legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: #66748a;
+}
+.tl-caption-studio .tl-caption-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  color: #66748a;
+  font-size: 10px;
+}
+.tl-caption-studio textarea {
+  min-height: 70px;
+  font-size: 11px;
+  padding: 10px;
+}
+.tl-caption-studio select,
+.tl-caption-studio input[type="number"] {
+  min-width: 0;
+  height: 35px;
+  width: 100%;
+  border: 1px solid #e3e8ef;
+  border-radius: 7px;
+  padding: 7px 8px;
+  background: #fafbfc;
+  color: #394c65;
+  font-size: 10px;
+}
+.tl-caption-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+.tl-caption-preset {
+  overflow: hidden;
+  border: 1px solid #e2e7ef;
+  border-radius: 8px;
+  padding: 0;
+  background: #fff;
+  text-align: left;
+}
+.tl-caption-preset:hover {
+  border-color: #aebfd7;
+}
+.tl-caption-preset[aria-pressed="true"] {
+  border-color: var(--tl-blue);
+  box-shadow: 0 0 0 1px #155eef;
+}
+.tl-caption-preset-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 6px;
+  background: linear-gradient(135deg, #677385, #344257);
+  text-align: center;
+  line-height: 1.05;
+}
+.tl-caption-preset-art > span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tl-caption-preset-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 25px;
+  gap: 4px;
+  padding: 5px 7px;
+  color: #65758a;
+  font-size: 9px;
+}
+.tl-caption-preset[aria-pressed="true"] .tl-caption-preset-name {
+  background: #edf3ff;
+  color: #155eef;
+}
+.tl-caption-type-controls {
+  display: grid;
+  grid-template-columns: 55px minmax(0, 1fr) auto;
+  gap: 7px;
+  align-items: end;
+}
+.tl-caption-emphasis {
+  display: flex;
+  gap: 4px;
+}
+.tl-caption-emphasis > button {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 35px;
+  border: 1px solid #e3e8ef;
+  border-radius: 7px;
+  color: #64738a;
+  background: #fafbfc;
+  font-size: 10px;
+}
+.tl-caption-emphasis i {
+  font: italic 18px Georgia, serif;
+}
+.tl-caption-emphasis > button[aria-pressed="true"] {
+  border-color: #b8cdf7;
+  background: #edf3ff;
+  color: #155eef;
+}
+.tl-caption-alignment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+  color: #66748a;
+}
+.tl-caption-segments {
+  display: flex;
+  border: 1px solid #e3e8ef;
+  border-radius: 7px;
+  padding: 3px;
+  background: #f5f7fa;
+  gap: 3px;
+}
+.tl-caption-segments > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-width: 30px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: #718199;
+  padding: 5px 8px;
+  font-size: 10px;
+}
+.tl-caption-segments > button[aria-pressed="true"] {
+  background: #fff;
+  color: #2e425e;
+  box-shadow: 0 1px 3px #24384e12;
+}
+.tl-caption-swatches {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tl-caption-swatch {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #192b4224;
+  border-radius: 50%;
+  background: var(--swatch-colour);
+  padding: 0;
+}
+.tl-caption-swatch[aria-pressed="true"]:after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid #617c9f;
+  border-radius: 50%;
+}
+.tl-caption-custom-colour {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  margin-left: 1px;
+  overflow: hidden;
+  border: 1px solid #dce3ed;
+  border-radius: 50%;
+  background: #fff;
+  color: #758499;
+  font-size: 17px;
+}
+.tl-caption-custom-colour input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.tl-caption-custom-colour:focus-within {
+  outline: 3px solid #7ca6fa;
+  outline-offset: 3px;
+}
+.tl-caption-advanced {
+  border-top: 1px solid #e9edf3;
+  border-bottom: 1px solid #e9edf3;
+  padding: 13px 0;
+}
+.tl-caption-advanced > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+  color: #607089;
+  font-size: 10px;
+}
+.tl-caption-advanced > summary::-webkit-details-marker {
+  display: none;
+}
+.tl-caption-advanced[open] > summary > svg {
+  transform: rotate(180deg);
+}
+.tl-caption-advanced > div {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  padding-top: 20px;
+}
+.tl-caption-range {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 10px;
+  color: #748297;
+}
+.tl-caption-range > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tl-caption-outline-colour {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #748297;
+  font-size: 10px;
+}
+.tl-caption-outline-colour input {
+  width: 30px;
+  height: 27px;
+  border: 1px solid #e3e8ef;
+  border-radius: 6px;
+  padding: 2px;
+  background: #fff;
+}
+.tl-caption-reset-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tl-caption-reset-row > span {
+  color: #8a96a6;
+  font-size: 8px;
+}
+.tl-caption-studio .tl-draft-note {
+  margin-top: -8px;
+  font-size: 9px;
 }
 .tl-switch {
   position: relative;

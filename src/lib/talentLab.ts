@@ -1,10 +1,18 @@
 import { strToU8, zipSync } from "fflate";
 import {
+  CAPTION_FONT_OPTIONS,
   resolveCaptionSettings,
   type StagedTalent,
   type TalentContentTile,
   type TileCaptionSettings,
 } from "../data/stagedTalent";
+
+import {
+  captionBackgrounds,
+  captionFont,
+  captionPosition,
+  measureCaption,
+} from "./captionLayout";
 
 export type LabAsset = {
   id: string;
@@ -85,7 +93,7 @@ export function cleanCaption(
     typeof p[key] === "number" && Number.isFinite(p[key])
       ? Math.min(max, Math.max(min, p[key] as number))
       : (fallback[key] as number);
-  const color = (key: "fill" | "stroke") =>
+  const color = (key: "fill" | "stroke" | "backgroundColor") =>
     typeof p[key] === "string" && /^#[\da-f]{6}$/i.test(p[key] as string)
       ? (p[key] as string)
       : fallback[key];
@@ -98,7 +106,24 @@ export function cleanCaption(
     strokeWidth: number("strokeWidth", 0, 6),
     fill: color("fill"),
     stroke: color("stroke"),
-    font: ["founders", "sf", "georgia", "mono"].includes(String(p.font))
+    weight:
+      [400, 600, 800].includes(Number(p.weight)) && typeof p.weight === "number"
+        ? (p.weight as TileCaptionSettings["weight"])
+        : fallback.weight,
+    italic: typeof p.italic === "boolean" ? p.italic : fallback.italic,
+    uppercase:
+      typeof p.uppercase === "boolean" ? p.uppercase : fallback.uppercase,
+    align: ["left", "center", "right"].includes(String(p.align))
+      ? (p.align as TileCaptionSettings["align"])
+      : fallback.align,
+    background: ["none", "box", "highlight"].includes(String(p.background))
+      ? (p.background as TileCaptionSettings["background"])
+      : fallback.background,
+    backgroundColor: color("backgroundColor"),
+    backgroundOpacity: number("backgroundOpacity", 0, 100),
+    padding: number("padding", 0, 18),
+    radius: number("radius", 0, 24),
+    font: CAPTION_FONT_OPTIONS.some((font) => font.id === p.font)
       ? (p.font as TileCaptionSettings["font"])
       : fallback.font,
   };
@@ -411,48 +436,47 @@ export async function downloadCaptioned(
     image.height * scale,
   );
   if (caption.visible && caption.text.trim()) {
-    const fonts = {
-      founders: "'Founders Grotesk'",
-      sf: "'SF Pro Text'",
-      georgia: "Georgia",
-      mono: "monospace",
-    };
-    const size = caption.size * 3.6;
-    ctx.font = `600 ${size}px ${fonts[caption.font]}`;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    const lines: string[] = [];
-    for (const paragraph of caption.text.split("\n")) {
-      let line = "";
-      for (const word of paragraph.split(/\s+/)) {
-        const candidate = line ? `${line} ${word}` : word;
-        if (ctx.measureText(candidate).width > 950.4 && line) {
-          lines.push(line);
-          line = word;
-        } else {
-          line = candidate;
-        }
-      }
-      lines.push(line);
+    // Explicitly load the selected face, even when exporting before it has appeared in a preview.
+    await document.fonts.load(captionFont(caption), caption.text).catch(() => {
+      // Match the preview's declared fallback if a font request fails.
+    });
+    const layout = measureCaption(ctx, caption);
+    ctx.translate(
+      captionPosition(caption.x, layout.width, canvas.width) - layout.width / 2,
+      captionPosition(caption.y, layout.height, canvas.height) -
+        layout.height / 2,
+    );
+    ctx.fillStyle = caption.backgroundColor;
+    ctx.globalAlpha = caption.backgroundOpacity / 100;
+    ctx.beginPath();
+    for (const rect of captionBackgrounds(layout, caption)) {
+      ctx.roundRect(
+        rect.x,
+        rect.y,
+        rect.width,
+        rect.height,
+        Math.min(caption.radius * 3.6, rect.height / 2, rect.width / 2),
+      );
     }
+    ctx.fill();
+    ctx.globalAlpha = 1;
     ctx.fillStyle = caption.fill;
     ctx.strokeStyle = caption.stroke;
     ctx.lineWidth = caption.strokeWidth * 3.6;
     ctx.lineJoin = "round";
-    lines.forEach((line, i) => {
-      const x = (canvas.width * caption.x) / 100,
-        y =
-          (canvas.height * caption.y) / 100 +
-          (i - (lines.length - 1) / 2) * size * 1.3;
-      if (caption.strokeWidth) ctx.strokeText(line, x, y);
-      else {
-        ctx.shadowColor = "rgba(0,0,0,.5)";
-        ctx.shadowBlur = 8;
-        ctx.shadowOffsetY = 2;
-      }
-      ctx.fillText(line, x, y);
-    });
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    if (!caption.strokeWidth && caption.background === "none") {
+      ctx.shadowColor = "rgba(0,0,0,.5)";
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 2;
+    }
+    for (const line of layout.lines) {
+      if (caption.strokeWidth) ctx.strokeText(line.text, line.x, line.y);
+      ctx.fillText(line.text, line.x, line.y);
+    }
   }
+
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve, "image/png"),
   );
