@@ -1,5 +1,11 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
+import {
+  KitEditHandle,
+  KitPlatformIcon,
+  KitVerifiedBadge,
+} from "../components/KitDetails";
+import type { TalentNetwork } from "../data/stagedTalent";
 import { MobileFade } from "../components/MobileFade";
 import { KitAudience, KitGrowth, KitMetrics } from "../components/KitAnalytics";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
@@ -51,11 +57,13 @@ function ScrollCount({
 }
 
 function Plat({
+  network,
   label,
   amount,
   handle,
   progress,
 }: {
+  network: TalentNetwork;
   label: string;
   amount: number;
   handle: string;
@@ -63,9 +71,10 @@ function Plat({
 }) {
   return (
     <div className="min-w-[72px]">
-      <p className="text-[11px] opacity-70 mb-1">{label}</p>
-      <p className="text-[20px] font-semibold leading-none tabular-nums">
+      <KitPlatformIcon network={network} label={label} />
+      <p className="mt-3 flex items-center gap-1.5 text-[20px] font-semibold leading-none tabular-nums">
         <ScrollCount value={amount} progress={progress} />
+        <KitVerifiedBadge />
       </p>
       {handle ? (
         <p className="text-[11px] opacity-70 mt-1 truncate">{handle}</p>
@@ -130,14 +139,20 @@ function MobileKitCard() {
                 {TALENT.age} yo · {TALENT.gender}
               </p>
               <div className="flex gap-1.5 mb-3">
-                {["IG", "TT", "YT"].map((lab) => (
-                  <span
-                    key={lab}
-                    className="size-7 rounded-full border border-[#7a0036]/40 text-[#7a0036] text-[9px] font-semibold inline-flex items-center justify-center"
-                  >
-                    {lab}
-                  </span>
-                ))}
+                {(["instagram", "tiktok", "youtube"] as const).map(
+                  (network) => (
+                    <span
+                      key={network}
+                      className="size-7 rounded-full border border-[#7a0036]/40 text-[#7a0036] text-[9px] font-semibold inline-flex items-center justify-center"
+                    >
+                      <KitPlatformIcon
+                        network={network}
+                        label={PLATFORM_LABELS[network]}
+                        size={14}
+                      />
+                    </span>
+                  ),
+                )}
               </div>
               <div className="inline-flex flex-col rounded-xl bg-[#f6ece4] text-[#7a0036] px-3 py-2">
                 <span className="text-[11px] opacity-70 mb-0.5">Verticals</span>
@@ -163,8 +178,9 @@ function MobileKitCard() {
         </div>
         <div
           ref={platforms.ref}
-          className="bg-[#7a0036] text-[#fff6eb] px-4 py-6"
+          className="relative bg-[#7a0036] text-[#fff6eb] px-4 pt-9 pb-6"
         >
+          <KitEditHandle />
           <p className={`${FG_SB} text-[18px]`}>Platforms</p>
           <p className={`${FG_SB} text-[32px] leading-none mt-1 tabular-nums`}>
             <ScrollCount
@@ -178,6 +194,7 @@ function MobileKitCard() {
             {TALENT.platforms.map((platform) => (
               <Plat
                 key={platform.network}
+                network={platform.network}
                 label={platform.label}
                 amount={
                   websiteSamantha.platforms.find(
@@ -545,10 +562,13 @@ export function KitStoryMobile() {
           <div className="grid grid-cols-2 gap-5">
             {TALENT.platforms.map((platform) => (
               <div key={platform.network}>
-                <p className={`${FG_R} text-[12px] opacity-70 mb-1`}>
-                  {platform.label}
-                </p>
-                <p className={`${FG_SB} text-[22px] leading-none tabular-nums`}>
+                <KitPlatformIcon
+                  network={platform.network}
+                  label={platform.label}
+                />
+                <p
+                  className={`${FG_SB} mt-3 flex items-center gap-1.5 text-[22px] leading-none tabular-nums`}
+                >
                   <ScrollCount
                     value={
                       websiteSamantha.platforms.find(
@@ -557,6 +577,7 @@ export function KitStoryMobile() {
                     }
                     progress={platformReveal.progress}
                   />
+                  <KitVerifiedBadge />
                 </p>
               </div>
             ))}
