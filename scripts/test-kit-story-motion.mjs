@@ -22,6 +22,7 @@ const {
   smoothProgress,
   kitStoryTimeline,
   kitPan,
+  kitRevealStarts,
   KIT_CHAPTERS,
 } = module.exports;
 
@@ -97,20 +98,20 @@ test("each content chapter has a real stationary reading interval", () => {
   }
 });
 
-test("metrics, growth and audience finish animating while their panel is stationary", () => {
+test("counts are underway during the pan and finish while their panel is stationary", () => {
   const sections = [
-    { field: "metrics", start: 0.475, end: 0.535, holdEnd: 0.54 },
-    { field: "growth", start: 0.585, end: 0.66, holdEnd: 0.665 },
-    { field: "audience", start: 0.71, end: 0.78, holdEnd: 0.795 },
+    { field: "platforms", panStart: 0.19, start: 0.255, end: 0.31, holdEnd: 0.315 },
+    { field: "metrics", panStart: 0.415, start: 0.475, end: 0.535, holdEnd: 0.54 },
+    { field: "growth", panStart: 0.54, start: 0.585, end: 0.66, holdEnd: 0.665 },
+    { field: "audience", panStart: 0.665, start: 0.71, end: 0.78, holdEnd: 0.795 },
   ];
-  for (const { field, start, end, holdEnd } of sections) {
-    assert.equal(kitStoryTimeline(start)[field], 0);
+  for (const { field, panStart, start, end, holdEnd } of sections) {
+    const duringPan = kitStoryTimeline((panStart + start) / 2)[field];
+    const settled = kitStoryTimeline(start)[field];
+    assert.ok(duringPan > 0 && duringPan < settled);
+    assert.ok(settled > 0 && settled < 1);
+    assert.ok(kitStoryTimeline((start + end) / 2)[field] > settled);
     assert.equal(kitStoryTimeline(end)[field], 1);
-    nearly(
-      kitStoryTimeline((start + end) / 2)[field],
-      0.5,
-      `${field} midpoint`,
-    );
     for (const p of samples(start, holdEnd)) {
       nearly(
         kitPan(p, targets),
@@ -122,17 +123,17 @@ test("metrics, growth and audience finish animating while their panel is station
   }
 });
 
-test("later charts wait their turn while completed charts retain their result", () => {
+test("later charts can begin before their dedicated pan while completed charts retain their result", () => {
   const metrics = kitStoryTimeline(0.5);
   assert.equal(metrics.platforms, 1);
   assert.ok(metrics.metrics > 0 && metrics.metrics < 1);
-  assert.equal(metrics.growth, 0);
+  assert.ok(metrics.growth > 0 && metrics.growth < 1);
   assert.equal(metrics.audience, 0);
 
   const growth = kitStoryTimeline(0.62);
   assert.equal(growth.metrics, 1);
   assert.ok(growth.growth > 0 && growth.growth < 1);
-  assert.equal(growth.audience, 0);
+  assert.ok(growth.audience > 0 && growth.audience < 1);
 
   const audience = kitStoryTimeline(0.75);
   assert.equal(audience.metrics, 1);
@@ -140,6 +141,93 @@ test("later charts wait their turn while completed charts retain their result", 
   assert.ok(audience.audience > 0 && audience.audience < 1);
   assert.equal(audience.aimShare, 0);
   assert.equal(audience.shareOpen, 0);
+});
+
+const measuredLayouts = [
+  {
+    name: "compact viewport",
+    targets,
+    layout: { viewportHeight: 500, platforms: 510, metrics: 1390, growth: 1770, audience: 2240 },
+  },
+  {
+    name: "tall viewport showing growth below metrics",
+    targets: { platforms: 120, content: 590, metrics: 980, growth: 1310, audience: 1740 },
+    layout: { viewportHeight: 960, platforms: 470, metrics: 1300, growth: 1650, audience: 2080 },
+  },
+  {
+    name: "very tall viewport showing multiple sections before pan",
+    targets: { platforms: 0, content: 180, metrics: 430, growth: 800, audience: 1100 },
+    layout: { viewportHeight: 1400, platforms: 420, metrics: 1080, growth: 1470, audience: 1820 },
+  },
+  {
+    name: "all sections initially visible",
+    targets: { platforms: 0, content: 0, metrics: 0, growth: 0, audience: 0 },
+    layout: { viewportHeight: 2400, platforms: 400, metrics: 1100, growth: 1500, audience: 1900 },
+  },
+];
+
+test("measured reveal starts eliminate visible zero exposure across viewport geometries", () => {
+  const ends = { platforms: 0.31, metrics: 0.535, growth: 0.66, audience: 0.78 };
+  for (const fixture of measuredLayouts) {
+    const starts = kitRevealStarts(fixture.targets, fixture.layout);
+    for (const field of Object.keys(ends)) {
+      const entryDistance = Math.max(0, fixture.layout[field] - fixture.layout.viewportHeight);
+      // Independently scan the pan to find the first visible pixel; the hero
+      // covers initially visible sections until its packing has completed.
+      const entry = entryDistance === 0 ? 0.14 : samples(0, ends[field], 10000)
+        .find((p) => kitPan(p, fixture.targets) >= entryDistance);
+      assert.notEqual(entry, undefined, `${fixture.name}: ${field} must enter`);
+      assert.ok(starts[field] < entry, `${fixture.name}: ${field} starts before entry`);
+      assert.ok(kitStoryTimeline(entry, starts)[field] > 0, `${fixture.name}: ${field} cannot enter at zero`);
+      assert.equal(kitStoryTimeline(starts[field], starts)[field], 0);
+      assert.equal(kitStoryTimeline(ends[field], starts)[field], 1);
+      // A single scroll interval has no geometry/timeline handoff plateau.
+      let previous = -1;
+      for (const p of samples(starts[field], ends[field], 100)) {
+        const current = kitStoryTimeline(p, starts)[field];
+        assert.ok(current > previous, `${fixture.name}: ${field} stalled at ${p}`);
+        previous = current;
+      }
+    }
+  }
+});
+
+test("growth already counts while visible below metrics before the growth pan begins", () => {
+  const { targets: measured, layout } = measuredLayouts[1];
+  const starts = kitRevealStarts(measured, layout);
+  const duringMetrics = 0.49;
+  assert.ok(layout.growth - kitPan(duringMetrics, measured) < layout.viewportHeight);
+  assert.ok(duringMetrics < 0.54, "growth pan has not started");
+  assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
+  assert.ok(kitStoryTimeline(0.52, starts).growth > kitStoryTimeline(duringMetrics, starts).growth);
+  assert.ok(kitStoryTimeline(0.56, starts).growth > kitStoryTimeline(0.52, starts).growth);
+  assert.ok(kitStoryTimeline(0.62, starts).growth > kitStoryTimeline(0.56, starts).growth);
+});
+
+test("measured reveal counts are identical on reverse scroll and arbitrary jumps", () => {
+  for (const { targets: measured, layout } of measuredLayouts) {
+    const starts = kitRevealStarts(measured, layout);
+    const checkpoints = [0, 0.08, 0.14, 0.22, 0.42, 0.49, 0.535, 0.6, 0.78, 1];
+    const expected = new Map(checkpoints.map((p) => [p, kitStoryTimeline(p, starts)]));
+    for (const p of [...checkpoints].reverse().concat([0.42, 0.78, 0.14, 1, 0])) {
+      assert.deepEqual(kitStoryTimeline(p, starts), expected.get(p));
+      const baseline = kitStoryTimeline(p);
+      for (const field of Object.keys(baseline).filter((key) => !(key in starts)))
+        assert.equal(kitStoryTimeline(p, starts)[field], baseline[field], `${field} choreography changed`);
+    }
+  }
+});
+
+test("unmeasured or incomplete layouts retain safe earlier defaults", () => {
+  const starts = kitRevealStarts(targets, {
+    viewportHeight: 0, platforms: 0, metrics: 0, growth: 0, audience: 0,
+  });
+  for (const p of samples(0, 1))
+    assert.deepEqual(kitStoryTimeline(p, starts), kitStoryTimeline(p));
+  for (const invalid of [NaN, Infinity, -1, 1]) {
+    const timeline = kitStoryTimeline(0.5, { metrics: invalid });
+    assert.ok(Number.isFinite(timeline.metrics) && timeline.metrics >= 0 && timeline.metrics <= 1);
+  }
 });
 
 test("chapter shortcuts land on the intended complete section instead of its transition", () => {

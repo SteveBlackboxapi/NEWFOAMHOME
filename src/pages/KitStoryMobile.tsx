@@ -1,6 +1,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
+import { ContentCardOverlay } from "../components/ContentMetrics";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
   KitEditHandle,
@@ -222,23 +223,17 @@ function MobileKitCard() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 items-start mb-6">
             {CONTENT.map((tile) => (
               <figure key={tile.thumb}>
-                <div className="relative aspect-[9/16] rounded-[12px] overflow-hidden bg-[#f6ece4]">
+                <div
+                  className="relative aspect-[9/16] rounded-[12px] overflow-hidden bg-[#f6ece4]"
+                  style={{ containerType: "inline-size" }}
+                >
                   <img
                     src={tile.thumb}
                     alt={`${TALENT.name}: ${tile.caption}`}
                     loading="lazy"
                     className="absolute inset-0 size-full object-cover"
                   />
-                  <div className="absolute inset-x-0 bottom-0 px-2 py-2 text-white bg-gradient-to-t from-black/70 to-transparent">
-                    <p className={`${FG_M} text-[10px]`}>
-                      {tile.views !== undefined
-                        ? `${formatWebsiteMetric(tile.views)} views`
-                        : "New content"}
-                    </p>
-                    <p className={`${FG_R} text-[9px] text-white/80`}>
-                      {PLATFORM_LABELS[tile.platform]}
-                    </p>
-                  </div>
+                  <ContentCardOverlay tile={tile} />
                 </div>
                 <figcaption>
                   <AIDisclosure className={FG_R} size={9} />

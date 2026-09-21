@@ -1,0 +1,53 @@
+.content-metrics {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  color: #fff;
+  font-family: "SF Pro Text", system-ui, sans-serif;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+.content-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+.content-metric-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 1.3em;
+  height: 1.3em;
+  background: currentColor;
+  mask: no-repeat center / contain;
+  -webkit-mask: no-repeat center / contain;
+}
+.content-platform-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.content-platform-icon .content-metric-icon {
+  width: 1.15em;
+  height: 1.15em;
+}
+.content-card-fade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 32%;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    #171c22f5,
+    #171c22bd 24%,
+    #171c224d 55%,
+    #171c2200
+  );
+}
+.content-card-footer {
+  position: absolute;
+  inset: auto 6cqw 8cqw;
+  font-size: 5.7cqw;
+  pointer-events: none;
+}
