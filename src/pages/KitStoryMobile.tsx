@@ -1,6 +1,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
+import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
   KitEditHandle,
   KitPlatformIcon,
@@ -607,6 +608,7 @@ export function KitStoryMobile() {
           >
             Shared
           </p>
+          <MediaKitLogo className="w-[150px] mx-auto mb-5" />
           <p
             className={`${FG_SB} text-[32px] leading-[1.02] tracking-[-1.2px] text-[#101828] max-w-[14ch] mx-auto`}
           >
