@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
 import { MobileFade } from "../components/MobileFade";
 import { websiteContentStats, websiteProfile, websiteSamantha } from "../data/websiteTalent";
 
@@ -75,7 +76,7 @@ export function ChromeStoryMobile({ embedded = false }: { embedded?: boolean } =
                       <p className="text-[11px] text-[#185abc]">IG {SAMANTHA.ig.n} · TT {SAMANTHA.tt.n} · YT {SAMANTHA.yt.n}</p>
                     </div>
                   </div>
-                  <p className="bg-white text-[9px] text-[#6a7282] mb-2">Made with AI · Demo profile</p>
+                  <div className="mb-2"><AIDisclosure size={9} detail="Demo profile" /></div>
                   <p className={`${FG_R} text-[13px] leading-5 text-[#344054] mb-3`}>
                     {BIO}
                   </p>
@@ -92,7 +93,7 @@ export function ChromeStoryMobile({ embedded = false }: { embedded?: boolean } =
               <div className="bg-white rounded-[12px] border border-[#eeefef] p-4 text-center">
                 <figure className="mb-2">
                   <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} loading="lazy" className="size-16 mx-auto rounded-[12px] object-cover object-top" />
-                  <figcaption className="bg-white text-[8px] text-[#6a7282] py-1">Made with AI</figcaption>
+                  <figcaption><AIDisclosure size={8} className="justify-center" /></figcaption>
                 </figure>
                 <p className={`${FG_SB} text-[15px]`}>{SAMANTHA.name}</p>
                 <p className="text-[11px] text-[#6a7282] mb-3">{SAMANTHA.loc} · {SAMANTHA.age}</p>

@@ -38,8 +38,12 @@ export const SHORT_NAMES = {
   linkedin: "IN",
 };
 export const SAVED_KEY = "foam-lab-saved-assets:v1";
-const captionKey = (id: string, index: number) =>
-  `foam-lab-talent-caption:${id}:${index}`;
+// Keep legacy numeric keys while allowing a tile to move without taking another
+// asset's bookmarks or caption draft with it.
+const contentId = (tile: TalentContentTile, index: number) =>
+  tile.id ?? String(index);
+const captionKey = (asset: LabAsset) =>
+  `foam-lab-talent-caption:${asset.talent.id}:${asset.tile ? contentId(asset.tile, asset.index) : asset.index}`;
 
 export function assetsFor(talent: StagedTalent): LabAsset[] {
   return [
@@ -52,7 +56,7 @@ export function assetsFor(talent: StagedTalent): LabAsset[] {
       title: `${talent.displayName} portrait`,
     },
     ...talent.content.map((tile, index) => ({
-      id: `${talent.id}:${index}`,
+      id: `${talent.id}:${contentId(tile, index)}`,
       talent,
       index,
       src: tile.thumb,
@@ -134,10 +138,7 @@ export function readCaption(asset: LabAsset): TileCaptionSettings | undefined {
   const fallback = resolveCaptionSettings(asset.tile);
   try {
     return cleanCaption(
-      JSON.parse(
-        localStorage.getItem(captionKey(asset.talent.id, asset.index)) ||
-          "null",
-      ),
+      JSON.parse(localStorage.getItem(captionKey(asset)) || "null"),
       fallback,
     );
   } catch {
@@ -147,10 +148,7 @@ export function readCaption(asset: LabAsset): TileCaptionSettings | undefined {
 
 export function writeCaption(asset: LabAsset, caption: TileCaptionSettings) {
   try {
-    localStorage.setItem(
-      captionKey(asset.talent.id, asset.index),
-      JSON.stringify(caption),
-    );
+    localStorage.setItem(captionKey(asset), JSON.stringify(caption));
     return true;
   } catch {
     return false;

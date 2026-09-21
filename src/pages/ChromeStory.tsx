@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
 import { useIsDesktop } from "../hooks/useMediaQuery";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { websiteAria, websiteContentStats, websiteProfile, websiteSamantha } from "../data/websiteTalent";
@@ -130,7 +131,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                           <p className="text-[11px] text-[#185abc]">IG {SAMANTHA.ig.n} · TT {SAMANTHA.tt.n} · YT {SAMANTHA.yt.n}</p>
                         </div>
                       </div>
-                      <p className="bg-white text-[9px] text-[#6a7282] mb-2">Made with AI · Demo profile</p>
+                      <div className="mb-2"><AIDisclosure size={9} detail="Demo profile" /></div>
                       <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>{BIO}</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
@@ -161,9 +162,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                     <div className="px-3 grid grid-cols-2 gap-2">
                       {TALENT.map((t) => (
                         <div key={t.id}>
-                          <figure className="rounded-[10px] overflow-hidden bg-white">
-                            <img src={t.portrait} alt={`${t.name} portrait`} loading="lazy" className="w-full aspect-square object-cover object-top" />
-                            <figcaption className="bg-white text-[8px] text-[#6a7282] py-1">Made with AI</figcaption>
+                          <figure>
+                            <img src={t.portrait} alt={`${t.name} portrait`} loading="lazy" className="block w-full aspect-square rounded-[10px] object-cover object-top" />
+                            <figcaption><AIDisclosure size={8} /></figcaption>
                           </figure>
                           <p className="text-[10px] mt-1 truncate">{t.name}</p>
                         </div>
@@ -174,7 +175,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                   <div className="flex-1 overflow-hidden px-4 py-4 text-center">
                     <figure className="mb-3">
                       <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} className="size-24 mx-auto rounded-[12px] object-cover object-top" />
-                      <figcaption className="bg-white text-[8px] text-[#6a7282] py-1">Made with AI</figcaption>
+                      <figcaption><AIDisclosure size={8} className="justify-center" /></figcaption>
                     </figure>
                     <p className={`${FG_SB} text-[16px]`}>{SAMANTHA.name}</p>
                     <p className="text-[11px] text-[#6a7282] mb-2">{SAMANTHA.loc} · {SAMANTHA.age}</p>

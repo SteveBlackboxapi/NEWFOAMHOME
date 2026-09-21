@@ -16,13 +16,11 @@ import {
   type LabAsset,
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
+import { AIDisclosure as MediaAIDisclosure } from "./AIDisclosure";
 
 export function AIDisclosure({ className = "" }: { className?: string }) {
   return (
-    <span className={`tl-ai-disclosure ${className}`.trim()}>
-      <LabIcon name="sparkles" size={13} />
-      Made with AI
-    </span>
+    <MediaAIDisclosure className={`tl-ai-disclosure ${className}`.trim()} />
   );
 }
 

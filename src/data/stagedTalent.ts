@@ -250,6 +250,8 @@ export type TalentPlatform = {
 };
 
 export type TalentContentTile = {
+  /** Stable asset identity for saved items and captions when content is reordered. */
+  id?: string;
   type: "still" | "clip";
   thumb: string;
   /** Keep the photographed framing in the feed and exports. */
@@ -367,19 +369,54 @@ export const stagedTalent: StagedTalent[] = [
     ],
     creativeDirection: {
       summary:
-        "Approachable beauty and real-feeling family moments in Los Angeles. Natural phone photography, quiet expressions, everyday clothes and candid activity. Keep Samantha's face and dark curls consistent with her original portrait.",
+        "Approachable beauty and relaxed adult dance moments in Los Angeles. Natural phone photography, unposed movement, everyday clothes and candid activity. Keep Samantha's face and dark curls consistent with her original portrait.",
       identityNotes: [
         "Samantha is a fictional adult aged 26. Her original portrait and existing portrait video are the identity references.",
         "Preserve her face shape, brown eyes, brows, nose, lips and shoulder-length dark curls. The earlier content sheet used a different highlighted hairstyle.",
-        "The two family scenes retain the fictional father and daughter from the supplied references, with relaxed everyday interactions.",
+        "The solo and duo dance images revisit the first two scenes from the earlier content sheet. The companion in the duo is an adult; preserve the casual home setting and natural movement.",
         "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics.",
       ],
       motionBrief:
-        "The original portrait video remains available below. A new 10-second silent curl-refresh video, generated from Samantha's approved haircare image, is available in the content collection. Both videos are included in the download pack. No family video has been generated.",
-      promptFile: `${T}/samantha-pikka-v2/creative-brief.md`,
+        "The original portrait video and the 10-second silent curl-refresh video remain available in the content collection and download pack. The dance images are stills; no dance video has been generated.",
+      promptFile: `${T}/samantha-pikka-v3/creative-brief.md`,
     },
     content: [
       {
+        id: "dance-solo-v3",
+        type: "still",
+        thumb: `${T}/samantha-pikka-v3/samantha-pikka-dance-solo.webp`,
+        aspectRatio: "9/16",
+        views: 116_000,
+        engagements: 4_600,
+        caption: "a quick dance break",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v3",
+          approach:
+            "Regenerated solo dance scene from the supplied earlier content reference, using Samantha's approved portrait to preserve her identity and natural phone-camera movement.",
+        },
+      },
+      {
+        id: "dance-duo-v3",
+        type: "still",
+        thumb: `${T}/samantha-pikka-v3/samantha-pikka-dance-duo.webp`,
+        aspectRatio: "9/16",
+        views: 110_000,
+        engagements: 34_600,
+        caption: "one more take together",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v3",
+          approach:
+            "Regenerated dance scene with the adult companion from the supplied earlier content reference, keeping Samantha's identity consistent and the interaction candid.",
+        },
+      },
+      {
+        id: "0",
         type: "still",
         thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
         aspectRatio: "9/16",
@@ -396,6 +433,7 @@ export const stagedTalent: StagedTalent[] = [
         },
       },
       {
+        id: "1",
         type: "still",
         thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c2.jpg`,
         aspectRatio: "9/16",
@@ -412,38 +450,7 @@ export const stagedTalent: StagedTalent[] = [
         },
       },
       {
-        type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c3.jpg`,
-        aspectRatio: "9/16",
-        views: 93_200,
-        engagements: 31_200,
-        caption: "the little things on a park walk",
-        captionSettings: { visible: false },
-        platform: "instagram",
-        strongKind: "photo",
-        generation: {
-          version: "Realism v2",
-          approach:
-            "Regenerated family scene with candid activity and understated expressions.",
-        },
-      },
-      {
-        type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c4.jpg`,
-        aspectRatio: "4/5",
-        views: 154_300,
-        engagements: 74_900,
-        caption: "a quiet morning together",
-        captionSettings: { visible: false },
-        platform: "instagram",
-        strongKind: "photo",
-        generation: {
-          version: "Realism v2",
-          approach:
-            "Regenerated family scene at home, replacing the posed smiling selfie.",
-        },
-      },
-      {
+        id: "4",
         type: "still",
         thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c5.jpg`,
         aspectRatio: "4/5",
@@ -459,6 +466,7 @@ export const stagedTalent: StagedTalent[] = [
         },
       },
       {
+        id: "5",
         type: "still",
         thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c6.jpg`,
         aspectRatio: "4/5",
@@ -474,6 +482,7 @@ export const stagedTalent: StagedTalent[] = [
         },
       },
       {
+        id: "6",
         type: "clip",
         thumb: `${A}/io-portrait-poster.webp`,
         video: `${A}/io-portrait-web.mp4`,
@@ -489,6 +498,7 @@ export const stagedTalent: StagedTalent[] = [
         },
       },
       {
+        id: "7",
         type: "clip",
         thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
         video: `${T}/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.mp4`,

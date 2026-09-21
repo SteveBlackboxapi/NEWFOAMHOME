@@ -151,13 +151,12 @@
   width: 100%;
   max-width: calc(90vh - 295px);
   justify-self: end;
-  border-radius: 17px;
-  overflow: hidden;
-  background: white;
 }
 .ks-portrait > div {
   aspect-ratio: 1;
   background: #f2e2dd;
+  border-radius: 17px;
+  overflow: hidden;
 }
 .ks-portrait img {
   width: 100%;
@@ -167,10 +166,6 @@
 }
 .ks-disclosure {
   display: block;
-  background: white;
-  color: #7e8795;
-  padding: 7px 10px;
-  font-size: 10px;
 }
 .ks-platforms {
   position: relative;
@@ -250,13 +245,13 @@
   gap: 12px;
 }
 .ks-content-grid figure {
-  border-radius: 13px;
-  overflow: hidden;
-  background: white;
+  min-width: 0;
 }
 .ks-content-image {
   position: relative;
   aspect-ratio: 9/16;
+  border-radius: 13px;
+  overflow: hidden;
 }
 .ks-content-image > img {
   width: 100%;
