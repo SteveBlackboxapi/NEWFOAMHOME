@@ -8,6 +8,7 @@ import {
 } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
+import { ContentCardOverlay } from "../components/ContentMetrics";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
 import { KitStoryMobile } from "./KitStoryMobile";
@@ -786,19 +787,7 @@ function KitStoryDesktop() {
                                 alt={`${STAGE.name}: ${tile.caption}`}
                                 loading="lazy"
                               />
-                              <div className="ks-content-metrics">
-                                <span>
-                                  <LabIcon name="eye" size={12} />
-                                  {formatWebsiteMetric(tile.views ?? 0)}
-                                </span>
-                                <span>
-                                  <LabIcon name="heart" size={12} />
-                                  {formatWebsiteMetric(tile.engagements ?? 0)}
-                                </span>
-                                <abbr title={PLATFORM_LABELS[tile.platform]}>
-                                  IG
-                                </abbr>
-                              </div>
+                              <ContentCardOverlay tile={tile} />
                             </div>
                             <figcaption className="ks-disclosure">
                               <AIDisclosure />

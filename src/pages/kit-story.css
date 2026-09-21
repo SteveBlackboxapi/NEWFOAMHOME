@@ -254,6 +254,7 @@
 }
 .ks-content-image {
   position: relative;
+  container-type: inline-size;
   aspect-ratio: 9/16;
   border-radius: 13px;
   overflow: hidden;
@@ -262,28 +263,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.ks-content-metrics {
-  position: absolute;
-  inset: auto 0 0;
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  padding: 28px 10px 10px;
-  color: white;
-  background: linear-gradient(transparent, #101828c9);
-  font-size: 10px;
-}
-.ks-content-metrics span {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  white-space: nowrap;
-}
-.ks-content-metrics abbr {
-  margin-left: auto;
-  font-size: 8px;
-  text-decoration: none;
 }
 .ks-analytics {
   padding: 8px 36px 36px;
@@ -320,12 +299,6 @@
   }
   .ks-platform-stat strong {
     margin-top: 8px;
-  }
-  .ks-content-metrics {
-    gap: 4px;
-    padding-inline: 5px;
-    font-size: 9px;
-    flex-wrap: wrap;
   }
   .ks-sidebar-inner {
     padding: 22px 16px;
