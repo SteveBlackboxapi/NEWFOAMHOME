@@ -1,930 +1,875 @@
-import { useEffect, useId, useState, type CSSProperties, type ReactNode } from "react";
-import { Link } from "react-router";
-import { FG_R, FG_M, FG_SB } from "../lib/assets";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router";
 import {
-  CAPTION_FONT_OPTIONS,
-  formatAudience,
-  resolveCaptionSettings,
   stagedTalent,
-  type CaptionFontFamily,
-  type ContentPlatform,
-  type StagedTalent,
-  type StrongKind,
-  type TalentContentTile,
+  formatAudience,
   type TalentNetwork,
   type TileCaptionSettings,
 } from "../data/stagedTalent";
+import { img } from "../lib/assets";
+import {
+  assetsFor,
+  assetKind,
+  readCaption,
+  writeCaption,
+  readSaved,
+  SAVED_KEY,
+  NETWORK_NAMES,
+  SHORT_NAMES,
+  downloadPack,
+  exportData,
+  type LabAsset,
+} from "../lib/talentLab";
+import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
+import { AssetCard } from "../components/TalentLabMedia";
+import { TalentLabProfile } from "../components/TalentLabProfile";
+import "./talent-lab.css";
 
-const NETWORK_LABEL: Record<TalentNetwork, string> = {
-  instagram: "Instagram",
-  tiktok: "TikTok",
-  youtube: "YouTube",
-  twitch: "Twitch",
-  linkedin: "LinkedIn",
+type View = "talent" | "content" | "saved";
+type Filters = {
+  talent: string;
+  platforms: TalentNetwork[];
+  category: string;
+  kind: string;
+  audience: string;
+  views: string;
 };
-
-const PLATFORM_SHORT: Record<ContentPlatform, string> = {
-  instagram: "IG",
-  tiktok: "TT",
-  youtube: "YT",
+const EMPTY: Filters = {
+  talent: "",
+  platforms: [],
+  category: "",
+  kind: "",
+  audience: "",
+  views: "",
 };
-
-const FIELD_HINT = [
-  "id",
-  "displayName",
-  "age",
-  "location",
-  "bio",
-  "verticals",
-  "platforms",
-  "totalAudience",
-  "portrait",
-  "motion",
-  "motionStatus",
-  "content",
-  "caption",
-  "captionSettings",
-  "views",
-  "platform",
-  "strongKind",
+const allAssets = stagedTalent.flatMap(assetsFor);
+const contentAssets = allAssets.filter((a) => a.tile);
+const categories = [
+  ...new Set(stagedTalent.flatMap((t) => t.verticals)),
+].sort();
+const navItems: { view: View; icon: LabIconName; label: string }[] = [
+  { view: "talent", icon: "people", label: "Talent library" },
+  { view: "content", icon: "explore", label: "Explore content" },
+  { view: "saved", icon: "bookmark", label: "Saved assets" },
 ];
 
-const CAPTION_STORAGE_PREFIX = "foam-lab-talent-caption:";
-
-function captionStorageKey(talentId: string, tileIndex: number) {
-  return `${CAPTION_STORAGE_PREFIX}${talentId}:${tileIndex}`;
-}
-
-function loadCaptionOverride(
-  talentId: string,
-  tileIndex: number,
-  fallback: TileCaptionSettings,
-): TileCaptionSettings {
-  try {
-    const raw = localStorage.getItem(captionStorageKey(talentId, tileIndex));
-    if (!raw) return fallback;
-    const parsed = JSON.parse(raw) as Partial<TileCaptionSettings>;
-    if (!parsed || typeof parsed !== "object") return fallback;
-    return { ...fallback, ...parsed };
-  } catch {
-    return fallback;
-  }
-}
-
-function saveCaptionOverride(
-  talentId: string,
-  tileIndex: number,
-  settings: TileCaptionSettings,
-) {
-  try {
-    localStorage.setItem(
-      captionStorageKey(talentId, tileIndex),
-      JSON.stringify(settings),
-    );
-  } catch {
-    /* ignore quota / private mode */
-  }
-}
-
-function fontCss(font: CaptionFontFamily): string {
-  return (
-    CAPTION_FONT_OPTIONS.find((f) => f.id === font)?.css ??
-    CAPTION_FONT_OPTIONS[0].css
+export function LabTalent() {
+  const [params, setParams] = useSearchParams();
+  const view: View =
+    params.get("view") === "content" || params.get("view") === "saved"
+      ? (params.get("view") as View)
+      : "talent";
+  const selected = stagedTalent.find((t) => t.id === params.get("talent"));
+  const [query, setQuery] = useState("");
+  const [filters, setFilters] = useState<Filters>(EMPTY);
+  const [draft, setDraft] = useState<Filters>(EMPTY);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const [sort, setSort] = useState("curated");
+  const [saved, setSaved] = useState(() =>
+    readSaved().filter((id) => allAssets.some((a) => a.id === id)),
   );
-}
+  const [captions, setCaptions] = useState<Record<string, TileCaptionSettings>>(
+    () => Object.fromEntries(contentAssets.map((a) => [a.id, readCaption(a)!])),
+  );
+  const [toast, setToast] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [progress, setProgress] = useState("");
+  const filterToggle = useRef<HTMLButtonElement>(null);
+  const filterPanel = useRef<HTMLElement>(null);
+  const search = query.trim().toLowerCase();
+  const activeCount = Object.values(filters).reduce(
+    (n, value) => n + (Array.isArray(value) ? value.length : value ? 1 : 0),
+    0,
+  );
+  const title = navItems.find((n) => n.view === view)!.label;
 
-function captionOverlayStyle(settings: TileCaptionSettings): CSSProperties {
-  const stroke = Math.max(0, settings.strokeWidth);
-  const strokeColor = settings.stroke;
-  // Prefer text-shadow outlines so fill colour stays visible across browsers
-  // (-webkit-text-stroke often eats the fill on thin display sizes).
-  const outlineShadows =
-    stroke > 0
-      ? [
-          `${stroke}px 0 0 ${strokeColor}`,
-          `-${stroke}px 0 0 ${strokeColor}`,
-          `0 ${stroke}px 0 ${strokeColor}`,
-          `0 -${stroke}px 0 ${strokeColor}`,
-          `${stroke}px ${stroke}px 0 ${strokeColor}`,
-          `-${stroke}px ${stroke}px 0 ${strokeColor}`,
-          `${stroke}px -${stroke}px 0 ${strokeColor}`,
-          `-${stroke}px -${stroke}px 0 ${strokeColor}`,
-        ].join(", ")
-      : "0 1px 2px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.25)";
+  useEffect(() => {
+    document.title = `${title} · Foam Lab`;
+  }, [title]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
+  useEffect(() => {
+    if (!toast) return;
+    const timer = window.setTimeout(() => setToast(""), 5500);
+    return () => clearTimeout(timer);
+  }, [toast]);
+  useEffect(() => {
+    const listener = (event: StorageEvent) => {
+      if (event.key === SAVED_KEY)
+        setSaved(
+          readSaved().filter((id) => allAssets.some((a) => a.id === id)),
+        );
+      if (event.key?.startsWith("foam-lab-talent-caption:"))
+        setCaptions(
+          Object.fromEntries(contentAssets.map((a) => [a.id, readCaption(a)!])),
+        );
+    };
+    window.addEventListener("storage", listener);
+    return () => window.removeEventListener("storage", listener);
+  }, []);
+  useEffect(() => {
+    if (!filterOpen) return;
+    filterPanel.current?.focus();
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFilterOpen(false);
+        filterToggle.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [filterOpen]);
 
-  return {
-    left: `${settings.x}%`,
-    top: `${settings.y}%`,
-    transform: "translate(-50%, -50%)",
-    fontFamily: fontCss(settings.font),
-    fontSize: `${settings.size}px`,
-    color: settings.fill,
-    WebkitTextFillColor: settings.fill,
-    textShadow: outlineShadows,
+  const changeView = (next: View) => {
+    setParams((prev) => {
+      const p = new URLSearchParams(prev);
+      p.set("view", next);
+      p.delete("talent");
+      p.delete("asset");
+      return p;
+    });
+    setFilters(EMPTY);
+    setDraft(EMPTY);
+    setQuery("");
+    setSort("curated");
+    setFilterOpen(false);
   };
-}
-
-function StrongIcon({ kind }: { kind: StrongKind }) {
-  if (kind === "hashtag") {
-    return <span aria-hidden className="text-[11px] font-semibold">#</span>;
-  }
-  if (kind === "link") {
-    return (
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <path
-          d="M10 13a5 5 0 0 0 7.07 0l2.12-2.12a5 5 0 0 0-7.07-7.07L11 5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M14 11a5 5 0 0 0-7.07 0L4.8 13.12a5 5 0 0 0 7.07 7.07L13 19"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
+  const openProfile = (id: string, asset?: string) =>
+    setParams((prev) => {
+      const p = new URLSearchParams(prev);
+      p.set("talent", id);
+      if (asset) p.set("asset", asset);
+      else p.delete("asset");
+      return p;
+    });
+  const closeProfile = () =>
+    setParams(
+      (prev) => {
+        const p = new URLSearchParams(prev);
+        p.delete("talent");
+        p.delete("asset");
+        return p;
+      },
+      { replace: true },
     );
-  }
-  if (kind === "question") {
-    return <span aria-hidden className="text-[11px] font-semibold">?</span>;
-  }
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 8.5A2.5 2.5 0 0 1 6.5 6h2l1.2-1.8A1 1 0 0 1 10.5 4h3a1 1 0 0 1 .8.4L15.5 6h2A2.5 2.5 0 0 1 20 8.5v9A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-9Z"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <circle cx="12" cy="13" r="3.2" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function EyeIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function HeartIcon() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 20s-7-4.4-9.5-8.2C.4 8.8 2.2 5 6 5c2.1 0 3.5 1.2 4 2 .5-.8 1.9-2 4-2 3.8 0 5.6 3.8 3.5 6.8C19 15.6 12 20 12 20Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CaptionOverlay({ settings }: { settings: TileCaptionSettings }) {
-  if (!settings.visible || !settings.text.trim()) return null;
-  return (
-    <p
-      className="absolute z-[2] max-w-[88%] px-1 text-center font-semibold leading-snug tracking-[-0.2px] pointer-events-none whitespace-pre-wrap break-words"
-      style={captionOverlayStyle(settings)}
-      data-caption-visible={settings.visible ? "true" : "false"}
-      data-caption-font={settings.font}
-    >
-      {settings.text}
-    </p>
-  );
-}
-
-function ExploreCardChrome({
-  tile,
-  portrait,
-  name,
-  caption,
-}: {
-  tile: TalentContentTile;
-  portrait: string;
-  name: string;
-  caption: TileCaptionSettings;
-}) {
-  return (
-    <>
-      <img
-        src={tile.thumb}
-        alt=""
-        className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
-
-      <CaptionOverlay settings={caption} />
-
-      <div className="absolute inset-x-0 bottom-0 p-2.5 flex flex-col gap-1.5 z-[3]">
-        <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 text-white backdrop-blur-[6px] border border-white/10">
-          <span className={`${FG_M} text-[10px] tracking-[0.2px]`}>Strong:</span>
-          <StrongIcon kind={tile.strongKind} />
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-full bg-black/40 px-1.5 py-1 backdrop-blur-[6px] border border-white/10">
-            <img
-              src={portrait}
-              alt=""
-              className="size-5 rounded-full object-cover border border-white/40 shrink-0"
-            />
-            <span className="inline-flex items-center gap-1 text-white/95 shrink-0">
-              <EyeIcon />
-              <span className={`${FG_M} text-[11px]`}>{formatAudience(tile.views)}</span>
-            </span>
-            {typeof tile.engagements === "number" ? (
-              <span className="inline-flex items-center gap-1 text-white/90 shrink-0">
-                <HeartIcon />
-                <span className={`${FG_M} text-[11px]`}>
-                  {formatAudience(tile.engagements)}
-                </span>
-              </span>
-            ) : null}
-            <span className={`${FG_R} text-[10px] text-white/55 truncate ml-0.5`}>
-              {name.split(" ")[0]}
-            </span>
-          </div>
-          <span
-            className={`${FG_SB} size-7 rounded-full bg-black/45 border border-white/15 text-[9px] tracking-[0.4px] text-white inline-flex items-center justify-center backdrop-blur-[6px] shrink-0`}
-            title={tile.platform}
-          >
-            {PLATFORM_SHORT[tile.platform]}
-          </span>
-        </div>
-      </div>
-
-      {tile.type === "clip" ? (
-        <span
-          className={`${FG_M} absolute right-2.5 top-2.5 z-[3] rounded-full bg-black/45 px-2 py-0.5 text-[9px] uppercase tracking-[0.8px] text-white/90 backdrop-blur-sm border border-white/10`}
-        >
-          Clip
-        </span>
-      ) : null}
-    </>
-  );
-}
-
-function ExploreCard({
-  tile,
-  portrait,
-  name,
-  caption,
-  selected,
-  onSelect,
-}: {
-  tile: TalentContentTile;
-  portrait: string;
-  name: string;
-  caption: TileCaptionSettings;
-  selected?: boolean;
-  onSelect?: () => void;
-}) {
-  const shellClass = [
-    "group relative overflow-hidden rounded-[16px] aspect-[9/16] bg-[#1a1520] shadow-[0_8px_24px_rgba(16,24,40,0.12)] text-left w-full",
-    onSelect
-      ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-      : "",
-    selected ? "ring-2 ring-brand/60 ring-offset-2 ring-offset-[#faf8f5]" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  if (onSelect) {
-    return (
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-pressed={selected}
-        className={shellClass}
-      >
-        <ExploreCardChrome
-          tile={tile}
-          portrait={portrait}
-          name={name}
-          caption={caption}
-        />
-      </button>
-    );
-  }
-
-  return (
-    <div className={shellClass}>
-      <ExploreCardChrome
-        tile={tile}
-        portrait={portrait}
-        name={name}
-        caption={caption}
-      />
-    </div>
-  );
-}
-
-function toColorInputValue(hex: string): string {
-  return /^#[0-9a-fA-F]{6}$/.test(hex) ? hex : "#ffffff";
-}
-
-function CaptionSlidersIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 7h10M14 7a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM4 17h6M10 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0ZM20 17H14M20 7h-2"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function CaptionRailSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <section className="border-b border-border px-4 py-4 last:border-b-0">
-      <p className={`${FG_M} mb-3 text-[13px] text-text`}>{title}</p>
-      <div className="flex flex-col gap-3">{children}</div>
-    </section>
-  );
-}
-
-function CaptionRailField({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className={`${FG_R} text-[12px] text-muted`}>{label}</span>
-      {children}
-    </label>
-  );
-}
-
-const RAIL_INPUT = `${FG_R} w-full rounded-[8px] border border-border bg-white px-3 py-2 text-[14px] text-text placeholder:text-subtle disabled:opacity-50`;
-const RAIL_RANGE = "w-full accent-[var(--brand)] disabled:opacity-50";
-
-/**
- * Explore Filters-style left rail for caption controls.
- * Vertical stacked sections + sticky Reset / Done footer.
- */
-function CaptionRail({
-  settings,
-  onChange,
-  onReset,
-  onDone,
-  tileLabel,
-}: {
-  settings: TileCaptionSettings;
-  onChange: (next: TileCaptionSettings) => void;
-  onReset: () => void;
-  onDone: () => void;
-  tileLabel: string;
-}) {
-  const panelId = useId();
-
-  const patch = (partial: Partial<TileCaptionSettings>) => {
-    onChange({ ...settings, ...partial });
+  const toggleSaved = (id: string) => {
+    const next = saved.includes(id)
+      ? saved.filter((value) => value !== id)
+      : [...saved, id];
+    setSaved(next);
+    try {
+      localStorage.setItem(SAVED_KEY, JSON.stringify(next));
+    } catch {
+      setToast("Saved for this visit. Browser storage is unavailable.");
+    }
   };
-
-  return (
-    <aside
-      className="flex h-full min-h-0 w-full flex-col border-border bg-white md:w-[300px] md:shrink-0 md:border-r"
-      aria-label="Caption controls"
-    >
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3.5">
-        <span className="text-text" aria-hidden>
-          <CaptionSlidersIcon />
-        </span>
-        <div className="min-w-0">
-          <p className={`${FG_M} text-[15px] text-text`}>Caption</p>
-          <p className={`${FG_R} truncate text-[12px] text-muted`}>{tileLabel}</p>
-        </div>
-      </div>
-
-      <div id={panelId} className="min-h-0 flex-1 overflow-y-auto">
-        <CaptionRailSection title="Visibility">
-          <label className="inline-flex cursor-pointer select-none items-center gap-2.5">
-            <input
-              type="checkbox"
-              checked={settings.visible}
-              onChange={(e) => patch({ visible: e.target.checked })}
-              className="size-4 accent-[var(--brand)]"
-            />
-            <span className={`${FG_R} text-[14px] text-text`}>Show caption</span>
-          </label>
-        </CaptionRailSection>
-
-        <CaptionRailSection title="Text">
-          <CaptionRailField label="Caption or slogan">
-            <input
-              type="text"
-              value={settings.text}
-              onChange={(e) => patch({ text: e.target.value })}
-              disabled={!settings.visible}
-              placeholder="Caption or slogan"
-              className={RAIL_INPUT}
-            />
-          </CaptionRailField>
-        </CaptionRailSection>
-
-        <CaptionRailSection title="Position">
-          <CaptionRailField label={`Vertical · ${settings.y}%`}>
-            <input
-              type="range"
-              min={10}
-              max={90}
-              step={1}
-              value={settings.y}
-              disabled={!settings.visible}
-              onChange={(e) => patch({ y: Number(e.target.value) })}
-              className={RAIL_RANGE}
-            />
-          </CaptionRailField>
-          <CaptionRailField label={`Horizontal · ${settings.x}%`}>
-            <input
-              type="range"
-              min={10}
-              max={90}
-              step={1}
-              value={settings.x}
-              disabled={!settings.visible}
-              onChange={(e) => patch({ x: Number(e.target.value) })}
-              className={RAIL_RANGE}
-            />
-          </CaptionRailField>
-        </CaptionRailSection>
-
-        <CaptionRailSection title="Type">
-          <CaptionRailField label="Font">
-            <select
-              value={settings.font}
-              disabled={!settings.visible}
-              onChange={(e) =>
-                patch({ font: e.target.value as CaptionFontFamily })
-              }
-              className={RAIL_INPUT}
-            >
-              {CAPTION_FONT_OPTIONS.map((f) => (
-                <option key={f.id} value={f.id}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
-          </CaptionRailField>
-          <CaptionRailField label={`Size · ${settings.size}px`}>
-            <input
-              type="range"
-              min={10}
-              max={36}
-              step={1}
-              value={settings.size}
-              disabled={!settings.visible}
-              onChange={(e) => patch({ size: Number(e.target.value) })}
-              className={RAIL_RANGE}
-            />
-          </CaptionRailField>
-        </CaptionRailSection>
-
-        <CaptionRailSection title="Colour">
-          <CaptionRailField label="Fill">
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={toColorInputValue(settings.fill)}
-                disabled={!settings.visible}
-                onChange={(e) => patch({ fill: e.target.value })}
-                className="size-9 cursor-pointer rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50"
-              />
-              <input
-                type="text"
-                value={settings.fill}
-                disabled={!settings.visible}
-                onChange={(e) => patch({ fill: e.target.value })}
-                className={`${RAIL_INPUT} flex-1`}
-              />
-            </div>
-          </CaptionRailField>
-          <CaptionRailField label="Outline">
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={toColorInputValue(settings.stroke)}
-                disabled={!settings.visible}
-                onChange={(e) => patch({ stroke: e.target.value })}
-                className="size-9 cursor-pointer rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50"
-              />
-              <input
-                type="text"
-                value={settings.stroke}
-                disabled={!settings.visible}
-                onChange={(e) => patch({ stroke: e.target.value })}
-                className={`${RAIL_INPUT} flex-1`}
-              />
-            </div>
-          </CaptionRailField>
-          <CaptionRailField label={`Outline width · ${settings.strokeWidth}px`}>
-            <input
-              type="range"
-              min={0}
-              max={6}
-              step={0.5}
-              value={settings.strokeWidth}
-              disabled={!settings.visible}
-              onChange={(e) => patch({ strokeWidth: Number(e.target.value) })}
-              className={RAIL_RANGE}
-            />
-          </CaptionRailField>
-        </CaptionRailSection>
-      </div>
-
-      <div className="sticky bottom-0 z-[1] flex items-center justify-between gap-3 border-t border-border bg-white px-4 py-3">
-        <button
-          type="button"
-          onClick={onReset}
-          className={`${FG_M} text-[13px] text-muted transition-colors hover:text-text`}
-        >
-          Reset caption
-        </button>
-        <button
-          type="button"
-          onClick={onDone}
-          className={`${FG_M} rounded-[8px] bg-brand px-4 py-2 text-[13px] text-white transition-colors hover:bg-brand-hover`}
-        >
-          Done
-        </button>
-      </div>
-    </aside>
+  const updateCaption = (asset: LabAsset, caption: TileCaptionSettings) => {
+    setCaptions((prev) => ({ ...prev, [asset.id]: caption }));
+    if (!writeCaption(asset, caption))
+      setToast(
+        "The edit is visible, but browser storage is unavailable. Download the image before leaving.",
+      );
+  };
+  const pack = async (assets: LabAsset[], name: string) => {
+    if (busy || !assets.length) return;
+    setBusy(true);
+    setProgress("Preparing download…");
+    try {
+      await downloadPack(assets, name, (done, total) =>
+        setProgress(`Preparing ${done} of ${total} files…`),
+      );
+      setToast(
+        "Your ZIP download is ready. Originals and profile data are included.",
+      );
+    } catch (error) {
+      setToast(
+        error instanceof Error
+          ? error.message
+          : "Download failed. Please try again.",
+      );
+    } finally {
+      setBusy(false);
+      setProgress("");
+    }
+  };
+  const clearFilters = () => {
+    setFilters(EMPTY);
+    setDraft(EMPTY);
+    setQuery("");
+  };
+  const matchingTalent = useMemo(
+    () =>
+      stagedTalent.filter((t) => {
+        const text = [
+          t.displayName,
+          t.location,
+          t.bio,
+          ...t.verticals,
+          ...t.platforms.map((p) => p.handle),
+        ]
+          .join(" ")
+          .toLowerCase();
+        return (
+          (!filters.talent || t.id === filters.talent) &&
+          (!filters.category || t.verticals.includes(filters.category)) &&
+          (!filters.platforms.length ||
+            t.platforms.some((p) => filters.platforms.includes(p.network))) &&
+          (!filters.audience ||
+            (filters.audience === "1m"
+              ? t.totalAudience >= 1_000_000
+              : filters.audience === "500k"
+                ? t.totalAudience >= 500_000 && t.totalAudience < 1_000_000
+                : t.totalAudience < 500_000)) &&
+          (view !== "talent" || !search || text.includes(search))
+        );
+      }),
+    [filters, search, view],
   );
-}
+  const visibleTalent = [...matchingTalent].sort((a, b) =>
+    sort === "name"
+      ? a.displayName.localeCompare(b.displayName)
+      : sort === "audience"
+        ? b.totalAudience - a.totalAudience
+        : 0,
+  );
+  const visibleAssets = (
+    view === "saved"
+      ? allAssets.filter((a) => saved.includes(a.id))
+      : contentAssets
+  )
+    .filter(
+      (a) =>
+        matchingTalent.some((t) => t.id === a.talent.id) &&
+        (!filters.platforms.length ||
+          (!!a.tile && filters.platforms.includes(a.tile.platform))) &&
+        (!filters.kind || assetKind(a) === filters.kind) &&
+        (!filters.views || (a.tile?.views ?? 0) >= Number(filters.views)) &&
+        (!search ||
+          [
+            a.title,
+            captions[a.id]?.text,
+            a.talent.displayName,
+            a.talent.location,
+            ...a.talent.verticals,
+            ...a.talent.platforms.map((p) => p.handle),
+          ]
+            .join(" ")
+            .toLowerCase()
+            .includes(search)),
+    )
+    .sort((a, b) =>
+      sort === "name"
+        ? a.talent.displayName.localeCompare(b.talent.displayName)
+        : sort === "views"
+          ? (b.tile?.views ?? 0) - (a.tile?.views ?? 0)
+          : sort === "audience"
+            ? b.talent.totalAudience - a.talent.totalAudience
+            : a.index - b.index ||
+              stagedTalent.indexOf(a.talent) - stagedTalent.indexOf(b.talent),
+    );
+  const visibleProfiles =
+    view === "talent"
+      ? visibleTalent
+      : [
+          ...new Map(
+            visibleAssets.map((a) => [a.talent.id, a.talent]),
+          ).values(),
+        ];
+  const count = view === "talent" ? visibleTalent.length : visibleAssets.length;
 
-function TalentCard({
-  talent,
-  selected,
-  onSelect,
-}: {
-  talent: StagedTalent;
-  selected: boolean;
-  onSelect: () => void;
-}) {
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={selected}
-      className={[
-        "group text-left rounded-[16px] border bg-[#faf8f5] overflow-hidden transition-all w-full",
-        selected
-          ? "border-brand/50 shadow-[0_0_0_1px_rgba(122,0,54,0.08)]"
-          : "border-border hover:border-border-dark hover:-translate-y-0.5",
-      ].join(" ")}
-    >
-      <div className="aspect-[4/5] bg-raised overflow-hidden relative">
-        <img
-          src={talent.portrait}
-          alt=""
-          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent" />
-        <span
-          className={`${FG_M} absolute left-3 top-3 rounded-full border border-white/25 bg-black/35 px-2.5 py-1 text-[10px] uppercase tracking-[1px] text-white backdrop-blur-sm`}
+    <div className="tl-app tl-shell">
+      <a className="tl-skip" href="#talent-results">
+        Skip to results
+      </a>
+      <nav className="tl-nav" aria-label="Lab navigation">
+        <Link
+          className="tl-brand"
+          to="/"
+          title="Foam website"
+          aria-label="Foam website"
         >
-          {talent.motionStatus === "ready" ? "Motion ready" : "Still"}
-        </span>
-        <div className="absolute left-3 right-3 bottom-3 flex items-end justify-between gap-2">
-          <div>
-            <p className={`${FG_SB} text-[16px] text-white tracking-[-0.2px]`}>
-              {talent.displayName}
-            </p>
-            <p className={`${FG_R} text-[12px] text-white/75`}>
-              {talent.verticals[0]}
-            </p>
-          </div>
-          <span className={`${FG_M} text-[12px] text-white/90 shrink-0`}>
-            {formatAudience(talent.totalAudience)}
-          </span>
-        </div>
-      </div>
-      <div className="p-4 md:p-5">
-        <p className={`${FG_R} text-[13px] text-muted mb-3`}>
-          {talent.location} · {talent.age}
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {talent.verticals.slice(0, 3).map((v) => (
-            <span
-              key={v}
-              className={`${FG_M} rounded-full border border-border bg-raised px-2.5 py-1 text-[11px] text-muted`}
+          <img src={img.foamSymbol} alt="" />
+        </Link>
+        <div className="tl-nav-items">
+          {navItems.map((item) => (
+            <button
+              key={item.view}
+              className={`tl-nav-item ${view === item.view ? "active" : ""}`}
+              onClick={() => changeView(item.view)}
+              aria-label={item.label}
+              aria-current={view === item.view ? "page" : undefined}
+              title={item.label}
             >
-              {v}
-            </span>
+              <LabIcon name={item.icon} size={23} />
+              {item.view === "saved" && saved.length > 0 && (
+                <span className="tl-nav-count">{saved.length}</span>
+              )}
+              <span className="tl-nav-tooltip">{item.label}</span>
+            </button>
           ))}
         </div>
-      </div>
-    </button>
-  );
-}
-
-function DetailPanel({
-  talent,
-  onClose,
-}: {
-  talent: StagedTalent;
-  onClose: () => void;
-}) {
-  const titleId = useId();
-  const [activeTile, setActiveTile] = useState(0);
-  const [captions, setCaptions] = useState<TileCaptionSettings[]>(() =>
-    talent.content.map((tile, i) =>
-      loadCaptionOverride(talent.id, i, resolveCaptionSettings(tile)),
-    ),
-  );
-
-  useEffect(() => {
-    setActiveTile(0);
-    setCaptions(
-      talent.content.map((tile, i) =>
-        loadCaptionOverride(talent.id, i, resolveCaptionSettings(tile)),
-      ),
-    );
-  }, [talent]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  const updateCaption = (index: number, next: TileCaptionSettings) => {
-    setCaptions((prev) => {
-      const copy = [...prev];
-      copy[index] = next;
-      return copy;
-    });
-    saveCaptionOverride(talent.id, index, next);
-  };
-
-  const resetCaption = () => {
-    const tile = talent.content[activeTile];
-    if (!tile) return;
-    updateCaption(activeTile, resolveCaptionSettings(tile));
-  };
-
-  const activeCaption =
-    captions[activeTile] ??
-    resolveCaptionSettings(talent.content[activeTile] ?? talent.content[0]);
-
-  const activeTileData = talent.content[activeTile] ?? talent.content[0];
-
-  return (
-    <div
-      className="fixed inset-0 z-40 flex items-end justify-center p-0 md:items-center md:p-5"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={titleId}
-    >
-      <button
-        type="button"
-        className="absolute inset-0 bg-[#0a0e1a]/45 backdrop-blur-[2px]"
-        aria-label="Close detail"
-        onClick={onClose}
-      />
-      <div className="relative z-10 flex h-[94vh] w-full max-h-[940px] flex-col overflow-hidden rounded-t-[20px] border border-border bg-[#f7f4ef] shadow-[0_24px_64px_rgba(16,24,40,0.28)] md:h-[min(92vh,900px)] md:max-w-[1120px] md:rounded-[20px]">
-        <div className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-white px-5 md:px-6">
-          <div className="min-w-0">
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle`}>
-              Lab · Caption editor
-            </p>
-            <h2
-              id={titleId}
-              className={`${FG_SB} truncate text-[16px] tracking-[-0.2px] text-text`}
-            >
-              {talent.displayName}
-            </h2>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className={`${FG_M} shrink-0 text-[13px] text-muted transition-colors hover:text-text`}
+        <div className="tl-nav-bottom">
+          <Link
+            to="/"
+            className="tl-nav-item"
+            title="Back to website"
+            aria-label="Back to website"
           >
-            Close
-          </button>
+            <LabIcon name="external" />
+          </Link>
+          <span className="tl-avatar" title="Demo workspace">
+            FL
+          </span>
         </div>
-
-        {/* Explore-shaped shell: left caption rail, right live preview */}
-        <div className="flex min-h-0 flex-1 flex-col md:flex-row">
-          {/* Mobile: preview first so the edited tile stays in view while scrolling controls */}
-          <div className="order-1 min-h-0 flex-1 overflow-y-auto md:order-2">
-            <div className="px-5 py-5 md:px-8 md:py-6">
-              <p
-                className={`${FG_M} mb-1 text-[11px] uppercase tracking-[1.6px] text-brand`}
+      </nav>
+      <div className="tl-main">
+        <header className="tl-header">
+          <div className="tl-title">
+            <span className="tl-eyebrow">FOAM LAB</span>
+            <h1>{title}</h1>
+          </div>
+          <label className="tl-search">
+            <LabIcon name="search" size={20} />
+            <span className="tl-sr-only">Search talent and content</span>
+            <input
+              type="search"
+              aria-label="Search talent and content"
+              placeholder={
+                view === "talent"
+                  ? "Search by name, handle or interest"
+                  : "Search creators, content or captions"
+              }
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            {query && (
+              <button
+                type="button"
+                aria-label="Clear search"
+                onClick={() => setQuery("")}
               >
-                Live preview
-              </p>
-              <p className={`${FG_R} mb-4 max-w-[48ch] text-[14px] text-muted`}>
-                Adjust caption on the left. Changes show on this tile as you edit.
-              </p>
-
-              <div className="mx-auto mb-6 w-full max-w-[280px] sm:max-w-[320px] md:mx-0 md:max-w-[300px]">
-                <ExploreCard
-                  tile={activeTileData}
-                  portrait={talent.portrait}
-                  name={talent.displayName}
-                  caption={activeCaption}
-                />
+                <LabIcon name="close" size={16} />
+              </button>
+            )}
+          </label>
+          <span className="tl-workspace-label">
+            <span /> Demo workspace
+          </span>
+        </header>
+        <div className="tl-intro">
+          <p>
+            {view === "talent"
+              ? "Every character. Every asset. One place."
+              : view === "content"
+                ? "Explore your characters’ content, just as it appears in Foam."
+                : "Your picks, ready for the next story."}
+          </p>
+          <span>
+            {stagedTalent.length} creators <i /> {allAssets.length} images
+          </span>
+        </div>
+        <section
+          className={`tl-workbench ${filterOpen ? "tl-filters-open" : ""}`}
+          aria-label="Talent workspace"
+        >
+          <aside
+            className="tl-filters"
+            ref={filterPanel}
+            tabIndex={-1}
+            aria-label="Filters"
+          >
+            <div className="tl-filter-heading">
+              <LabIcon name="filter" size={18} />
+              <h2>Filters</h2>
+              {activeCount > 0 && (
+                <span className="tl-count">{activeCount}</span>
+              )}
+              <button
+                className="tl-icon-button tl-mobile-only"
+                aria-label="Close filters"
+                onClick={() => {
+                  setFilterOpen(false);
+                  filterToggle.current?.focus();
+                }}
+              >
+                <LabIcon name="close" size={18} />
+              </button>
+            </div>
+            <div className="tl-filter-body">
+              <details open>
+                <summary>
+                  Talent <LabIcon name="chevron" size={14} />
+                </summary>
+                <label className="tl-sr-only" htmlFor="tl-talent-filter">
+                  Choose talent
+                </label>
+                <select
+                  id="tl-talent-filter"
+                  value={draft.talent}
+                  onChange={(e) =>
+                    setDraft({ ...draft, talent: e.target.value })
+                  }
+                >
+                  <option value="">All talent</option>
+                  {stagedTalent.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.displayName}
+                    </option>
+                  ))}
+                </select>
+              </details>
+              <details open>
+                <summary>
+                  Category <LabIcon name="chevron" size={14} />
+                </summary>
+                <label className="tl-sr-only" htmlFor="tl-category-filter">
+                  Choose category
+                </label>
+                <select
+                  id="tl-category-filter"
+                  value={draft.category}
+                  onChange={(e) =>
+                    setDraft({ ...draft, category: e.target.value })
+                  }
+                >
+                  <option value="">All interests</option>
+                  {categories.map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
+                </select>
+              </details>
+              <details open>
+                <summary>
+                  Platform <LabIcon name="chevron" size={14} />
+                </summary>
+                <div className="tl-checkbox-list">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={!draft.platforms.length}
+                      onChange={() => setDraft({ ...draft, platforms: [] })}
+                    />
+                    Any platform
+                  </label>
+                  {(Object.keys(NETWORK_NAMES) as TalentNetwork[])
+                    .filter(
+                      (p) =>
+                        view === "talent" ||
+                        ["instagram", "tiktok", "youtube"].includes(p),
+                    )
+                    .map((p) => (
+                      <label key={p}>
+                        <input
+                          type="checkbox"
+                          checked={draft.platforms.includes(p)}
+                          onChange={() =>
+                            setDraft({
+                              ...draft,
+                              platforms: draft.platforms.includes(p)
+                                ? draft.platforms.filter((x) => x !== p)
+                                : [...draft.platforms, p],
+                            })
+                          }
+                        />
+                        {NETWORK_NAMES[p]}
+                      </label>
+                    ))}
+                </div>
+              </details>
+              {view !== "talent" && (
+                <details open>
+                  <summary>
+                    Asset type <LabIcon name="chevron" size={14} />
+                  </summary>
+                  <label className="tl-sr-only" htmlFor="tl-kind-filter">
+                    Choose asset type
+                  </label>
+                  <select
+                    id="tl-kind-filter"
+                    value={draft.kind}
+                    onChange={(e) =>
+                      setDraft({ ...draft, kind: e.target.value })
+                    }
+                  >
+                    <option value="">All assets</option>
+                    <option value="still">Images</option>
+                    <option value="video">Ready videos</option>
+                    <option value="planned">Video planned</option>
+                  </select>
+                </details>
+              )}
+              <details open>
+                <summary>
+                  {view === "talent" ? "Audience" : "Performance"}{" "}
+                  <LabIcon name="chevron" size={14} />
+                </summary>
+                <label className="tl-filter-label">
+                  Total audience
+                  <select
+                    value={draft.audience}
+                    onChange={(e) =>
+                      setDraft({ ...draft, audience: e.target.value })
+                    }
+                  >
+                    <option value="">Any size</option>
+                    <option value="under500k">Under 500K</option>
+                    <option value="500k">500K–1M</option>
+                    <option value="1m">1M and above</option>
+                  </select>
+                </label>
+                {view !== "talent" && (
+                  <label className="tl-filter-label">
+                    Post views
+                    <select
+                      value={draft.views}
+                      onChange={(e) =>
+                        setDraft({ ...draft, views: e.target.value })
+                      }
+                    >
+                      <option value="">Any views</option>
+                      <option value="100000">100K and above</option>
+                      <option value="500000">500K and above</option>
+                      <option value="1000000">1M and above</option>
+                    </select>
+                  </label>
+                )}
+              </details>
+            </div>
+            <div className="tl-filter-footer">
+              <button className="tl-text-button" onClick={clearFilters}>
+                Reset all
+              </button>
+              <button
+                className="tl-button tl-primary"
+                onClick={() => {
+                  setFilters({ ...draft });
+                  setFilterOpen(false);
+                  if (filterOpen) filterToggle.current?.focus();
+                }}
+              >
+                Apply filters
+              </button>
+            </div>
+          </aside>
+          <div className="tl-results" id="talent-results" tabIndex={-1}>
+            <div className="tl-results-toolbar">
+              <div className="tl-tabs" aria-label="Library view">
+                <button
+                  className={view === "talent" ? "active" : ""}
+                  aria-pressed={view === "talent"}
+                  onClick={() => changeView("talent")}
+                >
+                  Talent <span>{stagedTalent.length}</span>
+                </button>
+                <button
+                  className={view === "content" ? "active" : ""}
+                  aria-pressed={view === "content"}
+                  onClick={() => changeView("content")}
+                >
+                  Content <span>{contentAssets.length}</span>
+                </button>
+                {view === "saved" && (
+                  <button className="active" aria-pressed="true">
+                    Saved <span>{saved.length}</span>
+                  </button>
+                )}
               </div>
-
-              <p
-                className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1.2px] text-subtle`}
-              >
-                Choose tile · {talent.content.length}
-              </p>
-              <div className="mb-8 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5">
-                {talent.content.map((tile, i) => (
-                  <ExploreCard
-                    key={`${talent.id}-tile-${i}`}
-                    tile={tile}
-                    portrait={talent.portrait}
-                    name={talent.displayName}
-                    caption={captions[i] ?? resolveCaptionSettings(tile)}
-                    selected={activeTile === i}
-                    onSelect={() => setActiveTile(i)}
+              <div className="tl-toolbar-actions">
+                <button
+                  className="tl-icon-button tl-mobile-only"
+                  ref={filterToggle}
+                  aria-label="Show filters"
+                  aria-expanded={filterOpen}
+                  onClick={() => setFilterOpen(!filterOpen)}
+                >
+                  <LabIcon name="filter" />
+                </button>
+                <label className="tl-sort">
+                  <span className="tl-sr-only">Sort results</span>
+                  <select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <option value="curated">Curated order</option>
+                    <option value="name">Name A–Z</option>
+                    <option value="audience">Largest audience</option>
+                    {view !== "talent" && (
+                      <option value="views">Most viewed</option>
+                    )}
+                  </select>
+                </label>
+                <div className="tl-density">
+                  <button
+                    className={!compact ? "active" : ""}
+                    onClick={() => setCompact(false)}
+                    aria-label="Comfortable grid"
+                    aria-pressed={!compact}
+                  >
+                    <LabIcon name="grid" size={16} />
+                  </button>
+                  <button
+                    className={compact ? "active" : ""}
+                    onClick={() => setCompact(true)}
+                    aria-label="Compact grid"
+                    aria-pressed={compact}
+                  >
+                    <LabIcon name="compact" size={16} />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="tl-results-meta">
+              <span role="status">
+                {count}{" "}
+                {view === "talent"
+                  ? count === 1
+                    ? "creator"
+                    : "creators"
+                  : count === 1
+                    ? "asset"
+                    : "assets"}
+                {search
+                  ? ` matching “${query.trim()}”`
+                  : activeCount
+                    ? count === 1
+                      ? " matches your filters"
+                      : " match your filters"
+                    : view === "saved"
+                      ? " saved on this browser"
+                      : " in your library"}
+              </span>
+              <div className="tl-actions">
+                {(activeCount > 0 || search) && (
+                  <button className="tl-text-button" onClick={clearFilters}>
+                    Clear filters
+                  </button>
+                )}
+                {view === "saved" ? (
+                  <button
+                    className="tl-text-button"
+                    disabled={busy || !count}
+                    onClick={() => pack(visibleAssets, "foam-saved-assets.zip")}
+                  >
+                    <LabIcon name="download" size={15} />
+                    {busy ? "Preparing…" : "Download saved"}
+                  </button>
+                ) : (
+                  <button
+                    className="tl-text-button"
+                    disabled={!count}
+                    onClick={() => {
+                      exportData(visibleProfiles);
+                      setToast(
+                        "Character data exported, including local caption drafts.",
+                      );
+                    }}
+                  >
+                    <LabIcon name="download" size={15} />
+                    Export data
+                  </button>
+                )}
+              </div>
+            </div>
+            {!!activeCount && (
+              <div className="tl-applied-filters">
+                {filters.talent && (
+                  <span>
+                    {
+                      stagedTalent.find((t) => t.id === filters.talent)
+                        ?.displayName
+                    }
+                  </span>
+                )}
+                {filters.category && <span>{filters.category}</span>}
+                {filters.platforms.map((p) => (
+                  <span key={p}>{NETWORK_NAMES[p]}</span>
+                ))}
+                {filters.kind && (
+                  <span>
+                    {filters.kind === "planned"
+                      ? "Video planned"
+                      : filters.kind === "video"
+                        ? "Ready videos"
+                        : "Images"}
+                  </span>
+                )}
+                {filters.audience && (
+                  <span>
+                    {filters.audience === "1m"
+                      ? "1M+ audience"
+                      : filters.audience === "500k"
+                        ? "500K–1M audience"
+                        : "Under 500K audience"}
+                  </span>
+                )}
+                {filters.views && (
+                  <span>{formatAudience(Number(filters.views))}+ views</span>
+                )}
+              </div>
+            )}
+            {!count ? (
+              <div className="tl-empty">
+                <div>
+                  <LabIcon
+                    name={
+                      view === "saved" && !saved.length ? "bookmark" : "search"
+                    }
+                    size={30}
+                  />
+                </div>
+                <h2>
+                  {view === "saved" && !saved.length
+                    ? "A place for your next story"
+                    : filters.kind === "video"
+                      ? "No ready videos yet"
+                      : "No matches this time"}
+                </h2>
+                <p>
+                  {view === "saved" && !saved.length
+                    ? "Save images from the talent library or content feed. They’ll be here when you need them."
+                    : filters.kind === "video"
+                      ? "Planned videos currently have a still image. Switch to Video planned to explore those assets."
+                      : "Try another name, interest or combination of filters."}
+                </p>
+                <button
+                  className="tl-button tl-primary"
+                  onClick={
+                    view === "saved" && !saved.length
+                      ? () => changeView("content")
+                      : clearFilters
+                  }
+                >
+                  {view === "saved" && !saved.length
+                    ? "Explore content"
+                    : "Clear filters"}
+                </button>
+              </div>
+            ) : view === "talent" ? (
+              <div className={`tl-talent-grid ${compact ? "compact" : ""}`}>
+                {visibleTalent.map((talent) => (
+                  <article className="tl-talent-card" key={talent.id}>
+                    <button
+                      className="tl-talent-open"
+                      onClick={() => openProfile(talent.id)}
+                      aria-label={`Open ${talent.displayName} profile`}
+                    >
+                      <div className="tl-talent-portrait">
+                        <img
+                          src={talent.portrait}
+                          alt={talent.displayName}
+                          loading="lazy"
+                        />
+                        <span className="tl-card-shade" />
+                        <span className="tl-asset-count">
+                          <LabIcon name="image" size={13} />
+                          {assetsFor(talent).length} assets
+                        </span>
+                        <div className="tl-talent-identity">
+                          <span>{talent.verticals[0]}</span>
+                          <h2>{talent.displayName}</h2>
+                          <p>{talent.location}</p>
+                        </div>
+                      </div>
+                      <div className="tl-talent-info">
+                        <div>
+                          <strong>
+                            {formatAudience(talent.totalAudience)}
+                          </strong>
+                          <span>Total audience</span>
+                        </div>
+                        <div className="tl-platform-pills">
+                          {talent.platforms.map((p) => (
+                            <abbr
+                              key={p.network}
+                              title={NETWORK_NAMES[p.network]}
+                            >
+                              {SHORT_NAMES[p.network]}
+                            </abbr>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="tl-talent-tags">
+                        {talent.verticals.slice(0, 3).map((v) => (
+                          <span key={v}>{v}</span>
+                        ))}
+                        <LabIcon name="arrow" size={17} />
+                      </div>
+                    </button>
+                    <button
+                      className={`tl-card-save ${saved.includes(`${talent.id}:portrait`) ? "is-saved" : ""}`}
+                      onClick={() => toggleSaved(`${talent.id}:portrait`)}
+                      aria-label={`${saved.includes(`${talent.id}:portrait`) ? "Unsave" : "Save"} ${talent.displayName} portrait`}
+                      aria-pressed={saved.includes(`${talent.id}:portrait`)}
+                    >
+                      <LabIcon name="bookmark" size={17} />
+                    </button>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className={`tl-content-grid ${compact ? "compact" : ""}`}>
+                {visibleAssets.map((asset, i) => (
+                  <AssetCard
+                    key={asset.id}
+                    asset={asset}
+                    caption={captions[asset.id]}
+                    saved={saved.includes(asset.id)}
+                    onSave={() => toggleSaved(asset.id)}
+                    onOpen={() => openProfile(asset.talent.id, asset.id)}
+                    position={i}
                   />
                 ))}
               </div>
-
-              <div className="mb-6 flex flex-wrap items-center gap-3 rounded-[12px] border border-border bg-white p-3">
-                <img
-                  src={talent.portrait}
-                  alt=""
-                  className="size-12 rounded-[10px] object-cover"
-                />
-                <div className="min-w-0">
-                  <p className={`${FG_M} text-[14px] text-text`}>
-                    {talent.displayName}
-                  </p>
-                  <p className={`${FG_R} text-[12px] text-muted`}>
-                    {talent.location} · {talent.age} ·{" "}
-                    {formatAudience(talent.totalAudience)}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-1.5 sm:ml-auto">
-                  {talent.verticals.slice(0, 3).map((v) => (
-                    <span
-                      key={v}
-                      className={`${FG_M} rounded-full border border-brand/20 bg-brand-light px-2.5 py-1 text-[11px] text-brand`}
-                    >
-                      {v}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <p className={`${FG_R} mb-6 max-w-[52ch] text-[15px] leading-7 text-text/90`}>
-                {talent.bio}
-              </p>
-
-              <div className="mb-4">
-                <p
-                  className={`${FG_M} mb-2 text-[11px] uppercase tracking-[1px] text-subtle`}
-                >
-                  Platforms
-                </p>
-                <ul className="flex flex-col gap-2 sm:grid sm:grid-cols-2">
-                  {talent.platforms.map((p) => (
-                    <li
-                      key={`${p.network}-${p.handle}`}
-                      className="flex items-center justify-between gap-3 rounded-[10px] border border-border bg-white px-3 py-2.5"
-                    >
-                      <div className="min-w-0">
-                        <p className={`${FG_M} text-[13px] text-text`}>
-                          {NETWORK_LABEL[p.network]}
-                        </p>
-                        <p className={`${FG_R} truncate text-[12px] text-subtle`}>
-                          {p.handle}
-                        </p>
-                      </div>
-                      <span className={`${FG_SB} shrink-0 text-[14px] text-text`}>
-                        {formatAudience(p.followers)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded-[12px] border border-dashed border-border-dark bg-white/70 px-4 py-3">
-                <p
-                  className={`${FG_M} mb-1 text-[11px] uppercase tracking-[1.2px] text-subtle`}
-                >
-                  Fields for reuse
-                </p>
-                <p className={`${FG_R} break-all text-[12px] leading-5 text-muted`}>
-                  {FIELD_HINT.join(" · ")}
-                </p>
-              </div>
-            </div>
+            )}
+            <footer className="tl-library-footer">
+              <span>
+                <span className="tl-signal" />
+                Made for the stories you’re building.
+              </span>
+              <span>Fictional talent & demo metrics</span>
+            </footer>
           </div>
-
-          <div className="order-2 max-h-[48vh] shrink-0 border-t border-border md:order-1 md:h-full md:max-h-none md:border-t-0">
-            <CaptionRail
-              settings={activeCaption}
-              onChange={(next) => updateCaption(activeTile, next)}
-              onReset={resetCaption}
-              onDone={onClose}
-              tileLabel={`Tile ${activeTile + 1} · ${activeTileData?.platform ?? ""}`}
-            />
-          </div>
-        </div>
+        </section>
+        <footer className="tl-page-footer">
+          <span>
+            Foam Lab <i /> Talent & content library
+          </span>
+          <span>Browser-local saves · Login not enabled</span>
+        </footer>
       </div>
-    </div>
-  );
-}
-
-export function LabTalent() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selected = stagedTalent.find((t) => t.id === selectedId) ?? null;
-
-  return (
-    <div className="font-founders font-normal min-h-screen bg-[#f7f4ef] text-text">
-      <header className="border-b border-border bg-[#faf8f5]/90 backdrop-blur-sm sticky top-0 z-20">
-        <div className="max-w-[1120px] mx-auto px-6 h-14 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <span className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle`}>
-              Foam
-            </span>
-            <span
-              className={`${FG_M} inline-flex items-center rounded-full border border-brand/25 bg-brand-light px-2.5 py-1 text-[11px] tracking-[0.4px] text-brand`}
+      {selected && (
+        <TalentLabProfile
+          key={selected.id}
+          talent={selected}
+          initialAsset={params.get("asset")}
+          captions={captions}
+          onCaption={updateCaption}
+          saved={saved}
+          onSave={toggleSaved}
+          onClose={closeProfile}
+          onPack={pack}
+          busy={busy}
+          notify={setToast}
+          notice={progress || toast}
+        />
+      )}
+      {(toast || progress) && (
+        <div className="tl-toast" role="status">
+          <LabIcon name={busy ? "download" : "check"} size={17} />
+          <span>{progress || toast}</span>
+          {!busy && (
+            <button
+              aria-label="Dismiss notification"
+              onClick={() => setToast("")}
             >
-              Lab · Talent
-            </span>
-          </div>
-          <Link
-            to="/"
-            className={`${FG_M} text-[13px] text-muted hover:text-text transition-colors shrink-0`}
-          >
-            Back to site
-          </Link>
+              <LabIcon name="close" size={15} />
+            </button>
+          )}
         </div>
-      </header>
-
-      <main className="max-w-[1120px] mx-auto px-6 pt-12 pb-24">
-        <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-subtle mb-5`}>
-          Unlisted catalogue
-        </p>
-        <h1 className={`${FG_SB} text-[40px] md:text-[52px] leading-[1.05] tracking-[-1.4px] text-text mb-5`}>
-          Staged talent
-        </h1>
-        <p className={`${FG_R} text-[17px] leading-7 text-muted max-w-[560px] mb-3`}>
-          Twelve invented profiles with photoreal explore cards for marketing kit
-          staging. Not linked from the public site.
-        </p>
-        <p className={`${FG_R} text-[14px] leading-6 text-subtle max-w-[560px] mb-10`}>
-          Portraits and post stills are synthetic staged assets. Fake handles end in
-          .fake. Data lives in{" "}
-          <span className={`${FG_M} text-muted`}>src/data/stagedTalent.ts</span>.
-          Open a profile to edit caption overlays on content tiles.
-        </p>
-
-        <div className="flex flex-wrap items-center gap-2 mb-8">
-          <span className={`${FG_M} text-[12px] text-muted`}>
-            {stagedTalent.length} profiles
-          </span>
-          <span className="text-border-dark">·</span>
-          <span className={`${FG_R} text-[12px] text-subtle`}>
-            Fields: id, platforms, portrait, motion, content, caption,
-            captionSettings, views, platform, strongKind
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {stagedTalent.map((talent) => (
-            <TalentCard
-              key={talent.id}
-              talent={talent}
-              selected={selectedId === talent.id}
-              onSelect={() => setSelectedId(talent.id)}
-            />
-          ))}
-        </div>
-      </main>
-
-      {selected ? (
-        <DetailPanel talent={selected} onClose={() => setSelectedId(null)} />
-      ) : null}
+      )}
     </div>
   );
 }

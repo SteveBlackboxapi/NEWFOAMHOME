@@ -88,6 +88,8 @@ export type TalentPlatform = {
 export type TalentContentTile = {
   type: "still" | "clip";
   thumb: string;
+  /** Playable source, when available. A clip thumbnail alone is not a video. */
+  video?: string;
   views: number;
   /** Default caption text; used when captionSettings.text is unset */
   caption?: string;
