@@ -1,14 +1,18 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 import {
+  CAPTION_FONT_OPTIONS,
   formatAudience,
+  resolveCaptionSettings,
   stagedTalent,
+  type CaptionFontFamily,
   type ContentPlatform,
   type StagedTalent,
   type StrongKind,
   type TalentContentTile,
   type TalentNetwork,
+  type TileCaptionSettings,
 } from "../data/stagedTalent";
 
 const NETWORK_LABEL: Record<TalentNetwork, string> = {
@@ -39,10 +43,74 @@ const FIELD_HINT = [
   "motionStatus",
   "content",
   "caption",
+  "captionSettings",
   "views",
   "platform",
   "strongKind",
 ];
+
+const CAPTION_STORAGE_PREFIX = "foam-lab-talent-caption:";
+
+function captionStorageKey(talentId: string, tileIndex: number) {
+  return `${CAPTION_STORAGE_PREFIX}${talentId}:${tileIndex}`;
+}
+
+function loadCaptionOverride(
+  talentId: string,
+  tileIndex: number,
+  fallback: TileCaptionSettings,
+): TileCaptionSettings {
+  try {
+    const raw = localStorage.getItem(captionStorageKey(talentId, tileIndex));
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw) as Partial<TileCaptionSettings>;
+    if (!parsed || typeof parsed !== "object") return fallback;
+    return { ...fallback, ...parsed };
+  } catch {
+    return fallback;
+  }
+}
+
+function saveCaptionOverride(
+  talentId: string,
+  tileIndex: number,
+  settings: TileCaptionSettings,
+) {
+  try {
+    localStorage.setItem(
+      captionStorageKey(talentId, tileIndex),
+      JSON.stringify(settings),
+    );
+  } catch {
+    /* ignore quota / private mode */
+  }
+}
+
+function fontCss(font: CaptionFontFamily): string {
+  return (
+    CAPTION_FONT_OPTIONS.find((f) => f.id === font)?.css ??
+    CAPTION_FONT_OPTIONS[0].css
+  );
+}
+
+function captionOverlayStyle(settings: TileCaptionSettings): CSSProperties {
+  const stroke = Math.max(0, settings.strokeWidth);
+  return {
+    left: `${settings.x}%`,
+    top: `${settings.y}%`,
+    transform: "translate(-50%, -50%)",
+    fontFamily: fontCss(settings.font),
+    fontSize: `${settings.size}px`,
+    color: settings.fill,
+    WebkitTextStroke:
+      stroke > 0 ? `${stroke}px ${settings.stroke}` : undefined,
+    paintOrder: stroke > 0 ? "stroke fill" : undefined,
+    textShadow:
+      stroke > 0
+        ? undefined
+        : "0 1px 2px rgba(0,0,0,0.35), 0 2px 10px rgba(0,0,0,0.25)",
+  };
+}
 
 function StrongIcon({ kind }: { kind: StrongKind }) {
   if (kind === "hashtag") {
@@ -107,17 +175,31 @@ function HeartIcon() {
   );
 }
 
-function ExploreCard({
+function CaptionOverlay({ settings }: { settings: TileCaptionSettings }) {
+  if (!settings.visible || !settings.text.trim()) return null;
+  return (
+    <p
+      className="absolute z-[2] max-w-[88%] px-1 text-center font-semibold leading-snug tracking-[-0.2px] pointer-events-none whitespace-pre-wrap break-words"
+      style={captionOverlayStyle(settings)}
+    >
+      {settings.text}
+    </p>
+  );
+}
+
+function ExploreCardChrome({
   tile,
   portrait,
   name,
+  caption,
 }: {
   tile: TalentContentTile;
   portrait: string;
   name: string;
+  caption: TileCaptionSettings;
 }) {
   return (
-    <figure className="group relative overflow-hidden rounded-[16px] aspect-[9/16] bg-[#1a1520] shadow-[0_8px_24px_rgba(16,24,40,0.12)]">
+    <>
       <img
         src={tile.thumb}
         alt=""
@@ -125,15 +207,9 @@ function ExploreCard({
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
 
-      {tile.caption ? (
-        <p
-          className={`${FG_SB} absolute left-3 right-3 top-[26%] mx-auto max-w-[90%] text-center text-[13px] sm:text-[14px] leading-snug tracking-[-0.2px] text-white px-2.5 py-1.5 rounded-[10px] bg-black/35 backdrop-blur-[2px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]`}
-        >
-          {tile.caption}
-        </p>
-      ) : null}
+      <CaptionOverlay settings={caption} />
 
-      <div className="absolute inset-x-0 bottom-0 p-2.5 flex flex-col gap-1.5">
+      <div className="absolute inset-x-0 bottom-0 p-2.5 flex flex-col gap-1.5 z-[3]">
         <div className="inline-flex w-fit items-center gap-1.5 rounded-full bg-black/50 px-2 py-1 text-white backdrop-blur-[6px] border border-white/10">
           <span className={`${FG_M} text-[10px] tracking-[0.2px]`}>Strong:</span>
           <StrongIcon kind={tile.strongKind} />
@@ -173,12 +249,242 @@ function ExploreCard({
 
       {tile.type === "clip" ? (
         <span
-          className={`${FG_M} absolute right-2.5 top-2.5 rounded-full bg-black/45 px-2 py-0.5 text-[9px] uppercase tracking-[0.8px] text-white/90 backdrop-blur-sm border border-white/10`}
+          className={`${FG_M} absolute right-2.5 top-2.5 z-[3] rounded-full bg-black/45 px-2 py-0.5 text-[9px] uppercase tracking-[0.8px] text-white/90 backdrop-blur-sm border border-white/10`}
         >
           Clip
         </span>
       ) : null}
-    </figure>
+    </>
+  );
+}
+
+function ExploreCard({
+  tile,
+  portrait,
+  name,
+  caption,
+  selected,
+  onSelect,
+}: {
+  tile: TalentContentTile;
+  portrait: string;
+  name: string;
+  caption: TileCaptionSettings;
+  selected?: boolean;
+  onSelect?: () => void;
+}) {
+  const shellClass = [
+    "group relative overflow-hidden rounded-[16px] aspect-[9/16] bg-[#1a1520] shadow-[0_8px_24px_rgba(16,24,40,0.12)] text-left w-full",
+    onSelect
+      ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      : "",
+    selected ? "ring-2 ring-brand/60 ring-offset-2 ring-offset-[#faf8f5]" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  if (onSelect) {
+    return (
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={selected}
+        className={shellClass}
+      >
+        <ExploreCardChrome
+          tile={tile}
+          portrait={portrait}
+          name={name}
+          caption={caption}
+        />
+      </button>
+    );
+  }
+
+  return (
+    <div className={shellClass}>
+      <ExploreCardChrome
+        tile={tile}
+        portrait={portrait}
+        name={name}
+        caption={caption}
+      />
+    </div>
+  );
+}
+
+function CaptionPanel({
+  settings,
+  onChange,
+  tileLabel,
+}: {
+  settings: TileCaptionSettings;
+  onChange: (next: TileCaptionSettings) => void;
+  tileLabel: string;
+}) {
+  const panelId = useId();
+
+  const patch = (partial: Partial<TileCaptionSettings>) => {
+    onChange({ ...settings, ...partial });
+  };
+
+  return (
+    <div className="rounded-[12px] border border-border bg-surface px-4 py-4 md:px-5">
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <p className={`${FG_M} text-[11px] uppercase tracking-[1.2px] text-subtle`}>
+            Caption
+          </p>
+          <p className={`${FG_R} text-[12px] text-muted mt-0.5`}>{tileLabel}</p>
+        </div>
+        <label className="inline-flex items-center gap-2 cursor-pointer select-none">
+          <span className={`${FG_M} text-[12px] text-muted`}>Visible</span>
+          <input
+            type="checkbox"
+            checked={settings.visible}
+            onChange={(e) => patch({ visible: e.target.checked })}
+            className="size-4 accent-[var(--brand)]"
+            aria-describedby={panelId}
+          />
+        </label>
+      </div>
+
+      <div id={panelId} className="grid gap-3 sm:grid-cols-2">
+        <label className="sm:col-span-2 flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>Text</span>
+          <input
+            type="text"
+            value={settings.text}
+            onChange={(e) => patch({ text: e.target.value })}
+            disabled={!settings.visible}
+            placeholder="Caption or slogan"
+            className={`${FG_R} w-full rounded-[8px] border border-border bg-[#faf8f5] px-3 py-2 text-[14px] text-text placeholder:text-subtle disabled:opacity-50`}
+          />
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>
+            Vertical · {settings.y}%
+          </span>
+          <input
+            type="range"
+            min={10}
+            max={90}
+            step={1}
+            value={settings.y}
+            disabled={!settings.visible}
+            onChange={(e) => patch({ y: Number(e.target.value) })}
+            className="w-full accent-[var(--brand)] disabled:opacity-50"
+          />
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>
+            Horizontal · {settings.x}%
+          </span>
+          <input
+            type="range"
+            min={10}
+            max={90}
+            step={1}
+            value={settings.x}
+            disabled={!settings.visible}
+            onChange={(e) => patch({ x: Number(e.target.value) })}
+            className="w-full accent-[var(--brand)] disabled:opacity-50"
+          />
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>Font</span>
+          <select
+            value={settings.font}
+            disabled={!settings.visible}
+            onChange={(e) =>
+              patch({ font: e.target.value as CaptionFontFamily })
+            }
+            className={`${FG_R} w-full rounded-[8px] border border-border bg-[#faf8f5] px-3 py-2 text-[14px] text-text disabled:opacity-50`}
+          >
+            {CAPTION_FONT_OPTIONS.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>
+            Size · {settings.size}px
+          </span>
+          <input
+            type="range"
+            min={10}
+            max={36}
+            step={1}
+            value={settings.size}
+            disabled={!settings.visible}
+            onChange={(e) => patch({ size: Number(e.target.value) })}
+            className="w-full accent-[var(--brand)] disabled:opacity-50"
+          />
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>Fill colour</span>
+          <div className="flex items-center gap-2">
+            <input
+              type="color"
+              value={settings.fill}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ fill: e.target.value })}
+              className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
+            />
+            <input
+              type="text"
+              value={settings.fill}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ fill: e.target.value })}
+              className={`${FG_R} flex-1 rounded-[8px] border border-border bg-[#faf8f5] px-2.5 py-2 text-[13px] text-text disabled:opacity-50`}
+            />
+          </div>
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>Outline colour</span>
+          <div className="flex items-center gap-2">
+            <input
+              type="color"
+              value={settings.stroke}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ stroke: e.target.value })}
+              className="size-9 rounded-[6px] border border-border bg-transparent p-0.5 disabled:opacity-50 cursor-pointer"
+            />
+            <input
+              type="text"
+              value={settings.stroke}
+              disabled={!settings.visible}
+              onChange={(e) => patch({ stroke: e.target.value })}
+              className={`${FG_R} flex-1 rounded-[8px] border border-border bg-[#faf8f5] px-2.5 py-2 text-[13px] text-text disabled:opacity-50`}
+            />
+          </div>
+        </label>
+
+        <label className="sm:col-span-2 flex flex-col gap-1.5">
+          <span className={`${FG_M} text-[11px] text-subtle`}>
+            Outline width · {settings.strokeWidth}px
+          </span>
+          <input
+            type="range"
+            min={0}
+            max={6}
+            step={0.5}
+            value={settings.strokeWidth}
+            disabled={!settings.visible}
+            onChange={(e) => patch({ strokeWidth: Number(e.target.value) })}
+            className="w-full accent-[var(--brand)] disabled:opacity-50"
+          />
+        </label>
+      </div>
+    </div>
   );
 }
 
@@ -256,6 +562,21 @@ function DetailPanel({
   onClose: () => void;
 }) {
   const titleId = useId();
+  const [activeTile, setActiveTile] = useState(0);
+  const [captions, setCaptions] = useState<TileCaptionSettings[]>(() =>
+    talent.content.map((tile, i) =>
+      loadCaptionOverride(talent.id, i, resolveCaptionSettings(tile)),
+    ),
+  );
+
+  useEffect(() => {
+    setActiveTile(0);
+    setCaptions(
+      talent.content.map((tile, i) =>
+        loadCaptionOverride(talent.id, i, resolveCaptionSettings(tile)),
+      ),
+    );
+  }, [talent]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -264,6 +585,19 @@ function DetailPanel({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  const updateCaption = (index: number, next: TileCaptionSettings) => {
+    setCaptions((prev) => {
+      const copy = [...prev];
+      copy[index] = next;
+      return copy;
+    });
+    saveCaptionOverride(talent.id, index, next);
+  };
+
+  const activeCaption = captions[activeTile] ?? resolveCaptionSettings(
+    talent.content[activeTile] ?? talent.content[0],
+  );
 
   return (
     <div
@@ -365,18 +699,32 @@ function DetailPanel({
               {talent.bio}
             </p>
 
-            <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle mb-3`}>
+            <p className={`${FG_M} text-[11px] uppercase tracking-[1.4px] text-subtle mb-2`}>
               Explore cards · {talent.content.length}
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-8">
+            <p className={`${FG_R} text-[13px] text-muted mb-3`}>
+              Select a tile to edit its caption overlay.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4">
               {talent.content.map((tile, i) => (
                 <ExploreCard
                   key={`${talent.id}-tile-${i}`}
                   tile={tile}
                   portrait={talent.portrait}
                   name={talent.displayName}
+                  caption={captions[i] ?? resolveCaptionSettings(tile)}
+                  selected={activeTile === i}
+                  onSelect={() => setActiveTile(i)}
                 />
               ))}
+            </div>
+
+            <div className="mb-8">
+              <CaptionPanel
+                settings={activeCaption}
+                onChange={(next) => updateCaption(activeTile, next)}
+                tileLabel={`Tile ${activeTile + 1} · ${talent.content[activeTile]?.platform ?? ""}`}
+              />
             </div>
 
             <div className="rounded-[12px] border border-dashed border-border-dark bg-surface/70 px-4 py-3">
@@ -436,6 +784,7 @@ export function LabTalent() {
           Portraits and post stills are synthetic staged assets. Fake handles end in
           .fake. Data lives in{" "}
           <span className={`${FG_M} text-muted`}>src/data/stagedTalent.ts</span>.
+          Open a profile to edit caption overlays on content tiles.
         </p>
 
         <div className="flex flex-wrap items-center gap-2 mb-8">
@@ -444,8 +793,8 @@ export function LabTalent() {
           </span>
           <span className="text-border-dark">·</span>
           <span className={`${FG_R} text-[12px] text-subtle`}>
-            Fields: id, platforms, portrait, motion, content, caption, views,
-            platform, strongKind
+            Fields: id, platforms, portrait, motion, content, caption,
+            captionSettings, views, platform, strongKind
           </span>
         </div>
 

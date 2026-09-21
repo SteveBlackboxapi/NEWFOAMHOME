@@ -14,6 +14,70 @@ export type ContentPlatform = "instagram" | "tiktok" | "youtube";
 /** Strong-badge chrome kinds (layout inspo only; invented content). */
 export type StrongKind = "photo" | "hashtag" | "link" | "question";
 
+/** Fonts available for caption overlays on explore cards. */
+export type CaptionFontFamily = "founders" | "sf" | "georgia" | "mono";
+
+/**
+ * Editable caption / slogan overlay on a content tile.
+ * Rendered as DOM/CSS (not baked into the image).
+ */
+export type TileCaptionSettings = {
+  /** Show or hide the overlay text */
+  visible: boolean;
+  /** Caption / slogan string */
+  text: string;
+  /** Vertical position as percent from top (10–90) */
+  y: number;
+  /** Horizontal position as percent from left (0–100) */
+  x: number;
+  font: CaptionFontFamily;
+  /** Font size in px */
+  size: number;
+  /** Fill colour */
+  fill: string;
+  /** Outline / stroke colour */
+  stroke: string;
+  /** Outline width in px (0 = none) */
+  strokeWidth: number;
+};
+
+export const CAPTION_FONT_OPTIONS: {
+  id: CaptionFontFamily;
+  label: string;
+  css: string;
+}[] = [
+  {
+    id: "founders",
+    label: "Founders",
+    css: "'Founders Grotesk', system-ui, sans-serif",
+  },
+  {
+    id: "sf",
+    label: "SF Pro",
+    css: "'SF Pro Text', system-ui, -apple-system, sans-serif",
+  },
+  {
+    id: "georgia",
+    label: "Georgia",
+    css: "Georgia, 'Times New Roman', serif",
+  },
+  {
+    id: "mono",
+    label: "Mono",
+    css: "ui-monospace, 'SF Mono', Menlo, monospace",
+  },
+];
+
+export const DEFAULT_CAPTION_SETTINGS: Omit<TileCaptionSettings, "text" | "visible"> = {
+  y: 26,
+  x: 50,
+  font: "founders",
+  size: 14,
+  fill: "#ffffff",
+  stroke: "#000000",
+  strokeWidth: 0,
+};
+
 export type TalentPlatform = {
   network: TalentNetwork;
   /** Fake handle only, e.g. @mira.vale.fake */
@@ -25,11 +89,34 @@ export type TalentContentTile = {
   type: "still" | "clip";
   thumb: string;
   views: number;
+  /** Default caption text; used when captionSettings.text is unset */
   caption?: string;
+  /** Optional caption style defaults for this tile */
+  captionSettings?: Partial<TileCaptionSettings>;
   platform: ContentPlatform;
   strongKind: StrongKind;
   engagements?: number;
 };
+
+/** Resolve full caption settings from tile defaults. */
+export function resolveCaptionSettings(
+  tile: TalentContentTile,
+): TileCaptionSettings {
+  const baseText = tile.caption ?? "";
+  const merged: TileCaptionSettings = {
+    ...DEFAULT_CAPTION_SETTINGS,
+    text: baseText,
+    visible: baseText.length > 0,
+    ...tile.captionSettings,
+  };
+  if (tile.captionSettings?.text === undefined) {
+    merged.text = baseText;
+  }
+  if (tile.captionSettings?.visible === undefined) {
+    merged.visible = merged.text.length > 0;
+  }
+  return merged;
+}
 
 export type StagedTalent = {
   id: string;
