@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { useIsDesktop } from "../hooks/useMediaQuery";
-import { img } from "../lib/assets";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
+import { websiteAria, websiteContentStats, websiteProfile, websiteSamantha } from "../data/websiteTalent";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const BAG = `${A}/chrome-store.webp`;
@@ -29,11 +29,12 @@ const WALLPAPER =
   "radial-gradient(ellipse 36% 90% at 100% 42%, rgba(198,243,30,0.95) 0%, rgba(198,243,30,0.18) 38%, transparent 62%)," +
   "linear-gradient(180deg, #070707 0%, #111111 26%, #f3efe6 46%, #c9daf0 68%, #8eb6de 100%)";
 
-const TALENT = [
-  { name: "Ren Cole", img: img.talent1 },
-  { name: "Io Marin", img: img.talent2 },
-  { name: "Sable Voss", img: img.talent3 },
-];
+// The animated cursor selects the second tile, then carries Samantha into Gmail.
+const TALENT = [websiteAria, websiteSamantha].map(websiteProfile);
+const SAMANTHA = websiteProfile(websiteSamantha);
+const BIO = `${SAMANTHA.bio.split(". ")[0]}.`;
+const CONTENT_STATS = websiteContentStats(websiteSamantha.content.slice(0, 4))
+  .map(([value, label]): [string, string] => [label, value]);
 
 function StatBlock({ title, rows }: { title: string; rows: [string, string][] }) {
   return (
@@ -41,7 +42,7 @@ function StatBlock({ title, rows }: { title: string; rows: [string, string][] })
       <p className={`${FG_M} text-[11px] text-[#101828] mb-1.5`}>{title}</p>
       {rows.map(([label, val]) => (
         <div key={label} className="flex gap-2 text-[11px] leading-5">
-          <span className="text-[#101828] w-10">{val}</span>
+          <span className="text-[#101828] w-16 shrink-0">{val}</span>
           <span className="text-[#6a7282]">{label}</span>
         </div>
       ))}
@@ -122,19 +123,20 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                   <div className="p-4 min-h-[360px]">
                     <div style={{ opacity: paste }}>
                       <div className="flex gap-3 items-start mb-3">
-                        <img src={img.talent2} alt="" className="size-11 rounded-full object-cover" />
+                        <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} className="size-11 rounded-full object-cover object-top" />
                         <div>
-                          <p className={`${FG_SB} text-[14px]`}>Io Marin</p>
-                          <p className="text-[11px] text-[#6a7282]">Lisbon · 28</p>
-                          <p className="text-[11px] text-[#185abc]">164K · 89K · 12K</p>
+                          <p className={`${FG_SB} text-[14px]`}>{SAMANTHA.name}</p>
+                          <p className="text-[11px] text-[#6a7282]">{SAMANTHA.loc} · {SAMANTHA.age}</p>
+                          <p className="text-[11px] text-[#185abc]">IG {SAMANTHA.ig.n} · TT {SAMANTHA.tt.n} · YT {SAMANTHA.yt.n}</p>
                         </div>
                       </div>
-                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>Io is a movement creator known for rooftop sessions and late miles. Vale Studio roster; demonstration only.</p>
+                      <p className="bg-white text-[9px] text-[#6a7282] mb-2">Made with AI · Demo profile</p>
+                      <p className={`${FG_R} text-[13px] leading-5 text-[#344054] max-w-[560px] mb-3`}>{BIO}</p>
                       <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
                       <div className="rounded-xl border border-[#e8eaed] p-4 grid grid-cols-3 gap-5" style={{ opacity: proof }}>
-                        <StatBlock title="Instagram Posts Highlights" rows={[["Avg Reach", "688.9"], ["Avg Views", "247.5"], ["Eng. rate", "2.9%"]]} />
-                        <StatBlock title="Instagram Audience Summary" rows={[["ES 85.8%", ""], ["Female 68.6%", ""], ["25-34 31%", ""]]} />
-                        <StatBlock title="Age" rows={[["18-24", "20%"], ["25-34", "31%"], ["35-44", "18%"]]} />
+                        <StatBlock title="Featured posts · Demo" rows={CONTENT_STATS} />
+                        <StatBlock title="Platforms" rows={[["Instagram", SAMANTHA.ig.n], ["TikTok", SAMANTHA.tt.n], ["YouTube", SAMANTHA.yt.n]]} />
+                        <StatBlock title="Profile" rows={[["Years old", SAMANTHA.age], ["LinkedIn", SAMANTHA.li.n], ["Total audience", SAMANTHA.totalShort]]} />
                       </div>
                     </div>
                   </div>
@@ -158,8 +160,11 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                     <div className="px-3 py-3"><span className="h-7 px-3 rounded-full border border-[#e6e8ec] text-[11px]">All Talent</span></div>
                     <div className="px-3 grid grid-cols-2 gap-2">
                       {TALENT.map((t) => (
-                        <div key={t.name}>
-                          <img src={t.img} alt="" className="w-full aspect-square object-cover rounded-[10px]" />
+                        <div key={t.id}>
+                          <figure className="rounded-[10px] overflow-hidden bg-white">
+                            <img src={t.portrait} alt={`${t.name} portrait`} loading="lazy" className="w-full aspect-square object-cover object-top" />
+                            <figcaption className="bg-white text-[8px] text-[#6a7282] py-1">Made with AI</figcaption>
+                          </figure>
                           <p className="text-[10px] mt-1 truncate">{t.name}</p>
                         </div>
                       ))}
@@ -167,12 +172,15 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean } = {}) {
                   </>
                 ) : (
                   <div className="flex-1 overflow-hidden px-4 py-4 text-center">
-                    <img src={img.talent2} alt="" className="size-24 mx-auto rounded-[12px] object-cover mb-3" />
-                    <p className={`${FG_SB} text-[16px]`}>Io Marin</p>
-                    <p className="text-[11px] text-[#6a7282] mb-2">Lisbon · 28</p>
-                    <p className="text-[12px] text-[#185abc] mb-3">164K · 89K · 12K</p>
-                    <div className="flex justify-center gap-2 mb-3">{["Movement", "City", "Film"].map((tag) => (<span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>))}</div>
-                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>Io is a movement creator known for rooftop sessions and late miles.</p>
+                    <figure className="mb-3">
+                      <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} className="size-24 mx-auto rounded-[12px] object-cover object-top" />
+                      <figcaption className="bg-white text-[8px] text-[#6a7282] py-1">Made with AI</figcaption>
+                    </figure>
+                    <p className={`${FG_SB} text-[16px]`}>{SAMANTHA.name}</p>
+                    <p className="text-[11px] text-[#6a7282] mb-2">{SAMANTHA.loc} · {SAMANTHA.age}</p>
+                    <p className="text-[12px] text-[#185abc] mb-3">{SAMANTHA.ig.n} · {SAMANTHA.tt.n} · {SAMANTHA.yt.n}</p>
+                    <div className="flex justify-center gap-2 mb-3">{websiteSamantha.verticals.map((tag) => (<span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#f4f5f7]">{tag}</span>))}</div>
+                    <p className={`${FG_R} text-[11px] leading-4 text-[#4a5565] text-left mb-4`}>{BIO}</p>
                     <p className="text-left text-[11px] text-[#6a7282] mb-2">Choose what is included in embeds</p>
                     <div className="text-left text-[12px] space-y-2 mb-4">
                       <div className="flex justify-between"><span>Include Biography</span><span className="w-8 h-4 rounded-full bg-[#185abc]" /></div>

@@ -6,6 +6,9 @@
  *   variant="roster"  → talent list with View media kit CTAs
  *   variant="search"  → content search masonry grid
  */
+import { LabIcon } from "./TalentLabIcon";
+import { formatWebsiteMetric, websiteAria, websiteProfile, websiteSamantha } from "../data/websiteTalent";
+import type { TalentContentTile } from "../data/stagedTalent";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 
@@ -17,9 +20,6 @@ const icNavWatch   = `${A}/5c880.svg`; // watchlist
 const icNavChat    = `${A}/4f583.svg`; // messaging
 const icFoamLogo   = `${A}/fdb3b.svg`; // foam F symbol (white)
 const icBriefcase  = `${A}/f1847.svg`;
-const icIG         = `${A}/20684.svg`;
-const icTT         = `${A}/8509e.svg`;
-const icYT         = `${A}/d0b8e.svg`;
 const icMagnify    = `${A}/333bb.svg`;
 const icPlus       = `${A}/30501.svg`;
 const icShare      = `${A}/a2840.svg`;
@@ -27,22 +27,15 @@ const icFilters    = `${A}/462ac.svg`;
 const icGrid       = `${A}/8b982.svg`;
 const icSort       = `${A}/de843.svg`;
 const icCheck      = `${A}/875ea.svg`;
-const icRadio      = `${A}/5fb1f.svg`;
-
-// Talent portrait photos
-const photoAliedy   = `${A}/9e849.png`;
-const photoCarolyn  = `${A}/3546d.png`;
-const photoCassandra= `${A}/b93cd.png`;
-
-// Content grid images (from Explore content screen)
-const contentImgs = [
-  `${A}/5f2d5.png`, `${A}/3cf05.png`, `${A}/d52d8.png`, `${A}/fe72f.png`,
-  `${A}/d63c0.png`, `${A}/ded1e.png`, `${A}/53bfb.png`, `${A}/1f42c.png`,
-  `${A}/7c514.png`, `${A}/36267.png`, `${A}/3ce59.png`, `${A}/03ef9.png`,
-  `${A}/499ca.png`, `${A}/79673.png`, `${A}/f28d9.png`, `${A}/60da6.png`,
-];
-
-const platformIcons: Record<string, string> = { ig: icIG, tt: icTT, yt: icYT };
+const WEBSITE_CAST = [websiteSamantha, websiteAria];
+const creatorPosts = WEBSITE_CAST.map((talent) => talent.content.filter((tile) => tile.type === "still"));
+const CONTENT_POSTS = Array.from({ length: Math.max(...creatorPosts.map((posts) => posts.length)) }, (_, index) =>
+  WEBSITE_CAST.flatMap((talent, creatorIndex) => {
+    const tile = creatorPosts[creatorIndex][index];
+    return tile ? [{ talent, tile }] : [];
+  }),
+).flat();
+const platformLabels = { instagram: "IG", tiktok: "TT", youtube: "YT" };
 
 // ─── Browser chrome ──────────────────────────────────────────────────────────
 function BrowserChrome({ children }: { children: React.ReactNode }) {
@@ -118,17 +111,17 @@ function AppSidebar({ active }: { active: "roster" | "search" | "lists" }) {
       <div className="flex-1" />
       <div className="mt-auto rounded-[10px] border border-[#eeefef] bg-white p-2">
         <p className="font-founders font-medium text-[11px] text-[#101828]">Vale Studio</p>
-        <p className="font-founders text-[10px] text-[#6a7282]">Harbor Spring Roster</p>
+        <p className="font-founders text-[10px] text-[#6a7282]">Beauty roster</p>
       </div>
     </div>
   );
 }
 
 // ─── Roster view ─────────────────────────────────────────────────────────────
-function SocialStat({ icon, val }: { icon: string; val: string }) {
+function SocialStat({ label, val }: { label: string; val: string }) {
   return (
     <div className="flex items-center gap-1 shrink-0">
-      <img alt="" className="size-[14px] shrink-0" src={icon} />
+      <span className="text-[9px] text-[#6a7282] font-medium">{label}</span>
       <span className="font-founders font-medium text-[12px] leading-[18px] tracking-[0.2px] text-[#101828]">{val}</span>
     </div>
   );
@@ -146,7 +139,7 @@ type TalentRow = {
   photo: string;
   name: string;
   age: string;
-  gender: string;
+  gender?: string;
   location: string;
   ig: string; tt: string; yt: string;
   bio: string;
@@ -169,14 +162,14 @@ function TalentCard({ t }: { t: TalentRow }) {
           <div className="flex-1 min-w-0">
             <p className="font-founders font-medium text-[14px] leading-[20px] tracking-[0.2px] text-[#101828]">{t.name}</p>
             <p className="font-founders font-normal text-[12px] leading-[18px] tracking-[0.2px] text-[#6a7282]">
-              {t.age} · {t.gender}
+              {t.age}{t.gender ? ` · ${t.gender}` : ""}
             </p>
             <p className="font-founders font-normal text-[12px] leading-[18px] tracking-[0.2px] text-[#6a7282]">{t.location}</p>
           </div>
           <div className="flex items-center gap-3 shrink-0 pt-[2px]">
-            <SocialStat icon={icIG} val={t.ig} />
-            <SocialStat icon={icTT} val={t.tt} />
-            <SocialStat icon={icYT} val={t.yt} />
+            <SocialStat label="IG" val={t.ig} />
+            <SocialStat label="TT" val={t.tt} />
+            <SocialStat label="YT" val={t.yt} />
           </div>
         </div>
         <p className="font-founders font-normal text-[11px] leading-[16px] tracking-[0.2px] text-[#6a7282] mt-2 line-clamp-2">{t.bio}</p>
@@ -197,32 +190,22 @@ function TalentCard({ t }: { t: TalentRow }) {
   );
 }
 
-const TALENT_DATA: TalentRow[] = [
-  {
-    photo: photoAliedy,
-    name: "Ren Cole", age: "32y", gender: "Male", location: "Portland, OR",
-    ig: "131K", tt: "97K", yt: "58K",
-    bio: "Early miles and long runs. A roster example for demonstration only.",
-    tags: ["Beauty", "Advocacy", "BIPOC"],
+const TALENT_DATA: TalentRow[] = WEBSITE_CAST.map((talent) => {
+  const profile = websiteProfile(talent);
+  return {
+    photo: profile.portrait,
+    name: profile.name,
+    age: `${profile.age}y`,
+    gender: profile.gender,
+    location: profile.loc,
+    ig: profile.ig.n,
+    tt: profile.tt.n,
+    yt: profile.yt.n,
+    bio: profile.bio,
+    tags: talent.verticals,
     manager: "Rowan Hale",
-  },
-  {
-    photo: photoCarolyn,
-    name: "Io Marin", age: "28y", gender: "Female", location: "Lisbon",
-    ig: "164K", tt: "89K", yt: "12K",
-    bio: "Early miles and long runs. A roster example for demonstration only.",
-    tags: ["Beauty", "Advocacy", "BIPOC"],
-    manager: "Rowan Hale",
-  },
-  {
-    photo: photoCassandra,
-    name: "Sable Quinn", age: "33y", gender: "Female", location: "Glasgow",
-    ig: "131K", tt: "97K", yt: "58K",
-    bio: "Studio sessions and late rooms. A roster example for demonstration only.",
-    tags: ["Beauty", "Advocacy", "BIPOC"],
-    manager: "Rowan Hale",
-  },
-];
+  };
+});
 
 function RosterView() {
   return (
@@ -232,7 +215,7 @@ function RosterView() {
         <div className="flex items-center gap-2 min-w-0">
           <span className="font-founders text-[12px] text-[#6a7282]">Lists</span>
           <span className="text-[#99a1af]">/</span>
-          <p className="font-founders font-medium text-[13px] text-[#101828]">Harbor Spring Roster</p>
+          <p className="font-founders font-medium text-[13px] text-[#101828]">Beauty roster</p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <div className="flex items-center gap-2 bg-[#f4f5f6] border border-[#eeefef] rounded-[6px] px-2 h-7">
@@ -259,10 +242,10 @@ function RosterView() {
 
 function ListsView() {
   const rows = [
-    { name: "Boston Marathon shortlist", talent: "3 Talent", owner: "Rowan Hale", created: "Mar 12", modified: "2d ago" },
-    { name: "Harbor Spring Roster", talent: "12 Talent", owner: "Rowan Hale", created: "Jan 8", modified: "5d ago" },
-    { name: "Vale Studio runners", talent: "4 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
-    { name: "US audience 100K+", talent: "6 Talent", owner: "Rowan Hale", created: "Apr 2", modified: "1w ago" },
+    { name: "Haircare shortlist", talent: "2 Talent", owner: "Rowan Hale", created: "Mar 12", modified: "2d ago" },
+    { name: "Beauty roster", talent: "2 Talent", owner: "Rowan Hale", created: "Jan 8", modified: "5d ago" },
+    { name: "Vale Studio beauty", talent: "2 Talent", owner: "Jamie Vale", created: "Feb 20", modified: "Mar 1" },
+    { name: "Instagram 100K+", talent: "2 Talent", owner: "Rowan Hale", created: "Apr 2", modified: "1w ago" },
   ];
   return (
     <div className="flex flex-col flex-1 overflow-hidden bg-white">
@@ -363,45 +346,31 @@ function FilterSidebar() {
 }
 
 type ContentCardProps = {
-  imgSrc: string;
-  platform: "ig" | "tt" | "yt";
-  views: string;
-  likes: string;
-  comments: string;
+  tile: TalentContentTile;
   creator: string;
-  match?: boolean;
+  portrait: string;
 };
 
-function ContentCard({ imgSrc, platform, views, likes, comments, creator, match }: ContentCardProps) {
+function ContentCard({ tile, creator, portrait }: ContentCardProps) {
   return (
-    <div className="relative rounded-[8px] overflow-hidden bg-[#101828] aspect-[9/16]">
-      <img alt="" className="absolute inset-0 size-full object-cover" src={imgSrc} />
+    <div className="relative rounded-[8px] overflow-hidden bg-[#101828]" style={{ aspectRatio: tile.aspectRatio || "9/16" }}>
+      <img alt={`${creator}: ${tile.caption || "creator content"}`} className="absolute inset-0 size-full object-cover" src={tile.thumb} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-      {match && (
-        <div className="absolute top-1 left-1 bg-white/90 rounded-[4px] px-1 py-[2px]">
-          <span className="font-founders font-medium text-[7px] text-[#101828]">Strong Match</span>
-        </div>
-      )}
       <div className="absolute bottom-0 left-0 right-0 p-[6px]">
-        <div className="flex items-center gap-1 mb-1">
-          <img alt="" className="size-[10px] opacity-70" src={icIG} />
-          <span className="font-founders font-normal text-[8px] text-white/80">{views}</span>
-          <img alt="" className="size-[10px] opacity-70 ml-1" src={icTT} />
-          <span className="font-founders font-normal text-[8px] text-white/80">{likes}</span>
+        <div className="flex items-center gap-2 mb-1 font-founders text-[8px] text-white/90">
+          {Boolean(tile.views) && <span className="inline-flex items-center gap-1" aria-label={`${formatWebsiteMetric(tile.views!)} views`}><LabIcon name="eye" size={10} />{formatWebsiteMetric(tile.views!)}</span>}
+          {tile.engagements !== undefined && <span className="inline-flex items-center gap-1" aria-label={`${formatWebsiteMetric(tile.engagements)} engagements`}><LabIcon name="heart" size={10} />{formatWebsiteMetric(tile.engagements)}</span>}
+          {!tile.views && <span>Draft asset</span>}
         </div>
         <div className="flex items-center gap-1">
-          <div className="size-[14px] rounded-full bg-[#7a0036] flex items-center justify-center shrink-0">
-            <span className="font-founders font-medium text-[7px] text-white">{creator.charAt(0)}</span>
-          </div>
-          <span className="font-founders font-normal text-[8px] text-white">{creator}</span>
-          <img alt="" className="size-[10px] opacity-70 ml-auto" src={platformIcons[platform]} />
+          <img alt="" className="size-[14px] rounded-full object-cover shrink-0" src={portrait} />
+          <span className="font-founders font-normal text-[8px] text-white truncate">{creator}</span>
+          <span className="font-founders text-[8px] text-white/80 ml-auto">{platformLabels[tile.platform]}</span>
         </div>
       </div>
     </div>
   );
 }
-
-const CONTENT_PLATFORMS: ContentCardProps["platform"][] = ["ig","tt","yt","ig","tt","ig","tt","yt","ig","tt","ig","tt","yt","ig","tt","ig"];
 
 function ContentSearchView() {
   return (
@@ -430,16 +399,12 @@ function ContentSearchView() {
         {/* Masonry grid */}
         <div className="flex-1 overflow-hidden p-3">
           <div className="columns-4 gap-2 space-y-2">
-            {contentImgs.map((src, i) => (
-              <div key={i} className="break-inside-avoid mb-2">
+            {CONTENT_POSTS.map(({ talent, tile }) => (
+              <div key={`${talent.id}:${tile.thumb}`} className="break-inside-avoid mb-2">
                 <ContentCard
-                  imgSrc={src}
-                  platform={CONTENT_PLATFORMS[i % CONTENT_PLATFORMS.length]}
-                  views="980.2K"
-                  likes="293.2K"
-                  comments="124.8K"
-                  creator="Ren Cole"
-                  match={i % 3 === 0}
+                  tile={tile}
+                  creator={talent.displayName}
+                  portrait={talent.portrait}
                 />
               </div>
             ))}
@@ -467,6 +432,7 @@ export function FoamAppScreen({ variant = "roster", className = "" }: Props) {
           {variant === "search" ? <ContentSearchView /> : variant === "lists" ? <ListsView /> : <RosterView />}
         </div>
       </BrowserChrome>
+      <p className="font-founders text-[10px] text-[#6a7282] mt-2">AI-generated demo talent · Illustrative metrics</p>
     </div>
   );
 }

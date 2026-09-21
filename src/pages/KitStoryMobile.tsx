@@ -1,6 +1,12 @@
 import { Link } from "react-router";
 import { MobileFade } from "../components/MobileFade";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
+import {
+  formatWebsiteMetric,
+  websiteContentStats,
+  websiteProfile,
+  websiteSamantha,
+} from "../data/websiteTalent";
 
 const A = `${import.meta.env.BASE_URL}assets`;
 const CLIP = `${A}/io-portrait-web.mp4`;
@@ -11,18 +17,12 @@ const FG_SB = "font-founders font-semibold";
 
 /** Staged demo talent (same kit as desktop kit-story). Not a real person. */
 const TALENT = {
-  name: "Samantha Pikka",
+  ...websiteProfile(websiteSamantha),
   kitName: "Samantha-Pikka-haircare'26",
-  loc: "Los Angeles, CA",
-  age: "26",
-  gender: "Female",
-  verticals: "Beauty · Advocacy · Education",
-  total: "1,155,300",
-  ig: { n: "570.1K", h: "@samanthapikka3" },
-  tt: { n: "157.2K", h: "@sampikka" },
-  yt: { n: "418K", h: "@samiepikka4" },
-  bio: "LA-based beauty creator making skincare and haircare feel simple and approachable. Honest reviews, easy routines, and practical tips. Staged demo talent for the kit story.",
 };
+const CONTENT = websiteSamantha.content.slice(0, 4);
+const CONTENT_STATS = websiteContentStats(CONTENT);
+const PLATFORM_LABELS = { instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube" };
 
 function Plat({ label, val, handle }: { label: string; val: string; handle: string }) {
   return (
@@ -49,50 +49,68 @@ function MobileKitCard() {
       <div className="bg-[#F4E6C8]">
         <div className="px-5 pt-5 pb-6">
           <div className="flex justify-end mb-6">
-            <span className="border border-[#6b0030]/40 text-[#6b0030] rounded-full px-3.5 py-1 text-[12px]">Contact</span>
+            <span className="border border-[#7a0036]/40 text-[#7a0036] rounded-full px-3.5 py-1 text-[12px]">Contact</span>
           </div>
           <div className="flex gap-4 items-center">
             <div className="flex-1 min-w-0">
-              <p className={`${FG_SB} text-[#6b0030] text-[28px] leading-[0.95] tracking-[-0.8px] mb-3`}>{TALENT.name}</p>
+              <p className={`${FG_SB} text-[#7a0036] text-[28px] leading-[0.95] tracking-[-0.8px] mb-3`}>{TALENT.name}</p>
               <p className={`${FG_R} text-[13px] text-[#101828] mb-4`}>
                 {TALENT.loc}&nbsp;|&nbsp;{TALENT.age} yo&nbsp;|&nbsp;{TALENT.gender}
               </p>
               <div className="flex gap-2 mb-4">
                 {["IG", "TT", "YT"].map((lab) => (
-                  <span key={lab} className="size-9 rounded-full border border-[#6b0030]/40 text-[#6b0030] text-[11px] font-semibold inline-flex items-center justify-center">
+                  <span key={lab} className="size-9 rounded-full border border-[#7a0036]/40 text-[#7a0036] text-[11px] font-semibold inline-flex items-center justify-center">
                     {lab}
                   </span>
                 ))}
               </div>
-              <div className="inline-flex flex-col rounded-2xl bg-[#6b0030]/10 text-[#6b0030] px-4 py-2.5">
+              <div className="inline-flex flex-col rounded-2xl bg-[#7a0036]/10 text-[#7a0036] px-4 py-2.5">
                 <span className="text-[11px] opacity-70 mb-0.5">Verticals</span>
                 <span className="text-[14px]">{TALENT.verticals}</span>
               </div>
             </div>
-            <div className="w-[38%] shrink-0 rounded-[14px] overflow-hidden bg-[#ead9b8] aspect-square">
-              <video className="size-full object-cover object-[center_20%]" src={CLIP} poster={POSTER} muted loop playsInline autoPlay />
-            </div>
+            <figure className="w-[38%] shrink-0 rounded-[14px] overflow-hidden bg-white">
+              <img src={TALENT.portrait} alt={`${TALENT.name} portrait`} loading="lazy" className="w-full aspect-square object-cover object-top" />
+              <figcaption className={`${FG_R} bg-white px-2 py-1.5 text-[9px] text-[#6a7282]`}>Made with AI</figcaption>
+            </figure>
           </div>
         </div>
-        <div className="bg-[#6b0030] text-[#F4E6C8] px-5 py-6">
+        <div className="bg-[#7a0036] text-[#F4E6C8] px-5 py-6">
           <p className={`${FG_SB} text-[18px]`}>Platforms</p>
           <p className={`${FG_SB} text-[32px] leading-none mt-1`}>{TALENT.total}</p>
           <p className="text-[11px] opacity-70 mt-1 mb-5">Total audience</p>
           <div className="flex gap-5 flex-wrap mb-5">
-            <Plat label="Instagram" val={TALENT.ig.n} handle={TALENT.ig.h} />
-            <Plat label="TikTok" val={TALENT.tt.n} handle={TALENT.tt.h} />
-            <Plat label="YouTube" val={TALENT.yt.n} handle={TALENT.yt.h} />
+            {TALENT.platforms.map((platform) => (
+              <Plat key={platform.network} label={platform.label} val={platform.count} handle={platform.handle} />
+            ))}
           </div>
           <p className={`${FG_R} text-[14px] leading-6 opacity-95`}>{TALENT.bio}</p>
         </div>
         <div className="px-5 py-5">
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <p className={`${FG_SB} text-[15px] text-[#101828]`}>Featured content</p>
+            <span className={`${FG_R} text-[10px] text-[#6a7282]`}>Demo figures</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5 items-start mb-6">
+            {CONTENT.map((tile) => (
+              <figure key={tile.thumb} className="rounded-[12px] overflow-hidden bg-white">
+                <div className="relative bg-[#ead9b8]" style={{ aspectRatio: tile.aspectRatio || "9/16" }}>
+                  <img src={tile.thumb} alt={`${TALENT.name}: ${tile.caption}`} loading="lazy" className="absolute inset-0 size-full object-cover" />
+                  <div className="absolute inset-x-0 bottom-0 px-2 py-2 text-white bg-gradient-to-t from-black/70 to-transparent">
+                    <p className={`${FG_M} text-[10px]`}>{tile.views !== undefined ? `${formatWebsiteMetric(tile.views)} views` : "New content"}</p>
+                    <p className={`${FG_R} text-[9px] text-white/80`}>{PLATFORM_LABELS[tile.platform]}</p>
+                  </div>
+                </div>
+                <figcaption className={`${FG_R} bg-white px-2 py-1.5 text-[9px] text-[#6a7282]`}>Made with AI</figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <p className={`${FG_SB} text-[15px] text-[#101828]`}>Instagram</p>
+            <span className={`${FG_R} text-[10px] text-[#6a7282]`}>Featured posts · Demo data</span>
+          </div>
           <div className="grid grid-cols-2 gap-2.5 mb-4">
-            {[
-              ["672.0K", "Avg. Views"],
-              ["22K", "Avg. Likes"],
-              ["8.3K", "Avg. Comments"],
-              ["31.8K", "Avg. Shares"],
-            ].map(([val, lab]) => (
+            {CONTENT_STATS.map(([val, lab]) => (
               <div key={lab} className="rounded-[12px] bg-[#f7efe0] border border-[#ead9b8] px-3.5 py-3">
                 <p className={`${FG_SB} text-[20px] leading-none text-[#101828]`}>{val}</p>
                 <p className={`${FG_R} text-[12px] text-[#6a7282] mt-1`}>{lab}</p>
@@ -100,9 +118,9 @@ function MobileKitCard() {
             ))}
           </div>
           <div className="rounded-[12px] bg-[#f7efe0] border border-[#ead9b8] px-3.5 py-3">
-            <p className={`${FG_R} text-[12px] text-[#6a7282]`}>Total subscribers</p>
-            <p className={`${FG_SB} text-[26px] leading-none text-[#101828] mt-1`}>72.9K</p>
-            <p className={`${FG_R} text-[12px] text-[#6b0030] mt-1`}>+5,976 new followers</p>
+            <p className={`${FG_R} text-[12px] text-[#6a7282]`}>Instagram followers</p>
+            <p className={`${FG_SB} text-[26px] leading-none text-[#101828] mt-1`}>{TALENT.ig.n}</p>
+            <p className={`${FG_R} text-[12px] text-[#7a0036] mt-1`}>{TALENT.ig.h} · Demo profile</p>
           </div>
         </div>
       </div>
@@ -255,20 +273,16 @@ export function KitStoryMobile() {
       </section>
 
       {/* 3. Numbers / platforms callout */}
-      <section className="px-5 py-14 bg-[#6b0030] text-[#F4E6C8]">
+      <section className="px-5 py-14 bg-[#7a0036] text-[#F4E6C8]">
         <MobileFade>
           <p className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#F4E6C8]/60 mb-3`}>Platforms</p>
           <p className={`${FG_SB} text-[40px] leading-none tracking-[-1.2px] mb-2`}>{TALENT.total}</p>
-          <p className={`${FG_R} text-[14px] opacity-75 mb-8`}>Total audience across Instagram, TikTok, and YouTube</p>
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              ["IG", TALENT.ig.n],
-              ["TT", TALENT.tt.n],
-              ["YT", TALENT.yt.n],
-            ].map(([lab, val]) => (
-              <div key={lab}>
-                <p className={`${FG_R} text-[12px] opacity-70 mb-1`}>{lab}</p>
-                <p className={`${FG_SB} text-[22px] leading-none`}>{val}</p>
+          <p className={`${FG_R} text-[14px] opacity-75 mb-8`}>Total demo audience across connected platforms</p>
+          <div className="grid grid-cols-2 gap-5">
+            {TALENT.platforms.map((platform) => (
+              <div key={platform.network}>
+                <p className={`${FG_R} text-[12px] opacity-70 mb-1`}>{platform.label}</p>
+                <p className={`${FG_SB} text-[22px] leading-none`}>{platform.count}</p>
               </div>
             ))}
           </div>
@@ -300,14 +314,15 @@ export function KitStoryMobile() {
           <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#ead9b8] bg-[#F4E6C8] text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
               <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
-                <img src={POSTER} alt="" className="size-full object-cover object-[center_18%]" />
+                <img src={TALENT.portrait} alt={`${TALENT.name} portrait`} loading="lazy" className="size-full object-cover object-top" />
               </div>
               <div className="min-w-0">
-                <p className={`${FG_SB} text-[16px] text-[#6b0030]`}>{TALENT.name}</p>
-                <p className={`${FG_R} text-[12px] text-[#6a7282]`}>1.2M total audience</p>
+                <p className={`${FG_SB} text-[16px] text-[#7a0036]`}>{TALENT.name}</p>
+                <p className={`${FG_R} text-[12px] text-[#6a7282]`}>{TALENT.totalShort} total audience</p>
               </div>
             </div>
-            <div className="px-4 py-3 flex items-center justify-between bg-[#6b0030] text-[#F4E6C8]">
+            <p className={`${FG_R} bg-white px-4 py-1.5 text-[10px] text-[#6a7282]`}>Made with AI · Demo profile</p>
+            <div className="px-4 py-3 flex items-center justify-between bg-[#7a0036] text-[#F4E6C8]">
               <span className={`${FG_R} text-[12px] truncate`}>foam.io/m/samantha-pikka</span>
               <span className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}>Sent</span>
             </div>
