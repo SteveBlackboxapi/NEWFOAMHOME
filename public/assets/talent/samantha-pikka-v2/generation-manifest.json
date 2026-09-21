@@ -42,5 +42,26 @@
       "filename": "samantha-pikka-v2-c6.png",
       "prompt": "Use case: photorealistic-natural. One4:5vertical casual phone photograph of a fictional beauty creator's actual-used haircare corner: a wide-tooth dark comb with a few loose curly strands, a plain unlabeled pump bottle, a nearly-used simple jar of curlcream with lid besideit, two plain black hair clips and a creased white cotton towel on a modest light bathroomcounter. The handmirror edge is partlycropped; unarranged everyday placement with some surface waterdrops and productresidue on the jar rim. Neutral mixedbathroomlight, slightly dim corners, realistic materials andphone clarity. No hands or people, no glossyadvertising light, no decorativeflowers, no logos, readabletext, watermarks, borders or interface. The photo should look taken quickly between routine steps, not a styled productcampaign."
     }
+  ],
+  "videos": [
+    {
+      "character": "Samantha Pikka",
+      "id": "samantha-pikka",
+      "filename": "samantha-pikka-v2-curl-refresh.mp4",
+      "reference": "public/assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.jpg",
+      "taskId": "11163bc0-5c01-44e7-9372-fa44d077f221",
+      "prompt": "A single continuous natural smartphone selfie video of the same fictional adult woman in the starting photograph. Preserve her exact face, dark shoulder-length curly hair, natural skin texture, small asymmetries, black T-shirt and everyday bathroom. She gently lets the curl already held between her fingers slip free, watches it spring back naturally, and lowers her hand out of the frame. She makes a small head tilt to check the shape of her hair, blinks normally, then gives a brief relaxed closed-mouth smile. Casual, quiet, unperformed movement with subtle breathing; believable fingers and curl physics. Keep the phone at the same arm's-length framing with only a tiny natural hand sway. Soft ordinary bathroom light remains constant. No cuts, camera zoom, added people, beauty-filter smoothing or text. Her mouth stays relaxed, not speaking. Silent.",
+      "provider": "Runway",
+      "model": "kling-o3-pro",
+      "date": "2026-09-21",
+      "durationSeconds": 10.042,
+      "width": 1080,
+      "height": 1916,
+      "fps": 24,
+      "audio": false,
+      "status": "generated",
+      "bytes": 18922728,
+      "sha256": "b13c3dfbabc5c6db5a4f6c0615d5e8797a30c06727399cf29f0dbf0923899b86"
+    }
   ]
 }

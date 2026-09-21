@@ -210,7 +210,7 @@ export const stagedTalent: StagedTalent[] = [
         "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics.",
       ],
       motionBrief:
-        "The existing portrait video is available below and included in the download pack. No new family video has been generated. Next: a short, fixed-phone haircare clip with one small curl-adjusting gesture, a blink and a natural pause; preserve face, hair and hand anatomy.",
+        "The original portrait video remains available below. A new 10-second silent curl-refresh video, generated from Samantha's approved haircare image, is available in the content collection. Both videos are included in the download pack. No family video has been generated.",
       promptFile: `${T}/samantha-pikka-v2/creative-brief.md`,
     },
     content: [
@@ -323,6 +323,21 @@ export const stagedTalent: StagedTalent[] = [
             "Existing 15-second portrait video (960 × 540, 24 fps, no audio), preserved from the original site. No new animation has been generated.",
         },
       },
+      {
+        type: "clip",
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        video: `${T}/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.mp4`,
+        aspectRatio: "9/16",
+        caption: "Samantha · curl refresh in motion",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · video",
+          approach:
+            "Generated from the approved curl-refresh image; natural movement, consistent fictional identity. 10-second silent video.",
+        },
+      },
     ],
   },
   {
@@ -349,14 +364,14 @@ export const stagedTalent: StagedTalent[] = [
         "Vary expression, clothes and surroundings; preserve everyday skin texture and phone-camera detail.",
       ],
       motionBrief:
-        "Planned: a 6–8 second bathroom GRWM. Aria makes a small lip-balm pass, lowers it, blinks and smiles toward the mirror. Locked phone camera, quiet room tone, consistent face and hands. No clip has been generated yet.",
+        "A 10-second silent bathroom GRWM, generated from Aria's approved makeup image, is available below and in the content collection. Natural movement and a consistent fictional identity, with the source photograph retained as a separate asset.",
       promptFile: `${T}/aria-quen-v2/creative-brief.md`,
     },
-    motion: null,
-    motionStatus: "placeholder",
+    motion: `${T}/aria-quen-v2/aria-quen-v2-makeup.mp4`,
+    motionStatus: "ready",
     content: [
       {
-        type: "clip",
+        type: "still",
         thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
         original: tile("aria-quen", 1),
         aspectRatio: "9/16",
@@ -450,6 +465,21 @@ export const stagedTalent: StagedTalent[] = [
           version: "Realism v2",
           approach:
             "Night selfie with mixed shop and street lighting; new unpublished demo asset.",
+        },
+      },
+      {
+        type: "clip",
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        video: `${T}/aria-quen-v2/aria-quen-v2-makeup.mp4`,
+        aspectRatio: "9/16",
+        caption: "Aria · five-minute face in motion",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · video",
+          approach:
+            "Generated from the approved makeup image; natural movement, consistent fictional identity. 10-second silent video.",
         },
       },
     ],

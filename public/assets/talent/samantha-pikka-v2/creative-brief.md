@@ -20,7 +20,11 @@ Believable everyday beauty and family content. Natural phone-camera texture, leg
 
 The existing io-portrait-web.mp4 portrait video has been reused from the website and is included in Samantha's pack. This is an existing asset, not a newly generated video. No new family video was generated.
 
-Next clip brief: 6–8 seconds, fixed phone camera during a curl refresh. One small curl-adjusting gesture, natural blink and conversational pause. Preserve the face, hairline, curl texture, skin, hand anatomy and room geometry. No camera orbit, face morphing or fabricated dialogue. Review every frame before publication.
+## Generated video
+
+The approved curl-refresh image now has a separate generated video: a small curl release, a head tilt and a relaxed smile. The source still and the original portrait video remain available.
+
+File: samantha-pikka-v2-curl-refresh.mp4. Generated with Runway on 21 September 2026: 10.042 seconds, 1080 × 1916, 24 fps, silent. This is a single shot, not a seamless loop. It has no baked-in text; the library places Made with AI underneath it. No audience metrics are asserted for this new clip.
 
 ## Source preservation and AI disclosure
 
@@ -58,3 +62,7 @@ Use case: identity-preserve. Inputimage1 is adult fictional Samantha Pikka,age26
 
 Use case: photorealistic-natural. One4:5vertical casual phone photograph of a fictional beauty creator's actual-used haircare corner: a wide-tooth dark comb with a few loose curly strands, a plain unlabeled pump bottle, a nearly-used simple jar of curlcream with lid besideit, two plain black hair clips and a creased white cotton towel on a modest light bathroomcounter. The handmirror edge is partlycropped; unarranged everyday placement with some surface waterdrops and productresidue on the jar rim. Neutral mixedbathroomlight, slightly dim corners, realistic materials andphone clarity. No hands or people, no glossyadvertising light, no decorativeflowers, no logos, readabletext, watermarks, borders or interface. The photo should look taken quickly between routine steps, not a styled productcampaign.
 
+
+## Exact video-generation prompt
+
+A single continuous natural smartphone selfie video of the same fictional adult woman in the starting photograph. Preserve her exact face, dark shoulder-length curly hair, natural skin texture, small asymmetries, black T-shirt and everyday bathroom. She gently lets the curl already held between her fingers slip free, watches it spring back naturally, and lowers her hand out of the frame. She makes a small head tilt to check the shape of her hair, blinks normally, then gives a brief relaxed closed-mouth smile. Casual, quiet, unperformed movement with subtle breathing; believable fingers and curl physics. Keep the phone at the same arm's-length framing with only a tiny natural hand sway. Soft ordinary bathroom light remains constant. No cuts, camera zoom, added people, beauty-filter smoothing or text. Her mouth stays relaxed, not speaking. Silent.

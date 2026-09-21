@@ -40,5 +40,26 @@
       "filename": "aria-quen-v2-c6.png",
       "prompt": "Use case: identity-preserve. Asset type: one fictional creator's natural social-media photograph for the Foam talent library. Input image 1 is Aria Quen's refreshed identity reference. She is a fictional adult woman aged 22. Preserve her recognisable face, proportions, softly oval face, eye shape/spacing, nose and lips, long black hair and adult age. Reproduce the same person in a different everyday moment. Photographic style: plausible ordinary smartphone capture, real skin texture and natural facial asymmetry, everyday colour, no airbrushing or professional beauty retouching, avoid uniform golden-hour light and creamy portrait-mode bokeh. Keep the background reasonably legible like a phone photo. Natural hands and anatomy. One frame, no collage, no text, no captions, no watermark, no interface, no brand logos. Scene: a quick front-camera selfie just outside a Seoul corner shop after an evening errand, a different day. Aria wears a dark navy hooded windbreaker with the hood down; long black hair loose, a few strands across forehead. A cheerful mid-speech half-smile, lips slightly parted, looking into camera at arm length. Vertical 9:16 close upper-body framing from a mildly high phone angle, face slightly off-centre. Cool overhead shop light and warmer distant street lamps create realistic mixed lighting; dark street and softly legible storefront glass behind her, no readable signs or logos. Mild low-light phone noise, subtle background motion blur, believable imperfect white balance, no cinematic glow or polished campaign composition. Entirely everyday and nonsexual."
     }
+  ],
+  "videos": [
+    {
+      "character": "Aria Quen",
+      "id": "aria-quen",
+      "filename": "aria-quen-v2-makeup.mp4",
+      "reference": "public/assets/talent/aria-quen-v2/aria-quen-v2-c1.jpg",
+      "taskId": "e19a82b8-e6d1-4e6f-b909-f31255718574",
+      "prompt": "A single continuous candid smartphone video of the same fictional adult woman shown in the starting photograph. Keep exactly her facial structure, long black tied-back hair with flyaways, natural skin texture, white T-shirt, small lipstick, hands and ordinary bathroom setting. She finishes one small gentle pass of lipstick along her lower lip, lowers that hand naturally below her chin, lightly presses her lips together once, looks briefly toward her reflection, blinks, and gives a tiny relaxed closed-mouth smile. Quiet unperformed everyday movement, believable breathing, slight natural head movement. The phone stays fixed on the counter at this framing, with barely perceptible handheld vibration, no camera travel or zoom. Preserve the soft mixed bathroom/window light and imperfect phone-camera detail. One person, one shot, normal-speed motion, no cuts, no added text, no glamour smoothing, no dramatic gestures. Silent.",
+      "provider": "Runway",
+      "model": "kling-o3-pro",
+      "date": "2026-09-21",
+      "durationSeconds": 10.042,
+      "width": 1080,
+      "height": 1916,
+      "fps": 24,
+      "audio": false,
+      "status": "generated",
+      "bytes": 18074810,
+      "sha256": "c4b509daad4ea11ada20383331b9c331e02dd759dc4247d4a44b558f9f592c0d"
+    }
   ]
 }

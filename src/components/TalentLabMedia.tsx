@@ -81,7 +81,7 @@ export function AssetCard({
             alt={asset.title}
             loading="lazy"
           />
-          <Caption settings={caption} />
+          {kind !== "video" && <Caption settings={caption} />}
           <span className="tl-card-shade" />
           {kind !== "still" && (
             <span className="tl-media-kind">
