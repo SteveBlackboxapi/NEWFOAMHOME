@@ -60,9 +60,6 @@ function clamp(n: number, a = 0, b = 1) {
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
-function range(p: number, a: number, b: number) {
-  return clamp((p - a) / (b - a));
-}
 function ease(t: number) {
   return t * t * (3 - 2 * t);
 }
@@ -407,7 +404,17 @@ function KitStoryDesktop() {
   const viewport = useRef<HTMLDivElement | null>(null);
   const content = useRef<HTMLDivElement | null>(null);
   const [p, setProg] = useState(0);
-  const [slot, setSlot] = useState({ l: 60, t: 22, w: 30, h: 40 });
+  const [slot, setSlot] = useState({
+    l: 60,
+    t: 22,
+    w: 30,
+    h: 40,
+    stageHeight: 720,
+    clipTop: 0,
+    clipRight: 0,
+    clipBottom: 0,
+    clipLeft: 0,
+  });
   const [targets, setTargets] = useState<KitPanTargets>({
     platforms: 0,
     content: 0,
@@ -465,12 +472,19 @@ function KitStoryDesktop() {
       );
       const s = stage.current?.getBoundingClientRect();
       const w = well.current?.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
       if (s && w && w.width > 8) {
         const nextSlot = {
           l: ((w.left - s.left) / s.width) * 100,
-          t: ((w.top - s.top) / s.height) * 100,
+          // Cancel the content translation; apply the current pan during render.
+          t: ((w.top - bodyRect.top + panelRect.top - s.top) / s.height) * 100,
           w: (w.width / s.width) * 100,
           h: (w.height / s.height) * 100,
+          stageHeight: s.height,
+          clipTop: ((panelRect.top - s.top) / s.height) * 100,
+          clipRight: ((s.right - panelRect.right) / s.width) * 100,
+          clipBottom: ((s.bottom - panelRect.bottom) / s.height) * 100,
+          clipLeft: ((panelRect.left - s.left) / s.width) * 100,
         };
         setSlot((previous) =>
           Object.keys(nextSlot).every(
@@ -539,7 +553,7 @@ function KitStoryDesktop() {
   } = timeline;
   const pan = kitPan(p, targets);
   const kitIn = clamp((pack - 0.68) / 0.32);
-  const landed = pack >= 0.995;
+  const landed = pack === 1;
   const sharedOp = sharedIn * (1 - ease(sharedOut));
   const shareModalOp = shareOpen * (1 - shareFade);
   const canvasLight = kitIn > 0.12 || sharedIn > 0 || fold > 0;
@@ -554,7 +568,7 @@ function KitStoryDesktop() {
   }, [landed]);
 
   const photoL = lerp(0, slot.l, pack);
-  const photoT = lerp(0, slot.t, pack);
+  const photoT = lerp(0, slot.t, pack) - (pan / slot.stageHeight) * 100;
   const photoW = lerp(100, slot.w, pack);
   const photoH = lerp(100, slot.h, pack);
   const cursorL =
@@ -581,7 +595,7 @@ function KitStoryDesktop() {
       <section ref={track} className="relative h-[820vh]" data-kit-story-track>
         <div
           ref={stage}
-          className="sticky top-0 h-screen overflow-hidden"
+          className="sticky top-0 h-screen overflow-clip"
           style={{
             background: stageBg,
             transition: "background-color 420ms ease",
@@ -650,10 +664,7 @@ function KitStoryDesktop() {
                       </div>
                       <figure className="ks-portrait">
                         <div ref={well}>
-                          <img
-                            src={STAGE.portrait}
-                            alt={`${STAGE.name} portrait`}
-                          />
+                          <img src={POSTER} alt={`${STAGE.name} portrait`} />
                         </div>
                         <figcaption className="ks-disclosure">
                           Made with AI · Fictional creator
@@ -759,29 +770,38 @@ function KitStoryDesktop() {
             </div>
           </div>
 
-          {/* Portrait packing into the well */}
+          {/* One video shrinks into the right-hand portrait and stays frozen there. */}
           <div
-            className="absolute z-[22] overflow-hidden bg-black pointer-events-none"
+            className="absolute inset-0 z-[22] pointer-events-none"
+            aria-hidden="true"
             style={{
-              left: `${photoL}%`,
-              top: `${photoT}%`,
-              width: `${photoW}%`,
-              height: `${photoH}%`,
-              borderRadius: `${lerp(0, 14, pack)}px`,
-              opacity:
-                (1 - ease(fold) * 0.9) * (1 - ease(range(pack, 0.94, 1))),
+              clipPath: landed
+                ? `inset(${slot.clipTop}% ${slot.clipRight}% ${slot.clipBottom}% ${slot.clipLeft}%)`
+                : undefined,
             }}
           >
-            <video
-              ref={vid}
-              className="size-full object-cover object-[center_20%]"
-              src={CLIP}
-              poster={POSTER}
-              muted
-              loop
-              playsInline
-              autoPlay
-            />
+            <div
+              data-kit-portrait-video
+              className="absolute overflow-hidden bg-black"
+              style={{
+                left: `${photoL}%`,
+                top: `${photoT}%`,
+                width: `${photoW}%`,
+                height: `${photoH}%`,
+                borderRadius: `${lerp(0, 17, pack)}px ${lerp(0, 17, pack)}px 0 0`,
+                opacity: 1 - ease(kitOut),
+              }}
+            >
+              <video
+                ref={vid}
+                className="size-full object-cover object-[center_20%]"
+                src={CLIP}
+                poster={POSTER}
+                muted
+                loop
+                playsInline
+              />
+            </div>
           </div>
 
           {/* Mask so sticky nav sits cleanly above the kit */}
@@ -931,79 +951,25 @@ function KitStoryDesktop() {
             }}
           />
 
-          {/* Finished share climax: what you see is what they get */}
+          {/* Original media-kit send-off, followed by the paper-plane flight. */}
           <div
-            className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-6"
+            className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-6 text-center"
             aria-hidden={sharedOp < 0.02}
             style={{
               opacity: sharedOp,
               transform: `translateY(${(1 - sharedIn) * 14}px)`,
             }}
           >
-            <div
-              className="absolute inset-0"
-              style={{ background: "#eef0f4" }}
-            />
-            <div className="relative flex flex-col items-center">
+            <div className="absolute inset-0 bg-[#eef0f4]" />
+            <div className="relative">
               <p
-                className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-4`}
+                className={`${FG_SB} text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px]`}
               >
-                Shared
+                Media Kit
               </p>
-              <p
-                className={`${FG_SB} text-[#101828] text-[42px] md:text-[64px] leading-[0.98] tracking-[-2px] text-center max-w-[14ch]`}
-              >
-                What you see is what they get.
+              <p className={`${FG_R} mt-4 text-[18px] text-[#6a7282]`}>
+                On its way
               </p>
-              <p
-                className={`${FG_R} mt-4 text-[16px] md:text-[18px] text-[#6a7282] text-center max-w-[28em]`}
-              >
-                Link copied. Same kit. Same connected numbers. Ready for the
-                inbox.
-              </p>
-              <div
-                className="mt-8 w-[min(360px,90vw)] rounded-[18px] overflow-hidden border border-[#ead9b8] shadow-[0_18px_50px_rgba(16,24,40,0.14)]"
-                style={{ background: CREAM }}
-              >
-                <div className="px-4 pt-4 pb-3 flex items-center gap-3">
-                  <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
-                    <img
-                      src={STAGE.portrait}
-                      alt={`${STAGE.name} portrait`}
-                      className="size-full object-cover object-top"
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p
-                      className={`${FG_SB} text-[16px]`}
-                      style={{ color: BURGUNDY }}
-                    >
-                      {STAGE.name}
-                    </p>
-                    <p className={`${FG_R} text-[12px] text-[#6a7282]`}>
-                      {STAGE.totalShort} total audience
-                    </p>
-                  </div>
-                </div>
-                <p
-                  className={`${FG_R} bg-white px-4 py-1.5 text-[10px] text-[#6a7282]`}
-                >
-                  Made with AI · Demo profile
-                </p>
-                <div
-                  className="px-4 py-3 flex items-center justify-between"
-                  style={{ background: BURGUNDY, color: CREAM }}
-                >
-                  <span className={`${FG_R} text-[12px] truncate`}>
-                    {STAGE.shareUrl.replace("https://", "")}
-                  </span>
-                  <span
-                    className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}
-                  >
-                    Sent
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
 
