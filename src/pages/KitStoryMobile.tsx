@@ -1,7 +1,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
-import { ContentCardOverlay } from "../components/ContentMetrics";
+import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
   KitEditHandle,
@@ -230,18 +230,11 @@ function MobileKitCard() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 items-start mb-6">
             {CONTENT.map((tile) => (
               <figure key={tile.thumb}>
-                <div
-                  className="relative aspect-[9/16] rounded-[12px] overflow-hidden bg-[#f6ece4]"
-                  style={{ containerType: "inline-size" }}
-                >
-                  <img
-                    src={tile.thumb}
-                    alt={`${TALENT.name}: ${tile.caption}`}
-                    loading="lazy"
-                    className="absolute inset-0 size-full object-cover"
-                  />
-                  <ContentCardOverlay tile={tile} />
-                </div>
+                <KitFeaturedMedia
+                  tile={tile}
+                  alt={`${TALENT.name}: ${tile.caption}`}
+                  className="ks-featured-media-mobile"
+                />
                 <figcaption>
                   <AIDisclosure className={FG_R} size={9} />
                 </figcaption>

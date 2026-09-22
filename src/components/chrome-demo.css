@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: min(84vw, 1180px);
-  height: min(80vh, 690px);
+  height: min(86vh, 690px);
   border: 1px solid #ffffff38;
   border-radius: 13px;
   overflow: hidden;
@@ -303,13 +303,17 @@
   color: #8a94a5;
   font-size: 8px;
 }
-.cs-email-copy {
-  padding: 17px 0 0 39px;
-  max-width: 610px;
+.cs-email-copy,
+.cs-reply-body {
   font-size: 12px;
   line-height: 1.7;
 }
-.cs-email-copy > p + p {
+.cs-email-copy {
+  padding: 17px 0 0 39px;
+  max-width: 610px;
+}
+.cs-email-copy > p + p,
+.cs-reply-body > p + p {
   margin-top: 13px;
 }
 .cs-signature-brand {
@@ -368,11 +372,6 @@
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #d0d7e1 transparent;
-  font-size: 10px;
-  line-height: 1.55;
-}
-.cs-reply-body > p + p {
-  margin-top: 8px;
 }
 .cs-paste-caret {
   display: flex;
@@ -813,11 +812,6 @@
 }
 .cs-thread.is-replying .cs-reply-body {
   padding: 10px 12px;
-  font-size: 9px;
-  line-height: 1.45;
-}
-.cs-thread.is-replying .cs-reply-body > p + p {
-  margin-top: 5px;
 }
 .cs-thread.is-replying .cs-creator-embed,
 .cs-thread.is-replying .cs-paste-caret {
@@ -923,6 +917,9 @@
   .cs-thread.is-replying .cs-brand-email.is-condensed {
     margin-bottom: 4px;
     padding-bottom: 4px;
+  }
+  .cs-thread.is-replying .cs-reply-body {
+    padding-block: 8px;
   }
   .cs-thread.is-replying .cs-reply > header,
   .cs-thread.is-replying .cs-reply > footer {
