@@ -799,7 +799,7 @@ function KitStoryDesktop() {
               <EditorSidebar collapse={publicize} />
               <div
                 ref={viewport}
-                className="relative flex-1 overflow-hidden bg-[#e2e7da]"
+                className="relative flex-1 overflow-hidden bg-[#dddddd]"
                 data-kit-viewport
               >
                 <div

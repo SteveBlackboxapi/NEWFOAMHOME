@@ -143,7 +143,7 @@
   margin: 28px;
   border-radius: 20px;
   overflow: hidden;
-  background: #fff6eb;
+  background: #fff;
 }
 .ks-contact-row {
   display: flex;
@@ -197,7 +197,7 @@
   display: inline-flex;
   flex-direction: column;
   gap: 5px;
-  background: #f2e2dd;
+  background: #f2ecef;
   color: #7a0036;
   padding: 17px 20px;
   border-radius: 16px;
@@ -215,7 +215,7 @@
 }
 .ks-portrait > div {
   aspect-ratio: 1;
-  background: #f2e2dd;
+  background: #f2ecef;
   border-radius: 17px;
   overflow: hidden;
 }
@@ -231,8 +231,8 @@
 .ks-platforms {
   position: relative;
   padding: 35px 36px;
-  background: #7a0036;
-  color: #fff6eb;
+  background: #202938;
+  color: #fcf5ea;
 }
 .ks-platform-row {
   display: grid;
