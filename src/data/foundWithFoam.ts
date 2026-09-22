@@ -31,6 +31,14 @@ export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // Curl refresh
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
   resultFor(websiteSamantha, "samantha-pikka-v2-c6.webp"), // Haircare products
+  resultFor(websiteAria, "aria-quen-v2-c3.webp"), // Evening routine
+  resultFor(websiteSamantha, "samantha-pikka-v2-c5.webp"), // Morning check-in
+  resultFor(websiteAria, "aria-quen-v2-c2.webp"), // Coffee break
+  resultFor(websiteAria, "aria-quen-v2-c5.webp"), // Packing essentials
+  resultFor(websiteSamantha, "samantha-pikka-dance-solo.webp"),
+  resultFor(websiteAria, "aria-quen-v2-c6.webp"), // Evening selfie
+  resultFor(websiteSamantha, "samantha-pikka-v2-c2.webp"), // Between takes
+  resultFor(websiteSamantha, "samantha-pikka-dance-duo.webp"),
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];

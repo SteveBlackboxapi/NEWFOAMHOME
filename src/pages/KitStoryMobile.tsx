@@ -3,6 +3,7 @@ import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
+import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
@@ -36,7 +37,6 @@ const TALENT = {
   ...websiteProfile(websiteSamantha),
   kitName: "Samantha-Pikka-haircare'26",
 };
-const CONTENT = websiteSamantha.content.slice(0, 4);
 const PLATFORM_LABELS = {
   instagram: "Instagram",
   tiktok: "TikTok",
@@ -230,7 +230,7 @@ function MobileKitCard() {
             </span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 items-start mb-6">
-            {CONTENT.map((tile) => (
+            {KIT_FEATURED_CONTENT.map((tile) => (
               <figure key={tile.thumb}>
                 <KitFeaturedMedia
                   tile={tile}

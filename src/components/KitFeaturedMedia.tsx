@@ -29,6 +29,7 @@ export function KitFeaturedMedia({
   return (
     <div
       className={`ks-featured-media ${className}`.trim()}
+      style={{ aspectRatio: tile.aspectRatio }}
       data-media-state={status}
       aria-busy={status === "loading"}
     >
