@@ -17,10 +17,8 @@ export function Nav() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border">
       <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
-        <Link to="/" className="flex items-center gap-[10px] shrink-0">
-          <div className="bg-[#101828] flex items-center justify-center rounded-full size-9 shrink-0">
-            <img alt="Foam" className="size-[20px] brightness-0 invert" src={img.foamSymbol} />
-          </div>
+        <Link to="/kit-story/" aria-label="Foam story" className="flex items-center gap-[10px] shrink-0">
+          <img alt="" className="size-9 p-[6px] bg-[#202b3b] rounded-[11px] shrink-0" src={img.foamSymbol} />
           <span className={`${FG_SB} text-xl text-text tracking-[-0.4px]`}>foam</span>
         </Link>
         <nav className="hidden lg:flex items-center gap-7 flex-1 justify-center">

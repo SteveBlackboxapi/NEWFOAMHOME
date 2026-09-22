@@ -139,7 +139,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
       </section>
       <section className="cs-finale">
         <a href={CHROME_STORE} target="_blank" rel="noreferrer">
-          <img src={`${A}/chrome-store.webp`} alt="" width={180} height={157} />
+          <div className="cs-store-mark">
+            <img src={`${A}/chrome-store.webp`} alt="" width={180} height={157} />
+          </div>
           <h2>That’s the Chrome Extension.</h2>
           <span>
             Bring your roster to your inbox <span aria-hidden="true">↗</span>
