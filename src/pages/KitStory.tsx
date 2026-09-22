@@ -9,7 +9,7 @@ import {
 } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
-import { ContentCardOverlay } from "../components/ContentMetrics";
+import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
@@ -86,28 +86,6 @@ function lerp(a: number, b: number, t: number) {
 }
 function ease(t: number) {
   return t * t * (3 - 2 * t);
-}
-
-function KitFeaturedImage({ src, alt }: { src: string; alt: string }) {
-  const image = useRef<HTMLImageElement | null>(null);
-  const [loaded, setLoaded] = useState(false);
-  useLayoutEffect(() => {
-    // Cached images may finish before the load handler is attached.
-    setLoaded(Boolean(image.current?.complete));
-  }, [src]);
-  return (
-    <img
-      ref={image}
-      src={src}
-      alt={alt}
-      loading="lazy"
-      decoding="async"
-      className="ks-featured-photo"
-      style={{ opacity: loaded ? 1 : 0 }}
-      onLoad={() => setLoaded(true)}
-      onError={() => setLoaded(true)}
-    />
-  );
 }
 
 function KitNav({
@@ -333,7 +311,7 @@ function AfterShare() {
   ];
   return (
     <div className="bg-white" id="after-share">
-      <section className="pt-16 pb-6">
+      <section className="ks-agency-ticker pt-16 pb-6">
         <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>
           In good company. Across 800+ creator agencies.
         </p>
@@ -886,13 +864,11 @@ function KitStoryDesktop() {
                               opacity: kitFeaturedOpacity(pan, featuredLayout),
                             }}
                           >
-                            <div className="ks-content-image">
-                              <KitFeaturedImage
-                                src={tile.thumb}
-                                alt={`${STAGE.name}: ${tile.caption}`}
-                              />
-                              <ContentCardOverlay tile={tile} />
-                            </div>
+                            <KitFeaturedMedia
+                              tile={tile}
+                              alt={`${STAGE.name}: ${tile.caption}`}
+                              className="ks-content-image"
+                            />
                             <figcaption className="ks-disclosure">
                               <AIDisclosure />
                             </figcaption>
