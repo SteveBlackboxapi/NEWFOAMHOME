@@ -735,13 +735,57 @@ export const stagedTalent: StagedTalent[] = [
     ],
     totalAudience: 1_185_800,
     portrait: portrait("nova-reed"),
+    creativeDirection: {
+      summary:
+        "Everyday fitness and recovery in Toronto. Candid phone photographs, ordinary surroundings and relaxed mid-task expressions, with Nova's existing portrait kept as her identity reference.",
+      identityNotes: [
+        "Nova is a fictional adult, aged 24. Preserve her facial proportions, features, skin tone and short natural hair from her existing portrait.",
+        "Use natural skin and fabric texture, believable hands and uneven everyday light. Vary her expression and framing without changing her identity.",
+        "The refreshed band-stretch and evening-walk images are still photographs. Existing audience and engagement figures remain illustrative demo data.",
+      ],
+      motionBrief:
+        "The refreshed images are still photographs. No new video has been generated for Nova.",
+      promptFile: `${T}/nova-reed-v2/creative-brief.md`,
+    },
     motion: null,
     motionStatus: "placeholder",
     content: [
-      { type: "clip", thumb: tile("nova-reed", 1), views: 540_000, caption: "band stretch set", platform: "tiktok", strongKind: "photo", engagements: 41_200 },
+      {
+        type: "still",
+        thumb: `${T}/nova-reed-v2/nova-reed-band.webp`,
+        original: tile("nova-reed", 1),
+        aspectRatio: "9/16",
+        views: 540_000,
+        caption: "band stretch set",
+        captionSettings: { y: 72, font: "sf", size: 15, strokeWidth: 1 },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 41_200,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "A candid home-training photograph anchored to Nova's existing fictional portrait, with a natural mid-task expression and everyday phone-camera light.",
+        },
+      },
       { type: "still", thumb: tile("nova-reed", 2), views: 128_400, caption: "post workout smoothie", platform: "instagram", strongKind: "hashtag", engagements: 9_600 },
       { type: "still", thumb: tile("nova-reed", 3), views: 76_200, caption: "loft mat reset", platform: "instagram", strongKind: "photo" },
-      { type: "clip", thumb: tile("nova-reed", 4), views: 312_000, caption: "evening walk vlog", platform: "tiktok", strongKind: "photo", engagements: 27_800 },
+      {
+        type: "still",
+        thumb: `${T}/nova-reed-v2/nova-reed-walk.webp`,
+        original: tile("nova-reed", 4),
+        aspectRatio: "4/5",
+        views: 312_000,
+        caption: "evening walk vlog",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 27_800,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "An offhand evening-walk photograph with ordinary street light and casual framing, preserving Nova's fictional identity from her existing portrait.",
+        },
+      },
       { type: "still", thumb: tile("nova-reed", 5), views: 94_500, caption: "foam roll recovery", platform: "youtube", strongKind: "question", engagements: 6_100 },
     ],
   },
@@ -783,14 +827,74 @@ export const stagedTalent: StagedTalent[] = [
     ],
     totalAudience: 689_200,
     portrait: portrait("lena-croft"),
-    motion: null,
-    motionStatus: "placeholder",
+    creativeDirection: {
+      summary:
+        "Secondhand outfits and everyday getting-ready moments in Manchester. Relaxed phone photographs in lived-in surroundings, with Lena's existing portrait kept as her identity reference.",
+      identityNotes: [
+        "Lena is a fictional adult, aged 29. Preserve her facial proportions, features, skin tone and short blonde bob from her existing portrait.",
+        "Keep natural skin texture, small asymmetries and ordinary mixed light. Photograph her mid-task with casual framing rather than a posed fashion-shoot expression.",
+        "The refreshed outfit and getting-ready images are still photographs. Existing audience and engagement figures remain illustrative demo data.",
+      ],
+      motionBrief:
+        "A 10-second silent getting-ready video, generated from Lena's refreshed bathroom photograph, is available as a separate clip. The source still and earlier photographs remain available; no audience or engagement figures are assigned to the new video.",
+      promptFile: `${T}/lena-croft-v2/creative-brief.md`,
+    },
+    motion: `${T}/lena-croft-v2/lena-croft-grwm.mp4`,
+    motionStatus: "ready",
     content: [
-      { type: "clip", thumb: tile("lena-croft", 1), views: 276_000, caption: "mirror outfit check", platform: "tiktok", strongKind: "photo", engagements: 32_400 },
+      {
+        type: "still",
+        thumb: `${T}/lena-croft-v2/lena-croft-outfit.webp`,
+        original: tile("lena-croft", 1),
+        aspectRatio: "9/16",
+        views: 276_000,
+        caption: "mirror outfit check",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        engagements: 32_400,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "A casual phone-camera outfit check in everyday surroundings, preserving Lena's fictional identity from her existing portrait.",
+        },
+      },
       { type: "still", thumb: tile("lena-croft", 2), views: 148_900, caption: "PACKING FOR WEEKEND", captionSettings: { font: "dm-serif", weight: 400, italic: true, size: 21, y: 65 }, platform: "instagram", strongKind: "hashtag", engagements: 10_200 },
       { type: "still", thumb: tile("lena-croft", 3), views: 58_400, caption: "thrift haul flatlay", platform: "instagram", strongKind: "photo" },
       { type: "clip", thumb: tile("lena-croft", 4), views: 121_000, caption: "mend kit close-up", platform: "tiktok", strongKind: "photo", engagements: 9_800 },
-      { type: "still", thumb: tile("lena-croft", 5), views: 87_600, caption: "getting ready glow", platform: "instagram", strongKind: "question", engagements: 6_400 },
+      {
+        type: "still",
+        thumb: `${T}/lena-croft-v2/lena-croft-grwm.webp`,
+        original: tile("lena-croft", 5),
+        aspectRatio: "9/16",
+        views: 87_600,
+        caption: "getting ready glow",
+        captionSettings: { y: 72, font: "sf", size: 15, strokeWidth: 1 },
+        platform: "instagram",
+        strongKind: "question",
+        engagements: 6_400,
+        generation: {
+          version: "Realism v2",
+          approach:
+            "A candid getting-ready photograph with natural skin texture and ordinary bathroom light, anchored to Lena's existing fictional portrait.",
+        },
+      },
+      {
+        id: "grwm-motion-v2",
+        type: "clip",
+        thumb: `${T}/lena-croft-v2/lena-croft-grwm.webp`,
+        video: `${T}/lena-croft-v2/lena-croft-grwm.mp4`,
+        aspectRatio: "9/16",
+        caption: "Lena · getting ready in motion",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · video",
+          approach:
+            "A 10-second silent video generated from Lena's refreshed getting-ready photograph, with the source still retained separately and no invented performance metrics.",
+        },
+      },
     ],
   },
   {
