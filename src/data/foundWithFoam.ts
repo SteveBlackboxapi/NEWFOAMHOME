@@ -1,5 +1,10 @@
 import type { StagedTalent, TalentContentTile } from "./stagedTalent";
-import { websiteAria, websiteNia, websiteSamantha } from "./websiteTalent";
+import {
+  websiteAria,
+  websiteLena,
+  websiteNia,
+  websiteSamantha,
+} from "./websiteTalent";
 
 export type FoundResult = {
   id: string;
@@ -29,11 +34,11 @@ export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteNia, "nia-brooks-skincare.webp"),
   resultFor(websiteAria, "aria-quen-v2-c1.webp"), // Lipstick application
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // Curl refresh
-  resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
+  resultFor(websiteLena, "lena-croft-grwm.webp"), // Refreshed getting-ready skincare
   resultFor(websiteSamantha, "samantha-pikka-v2-c6.webp"), // Haircare products
   resultFor(websiteAria, "aria-quen-v2-c3.webp"), // Evening routine
   resultFor(websiteSamantha, "samantha-pikka-v2-c5.webp"), // Morning check-in
-  resultFor(websiteAria, "aria-quen-v2-c2.webp"), // Coffee break
+  resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
   resultFor(websiteAria, "aria-quen-v2-c5.webp"), // Packing essentials
   resultFor(websiteSamantha, "samantha-pikka-dance-solo.webp"),
   resultFor(websiteAria, "aria-quen-v2-c6.webp"), // Evening selfie
