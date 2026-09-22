@@ -14,6 +14,7 @@ import {
   type ChromeStage,
 } from "../lib/chromeDemo";
 import { A } from "../lib/assets";
+import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import "./chrome-story.css";
 
 /** The same inbox workflow in readable, naturally scrolling frames. */
@@ -21,6 +22,16 @@ export function ChromeStoryMobile({
   embedded = false,
 }: { embedded?: boolean } = {}) {
   const wallpaper = useChromeWallpaper();
+  const reduced = usePrefersReducedMotion();
+  const [sent, setSent] = useState(false);
+  const finale = useRef<HTMLDivElement>(null);
+  const send = () => {
+    setSent(true);
+    finale.current?.scrollIntoView({
+      block: "center",
+      behavior: reduced ? "instant" : "smooth",
+    });
+  };
   const preview = useRef<HTMLElement>(null);
   useChromePreviewEntry(preview);
   const [panelStage, setPanelStage] = useState<ChromeStage>(2);
@@ -92,7 +103,7 @@ export function ChromeStoryMobile({
           <MobileFade>
             <div className="cs-mobile-step-title">
               <span>03</span>
-              <h3>Paste. Your pitch is ready.</h3>
+              <h3>Paste. Send. You’re done.</h3>
             </div>
             <div className="cs-mobile-desktop" style={background}>
               <div className="cs-mobile-email-window">
@@ -100,22 +111,34 @@ export function ChromeStoryMobile({
                   <span>● ● ●</span> Your reply
                 </div>
                 <div className="cs-mobile-reply-wrap">
-                  <ChromeReply pasted />
+                  <ChromeReply pasted sent={sent} onSend={send} />
                 </div>
               </div>
             </div>
           </MobileFade>
         </section>
       </div>
-      <MobileFade className="cs-mobile-finale">
-        <a href={CHROME_STORE} target="_blank" rel="noreferrer">
-          <div className="cs-store-mark">
-            <img src={`${A}/chrome-store.webp`} alt="" width={150} height={131} />
-          </div>
-          <h2>That’s the Chrome Extension.</h2>
-          <span>Bring your roster to your inbox ↗</span>
-        </a>
-      </MobileFade>
+      <div ref={finale}>
+        <MobileFade className="cs-mobile-finale">
+          {sent && (
+            <p className="cs-mobile-sent" role="status">
+              ✓ Message sent
+            </p>
+          )}
+          <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+            <div className="cs-store-mark">
+              <img
+                src={`${A}/chrome-store.webp`}
+                alt=""
+                width={150}
+                height={131}
+              />
+            </div>
+            <h2>That’s the Chrome Extension.</h2>
+            <span>Bring your roster to your inbox ↗</span>
+          </a>
+        </MobileFade>
+      </div>
     </div>
   );
 }

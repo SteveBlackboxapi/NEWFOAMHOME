@@ -163,19 +163,25 @@ export function ChromeCreatorEmbed() {
 export function ChromeReply({
   pasted,
   onPaste,
+  sent = false,
+  onSend,
 }: {
   pasted: boolean;
   onPaste?: () => void;
+  sent?: boolean;
+  onSend?: () => void;
 }) {
   return (
     <section
       className={`cs-reply ${pasted ? "is-pasted" : ""}`}
-      aria-label="Talent manager’s reply draft"
+      aria-label={
+        sent ? "Talent manager’s sent reply" : "Talent manager’s reply draft"
+      }
     >
       <header>
         <span aria-hidden="true">↩</span> <strong>Rose Finch</strong>
         <span>&lt;rose@haven.example&gt;</span>
-        <small>Draft</small>
+        <small>{sent ? "Sent" : "Draft"}</small>
       </header>
       <div className="cs-reply-body">
         <p>Hi Rose,</p>
@@ -185,7 +191,14 @@ export function ChromeReply({
           kit:
         </p>
         {pasted ? (
-          <ChromeCreatorEmbed />
+          <div className="cs-pasted-profile">
+            <span
+              className="cs-pasted-anchor"
+              data-chrome-target="caret"
+              aria-hidden="true"
+            />
+            <ChromeCreatorEmbed />
+          </div>
         ) : (
           <button
             type="button"
@@ -203,17 +216,26 @@ export function ChromeReply({
         )}
       </div>
       <footer>
-        <span className="cs-send-preview">
-          Send <span aria-hidden="true">▾</span>
-        </span>
+        <button
+          type="button"
+          className="cs-send-preview"
+          data-chrome-target="send"
+          aria-label={sent ? "Reply sent in demo" : "Send reply in demo"}
+          disabled={!pasted || !onSend || sent}
+          onClick={onSend}
+        >
+          {sent ? "Sent" : "Send"}{" "}
+          <span aria-hidden="true">{sent ? "✓" : "▾"}</span>
+        </button>
         <span className="cs-formatting" aria-hidden="true">
           <u>A</u>
           <MailTool name="attach" />
           <LabIcon name="link" size={14} />
         </span>
         {pasted && (
-          <span className="cs-draft-ready">
-            <LabIcon name="check" size={12} /> Ready to send
+          <span className="cs-draft-ready" role="status">
+            <LabIcon name="check" size={12} />{" "}
+            {sent ? "Message sent" : "Ready to send"}
           </span>
         )}
       </footer>
@@ -473,11 +495,11 @@ export function ChromeDemoWindow({
               <span>Starred</span>
               <span>Sent</span>
               <span>
-                Drafts <small>{stage > 0 ? 1 : ""}</small>
+                Drafts <small>{stage > 0 && stage < 6 ? 1 : ""}</small>
               </span>
             </nav>
             <div
-              className={`cs-thread ${stage > 0 ? "is-replying" : ""} ${stage === 5 ? "is-pasted" : ""}`}
+              className={`cs-thread ${stage > 0 ? "is-replying" : ""} ${stage >= 5 ? "is-pasted" : ""}`}
             >
               <div className="cs-thread-tools" aria-hidden="true">
                 <span className="cs-thread-action-icons">
@@ -513,6 +535,8 @@ export function ChromeDemoWindow({
                   <ChromeBrandBrief condensed />
                   <ChromeReply
                     pasted={stage >= 5}
+                    sent={stage === 6}
+                    onSend={() => onStage(6)}
                     onPaste={stage >= 4 ? () => onStage(5) : undefined}
                   />
                 </div>

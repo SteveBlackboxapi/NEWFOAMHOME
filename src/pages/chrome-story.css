@@ -413,3 +413,35 @@
     animation: none;
   }
 }
+
+/* The finale remains in the pinned scene as the entire desktop fades away. */
+.cs-sendoff-finale {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  min-height: 0;
+  background: transparent;
+}
+.cs-paper-plane {
+  position: absolute;
+  z-index: 3;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 16px 28px rgb(16 24 40 / 28%));
+  transform-origin: center;
+}
+
+.cs-mobile-story .cs-mobile-sent {
+  text-align: center;
+  color: #56716c;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.cs-desktop-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
