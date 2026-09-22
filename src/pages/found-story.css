@@ -475,8 +475,8 @@
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 36px;
+  grid-template-columns: 1.18fr 1fr;
+  gap: 30px;
   padding: 24px;
 }
 .fs-detail-picture {
@@ -486,20 +486,220 @@
   min-height: 0;
   margin: 0;
 }
-.fs-detail-picture > img {
+.fs-video-stage {
+  position: relative;
+  overflow: hidden;
   min-height: 0;
   flex: 1;
   width: 100%;
-  object-fit: contain;
   border-radius: 10px;
   background: #0f1926;
+}
+.fs-video-stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.fs-video-blur {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(22px) brightness(0.7);
+  transform: scale(1.12);
+}
+.fs-video-identity {
+  position: absolute;
+  inset: 16px 16px auto;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 1px 6px #0006;
+  font-size: 15px;
+}
+.fs-video-identity > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.fs-video-identity small {
+  display: block;
+  font-size: 11px;
+  opacity: 0.85;
+}
+.fs-video-identity .content-platform-icon {
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+}
+.fs-video-caption {
+  position: absolute;
+  bottom: 22%;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px 5px #000b;
+  font-size: clamp(11px, 1.2vw, 18px);
+}
+.fs-video-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 50%;
+  background: #10182880;
+  color: white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.15s;
+}
+.fs-video-play.is-playing {
+  opacity: 0;
+}
+@media (hover: none) {
+  .fs-video-play.is-playing {
+    opacity: 1;
+    top: auto;
+    left: auto;
+    right: 10px;
+    bottom: 45px;
+    transform: none;
+    width: 32px;
+    height: 32px;
+  }
+}
+.fs-video-stage:hover .fs-video-play,
+.fs-video-play:focus-visible {
+  opacity: 1;
+}
+.fs-video-play:focus-visible,
+.fs-seen-card:focus-visible {
+  outline: 3px solid #c6f31e;
+  outline-offset: 3px;
+}
+.fs-video-controls {
+  position: absolute;
+  inset: auto 0 0;
+  height: 56px;
+  padding: 25px 16px 10px;
+  background: linear-gradient(transparent, #0008);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font:
+    11px system-ui,
+    sans-serif;
+}
+.fs-video-progress {
+  position: absolute;
+  height: 2px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  background: #ffffff40;
+}
+.fs-video-progress > i {
+  display: block;
+  height: 100%;
+  background: white;
+}
+.fs-video-sound {
+  margin-left: auto;
+  opacity: 0.8;
+  font-size: 9px;
+}
+.fs-strong-match {
+  background: #effbf3;
+  border-radius: 11px;
+  padding: 13px 15px;
+  font:
+    12px/1.5 "SF Pro Text",
+    system-ui,
+    sans-serif;
+}
+.fs-strong-match > strong {
+  font-size: 14px;
+}
+.fs-strong-match > p {
+  margin: 6px 0 0;
+}
+.fs-detail-info .fs-seen-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.fs-seen-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: #f4f5f7;
+  border-radius: 12px;
+  padding: 12px;
+}
+.fs-seen-card {
+  padding: 0;
+  border: 1px solid #eaecf0;
+  background: white;
+  border-radius: 11px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  pointer-events: auto;
+  color: #101828;
+  min-width: 0;
+}
+.fs-seen-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  font:
+    600 10px system-ui,
+    sans-serif;
+}
+.fs-seen-picture {
+  display: block;
+  position: relative;
+  height: clamp(70px, 10vh, 135px);
+  overflow: hidden;
+}
+.fs-seen-picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+.fs-seen-picture > span {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  background: #1e2939;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 4px;
+  text-align: center;
+  font:
+    8px system-ui,
+    sans-serif;
 }
 .fs-detail-picture figcaption .ai-media-disclosure {
   font-size: 9px;
 }
 .fs-detail-info {
   align-self: center;
-  padding: 4px 18px 4px 0;
+  padding: 0;
+  min-width: 0;
 }
 .fs-detail-kicker {
   font-size: 9px;
@@ -600,12 +800,38 @@
   padding: 0 clamp(16px, 3vw, 48px);
   background: #fff6eb;
 }
-.fs-campaign > img {
+.fs-campaign-art {
+  position: relative;
+  max-width: 1500px;
+  margin-inline: auto;
+}
+.fs-campaign-art > img {
   display: block;
   width: 100%;
   max-width: 1500px;
   height: auto;
   margin-inline: auto;
+}
+/* Keep the real Foam symbol crisp, on the headline baseline, at any display size. */
+.fs-campaign-logo {
+  position: absolute;
+  left: 92.93%;
+  top: 75.35%;
+  width: 2.5%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 18%;
+  background: #e1f38a;
+  transform: rotate(1.8deg);
+}
+.fs-campaign-logo > i {
+  width: 95%;
+  height: 95%;
+  background: #7a0036;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
 }
 .fs-campaign > figcaption {
   max-width: 1500px;
@@ -891,6 +1117,68 @@
   .fs-detail-info {
     padding: 0 3px 3px;
   }
+  .fs-strong-match {
+    padding: 9px 11px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .fs-strong-match > strong {
+    font-size: 12px;
+  }
+  .fs-strong-match > p {
+    margin-top: 3px;
+  }
+  .fs-detail-info .fs-seen-heading {
+    display: flex;
+    font-size: 11px;
+    margin: 8px 0 5px;
+  }
+  .fs-seen-grid {
+    gap: 8px;
+    padding: 7px;
+    margin-bottom: 8px;
+  }
+  .fs-seen-time {
+    padding: 4px 7px;
+    font-size: 9px;
+  }
+  .fs-seen-picture {
+    height: 57px;
+  }
+  .fs-seen-picture > span {
+    font-size: 6px;
+    padding: 3px;
+    bottom: 3px;
+  }
+  .fs-video-identity {
+    inset: 9px 10px auto;
+    font-size: 11px;
+  }
+  .fs-video-identity > img {
+    width: 23px;
+    height: 23px;
+  }
+  .fs-video-identity small {
+    font-size: 8px;
+  }
+  .fs-video-caption {
+    bottom: 26%;
+    font-size: 10px;
+  }
+  .fs-video-play {
+    width: 38px;
+    height: 38px;
+  }
+  .fs-video-controls {
+    height: 41px;
+    padding: 16px 10px 7px;
+    font-size: 8px;
+  }
+  .fs-video-progress {
+    top: 9px;
+    left: 10px;
+    right: 10px;
+  }
   .fs-detail-kicker,
   .fs-detail-caption,
   .fs-detail-info h4,
@@ -989,5 +1277,37 @@
 @media (max-width: 800px) {
   .fs-campaign + .fs-outro {
     padding-top: 48px;
+  }
+}
+@media (max-width: 800px) and (max-height: 700px) {
+  .fs-window {
+    inset-block: 8% 6%;
+  }
+  .fs-detail-header {
+    padding-block: 6px;
+  }
+  .fs-detail-body {
+    padding: 8px;
+    gap: 6px;
+    grid-template-rows: minmax(100px, 1fr) auto;
+  }
+  .fs-strong-match {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+  .fs-seen-picture {
+    height: 42px;
+  }
+  .fs-detail-info .fs-seen-heading {
+    margin-top: 6px;
+  }
+  .fs-post-metrics {
+    padding: 7px 10px;
+  }
+  .fs-post-metrics dd {
+    font-size: 19px;
+  }
+  .fs-demo-note {
+    margin-top: 5px;
   }
 }

@@ -660,6 +660,66 @@ export const stagedTalent: StagedTalent[] = [
     ],
   },
   {
+    id: "nia-brooks",
+    displayName: "Nia Brooks",
+    age: 27,
+    gender: "Female",
+    location: "London, UK",
+    bio: "Skincare made approachable: product textures, everyday routines and thoughtful beauty reviews from London. Nia shares what she likes about a product and how it fits into her day. Fictional demo creator; profile details and audience figures are illustrative.",
+    verticals: ["Skincare", "Beauty", "Product reviews"],
+    platforms: [
+      { network: "tiktok", handle: "@nia.brooks.fake", followers: 412_000 },
+      { network: "instagram", handle: "@niabrooks.fake", followers: 186_000 },
+      { network: "youtube", handle: "@nia.brooks.fake", followers: 54_000 },
+    ],
+    totalAudience: 652_000,
+    portrait: `${T}/nia-brooks/nia-brooks-profile.png`,
+    referenceImages: [
+      {
+        label: "Skincare video reference frame · 2 seconds",
+        src: `${T}/nia-brooks/nia-brooks-seen-1.jpg`,
+      },
+      {
+        label: "Skincare video reference frame · 7 seconds",
+        src: `${T}/nia-brooks/nia-brooks-seen-2.jpg`,
+      },
+    ],
+    creativeDirection: {
+      summary:
+        "A fictional Black adult skincare and beauty creator for Found with Foam. Natural skin texture, ordinary phone-camera framing, relaxed product demonstrations and a consistent face across her portrait and review content.",
+      identityNotes: [
+        "Nia is a fictional adult, aged 27. Keep her identity consistent with the approved Nia portrait and skincare reference.",
+        "Use natural expressions and believable hands when showing the skincare product; avoid beauty-filter smoothing or exaggerated transformations.",
+        "Her profile, handles, audience and post figures are invented demo data, not verified live account results.",
+      ],
+      motionBrief:
+        "A reviewed 10.084-second skincare clip at 720 × 1280: Nia gently massages cleanser into her skin while holding an unbranded white tube. Generated with Runway gen-4-turbo from her skincare still. The references at 2 and 7 seconds are frames from this same clip, not separate social posts.",
+      promptFile: `${T}/nia-brooks/GENERATIONS.md`,
+    },
+    motion: `${T}/nia-brooks/nia-brooks-skincare.mp4`,
+    motionStatus: "ready",
+    content: [
+      {
+        id: "skincare-review",
+        type: "clip",
+        thumb: `${T}/nia-brooks/nia-brooks-skincare.png`,
+        video: `${T}/nia-brooks/nia-brooks-skincare.mp4`,
+        aspectRatio: "9/16",
+        views: 265_600,
+        engagements: 15_500,
+        caption: "a closer look at my everyday skincare",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        generation: {
+          version: "Skincare v1 · video",
+          approach:
+            "Portrait and source still created with OpenAI image generation. Reviewed 10.084-second, 720 × 1280 video generated from the skincare still with Runway gen-4-turbo, task e83fc978-c4f1-4c52-aaa8-74abef74191a. Natural gentle cleanser massage with an unbranded white tube.",
+        },
+      },
+    ],
+  },
+  {
     id: "nova-reed",
     displayName: "Nova Reed",
     age: 24,

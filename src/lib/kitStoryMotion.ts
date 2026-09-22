@@ -1,3 +1,6 @@
+// Six viewport heights of travel, plus the final sticky viewport.
+export const KIT_STORY_HEIGHT_VH = 700;
+
 export const clampProgress = (value: number) =>
   Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 export const progressBetween = (p: number, start: number, end: number) =>
@@ -20,14 +23,14 @@ export type KitRevealLayout = KitRevealStarts & { viewportHeight: number };
 const DEFAULT_REVEAL_STARTS: KitRevealStarts = {
   platforms: 0.08,
   metrics: 0.34,
-  growth: 0.45,
-  audience: 0.56,
+  growth: 0.43,
+  audience: 0.5,
 };
 const REVEAL_ENDS: KitRevealStarts = {
   platforms: 0.31,
-  metrics: 0.535,
-  growth: 0.66,
-  audience: 0.78,
+  metrics: 0.49,
+  growth: 0.56,
+  audience: 0.65,
 };
 
 /** Every value is a pure function of scroll position: no playback clocks or one-shot flags. */
@@ -51,18 +54,19 @@ export function kitStoryTimeline(
     metrics: reveal("metrics"),
     growth: reveal("growth"),
     audience: reveal("audience"),
-    aimShare: progressBetween(p, 0.795, 0.825),
-    shareOpen: progressBetween(p, 0.825, 0.85),
-    generated: progressBetween(p, 0.85, 0.87),
-    aimCopy: progressBetween(p, 0.87, 0.895),
-    copied: progressBetween(p, 0.895, 0.915),
-    shareFade: progressBetween(p, 0.925, 0.94),
-    publicize: progressBetween(p, 0.925, 0.94),
-    kitOut: progressBetween(p, 0.93, 0.96),
-    fold: progressBetween(p, 0.95, 0.98),
-    fly: progressBetween(p, 0.97, 1),
-    sharedIn: smoothProgress(progressBetween(p, 0.94, 0.96)),
-    sharedOut: progressBetween(p, 0.98, 1),
+    aimShare: progressBetween(p, 0.655, 0.69),
+    shareOpen: progressBetween(p, 0.69, 0.72),
+    generated: progressBetween(p, 0.72, 0.755),
+    aimCopy: progressBetween(p, 0.755, 0.795),
+    copied: progressBetween(p, 0.795, 0.82),
+    shareFade: progressBetween(p, 0.84, 0.86),
+    publicize: progressBetween(p, 0.84, 0.86),
+    kitOut: progressBetween(p, 0.85, 0.89),
+    fold: progressBetween(p, 0.88, 0.91),
+    planeIn: smoothProgress(progressBetween(p, 0.915, 0.94)),
+    fly: smoothProgress(progressBetween(p, 0.94, 1)),
+    sharedIn: smoothProgress(progressBetween(p, 0.865, 0.895)),
+    sharedOut: progressBetween(p, 0.95, 0.985),
     headlineOpacity: 1 - progressBetween(p, 0.015, 0.105),
   };
 }
@@ -82,8 +86,8 @@ export function kitPan(value: number, targets: KitPanTargets) {
     [0.19, 0.255, 0, targets.platforms],
     [0.315, 0.39, targets.platforms, targets.content],
     [0.415, 0.475, targets.content, targets.metrics],
-    [0.54, 0.585, targets.metrics, targets.growth],
-    [0.665, 0.71, targets.growth, targets.audience],
+    [0.495, 0.54, targets.metrics, targets.growth],
+    [0.565, 0.61, targets.growth, targets.audience],
   ];
   let position = 0;
   for (const [start, end, from, to] of segments) {
@@ -131,8 +135,36 @@ export const KIT_CHAPTERS = [
   { label: "Profile", progress: 0.16 },
   { label: "Platforms", progress: 0.31 },
   { label: "Content", progress: 0.4 },
-  { label: "Performance", progress: 0.535 },
-  { label: "Growth", progress: 0.66 },
-  { label: "Audience", progress: 0.78 },
-  { label: "Share", progress: 0.875 },
+  { label: "Performance", progress: 0.49 },
+  { label: "Growth", progress: 0.56 },
+  { label: "Audience", progress: 0.65 },
+  { label: "Share", progress: 0.77 },
 ];
+
+type KitRect = { left: number; top: number; width: number; height: number };
+type KitPoint = { x: number; y: number };
+
+/** The cursor lands on the rendered control, even after a resize or label change. */
+export function kitShareCursor(
+  stage: KitRect,
+  share: KitRect,
+  copy: KitRect | null,
+  aimShare: number,
+  aimCopy: number,
+): KitPoint {
+  const centre = (rect: KitRect): KitPoint => ({
+    x: rect.left - stage.left + rect.width / 2,
+    y: rect.top - stage.top + rect.height / 2,
+  });
+  const sharePoint = centre(share);
+  const from =
+    aimCopy > 0
+      ? sharePoint
+      : { x: stage.width * 0.7, y: stage.height * 0.28 };
+  const to = aimCopy > 0 && copy ? centre(copy) : sharePoint;
+  const progress = clampProgress(aimCopy > 0 ? aimCopy : aimShare);
+  return {
+    x: from.x + (to.x - from.x) * progress,
+    y: from.y + (to.y - from.y) * progress,
+  };
+}

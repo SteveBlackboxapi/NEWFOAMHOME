@@ -24,6 +24,8 @@ const {
   kitPan,
   kitRevealStarts,
   KIT_CHAPTERS,
+  KIT_STORY_HEIGHT_VH,
+  kitShareCursor,
 } = module.exports;
 
 const targets = {
@@ -87,9 +89,9 @@ test("each content chapter has a real stationary reading interval", () => {
     [0.14, 0.19, 0],
     [0.255, 0.315, targets.platforms],
     [0.39, 0.415, targets.content],
-    [0.475, 0.54, targets.metrics],
-    [0.585, 0.665, targets.growth],
-    [0.71, 1, targets.audience],
+    [0.475, 0.495, targets.metrics],
+    [0.54, 0.565, targets.growth],
+    [0.61, 1, targets.audience],
   ];
   for (const [start, end, position] of holds) {
     for (const p of samples(start, end)) {
@@ -101,9 +103,9 @@ test("each content chapter has a real stationary reading interval", () => {
 test("counts are underway during the pan and finish while their panel is stationary", () => {
   const sections = [
     { field: "platforms", panStart: 0.19, start: 0.255, end: 0.31, holdEnd: 0.315 },
-    { field: "metrics", panStart: 0.415, start: 0.475, end: 0.535, holdEnd: 0.54 },
-    { field: "growth", panStart: 0.54, start: 0.585, end: 0.66, holdEnd: 0.665 },
-    { field: "audience", panStart: 0.665, start: 0.71, end: 0.78, holdEnd: 0.795 },
+    { field: "metrics", panStart: 0.415, start: 0.475, end: 0.49, holdEnd: 0.495 },
+    { field: "growth", panStart: 0.495, start: 0.54, end: 0.56, holdEnd: 0.565 },
+    { field: "audience", panStart: 0.565, start: 0.61, end: 0.65, holdEnd: 0.655 },
   ];
   for (const { field, panStart, start, end, holdEnd } of sections) {
     const duringPan = kitStoryTimeline((panStart + start) / 2)[field];
@@ -124,18 +126,18 @@ test("counts are underway during the pan and finish while their panel is station
 });
 
 test("later charts can begin before their dedicated pan while completed charts retain their result", () => {
-  const metrics = kitStoryTimeline(0.5);
+  const metrics = kitStoryTimeline(0.48);
   assert.equal(metrics.platforms, 1);
   assert.ok(metrics.metrics > 0 && metrics.metrics < 1);
   assert.ok(metrics.growth > 0 && metrics.growth < 1);
   assert.equal(metrics.audience, 0);
 
-  const growth = kitStoryTimeline(0.62);
+  const growth = kitStoryTimeline(0.55);
   assert.equal(growth.metrics, 1);
   assert.ok(growth.growth > 0 && growth.growth < 1);
   assert.ok(growth.audience > 0 && growth.audience < 1);
 
-  const audience = kitStoryTimeline(0.75);
+  const audience = kitStoryTimeline(0.63);
   assert.equal(audience.metrics, 1);
   assert.equal(audience.growth, 1);
   assert.ok(audience.audience > 0 && audience.audience < 1);
@@ -167,7 +169,7 @@ const measuredLayouts = [
 ];
 
 test("measured reveal starts eliminate visible zero exposure across viewport geometries", () => {
-  const ends = { platforms: 0.31, metrics: 0.535, growth: 0.66, audience: 0.78 };
+  const ends = { platforms: 0.31, metrics: 0.49, growth: 0.56, audience: 0.65 };
   for (const fixture of measuredLayouts) {
     const starts = kitRevealStarts(fixture.targets, fixture.layout);
     for (const field of Object.keys(ends)) {
@@ -195,13 +197,13 @@ test("measured reveal starts eliminate visible zero exposure across viewport geo
 test("growth already counts while visible below metrics before the growth pan begins", () => {
   const { targets: measured, layout } = measuredLayouts[1];
   const starts = kitRevealStarts(measured, layout);
-  const duringMetrics = 0.49;
+  const duringMetrics = 0.48;
   assert.ok(layout.growth - kitPan(duringMetrics, measured) < layout.viewportHeight);
-  assert.ok(duringMetrics < 0.54, "growth pan has not started");
+  assert.ok(duringMetrics < 0.495, "growth pan has not started");
   assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
-  assert.ok(kitStoryTimeline(0.52, starts).growth > kitStoryTimeline(duringMetrics, starts).growth);
-  assert.ok(kitStoryTimeline(0.56, starts).growth > kitStoryTimeline(0.52, starts).growth);
-  assert.ok(kitStoryTimeline(0.62, starts).growth > kitStoryTimeline(0.56, starts).growth);
+  assert.ok(kitStoryTimeline(0.495, starts).growth > kitStoryTimeline(duringMetrics, starts).growth);
+  assert.ok(kitStoryTimeline(0.52, starts).growth > kitStoryTimeline(0.495, starts).growth);
+  assert.ok(kitStoryTimeline(0.55, starts).growth > kitStoryTimeline(0.52, starts).growth);
 });
 
 test("measured reveal counts are identical on reverse scroll and arbitrary jumps", () => {
@@ -307,14 +309,14 @@ test("measured targets can change between calls without stale positions or overs
       previous = current;
     }
     nearly(
-      kitPan(0.5, measured),
+      kitPan(0.48, measured),
       measured.metrics,
       "new metrics position takes effect immediately",
     );
     nearly(kitPan(1, measured), measured.audience, "final measured position");
   }
   nearly(
-    kitPan(0.5, targets),
+    kitPan(0.48, targets),
     targets.metrics,
     "original targets remain reusable",
   );
@@ -322,9 +324,9 @@ test("measured targets can change between calls without stale positions or overs
 
 test("pan and timeline remain continuous at every chapter and sharing boundary", () => {
   const boundaries = [
-    0.015, 0.105, 0.14, 0.19, 0.255, 0.31, 0.315, 0.39, 0.415, 0.475, 0.535,
-    0.54, 0.585, 0.66, 0.665, 0.71, 0.78, 0.795, 0.825, 0.85, 0.87, 0.895,
-    0.915, 0.925, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 1,
+    0.015, 0.105, 0.14, 0.19, 0.255, 0.31, 0.315, 0.39, 0.415, 0.475, 0.49,
+    0.495, 0.54, 0.56, 0.565, 0.61, 0.65, 0.655, 0.69, 0.72, 0.755, 0.795,
+    0.82, 0.84, 0.85, 0.86, 0.865, 0.88, 0.89, 0.895, 0.91, 0.915, 0.94, 0.95, 0.985, 1,
   ];
   const epsilon = 1e-7;
   for (const boundary of boundaries) {
@@ -356,4 +358,71 @@ test("normalised easing settles at endpoints and preserves the middle position",
   assert.equal(smoothProgress(2), 1);
   assert.ok(smoothProgress(0.01) < 0.001);
   assert.ok(smoothProgress(0.99) > 0.999);
+});
+
+
+test("analytics stops need less than half their previous scroll while keeping a reading moment", () => {
+  const oldTravel = 820 - 100;
+  const newTravel = KIT_STORY_HEIGHT_VH - 100;
+  assert.ok(newTravel < oldTravel);
+  const holds = [
+    { old: 0.54 - 0.475, now: 0.495 - 0.475 },
+    { old: 0.665 - 0.585, now: 0.565 - 0.54 },
+    { old: 0.795 - 0.71, now: 0.655 - 0.61 },
+  ];
+  for (const hold of holds) {
+    assert.ok(hold.now * newTravel > 10, "a reading moment remains");
+    assert.ok(hold.now * newTravel < hold.old * oldTravel / 2);
+  }
+});
+
+test("send-off logo and title hold before the fully visible plane begins its flight", () => {
+  for (const progress of samples(0.895, 0.94)) {
+    const state = kitStoryTimeline(progress);
+    assert.equal(state.sharedIn, 1);
+    assert.equal(state.sharedOut, 0);
+    assert.equal(state.fly, 0);
+    assert.equal(state.kitOut, 1);
+  }
+  assert.equal(kitStoryTimeline(0.915).planeIn, 0);
+  assert.ok(kitStoryTimeline(0.93).planeIn > 0.5);
+  assert.equal(kitStoryTimeline(0.94).planeIn, 1);
+  assert.equal(kitStoryTimeline(0.95).sharedOut, 0);
+  assert.ok(kitStoryTimeline(0.95).fly > 0);
+  assert.equal(kitStoryTimeline(1).fly, 1);
+  assert.equal(kitStoryTimeline(1).sharedOut, 1);
+});
+
+test("share cursor centres itself on measured controls at compact, wide and offset stages", () => {
+  const fixtures = [
+    { stage: { left: 0, top: 0, width: 1024, height: 600 },
+      share: { left: 910, top: 42, width: 86, height: 32 },
+      copy: { left: 610, top: 325, width: 80, height: 28 } },
+    { stage: { left: 0, top: 0, width: 1920, height: 1080 },
+      share: { left: 1803, top: 68, width: 88, height: 32 },
+      copy: { left: 1060, top: 565, width: 80, height: 28 } },
+    { stage: { left: 135, top: -17, width: 1440, height: 900 },
+      share: { left: 1450, top: 54, width: 91, height: 32 },
+      copy: { left: 964, top: 477, width: 80, height: 28 } },
+  ];
+  for (const { stage, share, copy } of fixtures) {
+    const sharePoint = { x: share.left - stage.left + share.width / 2,
+      y: share.top - stage.top + share.height / 2 };
+    const copyPoint = { x: copy.left - stage.left + copy.width / 2,
+      y: copy.top - stage.top + copy.height / 2 };
+    assert.deepEqual(kitShareCursor(stage, share, null, 1, 0), sharePoint);
+    assert.deepEqual(kitShareCursor(stage, share, copy, 1, 1), copyPoint);
+    const middle = kitShareCursor(stage, share, copy, 1, 0.5);
+    nearly(middle.x, (sharePoint.x + copyPoint.x) / 2, "copy approach x");
+    nearly(middle.y, (sharePoint.y + copyPoint.y) / 2, "copy approach y");
+    const relabelled = { ...copy, left: copy.left + 8, width: copy.width - 16 };
+    assert.deepEqual(kitShareCursor(stage, share, relabelled, 1, 1), copyPoint);
+    const checkpoints = [0, 0.2, 0.5, 0.8, 1];
+    const recorded = new Map(checkpoints.map((progress) =>
+      [progress, kitShareCursor(stage, share, copy, 1, progress)]));
+    for (const progress of [1, 0.2, 0.8, 0, 0.5, 1]) {
+      assert.deepEqual(kitShareCursor(stage, share, copy, 1, progress),
+        recorded.get(progress), "reverse and jumps are pure");
+    }
+  }
 });

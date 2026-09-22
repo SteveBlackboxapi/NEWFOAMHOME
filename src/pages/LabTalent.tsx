@@ -24,6 +24,7 @@ import {
 import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
 import { AIDisclosure, AssetCard } from "../components/TalentLabMedia";
 import { TalentLabProfile } from "../components/TalentLabProfile";
+import { ChromeWallpaperSettings } from "../components/ChromeWallpaperSettings";
 import "./talent-lab.css";
 
 type View = "talent" | "content" | "saved";
@@ -361,6 +362,7 @@ export function LabTalent() {
           <span className="tl-workspace-label">
             <span /> Demo workspace
           </span>
+          <ChromeWallpaperSettings />
         </header>
         <div className="tl-intro">
           <p>

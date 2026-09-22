@@ -1,5 +1,5 @@
 import type { StagedTalent, TalentContentTile } from "./stagedTalent";
-import { websiteAria, websiteSamantha } from "./websiteTalent";
+import { websiteAria, websiteNia, websiteSamantha } from "./websiteTalent";
 
 export type FoundResult = {
   id: string;
@@ -12,9 +12,9 @@ function resultFor(
   filename: string,
   useOriginal = false,
 ): FoundResult {
-  // Match the pictured asset, not its position or a video with the same poster.
-  const index = talent.content.findIndex(
-    (tile) => tile.type === "still" && tile.thumb.endsWith(`/${filename}`),
+  // Match the pictured asset, including the selected video's poster.
+  const index = talent.content.findIndex((tile) =>
+    tile.thumb.endsWith(`/${filename}`),
   );
   if (index < 0) throw new Error(`Missing Found with Foam asset: ${filename}`);
   const source = talent.content[index];
@@ -26,11 +26,26 @@ function resultFor(
 
 /** Skincare first, with related beauty posts; retain each post’s demo metadata. */
 export const FOUND_RESULTS: FoundResult[] = [
-  // The preserved original shows the serum being discussed in this night routine.
-  resultFor(websiteAria, "aria-quen-v2-c3.jpg", true),
+  resultFor(websiteNia, "nia-brooks-skincare.png"),
   resultFor(websiteAria, "aria-quen-v2-c1.jpg"), // Lipstick application
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.jpg"), // Curl refresh
   resultFor(websiteAria, "aria-quen-v2-c4.jpg"), // Makeup flatlay
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];
+
+/** Real frame captures from the generated ten-second review; ranges stay within it. */
+export const FOUND_SEEN = [
+  {
+    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-1.jpg`,
+    start: 0,
+    end: 4,
+    label: "Cleanser applied to skin",
+  },
+  {
+    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-2.jpg`,
+    start: 5,
+    end: 10,
+    label: "Product shown in routine",
+  },
+];
