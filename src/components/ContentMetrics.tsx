@@ -44,10 +44,12 @@ export function ContentMetrics({
   tile,
   showPlatform = false,
   className = "",
+  uppercaseSuffix = false,
 }: {
   tile: Pick<TalentContentTile, "views" | "engagements" | "platform">;
   showPlatform?: boolean;
   className?: string;
+  uppercaseSuffix?: boolean;
 }) {
   if (
     tile.views === undefined &&
@@ -68,7 +70,9 @@ export function ContentMetrics({
             <span className="content-metric" key={label} title={label}>
               <ContentIcon asset={icon} />
               <span aria-hidden="true">
-                {formatWebsiteMetric(value).replace("K", "k")}
+                {uppercaseSuffix
+                  ? formatWebsiteMetric(value)
+                  : formatWebsiteMetric(value).replace("K", "k")}
               </span>
               <span className="sr-only">
                 {value.toLocaleString("en-US")} {label.toLowerCase()}

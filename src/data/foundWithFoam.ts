@@ -1,7 +1,9 @@
 import type { StagedTalent, TalentContentTile } from "./stagedTalent";
 import {
   websiteAria,
+  websiteElise,
   websiteLena,
+  websiteMira,
   websiteNia,
   websiteSamantha,
 } from "./websiteTalent";
@@ -32,18 +34,15 @@ function resultFor(
 /** Skincare first, with related beauty posts; retain each post’s demo metadata. */
 export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteNia, "nia-brooks-skincare.webp"),
+  resultFor(websiteMira, "mira-vale-paused-makeup.webp"), // Candid makeup frame
   resultFor(websiteAria, "aria-quen-v2-c1.webp"), // Lipstick application
-  resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // Curl refresh
+  resultFor(websiteElise, "elise-morgan-hotel-selfie.webp"), // Hotel getting-ready moment
   resultFor(websiteLena, "lena-croft-grwm.webp"), // Refreshed getting-ready skincare
-  resultFor(websiteSamantha, "samantha-pikka-v2-c6.webp"), // Haircare products
-  resultFor(websiteAria, "aria-quen-v2-c3.webp"), // Evening routine
-  resultFor(websiteSamantha, "samantha-pikka-v2-c5.webp"), // Morning check-in
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
+  resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // One Samantha appearance
+  resultFor(websiteLena, "lena-croft-outfit.webp"), // Outfit check
+  resultFor(websiteAria, "aria-quen-v2-c3.webp"), // Evening routine
   resultFor(websiteAria, "aria-quen-v2-c5.webp"), // Packing essentials
-  resultFor(websiteSamantha, "samantha-pikka-dance-solo.webp"),
-  resultFor(websiteAria, "aria-quen-v2-c6.webp"), // Evening selfie
-  resultFor(websiteSamantha, "samantha-pikka-v2-c2.webp"), // Between takes
-  resultFor(websiteSamantha, "samantha-pikka-dance-duo.webp"),
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];
