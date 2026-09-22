@@ -5,13 +5,13 @@
 }
 .fs-track {
   position: relative;
-  height: 480vh;
+  height: 320vh;
 }
 .fs-canvas {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
 }
 .fs-intro {
@@ -729,7 +729,7 @@
 }
 @media (max-width: 800px) {
   .fs-track {
-    height: 440svh;
+    height: 320svh;
   }
   .fs-canvas {
     height: 100svh;
@@ -938,5 +938,31 @@
   .fs-reduced .fs-canvas {
     min-height: 650px;
     height: 90svh;
+  }
+}
+
+.fs-example-control {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0;
+  background: transparent;
+  color: #667085;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.fs-example-control:hover {
+  background: #e9edf2;
+}
+.fs-example-control:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 2px;
+}
+@media (max-width: 800px) {
+  .fs-example-control {
+    bottom: 33%;
   }
 }

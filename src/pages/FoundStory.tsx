@@ -1,4 +1,10 @@
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import {
@@ -13,6 +19,7 @@ import {
 } from "../data/foundWithFoam";
 import { formatWebsiteMetric } from "../data/websiteTalent";
 import {
+  foundSearchExample,
   foundStoryTimeline,
   FOUND_SEARCH_QUERY,
 } from "../lib/foundStoryMotion";
@@ -25,6 +32,81 @@ function subscribeMotion(listener: () => void) {
   const query = window.matchMedia(motionQuery);
   query.addEventListener("change", listener);
   return () => query.removeEventListener("change", listener);
+}
+
+/** Keep the small typing update isolated from the results and camera. */
+function SearchExampleText({
+  query,
+  paused,
+  showCaret,
+}: {
+  query: string;
+  paused: boolean;
+  showCaret: boolean;
+}) {
+  const target = useRef<HTMLSpanElement>(null);
+  const elapsed = useRef(0);
+  const [example, setExample] = useState("");
+
+  useEffect(() => {
+    if (query) {
+      elapsed.current = 0;
+      setExample("");
+      return;
+    }
+    if (paused || !target.current) return;
+    let visible = false;
+    let timer: number | undefined;
+    let lastTick = 0;
+    const tick = () => {
+      const now = performance.now();
+      elapsed.current += now - lastTick;
+      lastTick = now;
+      setExample(foundSearchExample(elapsed.current));
+    };
+    const sync = () => {
+      if (visible && !document.hidden) {
+        if (timer === undefined) {
+          lastTick = performance.now();
+          timer = window.setInterval(tick, 60);
+        }
+      } else {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+        sync();
+      },
+      { threshold: 0.6 },
+    );
+    observer.observe(target.current);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      window.clearInterval(timer);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, [query, paused]);
+
+  // The scroll-selected query always wins, even if a timer callback is queued.
+  const text = query || example;
+  return (
+    <>
+      <span ref={target} className={text ? "fs-query" : "fs-placeholder"}>
+        {text || "Describe the content you’re looking for"}
+        <i
+          className="fs-caret"
+          style={{ opacity: text && showCaret ? 1 : 0 }}
+        />
+      </span>
+      <span className="fs-enter" style={{ opacity: text ? 1 : 0 }}>
+        ↵
+      </span>
+    </>
+  );
 }
 
 function ResultCard({
@@ -212,6 +294,7 @@ export function FoundStory() {
   const app = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [examplesPaused, setExamplesPaused] = useState(false);
   const [camera, setCamera] = useState({
     x: 0,
     y: 0,
@@ -359,19 +442,11 @@ export function FoundStory() {
               }}
             >
               <LabIcon name="search" size={19} />
-              <span className={state.query ? "fs-query" : "fs-placeholder"}>
-                {state.query || "Describe the content you’re looking for"}
-                <i
-                  className="fs-caret"
-                  style={{ opacity: state.query && zoom < 0.8 ? 1 : 0 }}
-                />
-              </span>
-              <span
-                className="fs-enter"
-                style={{ opacity: state.query ? 1 : 0 }}
-              >
-                ↵
-              </span>
+              <SearchExampleText
+                query={state.query}
+                paused={examplesPaused}
+                showCaret={!reducedMotion && zoom < 0.8}
+              />
             </div>
             <div className="fs-toolbar" style={{ opacity: zoom }}>
               <span className="fs-filter-heading">
@@ -431,6 +506,17 @@ export function FoundStory() {
               <SelectedPost />
             </div>
           </div>
+          {!state.query && !reducedMotion && (
+            <button
+              type="button"
+              className="fs-example-control"
+              onClick={() => setExamplesPaused((value) => !value)}
+              aria-pressed={examplesPaused}
+              aria-label="Pause search examples"
+            >
+              {examplesPaused ? "Resume examples" : "Pause examples"}
+            </button>
+          )}
           <p
             className="fs-scroll-cue"
             style={{ opacity: intro }}
