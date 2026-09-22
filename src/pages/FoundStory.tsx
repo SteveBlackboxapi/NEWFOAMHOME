@@ -19,6 +19,7 @@ import {
   type FoundResult,
 } from "../data/foundWithFoam";
 import { formatWebsiteMetric } from "../data/websiteTalent";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import {
   foundSearchExample,
   foundStoryTimeline,
@@ -126,7 +127,7 @@ function ResultCard({
   detail: number;
 }) {
   const { talent, tile } = result;
-  // Keep the whole stagger within the reveal, including the fifth result.
+  // Keep the whole feed's stagger within the reveal before selection begins.
   const delay = (index / Math.max(1, FOUND_RESULTS.length - 1)) * 0.3;
   const entered = clamp((progress - delay) / 0.7);
   const hasMetrics = (tile.views ?? 0) > 0 || (tile.engagements ?? 0) > 0;
@@ -141,6 +142,7 @@ function ResultCard({
       <div
         className="fs-result-media"
         style={{
+          aspectRatio: tile.aspectRatio ?? "9/16",
           outlineColor:
             index === 0 ? `rgba(198,243,30,${highlight})` : "transparent",
         }}
@@ -533,6 +535,14 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
 
 /** A continuous camera move: the opening search is the same bar in the results UI. */
 export function FoundStory() {
+  const narrow = useMediaQuery("(max-width: 800px)");
+  const columnCount = narrow ? 2 : 5;
+  // Fill across the first row, then stack each column independently like the app.
+  const resultColumns = Array.from({ length: columnCount }, (_, column) =>
+    FOUND_RESULTS.map((result, index) => ({ result, index })).filter(
+      ({ index }) => index % columnCount === column,
+    ),
+  );
   const reducedMotion = useSyncExternalStore(
     subscribeMotion,
     () => window.matchMedia(motionQuery).matches,
@@ -731,15 +741,19 @@ export function FoundStory() {
                 <span>Most relevant</span>
               </div>
               <div className="fs-results-grid">
-                {FOUND_RESULTS.map((result, index) => (
-                  <ResultCard
-                    key={result.id}
-                    result={result}
-                    index={index}
-                    progress={state.results}
-                    highlight={state.highlight}
-                    detail={state.detail}
-                  />
+                {resultColumns.map((column, columnIndex) => (
+                  <div className="fs-results-column" key={columnIndex}>
+                    {column.map(({ result, index }) => (
+                      <ResultCard
+                        key={result.id}
+                        result={result}
+                        index={index}
+                        progress={state.results}
+                        highlight={state.highlight}
+                        detail={state.detail}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>

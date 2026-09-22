@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
+import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
@@ -66,7 +67,6 @@ const STAGE = {
   shareUrl: "https://foam.io/m/samantha-pikka",
 };
 
-const TILES = websiteSamantha.content.slice(0, 4);
 // Count timing follows the first actual figure; section headers can enter much earlier.
 const COUNT_ANCHORS = {
   platforms: "[data-kit-count-anchor]",
@@ -272,14 +272,64 @@ function AfterShare() {
   const [hovering, setHovering] = useState(false);
   const halt = paused || hovering;
   const [active, setActive] = useState(0);
+  // Crop to each logo's artwork in the 3520 × 1120 sheet, excluding transparent padding.
   const LOGOS = [
-    ["tbh talent", "0% 66.6667%"],
-    ["The Brand Row", "33.3333% 66.6667%"],
-    ["Eleven Eleven Collective", "66.6667% 66.6667%"],
-    ["Hiller Media Group", "100% 66.6667%"],
-    ["Good Answer", "0% 100%"],
-    ["Gersh Agency", "0% 0%"],
-    ["Select Management Group", "33.3333% 0%"],
+    {
+      label: "tbh talent",
+      x: 277,
+      y: 604,
+      width: 325,
+      height: 192,
+      displayWidth: 172,
+    },
+    {
+      label: "The Brand Row",
+      x: 1236,
+      y: 641,
+      width: 168,
+      height: 117,
+      displayWidth: 160,
+    },
+    {
+      label: "Eleven Eleven Collective",
+      x: 1840,
+      y: 638,
+      width: 720,
+      height: 124,
+      displayWidth: 200,
+    },
+    {
+      label: "Hiller Media Group",
+      x: 2912,
+      y: 632,
+      width: 335,
+      height: 135,
+      displayWidth: 172,
+    },
+    {
+      label: "Good Answer",
+      x: 117,
+      y: 900,
+      width: 646,
+      height: 160,
+      displayWidth: 200,
+    },
+    {
+      label: "Gersh Agency",
+      x: 184,
+      y: 70,
+      width: 512,
+      height: 140,
+      displayWidth: 180,
+    },
+    {
+      label: "Select Management Group",
+      x: 1177,
+      y: 44,
+      width: 286,
+      height: 192,
+      displayWidth: 168,
+    },
   ];
   const sheet = `${A}/agency-logos.webp`;
   const CARDS = [
@@ -327,24 +377,37 @@ function AfterShare() {
           }}
         >
           <div
-            className="flex w-max animate-[logoMarquee_90s_linear_infinite]"
+            className="ks-agency-marquee flex w-max animate-[logoMarquee_90s_linear_infinite]"
             style={{ animationPlayState: halt ? "paused" : "running" }}
           >
             {[0, 1].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-10 pr-10">
-                {LOGOS.map(([label, pos]) => (
-                  <div
-                    key={`${copy}-${label}`}
-                    role="img"
-                    aria-label={label}
-                    className="w-52 h-16 shrink-0"
-                    style={{
-                      backgroundImage: `url(${sheet})`,
-                      backgroundSize: "400% 400%",
-                      backgroundPosition: pos,
-                    }}
-                  />
-                ))}
+              <div
+                key={copy}
+                className="flex shrink-0 gap-12 pr-12"
+                aria-hidden={copy === 1 ? true : undefined}
+              >
+                {LOGOS.map((logo) => {
+                  const scale = logo.displayWidth / logo.width;
+                  return (
+                    <div
+                      key={`${copy}-${logo.label}`}
+                      className="ks-agency-logo-slot"
+                    >
+                      <div
+                        role="img"
+                        aria-label={logo.label}
+                        style={{
+                          width: logo.displayWidth,
+                          height: logo.height * scale,
+                          backgroundImage: `url(${sheet})`,
+                          backgroundSize: `${3520 * scale}px ${1120 * scale}px`,
+                          backgroundPosition: `${-logo.x * scale}px ${-logo.y * scale}px`,
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
@@ -537,7 +600,7 @@ function KitStoryDesktop() {
           : nextReveal,
       );
       const featured = body
-        .querySelector<HTMLElement>(".ks-content-image")
+        .querySelector<HTMLElement>(".ks-content-grid")
         ?.getBoundingClientRect();
       if (featured) {
         const nextFeatured = {
@@ -859,7 +922,7 @@ function KitStoryDesktop() {
                         <small>Demo figures</small>
                       </div>
                       <div className="ks-content-grid">
-                        {TILES.map((tile) => (
+                        {KIT_FEATURED_CONTENT.map((tile) => (
                           <figure
                             key={tile.thumb}
                             style={{
