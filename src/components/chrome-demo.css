@@ -403,6 +403,9 @@
   border-top: 1px solid #edf0f4;
 }
 .cs-send-preview {
+  border: 0;
+  min-width: 68px;
+  justify-content: space-between;
   display: inline-flex;
   gap: 16px;
   align-items: center;
@@ -925,4 +928,28 @@
   .cs-thread.is-replying .cs-reply > footer {
     padding-block: 5px;
   }
+}
+
+/* Keep the paste anchor in place after the profile replaces the caret. */
+.cs-pasted-profile {
+  position: relative;
+  margin-top: 16px;
+}
+.cs-pasted-anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 15px;
+  pointer-events: none;
+}
+.cs-thread.is-replying .cs-pasted-profile {
+  margin-top: 11px;
+}
+.cs-pasted-profile > .cs-creator-embed,
+.cs-thread.is-replying .cs-pasted-profile > .cs-creator-embed {
+  margin-top: 0;
+}
+.cs-send-preview:disabled {
+  cursor: default;
 }

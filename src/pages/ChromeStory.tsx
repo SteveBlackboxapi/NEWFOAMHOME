@@ -18,6 +18,9 @@ import {
   SHOW_CHROME_STEP_NAV,
   chromeStageAt,
   chromeEntryScale,
+  chromeSendoffAt,
+  chromePlanePose,
+  type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import "./chrome-story.css";
@@ -28,6 +31,8 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const track = useRef<HTMLElement>(null);
   const reveal = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [flightGeometry, setFlightGeometry] =
+    useState<ChromeFlightGeometry | null>(null);
   const wallpaper = useChromeWallpaper();
   useChromePreviewEntry(track);
   useLayoutEffect(() => {
@@ -70,6 +75,41 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
     };
   }, []);
   const current = chromeStageAt(progress);
+  const sendoff = chromeSendoffAt(progress);
+  const plane = chromePlanePose(progress, flightGeometry);
+  useLayoutEffect(() => {
+    const root = reveal.current;
+    const send = root?.querySelector<HTMLElement>(
+      '[data-chrome-target="send"]',
+    );
+    if (!root || !send) return;
+    const measure = () => {
+      const bounds = root.getBoundingClientRect();
+      const button = send.getBoundingClientRect();
+      const scaleX = bounds.width / root.offsetWidth || 1;
+      const scaleY = bounds.height / root.offsetHeight || 1;
+      setFlightGeometry({
+        start: {
+          x: (button.left + button.width / 2 - bounds.left) / scaleX,
+          y: (button.top + button.height / 2 - bounds.top) / scaleY,
+        },
+        width: root.offsetWidth,
+        height: root.offsetHeight,
+      });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(root);
+    observer.observe(send);
+    let active = true;
+    void document.fonts.ready.then(() => {
+      if (active) measure();
+    });
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [current]);
   const goTo = useCallback((next: ChromeStage) => {
     const element = track.current;
     if (!element) return;
@@ -78,7 +118,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
       top:
         start +
         (element.offsetHeight - window.innerHeight) *
-          ((CHROME_STAGE_STOPS[next] + 0.005) / CHROME_STORY_END),
+          (next === 6
+            ? 1
+            : (CHROME_STAGE_STOPS[next] + 0.005) / CHROME_STORY_END),
       behavior: "smooth",
     });
   }, []);
@@ -111,21 +153,74 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         <div className="cs-sticky-stage">
           <div className="cs-stage-reveal" ref={reveal}>
             <div
-              className="cs-desktop-wallpaper"
-              style={{
-                backgroundImage: chromeWallpaperBackground(wallpaper),
-              }}
-            />
-            <p className="cs-stage-caption">
-              {CHROME_STEPS[current].description}
-            </p>
-            <div className="cs-browser-holder">
-              <ChromeDemoWindow
-                stage={current}
-                progress={progress}
-                onStage={goTo}
+              className="cs-desktop-scene"
+              style={{ opacity: sendoff.desktopOpacity }}
+              inert={sendoff.desktopOpacity === 0}
+              aria-hidden={sendoff.desktopOpacity === 0}
+            >
+              <div
+                className="cs-desktop-wallpaper"
+                style={{
+                  backgroundImage: chromeWallpaperBackground(wallpaper),
+                }}
               />
+              <p className="cs-stage-caption">
+                {CHROME_STEPS[current].description}
+              </p>
+              <div className="cs-browser-holder">
+                <ChromeDemoWindow
+                  stage={current}
+                  progress={progress}
+                  onStage={goTo}
+                />
+              </div>
             </div>
+            <section
+              className="cs-finale cs-sendoff-finale"
+              aria-label="Foam Chrome extension"
+              aria-hidden={!sendoff.finaleInteractive}
+              inert={!sendoff.finaleInteractive}
+              style={{
+                opacity: sendoff.finaleOpacity,
+                transform: `translateY(${sendoff.finaleOffset}px)`,
+                pointerEvents: sendoff.finaleInteractive ? "auto" : "none",
+              }}
+            >
+              <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+                <div className="cs-store-mark">
+                  <img
+                    src={`${A}/chrome-store.webp`}
+                    alt=""
+                    width={180}
+                    height={157}
+                  />
+                </div>
+                <h2>That’s the Chrome Extension.</h2>
+                <span>
+                  Bring your roster to your inbox{" "}
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </a>
+            </section>
+
+            {plane && (
+              <svg
+                className="cs-paper-plane"
+                data-chrome-paper-plane
+                viewBox="0 0 120 72"
+                aria-hidden="true"
+                style={{
+                  left: plane.x,
+                  top: plane.y,
+                  width: plane.width,
+                  opacity: plane.opacity,
+                  transform: `translate(-50%, -50%) rotate(${plane.rotation}deg) scale(${plane.scale})`,
+                }}
+              >
+                <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill="#7a0036" />
+                <path d="M44 40 L114 6 L60 40 Z" fill="#fff6eb" />
+              </svg>
+            )}
             {SHOW_CHROME_STEP_NAV && (
               <nav className="cs-step-nav" aria-label="Chrome demo steps">
                 {CHROME_STEPS.map((step, index) => (
@@ -143,22 +238,6 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
             )}
           </div>
         </div>
-      </section>
-      <section className="cs-finale">
-        <a href={CHROME_STORE} target="_blank" rel="noreferrer">
-          <div className="cs-store-mark">
-            <img
-              src={`${A}/chrome-store.webp`}
-              alt=""
-              width={180}
-              height={157}
-            />
-          </div>
-          <h2>That’s the Chrome Extension.</h2>
-          <span>
-            Bring your roster to your inbox <span aria-hidden="true">↗</span>
-          </span>
-        </a>
       </section>
     </div>
   );

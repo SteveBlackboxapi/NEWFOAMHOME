@@ -19,8 +19,9 @@ export const CHROME_STEPS = [
   { label: "Choose", description: "Find the person who fits the brief." },
   { label: "Copy", description: "One click copies the details that matter." },
   { label: "Paste", description: "A complete creator profile, ready to send." },
+  { label: "Send", description: "Your recommendation is on its way." },
 ] as const;
-export type ChromeStage = 0 | 1 | 2 | 3 | 4 | 5;
+export type ChromeStage = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export const CHROME_WALLPAPERS = {
   original: `url("${A}/chrome-desktop-landscape.webp")`,
