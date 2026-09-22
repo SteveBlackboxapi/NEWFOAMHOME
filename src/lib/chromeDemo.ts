@@ -11,12 +11,16 @@ export const CHROME_STORE =
 
 export const CHROME_STEPS = [
   { label: "The brief", description: "A brand asks for the right creator." },
-  { label: "Reply", description: "Your roster is right beside your reply." },
+  { label: "Reply", description: "Start your reply. Foam is one click away." },
+  {
+    label: "Open Foam",
+    description: "Your whole roster, right beside your reply.",
+  },
   { label: "Choose", description: "Find the person who fits the brief." },
   { label: "Copy", description: "One click copies the details that matter." },
   { label: "Paste", description: "A complete creator profile, ready to send." },
 ] as const;
-export type ChromeStage = 0 | 1 | 2 | 3 | 4;
+export type ChromeStage = 0 | 1 | 2 | 3 | 4 | 5;
 
 export const CHROME_WALLPAPERS = {
   original: `url("${A}/chrome-desktop-landscape.png")`,

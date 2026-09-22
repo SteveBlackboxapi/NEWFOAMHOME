@@ -1,5 +1,7 @@
 // Six viewport heights of travel, plus the final sticky viewport.
 export const KIT_STORY_HEIGHT_VH = 700;
+export const KIT_COUNT_SCROLL_VH = 24;
+const COUNT_SPAN = KIT_COUNT_SCROLL_VH / (KIT_STORY_HEIGHT_VH - 100);
 
 export const clampProgress = (value: number) =>
   Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
@@ -17,6 +19,7 @@ export type KitRevealStarts = {
   audience: number;
 };
 
+/** First visible number offsets within the scrolling body, not section/header offsets. */
 export type KitRevealLayout = KitRevealStarts & { viewportHeight: number };
 
 // Start early until the real section positions have been measured.
@@ -40,12 +43,13 @@ export function kitStoryTimeline(
 ) {
   const p = clampProgress(value);
   const reveal = (section: keyof KitRevealStarts) => {
-    const end = REVEAL_ENDS[section];
+    const latestEnd = REVEAL_ENDS[section];
     const supplied = revealStarts?.[section];
     const start =
       supplied !== undefined && Number.isFinite(supplied)
-        ? Math.max(0, Math.min(end - 0.001, supplied))
+        ? Math.max(0, Math.min(latestEnd - 0.001, supplied))
         : DEFAULT_REVEAL_STARTS[section];
+    const end = Math.min(latestEnd, start + COUNT_SPAN);
     return progressBetween(p, start, end);
   };
   return {
@@ -63,8 +67,9 @@ export function kitStoryTimeline(
     publicize: progressBetween(p, 0.84, 0.86),
     kitOut: progressBetween(p, 0.85, 0.89),
     fold: progressBetween(p, 0.88, 0.91),
-    planeIn: smoothProgress(progressBetween(p, 0.915, 0.94)),
-    fly: smoothProgress(progressBetween(p, 0.94, 1)),
+    planeIn: smoothProgress(progressBetween(p, 0.902, 0.914)),
+    planeEmerge: smoothProgress(progressBetween(p, 0.915, 0.95)),
+    fly: smoothProgress(progressBetween(p, 0.95, 1)),
     sharedIn: smoothProgress(progressBetween(p, 0.865, 0.895)),
     sharedOut: progressBetween(p, 0.95, 0.985),
     headlineOpacity: 1 - progressBetween(p, 0.015, 0.105),
@@ -98,7 +103,7 @@ export function kitPan(value: number, targets: KitPanTargets) {
   return position;
 }
 
-/** Find when each section approaches the viewport, in the same scroll space as the pan. */
+/** Find when each first number approaches the viewport, in the same scroll space as the pan. */
 export function kitRevealStarts(
   targets: KitPanTargets,
   layout: KitRevealLayout,
@@ -109,24 +114,35 @@ export function kitRevealStarts(
   for (const section of Object.keys(starts) as (keyof KitRevealStarts)[]) {
     const top = layout[section];
     if (!Number.isFinite(top) || top < 0) continue;
-    const entryPan = Math.max(0, top - layout.viewportHeight - 70);
-    if (entryPan === 0) {
+    const visiblePan = Math.max(0, top - layout.viewportHeight);
+    if (visiblePan === 0) {
+      // The canvas first shows through while the portrait is still shrinking.
       starts[section] = 0.08;
       continue;
     }
+    const leadPan = Math.max(0, visiblePan - 70);
     const end = REVEAL_ENDS[section];
-    if (!Number.isFinite(kitPan(end, targets)) || kitPan(end, targets) < entryPan)
+    if (
+      !Number.isFinite(kitPan(end, targets)) ||
+      kitPan(end, targets) < visiblePan
+    )
       continue;
-    let low = 0.08;
-    let high = end;
-    // kitPan is monotonic for measured document sections. Inverting it avoids
-    // restarting or flattening a count when the panel settles into a reading hold.
-    for (let step = 0; step < 48; step++) {
-      const middle = (low + high) / 2;
-      if (kitPan(middle, targets) >= entryPan) high = middle;
-      else low = middle;
-    }
-    starts[section] = Math.min(high, end - 0.001);
+    const atPan = (distance: number) => {
+      let low = 0.08;
+      let high = end;
+      for (let step = 0; step < 48; step++) {
+        const middle = (low + high) / 2;
+        if (kitPan(middle, targets) >= distance) high = middle;
+        else low = middle;
+      }
+      return high;
+    };
+    // A geometric lead can span a stationary hold. Limit that lead in scroll
+    // space too, so these shorter counts are still moving at visible entry.
+    starts[section] = Math.min(
+      Math.max(atPan(leadPan), atPan(visiblePan) - COUNT_SPAN * 0.35),
+      end - 0.001,
+    );
   }
   return starts;
 }
@@ -158,13 +174,41 @@ export function kitShareCursor(
   });
   const sharePoint = centre(share);
   const from =
-    aimCopy > 0
-      ? sharePoint
-      : { x: stage.width * 0.7, y: stage.height * 0.28 };
+    aimCopy > 0 ? sharePoint : { x: stage.width * 0.7, y: stage.height * 0.28 };
   const to = aimCopy > 0 && copy ? centre(copy) : sharePoint;
   const progress = clampProgress(aimCopy > 0 ? aimCopy : aimShare);
   return {
     x: from.x + (to.x - from.x) * progress,
     y: from.y + (to.y - from.y) * progress,
+  };
+}
+
+/** Complete natural-scroll counts in roughly a quarter of a viewport. */
+export const kitMobileCountProgress = (progress: number) =>
+  clampProgress(clampProgress(progress) * 2.6);
+
+/** Start inside the rendered logo, emerge behind its silhouette, then fly away. */
+export function kitPlanePose(
+  stage: KitRect,
+  logo: KitRect,
+  emerge: number,
+  flight: number,
+) {
+  const e = clampProgress(emerge);
+  const f = clampProgress(flight);
+  const logoX = logo.left - stage.left + logo.width / 2;
+  const logoY = logo.top - stage.top + logo.height / 2;
+  const launchX = logoX + logo.width * 0.76 * e;
+  const launchY = logoY - logo.height * 0.52 * e;
+  const launchWidth = logo.width * (0.58 + 0.22 * e);
+  const width = launchWidth + (logo.width * 1.1 - launchWidth) * f;
+  return {
+    x: launchX + (stage.width + width - launchX) * f,
+    y:
+      launchY +
+      (-width - launchY) * f -
+      Math.sin(f * Math.PI) * stage.height * 0.08,
+    width,
+    rotation: -16 + 10 * e + 16 * f,
   };
 }

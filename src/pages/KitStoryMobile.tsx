@@ -13,6 +13,7 @@ import { MobileFade } from "../components/MobileFade";
 import { KitAudience, KitGrowth, KitMetrics } from "../components/KitAnalytics";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import { useScrollRevealProgress } from "../hooks/useScrollRevealProgress";
+import { kitMobileCountProgress } from "../lib/kitStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { FoundStory } from "./FoundStory";
 import {
@@ -54,7 +55,9 @@ function ScrollCount({
     : (number: number) => number.toLocaleString("en-US");
   return (
     <>
-      <span aria-hidden="true">{format(Math.round(value * progress))}</span>
+      <span aria-hidden="true">
+        {format(Math.round(value * kitMobileCountProgress(progress)))}
+      </span>
       <span className="sr-only">{format(value)}</span>
     </>
   );
@@ -97,7 +100,10 @@ function MobileAnalyticsSection({
   const { ref, progress } = useScrollRevealProgress(reducedMotion);
   return (
     <div ref={ref} data-reveal-progress={progress.toFixed(3)}>
-      <Component progress={progress} reducedMotion={reducedMotion} />
+      <Component
+        progress={kitMobileCountProgress(progress)}
+        reducedMotion={reducedMotion}
+      />
     </div>
   );
 }
