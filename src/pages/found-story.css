@@ -5,13 +5,13 @@
 }
 .fs-track {
   position: relative;
-  height: 480vh;
+  height: 320vh;
 }
 .fs-canvas {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
 }
 .fs-intro {
@@ -595,6 +595,25 @@
 .fs-stage-note {
   bottom: 4%;
 }
+.fs-campaign {
+  margin: 0;
+  padding: 0 clamp(16px, 3vw, 48px);
+  background: #fff6eb;
+}
+.fs-campaign > img {
+  display: block;
+  width: 100%;
+  max-width: 1500px;
+  height: auto;
+  margin-inline: auto;
+}
+.fs-campaign > figcaption {
+  max-width: 1500px;
+  margin-inline: auto;
+}
+.fs-campaign + .fs-outro {
+  padding-top: 64px;
+}
 .fs-outro {
   padding: 100px 24px 110px;
   text-align: center;
@@ -729,7 +748,7 @@
 }
 @media (max-width: 800px) {
   .fs-track {
-    height: 440svh;
+    height: 320svh;
   }
   .fs-canvas {
     height: 100svh;
@@ -938,5 +957,37 @@
   .fs-reduced .fs-canvas {
     min-height: 650px;
     height: 90svh;
+  }
+}
+
+.fs-example-control {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0;
+  background: transparent;
+  color: #667085;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.fs-example-control:hover {
+  background: #e9edf2;
+}
+.fs-example-control:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 2px;
+}
+@media (max-width: 800px) {
+  .fs-example-control {
+    bottom: 33%;
+  }
+}
+
+@media (max-width: 800px) {
+  .fs-campaign + .fs-outro {
+    padding-top: 48px;
   }
 }

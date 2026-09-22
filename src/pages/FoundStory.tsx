@@ -1,4 +1,10 @@
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import {
@@ -13,6 +19,7 @@ import {
 } from "../data/foundWithFoam";
 import { formatWebsiteMetric } from "../data/websiteTalent";
 import {
+  foundSearchExample,
   foundStoryTimeline,
   FOUND_SEARCH_QUERY,
 } from "../lib/foundStoryMotion";
@@ -25,6 +32,81 @@ function subscribeMotion(listener: () => void) {
   const query = window.matchMedia(motionQuery);
   query.addEventListener("change", listener);
   return () => query.removeEventListener("change", listener);
+}
+
+/** Keep the small typing update isolated from the results and camera. */
+function SearchExampleText({
+  query,
+  paused,
+  showCaret,
+}: {
+  query: string;
+  paused: boolean;
+  showCaret: boolean;
+}) {
+  const target = useRef<HTMLSpanElement>(null);
+  const elapsed = useRef(0);
+  const [example, setExample] = useState("");
+
+  useEffect(() => {
+    if (query) {
+      elapsed.current = 0;
+      setExample("");
+      return;
+    }
+    if (paused || !target.current) return;
+    let visible = false;
+    let timer: number | undefined;
+    let lastTick = 0;
+    const tick = () => {
+      const now = performance.now();
+      elapsed.current += now - lastTick;
+      lastTick = now;
+      setExample(foundSearchExample(elapsed.current));
+    };
+    const sync = () => {
+      if (visible && !document.hidden) {
+        if (timer === undefined) {
+          lastTick = performance.now();
+          timer = window.setInterval(tick, 60);
+        }
+      } else {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+        sync();
+      },
+      { threshold: 0.6 },
+    );
+    observer.observe(target.current);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      window.clearInterval(timer);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, [query, paused]);
+
+  // The scroll-selected query always wins, even if a timer callback is queued.
+  const text = query || example;
+  return (
+    <>
+      <span ref={target} className={text ? "fs-query" : "fs-placeholder"}>
+        {text || "Describe the content you’re looking for"}
+        <i
+          className="fs-caret"
+          style={{ opacity: text && showCaret ? 1 : 0 }}
+        />
+      </span>
+      <span className="fs-enter" style={{ opacity: text ? 1 : 0 }}>
+        ↵
+      </span>
+    </>
+  );
 }
 
 function ResultCard({
@@ -135,7 +217,7 @@ function SelectedPost() {
         <img src={talent.portrait} alt="" />
         <span>
           <strong>{talent.displayName}</strong>
-          <small>Instagram · Image</small>
+          <small>TikTok · Image</small>
         </span>
         <span className="fs-detail-close">×</span>
       </div>
@@ -148,9 +230,9 @@ function SelectedPost() {
         </figure>
         <div className="fs-detail-info">
           <p className="fs-detail-kicker">THE MOMENT YOU WERE LOOKING FOR</p>
-          <h3>A quick curl refresh.</h3>
+          <h3>A low-effort night routine.</h3>
           <p className="fs-detail-caption">
-            An everyday haircare routine from Samantha Pikka.
+            A skincare routine with Aria Quen.
           </p>
           <h4>Post metrics</h4>
           <dl className="fs-post-metrics">
@@ -179,7 +261,7 @@ function SelectedPost() {
           <dl className="fs-post-details">
             <div>
               <dt>Platform</dt>
-              <dd>Instagram</dd>
+              <dd>TikTok</dd>
             </div>
             <div>
               <dt>Talent</dt>
@@ -187,7 +269,7 @@ function SelectedPost() {
             </div>
             <div>
               <dt>Content</dt>
-              <dd>Haircare · Routine</dd>
+              <dd>Skincare · Night routine</dd>
             </div>
           </dl>
           <p className="fs-demo-note">Fictional creators · Demo figures</p>
@@ -212,6 +294,7 @@ export function FoundStory() {
   const app = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [examplesPaused, setExamplesPaused] = useState(false);
   const [camera, setCamera] = useState({
     x: 0,
     y: 0,
@@ -290,9 +373,10 @@ export function FoundStory() {
         <h2>Found with Foam</h2>
         <p>
           Describe a moment, topic or creator. This example searches for
-          everyday makeup and haircare, reveals four matching posts, then opens
-          Samantha Pikka’s curl refresh with 116,000 views and 4,600
-          engagements. All creators and figures are illustrative.
+          skincare product reviews, shows a skincare post alongside related
+          beauty content, then opens Aria Quen’s night routine with 410,000
+          views and 38,100 engagements. All creators and figures are
+          illustrative.
         </p>
       </div>
       <section
@@ -359,19 +443,11 @@ export function FoundStory() {
               }}
             >
               <LabIcon name="search" size={19} />
-              <span className={state.query ? "fs-query" : "fs-placeholder"}>
-                {state.query || "Describe the content you’re looking for"}
-                <i
-                  className="fs-caret"
-                  style={{ opacity: state.query && zoom < 0.8 ? 1 : 0 }}
-                />
-              </span>
-              <span
-                className="fs-enter"
-                style={{ opacity: state.query ? 1 : 0 }}
-              >
-                ↵
-              </span>
+              <SearchExampleText
+                query={state.query}
+                paused={examplesPaused}
+                showCaret={!reducedMotion && zoom < 0.8}
+              />
             </div>
             <div className="fs-toolbar" style={{ opacity: zoom }}>
               <span className="fs-filter-heading">
@@ -382,7 +458,7 @@ export function FoundStory() {
                 className="fs-query-chip"
                 style={{ opacity: state.results }}
               >
-                <LabIcon name="search" size={13} /> Makeup & haircare{" "}
+                <LabIcon name="search" size={13} /> {FOUND_SEARCH_QUERY}{" "}
                 <span>×</span>
               </span>
               <span className="fs-sort">
@@ -395,7 +471,7 @@ export function FoundStory() {
             </div>
             <div className="fs-results" style={{ opacity: zoom }}>
               <div className="fs-results-caption">
-                <span>{FOUND_RESULTS.length} matching posts</span>
+                <span>{FOUND_RESULTS.length} beauty posts</span>
                 <span>Most relevant</span>
               </div>
               <div className="fs-results-grid">
@@ -431,6 +507,17 @@ export function FoundStory() {
               <SelectedPost />
             </div>
           </div>
+          {!state.query && !reducedMotion && (
+            <button
+              type="button"
+              className="fs-example-control"
+              onClick={() => setExamplesPaused((value) => !value)}
+              aria-pressed={examplesPaused}
+              aria-label="Pause search examples"
+            >
+              {examplesPaused ? "Resume examples" : "Pause examples"}
+            </button>
+          )}
           <p
             className="fs-scroll-cue"
             style={{ opacity: intro }}
@@ -447,6 +534,19 @@ export function FoundStory() {
           </p>
         </div>
       </section>
+      <figure className="fs-campaign">
+        <img
+          src={`${A}/campaigns/found-with-foam-skincare.webp`}
+          width={1584}
+          height={1248}
+          loading="lazy"
+          decoding="async"
+          alt="Concept outdoor advert: a woman cleansing her face against a pink background, beneath a search for Skincare product reviews and above the words Found with Foam."
+        />
+        <figcaption>
+          <AIDisclosure detail="Concept advert" />
+        </figcaption>
+      </figure>
       <div className="fs-outro">
         <span className="fs-eyebrow">FOUND WITH FOAM</span>
         <h2 id="found-title">

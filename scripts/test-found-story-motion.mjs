@@ -1,5 +1,6 @@
 // Run with: node --test scripts/test-found-story-motion.mjs
-// Checks pure scroll state; visual composition remains a browser check.
+// Checks timed example text and pure scroll state. Timer lifecycle and visual
+// composition remain integration/browser checks.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
@@ -15,14 +16,25 @@ const { outputText } = ts.transpileModule(readFileSync(filename, "utf8"), {
 });
 const module = { exports: {} };
 new Function("module", "exports", outputText)(module, module.exports);
-const { foundStoryTimeline, FOUND_SEARCH_QUERY } = module.exports;
-const initialQuery = "Morning runs outdoors";
+const {
+  foundStoryTimeline,
+  foundSearchExample,
+  FOUND_SEARCH_QUERY,
+  FOUND_SEARCH_LOCK_PROGRESS,
+  FOUND_SEARCH_EXAMPLES,
+  FOUND_SEARCH_CYCLE_MS,
+} = module.exports;
+const exampleQueries = ["Morning runs outdoors", "Skincare product reviews"];
+const typeMs = 65;
+const holdMs = 1500;
+const eraseMs = 30;
+const gapMs = 400;
 const phases = {
-  zoom: [0.43, 0.62],
-  results: [0.53, 0.69],
-  highlight: [0.7, 0.76],
-  detail: [0.78, 0.89],
-  finish: [0.9, 0.97],
+  zoom: [0.05, 0.38],
+  results: [0.22, 0.5],
+  highlight: [0.52, 0.62],
+  detail: [0.66, 0.85],
+  finish: [0.88, 0.98],
 };
 const samples = (start, end, steps = 100) =>
   Array.from(
@@ -35,51 +47,91 @@ const nearly = (actual, expected, message, tolerance = 1e-9) =>
     `${message}: ${actual} ≠ ${expected}`,
   );
 
-test("search types both complete queries as prefixes and erases the first one", () => {
-  for (const [text, start, end] of [
-    [initialQuery, 0.025, 0.14],
-    [FOUND_SEARCH_QUERY, 0.28, 0.4],
-  ]) {
-    const lengths = new Set();
-    let previous = "";
-    for (const p of samples(start, end, 200)) {
-      const { query } = foundStoryTimeline(p);
-      assert.ok(text.startsWith(query), `unexpected query text at ${p}`);
-      assert.ok(query.startsWith(previous), `typing went backward at ${p}`);
-      lengths.add(query.length);
-      previous = query;
+test("each timed example types one character at a time, holds, then erases into a blank gap", () => {
+  assert.deepEqual(FOUND_SEARCH_EXAMPLES, exampleQueries);
+  let start = 0;
+  for (const text of exampleQueries) {
+    for (let characters = 0; characters < text.length; characters++) {
+      const time = start + characters * typeMs;
+      assert.equal(foundSearchExample(time), text.slice(0, characters));
+      assert.equal(foundSearchExample(time + typeMs - 0.25), text.slice(0, characters));
+      assert.equal(foundSearchExample(time + typeMs), text.slice(0, characters + 1));
     }
-    assert.equal(previous, text);
-    assert.equal(
-      lengths.size,
-      text.length + 1,
-      "every character is reachable by scrolling",
-    );
+    const holdStart = start + text.length * typeMs;
+    for (const offset of [0, holdMs / 2, holdMs - 0.25])
+      assert.equal(foundSearchExample(holdStart + offset), text);
+    const eraseStart = holdStart + holdMs;
+    for (let removed = 0; removed < text.length; removed++) {
+      const time = eraseStart + removed * eraseMs;
+      assert.equal(foundSearchExample(time), text.slice(0, text.length - removed));
+      assert.equal(foundSearchExample(time + eraseMs - 0.25), text.slice(0, text.length - removed));
+      assert.equal(foundSearchExample(time + eraseMs), text.slice(0, text.length - removed - 1));
+    }
+    const gapStart = eraseStart + text.length * eraseMs;
+    for (const offset of [0, gapMs / 2, gapMs - 0.25])
+      assert.equal(foundSearchExample(gapStart + offset), "");
+    start = gapStart + gapMs;
   }
-  let previous = initialQuery;
-  const lengths = new Set();
-  for (const p of samples(0.21, 0.27, 200)) {
-    const { query } = foundStoryTimeline(p);
-    assert.ok(previous.startsWith(query), `erasing added text at ${p}`);
-    lengths.add(query.length);
-    previous = query;
-  }
-  assert.equal(previous, "");
-  assert.equal(lengths.size, initialQuery.length + 1);
+  assert.equal(FOUND_SEARCH_CYCLE_MS, start);
 });
 
-test("typing holds are exact and the final query remains throughout results and detail", () => {
-  for (const p of samples(0, 0.025))
-    assert.equal(foundStoryTimeline(p).query, "");
-  for (const p of samples(0.14, 0.21))
-    assert.equal(foundStoryTimeline(p).query, initialQuery);
-  for (const p of samples(0.27, 0.28))
-    assert.equal(foundStoryTimeline(p).query, "");
-  for (const p of samples(0.4, 1))
+test("timed examples wrap exactly and give the same text after skipped or reversed clock samples", () => {
+  const checkpoints = [...samples(0, FOUND_SEARCH_CYCLE_MS, 1000), 65, 130, 1365, 2865, 3895];
+  const baseline = new Map(checkpoints.map((time) => [time, foundSearchExample(time)]));
+  for (const time of [...checkpoints].reverse().concat([3895, 65, 2865, 0, 1365]))
+    assert.equal(foundSearchExample(time), baseline.get(time));
+  for (const cycles of [1, 2, 1000]) {
+    for (const offset of [0, 64.75, 65, 130, 1365, 2865, 3895, FOUND_SEARCH_CYCLE_MS - 0.25])
+      assert.equal(foundSearchExample(cycles * FOUND_SEARCH_CYCLE_MS + offset), foundSearchExample(offset));
+  }
+  assert.equal(foundSearchExample(FOUND_SEARCH_CYCLE_MS - 0.25), "");
+  assert.equal(foundSearchExample(FOUND_SEARCH_CYCLE_MS), "");
+  assert.equal(foundSearchExample(FOUND_SEARCH_CYCLE_MS + typeMs), "M");
+});
+
+test("examples can change while scroll is paused without advancing any visual phase", () => {
+  for (const progress of [0, 0.01, 0.02499]) {
+    const paused = foundStoryTimeline(progress);
+    const texts = new Set();
+    for (const elapsed of samples(0, FOUND_SEARCH_CYCLE_MS, 200)) {
+      texts.add(foundSearchExample(elapsed));
+      assert.deepEqual(foundStoryTimeline(progress), paused);
+      for (const field of Object.keys(phases)) assert.equal(paused[field], 0);
+    }
+    assert.ok(texts.size > 20, "search examples must keep typing at the same scroll position");
+  }
+});
+
+test("scroll locks the final query at .025 before zoom, and reversing releases the lock", () => {
+  assert.equal(FOUND_SEARCH_LOCK_PROGRESS, 0.025);
+  assert.equal(FOUND_SEARCH_QUERY, "Skincare product reviews");
+  assert.equal(foundStoryTimeline(0.025 - 1e-7).query, "");
+  for (const p of [0.025, 0.025 + 1e-7, 0.04, 0.05]) {
+    const state = foundStoryTimeline(p);
+    assert.equal(state.query, FOUND_SEARCH_QUERY);
+    for (const field of Object.keys(phases)) assert.equal(state[field], 0);
+  }
+  for (const p of samples(0.025, 1))
     assert.equal(foundStoryTimeline(p).query, FOUND_SEARCH_QUERY);
-  assert.equal(FOUND_SEARCH_QUERY, "Everyday makeup and haircare");
-  assert.deepEqual(foundStoryTimeline(0.14), foundStoryTimeline(0.21));
-  assert.deepEqual(foundStoryTimeline(0.4), foundStoryTimeline(0.43));
+  // Calling the clock helper mid-type or mid-erase cannot alter the scroll lock.
+  for (const elapsed of [typeMs, 20 * typeMs, 21 * typeMs + holdMs + eraseMs, 3895]) {
+    foundSearchExample(elapsed);
+    assert.equal(foundStoryTimeline(0.025).query, FOUND_SEARCH_QUERY);
+  }
+  foundStoryTimeline(1);
+  assert.equal(foundStoryTimeline(0.02499).query, "");
+  assert.equal(foundSearchExample(typeMs), "M");
+  assert.equal(foundStoryTimeline(0.025).query, FOUND_SEARCH_QUERY);
+});
+
+test("invalid example times reset safely and very large finite times still return a valid prefix", () => {
+  for (const time of [-1000, -1, NaN, Infinity, -Infinity])
+    assert.equal(foundSearchExample(time), foundSearchExample(0));
+  for (const time of [Number.MAX_SAFE_INTEGER, Number.MAX_VALUE]) {
+    const text = foundSearchExample(time);
+    assert.equal(typeof text, "string");
+    assert.ok(exampleQueries.some((query) => query.startsWith(text)));
+  }
 });
 
 test("each visual phase eases only within its interval and holds exact endpoints", () => {
@@ -107,29 +159,24 @@ test("each visual phase eases only within its interval and holds exact endpoints
 });
 
 test("results overlap zoom and later beats retain their intended gaps", () => {
-  const overlap = foundStoryTimeline(0.57);
+  const overlap = foundStoryTimeline(0.3);
   assert.ok(overlap.zoom > 0 && overlap.zoom < 1);
   assert.ok(overlap.results > 0 && overlap.results < 1);
   assert.equal(overlap.highlight, 0);
   assert.equal(overlap.detail, 0);
   assert.equal(overlap.finish, 0);
-  const ready = foundStoryTimeline(0.695);
+  const ready = foundStoryTimeline(0.51);
   assert.equal(ready.zoom, 1);
   assert.equal(ready.results, 1);
   assert.equal(ready.highlight, 0);
-  assert.deepEqual(foundStoryTimeline(0.76), foundStoryTimeline(0.78));
-  assert.deepEqual(foundStoryTimeline(0.89), foundStoryTimeline(0.9));
-  assert.deepEqual(foundStoryTimeline(0.97), foundStoryTimeline(1));
+  assert.deepEqual(foundStoryTimeline(0.62), foundStoryTimeline(0.66));
+  assert.deepEqual(foundStoryTimeline(0.85), foundStoryTimeline(0.88));
+  assert.deepEqual(foundStoryTimeline(0.98), foundStoryTimeline(1));
 });
 
 test("numeric animation values stay continuous across all phase boundaries", () => {
   for (const boundary of [
     0.025,
-    0.14,
-    0.21,
-    0.27,
-    0.28,
-    0.4,
     ...Object.values(phases).flat(),
   ]) {
     const before = foundStoryTimeline(boundary - 1e-7);
@@ -142,25 +189,15 @@ test("numeric animation values stay continuous across all phase boundaries", () 
 test("reverse scroll and arbitrary jumps reproduce the same query and visual state", () => {
   const checkpoints = [
     ...samples(0, 1, 1000),
+    0.02499,
     0.025,
-    0.14,
-    0.21,
-    0.27,
-    0.28,
     0.4,
-    0.43,
-    0.62,
-    0.69,
-    0.76,
-    0.78,
-    0.89,
-    0.9,
-    0.97,
+    ...Object.values(phases).flat(),
   ];
   const baseline = new Map(checkpoints.map((p) => [p, foundStoryTimeline(p)]));
   for (const p of [...checkpoints]
     .reverse()
-    .concat([0.89, 0.21, 1, 0, 0.62, 0.14, 0.97]))
+    .concat([0.85, 0.025, 1, 0, 0.62, 0.02499, 0.98]))
     assert.deepEqual(foundStoryTimeline(p), baseline.get(p));
   const edited = foundStoryTimeline(0.4);
   edited.query = "unrelated edit";
