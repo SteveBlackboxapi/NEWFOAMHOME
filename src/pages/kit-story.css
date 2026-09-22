@@ -1,3 +1,30 @@
+.ks-hero-title {
+  font-size: clamp(48px, 6.4vw, 88px);
+  line-height: 0.94;
+  letter-spacing: -0.026em;
+}
+.ks-hero-title > span {
+  display: block;
+  white-space: nowrap;
+}
+.ks-hero-title-mobile {
+  font-size: clamp(32px, 10vw, 56px);
+  line-height: 0.96;
+}
+.ks-content-grid figure {
+  transition: opacity 240ms ease-out;
+}
+.ks-featured-photo {
+  transition: opacity 300ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ks-content-grid figure,
+  .ks-featured-photo {
+    opacity: 1 !important;
+    transition: none;
+  }
+}
+
 .ks-sendoff-logo {
   width: clamp(160px, 28vh, 220px);
   margin-bottom: clamp(16px, 3vh, 26px);

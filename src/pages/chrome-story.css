@@ -59,10 +59,18 @@
   top: 0;
   height: 100vh;
   overflow: clip;
+  background: #fff;
+}
+.cs-stage-reveal {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f4f5f7;
+  transform: scale(var(--chrome-entry-scale, 0.7));
+  transform-origin: center top;
 }
 .cs-desktop-wallpaper {
   position: absolute;

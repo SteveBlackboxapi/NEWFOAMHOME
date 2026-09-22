@@ -33,6 +33,7 @@ import {
   kitStoryTimeline,
   kitShareCursor,
   kitPlanePose,
+  kitFeaturedOpacity,
   KIT_STORY_HEIGHT_VH,
   KIT_JUMP_POINTS,
   type KitPanTargets,
@@ -85,6 +86,28 @@ function lerp(a: number, b: number, t: number) {
 }
 function ease(t: number) {
   return t * t * (3 - 2 * t);
+}
+
+function KitFeaturedImage({ src, alt }: { src: string; alt: string }) {
+  const image = useRef<HTMLImageElement | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  useLayoutEffect(() => {
+    // Cached images may finish before the load handler is attached.
+    setLoaded(Boolean(image.current?.complete));
+  }, [src]);
+  return (
+    <img
+      ref={image}
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      className="ks-featured-photo"
+      style={{ opacity: loaded ? 1 : 0 }}
+      onLoad={() => setLoaded(true)}
+      onError={() => setLoaded(true)}
+    />
+  );
 }
 
 function KitNav({
@@ -455,6 +478,11 @@ function KitStoryDesktop() {
   const [revealLayout, setRevealLayout] = useState<KitRevealLayout | null>(
     null,
   );
+  const [featuredLayout, setFeaturedLayout] = useState<{
+    top: number;
+    height: number;
+    viewportHeight: number;
+  } | null>(null);
 
   useLayoutEffect(() => {
     const el = track.current;
@@ -528,6 +556,24 @@ function KitStoryDesktop() {
           ? previous
           : nextReveal,
       );
+      const featured = body
+        .querySelector<HTMLElement>(".ks-content-image")
+        ?.getBoundingClientRect();
+      if (featured) {
+        const nextFeatured = {
+          top: featured.top - bodyRect.top,
+          height: featured.height,
+          viewportHeight: panel.clientHeight,
+        };
+        setFeaturedLayout((previous) =>
+          previous &&
+          Math.abs(previous.top - nextFeatured.top) < 0.25 &&
+          Math.abs(previous.height - nextFeatured.height) < 0.25 &&
+          Math.abs(previous.viewportHeight - nextFeatured.viewportHeight) < 0.25
+            ? previous
+            : nextFeatured,
+        );
+      }
       const s = stage.current?.getBoundingClientRect();
       const w = well.current?.getBoundingClientRect();
       const panelRect = panel.getBoundingClientRect();
@@ -834,12 +880,16 @@ function KitStoryDesktop() {
                       </div>
                       <div className="ks-content-grid">
                         {TILES.map((tile) => (
-                          <figure key={tile.thumb}>
+                          <figure
+                            key={tile.thumb}
+                            style={{
+                              opacity: kitFeaturedOpacity(pan, featuredLayout),
+                            }}
+                          >
                             <div className="ks-content-image">
-                              <img
+                              <KitFeaturedImage
                                 src={tile.thumb}
                                 alt={`${STAGE.name}: ${tile.caption}`}
-                                loading="lazy"
                               />
                               <ContentCardOverlay tile={tile} />
                             </div>
@@ -933,11 +983,9 @@ function KitStoryDesktop() {
             >
               The truth layer
             </p>
-            <h1
-              className={`${FG_SB} text-white leading-[0.92] tracking-[-2.5px] max-w-[13ch]`}
-              style={{ fontSize: "clamp(52px, 8vw, 96px)" }}
-            >
-              Numbers everyone in the deal can trust.
+            <h1 className={`${FG_SB} ks-hero-title text-white`}>
+              <span>Numbers that</span> <span>everyone in the</span>{" "}
+              <span>deal can trust</span>
             </h1>
             <p
               className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}

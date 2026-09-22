@@ -214,3 +214,29 @@ export function kitPlanePose(
     rotation: -16 + 10 * e + 16 * f,
   };
 }
+
+/** Reveal only the part of a featured card inside the clipped kit viewport. */
+export function kitFeaturedOpacity(
+  pan: number,
+  layout: { top: number; height: number; viewportHeight: number } | null,
+) {
+  if (
+    !layout ||
+    ![pan, layout.top, layout.height, layout.viewportHeight].every(
+      Number.isFinite,
+    ) ||
+    layout.height <= 0 ||
+    layout.viewportHeight <= 0
+  )
+    return 1;
+  const top = layout.top - pan;
+  const visible =
+    Math.min(layout.viewportHeight, top + layout.height) - Math.max(0, top);
+  // A short reveal within the existing movement, complete once the upper part is visible.
+  const revealDistance = Math.min(
+    96,
+    layout.viewportHeight * 0.18,
+    layout.height * 0.3,
+  );
+  return smoothProgress(visible / revealDistance);
+}
