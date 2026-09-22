@@ -11,6 +11,7 @@ import { AIDisclosure } from "../components/AIDisclosure";
 import { ContentCardOverlay } from "../components/ContentMetrics";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
+import { FoundStory } from "./FoundStory";
 import { KitStoryMobile } from "./KitStoryMobile";
 import {
   formatWebsiteMetric,
@@ -1031,6 +1032,7 @@ function KitStoryDesktop() {
 
       <ChromeStory embedded />
       <AfterShare />
+      <FoundStory />
     </div>
   );
 }
