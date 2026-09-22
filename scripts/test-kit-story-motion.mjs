@@ -30,6 +30,7 @@ const {
   KIT_COUNT_SCROLL_VH,
   kitMobileCountProgress,
   kitPlanePose,
+  kitFeaturedOpacity,
 } = module.exports;
 
 const targets = {
@@ -200,7 +201,12 @@ const measuredLayouts = [
 ];
 
 test("measured reveal starts eliminate visible zero exposure across viewport geometries", () => {
-  const ends = { platforms: 0.22, metrics: 0.385, growth: 0.455, audience: 0.535 };
+  const ends = {
+    platforms: 0.22,
+    metrics: 0.385,
+    growth: 0.455,
+    audience: 0.535,
+  };
   for (const fixture of measuredLayouts) {
     const starts = kitRevealStarts(fixture.targets, fixture.layout);
     for (const field of Object.keys(ends)) {
@@ -263,7 +269,8 @@ test("growth starts counting while visible below metrics, before its own pan", (
   assert.ok(starts.growth < duringMetrics);
   assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
   nearly(
-    kitStoryTimeline(starts.growth + 12 / (KIT_STORY_HEIGHT_VH - 100), starts).growth,
+    kitStoryTimeline(starts.growth + 12 / (KIT_STORY_HEIGHT_VH - 100), starts)
+      .growth,
     0.5,
     "visible growth halfway",
   );
@@ -405,9 +412,9 @@ test("measured targets can change between calls without stale positions or overs
 
 test("pan and timeline remain continuous at every chapter and sharing boundary", () => {
   const boundaries = [
-    0.015, 0.105, 0.14, 0.15, 0.205, 0.22, 0.3, 0.31, 0.375, 0.385,
-    0.445, 0.455, 0.515, 0.535, 0.58, 0.62, 0.66, 0.71, 0.75, 0.765,
-    0.78, 0.8, 0.815, 0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.985, 1,
+    0.015, 0.105, 0.14, 0.15, 0.205, 0.22, 0.3, 0.31, 0.375, 0.385, 0.445,
+    0.455, 0.515, 0.535, 0.58, 0.62, 0.66, 0.71, 0.75, 0.765, 0.78, 0.8, 0.815,
+    0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.985, 1,
   ];
   const epsilon = 1e-7;
   for (const boundary of boundaries) {
@@ -444,12 +451,27 @@ test("normalised easing settles at endpoints and preserves the middle position",
 test("profile and panel reading beats are brief instead of consuming whole gestures", () => {
   const travelVh = KIT_STORY_HEIGHT_VH - 100;
   assert.ok(KIT_STORY_HEIGHT_VH >= 430 && KIT_STORY_HEIGHT_VH <= 460);
-  assert.ok(travelVh <= (700 - 100) * 0.6, "at least 40% less travel than the previous story");
-  const holds = [[0.14, 0.15], [0.205, 0.22], [0.3, 0.31], [0.375, 0.385], [0.445, 0.455]];
+  assert.ok(
+    travelVh <= (700 - 100) * 0.6,
+    "at least 40% less travel than the previous story",
+  );
+  const holds = [
+    [0.14, 0.15],
+    [0.205, 0.22],
+    [0.3, 0.31],
+    [0.375, 0.385],
+    [0.445, 0.455],
+  ];
   for (const [start, end] of holds) {
     const distanceVh = (end - start) * travelVh;
-    assert.ok(distanceVh >= 3 && distanceVh <= 5.3, "only a brief settling beat remains");
-    assert.ok(distanceVh * 720 / 100 < 40, "less than 40px of scroll at 720px height");
+    assert.ok(
+      distanceVh >= 3 && distanceVh <= 5.3,
+      "only a brief settling beat remains",
+    );
+    assert.ok(
+      (distanceVh * 720) / 100 < 40,
+      "less than 40px of scroll at 720px height",
+    );
   }
 });
 
@@ -458,9 +480,12 @@ test("a short 8vh scroll gesture always advances the profile-to-analytics sequen
   for (const start of samples(0.14, 0.51, 500)) {
     const end = start + gesture;
     const panDistance = kitPan(end, targets) - kitPan(start, targets);
-    const shareDistance = kitStoryTimeline(end).aimShare - kitStoryTimeline(start).aimShare;
-    assert.ok(panDistance > 1 || shareDistance > 0.01,
-      `gesture at ${start} cannot disappear into a stationary stop`);
+    const shareDistance =
+      kitStoryTimeline(end).aimShare - kitStoryTimeline(start).aimShare;
+    assert.ok(
+      panDistance > 1 || shareDistance > 0.01,
+      `gesture at ${start} cannot disappear into a stationary stop`,
+    );
   }
 });
 
@@ -643,7 +668,13 @@ test("a visible panel edge or header cannot spend the count before the numbers a
       count > 0 && count < 0.5,
       `${field} enters with most of its count still visible`,
     );
-    assert.equal(kitStoryTimeline(starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100) + 0.000001, starts)[field], 1);
+    assert.equal(
+      kitStoryTimeline(
+        starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100) + 0.000001,
+        starts,
+      )[field],
+      1,
+    );
   }
   // The old section-edge anchor reproduces premature completion, making this
   // fixture sensitive to accidentally measuring the section again.
@@ -653,4 +684,58 @@ test("a visible panel edge or header cannot spend the count before the numbers a
   });
   assert.equal(kitStoryTimeline(0.15, wrongStarts).platforms, 1);
   assert.ok(kitStoryTimeline(0.14, starts).platforms < 0.05);
+});
+
+test("featured cards fade only after entering the clipped viewport and finish within 96px", () => {
+  const layout = { top: 1100, height: 380, viewportHeight: 560 };
+  const firstEntry = layout.top - layout.viewportHeight;
+  assert.equal(kitFeaturedOpacity(firstEntry - 1, layout), 0);
+  assert.equal(kitFeaturedOpacity(firstEntry, layout), 0);
+  assert.ok(kitFeaturedOpacity(firstEntry + 1, layout) > 0);
+  nearly(
+    kitFeaturedOpacity(firstEntry + 48, layout),
+    0.5,
+    "halfway through the visible reveal",
+  );
+  assert.equal(kitFeaturedOpacity(firstEntry + 96, layout), 1);
+  assert.equal(kitFeaturedOpacity(800, layout), 1);
+  const checkpoints = [
+    firstEntry - 50,
+    firstEntry,
+    firstEntry + 24,
+    firstEntry + 96,
+    800,
+    1400,
+    1480,
+  ];
+  const recorded = new Map(
+    checkpoints.map((pan) => [pan, kitFeaturedOpacity(pan, layout)]),
+  );
+  for (const pan of [...checkpoints].reverse().concat(checkpoints))
+    assert.equal(kitFeaturedOpacity(pan, layout), recorded.get(pan));
+  assert.equal(kitFeaturedOpacity(layout.top + layout.height, layout), 0);
+  assert.ok(
+    kitFeaturedOpacity(layout.top + layout.height - 24, layout) > 0,
+    "reverse entry from above also fades in",
+  );
+});
+
+test("featured reveal adapts to small frames and fails open until its layout is measured", () => {
+  for (const viewportHeight of [400, 600, 960]) {
+    const layout = { top: 1300, height: 300, viewportHeight };
+    const entry = layout.top - viewportHeight;
+    assert.equal(kitFeaturedOpacity(entry, layout), 0);
+    assert.equal(kitFeaturedOpacity(entry + 96, layout), 1);
+  }
+  for (const layout of [
+    null,
+    { top: 1000, height: 0, viewportHeight: 600 },
+    { top: NaN, height: 300, viewportHeight: 600 },
+    { top: 1000, height: 300, viewportHeight: 0 },
+  ])
+    assert.equal(
+      kitFeaturedOpacity(0, layout),
+      1,
+      "missing layout must not permanently hide media",
+    );
 });

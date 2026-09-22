@@ -382,6 +382,9 @@ export function ChromeDemoWindow({
     const measure = () => {
       if (!active) return;
       const bounds = root.getBoundingClientRect();
+      // The whole desktop scales on entry; cursor coordinates stay local.
+      const scaleX = bounds.width / root.offsetWidth || 1;
+      const scaleY = bounds.height / root.offsetHeight || 1;
       const next: ChromeTargets = {};
       root
         .querySelectorAll<HTMLElement>("[data-chrome-target]")
@@ -389,8 +392,12 @@ export function ChromeDemoWindow({
           const rect = target.getBoundingClientRect();
           if (!rect.width || !rect.height) return;
           next[target.dataset.chromeTarget as ChromeTarget] = {
-            x: rect.left - bounds.left - root.clientLeft + rect.width / 2,
-            y: rect.top - bounds.top - root.clientTop + rect.height / 2,
+            x:
+              (rect.left - bounds.left + rect.width / 2) / scaleX -
+              root.clientLeft,
+            y:
+              (rect.top - bounds.top + rect.height / 2) / scaleY -
+              root.clientTop,
           };
         });
       setTargets(next);

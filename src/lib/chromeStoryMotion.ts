@@ -18,6 +18,17 @@ const smooth = (value: number) => {
   return t * t * (3 - 2 * t);
 };
 
+/** Grow during the section's natural entrance, before the pinned demo begins. */
+export function chromeEntryScale(top: number, viewportHeight: number) {
+  if (
+    !Number.isFinite(top) ||
+    !Number.isFinite(viewportHeight) ||
+    viewportHeight <= 0
+  )
+    return 1;
+  return 0.7 + 0.3 * smooth(1 - top / (viewportHeight * 0.65));
+}
+
 export function chromeStageAt(progress: number): ChromeStage {
   const p = Number.isFinite(progress) ? clamp(progress) : 0;
   return CHROME_STAGE_STOPS.reduce<ChromeStage>(

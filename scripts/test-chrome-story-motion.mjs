@@ -20,6 +20,7 @@ const {
   CHROME_STORY_HEIGHT_VH,
   chromeStageAt,
   chromeCursorPose,
+  chromeEntryScale,
 } = module.exports;
 
 const targets = {
@@ -31,6 +32,32 @@ const targets = {
 };
 const close = (actual, expected, tolerance = 1e-9) =>
   assert.ok(Math.abs(actual - expected) < tolerance, `${actual} ≠ ${expected}`);
+
+test("desktop grows from 70% to full size before the pinned workflow starts", () => {
+  for (const height of [640, 720, 1080]) {
+    close(chromeEntryScale(height, height), 0.7);
+    close(chromeEntryScale(height * 0.65, height), 0.7);
+    close(chromeEntryScale(height * 0.325, height), 0.85);
+    close(chromeEntryScale(0, height), 1);
+    close(chromeEntryScale(-height, height), 1);
+    const positions = [0.7, 0.5, 0.3, 0.1, 0, -0.1].map(
+      (ratio) => ratio * height,
+    );
+    const forward = positions.map((top) => chromeEntryScale(top, height));
+    assert.deepEqual(
+      positions
+        .toReversed()
+        .map((top) => chromeEntryScale(top, height))
+        .toReversed(),
+      forward,
+    );
+    assert.ok(
+      forward.every((scale, index) => !index || scale >= forward[index - 1]),
+    );
+  }
+  assert.equal(chromeEntryScale(NaN, 720), 1);
+  assert.equal(chromeEntryScale(100, 0), 1);
+});
 
 test("reply is visibly closed before the toolbar opens the roster", () => {
   assert.equal(chromeStageAt(0.1399), 0);

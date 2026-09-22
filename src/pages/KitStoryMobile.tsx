@@ -452,10 +452,10 @@ export function KitStoryMobile() {
             The truth layer
           </p>
           <h1
-            className={`${FG_SB} text-white leading-[0.95] tracking-[-1.5px] max-w-[14ch]`}
-            style={{ fontSize: "clamp(40px, 11vw, 56px)" }}
+            className={`${FG_SB} ks-hero-title ks-hero-title-mobile text-white`}
           >
-            Numbers everyone in the deal can trust.
+            <span>Numbers that</span> <span>everyone in the</span>{" "}
+            <span>deal can trust</span>
           </h1>
           <p
             className={`${FG_R} mt-5 max-w-[34em] text-[16px] leading-7 text-white/85`}
