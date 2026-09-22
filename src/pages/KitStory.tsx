@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
+import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
@@ -1099,7 +1100,7 @@ function KitStoryDesktop() {
                 Media Kit
               </p>
               <p className={`${FG_R} mt-4 text-[18px] text-[#6a7282]`}>
-                On its way
+                <KitShareStatus />
               </p>
             </div>
           </div>

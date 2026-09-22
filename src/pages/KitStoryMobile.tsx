@@ -2,6 +2,7 @@ import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
+import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
   KitEditHandle,
@@ -612,7 +613,7 @@ export function KitStoryMobile() {
           <p
             className={`${FG_R} mt-3 text-[15px] text-[#6a7282] max-w-[28em] mx-auto`}
           >
-            On its way
+            <KitShareStatus />
           </p>
           <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#ead9b8] bg-[#fff6eb] text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
