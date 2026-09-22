@@ -15,6 +15,7 @@ import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
 import {
   FOUND_RESULTS,
   FOUND_SELECTED,
+  FOUND_SEEN,
   type FoundResult,
 } from "../data/foundWithFoam";
 import { formatWebsiteMetric } from "../data/websiteTalent";
@@ -209,31 +210,210 @@ function SearchFilters() {
   );
 }
 
-function SelectedPost() {
+function SelectedPost({
+  active,
+  reducedMotion,
+}: {
+  active: boolean;
+  reducedMotion: boolean;
+}) {
   const { talent, tile } = FOUND_SELECTED;
+  const video = useRef<HTMLVideoElement>(null);
+  const pendingSeek = useRef<number | null>(null);
+  const [playbackIntent, setPlaybackIntent] = useState<
+    "auto" | "play" | "pause"
+  >("auto");
+  const [playing, setPlaying] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const handle = talent.platforms.find(
+    ({ network }) => network === tile.platform,
+  )?.handle;
+  useEffect(() => {
+    if (!video.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) =>
+        setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.1),
+      { threshold: 0.1 },
+    );
+    observer.observe(video.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const element = video.current;
+    if (!element) return;
+    const sync = () => {
+      if (
+        active &&
+        visible &&
+        (playbackIntent === "play" ||
+          (playbackIntent === "auto" && !reducedMotion)) &&
+        !document.hidden
+      ) {
+        void element.play().catch(() => {
+          if (element.paused) setPlaying(false);
+        });
+      } else element.pause();
+    };
+    sync();
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      element.pause();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, [active, visible, reducedMotion, playbackIntent]);
+  useEffect(() => {
+    if (!active) {
+      pendingSeek.current = null;
+      setElapsed(0);
+    }
+  }, [active]);
+  const play = (element: HTMLVideoElement) => {
+    setPlaybackIntent("play");
+    void element.play().catch(() => {
+      if (element.paused) setPlaying(false);
+    });
+  };
+  const togglePlayback = () => {
+    const element = video.current;
+    if (!element || !active) return;
+    if (element.paused) {
+      play(element);
+    } else {
+      setPlaybackIntent("pause");
+      element.pause();
+    }
+  };
+  const applyPendingSeek = () => {
+    const element = video.current;
+    if (
+      !element ||
+      !active ||
+      pendingSeek.current === null ||
+      element.readyState < 1
+    )
+      return;
+    const time = Math.max(
+      0,
+      Math.min(
+        pendingSeek.current,
+        Number.isFinite(element.duration)
+          ? element.duration
+          : pendingSeek.current,
+      ),
+    );
+    element.currentTime = time;
+    pendingSeek.current = null;
+    setElapsed(time);
+  };
+  const seek = (time: number) => {
+    const element = video.current;
+    if (!element || !active) return;
+    pendingSeek.current = time;
+    applyPendingSeek();
+    // Playing on this explicit click also loads metadata when preload is disabled.
+    play(element);
+  };
   return (
     <>
       <div className="fs-detail-header">
         <img src={talent.portrait} alt="" />
         <span>
           <strong>{talent.displayName}</strong>
-          <small>TikTok · Image</small>
+          <small>TikTok · Video</small>
         </span>
         <span className="fs-detail-close">×</span>
       </div>
       <div className="fs-detail-body">
         <figure className="fs-detail-picture">
-          <img src={tile.thumb} alt="" />
+          <div className="fs-video-stage">
+            <img className="fs-video-blur" src={tile.thumb} alt="" />
+            <video
+              ref={video}
+              src={active ? tile.video : undefined}
+              poster={tile.thumb}
+              muted
+              playsInline
+              loop
+              preload="none"
+              onPlay={() => setPlaying(true)}
+              onPause={() => setPlaying(false)}
+              onLoadedMetadata={applyPendingSeek}
+              onTimeUpdate={() => setElapsed(video.current?.currentTime ?? 0)}
+              aria-label={`${talent.displayName} demonstrates a cleanser in a fictional skincare review`}
+            />
+            <div className="fs-video-identity">
+              <img src={talent.portrait} alt="" />
+              <span>
+                {talent.displayName}
+                <small>{handle}</small>
+              </span>
+              <ContentPlatformIcon network="tiktok" />
+            </div>
+            <div className="fs-video-caption">
+              My everyday cleanser check-in
+            </div>
+            <button
+              type="button"
+              className={`fs-video-play ${playing ? "is-playing" : ""}`}
+              onClick={togglePlayback}
+              aria-label={
+                playing ? "Pause skincare video" : "Play skincare video"
+              }
+              disabled={!active}
+              tabIndex={active ? 0 : -1}
+            >
+              {playing ? <span>Ⅱ</span> : <LabIcon name="play" size={29} />}
+            </button>
+            <div className="fs-video-controls" aria-hidden="true">
+              <span className="fs-video-progress">
+                <i style={{ width: `${Math.min(100, elapsed * 10)}%` }} />
+              </span>
+              <span>{playing ? "Ⅱ" : "▶"}</span>
+              <span>
+                00:{Math.floor(elapsed).toString().padStart(2, "0")} / 00:10
+              </span>
+              <span className="fs-video-sound">Muted</span>
+            </div>
+          </div>
           <figcaption>
             <AIDisclosure />
           </figcaption>
         </figure>
         <div className="fs-detail-info">
-          <p className="fs-detail-kicker">THE MOMENT YOU WERE LOOKING FOR</p>
-          <h3>A low-effort night routine.</h3>
-          <p className="fs-detail-caption">
-            A skincare routine with Aria Quen.
-          </p>
+          <div className="fs-strong-match">
+            <strong>Strong match</strong>
+            <p>
+              This content strongly matches your search for{" "}
+              <b>“skincare product reviews”</b>. Evidence found in visuals.
+            </p>
+          </div>
+          <h4 className="fs-seen-heading">
+            <LabIcon name="image" size={16} /> Seen (2)
+          </h4>
+          <div className="fs-seen-grid">
+            {FOUND_SEEN.map((moment) => (
+              <button
+                type="button"
+                className="fs-seen-card"
+                key={moment.start}
+                onClick={() => seek(moment.start)}
+                disabled={!active}
+                tabIndex={active ? 0 : -1}
+                aria-label={`Watch ${moment.label.toLowerCase()}, ${moment.start} to ${moment.end} seconds`}
+              >
+                <span className="fs-seen-time">
+                  <LabIcon name="play" size={12} /> 0:
+                  {moment.start.toString().padStart(2, "0")} – 0:
+                  {moment.end.toString().padStart(2, "0")}
+                </span>
+                <span className="fs-seen-picture">
+                  <img src={moment.image} alt={moment.label} loading="lazy" />
+                  <span>skincare product reviews</span>
+                </span>
+              </button>
+            ))}
+          </div>
           <h4>Post metrics</h4>
           <dl className="fs-post-metrics">
             <div>
@@ -257,25 +437,7 @@ function SelectedPost() {
               <dd>{formatWebsiteMetric(tile.engagements!)}</dd>
             </div>
           </dl>
-          <h4>Details</h4>
-          <dl className="fs-post-details">
-            <div>
-              <dt>Platform</dt>
-              <dd>TikTok</dd>
-            </div>
-            <div>
-              <dt>Talent</dt>
-              <dd>{talent.displayName}</dd>
-            </div>
-            <div>
-              <dt>Content</dt>
-              <dd>Skincare · Night routine</dd>
-            </div>
-          </dl>
           <p className="fs-demo-note">Fictional creators · Demo figures</p>
-          <span className="fs-match">
-            <LabIcon name="check" size={15} /> Found with Foam
-          </span>
         </div>
       </div>
     </>
@@ -374,9 +536,9 @@ export function FoundStory() {
         <p>
           Describe a moment, topic or creator. This example searches for
           skincare product reviews, shows a skincare post alongside related
-          beauty content, then opens Aria Quen’s night routine with 410,000
-          views and 38,100 engagements. All creators and figures are
-          illustrative.
+          beauty content, then opens Nia Brooks’s cleanser review with 265,600
+          views and 15,500 engagements. The Seen examples show moments
+          identified in the video. All creators and figures are illustrative.
         </p>
       </div>
       <section
@@ -405,7 +567,7 @@ export function FoundStory() {
           <div
             ref={app}
             className="fs-window"
-            aria-hidden="true"
+            aria-label="Foam discovery preview"
             style={{
               transformOrigin: `${camera.originX}px ${camera.originY}px`,
               transform: `translate(${camera.x * (1 - zoom)}px, ${camera.y * (1 - zoom)}px) scale(${1 + (camera.scale - 1) * (1 - zoom)})`,
@@ -499,12 +661,16 @@ export function FoundStory() {
             />
             <div
               className="fs-post-detail"
+              aria-hidden={state.detail <= 0.95}
               style={{
                 opacity: state.detail,
                 transform: `translateY(${(1 - state.detail) * 24}px) scale(${0.96 + 0.04 * state.detail})`,
               }}
             >
-              <SelectedPost />
+              <SelectedPost
+                active={state.detail > 0.95}
+                reducedMotion={reducedMotion}
+              />
             </div>
           </div>
           {!state.query && !reducedMotion && (
@@ -535,14 +701,24 @@ export function FoundStory() {
         </div>
       </section>
       <figure className="fs-campaign">
-        <img
-          src={`${A}/campaigns/found-with-foam-skincare.webp`}
-          width={1584}
-          height={1248}
-          loading="lazy"
-          decoding="async"
-          alt="Concept outdoor advert: a woman cleansing her face against a pink background, beneath a search for Skincare product reviews and above the words Found with Foam."
-        />
+        <div className="fs-campaign-art">
+          <img
+            src={`${A}/campaigns/found-with-foam-skincare-v2.png`}
+            width={1412}
+            height={1114}
+            loading="lazy"
+            decoding="async"
+            alt="Concept outdoor advert: Nia Brooks, the same fictional creator found in the skincare review, cleansing her face against pink, beneath Skincare product reviews and above Found with Foam."
+          />
+          <span className="fs-campaign-logo" aria-hidden="true">
+            <i
+              style={{
+                maskImage: `url(${A}/fdb3b.svg)`,
+                WebkitMaskImage: `url(${A}/fdb3b.svg)`,
+              }}
+            />
+          </span>
+        </div>
         <figcaption>
           <AIDisclosure detail="Concept advert" />
         </figcaption>

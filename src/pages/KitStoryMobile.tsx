@@ -242,7 +242,7 @@ function MobileKitCard() {
               </figure>
             ))}
           </div>
-          <div className="space-y-7">
+          <div className="space-y-4">
             <MobileAnalyticsSection
               component={KitMetrics}
               reducedMotion={reducedMotion}

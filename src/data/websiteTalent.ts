@@ -14,6 +14,7 @@ function approvedTalent(id: string): StagedTalent {
 
 export const websiteSamantha = approvedTalent("samantha-pikka");
 export const websiteAria = approvedTalent("aria-quen");
+export const websiteNia = approvedTalent("nia-brooks");
 
 const platformNames: Record<TalentNetwork, string> = {
   instagram: "Instagram",

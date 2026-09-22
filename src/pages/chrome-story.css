@@ -1,0 +1,383 @@
+.cs-story {
+  background: #fff;
+  color: #101828;
+}
+.cs-back-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+}
+.cs-back-link > span,
+.cs-mobile-back > span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #657249;
+}
+.cs-story-intro {
+  max-width: 1100px;
+  margin: auto;
+  padding: 90px 24px 45px;
+  font-family: "Founders Grotesk", system-ui, sans-serif;
+}
+.cs-story-intro.is-embedded {
+  padding-top: 75px;
+}
+.cs-story-intro .cs-eyebrow {
+  margin: 0 0 18px;
+  color: #7d8593;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+}
+.cs-story-intro h1,
+.cs-story-intro h2 {
+  font-size: clamp(38px, 5.3vw, 64px);
+  line-height: 0.98;
+  font-weight: 600;
+  letter-spacing: -1.8px;
+  margin: 0;
+}
+.cs-story-intro p:not(.cs-eyebrow) {
+  max-width: 600px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #7a8595;
+  margin-top: 20px;
+}
+.cs-scroll-track {
+  position: relative;
+  height: 340vh;
+}
+.cs-sticky-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: clip;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f5f7;
+}
+.cs-desktop-wallpaper {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+}
+.cs-stage-caption {
+  position: absolute;
+  top: 3.2vh;
+  left: 25px;
+  right: 25px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 12px #172c4870;
+  font:
+    15px/1.4 "Founders Grotesk",
+    system-ui,
+    sans-serif;
+}
+.cs-browser-holder {
+  position: relative;
+  z-index: 1;
+}
+.cs-step-nav {
+  position: absolute;
+  bottom: 2.8vh;
+  display: flex;
+  gap: 5px;
+  z-index: 2;
+  border: 1px solid #ffffff50;
+  background: #f6f8f0de;
+  backdrop-filter: blur(14px);
+  padding: 5px;
+  border-radius: 24px;
+  box-shadow: 0 5px 20px #243b4f15;
+}
+.cs-step-nav button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  padding: 5px 11px;
+  color: #6c7b87;
+  font:
+    11px/1.4 "SF Pro Text",
+    system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.cs-step-nav button > span {
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b7c2c7;
+  border-radius: 50%;
+  font-size: 9px;
+}
+.cs-step-nav button[aria-current] {
+  background: #fff;
+  color: #263946;
+  box-shadow: 0 2px 6px #21334512;
+}
+.cs-step-nav button[aria-current] > span {
+  background: #7a0036;
+  border-color: #7a0036;
+  color: white;
+}
+.cs-step-nav button:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 2px;
+}
+.cs-finale {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f4f5f7;
+}
+.cs-finale a,
+.cs-mobile-finale a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.cs-finale img {
+  width: 180px;
+  height: 157px;
+  object-fit: contain;
+}
+.cs-finale h2 {
+  font:
+    600 clamp(36px, 4.5vw, 60px)/1 "Founders Grotesk",
+    sans-serif;
+  letter-spacing: -1.6px;
+  margin: 25px 0 18px;
+}
+.cs-finale a > span,
+.cs-mobile-finale a > span {
+  color: #66748a;
+  font-size: 15px;
+}
+.cs-mobile-back {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #edf0f3;
+  font-size: 12px;
+}
+.cs-mobile-story .cs-story-intro {
+  max-width: 900px;
+  padding: 45px 22px 30px;
+}
+.cs-mobile-story .cs-story-intro h2 {
+  font-size: clamp(34px, 6vw, 54px);
+  letter-spacing: -1.2px;
+  line-height: 1.04;
+}
+.cs-mobile-story .cs-story-intro p:not(.cs-eyebrow) {
+  font-size: 15px;
+  margin-top: 18px;
+}
+.cs-mobile-steps {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 20px 20px;
+  display: grid;
+  gap: 40px;
+}
+.cs-mobile-step-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.cs-mobile-step-title > span {
+  font:
+    11px "SF Pro Text",
+    sans-serif;
+  color: #98a3ae;
+}
+.cs-mobile-step-title > h3 {
+  font:
+    600 22px/1.2 "Founders Grotesk",
+    sans-serif;
+  letter-spacing: -0.4px;
+}
+.cs-mobile-step-copy {
+  margin: -3px 0 15px !important;
+  color: #7a8696;
+  font:
+    14px/1.55 "Founders Grotesk",
+    sans-serif;
+}
+.cs-mobile-desktop {
+  padding: 27px 14px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+}
+.cs-mobile-email-window {
+  max-width: 680px;
+  margin: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 35px #1b2f4730;
+  overflow: hidden;
+  font:
+    11px/1.55 "SF Pro Text",
+    system-ui,
+    sans-serif;
+}
+.cs-mobile-window-bar {
+  padding: 8px 12px;
+  display: flex;
+  gap: 17px;
+  background: #e9edf2;
+  color: #8d97a5;
+  font-size: 8px;
+}
+.cs-mobile-window-bar > span {
+  color: #a4adb8;
+  font-size: 5px;
+  letter-spacing: 1px;
+  align-self: center;
+}
+.cs-mobile-email-content {
+  padding: 17px 13px 23px;
+}
+.cs-mobile-email-content > h4 {
+  font-size: 14px;
+  color: #344054;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+.cs-mobile-story .cs-brand-email time,
+.cs-mobile-story .cs-email-address {
+  display: none;
+}
+.cs-mobile-story .cs-email-copy {
+  padding-left: 0;
+  font-size: 11px;
+}
+.cs-mobile-extension-stage {
+  display: flex;
+  justify-content: center;
+}
+.cs-mobile-story .cs-extension {
+  width: min(100%, 335px);
+  border: 0;
+  border-radius: 9px;
+  box-shadow: 0 12px 35px #1b2f4730;
+  font:
+    11px/1.5 "SF Pro Text",
+    system-ui,
+    sans-serif;
+}
+.cs-mobile-story .cs-extension-profile {
+  padding: 22px 20px 15px;
+}
+.cs-mobile-story .cs-extension-profile figure > img {
+  width: 105px;
+  height: 105px;
+}
+.cs-mobile-story .cs-extension-profile h3 {
+  font-size: 16px;
+}
+.cs-mobile-story .cs-panel-bio {
+  font-size: 11px;
+}
+.cs-mobile-story .cs-profile-location {
+  font-size: 10px;
+}
+.cs-mobile-story .cs-panel-platforms > span {
+  font-size: 11px;
+}
+.cs-mobile-story .cs-profile-tags > span {
+  font-size: 10px;
+}
+.cs-mobile-story .cs-embed-options {
+  padding: 20px;
+}
+.cs-mobile-story .cs-embed-options > p {
+  font-size: 10px;
+}
+.cs-mobile-story .cs-embed-options > div:not(.cs-copy-options) {
+  font-size: 10px;
+}
+.cs-mobile-story .cs-copy-options > * {
+  height: 32px;
+  font-size: 11px !important;
+}
+.cs-mobile-reply-wrap {
+  padding: 12px;
+}
+.cs-mobile-story .cs-reply {
+  box-shadow: none;
+  border: 0;
+}
+.cs-mobile-story .cs-reply-body {
+  padding: 12px 0;
+  overflow: visible;
+  font-size: 11px;
+}
+.cs-mobile-story .cs-reply > header {
+  padding: 3px 0 9px;
+}
+.cs-mobile-story .cs-reply > header > span:not(:first-child) {
+  display: none;
+}
+.cs-mobile-story .cs-reply > footer {
+  padding: 12px 0 0;
+}
+.cs-mobile-story .cs-embed-identity strong {
+  font-size: 12px;
+}
+.cs-mobile-story .cs-embed-bio {
+  font-size: 10px;
+}
+.cs-mobile-story .cs-embed-insights {
+  gap: 15px;
+  padding: 12px 10px;
+}
+.cs-mobile-story .cs-embed-insights dl > div {
+  gap: 5px;
+}
+.cs-mobile-story .cs-formatting {
+  display: none;
+}
+.cs-mobile-finale {
+  padding: 30px 20px 65px;
+}
+.cs-mobile-finale img {
+  width: 150px;
+  height: 131px;
+  object-fit: contain;
+}
+.cs-mobile-finale h2 {
+  font:
+    600 32px/1.05 "Founders Grotesk",
+    sans-serif;
+  letter-spacing: -1px;
+  margin: 24px 0 15px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-demo-cursor {
+    transition: none;
+  }
+}

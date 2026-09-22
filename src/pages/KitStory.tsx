@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type Ref,
 } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
@@ -30,6 +31,8 @@ import {
   kitPan,
   kitRevealStarts,
   kitStoryTimeline,
+  kitShareCursor,
+  KIT_STORY_HEIGHT_VH,
   type KitPanTargets,
   type KitRevealLayout,
 } from "../lib/kitStoryMotion";
@@ -79,10 +82,12 @@ function KitNav({
   sharePulse,
   onPreview,
   onShare,
+  shareRef,
 }: {
   sharePulse: boolean;
   onPreview: () => void;
   onShare: () => void;
+  shareRef: Ref<HTMLButtonElement>;
 }) {
   return (
     <div className="h-12 bg-white border-b border-[#e6e8ec] flex items-center px-3 gap-2 rounded-t-[20px]">
@@ -112,9 +117,9 @@ function KitNav({
         </button>
         <button
           type="button"
+          ref={shareRef}
           onClick={onShare}
           className={`${FG_M} h-8 rounded-full bg-[#185abc] text-white text-[13px] px-3.5 inline-flex items-center gap-1.5 ${sharePulse ? "ring-4 ring-[#185abc]/25 scale-[0.97]" : ""}`}
-          style={{ transition: "box-shadow 220ms ease, transform 220ms ease" }}
         >
           <img alt="" src={icShare} className="size-3 brightness-0 invert" />
           Share
@@ -414,6 +419,9 @@ function KitStoryDesktop() {
   const vid = useRef<HTMLVideoElement | null>(null);
   const viewport = useRef<HTMLDivElement | null>(null);
   const content = useRef<HTMLDivElement | null>(null);
+  const shareButton = useRef<HTMLButtonElement | null>(null);
+  const copyButton = useRef<HTMLSpanElement | null>(null);
+  const shareCursor = useRef<HTMLDivElement | null>(null);
   const [p, setProg] = useState(0);
   const [slot, setSlot] = useState({
     l: 60,
@@ -587,6 +595,7 @@ function KitStoryDesktop() {
     kitOut,
     fold,
     fly,
+    planeIn,
     sharedIn,
     sharedOut,
     headlineOpacity: headlineOp,
@@ -611,10 +620,23 @@ function KitStoryDesktop() {
   const photoT = lerp(0, slot.t, pack) - (pan / slot.stageHeight) * 100;
   const photoW = lerp(100, slot.w, pack);
   const photoH = lerp(100, slot.h, pack);
-  const cursorL =
-    aimCopy > 0 ? lerp(93.6, 61.5, aimCopy) : lerp(70, 93.6, aimShare);
-  const cursorT =
-    aimCopy > 0 ? lerp(8.4, 54, aimCopy) : lerp(28, 8.4, aimShare);
+  // Read after this render so the ring uses the current Copy/Copied label and
+  // responsive toolbar geometry, with no stale frame on scroll or resize.
+  useLayoutEffect(() => {
+    const cursor = shareCursor.current;
+    const stageRect = stage.current?.getBoundingClientRect();
+    const shareRect = shareButton.current?.getBoundingClientRect();
+    if (!cursor || !stageRect || !shareRect) return;
+    const point = kitShareCursor(
+      stageRect,
+      shareRect,
+      copyButton.current?.getBoundingClientRect() ?? null,
+      aimShare,
+      aimCopy,
+    );
+    cursor.style.left = `${point.x}px`;
+    cursor.style.top = `${point.y}px`;
+  });
   const cursorOn = aimShare > 0.02 && shareFade < 0.2;
   const stageBg = canvasLight ? "#eef0f4" : "#000";
 
@@ -632,7 +654,12 @@ function KitStoryDesktop() {
         </Link>
       </div>
 
-      <section ref={track} className="relative h-[820vh]" data-kit-story-track>
+      <section
+        ref={track}
+        className="relative"
+        style={{ height: `${KIT_STORY_HEIGHT_VH}vh` }}
+        data-kit-story-track
+      >
         <div
           ref={stage}
           className="sticky top-0 h-screen overflow-clip"
@@ -862,7 +889,8 @@ function KitStoryDesktop() {
               <KitNav
                 sharePulse={aimShare > 0.55 && shareOpen < 0.35}
                 onPreview={() => jumpTo(0.16)}
-                onShare={() => jumpTo(0.86)}
+                onShare={() => jumpTo(0.735)}
+                shareRef={shareButton}
               />
             </div>
           )}
@@ -949,7 +977,7 @@ function KitStoryDesktop() {
               <button
                 type="button"
                 aria-label="Close share preview"
-                onClick={() => jumpTo(0.78)}
+                onClick={() => jumpTo(0.65)}
                 className="text-[#6a7282] size-6 rounded-full hover:bg-[#f2f4f7]"
               >
                 ×
@@ -971,7 +999,8 @@ function KitStoryDesktop() {
                     {STAGE.shareUrl}
                   </span>
                   <span
-                    className={`${FG_M} text-[12px] rounded-full px-3 py-1 ${copied > 0.35 ? "bg-[#185abc] text-white" : "border border-[#d0d5dd]"}`}
+                    ref={copyButton}
+                    className={`${FG_M} min-w-[80px] inline-flex justify-center text-[12px] rounded-full px-3 py-1 ${copied > 0.35 ? "bg-[#185abc] text-white" : "border border-[#d0d5dd]"}`}
                   >
                     {copied > 0.35 ? "Copied" : "Copy link"}
                   </span>
@@ -981,11 +1010,12 @@ function KitStoryDesktop() {
           </div>
 
           <div
+            ref={shareCursor}
+            aria-hidden="true"
+            data-kit-share-cursor
             className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2"
             style={{
               opacity: cursorOn ? 1 : 0,
-              left: `${cursorL}%`,
-              top: `${cursorT}%`,
             }}
           />
 
@@ -1017,11 +1047,11 @@ function KitStoryDesktop() {
             aria-hidden="true"
             className="absolute z-[80] pointer-events-none drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]"
             style={{
-              width: lerp(80, 170, fly),
-              opacity: sharedOut * (1 - fly * 0.45),
-              left: `${lerp(42, 118, fly)}%`,
-              top: `${lerp(48, 6, fly) + Math.sin(fly * Math.PI) * -10}%`,
-              transform: `rotate(${lerp(-18, 18, fly)}deg)`,
+              width: lerp(150, 210, fly),
+              opacity: planeIn,
+              left: `${lerp(50, 118, fly)}%`,
+              top: `${lerp(79, -10, fly) - Math.sin(fly * Math.PI) * 8}%`,
+              transform: `translate(-50%, -50%) rotate(${lerp(-14, 10, fly)}deg)`,
             }}
           >
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill={BURGUNDY} />

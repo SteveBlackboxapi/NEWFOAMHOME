@@ -1,128 +1,119 @@
+import { useRef, useState } from "react";
 import { Link } from "react-router";
-import { AIDisclosure } from "../components/AIDisclosure";
+import {
+  ChromeBrandBrief,
+  ChromeExtensionPanel,
+  ChromeReply,
+} from "../components/ChromeDemoScene";
 import { MobileFade } from "../components/MobileFade";
-import { websiteContentStats, websiteProfile, websiteSamantha } from "../data/websiteTalent";
+import {
+  CHROME_STORE,
+  chromeWallpaperBackground,
+  useChromeWallpaper,
+  useChromePreviewEntry,
+  type ChromeStage,
+} from "../lib/chromeDemo";
+import { A } from "../lib/assets";
+import "./chrome-story.css";
 
-const A = `${import.meta.env.BASE_URL}assets`;
-const BAG = `${A}/chrome-store.webp`;
-const FG_R = "font-founders font-normal";
-const FG_M = "font-founders font-medium";
-const FG_SB = "font-founders font-semibold";
-const STORE = "https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf";
-const SAMANTHA = websiteProfile(websiteSamantha);
-const BIO = `${SAMANTHA.bio.split(". ")[0]}.`;
-const CONTENT_STATS = websiteContentStats(websiteSamantha.content.slice(0, 4))
-  .map(([value, label]): [string, string] => [label, value]);
-
-function StatBlock({ title, rows }: { title: string; rows: [string, string][] }) {
+/** The same inbox workflow in readable, naturally scrolling frames. */
+export function ChromeStoryMobile({
+  embedded = false,
+}: { embedded?: boolean } = {}) {
+  const wallpaper = useChromeWallpaper();
+  const preview = useRef<HTMLElement>(null);
+  useChromePreviewEntry(preview);
+  const [panelStage, setPanelStage] = useState<ChromeStage>(2);
+  const background = { backgroundImage: chromeWallpaperBackground(wallpaper) };
   return (
-    <div>
-      <p className={`${FG_M} text-[11px] text-[#101828] mb-1.5`}>{title}</p>
-      {rows.map(([label, val]) => (
-        <div key={label} className="flex gap-2 text-[11px] leading-5">
-          <span className="text-[#101828] w-16 shrink-0">{val}</span>
-          <span className="text-[#6a7282]">{label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/** Mobile Chrome story: static product frames, no scroll scrub. */
-export function ChromeStoryMobile({ embedded = false }: { embedded?: boolean } = {}) {
-  return (
-    <div className="bg-white text-[#101828]">
+    <div className="cs-story cs-mobile-story">
       {!embedded && (
-        <div className="sticky top-0 z-[70] flex items-center gap-3 px-4 py-3 bg-white/90 backdrop-blur-sm border-b border-[#eeefef]">
-          <Link to="/" className="text-[12px] text-[#101828]/70">← Home</Link>
-          <span className="text-[10px] uppercase tracking-[1px] text-[#5a6408]">Chrome story</span>
+        <div className="cs-mobile-back">
+          <Link to="/">← Home</Link>
+          <span>Chrome story</span>
         </div>
       )}
-
-      <section className={`px-5 pb-8 max-w-[640px] mx-auto ${embedded ? "pt-12" : "pt-10"}`}>
+      <section className={`cs-story-intro ${embedded ? "is-embedded" : ""}`}>
         <MobileFade>
-          <p className={`${FG_M} text-[11px] uppercase tracking-[1.8px] text-[#6a7282] mb-3`}>Foam for Chrome</p>
-          <h2 className={`${FG_SB} text-[32px] leading-[1.05] tracking-[-1px] max-w-[16ch]`}>
-            Pick the talent. Choose Detail. Paste the pitch.
+          <p className="cs-eyebrow">Foam for Chrome</p>
+          <h2>
+            A brief lands.
+            <br />
+            You already have the answer.
           </h2>
-          <p className={`${FG_R} mt-4 max-w-[36em] text-[15px] leading-6 text-[#6a7282]`}>
-            The side panel stays on Gmail. Open a creator, decide what the brand sees, drop it into the draft.
+          <p>
+            Find the right creator, copy their details and paste a complete
+            profile into your reply. All without leaving your inbox.
           </p>
         </MobileFade>
       </section>
-
-      <section className="px-5 pb-12">
-        <MobileFade>
-          <div className="rounded-[16px] overflow-hidden border border-[#e2e4e8] shadow-[0_20px_50px_rgba(16,24,40,0.12)] bg-white">
-            <div className="h-9 bg-[#3c3c42] flex items-center px-3 gap-2">
-              <span className="size-2 rounded-full bg-[#ff5f57]" />
-              <span className="size-2 rounded-full bg-[#febc2e]" />
-              <span className="size-2 rounded-full bg-[#28c840]" />
-              <div className="ml-2 h-5 flex-1 rounded-md bg-[#2b2b2f] text-[10px] text-white/50 flex items-center px-2">
-                mail.google.com
-              </div>
+      <div className="cs-mobile-steps">
+        <section ref={preview}>
+          <MobileFade>
+            <div className="cs-mobile-step-title">
+              <span>01</span>
+              <h3>A brand asks. You’re on it.</h3>
             </div>
-            <div className="p-4 bg-[#f4f6fb]">
-              <div className="bg-white rounded-[12px] border border-[#eeefef] overflow-hidden mb-3">
-                <div className="h-10 border-b border-[#eeefef] flex items-center px-3">
-                  <p className={`${FG_M} text-[13px] flex-1`}>New Message</p>
+            <div className="cs-mobile-desktop" style={background}>
+              <div className="cs-mobile-email-window">
+                <div className="cs-mobile-window-bar">
+                  <span>● ● ●</span> mail.google.com
                 </div>
-                <div className="p-3">
-                  <div className="flex gap-3 items-start mb-3">
-                    <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} loading="lazy" className="size-11 rounded-full object-cover object-top" />
-                    <div>
-                      <p className={`${FG_SB} text-[14px]`}>{SAMANTHA.name}</p>
-                      <p className="text-[11px] text-[#6a7282]">{SAMANTHA.loc} · {SAMANTHA.age}</p>
-                      <p className="text-[11px] text-[#185abc]">IG {SAMANTHA.ig.n} · TT {SAMANTHA.tt.n} · YT {SAMANTHA.yt.n}</p>
-                    </div>
-                  </div>
-                  <div className="mb-2"><AIDisclosure size={9} detail="Demo profile" /></div>
-                  <p className={`${FG_R} text-[13px] leading-5 text-[#344054] mb-3`}>
-                    {BIO}
-                  </p>
-                  <p className="text-[12px] text-[#185abc] mb-3">View Media Kit →</p>
-                  <div className="rounded-xl border border-[#e8eaed] p-3 grid grid-cols-1 gap-3">
-                    <StatBlock title="Featured posts · Demo" rows={CONTENT_STATS} />
-                    <StatBlock title="Platforms" rows={SAMANTHA.platforms.map((platform) => [platform.label, platform.count])} />
-                  </div>
-                </div>
-                <div className="h-11 border-t border-[#eeefef] flex items-center px-3">
-                  <span className="h-8 px-4 rounded-full text-[13px] inline-flex items-center bg-[#0b57d0] text-white">Send</span>
-                </div>
-              </div>
-              <div className="bg-white rounded-[12px] border border-[#eeefef] p-4 text-center">
-                <figure className="mb-2">
-                  <img src={SAMANTHA.portrait} alt={`${SAMANTHA.name} portrait`} loading="lazy" className="size-16 mx-auto rounded-[12px] object-cover object-top" />
-                  <figcaption><AIDisclosure size={8} className="justify-center" /></figcaption>
-                </figure>
-                <p className={`${FG_SB} text-[15px]`}>{SAMANTHA.name}</p>
-                <p className="text-[11px] text-[#6a7282] mb-3">{SAMANTHA.loc} · {SAMANTHA.age}</p>
-                <div className="flex gap-2">
-                  {(["Basic", "Detail", "Text"] as const).map((lab) => (
-                    <span
-                      key={lab}
-                      className={`flex-1 h-8 rounded-full text-[11px] inline-flex items-center justify-center border ${
-                        lab === "Detail" ? "bg-[#c6f31e] border-[#c6f31e] text-[#101828]" : "border-[#d0d5dd]"
-                      }`}
-                    >
-                      {lab}
-                    </span>
-                  ))}
+                <div className="cs-mobile-email-content">
+                  <h4>A creator for our curl-care launch</h4>
+                  <ChromeBrandBrief />
                 </div>
               </div>
             </div>
-          </div>
-        </MobileFade>
-
-        <MobileFade className="mt-14 text-center px-2" delayMs={80}>
-          <a href={STORE} target="_blank" rel="noreferrer" className="inline-flex flex-col items-center">
-            <img src={BAG} alt="Chrome Extension" width={160} height={140} className="w-[160px] h-[140px] object-contain" />
-            <span className={`${FG_SB} mt-8 text-[28px] leading-[1.1] tracking-[-1px] text-[#101828]`}>
-              That's the Chrome Extension
-            </span>
-          </a>
-        </MobileFade>
-      </section>
+          </MobileFade>
+        </section>
+        <section>
+          <MobileFade>
+            <div className="cs-mobile-step-title">
+              <span>02</span>
+              <h3>The right person. One click.</h3>
+            </div>
+            <p className="cs-mobile-step-copy">
+              Open Samantha’s profile in Foam. Choose Detail to copy her
+              biography, audience figures and media kit.
+            </p>
+            <div
+              className="cs-mobile-desktop cs-mobile-extension-stage"
+              style={background}
+            >
+              <ChromeExtensionPanel
+                stage={panelStage}
+                onStage={setPanelStage}
+              />
+            </div>
+          </MobileFade>
+        </section>
+        <section>
+          <MobileFade>
+            <div className="cs-mobile-step-title">
+              <span>03</span>
+              <h3>Paste. Your pitch is ready.</h3>
+            </div>
+            <div className="cs-mobile-desktop" style={background}>
+              <div className="cs-mobile-email-window">
+                <div className="cs-mobile-window-bar">
+                  <span>● ● ●</span> Your reply
+                </div>
+                <div className="cs-mobile-reply-wrap">
+                  <ChromeReply pasted />
+                </div>
+              </div>
+            </div>
+          </MobileFade>
+        </section>
+      </div>
+      <MobileFade className="cs-mobile-finale">
+        <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+          <img src={`${A}/chrome-store.webp`} alt="" width={150} height={131} />
+          <h2>That’s the Chrome Extension.</h2>
+          <span>Bring your roster to your inbox ↗</span>
+        </a>
+      </MobileFade>
     </div>
   );
 }
