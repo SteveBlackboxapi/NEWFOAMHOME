@@ -30,6 +30,7 @@ export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteAria, "aria-quen-v2-c1.webp"), // Lipstick application
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // Curl refresh
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
+  resultFor(websiteSamantha, "samantha-pikka-v2-c6.webp"), // Haircare products
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];
