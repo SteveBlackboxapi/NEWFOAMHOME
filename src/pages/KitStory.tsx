@@ -38,6 +38,7 @@ import {
   kitPlanePose,
   kitFeaturedOpacity,
   KIT_STORY_HEIGHT_VH,
+  KIT_CHROME_OVERLAP_VH,
   KIT_JUMP_POINTS,
   type KitPanTargets,
   type KitRevealLayout,
@@ -1183,7 +1184,19 @@ function KitStoryDesktop() {
         </div>
       </section>
 
-      <ChromeStory embedded />
+      <div
+        className="ks-chrome-handoff"
+        data-kit-chrome-handoff
+        style={{
+          marginTop: `-${KIT_CHROME_OVERLAP_VH}vh`,
+          opacity: timeline.chromeIn,
+          pointerEvents: timeline.chromeIn === 1 ? "auto" : "none",
+        }}
+        inert={timeline.chromeIn < 1}
+        aria-hidden={timeline.chromeIn < 1}
+      >
+        <ChromeStory embedded />
+      </div>
       <AfterShare />
       <FoundStory />
     </div>

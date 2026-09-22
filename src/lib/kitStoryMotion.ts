@@ -1,5 +1,8 @@
 // Three and a half viewport heights of travel, plus the final sticky viewport.
 export const KIT_STORY_HEIGHT_VH = 450;
+// Reuse the outgoing sticky viewport for the next story rather than scrolling
+// an empty full screen after the plane has gone. Earlier kit timing is unchanged.
+export const KIT_CHROME_OVERLAP_VH = 100;
 export const KIT_COUNT_SCROLL_VH = 24;
 const COUNT_SPAN = KIT_COUNT_SCROLL_VH / (KIT_STORY_HEIGHT_VH - 100);
 
@@ -71,7 +74,10 @@ export function kitStoryTimeline(
     planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
     fly: smoothProgress(progressBetween(p, 0.94, 1)),
     sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
-    sharedOut: progressBetween(p, 0.94, 0.985),
+    // Clear the outgoing lettering before the next headline arrives. The
+    // airplane bridges this short handoff, avoiding two ghosted titles.
+    sharedOut: progressBetween(p, 0.94, 0.965),
+    chromeIn: smoothProgress(progressBetween(p, 0.965, 1)),
     headlineOpacity: 1 - progressBetween(p, 0.015, 0.105),
   };
 }
