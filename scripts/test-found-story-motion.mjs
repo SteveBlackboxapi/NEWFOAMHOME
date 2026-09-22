@@ -18,6 +18,9 @@ const module = { exports: {} };
 new Function("module", "exports", outputText)(module, module.exports);
 const {
   foundStoryTimeline,
+  foundCampaignScale,
+  FOUND_STORY_HEIGHT_VH,
+  FOUND_CAMPAIGN_SCROLL_VH,
   foundSearchExample,
   FOUND_SEARCH_QUERY,
   FOUND_SEARCH_LOCK_PROGRESS,
@@ -30,11 +33,10 @@ const holdMs = 1500;
 const eraseMs = 30;
 const gapMs = 400;
 const phases = {
-  zoom: [0.05, 0.38],
-  results: [0.22, 0.5],
+  zoom: [0.025, 0.38],
+  results: [0.2, 0.52],
   highlight: [0.52, 0.62],
-  detail: [0.66, 0.85],
-  finish: [0.88, 0.98],
+  detail: [0.62, 0.94],
 };
 const samples = (start, end, steps = 100) =>
   Array.from(
@@ -54,8 +56,14 @@ test("each timed example types one character at a time, holds, then erases into 
     for (let characters = 0; characters < text.length; characters++) {
       const time = start + characters * typeMs;
       assert.equal(foundSearchExample(time), text.slice(0, characters));
-      assert.equal(foundSearchExample(time + typeMs - 0.25), text.slice(0, characters));
-      assert.equal(foundSearchExample(time + typeMs), text.slice(0, characters + 1));
+      assert.equal(
+        foundSearchExample(time + typeMs - 0.25),
+        text.slice(0, characters),
+      );
+      assert.equal(
+        foundSearchExample(time + typeMs),
+        text.slice(0, characters + 1),
+      );
     }
     const holdStart = start + text.length * typeMs;
     for (const offset of [0, holdMs / 2, holdMs - 0.25])
@@ -63,9 +71,18 @@ test("each timed example types one character at a time, holds, then erases into 
     const eraseStart = holdStart + holdMs;
     for (let removed = 0; removed < text.length; removed++) {
       const time = eraseStart + removed * eraseMs;
-      assert.equal(foundSearchExample(time), text.slice(0, text.length - removed));
-      assert.equal(foundSearchExample(time + eraseMs - 0.25), text.slice(0, text.length - removed));
-      assert.equal(foundSearchExample(time + eraseMs), text.slice(0, text.length - removed - 1));
+      assert.equal(
+        foundSearchExample(time),
+        text.slice(0, text.length - removed),
+      );
+      assert.equal(
+        foundSearchExample(time + eraseMs - 0.25),
+        text.slice(0, text.length - removed),
+      );
+      assert.equal(
+        foundSearchExample(time + eraseMs),
+        text.slice(0, text.length - removed - 1),
+      );
     }
     const gapStart = eraseStart + text.length * eraseMs;
     for (const offset of [0, gapMs / 2, gapMs - 0.25])
@@ -76,13 +93,36 @@ test("each timed example types one character at a time, holds, then erases into 
 });
 
 test("timed examples wrap exactly and give the same text after skipped or reversed clock samples", () => {
-  const checkpoints = [...samples(0, FOUND_SEARCH_CYCLE_MS, 1000), 65, 130, 1365, 2865, 3895];
-  const baseline = new Map(checkpoints.map((time) => [time, foundSearchExample(time)]));
-  for (const time of [...checkpoints].reverse().concat([3895, 65, 2865, 0, 1365]))
+  const checkpoints = [
+    ...samples(0, FOUND_SEARCH_CYCLE_MS, 1000),
+    65,
+    130,
+    1365,
+    2865,
+    3895,
+  ];
+  const baseline = new Map(
+    checkpoints.map((time) => [time, foundSearchExample(time)]),
+  );
+  for (const time of [...checkpoints]
+    .reverse()
+    .concat([3895, 65, 2865, 0, 1365]))
     assert.equal(foundSearchExample(time), baseline.get(time));
   for (const cycles of [1, 2, 1000]) {
-    for (const offset of [0, 64.75, 65, 130, 1365, 2865, 3895, FOUND_SEARCH_CYCLE_MS - 0.25])
-      assert.equal(foundSearchExample(cycles * FOUND_SEARCH_CYCLE_MS + offset), foundSearchExample(offset));
+    for (const offset of [
+      0,
+      64.75,
+      65,
+      130,
+      1365,
+      2865,
+      3895,
+      FOUND_SEARCH_CYCLE_MS - 0.25,
+    ])
+      assert.equal(
+        foundSearchExample(cycles * FOUND_SEARCH_CYCLE_MS + offset),
+        foundSearchExample(offset),
+      );
   }
   assert.equal(foundSearchExample(FOUND_SEARCH_CYCLE_MS - 0.25), "");
   assert.equal(foundSearchExample(FOUND_SEARCH_CYCLE_MS), "");
@@ -98,15 +138,18 @@ test("examples can change while scroll is paused without advancing any visual ph
       assert.deepEqual(foundStoryTimeline(progress), paused);
       for (const field of Object.keys(phases)) assert.equal(paused[field], 0);
     }
-    assert.ok(texts.size > 20, "search examples must keep typing at the same scroll position");
+    assert.ok(
+      texts.size > 20,
+      "search examples must keep typing at the same scroll position",
+    );
   }
 });
 
-test("scroll locks the final query at .025 before zoom, and reversing releases the lock", () => {
+test("scroll locks the final query as zoom starts, and reversing releases the lock", () => {
   assert.equal(FOUND_SEARCH_LOCK_PROGRESS, 0.025);
   assert.equal(FOUND_SEARCH_QUERY, "Skincare product reviews");
   assert.equal(foundStoryTimeline(0.025 - 1e-7).query, "");
-  for (const p of [0.025, 0.025 + 1e-7, 0.04, 0.05]) {
+  for (const p of [0.025]) {
     const state = foundStoryTimeline(p);
     assert.equal(state.query, FOUND_SEARCH_QUERY);
     for (const field of Object.keys(phases)) assert.equal(state[field], 0);
@@ -114,7 +157,12 @@ test("scroll locks the final query at .025 before zoom, and reversing releases t
   for (const p of samples(0.025, 1))
     assert.equal(foundStoryTimeline(p).query, FOUND_SEARCH_QUERY);
   // Calling the clock helper mid-type or mid-erase cannot alter the scroll lock.
-  for (const elapsed of [typeMs, 20 * typeMs, 21 * typeMs + holdMs + eraseMs, 3895]) {
+  for (const elapsed of [
+    typeMs,
+    20 * typeMs,
+    21 * typeMs + holdMs + eraseMs,
+    3895,
+  ]) {
     foundSearchExample(elapsed);
     assert.equal(foundStoryTimeline(0.025).query, FOUND_SEARCH_QUERY);
   }
@@ -158,27 +206,33 @@ test("each visual phase eases only within its interval and holds exact endpoints
   }
 });
 
-test("results overlap zoom and later beats retain their intended gaps", () => {
+test("search, results and selection keep moving without dormant scroll gaps", () => {
   const overlap = foundStoryTimeline(0.3);
   assert.ok(overlap.zoom > 0 && overlap.zoom < 1);
   assert.ok(overlap.results > 0 && overlap.results < 1);
   assert.equal(overlap.highlight, 0);
   assert.equal(overlap.detail, 0);
-  assert.equal(overlap.finish, 0);
-  const ready = foundStoryTimeline(0.51);
-  assert.equal(ready.zoom, 1);
-  assert.equal(ready.results, 1);
-  assert.equal(ready.highlight, 0);
-  assert.deepEqual(foundStoryTimeline(0.62), foundStoryTimeline(0.66));
-  assert.deepEqual(foundStoryTimeline(0.85), foundStoryTimeline(0.88));
-  assert.deepEqual(foundStoryTimeline(0.98), foundStoryTimeline(1));
+  for (const p of samples(0.025, 0.939, 900)) {
+    const before = foundStoryTimeline(p);
+    const after = foundStoryTimeline(p + 0.001);
+    assert.ok(
+      Object.keys(phases).some((field) => after[field] > before[field]),
+      `No visible movement at ${p}`,
+    );
+  }
+  const travel = FOUND_STORY_HEIGHT_VH - 100;
+  assert.ok(
+    travel <= 110,
+    "the demo should take at most 1.1 viewport heights of scroll",
+  );
+  assert.ok(
+    travel * (1 - phases.detail[1]) < 7,
+    "the completed detail view releases within 7vh",
+  );
 });
 
 test("numeric animation values stay continuous across all phase boundaries", () => {
-  for (const boundary of [
-    0.025,
-    ...Object.values(phases).flat(),
-  ]) {
+  for (const boundary of [0.025, ...Object.values(phases).flat()]) {
     const before = foundStoryTimeline(boundary - 1e-7);
     const after = foundStoryTimeline(boundary + 1e-7);
     for (const field of Object.keys(phases))
@@ -222,4 +276,58 @@ test("invalid and out-of-range progress always produces bounded finite state", (
   assert.deepEqual(foundStoryTimeline(2), foundStoryTimeline(1));
   for (const p of [NaN, Infinity, -Infinity])
     assert.deepEqual(foundStoryTimeline(p), foundStoryTimeline(0));
+});
+
+test("campaign starts at 70% of the previous width and reaches the true viewport edges", () => {
+  for (const [width, height] of [
+    [390, 844],
+    [1280, 720],
+    [1920, 1080],
+    [2560, 1440],
+  ]) {
+    const oldWidth = Math.min(
+      1500,
+      width - 2 * Math.max(16, Math.min(48, width * 0.03)),
+    );
+    const startTop = height * 0.85;
+    const endTop = startTop - (height * FOUND_CAMPAIGN_SCROLL_VH) / 100;
+    nearly(
+      foundCampaignScale(startTop, height, width) * width,
+      oldWidth * 0.7,
+      "starting artwork width",
+    );
+    assert.equal(foundCampaignScale(endTop - 1, height, width), 1);
+    assert.equal(foundCampaignScale(-1000, height, width), 1);
+    let prior = 0;
+    for (const top of samples(startTop, endTop, 50)) {
+      const scale = foundCampaignScale(top, height, width);
+      assert.ok(
+        scale >= prior && scale <= 1,
+        "growth must be monotonic without horizontal overflow",
+      );
+      prior = scale;
+    }
+    const stops = samples(startTop, endTop, 10);
+    const values = stops.map((top) => foundCampaignScale(top, height, width));
+    assert.deepEqual(
+      stops.toReversed().map((top) => foundCampaignScale(top, height, width)),
+      values.toReversed(),
+    );
+  }
+  assert.ok(
+    FOUND_CAMPAIGN_SCROLL_VH <= 40,
+    "full growth fits one short scroll span",
+  );
+});
+
+test("campaign reduced motion and invalid measurements show the complete artwork", () => {
+  assert.equal(foundCampaignScale(800, 800, 1280, true), 1);
+  for (const args of [
+    [NaN, 800, 1280],
+    [0, 0, 1280],
+    [0, 800, 0],
+    [0, Infinity, 1280],
+    [0, 800, NaN],
+  ])
+    assert.equal(foundCampaignScale(...args), 1);
 });

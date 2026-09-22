@@ -22,7 +22,9 @@ import { formatWebsiteMetric } from "../data/websiteTalent";
 import {
   foundSearchExample,
   foundStoryTimeline,
+  foundCampaignScale,
   FOUND_SEARCH_QUERY,
+  FOUND_STORY_HEIGHT_VH,
 } from "../lib/foundStoryMotion";
 import "./found-story.css";
 
@@ -444,6 +446,77 @@ function SelectedPost({
   );
 }
 
+function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
+  const artwork = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const element = artwork.current;
+    if (!element) return;
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const bounds = element.getBoundingClientRect();
+      element.style.setProperty(
+        "--campaign-scale",
+        String(
+          foundCampaignScale(
+            bounds.top,
+            window.innerHeight,
+            bounds.width,
+            reducedMotion,
+          ),
+        ),
+      );
+    };
+    measure();
+    if (reducedMotion) return;
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(element);
+    observer.observe(document.documentElement);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("pageshow", schedule);
+    };
+  }, [reducedMotion]);
+  return (
+    <section
+      className="fs-campaign-story"
+      aria-labelledby="campaign-bridge-title"
+    >
+      <header className="fs-campaign-bridge">
+        <h2 id="campaign-bridge-title">From a search to your next campaign.</h2>
+        <p>
+          You’ve seen Nia’s skincare review. Here’s where that discovery could
+          lead.
+        </p>
+      </header>
+      <figure className="fs-campaign">
+        <div ref={artwork} className="fs-campaign-art">
+          <img
+            src={`${A}/campaigns/found-with-foam-skincare-v2.webp`}
+            width={1412}
+            height={1114}
+            loading="lazy"
+            decoding="async"
+            alt="Concept outdoor advert: Nia Brooks, the same fictional creator found in the skincare review, cleansing her face against pink, beneath Skincare product reviews and above Found with Foam."
+          />
+        </div>
+        <figcaption>
+          <AIDisclosure detail="Concept advert" />
+        </figcaption>
+      </figure>
+    </section>
+  );
+}
+
 /** A continuous camera move: the opening search is the same bar in the results UI. */
 export function FoundStory() {
   const reducedMotion = useSyncExternalStore(
@@ -474,7 +547,11 @@ export function FoundStory() {
       setProgress(
         clamp(
           -track.current.getBoundingClientRect().top /
-            Math.max(1, track.current.offsetHeight - window.innerHeight),
+            Math.max(
+              1,
+              track.current.offsetHeight -
+                (canvas.current?.clientHeight ?? window.innerHeight),
+            ),
         ),
       );
     };
@@ -544,6 +621,9 @@ export function FoundStory() {
       <section
         ref={track}
         className="fs-track"
+        style={{
+          height: reducedMotion ? "auto" : `${FOUND_STORY_HEIGHT_VH}svh`,
+        }}
         aria-label="Found with Foam search demonstration"
       >
         <div
@@ -700,21 +780,7 @@ export function FoundStory() {
           </p>
         </div>
       </section>
-      <figure className="fs-campaign">
-        <div className="fs-campaign-art">
-          <img
-            src={`${A}/campaigns/found-with-foam-skincare-v2.webp`}
-            width={1412}
-            height={1114}
-            loading="lazy"
-            decoding="async"
-            alt="Concept outdoor advert: Nia Brooks, the same fictional creator found in the skincare review, cleansing her face against pink, beneath Skincare product reviews and above Found with Foam."
-          />
-        </div>
-        <figcaption>
-          <AIDisclosure detail="Concept advert" />
-        </figcaption>
-      </figure>
+      <CampaignReveal reducedMotion={reducedMotion} />
       <div className="fs-outro">
         <span className="fs-eyebrow">FOUND WITH FOAM</span>
         <h2 id="found-title">

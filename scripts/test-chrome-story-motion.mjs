@@ -55,10 +55,10 @@ test("every action clicks its measured target before the next UI state appears",
 
 test("ring travels continuously from the toolbar to Samantha, then to Detail and the caret", () => {
   for (const [start, end, from, to] of [
-    [0.18, 0.28, "reply", "toolbar"],
-    [0.355, 0.465, "toolbar", "talent"],
-    [0.53, 0.635, "talent", "copy"],
-    [0.7, 0.855, "copy", "caret"],
+    [0.14, 0.3, "reply", "toolbar"],
+    [0.32, 0.47, "toolbar", "talent"],
+    [0.49, 0.64, "talent", "copy"],
+    [0.66, 0.86, "copy", "caret"],
   ]) {
     const pose = chromeCursorPose((start + end) / 2, targets);
     close(pose.x, (targets[from].x + targets[to].x) / 2);
@@ -113,11 +113,33 @@ test("the scene releases within five viewport-percent of scroll after paste", ()
   const remainingVh = travel * (1 - paste / CHROME_STORY_END);
   assert.ok(remainingVh > 0 && remainingVh <= 5);
   assert.equal(chromeStageAt(CHROME_STORY_END), 5);
-  // Earlier action spacing is unchanged by trimming only the final hold.
-  close(
-    (travel * CHROME_STAGE_STOPS[2]) / CHROME_STORY_END,
-    240 * CHROME_STAGE_STOPS[2],
-  );
+  // The whole pinned demonstration is now less than 1.5 screens of scrolling.
+  assert.ok(CHROME_STORY_HEIGHT_VH >= 220 && CHROME_STORY_HEIGHT_VH <= 250);
+  assert.ok(travel <= 150);
+});
+
+test("every increment before paste produces visible travel, a click or a fade", () => {
+  // A 0.001 increment is about one pixel of scrolling at a 640px viewport.
+  // Regressing to the old between-action holds creates dozens of identical poses.
+  let previous = chromeCursorPose(0.001, targets);
+  for (let step = 2; step < 880; step++) {
+    const current = chromeCursorPose(step / 1000, targets);
+    assert.ok(current && previous);
+    const change =
+      Math.hypot(current.x - previous.x, current.y - previous.y) +
+      Math.abs(current.press - previous.press) +
+      Math.abs(current.opacity - previous.opacity);
+    assert.ok(change > 1e-8, `Idle interval at progress ${step / 1000}`);
+    previous = current;
+  }
+});
+
+test("the next movement begins immediately after each state change", () => {
+  for (const stop of CHROME_STAGE_STOPS.slice(1, -1)) {
+    const atClick = chromeCursorPose(stop, targets);
+    const next = chromeCursorPose(stop + 0.005, targets);
+    assert.ok(Math.hypot(next.x - atClick.x, next.y - atClick.y) > 0.01);
+  }
 });
 
 test("invalid progress is safe and out-of-range scrolling clamps to endpoints", () => {
