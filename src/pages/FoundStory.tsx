@@ -1,0 +1,467 @@
+import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
+import {
+  ContentMetrics,
+  ContentPlatformIcon,
+} from "../components/ContentMetrics";
+import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
+import {
+  FOUND_RESULTS,
+  FOUND_SELECTED,
+  type FoundResult,
+} from "../data/foundWithFoam";
+import { formatWebsiteMetric } from "../data/websiteTalent";
+import {
+  foundStoryTimeline,
+  FOUND_SEARCH_QUERY,
+} from "../lib/foundStoryMotion";
+import "./found-story.css";
+
+const A = `${import.meta.env.BASE_URL}assets`;
+const motionQuery = "(prefers-reduced-motion: reduce)";
+const clamp = (value: number) => Math.max(0, Math.min(1, value));
+function subscribeMotion(listener: () => void) {
+  const query = window.matchMedia(motionQuery);
+  query.addEventListener("change", listener);
+  return () => query.removeEventListener("change", listener);
+}
+
+function ResultCard({
+  result,
+  index,
+  progress,
+  highlight,
+}: {
+  result: FoundResult;
+  index: number;
+  progress: number;
+  highlight: number;
+}) {
+  const { talent, tile } = result;
+  const entered = clamp((progress - index * 0.1) / 0.7);
+  const hasMetrics = (tile.views ?? 0) > 0 || (tile.engagements ?? 0) > 0;
+  return (
+    <figure
+      className={`fs-result fs-result-${index}`}
+      style={{
+        opacity: entered,
+        transform: `translateY(${(1 - entered) * 42}px)`,
+      }}
+    >
+      <div
+        className="fs-result-media"
+        style={{
+          outlineColor:
+            index === 0 ? `rgba(198,243,30,${highlight})` : "transparent",
+        }}
+      >
+        <img src={tile.thumb} alt="" loading="lazy" />
+        <span className="content-card-fade" />
+        <span className="fs-save">
+          <LabIcon name="bookmark" size={15} />
+        </span>
+        <div className="fs-result-meta">
+          {hasMetrics ? (
+            <ContentMetrics tile={tile} className="fs-result-metrics" />
+          ) : (
+            <span className="fs-unpublished">Demo asset</span>
+          )}
+          <div className="fs-result-person">
+            <img src={talent.portrait} alt="" loading="lazy" />
+            <span>{talent.displayName}</span>
+            <ContentPlatformIcon network={tile.platform} />
+          </div>
+        </div>
+      </div>
+      <figcaption>
+        <AIDisclosure />
+      </figcaption>
+    </figure>
+  );
+}
+
+function SearchFilters() {
+  return (
+    <aside className="fs-filters">
+      <div>
+        <strong>
+          Talent <span>⌃</span>
+        </strong>
+        <span className="fs-filter-input">
+          <LabIcon name="search" size={14} /> Name or handle
+        </span>
+      </div>
+      <div>
+        <strong>
+          Roster <span>⌄</span>
+        </strong>
+      </div>
+      <div>
+        <strong>
+          Platform <span>⌃</span>
+        </strong>
+        {["Any", "Instagram", "TikTok", "YouTube"].map((name, i) => (
+          <span className="fs-check-row" key={name}>
+            <i className={i === 0 ? "is-checked" : ""}>{i === 0 ? "✓" : ""}</i>
+            {name}
+          </span>
+        ))}
+      </div>
+      <div className="fs-performance">
+        <strong>Performance metrics</strong>
+        {["Views", "Likes", "Comments", "Engagements"].map((name) => (
+          <span className="fs-filter-value" key={name}>
+            {name}
+            <i>
+              Any <span>⌄</span>
+            </i>
+          </span>
+        ))}
+      </div>
+      <div className="fs-filter-actions">
+        <span>Reset all filters</span>
+        <span>Apply</span>
+      </div>
+    </aside>
+  );
+}
+
+function SelectedPost() {
+  const { talent, tile } = FOUND_SELECTED;
+  return (
+    <>
+      <div className="fs-detail-header">
+        <img src={talent.portrait} alt="" />
+        <span>
+          <strong>{talent.displayName}</strong>
+          <small>Instagram · Image</small>
+        </span>
+        <span className="fs-detail-close">×</span>
+      </div>
+      <div className="fs-detail-body">
+        <figure className="fs-detail-picture">
+          <img src={tile.thumb} alt="" />
+          <figcaption>
+            <AIDisclosure />
+          </figcaption>
+        </figure>
+        <div className="fs-detail-info">
+          <p className="fs-detail-kicker">THE MOMENT YOU WERE LOOKING FOR</p>
+          <h3>A quick curl refresh.</h3>
+          <p className="fs-detail-caption">
+            An everyday haircare routine from Samantha Pikka.
+          </p>
+          <h4>Post metrics</h4>
+          <dl className="fs-post-metrics">
+            <div>
+              <dt>
+                <LabIcon name="eye" size={16} />
+                Views
+              </dt>
+              <dd>{formatWebsiteMetric(tile.views!)}</dd>
+            </div>
+            <div>
+              <dt>
+                <span
+                  className="fs-clap"
+                  style={{
+                    maskImage: `url(${A}/999f1.svg)`,
+                    WebkitMaskImage: `url(${A}/999f1.svg)`,
+                  }}
+                />
+                Engagements
+              </dt>
+              <dd>{formatWebsiteMetric(tile.engagements!)}</dd>
+            </div>
+          </dl>
+          <h4>Details</h4>
+          <dl className="fs-post-details">
+            <div>
+              <dt>Platform</dt>
+              <dd>Instagram</dd>
+            </div>
+            <div>
+              <dt>Talent</dt>
+              <dd>{talent.displayName}</dd>
+            </div>
+            <div>
+              <dt>Content</dt>
+              <dd>Haircare · Routine</dd>
+            </div>
+          </dl>
+          <p className="fs-demo-note">Fictional creators · Demo figures</p>
+          <span className="fs-match">
+            <LabIcon name="check" size={15} /> Found with Foam
+          </span>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/** A continuous camera move: the opening search is the same bar in the results UI. */
+export function FoundStory() {
+  const reducedMotion = useSyncExternalStore(
+    subscribeMotion,
+    () => window.matchMedia(motionQuery).matches,
+    () => true,
+  );
+  const track = useRef<HTMLElement>(null);
+  const canvas = useRef<HTMLDivElement>(null);
+  const app = useRef<HTMLDivElement>(null);
+  const search = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [camera, setCamera] = useState({
+    x: 0,
+    y: 0,
+    originX: 0,
+    originY: 0,
+    scale: 1,
+  });
+
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      if (!track.current) return;
+      setProgress(
+        clamp(
+          -track.current.getBoundingClientRect().top /
+            Math.max(1, track.current.offsetHeight - window.innerHeight),
+        ),
+      );
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.documentElement);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("pageshow", schedule);
+    };
+  }, [reducedMotion]);
+
+  useLayoutEffect(() => {
+    const stage = canvas.current,
+      windowEl = app.current,
+      bar = search.current;
+    if (!stage || !windowEl || !bar) return;
+    const measure = () => {
+      const originX = bar.offsetLeft + bar.offsetWidth / 2;
+      const originY = bar.offsetTop + bar.offsetHeight / 2;
+      setCamera({
+        originX,
+        originY,
+        x: stage.clientWidth / 2 - windowEl.offsetLeft - originX,
+        y: stage.clientHeight * 0.54 - windowEl.offsetTop - originY,
+        scale: Math.max(
+          1,
+          Math.min(2.1, (stage.clientWidth * 0.85) / bar.offsetWidth),
+        ),
+      });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(stage);
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
+
+  const state = foundStoryTimeline(reducedMotion ? 1 : progress);
+  const zoom = state.zoom;
+  const intro = 1 - clamp(zoom * 2.2);
+  return (
+    <section
+      className={`found-story ${reducedMotion ? "fs-reduced" : ""}`}
+      id="found-with-foam"
+      aria-labelledby="found-title"
+    >
+      <div className="sr-only">
+        <h2>Found with Foam</h2>
+        <p>
+          Describe a moment, topic or creator. This example searches for
+          everyday makeup and haircare, reveals four matching posts, then opens
+          Samantha Pikka’s curl refresh with 116,000 views and 4,600
+          engagements. All creators and figures are illustrative.
+        </p>
+      </div>
+      <section
+        ref={track}
+        className="fs-track"
+        aria-label="Found with Foam search demonstration"
+      >
+        <div
+          ref={canvas}
+          className="fs-canvas"
+          data-progress={progress.toFixed(4)}
+        >
+          <div
+            className="fs-intro"
+            style={{ opacity: intro, transform: `translateY(${-zoom * 40}px)` }}
+            aria-hidden="true"
+          >
+            <span className="fs-eyebrow">FOUND WITH FOAM</span>
+            <h2>
+              Type it the way
+              <br />
+              you’d say it.
+            </h2>
+            <p>Search by moment, topic or creator.</p>
+          </div>
+          <div
+            ref={app}
+            className="fs-window"
+            aria-hidden="true"
+            style={{
+              transformOrigin: `${camera.originX}px ${camera.originY}px`,
+              transform: `translate(${camera.x * (1 - zoom)}px, ${camera.y * (1 - zoom)}px) scale(${1 + (camera.scale - 1) * (1 - zoom)})`,
+            }}
+          >
+            <div className="fs-window-surface" style={{ opacity: zoom }} />
+            <div className="fs-rail" style={{ opacity: zoom }}>
+              <span className="fs-foam">
+                <img src={`${A}/fdb3b.svg`} alt="" />
+              </span>
+              {(
+                [
+                  "people",
+                  "explore",
+                  "search",
+                  "grid",
+                  "image",
+                ] as LabIconName[]
+              ).map((icon, index) => (
+                <span key={icon} className={index === 1 ? "is-active" : ""}>
+                  <LabIcon name={icon} size={21} />
+                </span>
+              ))}
+              <span className="fs-avatar">F</span>
+            </div>
+            <div className="fs-app-header" style={{ opacity: zoom }}>
+              <strong>Explore content</strong>
+              <span className="fs-demo-workspace">Demo workspace</span>
+            </div>
+            <div
+              ref={search}
+              className="fs-search"
+              style={{
+                boxShadow: `0 ${8 * (1 - zoom)}px ${36 * (1 - zoom)}px rgba(16,24,40,${0.08 * (1 - zoom)})`,
+              }}
+            >
+              <LabIcon name="search" size={19} />
+              <span className={state.query ? "fs-query" : "fs-placeholder"}>
+                {state.query || "Describe the content you’re looking for"}
+                <i
+                  className="fs-caret"
+                  style={{ opacity: state.query && zoom < 0.8 ? 1 : 0 }}
+                />
+              </span>
+              <span
+                className="fs-enter"
+                style={{ opacity: state.query ? 1 : 0 }}
+              >
+                ↵
+              </span>
+            </div>
+            <div className="fs-toolbar" style={{ opacity: zoom }}>
+              <span className="fs-filter-heading">
+                <LabIcon name="filter" size={16} />
+                Filters
+              </span>
+              <span
+                className="fs-query-chip"
+                style={{ opacity: state.results }}
+              >
+                <LabIcon name="search" size={13} /> Makeup & haircare{" "}
+                <span>×</span>
+              </span>
+              <span className="fs-sort">
+                <LabIcon name="compact" size={17} />
+                <LabIcon name="chevron" size={12} />
+              </span>
+            </div>
+            <div className="fs-filter-area" style={{ opacity: zoom }}>
+              <SearchFilters />
+            </div>
+            <div className="fs-results" style={{ opacity: zoom }}>
+              <div className="fs-results-caption">
+                <span>{FOUND_RESULTS.length} matching posts</span>
+                <span>Most relevant</span>
+              </div>
+              <div className="fs-results-grid">
+                {FOUND_RESULTS.map((result, index) => (
+                  <ResultCard
+                    key={result.id}
+                    result={result}
+                    index={index}
+                    progress={state.results}
+                    highlight={state.highlight}
+                  />
+                ))}
+              </div>
+            </div>
+            <span
+              className="fs-pointer"
+              style={{
+                opacity: state.highlight * (1 - state.detail),
+                transform: `translate(${(1 - state.highlight) * 60}px,${(1 - state.highlight) * 45}px)`,
+              }}
+            />
+            <div
+              className="fs-detail-backdrop"
+              style={{ opacity: state.detail }}
+            />
+            <div
+              className="fs-post-detail"
+              style={{
+                opacity: state.detail,
+                transform: `translateY(${(1 - state.detail) * 24}px) scale(${0.96 + 0.04 * state.detail})`,
+              }}
+            >
+              <SelectedPost />
+            </div>
+          </div>
+          <p
+            className="fs-scroll-cue"
+            style={{ opacity: intro }}
+            aria-hidden="true"
+          >
+            Scroll to find the moment <span>↓</span>
+          </p>
+          <p
+            className="fs-stage-note"
+            style={{ opacity: state.results * (1 - state.detail) }}
+            aria-hidden="true"
+          >
+            The right content. With the context behind it.
+          </p>
+        </div>
+      </section>
+      <div className="fs-outro">
+        <span className="fs-eyebrow">FOUND WITH FOAM</span>
+        <h2 id="found-title">
+          Find the moment
+          <br />
+          that makes the case.
+        </h2>
+        <p>From a few words to the post that belongs in your next pitch.</p>
+        <Link to="/demo" className="fs-demo-link">
+          Get a demo <span>↗</span>
+        </Link>
+        <p className="fs-accessible-query sr-only">
+          Example search: {FOUND_SEARCH_QUERY}
+        </p>
+      </div>
+    </section>
+  );
+}

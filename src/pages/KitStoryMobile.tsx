@@ -14,6 +14,7 @@ import { KitAudience, KitGrowth, KitMetrics } from "../components/KitAnalytics";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import { useScrollRevealProgress } from "../hooks/useScrollRevealProgress";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
+import { FoundStory } from "./FoundStory";
 import {
   formatWebsiteMetric,
   websiteProfile,
@@ -656,6 +657,7 @@ export function KitStoryMobile() {
       {/* 6. Roles + network */}
       <MobileRoles />
       <MobileNetwork />
+      <FoundStory />
     </div>
   );
 }
