@@ -401,3 +401,16 @@
     animation: none;
   }
 }
+
+/* Bring the next story into the final sticky viewport as the plane departs.
+   Its reveal is tied to the kit timeline so reversing scroll restores both. */
+.ks-chrome-handoff {
+  position: relative;
+  z-index: 1;
+}
+.ks-chrome-handoff .cs-story {
+  background: transparent;
+}
+.ks-chrome-handoff .cs-story-intro.is-embedded {
+  padding-top: 40px;
+}

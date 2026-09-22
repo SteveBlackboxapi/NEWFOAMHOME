@@ -25,6 +25,7 @@ const {
   kitRevealStarts,
   KIT_CHAPTERS,
   KIT_STORY_HEIGHT_VH,
+  KIT_CHROME_OVERLAP_VH,
   KIT_JUMP_POINTS,
   kitShareCursor,
   KIT_COUNT_SCROLL_VH,
@@ -414,7 +415,7 @@ test("pan and timeline remain continuous at every chapter and sharing boundary",
   const boundaries = [
     0.015, 0.105, 0.14, 0.15, 0.205, 0.22, 0.3, 0.31, 0.375, 0.385, 0.445,
     0.455, 0.515, 0.535, 0.58, 0.62, 0.66, 0.71, 0.75, 0.765, 0.78, 0.8, 0.815,
-    0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.985, 1,
+    0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.965, 0.985, 1,
   ];
   const epsilon = 1e-7;
   for (const boundary of boundaries) {
@@ -518,6 +519,114 @@ test("logo and title stay fully readable while the plane emerges, before its fli
   assert.ok(kitStoryTimeline(0.96).fly > 0);
   assert.equal(kitStoryTimeline(1).fly, 1);
   assert.equal(kitStoryTimeline(1).sharedOut, 1);
+});
+
+test("the old lockup clears before Chrome enters while the plane bridges the handoff", () => {
+  for (const p of samples(0, 0.965, 193)) {
+    assert.equal(
+      kitStoryTimeline(p).chromeIn,
+      0,
+      `Chrome must stay hidden during kit content, sharing and plane emergence at ${p}`,
+    );
+  }
+  const boundary = kitStoryTimeline(0.965);
+  assert.equal(boundary.sharedOut, 1, "outgoing title has cleared");
+  assert.equal(boundary.chromeIn, 0, "incoming title has not appeared yet");
+  assert.equal(boundary.planeIn, 1);
+  assert.equal(boundary.planeEmerge, 1);
+  assert.ok(boundary.fly > 0 && boundary.fly < 1, "plane is still midflight");
+  const crossing = kitStoryTimeline(0.975);
+  assert.ok(crossing.chromeIn > 0 && crossing.chromeIn < 1);
+  assert.equal(crossing.sharedOut, 1);
+  assert.ok(crossing.fly > 0 && crossing.fly < 1);
+  let previous = 0;
+  for (const p of samples(0.965, 1, 100)) {
+    const state = kitStoryTimeline(p);
+    assert.ok(state.chromeIn >= previous, "handoff does not fade backward");
+    assert.equal(
+      state.sharedOut,
+      1,
+      `outgoing and incoming text must never overlap at ${p}`,
+    );
+    previous = state.chromeIn;
+  }
+  const complete = kitStoryTimeline(1);
+  assert.equal(complete.sharedOut, 1);
+  assert.equal(complete.fly, 1);
+  assert.equal(complete.chromeIn, 1);
+  const checkpoints = [0.94, 0.965, 0.975, 0.985, 1];
+  const forward = checkpoints.map((p) => kitStoryTimeline(p).chromeIn);
+  assert.deepEqual(
+    checkpoints
+      .toReversed()
+      .map((p) => kitStoryTimeline(p).chromeIn)
+      .toReversed(),
+    forward,
+    "reverse scrolling reconstructs the same handoff",
+  );
+});
+
+test("the overlapping Chrome intro occupies the released viewport without changing earlier kit travel", () => {
+  assert.equal(KIT_STORY_HEIGHT_VH, 450, "keep the existing kit track length");
+  const travelVh = KIT_STORY_HEIGHT_VH - 100;
+  for (const [chapter, expectedVh] of [
+    ["profile", 50.75],
+    ["audience", 187.25],
+    ["share", 224],
+  ])
+    nearly(
+      KIT_JUMP_POINTS[chapter] * travelVh,
+      expectedVh,
+      `${chapter} scroll distance is unchanged`,
+    );
+
+  for (const height of [640, 720, 960]) {
+    const kitTrackHeight = (KIT_STORY_HEIGHT_VH * height) / 100;
+    const kitTravel = kitTrackHeight - height;
+    const chromeDocumentTop =
+      kitTrackHeight - (KIT_CHROME_OVERLAP_VH * height) / 100;
+    const introTop = (progress) => chromeDocumentTop - kitTravel * progress;
+    // This is the flow geometry; browser checks verify the wrapper and its 40px intro padding.
+    nearly(
+      introTop(1),
+      0,
+      `Chrome intro starts at the viewport top at ${height}px`,
+    );
+    assert.ok(
+      introTop(0.975) >= 0 && introTop(0.975) + 40 < height,
+      `intro copy is inside the viewport during its reveal at ${height}px`,
+    );
+    nearly(
+      kitTrackHeight - kitTravel,
+      height,
+      "without overlap the intro would still be below the viewport",
+    );
+    const state = kitStoryTimeline(1);
+    const stage = { left: 0, top: 0, width: 1440, height };
+    const logo = { left: 610, top: height / 2 - 150, width: 220, height: 220 };
+    const crossing = kitStoryTimeline(0.965);
+    const bridgingPlane = kitPlanePose(
+      stage,
+      logo,
+      crossing.planeEmerge,
+      crossing.fly,
+    );
+    assert.ok(bridgingPlane.x - bridgingPlane.width / 2 < stage.width);
+    assert.ok(
+      bridgingPlane.y + bridgingPlane.width / 2 > 0,
+      "plane remains in view between the two titles",
+    );
+    const plane = kitPlanePose(stage, logo, state.planeEmerge, state.fly);
+    assert.ok(
+      plane.x - plane.width / 2 > stage.width,
+      "plane has fully departed",
+    );
+    assert.equal(
+      state.chromeIn,
+      1,
+      "Chrome fills the viewport as the plane departs",
+    );
+  }
 });
 
 test("share cursor centres itself on measured controls at compact, wide and offset stages", () => {
