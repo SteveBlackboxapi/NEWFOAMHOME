@@ -1,3 +1,4 @@
+import { DEMO_URL } from "../lib/siteLinks";
 import {
   useEffect,
   useLayoutEffect,
@@ -5,7 +6,6 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import {
   ContentMetrics,
@@ -789,9 +789,9 @@ export function FoundStory() {
           that makes the case.
         </h2>
         <p>From a few words to the post that belongs in your next pitch.</p>
-        <Link to="/demo" className="fs-demo-link">
+        <a href={DEMO_URL} className="fs-demo-link">
           Get a demo <span>↗</span>
-        </Link>
+        </a>
         <p className="fs-accessible-query sr-only">
           Example search: {FOUND_SEARCH_QUERY}
         </p>

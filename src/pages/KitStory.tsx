@@ -1,3 +1,4 @@
+import { DEMO_URL } from "../lib/siteLinks";
 import {
   useEffect,
   useLayoutEffect,
@@ -972,8 +973,8 @@ function KitStoryDesktop() {
               check and get back to you."
             </p>
             <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
-              <Link
-                to="/demo"
+              <a
+                href={DEMO_URL}
                 className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`}
                 style={{ background: "#c6f31e" }}
               >
@@ -986,7 +987,7 @@ function KitStoryDesktop() {
                     strokeLinecap="round"
                   />
                 </svg>
-              </Link>
+              </a>
               <button
                 type="button"
                 onClick={() => jumpTo(KIT_JUMP_POINTS.profile)}

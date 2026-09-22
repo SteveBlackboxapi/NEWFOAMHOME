@@ -1,13 +1,41 @@
-import { Outlet, ScrollRestoration } from "react-router";
+import { useEffect } from "react";
+import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 
+/** Keep history and deep links working across both marketing and story routes. */
+export function NavigationLayout() {
+  return (
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  );
+}
+
 export function Root() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      "/": "Good talent. Great proof.",
+      "/managers": "For talent managers",
+      "/brands": "For brands and agencies",
+      "/creators": "For creators",
+      "/features": "Explore the platform",
+      "/about": "About Foam",
+      "/data-trust": "Data & trust",
+      "/updates": "Inside Foam",
+      "/demo": "Meet Foam",
+    };
+    document.title = `${titles[pathname.replace(/\/$/, "") || "/"] || "Page not found"} | Foam`;
+    return () => {
+      document.title = "Foam — Numbers everyone can trust";
+    };
+  }, [pathname]);
   return (
     <div className="font-founders font-normal min-h-screen bg-surface">
-      <ScrollRestoration />
       <Nav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
       <Footer />

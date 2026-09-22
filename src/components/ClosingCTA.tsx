@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import { FG_M, FG_R, FG_SB } from "../lib/assets";
+import { DEMO_URL } from "../lib/siteLinks";
+import "./site-shell.css";
 
 type Props = {
   headline?: string;
@@ -10,29 +11,72 @@ type Props = {
   secondaryTo?: string;
 };
 
+function CTAAction({
+  to,
+  label,
+  secondary = false,
+}: {
+  to: string;
+  label: string;
+  secondary?: boolean;
+}) {
+  const destination = to === "/demo" || to === "/demo/" ? DEMO_URL : to;
+  const className = `site-cta-action ${secondary ? "is-secondary" : ""}`;
+  const content = (
+    <>
+      {label}
+      <span aria-hidden="true">↗</span>
+    </>
+  );
+  return /^(https?:|mailto:)/.test(destination) ? (
+    <a href={destination} className={className}>
+      {content}
+    </a>
+  ) : (
+    <Link to={destination} className={className}>
+      {content}
+    </Link>
+  );
+}
+
 export function ClosingCTA({
-  headline = "Ready to pitch smarter?",
-  sub = "Join 1,300+ talent managers who use Foam to win more deals.",
-  primaryLabel = "Book a demo",
+  headline = "Make room for what’s next.",
+  sub = "Your people. Their potential. All the tools to bring it together.",
+  primaryLabel = "Get a demo",
   primaryTo = "/demo",
-  secondaryLabel = "See features",
+  secondaryLabel = "Explore the features",
   secondaryTo = "/features",
 }: Props) {
   return (
-    <section className="py-24 px-6 bg-navy">
-      <div className="max-w-[760px] mx-auto text-center">
-        <h2 className={`${FG_SB} text-[48px] leading-[1.05] tracking-[-1.5px] text-white mb-5`}>
-          {headline}
-        </h2>
-        <p className={`${FG_R} text-lg text-subtle mb-10 max-w-[480px] mx-auto leading-7`}>{sub}</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to={primaryTo} className={`${FG_M} bg-brand text-white text-[15px] px-8 h-12 rounded-full flex items-center hover:bg-brand-hover transition-colors`}>
-            {primaryLabel}
-          </Link>
-          <Link to={secondaryTo} className={`${FG_M} bg-white/10 text-white text-[15px] px-8 h-12 rounded-full flex items-center hover:bg-white/15 transition-colors`}>
-            {secondaryLabel}
-          </Link>
+    <section className="site-cta">
+      <div className="site-cta-inner">
+        <div className="site-cta-copy">
+          <p className="site-cta-eyebrow">Good things start here</p>
+          <h2>{headline}</h2>
+          <p className="site-cta-description">{sub}</p>
+          <div className="site-cta-actions">
+            <CTAAction to={primaryTo} label={primaryLabel} />
+            <CTAAction to={secondaryTo} label={secondaryLabel} secondary />
+          </div>
         </div>
+        <svg
+          className="site-cta-shape"
+          viewBox="0 0 280 280"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M0 0H140V140H0V0Z" fill="#155fef" />
+          <path d="M140 0C217.32 0 280 62.68 280 140H140V0Z" fill="#101828" />
+          <path d="M0 140H140V280C62.68 280 0 217.32 0 140Z" fill="#101828" />
+          <circle cx="210" cy="210" r="70" fill="#155fef" />
+          <path
+            d="M73 72L207 206M160 206H207V159"
+            stroke="#fff6eb"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
     </section>
   );

@@ -1,177 +1,136 @@
-import { useEffect, useRef, useState } from "react";
+import { MarketingImage } from "../components/MarketingImage";
+import { useRef, useState, type KeyboardEvent } from "react";
 import { Link } from "react-router";
-import { FG_R, FG_M, FG_SB } from "../lib/assets";
+import {
+  ActionLink,
+  FoamGlyph,
+  MarketingPage,
+  PageIntro,
+  Reveal,
+  SectionIntro,
+} from "../components/Marketing";
+import {
+  ProductPreview,
+  type ProductKind,
+} from "../components/MarketingProduct";
+import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ClosingCTA } from "../components/ClosingCTA";
-import { FoamAppScreen } from "../components/FoamAppScreen";
-import { GmailView } from "./Home";
+import { A } from "../lib/assets";
+import "./marketing-features.css";
 
-const FEATURES = [
+const FEATURES: {
+  kind: ProductKind;
+  name: string;
+  heading: string;
+  copy: string;
+  link: string;
+  cta: string;
+}[] = [
   {
+    kind: "kit",
     name: "Media kits",
-    tagline: "Connected numbers. Your agency's colours. One link.",
-    desc: "Foam pulls live follower counts, audience demographics, and top content from each creator's connected platforms and wraps it in your agency's branding. Every kit updates automatically. No manual refreshes.",
-    bullets: ["Live cross-platform stats", "Agency branding built in", "Shareable link, no login required", "Audience age & geo breakdown"],
-    color: "bg-raised",
-    dark: false,
+    heading: "The whole story. In one link.",
+    copy: "Put a creator’s work, connected platform numbers and audience insights together in a kit that’s ready to share.",
+    link: "/kit-story/",
+    cta: "See a kit come together",
   },
   {
+    kind: "roster",
     name: "Lists & rosters",
-    tagline: "Group creators, share via a single link.",
-    desc: "Build campaign-specific shortlists or export your full agency roster. Share one link with a brand and they see every creator in context: stats, content, and the manager behind each one.",
-    bullets: ["Campaign-scoped shortlists", "Full agency roster view", "Single shareable link per list", "Filter by niche, audience, location"],
-    color: "bg-surface",
-    dark: false,
+    heading: "A shortlist with a point of view.",
+    copy: "Bring the right people together for a brief. Give the brand a clear way to explore your recommendations.",
+    link: "/managers",
+    cta: "Explore the manager’s workflow",
   },
   {
+    kind: "search",
     name: "Content search",
-    tagline: "Find the moment that makes the case.",
-    desc: "Search across your roster's published content by keyword, platform, or performance. Surface the exact post that proves a creator's fit for a brand's brief, without digging through profiles manually.",
-    bullets: ["Keyword and platform search", "Performance-ranked results", "Direct link to original post", "Works across Instagram, TikTok, YouTube"],
-    color: "bg-raised",
-    dark: false,
+    heading: "Find the moment that makes the case.",
+    copy: "A routine. A product review. A perfect example. Search for the content that helps explain why a creator fits.",
+    link: "/kit-story/#found-with-foam",
+    cta: "Try the content story",
   },
   {
+    kind: "inbox",
     name: "Chrome extension",
-    tagline: "Embeds a pitch directly into Gmail replies.",
-    desc: "Install the Foam Chrome extension and drop a live creator card into any Gmail draft. The recipient sees real follower counts, a photo, and a link to the full media kit, without you leaving the inbox.",
-    bullets: ["Works inside Gmail", "Live stats in every embed", "7,000+ embeds per month", "No copy-paste required"],
-    color: "bg-dark",
-    dark: true,
-  },
-  {
-    name: "Watchlists",
-    tagline: "Your recruitment starting point.",
-    desc: "Add creators you're tracking but haven't signed yet. Monitor their growth across platforms without them knowing, then reach out when the timing is right.",
-    bullets: ["Track unsigned creators", "Growth monitoring over time", "Private to your account", "Converts to roster when signed"],
-    color: "bg-surface",
-    dark: false,
-  },
-  {
-    name: "Talent notes",
-    tagline: "Private, close-kept creator details.",
-    desc: "Keep internal notes on any creator in your roster: deal history, brand preferences, rate card notes. Notes are private to your account and never visible to creators or brands.",
-    bullets: ["Fully private to your team", "Attached to creator profile", "Never shared in media kits", "Searchable across your roster"],
-    color: "bg-raised",
-    dark: false,
-  },
-  {
-    name: "Tracking",
-    tagline: "See who viewed. Inform your follow-up.",
-    desc: "Know when a brand opens your kit, and how long they spent on it. Use that signal to time your follow-up with confidence rather than guessing.",
-    bullets: ["Open notifications", "Time-spent per kit", "Per-creator view data", "Follow-up timing signal"],
-    color: "bg-surface",
-    dark: false,
+    heading: "Your roster, right where you reply.",
+    copy: "Open Foam beside your inbox. Choose a creator, copy their profile and paste it into the conversation.",
+    link: "/chrome-story/",
+    cta: "Follow an inbox pitch",
   },
 ];
 
-function Hero() {
+function FeatureExplorer() {
+  const [active, setActive] = useState(0);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const current = FEATURES[active];
+  function onKey(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    const next =
+      event.key === "ArrowRight"
+        ? (index + 1) % FEATURES.length
+        : event.key === "ArrowLeft"
+          ? (index + FEATURES.length - 1) % FEATURES.length
+          : event.key === "Home"
+            ? 0
+            : event.key === "End"
+              ? FEATURES.length - 1
+              : null;
+    if (next === null) return;
+    event.preventDefault();
+    setActive(next);
+    tabs.current[next]?.focus();
+  }
   return (
-    <section className="pt-36 pb-24 px-6 text-center bg-surface">
-      <div className="max-w-[760px] mx-auto">
-        <div className="inline-flex items-center gap-2 bg-raised border border-border rounded-full px-[14px] py-[6px] mb-8">
-          <div className="size-[6px] rounded-full bg-text" />
-          <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>Features</span>
-        </div>
-        <h1 className={`${FG_SB} text-[60px] md:text-[72px] leading-[1.02] tracking-[-2px] text-text mb-6`}>
-          Built around{" "}
-          <em className="text-brand not-italic">the pitch</em>
-        </h1>
-        <p className={`${FG_R} text-lg leading-7 text-muted mb-10 max-w-[520px] mx-auto`}>
-          Seven tools covering the full creator pitch lifecycle: from finding proof to delivering the pitch to a brand, then tracking if they opened it.
-        </p>
-        <Link to="/demo" className={`${FG_M} bg-brand text-white text-[15px] px-8 h-12 rounded-full inline-flex items-center hover:bg-brand-hover transition-colors`}>
-          Get a demo
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-const APP_SCREEN_VARIANTS: Record<string, "roster" | "search"> = {
-  "Media kits": "roster",
-  "Lists & rosters": "roster",
-  "Content search": "search",
-};
-
-function FeatureBlock({ f, i }: { f: typeof FEATURES[0]; i: number }) {
-  const isReversed = i % 2 === 1;
-  const appVariant = APP_SCREEN_VARIANTS[f.name];
-  const pin = useRef<HTMLElement | null>(null);
-  const [gStep, setGStep] = useState(0);
-  useEffect(() => {
-    if (f.name !== "Chrome extension") return;
-    const el = pin.current;
-    if (!el) return;
-    const onScroll = () => {
-      const total = el.offsetHeight - window.innerHeight;
-      const passed = Math.min(Math.max(-el.getBoundingClientRect().top, 0), Math.max(total, 1));
-      setGStep(Math.min(3, Math.floor((passed / Math.max(total, 1)) * 4)));
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [f.name]);
-  return (
-    <section ref={pin} className={`${f.name === "Chrome extension" ? "relative h-[130vh]" : "py-20"} px-6 ${f.color}`}>
-      <div className={`${f.name === "Chrome extension" ? "sticky top-0 h-screen flex items-center" : ""} max-w-[1200px] mx-auto`}>
-        <div className={`flex flex-col ${isReversed ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-10 lg:gap-16 w-full`}>
-          <div className="flex-1 min-w-0 max-w-[480px]">
-            <p className={`${FG_M} text-xs uppercase tracking-[0.8px] mb-4 ${f.dark ? "text-muted" : "text-subtle"}`}>{f.name}</p>
-            <h2 className={`${FG_SB} text-[36px] leading-[1.1] tracking-[-0.6px] mb-4 ${f.dark ? "text-white" : "text-text"}`}>
-              {f.tagline}
-            </h2>
-            <p className={`${FG_R} text-base leading-7 mb-7 ${f.dark ? "text-subtle" : "text-muted"}`}>{f.desc}</p>
-            <div className="flex flex-col gap-3">
-              {f.bullets.map(b => (
-                <div key={b} className="flex items-center gap-[10px]">
-                  <div className={`size-[6px] rounded-full shrink-0 ${f.dark ? "bg-white/30" : "bg-border-dark"}`} />
-                  <span className={`${FG_R} text-sm ${f.dark ? "text-subtle" : "text-muted"}`}>{b}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Real app screen for roster/search, styled card otherwise */}
-          <div className="flex-1 min-w-0">
-            {f.name === "Chrome extension" ? (
-              <div className="rounded-[20px] overflow-hidden bg-white shadow-[0_20px_60px_rgba(0,0,0,0.25)] min-h-[520px] w-full">
-                <GmailView step={gStep} />
-              </div>
-            ) : appVariant ? (
-              <FoamAppScreen variant={appVariant} />
-            ) : (
-              <div className={`${f.dark ? "bg-white/5 border-white/10" : "bg-surface border-border"} border rounded-[20px] p-8 flex flex-col gap-6`}>
-                <div className={`${FG_SB} text-[56px] leading-none tracking-[-2px] ${f.dark ? "text-white/20" : "text-border-dark"}`}>
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <p className={`${FG_SB} text-2xl leading-tight tracking-[-0.4px] ${f.dark ? "text-white" : "text-text"}`}>{f.name}</p>
-                <p className={`${FG_R} text-[15px] leading-6 ${f.dark ? "text-subtle" : "text-muted"}`}>{f.tagline}</p>
-                <div className={`pt-4 border-t ${f.dark ? "border-white/10" : "border-border"}`}>
-                  <p className={`${FG_M} text-xs ${f.dark ? "text-muted" : "text-subtle"}`}>Part of the Foam workflow</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AudienceLinks() {
-  return (
-    <section className="py-20 px-6 bg-surface">
-      <div className="max-w-[1200px] mx-auto text-center">
-        <p className={`${FG_M} text-sm text-muted mb-8`}>Foam is built for three audiences</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          {[
-            { label: "Talent managers",  to: "/managers", cls: "bg-brand text-white"                  },
-            { label: "Brands & agencies",to: "/brands",   cls: "bg-blue text-white"                   },
-            { label: "Creators",         to: "/creators", cls: "bg-raised border border-border text-text" },
-          ].map(a => (
-            <Link key={a.to} to={a.to} className={`${FG_M} ${a.cls} text-[15px] px-7 h-11 rounded-full flex items-center hover:opacity-90 transition-opacity`}>
-              {a.label}
-            </Link>
+    <section className="mf-explorer mp-section" id="explore">
+      <div className="mp-container">
+        <SectionIntro
+          eyebrow="Take a closer look"
+          title="One platform. Plenty of possibility."
+        />
+        <div
+          className="mf-tabs"
+          role="tablist"
+          aria-label="Explore Foam features"
+        >
+          {FEATURES.map((feature, index) => (
+            <button
+              key={feature.kind}
+              ref={(element) => {
+                tabs.current[index] = element;
+              }}
+              role="tab"
+              id={`feature-tab-${feature.kind}`}
+              aria-controls={`feature-panel-${feature.kind}`}
+              aria-selected={active === index}
+              tabIndex={active === index ? 0 : -1}
+              onClick={() => setActive(index)}
+              onKeyDown={(event) => onKey(event, index)}
+            >
+              {feature.name}
+              <span aria-hidden="true">↗</span>
+            </button>
           ))}
+        </div>
+        <div
+          key={current.kind}
+          className="mf-feature-panel"
+          role="tabpanel"
+          tabIndex={0}
+          id={`feature-panel-${current.kind}`}
+          aria-labelledby={`feature-tab-${current.kind}`}
+        >
+          <div className="mf-feature-copy">
+            <span className="mp-eyebrow">
+              0{active + 1} / {current.name}
+            </span>
+            <h3>{current.heading}</h3>
+            <p>{current.copy}</p>
+            <Link className="mp-link" to={current.link}>
+              {current.cta}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <ProductPreview kind={current.kind} />
         </div>
       </div>
     </section>
@@ -180,11 +139,133 @@ function AudienceLinks() {
 
 export function Features() {
   return (
-    <>
-      <Hero />
-      {FEATURES.map((f, i) => <FeatureBlock key={f.name} f={f} i={i} />)}
-      <AudienceLinks />
-      <ClosingCTA headline="Ready to see it in action?" sub="Bring a brief. We'll show you how Foam fits your exact workflow." />
-    </>
+    <MarketingPage className="mf-features">
+      <PageIntro
+        eyebrow="Explore the platform"
+        title={
+          <>
+            A little more
+            <br />
+            <em>“that’s the one.”</em>
+          </>
+        }
+        description="From the first brief to the next conversation. Give a great creator pitch everything it needs."
+        tone="blue"
+        visual={
+          <div className="mf-hero-art">
+            <div className="mf-hero-grid" />
+            <FoamGlyph kind="orbit" className="mf-orbit" />
+            <div className="mf-icon-card mf-icon-back">
+              <MarketingImage
+                src={`${A}/chrome-store.webp`}
+                alt="Chrome Web Store"
+              />
+              <span>Right in your inbox</span>
+            </div>
+            <div className="mf-icon-card mf-icon-front">
+              <MediaKitLogo />
+              <span>Ready to share</span>
+            </div>
+            <span className="mf-hero-stamp">Find. Present. Connect.</span>
+          </div>
+        }
+      >
+        <a href="#explore" className="mp-button">
+          Find your flow <span aria-hidden="true">↓</span>
+        </a>
+        <ActionLink to="/demo" secondary>
+          Get a demo
+        </ActionLink>
+      </PageIntro>
+      <FeatureExplorer />
+      <section className="mp-section mp-dark">
+        <div className="mp-container">
+          <Reveal>
+            <SectionIntro
+              eyebrow="Room for the details"
+              title={
+                <>
+                  The thinking behind
+                  <br />
+                  <em>the introduction.</em>
+                </>
+              }
+              description="Keep the useful context close as you build the pitch."
+            />
+          </Reveal>
+          <div className="mf-detail-grid">
+            {[
+              [
+                "01",
+                "Watchlists",
+                "Keep an eye on what’s next.",
+                "Bring the creators you’re considering into view, alongside the people already on your roster.",
+                "orbit",
+              ],
+              [
+                "02",
+                "Talent notes",
+                "Remember the little things.",
+                "Keep the context that helps you choose the right creator for the next conversation.",
+                "quarter",
+              ],
+              [
+                "03",
+                "Tracking",
+                "Keep the conversation moving.",
+                "Use kit activity to help inform your follow-up after you’ve shared the pitch.",
+                "spark",
+              ],
+            ].map(([n, name, title, copy, glyph]) => (
+              <Reveal className="mf-detail" key={n}>
+                <div>
+                  <span>{n}</span>
+                  <FoamGlyph kind={glyph as "orbit" | "quarter" | "spark"} />
+                </div>
+                <p className="mp-eyebrow">{name}</p>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mp-actions">
+            <ActionLink to="/demo">See it with your team</ActionLink>
+          </div>
+        </div>
+      </section>
+      <section className="mp-section">
+        <div className="mp-container">
+          <Reveal>
+            <div className="mf-paths">
+              <SectionIntro
+                eyebrow="Choose your perspective"
+                title="What does Foam look like for you?"
+              />
+              <div>
+                {[
+                  ["Managers", "Your roster, ready to pitch.", "/managers"],
+                  ["Brands", "The detail behind the fit.", "/brands"],
+                  ["Creators", "Put your work in the picture.", "/creators"],
+                ].map(([title, copy, to]) => (
+                  <Link key={to} to={to}>
+                    <span>
+                      <strong>{title}</strong>
+                      <small>{copy}</small>
+                    </span>
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+      <ClosingCTA
+        headline="Bring the brief. We’ll bring Foam."
+        sub="See how the pieces work together in your team’s day."
+        secondaryLabel="See Foam in action"
+        secondaryTo="/kit-story/"
+      />
+    </MarketingPage>
   );
 }
