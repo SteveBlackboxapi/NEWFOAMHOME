@@ -4,11 +4,11 @@ Created 22 September 2026 for the Foam website demo. Nia Brooks is an invented a
 
 ## Assets
 
-- `nia-brooks-profile.png`: built-in image generation, square creator portrait.
-- `nia-brooks-skincare.png`: built-in image generation, portrait skincare review still.
+- `nia-brooks-profile.png`: original PNG master from built-in image generation, square creator portrait. `nia-brooks-profile.webp` is the website version, encoded at quality 85 without resizing (1254×1254). The PNG remains available as the original.
+- `nia-brooks-skincare.png`: original PNG master from built-in image generation, portrait skincare review still. `nia-brooks-skincare.webp` is the website version, encoded at quality 85 without resizing (941×1672). The PNG remains available as the original.
 - `nia-brooks-skincare.mp4`: Runway image-to-video, gen-4-turbo, task `e83fc978-c4f1-4c52-aaa8-74abef74191a`, 720×1280, 10.084 seconds. No audio.
-- `nia-brooks-seen-1.jpg` and `nia-brooks-seen-2.jpg`: exact video frame extractions at 2 and 7 seconds. These are evidence thumbnails from the same post, not additional posts. UI evidence ranges are illustrative 0:00–0:04 and 0:05–0:10.
-- `../../campaigns/found-with-foam-skincare-v2.png`: built-in image generation using the supplied billboard and new skincare still as references. The website overlays the repository’s real Foam symbol on the lime tile, aligned to the headline baseline.
+- `nia-brooks-seen-1.jpg` and `nia-brooks-seen-2.jpg`: exact video frame extractions at 2 and 7 seconds. Their same-resolution quality-90 WebP copies are served on the website. These are evidence thumbnails from the same post, not additional posts. UI evidence ranges are illustrative 0:00–0:04 and 0:05–0:10.
+- `../../campaigns/found-with-foam-skincare-v2.webp`: corrected campaign artwork supplied by the user, shown directly on the website with its embedded Foam logo. No separate logo overlay is added. The earlier generated PNG is retained as source history.
 
 ## Skincare still prompt
 

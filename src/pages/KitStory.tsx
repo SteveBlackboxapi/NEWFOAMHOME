@@ -277,7 +277,7 @@ function AfterShare() {
     ["Gersh Agency", "0% 0%"],
     ["Select Management Group", "33.3333% 0%"],
   ];
-  const sheet = `${A}/agency-logos.png`;
+  const sheet = `${A}/agency-logos.webp`;
   const CARDS = [
     {
       kicker: "I manage talent",

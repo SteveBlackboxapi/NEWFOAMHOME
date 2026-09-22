@@ -596,7 +596,7 @@ function LogoMarquee() {
     ["Hiller Media Group", "100% 66.6667%"],
     ["Good Answer", "0% 100%"],
   ];
-  const sheet = `${A}/agency-logos.png`;
+  const sheet = `${A}/agency-logos.webp`;
   const row = (
     <div className="flex shrink-0 gap-10 pr-10">
       {LOGOS.map(([label, pos]) => (

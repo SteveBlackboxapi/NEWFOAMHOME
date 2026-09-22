@@ -96,10 +96,10 @@ test("Samantha's reordered content keeps existing bookmarks and drafts on their 
     suffixes.map((id) => `${samantha.id}:${id}`),
   );
   const expectedSources = {
-    0: "v2-c1.jpg",
-    1: "v2-c2.jpg",
-    4: "v2-c5.jpg",
-    5: "v2-c6.jpg",
+    0: "v2-c1.webp",
+    1: "v2-c2.webp",
+    4: "v2-c5.webp",
+    5: "v2-c6.webp",
     6: "io-portrait-poster.webp",
   };
   for (const [id, source] of Object.entries(expectedSources)) {
@@ -173,7 +173,9 @@ test("caption writes survive another reorder without overwriting retired or adja
 
 test("creators without explicit tile IDs retain all numeric IDs and caption keys", (t) => {
   const values = storage(t);
-  for (const talent of stagedTalent.filter((item) => item.id !== samantha.id)) {
+  for (const talent of stagedTalent.filter((item) =>
+    item.content.every((tile) => tile.id === undefined),
+  )) {
     const assets = assetsFor(talent);
     assert.equal(assets[0].id, `${talent.id}:portrait`);
     for (const asset of assets.slice(1)) {
@@ -264,4 +266,32 @@ test("profile JSON and ZIP metadata export stable identities with their matching
       ["samantha-pikka:2", "samantha-pikka:3"].includes(tile.id),
     ),
   );
+});
+
+test("Nia's optimized image keeps the same saved post and caption draft as its PNG master", (t) => {
+  const values = storage(t);
+  const nia = stagedTalent.find((talent) => talent.id === "nia-brooks");
+  const prior = {
+    ...nia,
+    portrait: nia.originalPortrait,
+    content: nia.content.map((tile) => ({ ...tile, thumb: tile.original })),
+  };
+  const currentAssets = assetsFor(nia);
+  assert.deepEqual(
+    currentAssets.map((asset) => asset.id),
+    assetsFor(prior).map((asset) => asset.id),
+  );
+  const currentPost = currentAssets.find(
+    (asset) => asset.id === "nia-brooks:skincare-review",
+  );
+  assert.ok(currentPost);
+  values.set(SAVED_KEY, JSON.stringify([currentPost.id]));
+  values.set(
+    key("skincare-review", nia.id),
+    JSON.stringify({ text: "My saved skincare caption" }),
+  );
+  assert.deepEqual(readSaved(), [currentPost.id]);
+  assert.equal(readCaption(currentPost).text, "My saved skincare caption");
+  assert.equal(currentPost.original, prior.content[0].thumb);
+  assert.equal(currentAssets[0].original, prior.portrait);
 });

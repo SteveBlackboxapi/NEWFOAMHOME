@@ -812,27 +812,6 @@
   height: auto;
   margin-inline: auto;
 }
-/* Keep the real Foam symbol crisp, on the headline baseline, at any display size. */
-.fs-campaign-logo {
-  position: absolute;
-  left: 92.93%;
-  top: 75.35%;
-  width: 2.5%;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: 18%;
-  background: #e1f38a;
-  transform: rotate(1.8deg);
-}
-.fs-campaign-logo > i {
-  width: 95%;
-  height: 95%;
-  background: #7a0036;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-}
 .fs-campaign > figcaption {
   max-width: 1500px;
   margin-inline: auto;
