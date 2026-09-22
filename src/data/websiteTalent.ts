@@ -16,6 +16,8 @@ export const websiteSamantha = approvedTalent("samantha-pikka");
 export const websiteAria = approvedTalent("aria-quen");
 export const websiteNia = approvedTalent("nia-brooks");
 export const websiteLena = approvedTalent("lena-croft");
+export const websiteMira = approvedTalent("mira-vale");
+export const websiteElise = approvedTalent("elise-morgan");
 
 const platformNames: Record<TalentNetwork, string> = {
   instagram: "Instagram",

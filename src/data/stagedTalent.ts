@@ -803,6 +803,15 @@ export const stagedTalent: StagedTalent[] = [
     ],
     totalAudience: 557_600,
     portrait: portrait("mira-vale"),
+    creativeDirection: {
+      summary:
+        "Everyday wellness and getting-ready moments. The new makeup photograph catches Mira mid-sentence and half-blink, with slight motion blur in her brush hand.",
+      identityNotes: [
+        "Mira is a fictional adult aged 27. Preserve the face, brown eyes and dark messy updo from her existing portrait.",
+        "The paused-video look is a generated still photograph. It is not a frame extracted from a video; no video or new performance figures were created.",
+      ],
+      promptFile: `${T}/mira-vale-v2/creative-brief.md`,
+    },
     motion: null,
     motionStatus: "placeholder",
     content: [
@@ -811,6 +820,64 @@ export const stagedTalent: StagedTalent[] = [
       { type: "still", thumb: tile("mira-vale", 3), views: 91_800, caption: "taste test mid cook", platform: "instagram", strongKind: "photo", engagements: 7_200 },
       { type: "still", thumb: tile("mira-vale", 4), views: 42_300, caption: "herb shelf reset", platform: "instagram", strongKind: "photo" },
       { type: "clip", thumb: tile("mira-vale", 5), views: 156_000, caption: "grocery prep list", platform: "tiktok", strongKind: "link", engagements: 11_100 },
+      {
+        id: "paused-makeup-v2",
+        type: "still",
+        thumb: `${T}/mira-vale-v2/mira-vale-paused-makeup.webp`,
+        original: `${T}/mira-vale-v2/masters/mira-vale-paused-makeup.png`,
+        aspectRatio: "4/5",
+        caption: "getting ready between plans",
+        captionSettings: { visible: false },
+        platform: "tiktok",
+        strongKind: "photo",
+        generation: {
+          version: "Realism v2 · candid still",
+          approach:
+            "A generated phone-video-style still with a half-blink, mid-sentence expression and subtle brush-hand blur, preserving Mira's existing fictional identity.",
+        },
+      },
+    ],
+  },
+  {
+    id: "elise-morgan",
+    displayName: "Elise Morgan",
+    age: 27,
+    location: "London, UK",
+    bio: "Travel, beauty and getting-ready moments. A fictional adult creator for Foam's demo library; audience figures have not been assigned.",
+    verticals: ["Travel", "Beauty", "Lifestyle"],
+    platforms: [],
+    totalAudience: 0,
+    portrait: `${T}/elise-morgan/elise-morgan-portrait.webp`,
+    originalPortrait: `${T}/elise-morgan/masters/elise-morgan-portrait.png`,
+    creativeDirection: {
+      summary:
+        "A luxury hotel bathroom mirror selfie following the supplied creative prompt: long wavy blonde hair, black zip-up jacket, dark wide-leg jeans and open-toe sandals.",
+      identityNotes: [
+        "Elise is a new fictional adult aged 27. The hotel selfie defines her identity; her avatar preserves the same face, hair and outfit.",
+        "Keep warm bathroom lighting, natural skin and hair texture, realistic hands and a coherent mirror reflection.",
+        "These are generated still photographs. No video, audience, views or engagement figures have been generated for Elise.",
+      ],
+      promptFile: `${T}/elise-morgan/creative-brief.md`,
+    },
+    motion: null,
+    motionStatus: "placeholder",
+    content: [
+      {
+        id: "hotel-mirror-v1",
+        type: "still",
+        thumb: `${T}/elise-morgan/elise-morgan-hotel-selfie.webp`,
+        original: `${T}/elise-morgan/masters/elise-morgan-hotel-selfie.png`,
+        aspectRatio: "9/16",
+        caption: "ready for the evening",
+        captionSettings: { visible: false },
+        platform: "instagram",
+        strongKind: "photo",
+        generation: {
+          version: "Hotel selfie v1",
+          approach:
+            "Generated from the supplied luxury hotel mirror-selfie prompt, with a full-body outfit composition and realistic photographic detail. New fictional adult identity.",
+        },
+      },
     ],
   },
   {

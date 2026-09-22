@@ -11,7 +11,7 @@ import {
   ContentMetrics,
   ContentPlatformIcon,
 } from "../components/ContentMetrics";
-import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
+import { LabIcon } from "../components/TalentLabIcon";
 import {
   FOUND_RESULTS,
   FOUND_SELECTED,
@@ -43,10 +43,12 @@ function SearchExampleText({
   query,
   paused,
   showCaret,
+  submitted,
 }: {
   query: string;
   paused: boolean;
   showCaret: boolean;
+  submitted: boolean;
 }) {
   const target = useRef<HTMLSpanElement>(null);
   const elapsed = useRef(0);
@@ -99,17 +101,40 @@ function SearchExampleText({
   const text = query || example;
   return (
     <>
-      <span ref={target} className={text ? "fs-query" : "fs-placeholder"}>
-        {text || "Describe the content you’re looking for"}
+      <span ref={target} className={text && !submitted ? "fs-query" : "fs-placeholder"}>
+        {submitted
+          ? "Add to your search, or start a new one"
+          : text || "Describe the content you’re looking for"}
         <i
           className="fs-caret"
-          style={{ opacity: text && showCaret ? 1 : 0 }}
+          style={{ opacity: text && showCaret && !submitted ? 1 : 0 }}
         />
       </span>
-      <span className="fs-enter" style={{ opacity: text ? 1 : 0 }}>
+      <span className="fs-enter" style={{ display: submitted ? "none" : undefined, opacity: text ? 1 : 0 }}>
         ↵
       </span>
     </>
+  );
+}
+
+/** Product evidence glyphs: camera means a visual match, not an audio claim. */
+function EvidenceCamera() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M3 7h4l2-3h6l2 3h4v14H3V7Z" />
+      <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
+
+function ProductRailIcon({ kind }: { kind: "binoculars" | "list" | "cards" | "chat" }) {
+  return (
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {kind === "binoculars" && <><path d="m3 12 2-8h4l2 8m2 0 2-8h4l2 8M9 8h6" /><circle cx="6.5" cy="16" r="4.5" /><circle cx="17.5" cy="16" r="4.5" /><path d="M11 13h2" /></>}
+      {kind === "list" && <><path d="M8 5h13M8 12h13M8 19h13" /><circle cx="3" cy="5" r=".5" /><circle cx="3" cy="12" r=".5" /><circle cx="3" cy="19" r=".5" /></>}
+      {kind === "cards" && <><rect x="8" y="2" width="13" height="18" rx="2" /><path d="M5 6H3v16h13v-2" /><circle cx="14.5" cy="7" r="2" /><path d="M11 15v-1a3.5 3.5 0 0 1 7 0v1Z" /></>}
+      {kind === "chat" && <><path d="M3 3h18v15H8l-5 4V3Z" /><path d="M7 9h.01M12 9h.01M17 9h.01" strokeWidth="2.5" /></>}
+    </svg>
   );
 }
 
@@ -130,7 +155,6 @@ function ResultCard({
   // Keep the whole feed's stagger within the reveal before selection begins.
   const delay = (index / Math.max(1, FOUND_RESULTS.length - 1)) * 0.3;
   const entered = clamp((progress - delay) / 0.7);
-  const hasMetrics = (tile.views ?? 0) > 0 || (tile.engagements ?? 0) > 0;
   return (
     <figure
       className={`fs-result fs-result-${index}`}
@@ -149,18 +173,14 @@ function ResultCard({
       >
         <img src={tile.thumb} alt="" loading="lazy" />
         <span className="content-card-fade" />
-        <span className="fs-save">
-          <LabIcon name="bookmark" size={15} />
-        </span>
         <div className="fs-result-meta">
-          {hasMetrics ? (
-            <ContentMetrics tile={tile} className="fs-result-metrics" />
-          ) : (
-            <span className="fs-unpublished">Demo asset</span>
-          )}
-          <div className="fs-result-person">
-            <img src={talent.portrait} alt="" loading="lazy" />
-            <span>{talent.displayName}</span>
+          <span className="fs-result-strong" aria-label="Strong visual match">
+            Strong: <EvidenceCamera />
+            {tile.strongKind === "hashtag" && <span aria-label="Hashtag match">#</span>}
+          </span>
+          <div className="fs-result-footer">
+            <img src={talent.portrait} alt={talent.displayName} loading="lazy" />
+            <ContentMetrics tile={tile} className="fs-result-metrics" uppercaseSuffix />
             <ContentPlatformIcon network={tile.platform} />
           </div>
         </div>
@@ -210,8 +230,8 @@ function SearchFilters() {
         ))}
       </div>
       <div className="fs-performance">
-        <strong>Performance metrics</strong>
-        {["Views", "Likes", "Comments", "Engagements"].map((name) => (
+        <strong>Performance metrics <span>⌃</span></strong>
+        {["Views", "Likes", "Comments", "Engagements", "Shares"].map((name) => (
           <span className="fs-filter-value" key={name}>
             {name}
             <i>
@@ -678,28 +698,22 @@ export function FoundStory() {
             }}
           >
             <div className="fs-window-surface" style={{ opacity: zoom }} />
+            <div className="fs-content-surface" style={{ opacity: zoom }} />
             <div className="fs-rail" style={{ opacity: zoom }}>
               <span className="fs-foam">
                 <img src={`${A}/fdb3b.svg`} alt="" />
               </span>
-              {(
-                [
-                  "people",
-                  "explore",
-                  "search",
-                  "grid",
-                  "image",
-                ] as LabIconName[]
-              ).map((icon, index) => (
-                <span key={icon} className={index === 1 ? "is-active" : ""}>
-                  <LabIcon name={icon} size={21} />
-                </span>
-              ))}
+              <span><LabIcon name="people" size={21} /></span>
+              <span className="is-active"><LabIcon name="explore" size={21} /></span>
+              <span><ProductRailIcon kind="binoculars" /></span>
+              <i className="fs-rail-divider" />
+              <span><ProductRailIcon kind="list" /></span>
+              <span><ProductRailIcon kind="cards" /></span>
+              <span className="fs-rail-chat"><ProductRailIcon kind="chat" /></span>
               <span className="fs-avatar">F</span>
             </div>
             <div className="fs-app-header" style={{ opacity: zoom }}>
               <strong>Explore content</strong>
-              <span className="fs-demo-workspace">Demo workspace</span>
             </div>
             <div
               ref={search}
@@ -713,6 +727,7 @@ export function FoundStory() {
                 query={state.query}
                 paused={examplesPaused}
                 showCaret={!reducedMotion && zoom < 0.8}
+                submitted={state.results > 0.1}
               />
             </div>
             <div className="fs-toolbar" style={{ opacity: zoom }}>
@@ -724,22 +739,25 @@ export function FoundStory() {
                 className="fs-query-chip"
                 style={{ opacity: state.results }}
               >
-                <LabIcon name="search" size={13} /> {FOUND_SEARCH_QUERY}{" "}
-                <span>×</span>
+                <LabIcon name="search" size={14} /> skin care product reviews
+                <span className="fs-chip-dismiss"><i>×</i></span>
               </span>
-              <span className="fs-sort">
-                <LabIcon name="compact" size={17} />
-                <LabIcon name="chevron" size={12} />
+              <span className="fs-reset-search" style={{ opacity: state.results }}>Reset</span>
+              <span className="fs-display-controls">
+                <span className="fs-sort">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M8 4v16m-4-4 4 4 4-4M16 20V4m-4 4 4-4 4 4" /></svg>
+                  <LabIcon name="chevron" size={12} />
+                </span>
+                <span className="fs-sort">
+                  <LabIcon name="compact" size={17} />
+                  <LabIcon name="chevron" size={12} />
+                </span>
               </span>
             </div>
             <div className="fs-filter-area" style={{ opacity: zoom }}>
               <SearchFilters />
             </div>
             <div className="fs-results" style={{ opacity: zoom }}>
-              <div className="fs-results-caption">
-                <span>{FOUND_RESULTS.length} beauty posts</span>
-                <span>Most relevant</span>
-              </div>
               <div className="fs-results-grid">
                 {resultColumns.map((column, columnIndex) => (
                   <div className="fs-results-column" key={columnIndex}>
