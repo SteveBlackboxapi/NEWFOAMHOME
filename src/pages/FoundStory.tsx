@@ -703,21 +703,13 @@ export function FoundStory() {
       <figure className="fs-campaign">
         <div className="fs-campaign-art">
           <img
-            src={`${A}/campaigns/found-with-foam-skincare-v2.png`}
+            src={`${A}/campaigns/found-with-foam-skincare-v2.webp`}
             width={1412}
             height={1114}
             loading="lazy"
             decoding="async"
             alt="Concept outdoor advert: Nia Brooks, the same fictional creator found in the skincare review, cleansing her face against pink, beneath Skincare product reviews and above Found with Foam."
           />
-          <span className="fs-campaign-logo" aria-hidden="true">
-            <i
-              style={{
-                maskImage: `url(${A}/fdb3b.svg)`,
-                WebkitMaskImage: `url(${A}/fdb3b.svg)`,
-              }}
-            />
-          </span>
         </div>
         <figcaption>
           <AIDisclosure detail="Concept advert" />

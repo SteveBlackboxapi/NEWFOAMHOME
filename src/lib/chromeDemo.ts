@@ -11,15 +11,19 @@ export const CHROME_STORE =
 
 export const CHROME_STEPS = [
   { label: "The brief", description: "A brand asks for the right creator." },
-  { label: "Reply", description: "Your roster is right beside your reply." },
+  { label: "Reply", description: "Start your reply. Foam is one click away." },
+  {
+    label: "Open Foam",
+    description: "Your whole roster, right beside your reply.",
+  },
   { label: "Choose", description: "Find the person who fits the brief." },
   { label: "Copy", description: "One click copies the details that matter." },
   { label: "Paste", description: "A complete creator profile, ready to send." },
 ] as const;
-export type ChromeStage = 0 | 1 | 2 | 3 | 4;
+export type ChromeStage = 0 | 1 | 2 | 3 | 4 | 5;
 
 export const CHROME_WALLPAPERS = {
-  original: `url("${A}/chrome-desktop-landscape.png")`,
+  original: `url("${A}/chrome-desktop-landscape.webp")`,
   sage: "radial-gradient(ellipse at 20% 20%, #eef0df, transparent 62%), linear-gradient(130deg, #7b9383, #c0cebd 54%, #e2e5d3)",
   blue: "radial-gradient(ellipse at 72% 25%, #e4ebf8, transparent 62%), linear-gradient(145deg, #57718f, #acc3d7 54%, #d9e5ed)",
 };

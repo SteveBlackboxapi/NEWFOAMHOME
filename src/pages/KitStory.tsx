@@ -32,6 +32,7 @@ import {
   kitRevealStarts,
   kitStoryTimeline,
   kitShareCursor,
+  kitPlanePose,
   KIT_STORY_HEIGHT_VH,
   type KitPanTargets,
   type KitRevealLayout,
@@ -62,6 +63,13 @@ const STAGE = {
 };
 
 const TILES = websiteSamantha.content.slice(0, 4);
+// Count timing follows the first actual figure; section headers can enter much earlier.
+const COUNT_ANCHORS = {
+  platforms: "[data-kit-count-anchor]",
+  metrics: '.ka-metric-card dd > span[aria-hidden="true"]',
+  growth: '.ka-followers > span[aria-hidden="true"]',
+  audience: '.ka-percentage > span[aria-hidden="true"]',
+};
 const PLATFORM_LABELS = {
   instagram: "Instagram",
   tiktok: "TikTok",
@@ -269,7 +277,7 @@ function AfterShare() {
     ["Gersh Agency", "0% 0%"],
     ["Select Management Group", "33.3333% 0%"],
   ];
-  const sheet = `${A}/agency-logos.png`;
+  const sheet = `${A}/agency-logos.webp`;
   const CARDS = [
     {
       kicker: "I manage talent",
@@ -422,6 +430,8 @@ function KitStoryDesktop() {
   const shareButton = useRef<HTMLButtonElement | null>(null);
   const copyButton = useRef<HTMLSpanElement | null>(null);
   const shareCursor = useRef<HTMLDivElement | null>(null);
+  const sendoffLogo = useRef<HTMLDivElement | null>(null);
+  const paperPlane = useRef<SVGSVGElement | null>(null);
   const [p, setProg] = useState(0);
   const [slot, setSlot] = useState({
     l: 60,
@@ -479,7 +489,10 @@ function KitStoryDesktop() {
         );
         const rect = section?.getBoundingClientRect();
         if (key !== "content" && rect) {
-          nextReveal[key] = rect.top - bodyRect.top;
+          const countRect = section
+            ?.querySelector<HTMLElement>(COUNT_ANCHORS[key])
+            ?.getBoundingClientRect();
+          nextReveal[key] = (countRect?.top ?? rect.top) - bodyRect.top;
         }
         next[key] = rect
           ? clamp(
@@ -596,6 +609,7 @@ function KitStoryDesktop() {
     fold,
     fly,
     planeIn,
+    planeEmerge,
     sharedIn,
     sharedOut,
     headlineOpacity: headlineOp,
@@ -636,6 +650,17 @@ function KitStoryDesktop() {
     );
     cursor.style.left = `${point.x}px`;
     cursor.style.top = `${point.y}px`;
+  });
+  useLayoutEffect(() => {
+    const plane = paperPlane.current;
+    const stageRect = stage.current?.getBoundingClientRect();
+    const logoRect = sendoffLogo.current?.getBoundingClientRect();
+    if (!plane || !stageRect || !logoRect) return;
+    const pose = kitPlanePose(stageRect, logoRect, planeEmerge, fly);
+    plane.style.left = `${pose.x}px`;
+    plane.style.top = `${pose.y}px`;
+    plane.style.width = `${pose.width}px`;
+    plane.style.transform = `translate(-50%, -50%) rotate(${pose.rotation}deg)`;
   });
   const cursorOn = aimShare > 0.02 && shareFade < 0.2;
   const stageBg = canvasLight ? "#eef0f4" : "#000";
@@ -755,7 +780,7 @@ function KitStoryDesktop() {
                         <div className="ks-platform-total">
                           <h3>Platforms</h3>
                           <strong>
-                            <span aria-hidden="true">
+                            <span aria-hidden="true" data-kit-count-anchor>
                               {Math.round(
                                 websiteSamantha.totalAudience *
                                   timeline.platforms,
@@ -1013,24 +1038,34 @@ function KitStoryDesktop() {
             ref={shareCursor}
             aria-hidden="true"
             data-kit-share-cursor
-            className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#c6f31e] bg-[#c6f31e]/30 -translate-x-1/2 -translate-y-1/2"
+            className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#2674ff] bg-[#2674ff]/10 -translate-x-1/2 -translate-y-1/2"
             style={{
               opacity: cursorOn ? 1 : 0,
             }}
           />
 
-          {/* Original media-kit send-off, followed by the paper-plane flight. */}
+          {/* Separate layers let the plane emerge behind the opaque parts of the logo. */}
           <div
-            className="pointer-events-none absolute inset-0 z-40 flex flex-col items-center justify-center px-6 text-center"
+            className="pointer-events-none absolute inset-0 z-40 bg-[#eef0f4]"
+            aria-hidden="true"
+            style={{ opacity: sharedOp }}
+          />
+          <div
+            className="pointer-events-none absolute inset-0 z-[42] flex flex-col items-center justify-center px-6 text-center"
             aria-hidden={sharedOp < 0.02}
             style={{
               opacity: sharedOp,
               transform: `translateY(${(1 - sharedIn) * 14}px)`,
             }}
           >
-            <div className="absolute inset-0 bg-[#eef0f4]" />
             <div className="relative flex flex-col items-center">
-              <MediaKitLogo className="ks-sendoff-logo" />
+              <div
+                ref={sendoffLogo}
+                className="ks-sendoff-logo"
+                data-kit-sendoff-logo
+              >
+                <MediaKitLogo className="w-full" />
+              </div>
               <p
                 className={`${FG_SB} text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px]`}
               >
@@ -1043,16 +1078,12 @@ function KitStoryDesktop() {
           </div>
 
           <svg
+            ref={paperPlane}
             viewBox="0 0 120 72"
             aria-hidden="true"
-            className="absolute z-[80] pointer-events-none drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]"
-            style={{
-              width: lerp(150, 210, fly),
-              opacity: planeIn,
-              left: `${lerp(50, 118, fly)}%`,
-              top: `${lerp(79, -10, fly) - Math.sin(fly * Math.PI) * 8}%`,
-              transform: `translate(-50%, -50%) rotate(${lerp(-14, 10, fly)}deg)`,
-            }}
+            data-kit-paper-plane
+            className="absolute z-[41] pointer-events-none drop-shadow-[0_16px_28px_rgba(16,24,40,0.28)]"
+            style={{ opacity: planeIn }}
           >
             <path d="M6 38 L114 6 L60 40 L50 66 L44 40 Z" fill={BURGUNDY} />
             <path d="M44 40 L114 6 L60 40 Z" fill={CREAM} />

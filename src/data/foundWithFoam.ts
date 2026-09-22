@@ -26,10 +26,10 @@ function resultFor(
 
 /** Skincare first, with related beauty posts; retain each post’s demo metadata. */
 export const FOUND_RESULTS: FoundResult[] = [
-  resultFor(websiteNia, "nia-brooks-skincare.png"),
-  resultFor(websiteAria, "aria-quen-v2-c1.jpg"), // Lipstick application
-  resultFor(websiteSamantha, "samantha-pikka-v2-c1.jpg"), // Curl refresh
-  resultFor(websiteAria, "aria-quen-v2-c4.jpg"), // Makeup flatlay
+  resultFor(websiteNia, "nia-brooks-skincare.webp"),
+  resultFor(websiteAria, "aria-quen-v2-c1.webp"), // Lipstick application
+  resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // Curl refresh
+  resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];
@@ -37,13 +37,13 @@ export const FOUND_SELECTED = FOUND_RESULTS[0];
 /** Real frame captures from the generated ten-second review; ranges stay within it. */
 export const FOUND_SEEN = [
   {
-    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-1.jpg`,
+    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-1.webp`,
     start: 0,
     end: 4,
     label: "Cleanser applied to skin",
   },
   {
-    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-2.jpg`,
+    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-2.webp`,
     start: 5,
     end: 10,
     label: "Product shown in routine",

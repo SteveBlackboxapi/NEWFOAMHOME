@@ -73,7 +73,7 @@ test("a missing preference uses the base-aware photographic landscape", () => {
   });
   assert.equal(
     CHROME_WALLPAPERS.original,
-    'url("/NEWFOAMHOME/assets/chrome-desktop-landscape.png")',
+    'url("/NEWFOAMHOME/assets/chrome-desktop-landscape.webp")',
   );
   assert.match(CHROME_WALLPAPERS.sage, /gradient/);
   assert.match(CHROME_WALLPAPERS.blue, /gradient/);

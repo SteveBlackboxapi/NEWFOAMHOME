@@ -9,11 +9,24 @@ import {
   websiteContentStats,
 } from "../data/websiteTalent";
 import { type ChromeStage } from "../lib/chromeDemo";
+import { stagedTalent } from "../data/stagedTalent";
+import {
+  chromeCursorPose,
+  type ChromeTargets,
+  type ChromeTarget,
+} from "../lib/chromeStoryMotion";
 import { A } from "../lib/assets";
 import "./chrome-demo.css";
 
 const PROFILE = websiteProfile(websiteSamantha);
-const TALENT = [websiteAria, websiteSamantha].map(websiteProfile);
+const TALENT = [
+  websiteAria,
+  websiteSamantha,
+  ...stagedTalent.filter(
+    (talent) =>
+      talent.id !== websiteAria.id && talent.id !== websiteSamantha.id,
+  ),
+].map(websiteProfile);
 const BIO = `${PROFILE.bio.split(". ")[0]}.`;
 const POSTS = websiteContentStats(websiteSamantha.content.slice(0, 4));
 const PLATFORMS = PROFILE.platforms.filter((platform) =>
@@ -176,13 +189,16 @@ export function ChromeReply({
         ) : (
           <button
             type="button"
-            data-chrome-target="paste"
-            className="cs-paste-space"
+            className="cs-paste-caret"
+            aria-label="Paste Samantha’s profile into this reply"
             disabled={!onPaste}
             onClick={onPaste}
           >
-            <span className="cs-insertion-point" aria-hidden="true" />
-            {onPaste ? "Paste creator profile" : "Your creator details go here"}
+            <span
+              className="cs-insertion-point"
+              data-chrome-target="caret"
+              aria-hidden="true"
+            />
           </button>
         )}
       </div>
@@ -212,8 +228,8 @@ export function ChromeExtensionPanel({
   stage: ChromeStage;
   onStage?: (stage: ChromeStage) => void;
 }) {
-  const selected = stage >= 2;
-  const copied = stage >= 3;
+  const selected = stage >= 3;
+  const copied = stage >= 4;
   return (
     <aside className="cs-extension" aria-label="Foam extension demo">
       <header className="cs-extension-header">
@@ -225,8 +241,12 @@ export function ChromeExtensionPanel({
           ×
         </span>
       </header>
-      {!selected ? (
-        <div className="cs-extension-list">
+      <div className="cs-extension-pages">
+        <div
+          className={`cs-extension-list ${selected ? "is-hidden" : ""}`}
+          aria-hidden={selected}
+          inert={selected}
+        >
           <nav aria-label="Extension preview sections">
             <span>Talent</span>
             <span>Lists</span>
@@ -236,38 +256,47 @@ export function ChromeExtensionPanel({
             <span>All Talent⌄</span>
             <LabIcon name="search" size={15} />
           </div>
-          <div className="cs-extension-talents">
-            {TALENT.map((talent) => (
-              <div key={talent.id}>
-                {talent.id === PROFILE.id ? (
-                  <button
-                    type="button"
-                    className="cs-talent-choice"
-                    data-chrome-target="talent"
-                    onClick={() => onStage?.(2)}
-                    aria-label="Choose Samantha Pikka"
-                  >
-                    <img src={talent.portrait} alt="" />
-                    <strong>{talent.name}</strong>
-                  </button>
-                ) : (
-                  <div className="cs-talent-choice">
-                    <img src={talent.portrait} alt="" />
-                    <strong>{talent.name}</strong>
-                  </div>
-                )}
-                <AIDisclosure size={8} />
-              </div>
-            ))}
+          <div className="cs-extension-grid-scroll">
+            <div className="cs-extension-talents">
+              {TALENT.map((talent) => (
+                <div key={talent.id}>
+                  {talent.id === PROFILE.id ? (
+                    <button
+                      type="button"
+                      className="cs-talent-choice"
+                      data-chrome-target="talent"
+                      onClick={() => onStage?.(3)}
+                      aria-label="Choose Samantha Pikka"
+                    >
+                      <img src={talent.portrait} alt="" />
+                      <strong>{talent.name}</strong>
+                    </button>
+                  ) : (
+                    <div className="cs-talent-choice">
+                      <img src={talent.portrait} alt="" />
+                      <strong>{talent.name}</strong>
+                    </div>
+                  )}
+                  <AIDisclosure size={8} />
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="cs-roster-note">Your people. Right where you work.</p>
         </div>
-      ) : (
-        <>
+        <div
+          className={`cs-extension-selected ${!selected ? "is-hidden" : ""}`}
+          aria-hidden={!selected}
+          inert={!selected}
+        >
           <div className="cs-extension-profile">
-            <span className="cs-panel-back" aria-hidden="true">
+            <button
+              type="button"
+              className="cs-panel-back"
+              aria-label="Back to all talent"
+              onClick={() => onStage?.(2)}
+            >
               ‹
-            </span>
+            </button>
             <figure>
               <img src={PROFILE.portrait} alt={`${PROFILE.name} portrait`} />
               <figcaption>
@@ -315,59 +344,80 @@ export function ChromeExtensionPanel({
                 type="button"
                 data-chrome-target="copy"
                 className={copied ? "is-copied" : ""}
-                onClick={() => onStage?.(3)}
+                onClick={() => onStage?.(4)}
               >
                 <LabIcon name={copied ? "check" : "copy"} size={12} />
                 {copied ? "Copied" : "Detail"}
               </button>
               <span>Text</span>
             </div>
-            {copied && (
-              <p className="cs-copy-confirmation">
-                Profile copied. Paste it into your reply.
-              </p>
-            )}
+            <p
+              className={`cs-copy-confirmation ${copied ? "" : "is-hidden"}`}
+              aria-hidden={!copied}
+            >
+              Profile copied. Paste it into your reply.
+            </p>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </aside>
   );
 }
 
 export function ChromeDemoWindow({
   stage,
+  progress,
   onStage,
-  cursor = false,
 }: {
   stage: ChromeStage;
+  progress: number;
   onStage: (stage: ChromeStage) => void;
-  cursor?: boolean;
 }) {
   const frame = useRef<HTMLDivElement>(null);
-  const [point, setPoint] = useState<{ x: number; y: number } | null>(null);
+  const [targets, setTargets] = useState<ChromeTargets>({});
   useLayoutEffect(() => {
+    const root = frame.current;
+    if (!root) return;
+    let active = true;
     const measure = () => {
-      const root = frame.current;
-      const target = root?.querySelector(
-        `[data-chrome-target="${["reply", "talent", "copy", "paste", "paste"][stage]}"]`,
-      );
-      if (!root || !target || stage === 4) {
-        setPoint(null);
-        return;
-      }
+      if (!active) return;
       const bounds = root.getBoundingClientRect();
-      const rect = target.getBoundingClientRect();
-      setPoint({
-        x: rect.left - bounds.left + rect.width * 0.72,
-        y: rect.top - bounds.top + rect.height * 0.68,
-      });
+      const next: ChromeTargets = {};
+      root
+        .querySelectorAll<HTMLElement>("[data-chrome-target]")
+        .forEach((target) => {
+          const rect = target.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          next[target.dataset.chromeTarget as ChromeTarget] = {
+            x: rect.left - bounds.left - root.clientLeft + rect.width / 2,
+            y: rect.top - bounds.top - root.clientTop + rect.height / 2,
+          };
+        });
+      setTargets(next);
     };
+    // Both panel pages and email states retain geometry while inactive. This
+    // makes scrubbing, jumping and reversing independent of previous visits.
     measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(root);
+    root
+      .querySelectorAll<HTMLElement>("[data-chrome-target]")
+      .forEach((target) => observer.observe(target));
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("pageshow", measure);
+    root.addEventListener("scroll", measure, true);
+    void document.fonts.ready.then(measure);
+    return () => {
+      active = false;
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("pageshow", measure);
+      root.removeEventListener("scroll", measure, true);
+    };
   }, [stage]);
+  const point = chromeCursorPose(progress, targets);
   return (
-    <div className="cs-browser" ref={frame}>
+    <div className="cs-browser" ref={frame} data-chrome-stage={stage}>
       <div className="cs-browser-toolbar">
         <span className="cs-window-dots" aria-hidden="true">
           <i />
@@ -384,9 +434,16 @@ export function ChromeDemoWindow({
         <div>
           <span aria-hidden="true">⌕</span> mail.google.com/mail/u/0/#inbox
         </div>
-        <span className="cs-toolbar-foam">
-          <img src={`${A}/fdb3b.svg`} alt="Foam extension" />
-        </span>
+        <button
+          type="button"
+          className="cs-toolbar-foam"
+          data-chrome-target="toolbar"
+          aria-label="Open Foam extension"
+          aria-expanded={stage >= 2}
+          onClick={() => onStage(2)}
+        >
+          <img src={`${A}/fdb3b.svg`} alt="" />
+        </button>
       </div>
       <div className="cs-browser-content">
         <div className="cs-mail-app">
@@ -412,7 +469,9 @@ export function ChromeDemoWindow({
                 Drafts <small>{stage > 0 ? 1 : ""}</small>
               </span>
             </nav>
-            <div className={`cs-thread ${stage === 4 ? "is-pasted" : ""}`}>
+            <div
+              className={`cs-thread ${stage > 0 ? "is-replying" : ""} ${stage === 5 ? "is-pasted" : ""}`}
+            >
               <div className="cs-thread-tools" aria-hidden="true">
                 <span className="cs-thread-action-icons">
                   ←<MailTool name="archive" />
@@ -423,43 +482,51 @@ export function ChromeDemoWindow({
               <h3>
                 A creator for our curl-care launch <span>Inbox</span>
               </h3>
-              <ChromeBrandBrief condensed={stage > 0} />
-              {stage === 0 ? (
-                <button
-                  className="cs-reply-button"
-                  type="button"
-                  data-chrome-target="reply"
-                  onClick={() => onStage(1)}
+              <div className="cs-thread-pages">
+                <div
+                  className={`cs-thread-stage ${stage > 0 ? "is-hidden" : ""}`}
+                  aria-hidden={stage > 0}
+                  inert={stage > 0}
                 >
-                  ↩ Reply
-                </button>
-              ) : (
-                <ChromeReply
-                  pasted={stage >= 4}
-                  onPaste={stage >= 3 ? () => onStage(4) : undefined}
-                />
-              )}
+                  <ChromeBrandBrief />
+                  <button
+                    className="cs-reply-button"
+                    type="button"
+                    data-chrome-target="reply"
+                    onClick={() => onStage(1)}
+                  >
+                    ↩ Reply
+                  </button>
+                </div>
+                <div
+                  className={`cs-thread-stage ${stage === 0 ? "is-hidden" : ""}`}
+                  aria-hidden={stage === 0}
+                  inert={stage === 0}
+                >
+                  <ChromeBrandBrief condensed />
+                  <ChromeReply
+                    pasted={stage >= 5}
+                    onPaste={stage >= 4 ? () => onStage(5) : undefined}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        {stage > 0 && <ChromeExtensionPanel stage={stage} onStage={onStage} />}
+        {stage >= 2 && <ChromeExtensionPanel stage={stage} onStage={onStage} />}
       </div>
-      {cursor && point && (
-        <svg
-          className="cs-demo-cursor"
-          width="24"
-          height="30"
-          viewBox="0 0 24 30"
-          style={{ left: point.x, top: point.y }}
+      {point && (
+        <span
+          className="cs-demo-ring"
           aria-hidden="true"
-        >
-          <path
-            d="M3 2v23l6-7 5 10 4-2-5-10h9Z"
-            fill="#101828"
-            stroke="white"
-            strokeWidth="1.5"
-          />
-        </svg>
+          style={{
+            left: point.x,
+            top: point.y,
+            opacity: point.opacity,
+            transform: `translate(-50%, -50%) scale(${1 - point.press * 0.22})`,
+            boxShadow: `0 0 0 ${point.press * 9}px rgb(38 116 255 / ${point.press * 0.17})`,
+          }}
+        />
       )}
     </div>
   );

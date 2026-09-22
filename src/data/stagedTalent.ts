@@ -349,7 +349,7 @@ export const stagedTalent: StagedTalent[] = [
       { network: "linkedin", handle: "", followers: 10_000 },
     ],
     totalAudience: 1_155_300,
-    portrait: `${T}/samantha-pikka-v2/samantha-pikka-v2-portrait.jpg`,
+    portrait: `${T}/samantha-pikka-v2/samantha-pikka-v2-portrait.webp`,
     originalPortrait: `${A}/io-portrait-poster.webp`,
     motion: `${A}/io-portrait-web.mp4`,
     motionStatus: "ready",
@@ -418,7 +418,7 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "0",
         type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.webp`,
         aspectRatio: "9/16",
         views: 116_000,
         engagements: 4_600,
@@ -435,7 +435,7 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "1",
         type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c2.jpg`,
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c2.webp`,
         aspectRatio: "9/16",
         views: 110_000,
         engagements: 34_600,
@@ -452,7 +452,7 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "4",
         type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c5.jpg`,
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c5.webp`,
         aspectRatio: "4/5",
         views: 0,
         caption: "coffee before the day starts",
@@ -468,7 +468,7 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "5",
         type: "still",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c6.jpg`,
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c6.webp`,
         aspectRatio: "4/5",
         views: 0,
         caption: "what actually gets used",
@@ -500,7 +500,7 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "7",
         type: "clip",
-        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.jpg`,
+        thumb: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.webp`,
         video: `${T}/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.mp4`,
         aspectRatio: "9/16",
         caption: "Samantha · curl refresh in motion",
@@ -528,7 +528,7 @@ export const stagedTalent: StagedTalent[] = [
       { network: "youtube", handle: "@aria.quen.fake", followers: 112_000 },
     ],
     totalAudience: 1_771_000,
-    portrait: `${T}/aria-quen-v2/aria-quen-v2-portrait.jpg`,
+    portrait: `${T}/aria-quen-v2/aria-quen-v2-portrait.webp`,
     originalPortrait: portrait("aria-quen"),
     creativeDirection: {
       summary:
@@ -547,7 +547,7 @@ export const stagedTalent: StagedTalent[] = [
     content: [
       {
         type: "still",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.webp`,
         original: tile("aria-quen", 1),
         aspectRatio: "9/16",
         views: 820_400,
@@ -564,7 +564,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "still",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c2.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c2.webp`,
         original: tile("aria-quen", 2),
         aspectRatio: "4/5",
         views: 194_200,
@@ -580,7 +580,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "still",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c3.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c3.webp`,
         original: tile("aria-quen", 3),
         aspectRatio: "9/16",
         views: 410_000,
@@ -596,7 +596,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "still",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c4.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c4.webp`,
         original: tile("aria-quen", 4),
         aspectRatio: "4/5",
         views: 88_600,
@@ -612,7 +612,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "clip",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c5.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c5.webp`,
         original: tile("aria-quen", 5),
         aspectRatio: "9/16",
         views: 267_000,
@@ -629,7 +629,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "still",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c6.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c6.webp`,
         aspectRatio: "9/16",
         views: 0,
         caption: "one last stop on the way home",
@@ -644,7 +644,7 @@ export const stagedTalent: StagedTalent[] = [
       },
       {
         type: "clip",
-        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.jpg`,
+        thumb: `${T}/aria-quen-v2/aria-quen-v2-c1.webp`,
         video: `${T}/aria-quen-v2/aria-quen-v2-makeup.mp4`,
         aspectRatio: "9/16",
         caption: "Aria · five-minute face in motion",
@@ -673,15 +673,16 @@ export const stagedTalent: StagedTalent[] = [
       { network: "youtube", handle: "@nia.brooks.fake", followers: 54_000 },
     ],
     totalAudience: 652_000,
-    portrait: `${T}/nia-brooks/nia-brooks-profile.png`,
+    portrait: `${T}/nia-brooks/nia-brooks-profile.webp`,
+    originalPortrait: `${T}/nia-brooks/nia-brooks-profile.png`,
     referenceImages: [
       {
         label: "Skincare video reference frame · 2 seconds",
-        src: `${T}/nia-brooks/nia-brooks-seen-1.jpg`,
+        src: `${T}/nia-brooks/nia-brooks-seen-1.webp`,
       },
       {
         label: "Skincare video reference frame · 7 seconds",
-        src: `${T}/nia-brooks/nia-brooks-seen-2.jpg`,
+        src: `${T}/nia-brooks/nia-brooks-seen-2.webp`,
       },
     ],
     creativeDirection: {
@@ -702,7 +703,8 @@ export const stagedTalent: StagedTalent[] = [
       {
         id: "skincare-review",
         type: "clip",
-        thumb: `${T}/nia-brooks/nia-brooks-skincare.png`,
+        thumb: `${T}/nia-brooks/nia-brooks-skincare.webp`,
+        original: `${T}/nia-brooks/nia-brooks-skincare.png`,
         video: `${T}/nia-brooks/nia-brooks-skincare.mp4`,
         aspectRatio: "9/16",
         views: 265_600,
