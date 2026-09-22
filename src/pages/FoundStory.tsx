@@ -117,14 +117,18 @@ function ResultCard({
   index,
   progress,
   highlight,
+  detail,
 }: {
   result: FoundResult;
   index: number;
   progress: number;
   highlight: number;
+  detail: number;
 }) {
   const { talent, tile } = result;
-  const entered = clamp((progress - index * 0.1) / 0.7);
+  // Keep the whole stagger within the reveal, including the fifth result.
+  const delay = (index / Math.max(1, FOUND_RESULTS.length - 1)) * 0.3;
+  const entered = clamp((progress - delay) / 0.7);
   const hasMetrics = (tile.views ?? 0) > 0 || (tile.engagements ?? 0) > 0;
   return (
     <figure
@@ -158,6 +162,16 @@ function ResultCard({
             <ContentPlatformIcon network={tile.platform} />
           </div>
         </div>
+        {index === 0 && (
+          <span
+            className="fs-pointer"
+            aria-hidden="true"
+            style={{
+              opacity: highlight * (1 - detail),
+              transform: `translate(${(1 - highlight) * 60}px,${(1 - highlight) * 45}px)`,
+            }}
+          />
+        )}
       </div>
       <figcaption>
         <AIDisclosure />
@@ -724,17 +738,11 @@ export function FoundStory() {
                     index={index}
                     progress={state.results}
                     highlight={state.highlight}
+                    detail={state.detail}
                   />
                 ))}
               </div>
             </div>
-            <span
-              className="fs-pointer"
-              style={{
-                opacity: state.highlight * (1 - state.detail),
-                transform: `translate(${(1 - state.highlight) * 60}px,${(1 - state.highlight) * 45}px)`,
-              }}
-            />
             <div
               className="fs-detail-backdrop"
               style={{ opacity: state.detail }}
