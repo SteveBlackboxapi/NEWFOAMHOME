@@ -25,6 +25,7 @@ const {
   kitRevealStarts,
   KIT_CHAPTERS,
   KIT_STORY_HEIGHT_VH,
+  KIT_JUMP_POINTS,
   kitShareCursor,
   KIT_COUNT_SCROLL_VH,
   kitMobileCountProgress,
@@ -89,12 +90,12 @@ test("intro ends before the stationary profile chapter and does not linger over 
 
 test("each content chapter has a real stationary reading interval", () => {
   const holds = [
-    [0.14, 0.19, 0],
-    [0.255, 0.315, targets.platforms],
-    [0.39, 0.415, targets.content],
-    [0.475, 0.495, targets.metrics],
-    [0.54, 0.565, targets.growth],
-    [0.61, 1, targets.audience],
+    [0.14, 0.15, 0],
+    [0.205, 0.22, targets.platforms],
+    [0.3, 0.31, targets.content],
+    [0.375, 0.385, targets.metrics],
+    [0.445, 0.455, targets.growth],
+    [0.515, 1, targets.audience],
   ];
   for (const [start, end, position] of holds) {
     for (const p of samples(start, end)) {
@@ -106,9 +107,9 @@ test("each content chapter has a real stationary reading interval", () => {
 test("every count reaches its final result within 24vh of scroll rather than the reading hold", () => {
   const starts = {
     platforms: 0.08,
-    metrics: 0.34,
-    growth: 0.43,
-    audience: 0.5,
+    metrics: 0.27,
+    growth: 0.335,
+    audience: 0.4,
   };
   assert.equal(KIT_COUNT_SCROLL_VH, 24);
   const span = 24 / (KIT_STORY_HEIGHT_VH - 100);
@@ -199,7 +200,7 @@ const measuredLayouts = [
 ];
 
 test("measured reveal starts eliminate visible zero exposure across viewport geometries", () => {
-  const ends = { platforms: 0.31, metrics: 0.49, growth: 0.56, audience: 0.65 };
+  const ends = { platforms: 0.22, metrics: 0.385, growth: 0.455, audience: 0.535 };
   for (const fixture of measuredLayouts) {
     const starts = kitRevealStarts(fixture.targets, fixture.layout);
     for (const field of Object.keys(ends)) {
@@ -249,20 +250,20 @@ test("measured reveal starts eliminate visible zero exposure across viewport geo
   }
 });
 
-test("growth starts and completes quickly when visible below metrics, before its own pan", () => {
+test("growth starts counting while visible below metrics, before its own pan", () => {
   const { targets: measured, layout } = measuredLayouts.find(
     ({ name }) => name === "tall viewport showing growth below metrics",
   );
   const starts = kitRevealStarts(measured, layout);
-  const duringMetrics = 0.48;
+  const duringMetrics = 0.38;
   assert.ok(
     layout.growth - kitPan(duringMetrics, measured) < layout.viewportHeight,
   );
-  assert.ok(duringMetrics < 0.495, "growth pan has not started");
+  assert.ok(duringMetrics < 0.385, "growth pan has not started");
   assert.ok(starts.growth < duringMetrics);
-  assert.equal(kitStoryTimeline(duringMetrics, starts).growth, 1);
+  assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
   nearly(
-    kitStoryTimeline(starts.growth + 0.02, starts).growth,
+    kitStoryTimeline(starts.growth + 12 / (KIT_STORY_HEIGHT_VH - 100), starts).growth,
     0.5,
     "visible growth halfway",
   );
@@ -389,14 +390,14 @@ test("measured targets can change between calls without stale positions or overs
       previous = current;
     }
     nearly(
-      kitPan(0.48, measured),
+      kitPan(0.38, measured),
       measured.metrics,
       "new metrics position takes effect immediately",
     );
     nearly(kitPan(1, measured), measured.audience, "final measured position");
   }
   nearly(
-    kitPan(0.48, targets),
+    kitPan(0.38, targets),
     targets.metrics,
     "original targets remain reusable",
   );
@@ -404,10 +405,9 @@ test("measured targets can change between calls without stale positions or overs
 
 test("pan and timeline remain continuous at every chapter and sharing boundary", () => {
   const boundaries = [
-    0.015, 0.105, 0.14, 0.19, 0.255, 0.31, 0.315, 0.39, 0.415, 0.475, 0.49,
-    0.495, 0.54, 0.56, 0.565, 0.61, 0.65, 0.655, 0.69, 0.72, 0.755, 0.795, 0.82,
-    0.84, 0.85, 0.86, 0.865, 0.88, 0.89, 0.895, 0.91, 0.902, 0.914, 0.915, 0.94,
-    0.95, 0.985, 1,
+    0.015, 0.105, 0.14, 0.15, 0.205, 0.22, 0.3, 0.31, 0.375, 0.385,
+    0.445, 0.455, 0.515, 0.535, 0.58, 0.62, 0.66, 0.71, 0.75, 0.765,
+    0.78, 0.8, 0.815, 0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.985, 1,
   ];
   const epsilon = 1e-7;
   for (const boundary of boundaries) {
@@ -441,34 +441,55 @@ test("normalised easing settles at endpoints and preserves the middle position",
   assert.ok(smoothProgress(0.99) > 0.999);
 });
 
-test("analytics stops need less than half their previous scroll while keeping a reading moment", () => {
-  const oldTravel = 820 - 100;
-  const newTravel = KIT_STORY_HEIGHT_VH - 100;
-  assert.ok(newTravel < oldTravel);
-  const holds = [
-    { old: 0.54 - 0.475, now: 0.495 - 0.475 },
-    { old: 0.665 - 0.585, now: 0.565 - 0.54 },
-    { old: 0.795 - 0.71, now: 0.655 - 0.61 },
-  ];
-  for (const hold of holds) {
-    assert.ok(hold.now * newTravel > 10, "a reading moment remains");
-    assert.ok(hold.now * newTravel < (hold.old * oldTravel) / 2);
+test("profile and panel reading beats are brief instead of consuming whole gestures", () => {
+  const travelVh = KIT_STORY_HEIGHT_VH - 100;
+  assert.ok(KIT_STORY_HEIGHT_VH >= 430 && KIT_STORY_HEIGHT_VH <= 460);
+  assert.ok(travelVh <= (700 - 100) * 0.6, "at least 40% less travel than the previous story");
+  const holds = [[0.14, 0.15], [0.205, 0.22], [0.3, 0.31], [0.375, 0.385], [0.445, 0.455]];
+  for (const [start, end] of holds) {
+    const distanceVh = (end - start) * travelVh;
+    assert.ok(distanceVh >= 3 && distanceVh <= 5.3, "only a brief settling beat remains");
+    assert.ok(distanceVh * 720 / 100 < 40, "less than 40px of scroll at 720px height");
   }
 });
 
+test("a short 8vh scroll gesture always advances the profile-to-analytics sequence", () => {
+  const gesture = 8 / (KIT_STORY_HEIGHT_VH - 100);
+  for (const start of samples(0.14, 0.51, 500)) {
+    const end = start + gesture;
+    const panDistance = kitPan(end, targets) - kitPan(start, targets);
+    const shareDistance = kitStoryTimeline(end).aimShare - kitStoryTimeline(start).aimShare;
+    assert.ok(panDistance > 1 || shareDistance > 0.01,
+      `gesture at ${start} cannot disappear into a stationary stop`);
+  }
+});
+
+test("share and preview controls jump to the retimed complete views", () => {
+  const profile = kitStoryTimeline(KIT_JUMP_POINTS.profile);
+  assert.equal(profile.pack, 1);
+  assert.equal(kitPan(KIT_JUMP_POINTS.profile, targets), 0);
+  const share = kitStoryTimeline(KIT_JUMP_POINTS.share);
+  assert.equal(share.shareOpen, 1);
+  assert.ok(share.generated >= 0.4, "the share link is visible");
+  assert.equal(share.shareFade, 0);
+  const audience = kitStoryTimeline(KIT_JUMP_POINTS.audience);
+  assert.equal(audience.audience, 1);
+  assert.equal(audience.shareOpen, 0);
+});
+
 test("logo and title stay fully readable while the plane emerges, before its flight", () => {
-  for (const progress of samples(0.895, 0.95)) {
+  for (const progress of samples(0.85, 0.94)) {
     const state = kitStoryTimeline(progress);
     assert.equal(state.sharedIn, 1);
     assert.equal(state.sharedOut, 0);
     assert.equal(state.fly, 0);
     assert.equal(state.kitOut, 1);
   }
-  assert.equal(kitStoryTimeline(0.902).planeIn, 0);
-  assert.equal(kitStoryTimeline(0.914).planeIn, 1);
-  assert.equal(kitStoryTimeline(0.915).planeEmerge, 0);
-  assert.ok(kitStoryTimeline(0.935).planeEmerge > 0.5);
-  assert.equal(kitStoryTimeline(0.95).planeEmerge, 1);
+  assert.equal(kitStoryTimeline(0.858).planeIn, 0);
+  assert.equal(kitStoryTimeline(0.87).planeIn, 1);
+  assert.equal(kitStoryTimeline(0.872).planeEmerge, 0);
+  assert.ok(kitStoryTimeline(0.92).planeEmerge > 0.5);
+  assert.equal(kitStoryTimeline(0.94).planeEmerge, 1);
   assert.ok(kitStoryTimeline(0.96).fly > 0);
   assert.equal(kitStoryTimeline(1).fly, 1);
   assert.equal(kitStoryTimeline(1).sharedOut, 1);
@@ -565,7 +586,7 @@ test("plane begins within the actual logo and emerges upward away from the title
     const gone = kitPlanePose(stage, logo, 1, 1);
     assert.ok(gone.x - gone.width / 2 > stage.width, "plane exits entirely");
     let previousY = start.y;
-    for (const p of samples(0.915, 1, 100)) {
+    for (const p of samples(0.872, 1, 100)) {
       const state = kitStoryTimeline(p);
       const pose = kitPlanePose(stage, logo, state.planeEmerge, state.fly);
       assert.ok(
@@ -606,9 +627,9 @@ test("a visible panel edge or header cannot spend the count before the numbers a
   const sectionTop = 558;
   assert.equal(layout.viewportHeight - sectionTop, 18);
   assert.ok(layout.platforms > layout.viewportHeight);
-  assert.equal(kitStoryTimeline(461 / 4320, starts).platforms, 0);
+  assert.equal(kitStoryTimeline(0.1067, starts).platforms, 0);
   assert.ok(
-    starts.platforms > 0.19,
+    starts.platforms > 0.13,
     "wait until the first-number approach, not the intro",
   );
   for (const field of ["platforms", "metrics", "growth", "audience"]) {
@@ -622,7 +643,7 @@ test("a visible panel edge or header cannot spend the count before the numbers a
       count > 0 && count < 0.5,
       `${field} enters with most of its count still visible`,
     );
-    assert.equal(kitStoryTimeline(starts[field] + 0.040001, starts)[field], 1);
+    assert.equal(kitStoryTimeline(starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100) + 0.000001, starts)[field], 1);
   }
   // The old section-edge anchor reproduces premature completion, making this
   // fixture sensitive to accidentally measuring the section again.
@@ -630,6 +651,6 @@ test("a visible panel edge or header cannot spend the count before the numbers a
     ...layout,
     platforms: sectionTop,
   });
-  assert.equal(kitStoryTimeline(0.14, wrongStarts).platforms, 1);
-  assert.equal(kitStoryTimeline(0.14, starts).platforms, 0);
+  assert.equal(kitStoryTimeline(0.15, wrongStarts).platforms, 1);
+  assert.ok(kitStoryTimeline(0.14, starts).platforms < 0.05);
 });

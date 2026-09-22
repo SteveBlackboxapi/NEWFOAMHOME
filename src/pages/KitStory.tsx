@@ -34,6 +34,7 @@ import {
   kitShareCursor,
   kitPlanePose,
   KIT_STORY_HEIGHT_VH,
+  KIT_JUMP_POINTS,
   type KitPanTargets,
   type KitRevealLayout,
 } from "../lib/kitStoryMotion";
@@ -913,8 +914,8 @@ function KitStoryDesktop() {
             >
               <KitNav
                 sharePulse={aimShare > 0.55 && shareOpen < 0.35}
-                onPreview={() => jumpTo(0.16)}
-                onShare={() => jumpTo(0.735)}
+                onPreview={() => jumpTo(KIT_JUMP_POINTS.profile)}
+                onShare={() => jumpTo(KIT_JUMP_POINTS.share)}
                 shareRef={shareButton}
               />
             </div>
@@ -963,7 +964,7 @@ function KitStoryDesktop() {
               </Link>
               <button
                 type="button"
-                onClick={() => jumpTo(0.16)}
+                onClick={() => jumpTo(KIT_JUMP_POINTS.profile)}
                 className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}
               >
                 Follow a pitch
@@ -1002,7 +1003,7 @@ function KitStoryDesktop() {
               <button
                 type="button"
                 aria-label="Close share preview"
-                onClick={() => jumpTo(0.65)}
+                onClick={() => jumpTo(KIT_JUMP_POINTS.audience)}
                 className="text-[#6a7282] size-6 rounded-full hover:bg-[#f2f4f7]"
               >
                 ×
@@ -1019,6 +1020,7 @@ function KitStoryDesktop() {
               ) : (
                 <div
                   className={`h-11 rounded-full border flex items-center px-3 gap-2 ${copied > 0.35 ? "border-[#185abc]" : "border-[#d0d5dd]"}`}
+                  style={{ opacity: 0.6 + generated * 0.4 }}
                 >
                   <span className={`${FG_R} text-[12px] truncate flex-1`}>
                     {STAGE.shareUrl}
@@ -1041,6 +1043,7 @@ function KitStoryDesktop() {
             className="pointer-events-none absolute z-50 size-8 rounded-full border-[3px] border-[#2674ff] bg-[#2674ff]/10 -translate-x-1/2 -translate-y-1/2"
             style={{
               opacity: cursorOn ? 1 : 0,
+              scale: 1 + Math.sin(copied * Math.PI) * 0.16,
             }}
           />
 

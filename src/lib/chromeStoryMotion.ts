@@ -2,10 +2,10 @@ import type { ChromeStage } from "./chromeDemo";
 
 /** Every action finishes before its resulting UI state becomes visible. */
 export const CHROME_STAGE_STOPS = [0, 0.14, 0.32, 0.49, 0.66, 0.88] as const;
-// Release the pinned scene almost immediately after paste, without speeding
-// through the actions that lead to it.
+// The complete demonstration takes 140vh of scrolling. The final 3.1vh releases
+// the completed email into the natural-flow title immediately after paste.
 export const CHROME_STORY_END = 0.9;
-export const CHROME_STORY_HEIGHT_VH = 100 + 240 * CHROME_STORY_END;
+export const CHROME_STORY_HEIGHT_VH = 240;
 export const SHOW_CHROME_STEP_NAV = false;
 
 export type ChromeTarget = "reply" | "toolbar" | "talent" | "copy" | "caret";
@@ -32,18 +32,18 @@ const MOVES: {
   from: ChromeTarget;
   to: ChromeTarget;
 }[] = [
-  { start: 0.04, end: 0.115, from: "reply", to: "reply" },
-  { start: 0.18, end: 0.28, from: "reply", to: "toolbar" },
-  { start: 0.355, end: 0.465, from: "toolbar", to: "talent" },
-  { start: 0.53, end: 0.635, from: "talent", to: "copy" },
-  { start: 0.7, end: 0.855, from: "copy", to: "caret" },
+  { start: 0, end: 0.12, from: "reply", to: "reply" },
+  { start: 0.14, end: 0.3, from: "reply", to: "toolbar" },
+  { start: 0.32, end: 0.47, from: "toolbar", to: "talent" },
+  { start: 0.49, end: 0.64, from: "talent", to: "copy" },
+  { start: 0.66, end: 0.86, from: "copy", to: "caret" },
 ];
 
 /** Pure scroll interpolation: no timers, accumulated state or CSS transitions. */
 export function chromeCursorPose(progress: number, targets: ChromeTargets) {
   if (!Number.isFinite(progress)) return null;
   const p = clamp(progress);
-  if (p <= 0.035 || p >= 0.88) return null;
+  if (p <= 0 || p >= 0.88) return null;
   const move = MOVES.reduce(
     (current, next) => (p >= next.start ? next : current),
     MOVES[0],
@@ -64,7 +64,7 @@ export function chromeCursorPose(progress: number, targets: ChromeTargets) {
   return {
     x: from.x + (to.x - from.x) * t + initialOffset * 75,
     y: from.y + (to.y - from.y) * t + initialOffset * 24,
-    opacity: clamp((p - 0.035) / 0.015) * (1 - clamp((p - 0.87) / 0.01)),
+    opacity: clamp(p / 0.012) * (1 - clamp((p - 0.87) / 0.01)),
     press,
   };
 }

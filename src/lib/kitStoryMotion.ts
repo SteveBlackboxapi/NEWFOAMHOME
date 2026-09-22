@@ -1,5 +1,5 @@
-// Six viewport heights of travel, plus the final sticky viewport.
-export const KIT_STORY_HEIGHT_VH = 700;
+// Three and a half viewport heights of travel, plus the final sticky viewport.
+export const KIT_STORY_HEIGHT_VH = 450;
 export const KIT_COUNT_SCROLL_VH = 24;
 const COUNT_SPAN = KIT_COUNT_SCROLL_VH / (KIT_STORY_HEIGHT_VH - 100);
 
@@ -25,15 +25,15 @@ export type KitRevealLayout = KitRevealStarts & { viewportHeight: number };
 // Start early until the real section positions have been measured.
 const DEFAULT_REVEAL_STARTS: KitRevealStarts = {
   platforms: 0.08,
-  metrics: 0.34,
-  growth: 0.43,
-  audience: 0.5,
+  metrics: 0.27,
+  growth: 0.335,
+  audience: 0.4,
 };
 const REVEAL_ENDS: KitRevealStarts = {
-  platforms: 0.31,
-  metrics: 0.49,
-  growth: 0.56,
-  audience: 0.65,
+  platforms: 0.22,
+  metrics: 0.385,
+  growth: 0.455,
+  audience: 0.535,
 };
 
 /** Every value is a pure function of scroll position: no playback clocks or one-shot flags. */
@@ -58,20 +58,20 @@ export function kitStoryTimeline(
     metrics: reveal("metrics"),
     growth: reveal("growth"),
     audience: reveal("audience"),
-    aimShare: progressBetween(p, 0.655, 0.69),
-    shareOpen: progressBetween(p, 0.69, 0.72),
-    generated: progressBetween(p, 0.72, 0.755),
-    aimCopy: progressBetween(p, 0.755, 0.795),
-    copied: progressBetween(p, 0.795, 0.82),
-    shareFade: progressBetween(p, 0.84, 0.86),
-    publicize: progressBetween(p, 0.84, 0.86),
-    kitOut: progressBetween(p, 0.85, 0.89),
-    fold: progressBetween(p, 0.88, 0.91),
-    planeIn: smoothProgress(progressBetween(p, 0.902, 0.914)),
-    planeEmerge: smoothProgress(progressBetween(p, 0.915, 0.95)),
-    fly: smoothProgress(progressBetween(p, 0.95, 1)),
-    sharedIn: smoothProgress(progressBetween(p, 0.865, 0.895)),
-    sharedOut: progressBetween(p, 0.95, 0.985),
+    aimShare: progressBetween(p, 0.535, 0.58),
+    shareOpen: progressBetween(p, 0.58, 0.62),
+    generated: progressBetween(p, 0.62, 0.66),
+    aimCopy: progressBetween(p, 0.66, 0.71),
+    copied: progressBetween(p, 0.71, 0.75),
+    shareFade: progressBetween(p, 0.765, 0.8),
+    publicize: progressBetween(p, 0.765, 0.8),
+    kitOut: progressBetween(p, 0.78, 0.83),
+    fold: progressBetween(p, 0.815, 0.85),
+    planeIn: smoothProgress(progressBetween(p, 0.858, 0.87)),
+    planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
+    fly: smoothProgress(progressBetween(p, 0.94, 1)),
+    sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
+    sharedOut: progressBetween(p, 0.94, 0.985),
     headlineOpacity: 1 - progressBetween(p, 0.015, 0.105),
   };
 }
@@ -84,15 +84,15 @@ export type KitPanTargets = {
   audience: number;
 };
 
-/** Measured pan stages include reading holds; counters span both movement and holds. */
+/** Pan stages meet with only a short settling beat; numbers animate during entry. */
 export function kitPan(value: number, targets: KitPanTargets) {
   const p = clampProgress(value);
   const segments = [
-    [0.19, 0.255, 0, targets.platforms],
-    [0.315, 0.39, targets.platforms, targets.content],
-    [0.415, 0.475, targets.content, targets.metrics],
-    [0.495, 0.54, targets.metrics, targets.growth],
-    [0.565, 0.61, targets.growth, targets.audience],
+    [0.15, 0.205, 0, targets.platforms],
+    [0.22, 0.3, targets.platforms, targets.content],
+    [0.31, 0.375, targets.content, targets.metrics],
+    [0.385, 0.445, targets.metrics, targets.growth],
+    [0.455, 0.515, targets.growth, targets.audience],
   ];
   let position = 0;
   for (const [start, end, from, to] of segments) {
@@ -147,14 +147,16 @@ export function kitRevealStarts(
   return starts;
 }
 
+export const KIT_JUMP_POINTS = { profile: 0.145, audience: 0.535, share: 0.64 };
+
 export const KIT_CHAPTERS = [
-  { label: "Profile", progress: 0.16 },
-  { label: "Platforms", progress: 0.31 },
-  { label: "Content", progress: 0.4 },
-  { label: "Performance", progress: 0.49 },
-  { label: "Growth", progress: 0.56 },
-  { label: "Audience", progress: 0.65 },
-  { label: "Share", progress: 0.77 },
+  { label: "Profile", progress: KIT_JUMP_POINTS.profile },
+  { label: "Platforms", progress: 0.22 },
+  { label: "Content", progress: 0.305 },
+  { label: "Performance", progress: 0.385 },
+  { label: "Growth", progress: 0.455 },
+  { label: "Audience", progress: KIT_JUMP_POINTS.audience },
+  { label: "Share", progress: 0.68 },
 ];
 
 type KitRect = { left: number; top: number; width: number; height: number };

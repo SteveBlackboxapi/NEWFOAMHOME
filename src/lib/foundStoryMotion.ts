@@ -1,5 +1,7 @@
 export const FOUND_SEARCH_QUERY = "Skincare product reviews";
 export const FOUND_SEARCH_LOCK_PROGRESS = 0.025;
+export const FOUND_STORY_HEIGHT_VH = 210;
+export const FOUND_CAMPAIGN_SCROLL_VH = 38;
 export const FOUND_SEARCH_EXAMPLES = [
   "Morning runs outdoors",
   FOUND_SEARCH_QUERY,
@@ -46,10 +48,37 @@ export function foundStoryTimeline(progress: number) {
   const p = clamp(progress);
   return {
     query: p >= FOUND_SEARCH_LOCK_PROGRESS ? FOUND_SEARCH_QUERY : "",
-    zoom: smooth(between(p, 0.05, 0.38)),
-    results: smooth(between(p, 0.22, 0.5)),
+    zoom: smooth(between(p, FOUND_SEARCH_LOCK_PROGRESS, 0.38)),
+    results: smooth(between(p, 0.2, 0.52)),
     highlight: smooth(between(p, 0.52, 0.62)),
-    detail: smooth(between(p, 0.66, 0.85)),
-    finish: smooth(between(p, 0.88, 0.98)),
+    detail: smooth(between(p, 0.62, 0.94)),
   };
+}
+
+/** Natural page travel enlarges the complete artwork; its layout box never changes. */
+export function foundCampaignScale(
+  top: number,
+  viewportHeight: number,
+  width: number,
+  reducedMotion = false,
+) {
+  if (
+    reducedMotion ||
+    !Number.isFinite(top) ||
+    !Number.isFinite(viewportHeight) ||
+    viewportHeight <= 0 ||
+    !Number.isFinite(width) ||
+    width <= 0
+  )
+    return 1;
+  // Begin at 70% of the earlier, padded/max-width presentation.
+  const priorPadding = Math.max(16, Math.min(48, width * 0.03));
+  const priorWidth = Math.min(1500, Math.max(1, width - priorPadding * 2));
+  const from = (0.7 * priorWidth) / width;
+  const reveal = between(
+    viewportHeight * 0.85 - top,
+    0,
+    (viewportHeight * FOUND_CAMPAIGN_SCROLL_VH) / 100,
+  );
+  return from + (1 - from) * smooth(reveal);
 }
