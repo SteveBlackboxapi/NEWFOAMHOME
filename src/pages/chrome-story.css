@@ -153,6 +153,31 @@
   text-align: center;
   padding: 20px;
 }
+.cs-store-mark {
+  position: relative;
+  isolation: isolate;
+  flex-shrink: 0;
+}
+.cs-store-mark::before {
+  content: "";
+  position: absolute;
+  inset: -60px;
+  border-radius: 44% 56% 50% 48%;
+  background: #fff;
+  filter: blur(24px);
+  pointer-events: none;
+}
+.cs-store-mark img {
+  position: relative;
+  display: block;
+  mix-blend-mode: multiply;
+}
+.cs-finale h2,
+.cs-mobile-finale h2,
+.cs-finale a > span,
+.cs-mobile-finale a > span {
+  position: relative;
+}
 .cs-finale img {
   width: 180px;
   height: 157px;

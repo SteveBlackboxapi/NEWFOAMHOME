@@ -109,7 +109,9 @@ export function ChromeStoryMobile({
       </div>
       <MobileFade className="cs-mobile-finale">
         <a href={CHROME_STORE} target="_blank" rel="noreferrer">
-          <img src={`${A}/chrome-store.webp`} alt="" width={150} height={131} />
+          <div className="cs-store-mark">
+            <img src={`${A}/chrome-store.webp`} alt="" width={150} height={131} />
+          </div>
           <h2>That’s the Chrome Extension.</h2>
           <span>Bring your roster to your inbox ↗</span>
         </a>
