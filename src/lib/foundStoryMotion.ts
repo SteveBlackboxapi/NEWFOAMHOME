@@ -1,4 +1,4 @@
-export const FOUND_SEARCH_QUERY = "Everyday makeup and haircare";
+export const FOUND_SEARCH_QUERY = "Skincare product reviews";
 export const FOUND_SEARCH_LOCK_PROGRESS = 0.025;
 export const FOUND_SEARCH_EXAMPLES = [
   "Morning runs outdoors",

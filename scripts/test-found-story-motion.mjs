@@ -24,7 +24,7 @@ const {
   FOUND_SEARCH_EXAMPLES,
   FOUND_SEARCH_CYCLE_MS,
 } = module.exports;
-const exampleQueries = ["Morning runs outdoors", "Everyday makeup and haircare"];
+const exampleQueries = ["Morning runs outdoors", "Skincare product reviews"];
 const typeMs = 65;
 const holdMs = 1500;
 const eraseMs = 30;
@@ -104,7 +104,7 @@ test("examples can change while scroll is paused without advancing any visual ph
 
 test("scroll locks the final query at .025 before zoom, and reversing releases the lock", () => {
   assert.equal(FOUND_SEARCH_LOCK_PROGRESS, 0.025);
-  assert.equal(FOUND_SEARCH_QUERY, "Everyday makeup and haircare");
+  assert.equal(FOUND_SEARCH_QUERY, "Skincare product reviews");
   assert.equal(foundStoryTimeline(0.025 - 1e-7).query, "");
   for (const p of [0.025, 0.025 + 1e-7, 0.04, 0.05]) {
     const state = foundStoryTimeline(p);

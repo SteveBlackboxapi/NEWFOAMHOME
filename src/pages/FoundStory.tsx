@@ -217,7 +217,7 @@ function SelectedPost() {
         <img src={talent.portrait} alt="" />
         <span>
           <strong>{talent.displayName}</strong>
-          <small>Instagram · Image</small>
+          <small>TikTok · Image</small>
         </span>
         <span className="fs-detail-close">×</span>
       </div>
@@ -230,9 +230,9 @@ function SelectedPost() {
         </figure>
         <div className="fs-detail-info">
           <p className="fs-detail-kicker">THE MOMENT YOU WERE LOOKING FOR</p>
-          <h3>A quick curl refresh.</h3>
+          <h3>A low-effort night routine.</h3>
           <p className="fs-detail-caption">
-            An everyday haircare routine from Samantha Pikka.
+            A skincare routine with Aria Quen.
           </p>
           <h4>Post metrics</h4>
           <dl className="fs-post-metrics">
@@ -261,7 +261,7 @@ function SelectedPost() {
           <dl className="fs-post-details">
             <div>
               <dt>Platform</dt>
-              <dd>Instagram</dd>
+              <dd>TikTok</dd>
             </div>
             <div>
               <dt>Talent</dt>
@@ -269,7 +269,7 @@ function SelectedPost() {
             </div>
             <div>
               <dt>Content</dt>
-              <dd>Haircare · Routine</dd>
+              <dd>Skincare · Night routine</dd>
             </div>
           </dl>
           <p className="fs-demo-note">Fictional creators · Demo figures</p>
@@ -373,9 +373,10 @@ export function FoundStory() {
         <h2>Found with Foam</h2>
         <p>
           Describe a moment, topic or creator. This example searches for
-          everyday makeup and haircare, reveals four matching posts, then opens
-          Samantha Pikka’s curl refresh with 116,000 views and 4,600
-          engagements. All creators and figures are illustrative.
+          skincare product reviews, shows a skincare post alongside related
+          beauty content, then opens Aria Quen’s night routine with 410,000
+          views and 38,100 engagements. All creators and figures are
+          illustrative.
         </p>
       </div>
       <section
@@ -457,7 +458,7 @@ export function FoundStory() {
                 className="fs-query-chip"
                 style={{ opacity: state.results }}
               >
-                <LabIcon name="search" size={13} /> Makeup & haircare{" "}
+                <LabIcon name="search" size={13} /> {FOUND_SEARCH_QUERY}{" "}
                 <span>×</span>
               </span>
               <span className="fs-sort">
@@ -470,7 +471,7 @@ export function FoundStory() {
             </div>
             <div className="fs-results" style={{ opacity: zoom }}>
               <div className="fs-results-caption">
-                <span>{FOUND_RESULTS.length} matching posts</span>
+                <span>{FOUND_RESULTS.length} beauty posts</span>
                 <span>Most relevant</span>
               </div>
               <div className="fs-results-grid">
@@ -533,6 +534,19 @@ export function FoundStory() {
           </p>
         </div>
       </section>
+      <figure className="fs-campaign">
+        <img
+          src={`${A}/campaigns/found-with-foam-skincare.webp`}
+          width={1584}
+          height={1248}
+          loading="lazy"
+          decoding="async"
+          alt="Concept outdoor advert: a woman cleansing her face against a pink background, beneath a search for Skincare product reviews and above the words Found with Foam."
+        />
+        <figcaption>
+          <AIDisclosure detail="Concept advert" />
+        </figcaption>
+      </figure>
       <div className="fs-outro">
         <span className="fs-eyebrow">FOUND WITH FOAM</span>
         <h2 id="found-title">

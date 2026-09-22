@@ -595,6 +595,25 @@
 .fs-stage-note {
   bottom: 4%;
 }
+.fs-campaign {
+  margin: 0;
+  padding: 0 clamp(16px, 3vw, 48px);
+  background: #fff6eb;
+}
+.fs-campaign > img {
+  display: block;
+  width: 100%;
+  max-width: 1500px;
+  height: auto;
+  margin-inline: auto;
+}
+.fs-campaign > figcaption {
+  max-width: 1500px;
+  margin-inline: auto;
+}
+.fs-campaign + .fs-outro {
+  padding-top: 64px;
+}
 .fs-outro {
   padding: 100px 24px 110px;
   text-align: center;
@@ -964,5 +983,11 @@
 @media (max-width: 800px) {
   .fs-example-control {
     bottom: 33%;
+  }
+}
+
+@media (max-width: 800px) {
+  .fs-campaign + .fs-outro {
+    padding-top: 48px;
   }
 }
