@@ -1,89 +1,258 @@
-import { FG_R, FG_M, FG_SB } from "../lib/assets";
+import { MarketingImage } from "../components/MarketingImage";
+import { Link } from "react-router";
+import { AIDisclosure } from "../components/AIDisclosure";
+import { ClosingCTA } from "../components/ClosingCTA";
+import {
+  ActionLink,
+  FoamGlyph,
+  MarketingPage,
+  Reveal,
+} from "../components/Marketing";
+import {
+  websiteAria,
+  websiteNia,
+  websiteSamantha,
+} from "../data/websiteTalent";
+import "./editorial-pages.css";
 
-const UPDATES = [
-  {
-    tag: "New",
-    tagColor: "bg-brand-light text-brand",
-    date: "September 2026",
-    title: "Tracking notifications in Gmail",
-    desc: "When a brand opens a media kit you shared via the Chrome extension, you now get an instant Gmail notification, including time spent and which creator they spent the most time on.",
-  },
-  {
-    tag: "Improved",
-    tagColor: "bg-blue-light text-blue",
-    date: "August 2026",
-    title: "Audience demographics now include age × gender breakdown",
-    desc: "Media kits now show a cross-tab of age range and gender for each platform's audience. Brands asked for this. We shipped it in 3 weeks.",
-  },
-  {
-    tag: "New",
-    tagColor: "bg-brand-light text-brand",
-    date: "July 2026",
-    title: "Lists now support custom ordering",
-    desc: "You can now drag creators into any order within a list before sharing with a brand. Your shortlist, your logic.",
-  },
-  {
-    tag: "Improved",
-    tagColor: "bg-blue-light text-blue",
-    date: "June 2026",
-    title: "Content search is 3× faster",
-    desc: "We rebuilt the search index across the creator content store. Keyword results now surface in under 200ms for most queries.",
-  },
-  {
-    tag: "Fix",
-    tagColor: "bg-raised text-muted border border-border",
-    date: "May 2026",
-    title: "TikTok follower counts were showing 24h-delayed data",
-    desc: "An API caching bug caused TikTok follower counts to reflect data from 24 hours earlier. Now fixed. All platforms pull live at kit-open time.",
-  },
-  {
-    tag: "New",
-    tagColor: "bg-brand-light text-brand",
-    date: "April 2026",
-    title: "Watchlists: track creators before you sign them",
-    desc: "Monitor growth across Instagram, TikTok, and YouTube for creators you haven't signed yet. Private to your account. Converts to roster when you're ready.",
-  },
-];
-
-function Hero() {
+function KitCover() {
   return (
-    <section className="pt-36 pb-20 px-6 bg-surface">
-      <div className="max-w-[760px] mx-auto">
-        <div className="inline-flex items-center gap-2 bg-raised border border-border rounded-full px-[14px] py-[6px] mb-8">
-          <div className="size-[6px] rounded-full bg-border-dark" />
-          <span className={`${FG_M} text-xs text-muted tracking-[0.3px] uppercase`}>Product updates</span>
+    <figure className="ep-kit-cover">
+      <Link
+        className="ep-kit-cover-art"
+        to="/kit-story"
+        aria-label="Explore Samantha’s media kit story"
+      >
+        <div className="ep-kit-cover-type" aria-hidden="true">
+          A little
+          <br />
+          more
+          <br />
+          <em>possibility.</em>
         </div>
-        <h1 className={`${FG_SB} text-[60px] md:text-[72px] leading-[1.02] tracking-[-2px] text-text mb-5`}>
-          What we've shipped
-        </h1>
-        <p className={`${FG_R} text-lg leading-7 text-muted`}>
-          Foam ships fast, mostly based on what managers tell us is slowing them down. Here's the recent history.
-        </p>
+        <MarketingImage
+          src={websiteSamantha.portrait}
+          alt="Fictional creator Samantha Pikka in a sample media kit"
+          fetchPriority="high"
+          decoding="async"
+        />
+        <span className="ep-kit-cover-tag">
+          Foam Media Kits <span aria-hidden="true">↗</span>
+        </span>
+        <FoamGlyph kind="spark" />
+      </Link>
+      <figcaption>
+        <AIDisclosure detail="Fictional creator" />
+      </figcaption>
+    </figure>
+  );
+}
+
+function InboxIllustration() {
+  return (
+    <figure className="ep-inbox-illustration">
+      <div className="ep-inbox-scene">
+        <div className="ep-inbox-email">
+          <span className="ep-inbox-subject">Re: The next campaign</span>
+          <p>
+            I have someone
+            <br />
+            you should meet.
+          </p>
+          <span className="ep-inbox-rule" />
+          <span className="ep-inbox-rule ep-inbox-rule-short" />
+          <span className="ep-inbox-rule" />
+        </div>
+        <div className="ep-inbox-talent">
+          <MarketingImage
+            src={websiteAria.portrait}
+            alt="Fictional creator Aria Quen"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <strong>{websiteAria.displayName}</strong>
+            <span>Beauty · Lifestyle</span>
+          </div>
+          <span className="ep-inbox-plus" aria-hidden="true">
+            +
+          </span>
+        </div>
+        <FoamGlyph kind="quarter" />
       </div>
-    </section>
+      <figcaption>
+        <AIDisclosure detail="Fictional creator · Workflow illustration" />
+      </figcaption>
+    </figure>
+  );
+}
+
+function ContentIllustration() {
+  return (
+    <figure className="ep-content-illustration">
+      <div className="ep-content-scene">
+        <MarketingImage
+          src={websiteNia.content[0].thumb}
+          alt="Fictional creator Nia Brooks demonstrating a skincare product"
+          loading="lazy"
+          decoding="async"
+        />
+        <span className="ep-content-query">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            aria-hidden="true"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" />
+          </svg>
+          Skincare product reviews
+        </span>
+        <span className="ep-content-caption">
+          A brief.
+          <br />A better starting point.
+        </span>
+      </div>
+      <figcaption>
+        <AIDisclosure detail="Fictional creator · Workflow illustration" />
+      </figcaption>
+    </figure>
   );
 }
 
 export function Updates() {
   return (
-    <>
-      <Hero />
-      <section className="pb-32 px-6 bg-surface">
-        <div className="max-w-[760px] mx-auto">
-          <div className="flex flex-col gap-0">
-            {UPDATES.map((u, i) => (
-              <div key={u.title} className={`flex flex-col gap-4 py-10 ${i < UPDATES.length - 1 ? "border-b border-border" : ""}`}>
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className={`${FG_M} text-xs px-3 py-[4px] rounded-full ${u.tagColor}`}>{u.tag}</span>
-                  <span className={`${FG_R} text-xs text-muted`}>{u.date}</span>
-                </div>
-                <h2 className={`${FG_M} text-xl text-text leading-snug`}>{u.title}</h2>
-                <p className={`${FG_R} text-[15px] leading-6 text-muted`}>{u.desc}</p>
-              </div>
-            ))}
+    <MarketingPage className="ep-page ep-inside">
+      <header className="ep-inside-intro mp-cream">
+        <div className="mp-container">
+          <div className="ep-inside-masthead">
+            <p className="mp-eyebrow">Ideas, tools & a closer look</p>
+            <span>From the world of Foam</span>
           </div>
+          <div className="ep-inside-title">
+            <h1>
+              Inside
+              <br />
+              <em>Foam.</em>
+            </h1>
+            <FoamGlyph kind="flower" />
+          </div>
+          <p className="ep-inside-deck">
+            The thinking behind a better pitch.
+            <br />
+            Explore the tools, the stories and the possibilities.
+          </p>
+        </div>
+      </header>
+      <section className="mp-section ep-lead-story">
+        <div className="mp-container">
+          <Reveal className="ep-lead-layout">
+            <KitCover />
+            <div className="ep-lead-copy">
+              <p className="mp-eyebrow">In focus / Media kits</p>
+              <h2>
+                Every creator
+                <br />
+                has a story.
+                <br />
+                <em>Give it room.</em>
+              </h2>
+              <p>
+                A profile is a starting point. Bring the person, their content
+                and the supporting numbers into a media kit that gives the next
+                conversation somewhere to go.
+              </p>
+              <ActionLink to="/kit-story" className="ep-button-ink">
+                Explore the media kit story
+              </ActionLink>
+            </div>
+          </Reveal>
         </div>
       </section>
-    </>
+      <section className="ep-explorations mp-cream">
+        <div className="mp-container">
+          <div className="ep-explorations-heading">
+            <h2>Two more ways in.</h2>
+            <span aria-hidden="true">↓</span>
+          </div>
+          <Reveal>
+            <article className="ep-feature-story">
+              <InboxIllustration />
+              <div className="ep-feature-copy">
+                <p className="mp-eyebrow">The everyday / Foam for Chrome</p>
+                <h3>
+                  A better reply
+                  <br />
+                  starts here.
+                </h3>
+                <p>
+                  The brief is in your inbox. Your next recommendation can be,
+                  too. Follow the journey from a brand’s question to a creator
+                  profile in your reply.
+                </p>
+                <Link to="/chrome-story" className="mp-link">
+                  Watch the inbox story <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+            </article>
+          </Reveal>
+          <Reveal>
+            <article className="ep-feature-story ep-feature-story-reverse">
+              <ContentIllustration />
+              <div className="ep-feature-copy">
+                <p className="mp-eyebrow">Discovery / Content & context</p>
+                <h3>
+                  Find the work.
+                  <br />
+                  See the possibility.
+                </h3>
+                <p>
+                  A creator’s content can say more than a category. Explore how
+                  profiles, content and curated lists help give a campaign brief
+                  a useful starting point.
+                </p>
+                <Link to="/features" className="mp-link">
+                  Explore Foam’s features <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+            </article>
+          </Reveal>
+        </div>
+      </section>
+      <section className="mp-section ep-reading">
+        <div className="mp-container">
+          <Reveal className="ep-reading-layout">
+            <FoamGlyph kind="orbit" />
+            <div>
+              <p className="mp-eyebrow">Keep exploring</p>
+              <h2 className="mp-heading">The bigger picture.</h2>
+              <p className="mp-body">
+                Meet the purpose behind the product, or explore more
+                perspectives on talent management from Foam.
+              </p>
+              <div className="ep-reading-links">
+                <Link to="/about" className="mp-link">
+                  Why we build <span aria-hidden="true">↗</span>
+                </Link>
+                <a
+                  href="https://www.foam.io/talent-management"
+                  className="mp-link"
+                >
+                  The Foam Booth <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+      <ClosingCTA
+        headline="Make it part of your day."
+        sub="See how these tools fit your team’s real conversations, briefs and talent."
+        primaryLabel="Book a demo"
+        secondaryLabel="See all features"
+      />
+    </MarketingPage>
   );
 }

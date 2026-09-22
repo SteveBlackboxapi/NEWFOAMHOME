@@ -1,3 +1,4 @@
+import { DEMO_URL } from "../lib/siteLinks";
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
@@ -459,8 +460,8 @@ export function KitStoryMobile() {
             and get back to you.”
           </p>
           <div className="mt-8 flex items-center gap-5 flex-wrap">
-            <Link
-              to="/demo"
+            <a
+              href={DEMO_URL}
               className={`${FG_SB} text-[#101828] text-[16px] px-7 h-12 rounded-full inline-flex items-center gap-2`}
               style={{ background: "#c6f31e" }}
             >
@@ -479,7 +480,7 @@ export function KitStoryMobile() {
                   strokeLinecap="round"
                 />
               </svg>
-            </Link>
+            </a>
             <a
               href="#kit-beat"
               className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}

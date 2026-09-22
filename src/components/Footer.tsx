@@ -1,68 +1,82 @@
 import { Link } from "react-router";
-import { img, FG_M, FG_R, FG_SB } from "../lib/assets";
+import { PRIVACY_URL, TERMS_URL } from "../lib/siteLinks";
+import "./site-shell.css";
 
 const COLS = [
   {
-    head: "Product",
+    head: "Made for you",
     links: [
-      { label: "For managers", to: "/managers" },
-      { label: "For brands",   to: "/brands" },
-      { label: "For creators", to: "/creators" },
-      { label: "Features",     to: "/features" },
-      { label: "Updates",      to: "/updates" },
+      { label: "Managers", to: "/managers" },
+      { label: "Brands", to: "/brands" },
+      { label: "Creators", to: "/creators" },
     ],
   },
   {
-    head: "Company",
+    head: "Explore Foam",
     links: [
-      { label: "About",        to: "/about" },
-      { label: "Data & Trust", to: "/data-trust" },
-      { label: "Book a demo",  to: "/demo" },
+      { label: "Features", to: "/features" },
+      { label: "The kit story", to: "/kit-story/" },
+      { label: "Data & trust", to: "/data-trust" },
     ],
   },
   {
-    head: "Legal & contact",
+    head: "Say hello",
     links: [
-      { label: "Privacy policy",   to: "#" },
-      { label: "Terms of service", to: "#" },
-      { label: "hello@foam.io",    to: "#" },
+      { label: "About us", to: "/about" },
+      { label: "Inside Foam", to: "/updates" },
+      { label: "Let’s talk", to: "/demo" },
     ],
   },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white">
-      <div className="max-w-[1200px] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-[10px]">
-              <div className="bg-dark flex items-center justify-center p-[5px] rounded-[8px] size-8">
-                <img alt="Foam" className="size-[22px]" src={img.foamSymbol} />
-              </div>
-              <span className={`${FG_SB} text-lg tracking-[-0.3px]`}>foam</span>
-            </div>
-            <p className={`${FG_R} text-sm text-subtle leading-6 max-w-[220px]`}>
-              The pitch platform for talent managers, built around how deals actually get done.
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <div className="site-footer-top">
+          <div className="site-footer-intro">
+            <p>
+              Big on talent.
+              <br />
+              Bigger on possibility.
             </p>
-            <p className={`${FG_R} text-xs text-subtle`}>1,300+ talent managers active monthly</p>
+            <a href="mailto:hello@foam.io">
+              hello@foam.io <span aria-hidden="true">↗</span>
+            </a>
           </div>
-          {COLS.map(col => (
-            <div key={col.head} className="flex flex-col gap-4">
-              <p className={`${FG_M} text-xs text-subtle uppercase tracking-[0.6px]`}>{col.head}</p>
-              <div className="flex flex-col gap-3">
-                {col.links.map(l => (
-                  <Link key={l.label} to={l.to} className={`${FG_R} text-sm text-subtle hover:text-white transition-colors`}>
-                    {l.label}
+          <div className="site-footer-columns">
+            {COLS.map((column) => (
+              <nav key={column.head} aria-label={column.head}>
+                <h2>{column.head}</h2>
+                {column.links.map((link) => (
+                  <Link key={link.to} to={link.to}>
+                    {link.label}
                   </Link>
                 ))}
-              </div>
-            </div>
-          ))}
+              </nav>
+            ))}
+          </div>
         </div>
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className={`${FG_R} text-xs text-subtle`}>© {new Date().getFullYear()} Foam. All rights reserved.</p>
-          <p className={`${FG_R} text-xs text-subtle`}>Made for the best managers in the business.</p>
+        <div className="site-footer-wordmark" aria-label="Foam">
+          <span aria-hidden="true">foam</span>
+          <svg
+            className="site-footer-flower"
+            viewBox="0 0 120 120"
+            aria-hidden="true"
+          >
+            <path
+              d="M60 60C-20 60 15-20 60 25C105-20 140 60 60 60C140 60 105 140 60 95C15 140-20 60 60 60Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div className="site-footer-bottom">
+          <p>© {new Date().getFullYear()} Foam</p>
+          <p>For the people behind the talent.</p>
+          <div>
+            <a href={PRIVACY_URL}>Privacy</a>
+            <a href={TERMS_URL}>Website terms</a>
+          </div>
         </div>
       </div>
     </footer>
