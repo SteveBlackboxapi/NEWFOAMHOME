@@ -129,7 +129,7 @@ function MobileKitCard() {
           Share
         </span>
       </div>
-      <div className="bg-[#fff6eb]">
+      <div className="bg-white">
         <div className="px-4 pt-4 pb-5 md:px-8 md:pt-6 md:pb-8">
           <div className="flex justify-end mb-4">
             <span className="border border-[#7a0036]/40 text-[#7a0036] rounded-full px-3.5 py-1 text-[12px]">
@@ -166,7 +166,7 @@ function MobileKitCard() {
                   ),
                 )}
               </div>
-              <div className="inline-flex flex-col rounded-xl bg-[#f6ece4] text-[#7a0036] px-3 py-2">
+              <div className="inline-flex flex-col rounded-xl bg-[#f2ecef] text-[#7a0036] px-3 py-2">
                 <span className="text-[11px] opacity-70 mb-0.5">Verticals</span>
                 <span className="text-[11px] md:text-[15px] leading-4 md:leading-6">
                   {TALENT.verticals}
@@ -188,7 +188,7 @@ function MobileKitCard() {
         </div>
         <div
           ref={platforms.ref}
-          className="relative bg-[#7a0036] text-[#fff6eb] px-4 pt-9 pb-6"
+          className="relative bg-[#202938] text-[#fcf5ea] px-4 pt-9 pb-6"
         >
           <KitEditHandle />
           <p className={`${FG_SB} text-[18px]`}>Platforms</p>
@@ -408,7 +408,7 @@ export function KitStoryMobile() {
     setMotionPreferenceReady(true);
   }, []);
   return (
-    <div className="text-[#101828] bg-[#e7ede0]">
+    <div className="text-[#101828] bg-[#dddddd]">
       <div className="sticky top-0 z-[70] px-4 py-3 bg-black/80 backdrop-blur-sm">
         <Link
           to="/"
@@ -508,7 +508,7 @@ export function KitStoryMobile() {
       {/* 2. Kit */}
       <section
         id="kit-beat"
-        className="mx-auto max-w-[1000px] px-5 py-14 bg-[#e7ede0]"
+        className="mx-auto max-w-[1000px] px-5 py-14 bg-[#dddddd]"
       >
         <MobileFade>
           <p
@@ -524,7 +524,7 @@ export function KitStoryMobile() {
           <p
             className={`${FG_R} text-[15px] leading-6 text-[#6a7282] mb-8 max-w-[36em]`}
           >
-            {TALENT.name}'s media kit in cream and burgundy. Audience,
+            {TALENT.name}'s media kit in white and navy. Audience,
             platforms, and content on one page a brand can open.
           </p>
         </MobileFade>
@@ -532,10 +532,10 @@ export function KitStoryMobile() {
       </section>
 
       {/* 3. Numbers / platforms callout */}
-      <section className="px-5 py-14 bg-[#7a0036] text-[#fff6eb]">
+      <section className="px-5 py-14 bg-[#202938] text-[#fcf5ea]">
         <div ref={platformReveal.ref}>
           <p
-            className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#fff6eb]/60 mb-3`}
+            className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#fcf5ea]/60 mb-3`}
           >
             Platforms
           </p>
@@ -578,7 +578,7 @@ export function KitStoryMobile() {
       </section>
 
       {/* 4. Share / Shared */}
-      <section className="px-5 py-14 bg-[#e7ede0]">
+      <section className="px-5 py-14 bg-[#dddddd]">
         <MobileFade>
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] mb-3`}
@@ -616,9 +616,9 @@ export function KitStoryMobile() {
           >
             <KitShareStatus />
           </p>
-          <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#ead9b8] bg-[#fff6eb] text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
+          <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#e2e4e8] bg-white text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
-              <div className="size-12 rounded-[10px] overflow-hidden bg-[#ead9b8] shrink-0">
+              <div className="size-12 rounded-[10px] overflow-hidden bg-[#f2ecef] shrink-0">
                 <img
                   src={TALENT.portrait}
                   alt={`${TALENT.name} portrait`}
@@ -638,7 +638,7 @@ export function KitStoryMobile() {
             <div className="px-4 pb-3">
               <AIDisclosure className={FG_R} detail="Demo profile" />
             </div>
-            <div className="px-4 py-3 flex items-center justify-between bg-[#7a0036] text-[#fff6eb]">
+            <div className="px-4 py-3 flex items-center justify-between bg-[#202938] text-[#fcf5ea]">
               <span className={`${FG_R} text-[12px] truncate`}>
                 foam.io/m/samantha-pikka
               </span>
