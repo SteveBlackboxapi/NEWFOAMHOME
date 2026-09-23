@@ -28,7 +28,7 @@
   margin-inline: auto;
 }
 .dt-hero {
-  padding: 150px 0 68px;
+  padding: 82px 0 80px;
   text-align: center;
 }
 .dt-hero-symbol {
@@ -90,11 +90,20 @@
 }
 .dt-soft {
   background: #f5f5f7;
-  padding: 44px 0 80px;
+  padding: 0 0 80px;
+}
+.dt-privacy {
+  width: calc(100% - 80px);
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-top: 116px;
 }
 .dt-privacy-panel {
   position: relative;
-  min-height: 500px;
+  display: flex;
+  align-items: center;
+  min-height: 380px;
+  aspect-ratio: 1672 / 941;
   border-radius: 24px;
   overflow: hidden;
   background: #dce4e4;
@@ -116,7 +125,7 @@
   z-index: -1;
 }
 .dt-privacy-copy {
-  padding: 68px 52px;
+  padding: clamp(32px, 5vw, 72px);
   width: 53%;
 }
 .dt-eyebrow {
@@ -530,7 +539,7 @@
     width: calc(100% - 40px);
   }
   .dt-hero {
-    padding: 125px 0 42px;
+    padding: 54px 0 48px;
   }
   .dt-hero-symbol {
     width: 82px;
@@ -558,18 +567,26 @@
     height: 34px;
   }
   .dt-soft {
-    padding: 22px 0 44px;
+    padding: 0 0 44px;
+  }
+  .dt-privacy {
+    width: calc(100% - 40px);
+    padding-top: 94px;
   }
   .dt-privacy-panel {
-    min-height: 690px;
+    flex-direction: column;
+    min-height: 0;
+    aspect-ratio: auto;
   }
   .dt-privacy-panel > img {
-    top: auto;
-    height: 370px;
-    object-position: 80% 50%;
+    position: relative;
+    inset: auto;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    z-index: auto;
   }
   .dt-privacy-panel::after {
-    background: linear-gradient(#e5ecec 0%, #e5ecec 47%, #e5ecec00 62%);
+    display: none;
   }
   .dt-privacy-copy {
     padding: 31px 26px;

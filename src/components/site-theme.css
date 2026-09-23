@@ -16,7 +16,7 @@ html[data-theme="dark"] {
   --theme-ink: #edf0ee;
   --theme-muted: #b1bac2;
   --theme-line: #424b56;
-  --theme-accent: #e7aecb;
+  --theme-accent: #c8e4fa;
   --story-canvas: #20252b;
   background: var(--theme-page);
 }
@@ -243,7 +243,7 @@ html[data-theme="dark"]
   :is(
     .mp-cream,
     .mp-blue,
-    .mp-dark,
+    .mp-dark:where(:not(.ep-belief)),
     .pc-mixed-idea,
     .pc-mist,
     .pc-cream,
@@ -306,7 +306,6 @@ html[data-theme="dark"]
     .mp-body,
     .mp-intro-description,
     .mp-dark .mp-body,
-    .mp-dark .mp-heading em,
     .pc-image-note,
     .pc-section-intro > p,
     .pc-tool-info .pc-eyebrow,
@@ -351,7 +350,6 @@ html[data-theme="dark"]
     .ap-roster-section .mp-eyebrow,
     .ap-decision-section .mp-heading,
     .ap-decision-section .mp-eyebrow,
-    .ep-inside-title h1 em,
     .ep-demo-truth .mp-link,
     .demo-email
   ) {
@@ -361,6 +359,12 @@ html[data-theme="dark"]
   .pc-site
   :is(
     .ap-side-note,
+    .ap-burgundy,
+    .mp-display em,
+    .mp-heading em,
+    .mp-dark .mp-heading em,
+    .ep-inside-title h1 em,
+    .demo-hero h1 em,
     .ap-setup-list li > span,
     .ap-decision-list > div > span,
     .ap-decision-glyph,
@@ -775,6 +779,11 @@ html[data-theme="dark"] .ks-mobile-surround > div > .ks-mobile-sendoff-title {
   }
 }
 
-html[data-theme="dark"] .pc-site .pc-chrome-artwork {
-  background: #f4f5f5;
+/* These halos blend the store artwork into pale surfaces in light mode only. */
+html[data-theme="dark"] .cs-store-mark::before,
+html[data-theme="dark"] .pc-site .pc-chrome-artwork::before {
+  display: none;
+}
+html[data-theme="dark"] .cs-store-mark img {
+  mix-blend-mode: normal;
 }
