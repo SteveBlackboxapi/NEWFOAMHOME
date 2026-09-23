@@ -7,6 +7,7 @@ import {
 } from "../data/stagedTalent";
 import {
   assetsFor,
+  hasAssignedAudience,
   assetKind,
   NETWORK_NAMES,
   SHORT_NAMES,
@@ -284,8 +285,16 @@ export function TalentLabProfile({
               )}
               <div className="tl-summary-stats">
                 <div>
-                  <strong>{formatAudience(talent.totalAudience)}</strong>
-                  <span>Total audience</span>
+                  <strong>
+                    {hasAssignedAudience(talent)
+                      ? formatAudience(talent.totalAudience)
+                      : "—"}
+                  </strong>
+                  <span>
+                    {hasAssignedAudience(talent)
+                      ? "Total audience"
+                      : "Audience not assigned"}
+                  </span>
                 </div>
                 <div>
                   <strong>
@@ -302,6 +311,9 @@ export function TalentLabProfile({
                 Social profiles <span>Demo data</span>
               </h4>
               <div className="tl-platform-list">
+                {!talent.platforms.length && (
+                  <p>No social accounts or audience figures assigned.</p>
+                )}
                 {talent.platforms.map((p) => (
                   <div key={p.network}>
                     <span className="tl-network">{SHORT_NAMES[p.network]}</span>

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { A } from "../lib/assets";
 import { PRIVACY_URL, TERMS_URL } from "../lib/siteLinks";
 import "./site-shell.css";
 
@@ -14,6 +15,7 @@ const COLS = [
   {
     head: "Explore Foam",
     links: [
+      { label: "Home", to: "/" },
       { label: "Features", to: "/features" },
       { label: "The kit story", to: "/kit-story/" },
       { label: "Data & trust", to: "/data-trust" },
@@ -57,18 +59,14 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="site-footer-wordmark" aria-label="Foam">
-          <span aria-hidden="true">foam</span>
-          <svg
-            className="site-footer-flower"
-            viewBox="0 0 120 120"
-            aria-hidden="true"
-          >
-            <path
-              d="M60 60C-20 60 15-20 60 25C105-20 140 60 60 60C140 60 105 140 60 95C15 140-20 60 60 60Z"
-              fill="currentColor"
-            />
-          </svg>
+        <div className="site-footer-wordmark">
+          <img
+            className="site-footer-wordmark-art"
+            src={`${A}/brand/foam-wordmark.svg`}
+            alt="Foam"
+            width={2076}
+            height={654}
+          />
         </div>
         <div className="site-footer-bottom">
           <p>© {new Date().getFullYear()} Foam</p>

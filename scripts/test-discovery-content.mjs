@@ -35,7 +35,8 @@ const { stagedTalent } = loadApplication("src/data/stagedTalent.ts");
 const originalData = JSON.stringify(stagedTalent);
 const { labTalent, discoveryAdditions, discoveryFeedOrder } = loadApplication("src/data/labTalentCatalogue.ts");
 const { discoverySearches } = loadApplication("src/data/discoveryContent.ts");
-const { assetsFor } = loadApplication("src/lib/talentLab.ts");
+const { assetsFor, hasAssignedAudience } = loadApplication("src/lib/talentLab.ts");
+const { creatorWorkTalent, creatorWorkPosts } = loadApplication("src/data/creatorWorkTalent.ts");
 const { matchesDiscoveryQuery, readDiscoveryQuery, discoveryRank } = loadApplication("src/lib/discoverySearch.ts");
 const { talentContentColumns, distributeTalentContent } = loadApplication("src/lib/talentLabLayout.ts");
 const assets = labTalent.flatMap(assetsFor).filter((asset) => asset.tile);
@@ -98,6 +99,29 @@ test("the unfiltered opening feed contains varied new content from different cre
   assert.equal(new Set(first.map((asset) => asset.talent.id)).size, 6);
   for (const subject of ["jax-live-set", "zane-shoe-chat", "cats-sleeping"])
     assert.ok(first.some((asset) => asset.id.endsWith(subject)));
+});
+
+test("Creators images have their own metric-free Lab identities and lead the feed", () => {
+  assert.equal(creatorWorkTalent.length, 2);
+  assert.deepEqual(results("").slice(0, 2).map((asset) => asset.id), creatorWorkPosts.map((post) => post.assetId));
+  for (const [index, talent] of creatorWorkTalent.entries()) {
+    assert.ok(!stagedTalent.some((original) => original.id === talent.id));
+    assert.equal(hasAssignedAudience(talent), false);
+    assert.deepEqual(talent.platforms, []);
+    assert.equal(talent.content.length, 1);
+    const asset = assets.find((candidate) => candidate.id === creatorWorkPosts[index].assetId);
+    assert.equal(asset.talent.id, talent.id);
+    assert.equal(asset.src, creatorWorkPosts[index].src);
+    assert.equal(asset.tile.aspectRatio, "9/16");
+    assert.equal(asset.tile.views, undefined);
+    assert.equal(asset.tile.engagements, undefined);
+    assert.equal(asset.tile.type, "still");
+    assert.equal(asset.tile.video, undefined);
+    assert.ok(existsSync(path.join(root, "public", asset.src)));
+    assert.ok(existsSync(path.join(root, "public", asset.original)));
+  }
+  assert.ok(results("pink workout").some((asset) => asset.talent.id === "tessa-quinn"));
+  assert.ok(results("purple beach").some((asset) => asset.talent.id === "luca-marin"));
 });
 
 test("responsive masonry exposes the leading curated cards across its top row", () => {

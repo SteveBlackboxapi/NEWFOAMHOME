@@ -157,7 +157,7 @@ export function FoamGlyph({
   kind = "flower",
   className = "",
 }: {
-  kind?: "flower" | "quarter" | "spark" | "orbit";
+  kind?: "flower" | "spark" | "orbit";
   className?: string;
 }) {
   return (
@@ -174,8 +174,6 @@ export function FoamGlyph({
           <circle cx="26" cy="74" r="24" />
           <circle cx="74" cy="74" r="24" />
         </g>
-      ) : kind === "quarter" ? (
-        <path d="M2 50H50V2A48 48 0 1 1 2 50Z" fill="currentColor" />
       ) : kind === "spark" ? (
         <path
           d="M50 0 60 31 85 15 69 40 100 50 69 60 85 85 60 69 50 100 40 69 15 85 31 60 0 50 31 40 15 15 40 31Z"

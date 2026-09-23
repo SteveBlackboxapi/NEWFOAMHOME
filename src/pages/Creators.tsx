@@ -12,6 +12,7 @@ import {
   SectionIntro,
 } from "../components/Marketing";
 import { websiteAria, websiteProfile } from "../data/websiteTalent";
+import { creatorWorkPosts } from "../data/creatorWorkTalent";
 import "./audience-pages.css";
 
 const aria = websiteProfile(websiteAria);
@@ -94,14 +95,17 @@ export function Creators() {
           <Reveal className="ap-work-spread">
             <figure>
               <MarketingImage
-                src={websiteAria.content[1].thumb}
-                alt={`${aria.name}: ${websiteAria.content[1].caption}`}
+                src={creatorWorkPosts[0].src}
+                alt={creatorWorkPosts[0].alt}
+                width="941"
+                height="1672"
+                style={{ objectPosition: "center top" }}
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
                 <span>The everyday moments.</span>
-                <AIDisclosure detail="Aria Quen · Fictional creator" />
+                <AIDisclosure detail="Tessa Quinn · Fictional creator" />
               </figcaption>
             </figure>
             <div className="ap-work-note">
@@ -115,14 +119,16 @@ export function Creators() {
             </div>
             <figure>
               <MarketingImage
-                src={websiteAria.content[0].thumb}
-                alt={`${aria.name}: ${websiteAria.content[0].caption}`}
+                src={creatorWorkPosts[1].src}
+                alt={creatorWorkPosts[1].alt}
+                width="941"
+                height="1672"
                 loading="lazy"
                 decoding="async"
               />
               <figcaption>
                 <span>The things you know.</span>
-                <AIDisclosure detail="Aria Quen · Fictional creator" />
+                <AIDisclosure detail="Luca Marin · Fictional creator" />
               </figcaption>
             </figure>
           </Reveal>
@@ -175,7 +181,6 @@ export function Creators() {
             </ol>
           </div>
           <Reveal className="ap-connected-stage">
-            <FoamGlyph kind="quarter" className="ap-connected-shape" />
             <ConnectedProfile />
           </Reveal>
         </div>

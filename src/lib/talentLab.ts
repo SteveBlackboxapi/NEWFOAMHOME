@@ -23,6 +23,9 @@ export type LabAsset = {
   title: string;
   tile?: TalentContentTile;
 };
+/** Empty fictional profiles use zero as a storage sentinel, not a reported audience. */
+export const hasAssignedAudience = (talent: StagedTalent) =>
+  talent.totalAudience > 0 || talent.platforms.length > 0;
 export const NETWORK_NAMES = {
   instagram: "Instagram",
   tiktok: "TikTok",

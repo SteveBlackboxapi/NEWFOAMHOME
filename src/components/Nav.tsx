@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router";
-import { img } from "../lib/assets";
+import { A, img } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
 import "./site-shell.css";
 import "./foam-brand.css";
 
 const LINKS = [
+  { label: "Home", to: "/" },
   { label: "Managers", to: "/managers" },
   { label: "Brands", to: "/brands" },
   { label: "Creators", to: "/creators" },
@@ -91,14 +92,27 @@ export function Nav() {
           aria-label="Foam — Media Kit story"
           className="site-brand site-foam-brand"
         >
-          <img alt="" src={img.foamSymbol} width={36} height={36} />
-          <span>foam</span>
+          <img
+            className="site-foam-symbol"
+            alt=""
+            src={img.foamSymbol}
+            width={36}
+            height={36}
+          />
+          <img
+            className="site-foam-wordmark"
+            alt=""
+            src={`${A}/brand/foam-wordmark.svg`}
+            width={2076}
+            height={654}
+          />
         </Link>
         <nav className="site-desktop-nav" aria-label="Main navigation">
           {LINKS.map(({ label, to }) => (
             <NavLink
               key={to}
               to={to}
+              end={to === "/"}
               className={({ isActive }) => (isActive ? "is-active" : "")}
             >
               {label}
@@ -144,6 +158,7 @@ export function Nav() {
             <NavLink
               key={to}
               to={to}
+              end={to === "/"}
               onClick={onMobileNavigate}
               className={({ isActive }) => (isActive ? "is-active" : "")}
             >

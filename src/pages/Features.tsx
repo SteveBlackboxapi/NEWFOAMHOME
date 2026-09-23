@@ -188,7 +188,7 @@ export function Features() {
                 "Talent notes",
                 "Remember the little things.",
                 "Keep the context that helps you choose the right creator for the next conversation.",
-                "quarter",
+                "flower",
               ],
               [
                 "03",
@@ -201,7 +201,7 @@ export function Features() {
               <Reveal className="mf-detail" key={n}>
                 <div>
                   <span>{n}</span>
-                  <FoamGlyph kind={glyph as "orbit" | "quarter" | "spark"} />
+                  <FoamGlyph kind={glyph as "orbit" | "flower" | "spark"} />
                 </div>
                 <p className="mp-eyebrow">{name}</p>
                 <h3>{title}</h3>
