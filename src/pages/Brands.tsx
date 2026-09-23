@@ -1,3 +1,4 @@
+import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
@@ -39,49 +40,6 @@ const evidence = [
   },
 ];
 
-function BriefBoard() {
-  return (
-    <div className="ap-brief-board">
-      <div className="ap-brief-note">
-        <span className="ap-small-label">Example brief</span>
-        <h3>
-          Beauty that
-          <br />
-          feels everyday.
-        </h3>
-        <div className="ap-brief-tags">
-          <span>Skincare</span>
-          <span>Morning routines</span>
-        </div>
-      </div>
-      <figure className="ap-brief-portrait">
-        <MarketingImage
-          src={websiteNia.portrait}
-          alt={`${websiteNia.displayName} portrait`}
-          fetchPriority="high"
-          decoding="async"
-        />
-        <figcaption>
-          <strong>{websiteNia.displayName}</strong>
-          <span>{websiteNia.verticals.slice(0, 2).join(" · ")}</span>
-          <AIDisclosure detail="Fictional creator" />
-        </figcaption>
-      </figure>
-      <figure className="ap-brief-detail">
-        <MarketingImage
-          src={websiteAria.content[0].thumb}
-          alt={`${websiteAria.displayName} applying makeup`}
-          decoding="async"
-        />
-        <figcaption>
-          <AIDisclosure detail="Aria Quen" />
-        </figcaption>
-      </figure>
-      <FoamGlyph kind="spark" className="ap-brief-spark" />
-    </div>
-  );
-}
-
 export function Brands() {
   return (
     <MarketingPage className="audience-page ap-brands">
@@ -96,7 +54,7 @@ export function Brands() {
         }
         description="Meet the creator. Explore the work. Understand the audience. A Foam link gives your next partnership a clearer starting point."
         tone="blue"
-        visual={<BriefBoard />}
+        visual={<PeopleTiles kind="brands" message="Find your fit." />}
       >
         <ActionLink to="/kit-story">Open the story behind a kit</ActionLink>
         <ActionLink to="/demo" secondary>

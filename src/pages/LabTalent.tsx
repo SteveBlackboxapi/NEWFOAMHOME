@@ -26,6 +26,7 @@ import { AIDisclosure, AssetCard } from "../components/TalentLabMedia";
 import { TalentLabProfile } from "../components/TalentLabProfile";
 import { ChromeWallpaperSettings } from "../components/ChromeWallpaperSettings";
 import "./talent-lab.css";
+import "./lab-marketing.css";
 
 type View = "talent" | "content" | "saved";
 type Filters = {
@@ -284,7 +285,7 @@ export function LabTalent() {
   const count = view === "talent" ? visibleTalent.length : visibleAssets.length;
 
   return (
-    <div className="tl-app tl-shell">
+    <div className="tl-app tl-shell pc-lab">
       <a className="tl-skip" href="#talent-results">
         Skip to results
       </a>

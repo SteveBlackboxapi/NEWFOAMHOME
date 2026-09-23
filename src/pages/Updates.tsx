@@ -133,7 +133,7 @@ export function Updates() {
           </div>
           <div className="ep-inside-title">
             <h1>
-              Inside
+              Inside{" "}
               <br />
               <em>Foam.</em>
             </h1>

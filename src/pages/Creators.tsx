@@ -1,3 +1,4 @@
+import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
@@ -10,50 +11,10 @@ import {
   Reveal,
   SectionIntro,
 } from "../components/Marketing";
-import {
-  websiteAria,
-  websiteProfile,
-  websiteSamantha,
-} from "../data/websiteTalent";
+import { websiteAria, websiteProfile } from "../data/websiteTalent";
 import "./audience-pages.css";
 
 const aria = websiteProfile(websiteAria);
-
-function CreatorPortraits() {
-  return (
-    <div className="ap-creator-portraits">
-      <FoamGlyph kind="flower" className="ap-creator-flower" />
-      <figure className="ap-creator-main">
-        <MarketingImage
-          src={aria.portrait}
-          alt={`${aria.name} portrait`}
-          fetchPriority="high"
-          decoding="async"
-        />
-        <figcaption>
-          <strong>{aria.name}</strong>
-          <AIDisclosure detail="Fictional creator" />
-        </figcaption>
-      </figure>
-      <figure className="ap-creator-side">
-        <MarketingImage
-          src={websiteSamantha.content[0].thumb}
-          alt={`${websiteSamantha.displayName} dancing`}
-          decoding="async"
-        />
-        <figcaption>
-          <strong>{websiteSamantha.displayName}</strong>
-          <AIDisclosure detail="Fictional creator" />
-        </figcaption>
-      </figure>
-      <span className="ap-creator-sticker">
-        Made by you.
-        <br />
-        Backed by context.
-      </span>
-    </div>
-  );
-}
 
 function ConnectedProfile() {
   return (
@@ -108,7 +69,7 @@ export function Creators() {
         }
         description="You bring the ideas, the voice and the point of view. Foam helps your manager bring the context to the next conversation."
         tone="lime"
-        visual={<CreatorPortraits />}
+        visual={<PeopleTiles kind="creators" message="Made by you." />}
       >
         <ActionLink to="/kit-story">See how you're presented</ActionLink>
         <ActionLink to="/features" secondary>

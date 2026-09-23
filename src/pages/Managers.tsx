@@ -1,10 +1,10 @@
+import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { KitPlatformIcon } from "../components/KitDetails";
 import {
   ActionLink,
-  CreatorMosaic,
   FoamGlyph,
   MarketingPage,
   PageIntro,
@@ -93,7 +93,7 @@ export function Managers() {
         }
         description="Give every creator a stronger introduction. Bring the roster, the numbers and the pitch together in Foam."
         tone="cream"
-        visual={<CreatorMosaic variant="roster" />}
+        visual={<PeopleTiles kind="managers" message="Your people." />}
       >
         <ActionLink to="/demo">Let's talk about your roster</ActionLink>
         <ActionLink to="/kit-story" secondary>

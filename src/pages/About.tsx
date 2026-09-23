@@ -1,6 +1,5 @@
-import { MarketingImage } from "../components/MarketingImage";
+import { PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
-import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import {
   ActionLink,
@@ -9,52 +8,8 @@ import {
   PageIntro,
   Reveal,
 } from "../components/Marketing";
-import {
-  websiteAria,
-  websiteNia,
-  websiteSamantha,
-} from "../data/websiteTalent";
-import "./editorial-pages.css";
 
-function PeoplePortrait() {
-  return (
-    <figure className="ep-people">
-      <div className="ep-people-collage">
-        <div className="ep-people-main">
-          <MarketingImage
-            src={websiteSamantha.portrait}
-            alt="Samantha Pikka, a fictional beauty creator"
-            fetchPriority="high"
-            decoding="async"
-          />
-        </div>
-        <div className="ep-people-circle">
-          <MarketingImage
-            src={websiteNia.portrait}
-            alt="Nia Brooks, a fictional skincare creator"
-            decoding="async"
-          />
-        </div>
-        <div className="ep-people-small">
-          <MarketingImage
-            src={websiteAria.portrait}
-            alt="Aria Quen, a fictional beauty creator"
-            decoding="async"
-          />
-        </div>
-        <FoamGlyph kind="flower" className="ep-people-flower" />
-        <span className="ep-people-note" aria-hidden="true">
-          Talent.
-          <br />
-          Meets opportunity.
-        </span>
-      </div>
-      <figcaption>
-        <AIDisclosure detail="Fictional creators" />
-      </figcaption>
-    </figure>
-  );
-}
+import "./editorial-pages.css";
 
 const relationships = [
   {
@@ -98,7 +53,7 @@ export function About() {
           </>
         }
         description="Big ideas need someone in their corner. Foam gives talent managers the tools to turn a creator’s potential into a conversation that matters."
-        visual={<PeoplePortrait />}
+        visual={<PeopleTiles kind="about" message="All kinds. All here." />}
       >
         <ActionLink to="/kit-story" className="ep-button-ink">
           See the story

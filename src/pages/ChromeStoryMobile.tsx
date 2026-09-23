@@ -21,6 +21,7 @@ import "./chrome-story.css";
 export function ChromeStoryMobile({
   embedded = false,
 }: { embedded?: boolean } = {}) {
+  const Heading = embedded ? "h2" : "h1";
   const wallpaper = useChromeWallpaper();
   const reduced = usePrefersReducedMotion();
   const [sent, setSent] = useState(false);
@@ -47,11 +48,11 @@ export function ChromeStoryMobile({
       <section className={`cs-story-intro ${embedded ? "is-embedded" : ""}`}>
         <MobileFade>
           <p className="cs-eyebrow">Foam for Chrome</p>
-          <h2>
+          <Heading>
             A brief lands.
             <br />
             You already have the answer.
-          </h2>
+          </Heading>
           <p>
             Find the right creator, copy their details and paste a complete
             profile into your reply. All without leaving your inbox.

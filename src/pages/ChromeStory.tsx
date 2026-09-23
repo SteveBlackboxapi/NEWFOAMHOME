@@ -1,5 +1,15 @@
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Link } from "react-router";
+import { Nav } from "../components/Nav";
+import { Footer } from "../components/Footer";
+import "../components/people-colour-theme.css";
+import "./chrome-marketing.css";
 import { ChromeDemoWindow } from "../components/ChromeDemoScene";
 import { useMediaQuery, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import {
@@ -244,13 +254,28 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
 }
 
 export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
+  useEffect(() => {
+    if (!embedded) document.title = "Foam for Chrome | Foam";
+  }, [embedded]);
   const desktop = useMediaQuery("(min-width: 1024px) and (min-height: 640px)");
   const reduced = usePrefersReducedMotion();
   if (desktop === null)
     return <div className="min-h-[40vh] bg-white" aria-hidden />;
-  return desktop && !reduced ? (
-    <ChromeStoryDesktop embedded={embedded} />
+  const story =
+    desktop && !reduced ? (
+      <ChromeStoryDesktop embedded={embedded} />
+    ) : (
+      <ChromeStoryMobile embedded={embedded} />
+    );
+  return embedded ? (
+    story
   ) : (
-    <ChromeStoryMobile embedded={embedded} />
+    <div className="pc-site pc-chrome">
+      <Nav />
+      <main id="main-content" tabIndex={-1}>
+        {story}
+      </main>
+      <Footer />
+    </div>
   );
 }

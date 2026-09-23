@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
+import "./components/people-colour-theme.css";
 
 /** Keep history and deep links working across both marketing and story routes. */
 export function NavigationLayout() {
@@ -17,7 +18,7 @@ export function Root() {
   const { pathname } = useLocation();
   useEffect(() => {
     const titles: Record<string, string> = {
-      "/": "Good talent. Great proof.",
+      "/": "A world of talent",
       "/managers": "For talent managers",
       "/brands": "For brands and agencies",
       "/creators": "For creators",
@@ -33,7 +34,7 @@ export function Root() {
     };
   }, [pathname]);
   return (
-    <div className="font-founders font-normal min-h-screen bg-surface">
+    <div className="pc-site min-h-screen bg-surface">
       <Nav />
       <main id="main-content" tabIndex={-1}>
         <Outlet />

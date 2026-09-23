@@ -1,0 +1,67 @@
+/* Only the standalone Chrome marketing route; embedded kit scenes are unchanged. */
+.pc-chrome .cs-back-link,
+.pc-chrome .cs-mobile-back {
+  display: none;
+}
+.pc-site.pc-chrome .cs-story-intro {
+  font-family: var(--font-sf);
+  text-align: center;
+  padding: 165px 28px 75px;
+  max-width: 1120px;
+}
+.pc-site.pc-chrome .cs-story-intro :is(h1, h2) {
+  font-size: clamp(46px, 5.6vw, 80px);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  color: #1c2128;
+}
+.pc-site.pc-chrome .cs-story-intro .cs-eyebrow {
+  font-size: 11px;
+  color: #626a70;
+  margin-bottom: 27px;
+}
+.pc-site.pc-chrome .cs-story-intro p:not(.cs-eyebrow) {
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 28px auto 0;
+  color: #626a70;
+}
+.pc-chrome .cs-stage-reveal {
+  background: #f4f6f5;
+  border-radius: 24px;
+}
+.pc-chrome .cs-finale h2,
+.pc-chrome .cs-mobile-finale h2 {
+  font-family: var(--font-sf);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+}
+.pc-chrome .cs-mobile-step-title {
+  font-family: var(--font-sf);
+}
+.pc-chrome .cs-mobile-step-title h3 {
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.pc-chrome .cs-mobile-step-title > span {
+  background: #e8f87e;
+  color: #1c2128;
+}
+@media (max-width: 760px) {
+  .pc-site.pc-chrome .cs-story-intro {
+    padding: 130px 20px 55px;
+  }
+  .pc-site.pc-chrome .cs-story-intro :is(h1, h2) {
+    font-size: 43px;
+  }
+  .pc-site.pc-chrome .cs-story-intro p:not(.cs-eyebrow) {
+    font-size: 15px;
+  }
+  .pc-chrome .cs-mobile-step-title h3 {
+    font-size: 27px;
+  }
+}

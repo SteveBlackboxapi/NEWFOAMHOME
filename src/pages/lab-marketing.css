@@ -1,0 +1,58 @@
+/* Lab framing follows the white canvas; result controls and media stay functional. */
+.pc-lab {
+  --tl-ink: #1c2128;
+  --tl-bg: #f5f7f6;
+  --tl-line: #e5e9e9;
+  --tl-muted: #69727a;
+}
+.pc-lab .tl-nav {
+  background: #fff;
+  border-color: #e5e9e9;
+}
+.pc-lab .tl-nav-item.active {
+  background: #dfeffc;
+  color: #155eef;
+}
+.pc-lab .tl-header {
+  background: #fff;
+}
+.pc-lab .tl-workbench {
+  border-radius: 24px;
+}
+.pc-lab .tl-intro {
+  color: #626a70;
+}
+.pc-inspo {
+  font-family: var(--font-sf);
+  color: #1c2128;
+}
+.pc-inspo :is(h1, h2, p, a, span) {
+  font-family: inherit;
+}
+.pc-inspo h1 {
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 70px);
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+.pc-inspo main {
+  padding-top: 85px;
+  padding-bottom: 100px;
+}
+.pc-inspo ul > li:nth-child(3n + 1) > a {
+  background: #eaf4fb;
+}
+.pc-inspo ul > li:nth-child(3n + 2) > a {
+  background: #f5f7f6;
+}
+.pc-inspo ul > li:nth-child(3n) > a {
+  background: #f1f6d8;
+}
+.pc-inspo ul > li > a {
+  border: 0;
+  border-radius: 22px;
+  padding: 28px;
+}
+.pc-inspo header {
+  background: #fffffff5;
+}

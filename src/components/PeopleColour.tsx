@@ -1,0 +1,562 @@
+import { Link } from "react-router";
+import { A } from "../lib/assets";
+import "./people-colour.css";
+
+export const PC = `${A}/people-colour`;
+
+/** Artwork and palette from the approved second direction. No shared story styles. */
+export function CreatorWall() {
+  return (
+    <div className="pc-design pc-wall-block">
+      <div className="pc-wall-viewport">
+        <div className="pc-creator-wall">
+          <div className="pc-wall-column pc-col-one">
+            <figure className="pc-creator-tile">
+              <img
+                src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
+                alt="Fictional creator Elise taking a hotel mirror selfie"
+                width="941"
+                height="1672"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Your talent.</figcaption>
+            </figure>
+            <figure className="pc-creator-tile pc-colour-tile pc-pale">
+              <div className="pc-tile-message">
+                <span className="pc-tile-star" aria-hidden="true">
+                  ✳
+                </span>
+                <p>
+                  Different
+                  <br /> by nature.
+                </p>
+              </div>
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-two">
+            <figure className="pc-creator-tile pc-colour-tile pc-lime">
+              <div className="pc-tile-message">
+                <span className="pc-tiny-wordmark">foam</span>
+                <p>
+                  Make
+                  <br /> room.
+                </p>
+                <span>FOR WHAT’S NEXT ↗</span>
+              </div>
+            </figure>
+            <figure className="pc-creator-tile">
+              <img
+                src={`${A}/talent/nia-brooks/nia-brooks-skincare.webp`}
+                alt="Fictional creator Nia sharing her skincare routine"
+                width="941"
+                height="1672"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-three">
+            <figure className="pc-creator-tile">
+              <img
+                src={`${PC}/music-creator.webp`}
+                alt="Musician in a home studio in an illustrative photograph"
+                width="678"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure className="pc-creator-tile">
+              <img
+                src={`${A}/talent/mira-vale-v2/mira-vale-paused-makeup.webp`}
+                alt="Fictional creator Mira caught mid-makeup tutorial"
+                width="1122"
+                height="1402"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>In the making.</figcaption>
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-four">
+            <figure className="pc-creator-tile">
+              <img
+                src={`${PC}/outdoor-creator.webp`}
+                alt="Outdoor creator portrait with blue sky in an illustrative photograph"
+                width="960"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure className="pc-creator-tile pc-colour-tile pc-wine">
+              <div className="pc-tile-message">
+                <span className="pc-tile-loop" aria-hidden="true">
+                  ↗
+                </span>
+                <p>
+                  The next
+                  <br /> good thing.
+                </p>
+              </div>
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-five">
+            <figure className="pc-creator-tile pc-colour-tile pc-blue">
+              <div className="pc-tile-message">
+                <img
+                  src={`${PC}/found-concept.webp`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p>Found it.</p>
+              </div>
+            </figure>
+            <figure className="pc-creator-tile">
+              <img
+                src={`${A}/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp`}
+                alt="Fictional creator Samantha sharing a dance moment"
+                width="941"
+                height="1672"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-six">
+            <figure className="pc-creator-tile">
+              <img
+                src={`${PC}/studio-creator.webp`}
+                alt="Creator at a studio desk in an illustrative photograph"
+                width="1110"
+                height="1664"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Their world.</figcaption>
+            </figure>
+            <figure className="pc-creator-tile pc-colour-tile pc-sage">
+              <div className="pc-tile-message">
+                <span className="pc-tiny-wordmark">foam</span>
+                <p>
+                  All kinds
+                  <br /> of brilliant.
+                </p>
+              </div>
+            </figure>
+          </div>
+          <div className="pc-wall-column pc-col-seven">
+            <figure className="pc-creator-tile">
+              <img
+                src={`${PC}/blue-portrait.webp`}
+                alt="Laughing creative portrait in an illustrative photograph"
+                width="808"
+                height="632"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure className="pc-creator-tile">
+              <img
+                src={`${A}/talent/lena-croft-v2/lena-croft-grwm.webp`}
+                alt="Fictional creator Lena sharing her skincare routine"
+                width="941"
+                height="1672"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </div>
+      </div>
+      <p className="pc-image-note pc-shell">
+        Includes fictional creators made with AI.
+      </p>
+    </div>
+  );
+}
+
+export function PhotoFeature() {
+  return (
+    <section
+      className="pc-design pc-photo-section pc-shell"
+      aria-label="For creators and their champions"
+    >
+      <div className="pc-photo-banner">
+        <img
+          className="pc-banner-image"
+          src={`${PC}/studio-moment.webp`}
+          width="1672"
+          height="940"
+          alt="Illustrative creative collaborators reviewing work together, made with AI"
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="pc-banner-copy">
+          <p className="pc-eyebrow">POWERING CREATORS AND THEIR CHAMPIONS</p>
+          <h2>
+            Good work.
+            <br /> Deserves
+            <br /> to be seen.
+          </h2>
+          <p>
+            For the people making it.
+            <br /> And the people making it happen.
+          </p>
+          <Link className="pc-pill pc-white" to="/about">
+            This is Foam <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
+        <span className="pc-banner-brand" aria-hidden="true">
+          foam
+        </span>
+        <small className="pc-banner-credit">
+          Illustrative scene · Made with AI
+        </small>
+      </div>
+    </section>
+  );
+}
+
+export function WorkspaceGrid() {
+  return (
+    <section
+      className="pc-design pc-mixed-idea"
+      aria-labelledby="workspace-heading"
+    >
+      <div className="pc-shell">
+        <div className="pc-section-intro">
+          <h2 id="workspace-heading">
+            A little of everything.
+            <br />
+            All working together.
+          </h2>
+          <p>
+            A connected place to find the right content, bring your talent’s
+            story to life and get the next conversation started.
+          </p>
+        </div>
+        <div className="pc-mixed-grid">
+          <div className="pc-mixed-column">
+            <Link className="pc-people-card" to="/managers">
+              <div className="pc-card-copy">
+                <span className="pc-eyebrow">THE PEOPLE</span>
+                <h3>
+                  Built around
+                  <br /> your kind of team.
+                </h3>
+              </div>
+              <img
+                src={`${PC}/collaborators.webp`}
+                alt="Collaborators using laptops, in an illustrative photograph"
+                width="736"
+                height="552"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="pc-people-card-bottom">
+                <p>
+                  Great talent.
+                  <br /> Good company.
+                </p>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </Link>
+            <div className="pc-small-colour-note">
+              <span className="pc-small-orbit" aria-hidden="true">
+                ✳
+              </span>
+              <p>
+                Big ideas.
+                <br /> Small teams. <b>Foam.</b>
+              </p>
+            </div>
+          </div>
+          <div className="pc-mixed-column">
+            <article className="pc-kit-card">
+              <div>
+                <span className="pc-eyebrow">THE STORY</span>
+                <h3>
+                  Their best work.
+                  <br /> One beautiful link.
+                </h3>
+                <Link to="/kit-story/">
+                  Explore Media Kit <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+              <img
+                src={`${A}/foam-media-kit.webp`}
+                width="300"
+                height="300"
+                alt="Foam Media Kit icon"
+                loading="lazy"
+                decoding="async"
+              />
+            </article>
+            <article className="pc-search-card">
+              <span className="pc-eyebrow">THE DISCOVERY</span>
+              <h3>
+                Find your
+                <br /> “that’s the one”.
+              </h3>
+              <div className="pc-mini-search">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="10.5" cy="10.5" r="6.5"></circle>
+                  <path d="m15.5 15.5 5 5"></path>
+                </svg>
+                Everyday outfit inspiration
+              </div>
+              <div className="pc-search-pictures">
+                <img
+                  src={`${A}/talent/lena-croft-v2/lena-croft-outfit.webp`}
+                  alt="Fictional creator’s casual outfit"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
+                  alt="Fictional creator’s hotel mirror outfit"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={`${A}/talent/nova-reed-v2/nova-reed-walk.webp`}
+                  alt="Fictional creator’s walking outfit"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <Link to="/lab/talent/?view=content">
+                Found with Foam <span aria-hidden="true">↗</span>
+              </Link>
+            </article>
+            <div className="pc-quiet-card">
+              <span className="pc-status-dot" aria-hidden="true"></span>
+              <p>
+                The work. The context.
+                <br /> <b>Finally, together.</b>
+              </p>
+              <span aria-hidden="true">↗</span>
+            </div>
+          </div>
+          <div className="pc-mixed-column">
+            <article className="pc-mobile-card">
+              <div className="pc-card-copy">
+                <span className="pc-eyebrow">THE INTRODUCTION</span>
+                <h3>
+                  A good impression.
+                  <br /> On every screen.
+                </h3>
+              </div>
+              <div className="pc-phone">
+                <div className="pc-phone-speaker" aria-hidden="true"></div>
+                <div className="pc-phone-top">
+                  <span>9:41</span>
+                  <span>● ▰</span>
+                </div>
+                <div className="pc-phone-content">
+                  <div className="pc-phone-logo">
+                    foam <span>MEDIA KIT</span>
+                  </div>
+                  <img
+                    src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
+                    alt="Elise’s fictional travel and fashion media kit"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="pc-phone-bio">
+                    <span>TRAVEL · LIFESTYLE</span>
+                    <h4>Elise Morgan</h4>
+                    <p>
+                      A fresh perspective.
+                      <br /> Wherever the day takes her.
+                    </p>
+                  </div>
+                  <div className="pc-phone-foot">
+                    <span>Selected work</span>
+                    <span>↗</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article className="pc-chrome-card">
+              <img
+                src={`${A}/chrome-store.webp`}
+                alt="Chrome Web Store"
+                loading="lazy"
+                decoding="async"
+              />
+              <div>
+                <span className="pc-eyebrow">FOAM FOR CHROME</span>
+                <h3>
+                  Right where
+                  <br /> you work.
+                </h3>
+              </div>
+              <Link
+                to="https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf"
+                aria-label="Foam in the Chrome Web Store"
+              >
+                ↗
+              </Link>
+            </article>
+          </div>
+        </div>
+        <p className="pc-image-note">
+          Illustrative product layouts and photography. Fictional creators made
+          with AI.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export function ProductFamily({ heading = true }: { heading?: boolean }) {
+  return (
+    <section
+      className="pc-design pc-product-family pc-shell"
+      aria-label="Explore Foam products"
+    >
+      {heading && (
+        <div className="pc-calm-title">
+          <p className="pc-eyebrow">SMALL TOOLS. BIG POSSIBILITIES.</p>
+          <h2>
+            More time for
+            <br />
+            the good part.
+          </h2>
+          <p>A few helpful things. Made for the way you work.</p>
+        </div>
+      )}
+      <div className="pc-tool-row">
+        <Link className="pc-tool-card" to="/kit-story/">
+          <div className="pc-tool-image pc-cream">
+            <img
+              src={`${A}/foam-media-kit.webp`}
+              alt="Foam Media Kit icon"
+              width="300"
+              height="300"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="pc-tool-info">
+            <div>
+              <span className="pc-eyebrow">MAKE THE INTRODUCTION</span>
+              <h3>Media Kit</h3>
+              <p>The whole story. One link.</p>
+            </div>
+            <span className="pc-round-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+        </Link>
+        <Link className="pc-tool-card" to="/lab/talent/?view=content">
+          <div className="pc-tool-image pc-ice">
+            <img
+              src={`${PC}/found-concept.webp`}
+              alt="Exploratory Found with Foam discovery icon"
+              width="300"
+              height="300"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="pc-tool-info">
+            <div>
+              <span className="pc-eyebrow">FIND THE MOMENT</span>
+              <h3>Found with Foam</h3>
+              <p>The right content. In context.</p>
+            </div>
+            <span className="pc-round-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+        </Link>
+        <Link className="pc-tool-card" to="/chrome-story/">
+          <div className="pc-tool-image pc-mist">
+            <img
+              className="pc-chrome-tool"
+              src={`${A}/chrome-store.webp`}
+              alt="Chrome Web Store logo"
+              width="300"
+              height="300"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="pc-tool-info">
+            <div>
+              <span className="pc-eyebrow">KEEP THINGS MOVING</span>
+              <h3>Foam for Chrome</h3>
+              <p>Your talent. Close at hand.</p>
+            </div>
+            <span className="pc-round-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+const portraits = {
+  managers: [
+    "elise-morgan/elise-morgan-hotel-selfie.webp",
+    "mira-vale-v2/mira-vale-paused-makeup.webp",
+    "nova-reed-v2/nova-reed-walk.webp",
+  ],
+  brands: [
+    "nia-brooks/nia-brooks-skincare.webp",
+    "lena-croft-v2/lena-croft-grwm.webp",
+    "aria-quen-v2/aria-quen-v2-c1.webp",
+  ],
+  creators: [
+    "nova-reed-v2/nova-reed-walk.webp",
+    "elise-morgan/elise-morgan-hotel-selfie.webp",
+    "mira-vale-v2/mira-vale-paused-makeup.webp",
+  ],
+  about: [
+    "lena-croft-v2/lena-croft-outfit.webp",
+    "samantha-pikka-v3/samantha-pikka-dance-solo.webp",
+    "nia-brooks/nia-brooks-skincare.webp",
+  ],
+};
+export function PeopleTiles({
+  kind = "managers",
+  message = "All kinds of brilliant.",
+}: {
+  kind?: keyof typeof portraits;
+  message?: string;
+}) {
+  return (
+    <div className="pc-design pc-people-tiles">
+      <div className="pc-people-tiles-grid">
+        <img
+          src={`${A}/talent/${portraits[kind][0]}`}
+          alt="Fictional creator made with AI"
+          decoding="async"
+        />
+        <div className="pc-person-colour">
+          <span className="pc-tiny-wordmark">foam</span>
+          <p>{message}</p>
+          <span aria-hidden="true">↗</span>
+        </div>
+        <img
+          src={`${A}/talent/${portraits[kind][1]}`}
+          alt="Fictional creator filming a routine, made with AI"
+          decoding="async"
+        />
+        <img
+          src={`${A}/talent/${portraits[kind][2]}`}
+          alt="Fictional creator sharing their work, made with AI"
+          decoding="async"
+        />
+      </div>
+      <p className="pc-image-note">Fictional creators · Made with AI</p>
+    </div>
+  );
+}
