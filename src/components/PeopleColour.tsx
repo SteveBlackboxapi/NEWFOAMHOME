@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { DiscoveryArtwork, DiscoverySearch } from "./DiscoverySearch";
 import { A } from "../lib/assets";
 import "./people-colour.css";
 
@@ -105,12 +106,7 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-five">
             <figure className="pc-creator-tile pc-colour-tile pc-blue">
               <div className="pc-tile-message">
-                <img
-                  src={`${PC}/found-concept.webp`}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
+                <DiscoveryArtwork />
                 <p>Found it.</p>
               </div>
             </figure>
@@ -295,43 +291,7 @@ export function WorkspaceGrid() {
                 decoding="async"
               />
             </article>
-            <article className="pc-search-card">
-              <span className="pc-eyebrow">THE DISCOVERY</span>
-              <h3>
-                Find your
-                <br /> “that’s the one”.
-              </h3>
-              <div className="pc-mini-search">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="10.5" cy="10.5" r="6.5"></circle>
-                  <path d="m15.5 15.5 5 5"></path>
-                </svg>
-                Everyday outfit inspiration
-              </div>
-              <div className="pc-search-pictures">
-                <img
-                  src={`${A}/talent/lena-croft-v2/lena-croft-outfit.webp`}
-                  alt="Fictional creator’s casual outfit"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
-                  alt="Fictional creator’s hotel mirror outfit"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src={`${A}/talent/nova-reed-v2/nova-reed-walk.webp`}
-                  alt="Fictional creator’s walking outfit"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <Link to="/lab/talent/?view=content">
-                Found with Foam <span aria-hidden="true">↗</span>
-              </Link>
-            </article>
+            <DiscoverySearch />
             <div className="pc-quiet-card">
               <span className="pc-status-dot" aria-hidden="true"></span>
               <p>
@@ -455,14 +415,7 @@ export function ProductFamily({ heading = true }: { heading?: boolean }) {
         </Link>
         <Link className="pc-tool-card" to="/lab/talent/?view=content">
           <div className="pc-tool-image pc-ice">
-            <img
-              src={`${PC}/found-concept.webp`}
-              alt="Exploratory Found with Foam discovery icon"
-              width="300"
-              height="300"
-              loading="lazy"
-              decoding="async"
-            />
+            <DiscoveryArtwork />
           </div>
           <div className="pc-tool-info">
             <div>

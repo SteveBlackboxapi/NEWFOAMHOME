@@ -132,19 +132,19 @@ function MobileKitCard() {
       <div className="bg-white">
         <div className="px-4 pt-4 pb-5 md:px-8 md:pt-6 md:pb-8">
           <div className="flex justify-end mb-4">
-            <span className="border border-[#7a0036]/40 text-[#7a0036] rounded-full px-3.5 py-1 text-[12px]">
+            <span className="border border-[#000]/40 text-[#000] rounded-full px-3.5 py-1 text-[12px]">
               Contact
             </span>
           </div>
           <div className="flex gap-3 items-start">
             <div className="flex-1 min-w-0">
               <p
-                className={`${FG_SB} text-[#7a0036] text-[clamp(22px,6vw,30px)] md:text-[44px] leading-[0.98] tracking-[-0.7px] mb-3`}
+                className={`${FG_SB} text-[#000] text-[clamp(22px,6vw,30px)] md:text-[44px] leading-[0.98] tracking-[-0.7px] mb-3`}
               >
                 {TALENT.name}
               </p>
               <p
-                className={`${FG_R} text-[11px] md:text-[15px] leading-4 md:leading-6 text-[#101828] mb-3`}
+                className={`${FG_R} text-[11px] md:text-[15px] leading-4 md:leading-6 text-[#000] mb-3`}
               >
                 {TALENT.loc}
                 <br />
@@ -155,7 +155,7 @@ function MobileKitCard() {
                   (network) => (
                     <span
                       key={network}
-                      className="size-7 rounded-full border border-[#7a0036]/40 text-[#7a0036] text-[9px] font-semibold inline-flex items-center justify-center"
+                      className="size-7 rounded-full border border-[#000]/40 text-[#000] text-[9px] font-semibold inline-flex items-center justify-center"
                     >
                       <KitPlatformIcon
                         network={network}
@@ -166,7 +166,7 @@ function MobileKitCard() {
                   ),
                 )}
               </div>
-              <div className="inline-flex flex-col rounded-xl bg-[#f2ecef] text-[#7a0036] px-3 py-2">
+              <div className="inline-flex flex-col rounded-xl bg-[#eeefe8] text-[#000] px-3 py-2">
                 <span className="text-[11px] opacity-70 mb-0.5">Verticals</span>
                 <span className="text-[11px] md:text-[15px] leading-4 md:leading-6">
                   {TALENT.verticals}
@@ -188,7 +188,7 @@ function MobileKitCard() {
         </div>
         <div
           ref={platforms.ref}
-          className="relative bg-[#202938] text-[#fcf5ea] px-4 pt-9 pb-6"
+          className="relative bg-[#000] text-[#dfedfc] px-4 pt-9 pb-6"
         >
           <KitEditHandle />
           <p className={`${FG_SB} text-[18px]`}>Platforms</p>
@@ -524,7 +524,7 @@ export function KitStoryMobile() {
           <p
             className={`${FG_R} text-[15px] leading-6 text-[#6a7282] mb-8 max-w-[36em]`}
           >
-            {TALENT.name}'s media kit in white and navy. Audience,
+            {TALENT.name}'s media kit in white, black and pale blue. Audience,
             platforms, and content on one page a brand can open.
           </p>
         </MobileFade>
@@ -532,10 +532,10 @@ export function KitStoryMobile() {
       </section>
 
       {/* 3. Numbers / platforms callout */}
-      <section className="px-5 py-14 bg-[#202938] text-[#fcf5ea]">
+      <section className="px-5 py-14 bg-[#000] text-[#dfedfc]">
         <div ref={platformReveal.ref}>
           <p
-            className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#fcf5ea]/60 mb-3`}
+            className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#dfedfc]/60 mb-3`}
           >
             Platforms
           </p>
@@ -618,7 +618,7 @@ export function KitStoryMobile() {
           </p>
           <div className="mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#e2e4e8] bg-white text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
-              <div className="size-12 rounded-[10px] overflow-hidden bg-[#f2ecef] shrink-0">
+              <div className="size-12 rounded-[10px] overflow-hidden bg-[#eeefe8] shrink-0">
                 <img
                   src={TALENT.portrait}
                   alt={`${TALENT.name} portrait`}
@@ -627,7 +627,7 @@ export function KitStoryMobile() {
                 />
               </div>
               <div className="min-w-0">
-                <p className={`${FG_SB} text-[16px] text-[#7a0036]`}>
+                <p className={`${FG_SB} text-[16px] text-[#000]`}>
                   {TALENT.name}
                 </p>
                 <p className={`${FG_R} text-[12px] text-[#6a7282]`}>
@@ -638,7 +638,7 @@ export function KitStoryMobile() {
             <div className="px-4 pb-3">
               <AIDisclosure className={FG_R} detail="Demo profile" />
             </div>
-            <div className="px-4 py-3 flex items-center justify-between bg-[#202938] text-[#fcf5ea]">
+            <div className="px-4 py-3 flex items-center justify-between bg-[#000] text-[#dfedfc]">
               <span className={`${FG_R} text-[12px] truncate`}>
                 foam.io/m/samantha-pikka
               </span>

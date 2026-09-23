@@ -1,4 +1,4 @@
-import { PeopleTiles } from "../components/PeopleColour";
+import { PC, PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
 import {
@@ -127,13 +127,43 @@ export function About() {
           </div>
         </div>
       </section>
-      <section className="mp-section mp-blue ep-about-invitation">
+      <section
+        id="next-conversation"
+        className="mp-section mp-blue ep-about-invitation"
+      >
         <div className="mp-container">
           <Reveal className="ep-invitation-layout">
-            <div className="ep-invitation-art" aria-hidden="true">
-              <FoamGlyph kind="quarter" />
-              <FoamGlyph kind="orbit" />
-            </div>
+            <figure className="ep-invitation-people">
+              <div className="ep-invitation-mosaic">
+                <img
+                  className="ep-invitation-portrait"
+                  src={`${PC}/studio-creator.webp`}
+                  alt="A creative at work in a colourful studio"
+                  width="1110"
+                  height="1664"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="ep-invitation-colour">
+                  <span>foam</span>
+                  <p>
+                    Made
+                    <br />
+                    possible.
+                  </p>
+                </div>
+                <img
+                  className="ep-invitation-moment"
+                  src={`${PC}/blue-portrait.webp`}
+                  alt="A laughing person against a bright blue backdrop"
+                  width="808"
+                  height="632"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>Illustrative photography</figcaption>
+            </figure>
             <div>
               <p className="mp-eyebrow">From belief to the everyday</p>
               <h2 className="mp-heading">
