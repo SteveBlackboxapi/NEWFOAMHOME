@@ -70,8 +70,8 @@ export function CreatorWall() {
             </figure>
             <figure className="pc-creator-tile">
               <img
-                src={`${A}/talent/mira-vale-v2/mira-vale-paused-makeup.webp`}
-                alt="Fictional creator Mira caught mid-makeup tutorial"
+                src={`${A}/talent/discovery-v1/jax-live-set.webp`}
+                alt="Fictional creator Jax playing a live synth set, made with AI"
                 width="1122"
                 height="1402"
                 loading="lazy"
@@ -413,7 +413,7 @@ export function ProductFamily({ heading = true }: { heading?: boolean }) {
             </span>
           </div>
         </Link>
-        <Link className="pc-tool-card" to="/lab/talent/?view=content">
+        <Link className="pc-tool-card" to="/kit-story/#found-with-foam">
           <div className="pc-tool-image pc-ice">
             <DiscoveryArtwork />
           </div>
@@ -459,7 +459,7 @@ export function ProductFamily({ heading = true }: { heading?: boolean }) {
 const portraits = {
   managers: [
     "elise-morgan/elise-morgan-hotel-selfie.webp",
-    "mira-vale-v2/mira-vale-paused-makeup.webp",
+    "discovery-v1/jax-live-set.webp",
     "nova-reed-v2/nova-reed-walk.webp",
   ],
   brands: [
@@ -470,7 +470,7 @@ const portraits = {
   creators: [
     "nova-reed-v2/nova-reed-walk.webp",
     "elise-morgan/elise-morgan-hotel-selfie.webp",
-    "mira-vale-v2/mira-vale-paused-makeup.webp",
+    "lena-croft-v2/lena-croft-outfit.webp",
   ],
   about: [
     "lena-croft-v2/lena-croft-outfit.webp",
@@ -500,7 +500,11 @@ export function PeopleTiles({
         </div>
         <img
           src={`${A}/talent/${portraits[kind][1]}`}
-          alt="Fictional creator filming a routine, made with AI"
+          alt={
+            kind === "managers"
+              ? "Fictional creator Jax playing a live synth set, made with AI"
+              : "Fictional creator filming a routine, made with AI"
+          }
           decoding="async"
         />
         <img

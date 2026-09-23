@@ -42,7 +42,7 @@ const { talentContentColumns, distributeTalentContent } = loadApplication("src/l
 const assets = labTalent.flatMap(assetsFor).filter((asset) => asset.tile);
 const results = (query) => assets.filter((asset) => matchesDiscoveryQuery(asset, query)).sort((a,b) => discoveryRank(a, query) - discoveryRank(b, query));
 
-test("every homepage deep link opens the same three Lab images", () => {
+test("internal Lab queries return the same three curated discovery images", () => {
   assert.deepEqual(discoverySearches.map((item) => item.id), ["outfits", "skincare", "nike", "cats"]);
   for (const example of discoverySearches) {
     const url = new URL(`https://example.test/lab/talent/?view=content&q=${encodeURIComponent(example.query)}`);

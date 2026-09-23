@@ -297,6 +297,7 @@ export function LabTalent() {
 
   return (
     <div className="tl-app tl-shell pc-lab">
+      <meta name="robots" content="noindex, nofollow" />
       <a className="tl-skip" href="#talent-results">
         Skip to results
       </a>

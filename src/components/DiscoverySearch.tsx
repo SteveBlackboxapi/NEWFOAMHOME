@@ -172,9 +172,7 @@ export function DiscoverySearch() {
           </button>
         )}
       </div>
-      <Link
-        to={`/lab/talent/?view=content&q=${encodeURIComponent(current.query)}`}
-      >
+      <Link to="/kit-story/#found-with-foam">
         Found with Foam <span aria-hidden="true">↗</span>
       </Link>
     </article>
