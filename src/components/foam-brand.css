@@ -1,0 +1,40 @@
+/* Match the Foam app lockup: original F, a square badge and an open,
+   medium-weight wordmark. See docs/design/foam-navigation-logo.md. */
+.site-header .site-brand.site-foam-brand {
+  gap: 12px;
+  color: #101828;
+}
+
+.site-header .site-brand.site-foam-brand > img {
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #1e2939;
+  object-fit: contain;
+}
+
+.site-header .site-brand.site-foam-brand > span {
+  font-family: "SF Pro Text", system-ui, -apple-system, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  font-synthesis: none;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+@media (max-width: 600px) {
+  .site-header .site-brand.site-foam-brand {
+    gap: 10px;
+  }
+
+  .site-header .site-brand.site-foam-brand > img {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .site-header .site-brand.site-foam-brand > span {
+    font-size: 27px;
+  }
+}

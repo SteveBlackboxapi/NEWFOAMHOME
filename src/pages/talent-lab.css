@@ -1,5 +1,34 @@
 @import "../caption-fonts.css";
 
+.tl-discovery-queries {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 28px 18px;
+  font-size: 13px;
+}
+.tl-discovery-queries > span { color: #6e7684; margin-right: 4px; }
+.tl-discovery-queries button {
+  border: 1px solid #dce0e6;
+  border-radius: 24px;
+  padding: 8px 12px;
+  background: #fff;
+  color: #1d2939;
+  font: inherit;
+  cursor: pointer;
+}
+.tl-discovery-queries button:hover { background: #f2f5fb; }
+.tl-discovery-queries button[aria-pressed="true"] {
+  border-color: #2465ff;
+  background: #f0f5ff;
+  color: #1557e8;
+}
+.tl-discovery-queries button:focus-visible { outline: 2px solid #2465ff; outline-offset: 3px; }
+@media (max-width: 640px) {
+  .tl-discovery-queries { margin: 0 16px 14px; gap: 6px; }
+  .tl-discovery-queries > span { width: 100%; }
+}
 .tl-app {
   --tl-ink: #202b3b;
   --tl-muted: #77818f;
@@ -790,13 +819,17 @@
   fill: #155eef15;
 }
 .tl-content-grid {
-  columns: 3;
-  column-gap: 17px;
+  display: grid;
+  grid-template-columns: repeat(var(--tl-content-columns, 3), minmax(0, 1fr));
+  align-items: start;
+  gap: 17px;
   padding: 0 22px 22px;
 }
 .tl-content-grid.compact {
-  columns: 4;
-  column-gap: 13px;
+  gap: 13px;
+}
+.tl-content-column {
+  min-width: 0;
 }
 .tl-content-card {
   position: relative;
@@ -2049,22 +2082,10 @@
   .tl-talent-grid.compact {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
-  .tl-content-grid {
-    columns: 4;
-  }
-  .tl-content-grid.compact {
-    columns: 5;
-  }
 }
 @media (min-width: 1900px) {
   .tl-talent-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-  .tl-content-grid {
-    columns: 5;
-  }
-  .tl-content-grid.compact {
-    columns: 6;
   }
 }
 @media (max-width: 1100px) {
@@ -2108,11 +2129,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .tl-content-grid {
-    columns: 2;
     padding: 0 17px 17px;
-  }
-  .tl-content-grid.compact {
-    columns: 3;
   }
   .tl-talent-grid.compact .tl-talent-tags {
     display: none;
@@ -2492,8 +2509,7 @@
   }
   .tl-content-grid,
   .tl-content-grid.compact {
-    columns: 2;
-    column-gap: 10px;
+    gap: 10px;
     padding: 0 11px 15px;
   }
   .tl-content-card {

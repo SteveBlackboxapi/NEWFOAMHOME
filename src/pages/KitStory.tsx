@@ -817,7 +817,7 @@ function KitStoryDesktop() {
                     aria-label="Samantha Pikka example media kit"
                   >
                     <div className="ks-contact-row">
-                      <span className="rounded-full border border-[#7a0036]/50 text-[#7a0036] px-5 py-2 text-[13px]">
+                      <span className="rounded-full border border-[#000]/50 text-[#000] px-5 py-2 text-[13px]">
                         Contact
                       </span>
                     </div>

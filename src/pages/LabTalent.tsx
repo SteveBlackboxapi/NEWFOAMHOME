@@ -1,11 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Link, useSearchParams } from "react-router";
 import {
-  stagedTalent,
   formatAudience,
   type TalentNetwork,
   type TileCaptionSettings,
 } from "../data/stagedTalent";
+import { labTalent as stagedTalent } from "../data/labTalentCatalogue";
+import { discoverySearches } from "../data/discoveryContent";
+import { discoveryRank, matchesDiscoveryQuery, readDiscoveryQuery } from "../lib/discoverySearch";
+import { distributeTalentContent, talentContentColumns } from "../lib/talentLabLayout";
 import { img } from "../lib/assets";
 import {
   assetsFor,
@@ -65,11 +68,20 @@ export function LabTalent() {
       ? (params.get("view") as View)
       : "talent";
   const selected = stagedTalent.find((t) => t.id === params.get("talent"));
-  const [query, setQuery] = useState("");
+  const query = readDiscoveryQuery(params);
+  const setQuery = (next: string) =>
+    setParams((prev) => {
+      const updated = new URLSearchParams(prev);
+      if (next) updated.set("q", next);
+      else updated.delete("q");
+      return updated;
+    }, { replace: true });
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [draft, setDraft] = useState<Filters>(EMPTY);
   const [filterOpen, setFilterOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
+  const contentColumnCount = talentContentColumns(viewportWidth, compact);
   const [sort, setSort] = useState("curated");
   const [saved, setSaved] = useState(() =>
     readSaved().filter((id) => allAssets.some((a) => a.id === id)),
@@ -92,6 +104,11 @@ export function LabTalent() {
   useEffect(() => {
     document.title = `${title} · Foam Lab`;
   }, [title]);
+  useEffect(() => {
+    const updateWidth = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [view]);
@@ -133,11 +150,11 @@ export function LabTalent() {
       p.set("view", next);
       p.delete("talent");
       p.delete("asset");
+      p.delete("q");
       return p;
     });
     setFilters(EMPTY);
     setDraft(EMPTY);
-    setQuery("");
     setSort("curated");
     setFilterOpen(false);
   };
@@ -251,18 +268,7 @@ export function LabTalent() {
           (!!a.tile && filters.platforms.includes(a.tile.platform))) &&
         (!filters.kind || assetKind(a) === filters.kind) &&
         (!filters.views || (a.tile?.views ?? 0) >= Number(filters.views)) &&
-        (!search ||
-          [
-            a.title,
-            captions[a.id]?.text,
-            a.talent.displayName,
-            a.talent.location,
-            ...a.talent.verticals,
-            ...a.talent.platforms.map((p) => p.handle),
-          ]
-            .join(" ")
-            .toLowerCase()
-            .includes(search)),
+        matchesDiscoveryQuery(a, query, captions[a.id]?.text),
     )
     .sort((a, b) =>
       sort === "name"
@@ -271,7 +277,8 @@ export function LabTalent() {
           ? (b.tile?.views ?? 0) - (a.tile?.views ?? 0)
           : sort === "audience"
             ? b.talent.totalAudience - a.talent.totalAudience
-            : a.index - b.index ||
+            : discoveryRank(a, query) - discoveryRank(b, query) ||
+              a.index - b.index ||
               stagedTalent.indexOf(a.talent) - stagedTalent.indexOf(b.talent),
     );
   const visibleProfiles =
@@ -292,9 +299,9 @@ export function LabTalent() {
       <nav className="tl-nav" aria-label="Lab navigation">
         <Link
           className="tl-brand"
-          to="/"
-          title="Foam website"
-          aria-label="Foam website"
+          to="/kit-story/"
+          title="Foam — Media Kit story"
+          aria-label="Foam — Media Kit story"
         >
           <img src={img.foamSymbol} alt="" />
         </Link>
@@ -383,6 +390,21 @@ export function LabTalent() {
             )}
           </span>
         </div>
+        {view === "content" && (
+          <nav className="tl-discovery-queries" aria-label="Suggested content searches">
+            <span>Try a search</span>
+            {discoverySearches.map((example) => (
+              <button
+                key={example.id}
+                type="button"
+                aria-pressed={query === example.query}
+                onClick={() => { setQuery(example.query); setSort("curated"); }}
+              >
+                {example.query}
+              </button>
+            ))}
+          </nav>
+        )}
         <section
           className={`tl-workbench ${filterOpen ? "tl-filters-open" : ""}`}
           aria-label="Talent workspace"
@@ -823,17 +845,24 @@ export function LabTalent() {
                 ))}
               </div>
             ) : (
-              <div className={`tl-content-grid ${compact ? "compact" : ""}`}>
-                {visibleAssets.map((asset, i) => (
-                  <AssetCard
-                    key={asset.id}
-                    asset={asset}
-                    caption={captions[asset.id]}
-                    saved={saved.includes(asset.id)}
-                    onSave={() => toggleSaved(asset.id)}
-                    onOpen={() => openProfile(asset.talent.id, asset.id)}
-                    position={i}
-                  />
+              <div
+                className={`tl-content-grid ${compact ? "compact" : ""}`}
+                style={{ "--tl-content-columns": contentColumnCount } as CSSProperties}
+              >
+                {distributeTalentContent(visibleAssets, contentColumnCount).map((column, columnIndex) => (
+                  <div className="tl-content-column" key={columnIndex}>
+                    {column.map(({ item: asset, position }) => (
+                      <AssetCard
+                        key={asset.id}
+                        asset={asset}
+                        caption={captions[asset.id]}
+                        saved={saved.includes(asset.id)}
+                        onSave={() => toggleSaved(asset.id)}
+                        onOpen={() => openProfile(asset.talent.id, asset.id)}
+                        position={position}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
             )}

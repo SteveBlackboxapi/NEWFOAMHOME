@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from "react-router";
 import { img } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
 import "./site-shell.css";
+import "./foam-brand.css";
 
 const LINKS = [
   { label: "Managers", to: "/managers" },
@@ -85,7 +86,11 @@ export function Nav() {
         Skip to content
       </a>
       <div className="site-nav-bar">
-        <Link to="/" aria-label="Foam home" className="site-brand">
+        <Link
+          to="/kit-story/"
+          aria-label="Foam — Media Kit story"
+          className="site-brand site-foam-brand"
+        >
           <img alt="" src={img.foamSymbol} width={36} height={36} />
           <span>foam</span>
         </Link>

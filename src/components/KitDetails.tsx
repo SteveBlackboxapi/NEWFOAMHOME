@@ -8,7 +8,7 @@ const platformAssets: Partial<Record<TalentNetwork, string>> = {
   youtube: `${A}/572b1.svg`,
 };
 
-/** Product icons inherit the cream/burgundy colour of the surrounding kit. */
+/** Product icons inherit the colour of the surrounding kit. */
 export function KitPlatformIcon({
   network,
   label,
@@ -56,11 +56,11 @@ export function KitPlatformIcon({
 export function KitVerifiedBadge() {
   return (
     <svg className="kit-verified-badge" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 3h16v8c0 5.1-8 10-8 10S4 16.1 4 11V3Z" fill="#ffb5dc" />
+      <path d="M4 3h16v8c0 5.1-8 10-8 10S4 16.1 4 11V3Z" fill="#f4bae9" />
       <path
         d="m8 11 2.7 2.8L16.5 8"
         fill="none"
-        stroke="#7a0036"
+        stroke="#000"
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
