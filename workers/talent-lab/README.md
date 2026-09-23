@@ -1,8 +1,8 @@
 # Private Foam Talent Lab
 
-Target: `https://foam-talent-lab.stevendavidlewis80.workers.dev`  
-Worker name: `foam-talent-lab`  
-Repository: `SteveBlackboxapi/NEWFOAMHOME`  
+Target: `https://foam-talent-lab.stevendavidlewis80.workers.dev`
+Worker name: `foam-talent-lab`
+Repository: `SteveBlackboxapi/NEWFOAMHOME`
 Library branch: `content/talent-library`
 
 The Worker protects the Lab HTML, JavaScript, assets and API behind one shared password. The public marketing build must omit the Lab route. This is a separate deployment; deploying the marketing site does not update this Worker.
