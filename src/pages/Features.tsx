@@ -1,4 +1,4 @@
-import { MarketingImage } from "../components/MarketingImage";
+import { ProductFamily } from "../components/PeopleColour";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Link } from "react-router";
 import {
@@ -13,9 +13,7 @@ import {
   ProductPreview,
   type ProductKind,
 } from "../components/MarketingProduct";
-import { MediaKitLogo } from "../components/MediaKitLogo";
 import { ClosingCTA } from "../components/ClosingCTA";
-import { A } from "../lib/assets";
 import "./marketing-features.css";
 
 const FEATURES: {
@@ -151,24 +149,6 @@ export function Features() {
         }
         description="From the first brief to the next conversation. Give a great creator pitch everything it needs."
         tone="blue"
-        visual={
-          <div className="mf-hero-art">
-            <div className="mf-hero-grid" />
-            <FoamGlyph kind="orbit" className="mf-orbit" />
-            <div className="mf-icon-card mf-icon-back">
-              <MarketingImage
-                src={`${A}/chrome-store.webp`}
-                alt="Chrome Web Store"
-              />
-              <span>Right in your inbox</span>
-            </div>
-            <div className="mf-icon-card mf-icon-front">
-              <MediaKitLogo />
-              <span>Ready to share</span>
-            </div>
-            <span className="mf-hero-stamp">Find. Present. Connect.</span>
-          </div>
-        }
       >
         <a href="#explore" className="mp-button">
           Find your flow <span aria-hidden="true">↓</span>
@@ -177,6 +157,7 @@ export function Features() {
           Get a demo
         </ActionLink>
       </PageIntro>
+      <ProductFamily heading={false} />
       <FeatureExplorer />
       <section className="mp-section mp-dark">
         <div className="mp-container">

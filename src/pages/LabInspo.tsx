@@ -1,3 +1,4 @@
+import "./lab-marketing.css";
 import { Link } from "react-router";
 import { FG_R, FG_M, FG_SB } from "../lib/assets";
 
@@ -93,7 +94,7 @@ const VERDICT_LABEL: Record<Verdict, string> = {
 
 export function LabInspo() {
   return (
-    <div className="font-founders font-normal min-h-screen bg-[#f7f8fa] text-text">
+    <div className="pc-inspo min-h-screen bg-white text-text">
       <header className="border-b border-border bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-[920px] mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">

@@ -1,0 +1,1053 @@
+/* Marketing-only theme. The kit story and its embedded scenes never receive pc-site. */
+.pc-site {
+  font-family: var(--font-sf);
+  font-weight: 400;
+  color: #1c2128;
+  background: #fff;
+  --pc-ink: #1c2128;
+  --pc-muted: #626a70;
+  --pc-lime: #e8f87e;
+  --pc-blue: #c1e5ff;
+  --pc-sage: #e2e5d4;
+}
+.pc-site .mp-page {
+  --mp-ink: #1c2128;
+  --mp-cream: #f7f8f7;
+  --mp-blue: #eaf4fb;
+  --mp-lime: #e8f87e;
+  --ep-ink: #1c2128;
+  --ep-muted: #626a70;
+  font-family: var(--font-sf);
+  background: #fff;
+  color: #1c2128;
+}
+.pc-site :is(.mp-container, .site-nav-bar) {
+  max-width: 1440px;
+  padding-inline: 48px;
+}
+.pc-site .mp-section {
+  padding-block: clamp(76px, 8.5vw, 130px);
+}
+.pc-site .mp-display {
+  font-size: clamp(50px, 5.9vw, 86px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+}
+.pc-site .mp-heading {
+  font-size: clamp(36px, 4.3vw, 64px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+.pc-site .mp-display em,
+.pc-site .mp-heading em {
+  color: inherit;
+}
+.pc-site .mp-eyebrow {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.13em;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+.pc-site .mp-intro {
+  background: #fff;
+  color: #1c2128;
+  padding-block: 170px 95px;
+}
+.pc-site .mp-intro-description {
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 31em;
+  color: #626a70;
+  margin-top: 28px;
+}
+.pc-site .mp-intro-split .mp-intro-layout {
+  grid-template-columns: 1fr 1.1fr;
+  gap: 65px;
+}
+.pc-site .mp-intro-visual {
+  width: 100%;
+}
+.pc-site .mp-body {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #626a70;
+}
+.pc-site .mp-section-intro {
+  max-width: 850px;
+  margin-bottom: 45px;
+}
+.pc-site .mp-button {
+  font-family: var(--font-sf);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 15px 24px;
+  min-height: 51px;
+  background: #1c2128;
+  color: #fff;
+  gap: 30px;
+}
+.pc-site .mp-button:hover {
+  background: #343b45;
+  transform: translateY(-2px);
+}
+.pc-site .mp-button-secondary {
+  background: #fff;
+  color: #1c2128;
+  border-color: #d8dcdf;
+}
+.pc-site .mp-button-secondary:hover {
+  background: #f2f4f4;
+  color: #1c2128;
+}
+.pc-site .mp-button span {
+  font-size: 19px;
+}
+.pc-site .mp-link {
+  font-size: 14px;
+  line-height: 1.6;
+  gap: 25px;
+}
+.pc-site :is(.mp-cream, .mp-blue) {
+  background: #f5f7f6;
+}
+.pc-site .mp-lime {
+  background: #e8f87e;
+}
+.pc-site .mp-dark {
+  background: #f5f7f6;
+  color: #1c2128;
+}
+.pc-site .mp-dark :is(.mp-body, .mp-heading em) {
+  color: #626a70;
+}
+.pc-site .mp-dark .mp-button-secondary {
+  background: white;
+  color: #1c2128;
+  border-color: #d8dcdf;
+}
+.pc-site .site-header {
+  background: #fffffff2;
+  color: #1c2128;
+  font-family: var(--font-sf);
+  border-color: #eceeee;
+}
+.pc-site .site-nav-bar {
+  height: 82px;
+}
+.pc-site .site-brand > span {
+  font-family: "Founders Grotesk", sans-serif;
+  font-size: 34px;
+}
+.pc-site .site-brand img {
+  width: 32px;
+  height: 34px;
+}
+.pc-site .site-desktop-nav {
+  gap: 25px;
+}
+.pc-site .site-desktop-nav a {
+  font-size: 12px;
+  color: #5f666d;
+}
+.pc-site .site-desktop-nav a.is-active {
+  color: #1c2128;
+}
+.pc-site .site-desktop-nav a::after {
+  background: #1c2128;
+  height: 1px;
+}
+.pc-site .site-nav-demo {
+  font-size: 12px;
+  height: 42px;
+  background: #1c2128;
+  color: #fff;
+  gap: 25px;
+}
+.pc-site .site-nav-demo:hover {
+  background: #7a0036;
+}
+.pc-site .site-nav-demo > span {
+  font-size: 18px;
+}
+.pc-site .site-mobile-menu {
+  background: white;
+}
+.pc-site .site-mobile-menu nav a {
+  font-family: var(--font-sf);
+  font-size: 25px;
+  font-weight: 400;
+}
+.pc-site .site-menu-number {
+  font-size: 11px;
+}
+.pc-site .site-mobile-demo {
+  background: #e8f87e;
+  color: #1c2128;
+  font-family: var(--font-sf);
+  font-size: 15px;
+}
+.pc-site .site-cta {
+  background: #fff;
+  font-family: var(--font-sf);
+  padding-block: 100px;
+  color: #1c2128;
+}
+.pc-site .site-cta-inner {
+  display: block;
+  text-align: center;
+  max-width: 960px;
+}
+.pc-site .site-cta-shape {
+  display: none;
+}
+.pc-site .site-cta h2 {
+  font-size: clamp(38px, 4.7vw, 70px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+  max-width: 900px;
+  margin: auto;
+}
+.pc-site .site-cta-description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #626a70;
+  max-width: 570px;
+  margin: 26px auto 0;
+}
+.pc-site .site-cta-eyebrow {
+  font-size: 10px;
+  color: #626a70;
+}
+.pc-site .site-cta-actions {
+  justify-content: center;
+  margin-top: 30px;
+}
+.pc-site .site-cta-action {
+  font-size: 14px;
+  min-height: 51px;
+  background: #1c2128;
+  color: #fff;
+  border-color: #1c2128;
+}
+.pc-site .site-cta-action.is-secondary {
+  background: #fff;
+  color: #1c2128;
+  border-color: #d8dcdf;
+}
+.pc-site .site-cta-action:hover {
+  background: #7a0036;
+  color: white;
+  border-color: #7a0036;
+}
+.pc-site .site-footer {
+  background: #f5f6f6;
+  color: #1c2128;
+  font-family: var(--font-sf);
+  padding: 65px 48px 28px;
+}
+.pc-site .site-footer-inner {
+  max-width: 1344px;
+}
+.pc-site .site-footer-top {
+  gap: 70px;
+}
+.pc-site .site-footer-intro > p {
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+  font-weight: 400;
+}
+.pc-site .site-footer-intro > a {
+  font-size: 14px;
+  color: #626a70;
+}
+.pc-site .site-footer-columns h2 {
+  font-size: 10px;
+  color: #70777c;
+}
+.pc-site .site-footer-columns a {
+  font-size: 13px;
+  color: #1c2128;
+}
+.pc-site .site-footer a:hover {
+  color: #7a0036;
+}
+.pc-site .site-footer-wordmark {
+  padding: 60px 0 12px;
+}
+.pc-site .site-footer-wordmark > span {
+  font-family: "Founders Grotesk", sans-serif;
+  font-size: clamp(80px, 12vw, 180px);
+  letter-spacing: -0.065em;
+}
+.pc-site .site-footer-flower {
+  display: none;
+}
+.pc-site .site-footer-bottom {
+  border-color: #dfe3e5;
+  color: #626a70;
+  font-size: 11px;
+  margin-top: 22px;
+}
+/* Audience pages share the same people/colour hero, with distinct working examples. */
+.pc-site .audience-page .mp-intro {
+  padding-bottom: 90px;
+}
+.pc-site .ap-burgundy {
+  color: inherit;
+}
+.pc-site .ap-window-bar {
+  font-size: 13px;
+}
+.pc-site .ap-editorial-split {
+  gap: 85px;
+}
+.pc-site .ap-decision-section {
+  background: #e2e5d4;
+  color: #1c2128;
+}
+.pc-site .ap-decision-section :is(.mp-heading, .mp-eyebrow) {
+  color: #1c2128;
+}
+.pc-site .ap-decision-list > div {
+  border-color: #1c212829;
+}
+.pc-site .ap-decision-list > div > span {
+  color: #7a0036;
+}
+.pc-site .ap-decision-list p {
+  color: #525b60;
+}
+.pc-site .ap-decision-glyph {
+  color: #7a0036;
+  width: 80px;
+}
+.pc-site .ap-decision-list h3 {
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.pc-site .ap-creator-question {
+  background: #eaf4fb;
+}
+.pc-site .ap-question-layout > svg {
+  width: 45%;
+  max-width: 190px;
+}
+.pc-site .ap-work-note {
+  background: #e8f87e;
+  border-radius: 24px;
+  padding: 40px 20px;
+}
+.pc-site .ap-work-note > p {
+  font-size: 27px;
+}
+.pc-site .ap-work-note > svg {
+  width: 48px;
+  height: 48px;
+}
+.pc-site .ap-work-spread figure {
+  transform: none;
+}
+.pc-site .ap-work-spread figure > img {
+  aspect-ratio: 9/16;
+  border-radius: 20px;
+}
+.pc-site .ap-evidence-photo {
+  border-radius: 22px;
+}
+.pc-site .ap-evidence-photo > span {
+  inset: auto 0 0;
+  border-radius: 0;
+  background: linear-gradient(transparent, #101820bb);
+  color: #fff;
+  text-align: left;
+  font-size: 20px;
+  padding: 65px 24px 24px;
+  letter-spacing: -0.04em;
+}
+.pc-site .ap-evidence-grid figcaption > strong {
+  font-size: 15px;
+}
+.pc-site
+  :is(.ap-shared-card, .ap-kit-sheet, .ap-connected-card, .ap-mail-card) {
+  box-shadow: 0 15px 45px #1c21280d;
+  border: 1px solid #e5e8e9;
+}
+.pc-site .ap-link-ribbon {
+  background: #e8f87e;
+  transform: none;
+  font-size: 13px;
+}
+.pc-site .ap-floating-note {
+  transform: none;
+  background: #e8f87e;
+}
+.pc-site .ap-connected-shape {
+  color: #e2e5d4;
+}
+.pc-site .ap-connected-person h3 {
+  font-size: 27px;
+}
+.pc-site .ap-roster-heading h3 {
+  font-size: 31px;
+}
+.pc-site .ap-roster-identity h4 {
+  font-size: 22px;
+}
+.pc-site .ap-roster-total strong {
+  font-size: 24px;
+}
+/* Product family, retained feature tabs and quiet coloured detail cards. */
+.pc-site .mf-features > .mp-intro .mp-intro-layout {
+  display: block;
+  text-align: center;
+}
+.pc-site .mf-features > .mp-intro .mp-display {
+  max-width: 960px;
+  margin: auto;
+}
+.pc-site .mf-features .mp-intro-description {
+  margin-inline: auto;
+  max-width: 620px;
+}
+.pc-site .mf-features > .mp-intro .mp-actions {
+  justify-content: center;
+}
+.pc-site .mf-features > .mp-intro {
+  padding-bottom: 25px;
+}
+.pc-site .mf-features > .pc-product-family {
+  padding-top: 25px;
+}
+.pc-site .mf-tabs {
+  gap: 8px;
+  border: 0;
+  margin-bottom: 30px;
+}
+.pc-site .mf-tabs button {
+  font-family: var(--font-sf);
+  font-size: 13px;
+  border: 1px solid #dfe3e5;
+  border-radius: 28px;
+  padding: 14px 20px;
+  background: white;
+  color: #626a70;
+}
+.pc-site .mf-tabs button[aria-selected="true"] {
+  background: #1c2128;
+  color: #fff;
+  border-color: #1c2128;
+}
+.pc-site .mf-feature-panel {
+  background: #f4f6f5;
+  border-radius: 26px;
+  padding: 42px;
+  gap: 45px;
+}
+.pc-site .mf-feature-copy h3 {
+  font-size: clamp(29px, 3.2vw, 43px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.14;
+}
+.pc-site .mf-feature-copy p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.pc-site .mf-detail {
+  border: 0;
+  border-radius: 22px;
+  background: white;
+  color: #1c2128;
+  padding: 30px;
+}
+.pc-site .mf-detail:nth-child(2) {
+  background: #eaf4fb;
+}
+.pc-site .mf-detail:nth-child(3) {
+  background: #e8f87e;
+}
+.pc-site .mf-detail :is(.mp-eyebrow, div > span) {
+  color: #626a70;
+}
+.pc-site .mf-detail h3 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.pc-site .mf-detail > p:last-child {
+  color: #525b60;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.pc-site .mf-detail .mp-glyph {
+  color: #7a0036;
+  width: 45px;
+  height: 45px;
+}
+.pc-site .mf-paths strong {
+  font-size: 28px;
+}
+.pc-site .mf-paths small {
+  font-size: 14px;
+}
+/* Editorial and data pages: the content stays intact, with a lighter reading rhythm. */
+.pc-site .ep-about .mp-intro .mp-display,
+.pc-site .ep-trust .mp-intro .mp-display {
+  font-size: clamp(48px, 5.6vw, 80px);
+}
+.pc-site .ep-belief {
+  background: #321321 url("/assets/people-colour/studio-moment.webp")
+    center/cover;
+  color: white;
+  position: relative;
+  isolation: isolate;
+  max-width: 1344px;
+  width: calc(100% - 96px);
+  margin: auto;
+  border-radius: 26px;
+  padding: 70px 0;
+}
+.pc-site .ep-belief:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #2c061cbb, #2c061c66 55%, transparent);
+  z-index: -1;
+  border-radius: inherit;
+}
+.pc-site .ep-belief h2 {
+  font-size: clamp(38px, 4.4vw, 62px);
+  font-weight: 400;
+  line-height: 1.13;
+  letter-spacing: -0.055em;
+  max-width: 640px;
+}
+.pc-site .ep-belief h2 > span {
+  color: white;
+}
+.pc-site .ep-belief-top .mp-glyph {
+  display: none;
+}
+.pc-site .ep-belief-bottom {
+  display: block;
+  max-width: 520px;
+  margin-top: 30px;
+}
+.pc-site .ep-belief-bottom p {
+  color: #fffc;
+  line-height: 1.65;
+  font-size: 14px;
+  margin-top: 18px;
+}
+.pc-site .ep-belief-bottom .ep-small-label {
+  color: white;
+  font-size: 10px;
+}
+.pc-site .ep-invitation-art {
+  background: #e2e5d4;
+  border-radius: 25px;
+}
+.pc-site .ep-role-heading h3 {
+  font-size: 29px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.pc-site .ep-role-description p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.pc-site .ep-source-diagram {
+  background: #eaf4fb;
+  color: #1c2128;
+  box-shadow: none;
+  border: 1px solid #e0e7ec;
+  border-radius: 25px;
+}
+.pc-site .ep-source-centre {
+  background: white;
+  color: #1c2128;
+}
+.pc-site .ep-source-centre .mp-glyph {
+  color: #7a0036;
+}
+.pc-site .ep-source-context,
+.pc-site .ep-source-foot {
+  color: #626a70;
+}
+.pc-site .ep-source-connector span,
+.pc-site .ep-source-line {
+  background: #a2b4c0;
+}
+.pc-site .ep-source-platforms span {
+  border-color: #c2d3df;
+  font-size: 13px;
+}
+.pc-site .ep-principle h3 {
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.pc-site .ep-principle p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.pc-site .ep-demo-truth {
+  background: #e2e5d4;
+}
+.pc-site .ep-demo-truth .mp-body,
+.pc-site .ep-demo-notes p {
+  color: #525b60;
+}
+.pc-site .ep-demo-truth .mp-link {
+  color: #1c2128;
+}
+.pc-site .ep-demo-notes > div {
+  border-color: #1c212833;
+}
+.pc-site .ep-demo-notes > div > span {
+  background: white;
+  color: #7a0036;
+}
+.pc-site .ep-demo-notes h3 {
+  font-size: 27px;
+  line-height: 1.2;
+}
+.pc-site .ep-demo-notes p {
+  font-size: 15px;
+  line-height: 1.65;
+}
+.pc-site .ep-resource-list strong {
+  font-size: 27px;
+}
+.pc-site .ep-inside-intro {
+  padding: 165px 0 85px;
+  background: white;
+  text-align: center;
+}
+.pc-site .ep-inside-masthead {
+  display: block;
+}
+.pc-site .ep-inside-masthead > span {
+  display: none;
+}
+.pc-site .ep-inside-title {
+  display: block;
+}
+.pc-site .ep-inside-title h1 {
+  font-size: clamp(65px, 7vw, 100px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.065em;
+}
+.pc-site .ep-inside-title h1 br {
+  display: none;
+}
+.pc-site .ep-inside-title h1 em {
+  color: #1c2128;
+}
+.pc-site .ep-inside-title .mp-glyph {
+  display: none;
+}
+.pc-site .ep-inside-deck {
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: none;
+  margin-top: 28px;
+}
+.pc-site .ep-kit-cover-art {
+  border-radius: 24px;
+  background: #eaf4fb;
+}
+.pc-site .ep-kit-cover-type {
+  font-size: clamp(38px, 4.5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+.pc-site .ep-kit-cover-art > .mp-glyph {
+  display: none;
+}
+.pc-site .ep-lead-copy h2 {
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+.pc-site .ep-lead-copy > p:not(.mp-eyebrow),
+.pc-site .ep-feature-copy > p:not(.mp-eyebrow) {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.pc-site .ep-feature-copy h3 {
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+.pc-site .ep-content-scene {
+  border-radius: 24px;
+}
+.pc-site .ep-reading h2 {
+  font-weight: 400;
+  line-height: 1.12;
+}
+.pc-site .ep-inbox-scene {
+  background: #e2e5d4;
+  border-radius: 24px;
+}
+.pc-site .ep-inbox-scene > .mp-glyph {
+  color: #7a0036;
+}
+.pc-site .ep-explorations {
+  background: #f5f7f6;
+}
+.pc-site .demo-page {
+  font-family: var(--font-sf);
+  background: white;
+}
+.pc-site .demo-hero {
+  max-width: 1440px;
+  padding: 170px 48px 100px;
+  gap: 65px;
+}
+.pc-site .demo-hero h1 {
+  font-size: clamp(55px, 6vw, 86px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+.pc-site .demo-hero h1 em {
+  color: inherit;
+}
+.pc-site .demo-intro {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #626a70;
+}
+.pc-site .demo-primary {
+  background: #1c2128;
+  color: #fff;
+  font-size: 14px;
+  min-height: 52px;
+}
+.pc-site .demo-link-note {
+  font-size: 11px;
+}
+.pc-site .demo-email {
+  font-size: 13px;
+}
+.pc-site .demo-agenda {
+  gap: 85px;
+  max-width: 1344px;
+  padding-block: 90px 115px;
+}
+.pc-site .demo-agenda h2 {
+  font-size: clamp(36px, 4.3vw, 62px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+}
+.pc-site .demo-agenda-intro > p:last-child {
+  font-size: 16px;
+}
+.pc-site .demo-agenda-item h3 {
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.pc-site .demo-agenda-item p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #626a70;
+}
+.pc-site .demo-explore {
+  border-radius: 24px;
+  background: #eaf4fb;
+  margin: 0 48px 90px;
+  max-width: none;
+}
+.pc-site .demo-explore h2 {
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+.pc-site .demo-explore a {
+  font-size: 14px;
+}
+@media (max-width: 1100px) {
+  .pc-site .mp-intro-split .mp-intro-layout {
+    gap: 40px;
+  }
+  .pc-site :is(.mp-container, .site-nav-bar) {
+    padding-inline: 28px;
+  }
+  .pc-site .ap-editorial-split {
+    gap: 45px;
+  }
+  .pc-site .ep-belief {
+    width: calc(100% - 56px);
+  }
+  .pc-site .site-nav-bar {
+    height: 76px;
+  }
+  .pc-site .mf-feature-panel {
+    padding: 30px;
+  }
+  .pc-site .demo-hero {
+    padding-inline: 28px;
+    gap: 40px;
+  }
+}
+@media (max-width: 760px) {
+  .pc-site :is(.mp-container, .site-nav-bar) {
+    padding-inline: 20px;
+  }
+  .pc-site .mp-section {
+    padding-block: 72px;
+  }
+  .pc-site .mp-intro {
+    padding-block: 130px 65px;
+  }
+  .pc-site .mp-intro-split .mp-intro-layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .pc-site .mp-intro-copy {
+    text-align: center;
+  }
+  .pc-site .mp-intro-description {
+    font-size: 16px;
+    max-width: 480px;
+    margin: 25px auto 0;
+  }
+  .pc-site .mp-actions {
+    justify-content: center;
+  }
+  .pc-site .mp-display,
+  .pc-site .mp-intro-split .mp-display,
+  .pc-site .ep-about .mp-intro .mp-display,
+  .pc-site .ep-trust .mp-intro .mp-display {
+    font-size: 46px;
+    line-height: 1.08;
+  }
+  .pc-site .mp-heading {
+    font-size: 36px;
+  }
+  .pc-site .mp-body {
+    font-size: 16px;
+  }
+  .pc-site .mp-button {
+    font-size: 13px;
+    padding: 14px 21px;
+  }
+  .pc-site .mp-eyebrow {
+    font-size: 10px;
+  }
+  .pc-site .site-nav-demo {
+    font-size: 11px;
+    padding-inline: 16px;
+    gap: 12px;
+  }
+  .pc-site .site-nav-actions {
+    gap: 10px;
+  }
+  .pc-site .site-brand > span {
+    font-size: 31px;
+  }
+  .pc-site .site-nav-bar {
+    gap: 16px;
+  }
+  .pc-site .site-cta {
+    padding: 75px 20px;
+  }
+  .pc-site .site-cta h2 {
+    font-size: 39px;
+  }
+  .pc-site .site-cta-description {
+    font-size: 15px;
+  }
+  .pc-site .site-cta-action {
+    font-size: 13px;
+    padding: 13px 21px;
+  }
+  .pc-site .site-footer {
+    padding: 48px 20px 25px;
+  }
+  .pc-site .site-footer-top {
+    gap: 45px;
+  }
+  .pc-site .site-footer-intro > p {
+    font-size: 31px;
+  }
+  .pc-site .site-footer-columns {
+    gap: 20px;
+  }
+  .pc-site .site-footer-columns a {
+    font-size: 12px;
+  }
+  .pc-site .site-footer-columns h2 {
+    font-size: 9px;
+  }
+  .pc-site .site-footer-wordmark {
+    padding-top: 48px;
+  }
+  .pc-site .site-footer-bottom {
+    gap: 17px;
+    font-size: 10px;
+  }
+  .pc-site .ap-editorial-split {
+    gap: 38px;
+  }
+  .pc-site .ap-evidence-photo > span {
+    font-size: 17px;
+    padding: 40px 14px 15px;
+  }
+  .pc-site .ap-work-note {
+    padding: 30px;
+  }
+  .pc-site .ap-work-spread {
+    gap: 16px;
+  }
+  .pc-site .ap-question-layout > svg {
+    max-width: 90px;
+  }
+  .pc-site .mf-feature-panel {
+    padding: 24px 18px;
+    gap: 25px;
+  }
+  .pc-site .mf-feature-copy h3 {
+    font-size: 30px;
+  }
+  .pc-site .mf-tabs button {
+    font-size: 11px;
+    padding: 12px;
+  }
+  .pc-site .mf-tabs button > span {
+    display: none;
+  }
+  .pc-site .mf-detail {
+    padding: 28px;
+  }
+  .pc-site .ep-belief {
+    width: calc(100% - 36px);
+    padding: 55px 0;
+    background-position: 65% center;
+  }
+  .pc-site .ep-belief:before {
+    background: #240d1ac7;
+  }
+  .pc-site .ep-belief h2 {
+    font-size: 37px;
+  }
+  .pc-site .ep-belief-bottom p {
+    font-size: 14px;
+  }
+  .pc-site .ep-role-heading h3 {
+    font-size: 28px;
+  }
+  .pc-site .ep-inside-intro {
+    padding: 130px 0 55px;
+  }
+  .pc-site .ep-inside-title h1 {
+    font-size: 66px;
+  }
+  .pc-site .ep-inside-deck {
+    font-size: 15px;
+  }
+  .pc-site .ep-kit-cover-type {
+    font-size: 43px;
+  }
+  .pc-site .ep-lead-copy h2 {
+    font-size: 38px;
+  }
+  .pc-site .demo-hero {
+    padding: 130px 20px 70px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .pc-site .demo-hero-copy {
+    text-align: center;
+  }
+  .pc-site .demo-hero h1 {
+    font-size: 54px;
+  }
+  .pc-site .demo-intro {
+    font-size: 16px;
+    margin: 26px auto;
+  }
+  .pc-site .demo-agenda {
+    padding: 60px 20px 75px;
+    gap: 32px;
+  }
+  .pc-site .demo-explore {
+    margin: 0 20px 70px;
+    padding: 35px 25px;
+  }
+  .pc-site .demo-explore h2 {
+    font-size: 34px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-site a,
+  .pc-site button {
+    transition: none;
+  }
+  .pc-site .mp-button:hover,
+  .pc-site .site-cta-action:hover {
+    transform: none;
+  }
+}
+.pc-site .pc-not-found {
+  min-height: 80vh;
+  padding: 175px 24px 100px;
+  text-align: center;
+}
+.pc-not-found h1 {
+  font-size: clamp(44px, 6vw, 80px);
+  letter-spacing: -0.06em;
+  line-height: 1.07;
+  font-weight: 500;
+}
+.pc-not-found > p:last-of-type {
+  margin: 27px auto;
+  color: #626a70;
+  line-height: 1.65;
+}
+.pc-not-found .mp-actions {
+  justify-content: center;
+}
+.pc-site .mp-intro:is(.mp-cream, .mp-blue, .mp-lime, .mp-navy) {
+  background: #fff;
+  color: #1c2128;
+}
+.pc-site .ap-roster-section {
+  background: #eaf4fb;
+  color: #1c2128;
+}
+.pc-site .ap-roster-section :is(.mp-heading, .mp-eyebrow) {
+  color: #1c2128;
+}
+.pc-site .ap-roster-section .mp-body,
+.pc-site .ap-section-end > p {
+  color: #626a70;
+}
+.pc-site .ap-roster-flower {
+  display: none;
+}
+.pc-site .ap-roster {
+  box-shadow: none;
+  border: 1px solid #e0e7ec;
+}
+/* Keep marketing content immediately readable while retaining the separate story motion. */
+.pc-site .mp-reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}

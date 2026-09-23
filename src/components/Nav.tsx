@@ -85,7 +85,7 @@ export function Nav() {
         Skip to content
       </a>
       <div className="site-nav-bar">
-        <Link to="/kit-story/" aria-label="Foam story" className="site-brand">
+        <Link to="/" aria-label="Foam home" className="site-brand">
           <img alt="" src={img.foamSymbol} width={36} height={36} />
           <span>foam</span>
         </Link>

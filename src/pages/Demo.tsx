@@ -1,7 +1,6 @@
+import { PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
-import { AIDisclosure } from "../components/AIDisclosure";
-import { MarketingPage, Reveal, FoamGlyph } from "../components/Marketing";
-import { websiteSamantha } from "../data/websiteTalent";
+import { MarketingPage, Reveal } from "../components/Marketing";
 import { DEMO_URL } from "../lib/siteLinks";
 import "../components/site-shell.css";
 
@@ -32,47 +31,7 @@ export function Demo() {
             Or say hello@foam.io <span aria-hidden="true">↗</span>
           </a>
         </Reveal>
-        <Reveal className="demo-studio" delay={100}>
-          <figure className="demo-portrait">
-            <img
-              src={websiteSamantha.portrait}
-              alt="Samantha Pikka, a fictional Foam demo creator"
-              width={640}
-              height={800}
-            />
-            <AIDisclosure size={10} />
-            <figcaption>
-              <span>Samantha Pikka</span>
-              <small>Beauty · Advocacy · Education</small>
-            </figcaption>
-          </figure>
-          <div className="demo-idea-card">
-            <FoamGlyph kind="spark" />
-            <span>
-              Big ideas.
-              <br />
-              Meet your
-              <br />
-              new home.
-            </span>
-          </div>
-          <div className="demo-pitch-card">
-            <span className="demo-pitch-eyebrow">Your next pitch</span>
-            <p>
-              All the right
-              <br />
-              people.
-              <br />
-              <em>Right here.</em>
-            </p>
-            <span className="demo-pitch-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </div>
-          <span className="demo-studio-note">
-            A little of what’s possible with Foam.
-          </span>
-        </Reveal>
+        <PeopleTiles kind="creators" message="Big ideas. Start here." />
       </section>
       <section className="demo-agenda">
         <Reveal className="demo-agenda-intro">
