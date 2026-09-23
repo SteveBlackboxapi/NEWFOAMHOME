@@ -24,7 +24,7 @@ const sha256 = async (value) =>
   Buffer.from(
     await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)),
   ).toString("hex");
-async function fixture() {
+async function fixture({ redirectStatus } = {}) {
   const store = new Map();
   const calls = [];
   let head = null;
@@ -58,6 +58,14 @@ async function fixture() {
   };
   const fetcher = async (url, options = {}) => {
     calls.push({ url, options });
+    // workerd rejects redirect:"error" before making a request. Require the
+    // supported mode that also prevents sending credentials to a new origin.
+    assert.equal(options.redirect, "manual");
+    if (redirectStatus)
+      return new Response("Upstream redirect", {
+        status: redirectStatus,
+        headers: { Location: "https://unexpected.example/redirect-target" },
+      });
     const path = new URL(url).pathname.replace(
       "/repos/SteveBlackboxapi/NEWFOAMHOME",
       "",
@@ -237,7 +245,7 @@ test("forged, expired, and password-rotation sessions cannot read private assets
 test("login rate limiting and Origin checks cover mutations including login/logout", async () => {
   const f = await fixture();
   const cookie = await f.login();
-  for (const origin of [null, "https://attacker.example"])
+  for (const origin of [null, "null", "https://attacker.example"])
     for (const path of [
       "/api/login",
       "/api/connect",
@@ -286,6 +294,11 @@ test("authenticated assets use no-store, preserve gzip, root redirects, logout o
 });
 test("ordinary login form redirects after sign-in and public source assets need no GitHub token", async () => {
   const f = await fixture();
+  for (const path of ["/", "/login", "/lab/talent/?view=content"]) {
+    const page = await f.send(path);
+    // Browsers null the Origin of native form POSTs under no-referrer.
+    assert.equal(page.headers.get("Referrer-Policy"), "same-origin");
+  }
   const request = new Request(`${ORIGIN}/api/login`, {
     method: "POST",
     headers: {
@@ -311,6 +324,29 @@ test("ordinary login form redirects after sign-in and public source assets need 
     );
     assert.equal(f.calls.at(-1).options.headers, undefined);
   }
+});
+test("wrong-password form keeps the same-origin policy so a corrected retry can sign in", async () => {
+  const f = await fixture();
+  const postForm = (password) =>
+    handleRequest(
+      new Request(`${ORIGIN}/api/login`, {
+        method: "POST",
+        headers: {
+          Origin: ORIGIN,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ password }),
+      }),
+      f.env,
+    );
+  const rejected = await postForm("wrong-password");
+  assert.equal(rejected.status, 401);
+  assert.equal(rejected.headers.get("Referrer-Policy"), "same-origin");
+  assert.equal(rejected.headers.get("Set-Cookie"), null);
+  assert.match(await rejected.text(), /Incorrect password/);
+  const accepted = await postForm(PASSWORD);
+  assert.equal(accepted.status, 303);
+  assert.match(accepted.headers.get("Set-Cookie"), /^__Host-foam_lab=/);
 });
 test("GitHub token is verified, encrypted in KV, never echoed, and never needed for public reads", async () => {
   const f = await fixture();
@@ -537,6 +573,31 @@ test("upload image proxy scopes filenames and immutable revisions and authentica
       .status,
     403,
   );
+});
+test("upstream redirects are rejected for public media, GitHub reads and uploaded images", async () => {
+  const paths = [
+    "/assets/talent/photo.webp",
+    "/api/github/git/ref/heads/main",
+    `/api/asset?path=assets/talent/uploads/test.png&ref=${MAIN}`,
+  ];
+  for (const status of [301, 302]) {
+    for (const path of paths) {
+      const f = await fixture({ redirectStatus: status });
+      assert.equal((await f.send(path)).status, 401);
+      assert.equal(f.calls.length, 0, "signed-out requests never reach upstream");
+
+      const cookie = await f.login();
+      const result = await f.send(path, { cookie });
+      assert.equal(result.status, 502, `${path} rejects ${status}`);
+      assert.equal(result.headers.get("Location"), null);
+      assert.equal(f.calls.length, 1, "the redirect target is never fetched");
+      assert.equal(f.calls[0].options.redirect, "manual");
+      assert.notEqual(
+        f.calls[0].url,
+        "https://unexpected.example/redirect-target",
+      );
+    }
+  }
 });
 test("streaming body limit applies even without a Content-Length header", async () => {
   const f = await fixture();
