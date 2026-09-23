@@ -237,7 +237,7 @@ test("forged, expired, and password-rotation sessions cannot read private assets
 test("login rate limiting and Origin checks cover mutations including login/logout", async () => {
   const f = await fixture();
   const cookie = await f.login();
-  for (const origin of [null, "https://attacker.example"])
+  for (const origin of [null, "null", "https://attacker.example"])
     for (const path of [
       "/api/login",
       "/api/connect",
@@ -286,6 +286,11 @@ test("authenticated assets use no-store, preserve gzip, root redirects, logout o
 });
 test("ordinary login form redirects after sign-in and public source assets need no GitHub token", async () => {
   const f = await fixture();
+  for (const path of ["/", "/login", "/lab/talent/?view=content"]) {
+    const page = await f.send(path);
+    // Browsers null the Origin of native form POSTs under no-referrer.
+    assert.equal(page.headers.get("Referrer-Policy"), "same-origin");
+  }
   const request = new Request(`${ORIGIN}/api/login`, {
     method: "POST",
     headers: {
@@ -311,6 +316,29 @@ test("ordinary login form redirects after sign-in and public source assets need 
     );
     assert.equal(f.calls.at(-1).options.headers, undefined);
   }
+});
+test("wrong-password form keeps the same-origin policy so a corrected retry can sign in", async () => {
+  const f = await fixture();
+  const postForm = (password) =>
+    handleRequest(
+      new Request(`${ORIGIN}/api/login`, {
+        method: "POST",
+        headers: {
+          Origin: ORIGIN,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ password }),
+      }),
+      f.env,
+    );
+  const rejected = await postForm("wrong-password");
+  assert.equal(rejected.status, 401);
+  assert.equal(rejected.headers.get("Referrer-Policy"), "same-origin");
+  assert.equal(rejected.headers.get("Set-Cookie"), null);
+  assert.match(await rejected.text(), /Incorrect password/);
+  const accepted = await postForm(PASSWORD);
+  assert.equal(accepted.status, 303);
+  assert.match(accepted.headers.get("Set-Cookie"), /^__Host-foam_lab=/);
 });
 test("GitHub token is verified, encrypted in KV, never echoed, and never needed for public reads", async () => {
   const f = await fixture();

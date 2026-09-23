@@ -208,7 +208,12 @@ function loginPage(error = "", status = 200) {
   return response(
     `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Foam Talent Lab</title><style>body{font:16px/1.5 system-ui,sans-serif;color:#1d2635;background:#f7f7f8;margin:0;display:grid;place-items:center;min-height:100svh}main{box-sizing:border-box;width:min(440px,calc(100% - 40px));padding:40px;background:white;border:1px solid #e6e7eb;border-radius:22px}h1{font-size:28px;letter-spacing:-1px;margin:0 0 12px}p{color:#667085}label{display:block;margin:24px 0 8px}input,button{box-sizing:border-box;width:100%;font:inherit;padding:13px 15px;border:1px solid #d0d5dd;border-radius:9px}button{margin-top:18px;background:#1d2635;color:white;cursor:pointer}a{color:inherit}.error{color:#7a0036}</style><main><h1>Foam Talent Lab</h1><p>A private workspace for your fictional creator library.</p>${error ? `<p class="error" role="alert">${error}</p>` : ""}<form method="post" action="/api/login"><label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password" autofocus maxlength="256"><button type="submit">Open the Lab</button></form></main></html>`,
     status,
-    { "Content-Type": "text/html; charset=utf-8" },
+    {
+      "Content-Type": "text/html; charset=utf-8",
+      // Native form POSTs send Origin:null under no-referrer. Preserve our
+      // own origin so the strict CSRF check accepts this form and its retries.
+      "Referrer-Policy": "same-origin",
+    },
   );
 }
 async function github(path, token, method = "GET", body, fetcher = fetch) {
