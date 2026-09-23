@@ -753,8 +753,24 @@
   transform: translateY(-7px);
 }
 .pc-tool-image > img.pc-chrome-tool {
+  position: relative;
+  z-index: 1;
   width: 140px;
   height: 140px;
+}
+.pc-chrome-artwork {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.pc-chrome-artwork::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 280px;
+  background: radial-gradient(ellipse, #fff 0 70%, #fff0 100%);
+  filter: blur(16px);
+  pointer-events: none;
 }
 .pc-cream {
   background: #fbf4e9;

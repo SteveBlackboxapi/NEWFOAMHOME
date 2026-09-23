@@ -1,17 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import "./story-scroll-controls.css";
 
-/** A brief invitation on entry; it stays dismissed once the visitor scrolls. */
+/** A gentle repeating invitation while idle at the opening; scrolling dismisses it. */
 export function StoryScrollCue() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    setVisible(window.scrollY < 24);
-    const dismiss = () => {
-      if (window.scrollY >= 24) setVisible(false);
+    if (window.scrollY >= 24) return;
+    let timer = 0;
+    let dismissed = false;
+    const schedule = (show: boolean, duration: number, next: () => void) => {
+      if (dismissed) return;
+      setVisible(show);
+      timer = window.setTimeout(next, duration);
     };
-    const timer = window.setTimeout(() => setVisible(false), 4600);
+    const repeat = () =>
+      schedule(true, 3000, () => schedule(false, 7000, repeat));
+    // Preserve the first appearance, then wait 6.5 seconds before the repeat cycle.
+    schedule(true, 4600, () => schedule(false, 6500, repeat));
+    const dismiss = () => {
+      if (window.scrollY < 24) return;
+      dismissed = true;
+      clearTimeout(timer);
+      setVisible(false);
+    };
     window.addEventListener("scroll", dismiss, { passive: true });
     return () => {
+      dismissed = true;
       clearTimeout(timer);
       window.removeEventListener("scroll", dismiss);
     };

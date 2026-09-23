@@ -429,7 +429,7 @@ export function ProductFamily({ heading = true }: { heading?: boolean }) {
           </div>
         </Link>
         <Link className="pc-tool-card" to="/chrome-story/">
-          <div className="pc-tool-image pc-mist">
+          <div className="pc-tool-image pc-mist pc-chrome-artwork">
             <img
               className="pc-chrome-tool"
               src={`${A}/chrome-store.webp`}
