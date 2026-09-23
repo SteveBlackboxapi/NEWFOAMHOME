@@ -9,11 +9,26 @@ import {
   type TileCaptionSettings,
 } from "../data/stagedTalent";
 import { assetKind, type LabAsset } from "../lib/talentLab";
+import { placementsForAsset } from "./TalentLibraryManager";
 import { LabIcon } from "./TalentLabIcon";
 import { ContentMetrics, ContentPlatformIcon } from "./ContentMetrics";
 import { AIDisclosure as MediaAIDisclosure } from "./AIDisclosure";
 
-export function AIDisclosure({ className = "" }: { className?: string }) {
+export function AIDisclosure({
+  className = "",
+  provenance,
+}: {
+  className?: string;
+  provenance?: "ai-generated" | "uploaded" | "reference";
+}) {
+  if (provenance === "uploaded" || provenance === "reference")
+    return (
+      <span className={`tl-ai-disclosure ${className}`}>
+        {provenance === "uploaded"
+          ? "Uploaded image · origin not verified"
+          : "Supplied reference photo"}
+      </span>
+    );
   return (
     <MediaAIDisclosure className={`tl-ai-disclosure ${className}`.trim()} />
   );
@@ -170,7 +185,14 @@ export function AssetCard({
           <LabIcon name="bookmark" size={17} />
         </button>
       </div>
-      <AIDisclosure />
+      <AIDisclosure
+        provenance={asset.tile?.provenance || asset.talent.provenance}
+      />
+      <div className="tl-card-usage">
+        {placementsForAsset(asset).length
+          ? `Used on website · ${placementsForAsset(asset).length} placements`
+          : "Library only"}
+      </div>
     </article>
   );
 }

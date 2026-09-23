@@ -172,12 +172,20 @@ export function readSaved(): string[] {
 function absolute(src: string) {
   return new URL(src, window.location.href).href;
 }
+const madeWithAI = (provenance?: string) =>
+  !provenance || provenance === "ai-generated";
+const provenanceLabel = (provenance?: string) =>
+  madeWithAI(provenance)
+    ? "Made with AI"
+    : provenance === "reference"
+      ? "Supplied reference photo"
+      : "Uploaded image · origin not verified";
 export function profileData(talent: StagedTalent) {
   return {
     ...talent,
-    synthetic: true,
-    aiGenerated: true,
-    disclosure: "Made with AI",
+    synthetic: madeWithAI(talent.provenance),
+    aiGenerated: madeWithAI(talent.provenance),
+    disclosure: provenanceLabel(talent.provenance),
     referenceImages: talent.referenceImages?.map((reference) => ({
       ...reference,
       src: absolute(reference.src),
@@ -200,8 +208,8 @@ export function profileData(talent: StagedTalent) {
       .map((a) => ({
         ...a.tile,
         id: a.id,
-        aiGenerated: true,
-        disclosure: "Made with AI",
+        aiGenerated: madeWithAI(a.tile?.provenance || talent.provenance),
+        disclosure: provenanceLabel(a.tile?.provenance || talent.provenance),
         thumb: absolute(a.src),
         original: a.original ? absolute(a.original) : null,
         video: a.tile?.video ? absolute(a.tile.video) : null,
@@ -233,7 +241,7 @@ export function exportData(
           {
             schemaVersion: 1,
             exportedAt: new Date().toISOString(),
-            note: "Fictional demo talent. Caption edits are browser-local drafts.",
+            note: "Talent library with per-image provenance. Caption edits are browser-local drafts.",
             talent: talents.map(profileData),
           },
           null,
@@ -393,7 +401,7 @@ export async function downloadPack(
     JSON.stringify(
       {
         schemaVersion: 1,
-        synthetic: true,
+        synthetic: talents.every((talent) => madeWithAI(talent.provenance)),
         includedAssetIds: assets.map((a) => a.id),
         talent: talents.map(profileData),
       },
@@ -402,7 +410,7 @@ export async function downloadPack(
     ),
   );
   files["README.txt"] = strToU8(
-    "Foam talent library\n\nMade with AI. These are fictional demo characters and invented metrics.\nCurrent images are supplied without caption overlays. Earlier images, where available, are preserved in each character's archive/originals folder; supplied reference sheets are in references.\nCaption drafts, AI disclosure, source URLs and creative direction are included in talent-data.json. A creative-brief file is included for characters with a full brief. Use Download with caption in the lab for a rendered image.\nA planned video has a thumbnail only; no video file exists yet. Ready videos are included when a source file is available.\n",
+    "Foam talent library\n\nThis library contains fictional demo talent, supplied reference photos and uploaded images. See each profile and image provenance in talent-data.json; uploads are not assumed to be AI-generated. Demo metrics are illustrative.\nCurrent images are supplied without caption overlays. Earlier images, where available, are preserved in each character's archive/originals folder; supplied reference sheets are in references.\nCaption drafts, AI disclosure, source URLs and creative direction are included in talent-data.json. A creative-brief file is included for characters with a full brief. Use Download with caption in the lab for a rendered image.\nA planned video has a thumbnail only; no video file exists yet. Ready videos are included when a source file is available.\n",
   );
   const zipped = zipSync(files, { level: 0 });
   saveBlob(new Blob([zipped as BlobPart], { type: "application/zip" }), name);

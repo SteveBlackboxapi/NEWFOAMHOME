@@ -1087,6 +1087,15 @@
 .pc-site .ap-section-end > p {
   color: #626a70;
 }
+.pc-site .ap-roster-section .mp-button-secondary {
+  background: #fff;
+  color: #1c2128;
+  border-color: #d8dcdf;
+}
+.pc-site .ap-roster-section .mp-button-secondary:is(:hover, :focus-visible) {
+  background: #f2f4f4;
+  color: #1c2128;
+}
 .pc-site .ap-roster-flower {
   display: none;
 }

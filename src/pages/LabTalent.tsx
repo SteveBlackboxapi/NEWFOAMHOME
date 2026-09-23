@@ -1,15 +1,33 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { Link, useSearchParams } from "react-router";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import { useSearchParams } from "react-router";
 import {
   formatAudience,
   type TalentNetwork,
   type TileCaptionSettings,
 } from "../data/stagedTalent";
-import { labTalent as stagedTalent } from "../data/labTalentCatalogue";
+import { useTalentLibrary } from "../hooks/useTalentLibrary";
+import {
+  TalentLibraryManager,
+  placementsForAsset,
+} from "../components/TalentLibraryManager";
 import { discoverySearches } from "../data/discoveryContent";
-import { discoveryRank, matchesDiscoveryQuery, readDiscoveryQuery } from "../lib/discoverySearch";
-import { distributeTalentContent, talentContentColumns } from "../lib/talentLabLayout";
+import {
+  discoveryRank,
+  matchesDiscoveryQuery,
+  readDiscoveryQuery,
+} from "../lib/discoverySearch";
+import {
+  distributeTalentContent,
+  talentContentColumns,
+} from "../lib/talentLabLayout";
 import { img } from "../lib/assets";
+import { PRIVATE_LIBRARY } from "../lib/githubTalentLibrary";
 import {
   assetsFor,
   hasAssignedAudience,
@@ -49,13 +67,6 @@ const EMPTY: Filters = {
   audience: "",
   views: "",
 };
-const allAssets = stagedTalent.flatMap(assetsFor);
-const contentAssets = allAssets.filter((a) => a.tile);
-const imageAssetCount = allAssets.filter((asset) => !asset.tile?.video).length;
-const readyVideoCount = new Set(stagedTalent.flatMap(readyVideoSources)).size;
-const categories = [
-  ...new Set(stagedTalent.flatMap((t) => t.verticals)),
-].sort();
 const navItems: { view: View; icon: LabIconName; label: string }[] = [
   { view: "talent", icon: "people", label: "Talent library" },
   { view: "content", icon: "explore", label: "Explore content" },
@@ -63,6 +74,24 @@ const navItems: { view: View; icon: LabIconName; label: string }[] = [
 ];
 
 export function LabTalent() {
+  const library = useTalentLibrary();
+  const stagedTalent = library.profiles;
+  const allAssets = useMemo(
+    () => stagedTalent.flatMap(assetsFor),
+    [stagedTalent],
+  );
+  const contentAssets = useMemo(
+    () => allAssets.filter((a) => a.tile),
+    [allAssets],
+  );
+  const imageAssetCount = allAssets.filter(
+    (asset) => !asset.tile?.video,
+  ).length;
+  const readyVideoCount = new Set(stagedTalent.flatMap(readyVideoSources)).size;
+  const categories = [
+    ...new Set(stagedTalent.flatMap((t) => t.verticals)),
+  ].sort();
+  const [managing, setManaging] = useState<string | null>(null);
   const [params, setParams] = useSearchParams();
   const view: View =
     params.get("view") === "content" || params.get("view") === "saved"
@@ -71,12 +100,15 @@ export function LabTalent() {
   const selected = stagedTalent.find((t) => t.id === params.get("talent"));
   const query = readDiscoveryQuery(params);
   const setQuery = (next: string) =>
-    setParams((prev) => {
-      const updated = new URLSearchParams(prev);
-      if (next) updated.set("q", next);
-      else updated.delete("q");
-      return updated;
-    }, { replace: true });
+    setParams(
+      (prev) => {
+        const updated = new URLSearchParams(prev);
+        if (next) updated.set("q", next);
+        else updated.delete("q");
+        return updated;
+      },
+      { replace: true },
+    );
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [draft, setDraft] = useState<Filters>(EMPTY);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -240,7 +272,9 @@ export function LabTalent() {
           (!filters.platforms.length ||
             t.platforms.some((p) => filters.platforms.includes(p.network)) ||
             (view !== "talent" &&
-              t.content.some((tile) => filters.platforms.includes(tile.platform)))) &&
+              t.content.some((tile) =>
+                filters.platforms.includes(tile.platform),
+              ))) &&
           (!filters.audience ||
             (hasAssignedAudience(t) &&
               (filters.audience === "1m"
@@ -251,7 +285,7 @@ export function LabTalent() {
           (view !== "talent" || !search || text.includes(search))
         );
       }),
-    [filters, search, view],
+    [filters, search, view, stagedTalent],
   );
   const visibleTalent = [...matchingTalent].sort((a, b) =>
     sort === "name"
@@ -297,18 +331,23 @@ export function LabTalent() {
 
   return (
     <div className="tl-app tl-shell pc-lab">
+      <meta name="robots" content="noindex, nofollow" />
       <a className="tl-skip" href="#talent-results">
         Skip to results
       </a>
       <nav className="tl-nav" aria-label="Lab navigation">
-        <Link
+        <a
           className="tl-brand"
-          to="/kit-story/"
+          href={
+            PRIVATE_LIBRARY
+              ? "https://steveblackboxapi.github.io/NEWFOAMHOME/kit-story/"
+              : `${import.meta.env.BASE_URL}kit-story/`
+          }
           title="Foam — Media Kit story"
           aria-label="Foam — Media Kit story"
         >
           <img src={img.foamSymbol} alt="" />
-        </Link>
+        </a>
         <div className="tl-nav-items">
           {navItems.map((item) => (
             <button
@@ -328,14 +367,18 @@ export function LabTalent() {
           ))}
         </div>
         <div className="tl-nav-bottom">
-          <Link
-            to="/"
+          <a
+            href={
+              PRIVATE_LIBRARY
+                ? "https://steveblackboxapi.github.io/NEWFOAMHOME/"
+                : import.meta.env.BASE_URL
+            }
             className="tl-nav-item"
             title="Back to website"
             aria-label="Back to website"
           >
             <LabIcon name="external" />
-          </Link>
+          </a>
           <span className="tl-avatar" title="Demo workspace">
             FL
           </span>
@@ -376,6 +419,41 @@ export function LabTalent() {
           </span>
           <ChromeWallpaperSettings />
         </header>
+        <div className="tl-online-status">
+          <span>
+            {library.loading
+              ? "Loading the online library…"
+              : library.error
+                ? "Online library unavailable — open Manage library to reconnect."
+                : library.dirty
+                  ? "Unsaved library changes"
+                  : "GitHub library · changes saved for review"}
+          </span>
+          {PRIVATE_LIBRARY && (
+            <button
+              className="tl-button"
+              onClick={() => {
+                if (
+                  !library.dirty ||
+                  window.confirm(
+                    "Discard your unsaved draft and lock the library?",
+                  )
+                ) {
+                  library.reset();
+                  void library.disconnect();
+                }
+              }}
+            >
+              Lock library
+            </button>
+          )}
+          <button
+            className="tl-button tl-primary"
+            onClick={() => setManaging("")}
+          >
+            Add talent / manage images
+          </button>
+        </div>
         <div className="tl-intro">
           <p>
             {view === "talent"
@@ -395,14 +473,20 @@ export function LabTalent() {
           </span>
         </div>
         {view === "content" && (
-          <nav className="tl-discovery-queries" aria-label="Suggested content searches">
+          <nav
+            className="tl-discovery-queries"
+            aria-label="Suggested content searches"
+          >
             <span>Try a search</span>
             {discoverySearches.map((example) => (
               <button
                 key={example.id}
                 type="button"
                 aria-pressed={query === example.query}
-                onClick={() => { setQuery(example.query); setSort("curated"); }}
+                onClick={() => {
+                  setQuery(example.query);
+                  setSort("curated");
+                }}
               >
                 {example.query}
               </button>
@@ -811,7 +895,10 @@ export function LabTalent() {
                           <p>{talent.location}</p>
                         </div>
                       </div>
-                      <AIDisclosure className="tl-talent-disclosure" />
+                      <AIDisclosure
+                        className="tl-talent-disclosure"
+                        provenance={talent.provenance}
+                      />
                       <div className="tl-talent-info">
                         <div>
                           <strong>
@@ -843,6 +930,13 @@ export function LabTalent() {
                         <LabIcon name="arrow" size={17} />
                       </div>
                     </button>
+                    <div className="tl-card-usage">
+                      {assetsFor(talent).some(
+                        (a) => placementsForAsset(a).length,
+                      )
+                        ? "Used on the website"
+                        : "Library only"}
+                    </div>
                     <button
                       className={`tl-card-save ${saved.includes(`${talent.id}:portrait`) ? "is-saved" : ""}`}
                       onClick={() => toggleSaved(`${talent.id}:portrait`)}
@@ -857,23 +951,29 @@ export function LabTalent() {
             ) : (
               <div
                 className={`tl-content-grid ${compact ? "compact" : ""}`}
-                style={{ "--tl-content-columns": contentColumnCount } as CSSProperties}
+                style={
+                  {
+                    "--tl-content-columns": contentColumnCount,
+                  } as CSSProperties
+                }
               >
-                {distributeTalentContent(visibleAssets, contentColumnCount).map((column, columnIndex) => (
-                  <div className="tl-content-column" key={columnIndex}>
-                    {column.map(({ item: asset, position }) => (
-                      <AssetCard
-                        key={asset.id}
-                        asset={asset}
-                        caption={captions[asset.id]}
-                        saved={saved.includes(asset.id)}
-                        onSave={() => toggleSaved(asset.id)}
-                        onOpen={() => openProfile(asset.talent.id, asset.id)}
-                        position={position}
-                      />
-                    ))}
-                  </div>
-                ))}
+                {distributeTalentContent(visibleAssets, contentColumnCount).map(
+                  (column, columnIndex) => (
+                    <div className="tl-content-column" key={columnIndex}>
+                      {column.map(({ item: asset, position }) => (
+                        <AssetCard
+                          key={asset.id}
+                          asset={asset}
+                          caption={captions[asset.id]}
+                          saved={saved.includes(asset.id)}
+                          onSave={() => toggleSaved(asset.id)}
+                          onOpen={() => openProfile(asset.talent.id, asset.id)}
+                          position={position}
+                        />
+                      ))}
+                    </div>
+                  ),
+                )}
               </div>
             )}
             <footer className="tl-library-footer">
@@ -889,7 +989,9 @@ export function LabTalent() {
           <span>
             Foam Lab <i /> Talent & content library
           </span>
-          <span>Browser-local saves · Login not enabled</span>
+          <span>
+            GitHub library · Bookmarks and captions saved in this browser
+          </span>
         </footer>
       </div>
       {selected && (
@@ -906,6 +1008,17 @@ export function LabTalent() {
           busy={busy}
           notify={setToast}
           notice={progress || toast}
+          onManage={() => {
+            closeProfile();
+            setManaging(selected.id);
+          }}
+        />
+      )}
+      {managing !== null && (
+        <TalentLibraryManager
+          library={library}
+          initialId={managing}
+          onClose={() => setManaging(null)}
         />
       )}
       {(toast || progress) && (

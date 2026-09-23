@@ -1,6 +1,7 @@
 import { A } from "../lib/assets";
 import { stagedTalent, type StagedTalent, type TalentContentTile } from "./stagedTalent";
 import { creatorWorkKeywords, creatorWorkTalent } from "./creatorWorkTalent";
+import { websitePhotoTalent } from "./websitePhotoTalent";
 
 const D = `${A}/talent/discovery-v1`;
 
@@ -59,7 +60,7 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
       })),
     ],
   };
-}).concat(creatorWorkTalent);
+}).concat(creatorWorkTalent, websitePhotoTalent);
 
 /** Mix new candid imagery with existing content, rather than grouping one creator repeatedly. */
 export const discoveryFeedOrder = [

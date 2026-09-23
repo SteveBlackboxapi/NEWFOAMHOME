@@ -22,13 +22,17 @@ export const router = createBrowserRouter(
         { path: "kit-story", Component: KitStory },
         { path: "chrome-story", Component: ChromeStory },
         { path: "lab/inspo", Component: LabInspo },
-        {
-          path: "lab/talent",
-          HydrateFallback: () => null,
-          lazy: async () => ({
-            Component: (await import("./pages/LabTalent")).LabTalent,
-          }),
-        },
+        ...(import.meta.env.DEV || import.meta.env.VITE_PRIVATE_LAB === "true"
+          ? [
+              {
+                path: "lab/talent",
+                HydrateFallback: () => null,
+                lazy: async () => ({
+                  Component: (await import("./pages/LabTalent")).LabTalent,
+                }),
+              },
+            ]
+          : []),
         {
           path: "/",
           Component: Root,
