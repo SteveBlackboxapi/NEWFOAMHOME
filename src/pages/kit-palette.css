@@ -1,0 +1,132 @@
+/* Colour only: preserve the kit geometry, editor canvas and story timing. */
+:is(
+  .ks-kit,
+  .ks-mobile-kit,
+  .ks-mobile-platform-callout,
+  .ks-mobile-share-kit
+) {
+  --kit-surface: #1b1d20;
+  --kit-card: #28262e;
+  --kit-ink: #fff;
+  --kit-lilac: #d8b8e8;
+  --kit-stat: #eadcf1;
+  --kit-muted: #cec4d5;
+  --kit-line: #d8b8e84d;
+  --kit-tint: #d8b8e818;
+  background: var(--kit-surface);
+  color: var(--kit-ink);
+}
+
+.ks-kit .ks-contact-row {
+  border-color: var(--kit-line);
+}
+.ks-kit .ks-contact-row > span,
+.ks-mobile-kit .ks-mobile-kit-contact {
+  border-color: var(--kit-lilac);
+  color: var(--kit-lilac);
+}
+.ks-kit .ks-profile-name,
+.ks-mobile-kit .ks-mobile-kit-name,
+.ks-mobile-kit .ks-mobile-kit-content-title,
+.ks-mobile-share-kit .ks-mobile-kit-name {
+  color: var(--kit-ink);
+}
+.ks-kit .ks-profile-details,
+.ks-mobile-kit .ks-mobile-kit-details {
+  color: var(--kit-ink);
+}
+.ks-kit .ks-profile-details > svg,
+.ks-kit .ks-socials,
+.ks-mobile-kit .ks-mobile-kit-socials > span {
+  color: var(--kit-lilac);
+  border-color: var(--kit-lilac);
+}
+.ks-kit .ks-profile-details > span + span {
+  border-color: var(--kit-line);
+}
+.ks-kit .ks-verticals,
+.ks-mobile-kit .ks-mobile-kit-verticals {
+  background: var(--kit-tint);
+  color: var(--kit-ink);
+  box-shadow: inset 0 0 0 1px #d8b8e899;
+}
+.ks-kit .ks-portrait > div,
+.ks-mobile-share-kit .ks-mobile-kit-avatar {
+  background: var(--kit-card);
+}
+.ks-kit .ks-platforms,
+.ks-mobile-kit .ks-mobile-kit-platforms,
+.ks-mobile-share-kit .ks-mobile-share-strip {
+  background: var(--kit-surface);
+  color: var(--kit-stat);
+}
+.ks-kit .ks-platform-total h3,
+.ks-mobile-kit .ks-mobile-kit-platforms > p:first-of-type {
+  color: var(--kit-ink);
+}
+:is(.ks-kit, .ks-mobile-kit, .ks-mobile-platform-callout) .kit-platform-icon {
+  color: var(--kit-lilac);
+}
+.ks-kit .ks-bio,
+.ks-kit .ks-platform-stat small,
+.ks-mobile-kit .ks-mobile-kit-bio,
+.ks-mobile-share-kit .ks-mobile-kit-meta,
+.ks-mobile-platform-callout .ks-mobile-kit-meta {
+  color: var(--kit-muted);
+}
+.ks-mobile-platform-callout {
+  color: var(--kit-stat);
+}
+.ks-mobile-share-kit {
+  border-color: var(--kit-line);
+}
+:is(.ks-kit, .ks-mobile-kit, .ks-mobile-share-kit) .ai-media-disclosure,
+.ks-kit .ks-section-heading small,
+.ks-mobile-kit .ks-mobile-kit-meta {
+  color: var(--kit-muted);
+}
+:is(.ks-kit, .ks-mobile-kit, .ks-mobile-platform-callout)
+  .kit-verified-badge
+  > path:first-child {
+  fill: var(--kit-lilac);
+}
+:is(.ks-kit, .ks-mobile-kit, .ks-mobile-platform-callout)
+  .kit-verified-badge
+  > path:last-child {
+  stroke: var(--kit-surface);
+}
+:is(.ks-kit, .ks-mobile-kit) .ks-featured-media {
+  background: var(--kit-card);
+}
+:is(.ks-kit, .ks-mobile-kit) .ks-featured-unavailable {
+  color: var(--kit-muted);
+}
+
+/* The same palette continues through the existing analytics and graph cards. */
+:is(.ks-kit, .ks-mobile-kit) .ka-section {
+  --ka-burgundy: var(--kit-lilac);
+  --ka-cream: var(--kit-surface);
+  --ka-card: var(--kit-card);
+  --ka-ink: var(--kit-ink);
+  --ka-muted: var(--kit-muted);
+}
+:is(.ks-kit, .ks-mobile-kit)
+  :is(.ka-metric-card, .ka-growth-card, .ka-demographic-card, .ka-chart-tag) {
+  border-color: var(--kit-line);
+}
+:is(.ks-kit, .ks-mobile-kit) .ka-metric-card dt {
+  color: var(--kit-muted);
+}
+:is(.ks-kit, .ks-mobile-kit) .ka-icon-box {
+  background: var(--kit-tint);
+  color: var(--kit-lilac);
+}
+:is(.ks-kit, .ks-mobile-kit) .ka-chart-gridline {
+  stroke: var(--kit-line);
+}
+:is(.ks-kit, .ks-mobile-kit) .ka-bar-track {
+  background: #d8b8e829;
+}
+:is(.ks-kit, .ks-mobile-kit) .ka-metric-shield > path:last-child {
+  stroke: var(--kit-surface);
+}

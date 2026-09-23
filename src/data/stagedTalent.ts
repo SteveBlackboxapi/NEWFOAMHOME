@@ -250,6 +250,7 @@ export type TalentPlatform = {
 };
 
 export type TalentContentTile = {
+  provenance?: "ai-generated" | "uploaded" | "reference";
   /** Stable asset identity for saved items and captions when content is reordered. */
   id?: string;
   type: "still" | "clip";
@@ -292,6 +293,7 @@ export function resolveCaptionSettings(
 }
 
 export type StagedTalent = {
+  provenance?: "ai-generated" | "uploaded" | "reference";
   id: string;
   displayName: string;
   age: number;

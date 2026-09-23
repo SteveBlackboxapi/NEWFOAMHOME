@@ -14,6 +14,7 @@ import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
+import { StoryNav } from "../components/StoryNav";
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
 import { KitStoryMobile } from "./KitStoryMobile";
@@ -761,21 +762,73 @@ function KitStoryDesktop() {
       className="text-[#101828] overflow-x-clip"
       style={{ background: stageBg }}
     >
-      <div className="fixed top-1 left-4 z-[70]">
-        <Link
-          to="/"
-          className={`${FG_M} text-[12px] inline-flex items-center gap-2 rounded-full px-3 h-8 border ${canvasLight ? "text-[#101828] border-[#d8dbe2] bg-white/90" : "text-white/85 border-white/20 bg-black/30"}`}
-        >
-          ← Foam
-        </Link>
-      </div>
-
       <section
         ref={track}
         className="relative"
         style={{ height: `${KIT_STORY_HEIGHT_VH}vh` }}
         data-kit-story-track
       >
+        <StoryNav />
+        {/* Truth-layer hero copy */}
+        <div
+          className="ks-intro-copy z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none"
+          aria-hidden={headlineOp < 0.02}
+          inert={headlineOp < 0.02}
+          style={{ opacity: headlineOp }}
+        >
+          <p
+            className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}
+          >
+            The truth layer
+          </p>
+          <h1 className={`${FG_SB} ks-hero-title text-white`}>
+            <span>Numbers that</span> <span>everyone in the</span>{" "}
+            <span>deal can trust</span>
+          </h1>
+          <p
+            className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}
+          >
+            Creators connect their data at source. Managers pitch with it.
+            Brands decide on it. No screenshots, no guesswork, no "let me check
+            and get back to you."
+          </p>
+          <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
+            <a
+              href={DEMO_URL}
+              className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`}
+              style={{ background: "#c6f31e" }}
+            >
+              Get a demo
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M2 12L12 2M12 2H5M12 2V9"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </a>
+            <button
+              type="button"
+              onClick={() => jumpTo(KIT_JUMP_POINTS.profile)}
+              className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}
+            >
+              Follow a pitch
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path
+                  d="M6 2V10M6 10L2 6M6 10L10 6"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <p className="mt-5 text-[12px] text-white/60">
+            Scroll to explore. Scroll back to rewind.
+          </p>
+        </div>
+
         <div
           ref={stage}
           className="sticky top-0 h-screen overflow-clip"
@@ -1012,66 +1065,6 @@ function KitStoryDesktop() {
               />
             </div>
           )}
-
-          {/* Truth-layer hero copy */}
-          <div
-            className="absolute inset-0 z-30 flex flex-col justify-end px-8 md:px-16 pb-16 pointer-events-none"
-            aria-hidden={headlineOp < 0.02}
-            inert={headlineOp < 0.02}
-            style={{ opacity: headlineOp }}
-          >
-            <p
-              className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}
-            >
-              The truth layer
-            </p>
-            <h1 className={`${FG_SB} ks-hero-title text-white`}>
-              <span>Numbers that</span> <span>everyone in the</span>{" "}
-              <span>deal can trust</span>
-            </h1>
-            <p
-              className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}
-            >
-              Creators connect their data at source. Managers pitch with it.
-              Brands decide on it. No screenshots, no guesswork, no "let me
-              check and get back to you."
-            </p>
-            <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
-              <a
-                href={DEMO_URL}
-                className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`}
-                style={{ background: "#c6f31e" }}
-              >
-                Get a demo
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M2 12L12 2M12 2H5M12 2V9"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </a>
-              <button
-                type="button"
-                onClick={() => jumpTo(KIT_JUMP_POINTS.profile)}
-                className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}
-              >
-                Follow a pitch
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M6 2V10M6 10L2 6M6 10L10 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
-            <p className="mt-5 text-[12px] text-white/60">
-              Scroll to explore. Scroll back to rewind.
-            </p>
-          </div>
 
           {/* Share modal */}
           <div

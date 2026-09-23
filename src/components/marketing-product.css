@@ -44,8 +44,8 @@
   font-size: 10px;
 }
 .mp-product-kit {
-  background: #fff;
-  color: #000;
+  background: #1b1d20;
+  color: #fff;
 }
 .mp-product-kit-intro {
   display: grid;
@@ -75,7 +75,7 @@
   object-fit: cover;
   object-position: center top;
   border-radius: 10px;
-  background: #eeefe8;
+  background: #28262e;
 }
 .mp-product-kit-stats {
   display: flex;
@@ -83,8 +83,8 @@
   flex-wrap: wrap;
   gap: 10px;
   padding: 18px 26px;
-  background: #000;
-  color: #dfedfc;
+  background: #1b1d20;
+  color: #eadcf1;
 }
 .mp-product-kit-stats strong {
   font: 600 35px/1 var(--font-sans);
@@ -107,7 +107,7 @@
   object-fit: cover;
   object-position: center top;
   border-radius: 9px;
-  background: #eeefe8;
+  background: #28262e;
 }
 .mp-product-roster {
   padding: 26px;

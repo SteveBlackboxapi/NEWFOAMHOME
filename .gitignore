@@ -6,3 +6,6 @@ build/
 .vite/
 *.tsbuildinfo
 *.log
+
+dist-lab/
+workers/talent-lab/site-assets.mjs

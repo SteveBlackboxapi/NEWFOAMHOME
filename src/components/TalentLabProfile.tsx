@@ -22,6 +22,7 @@ import {
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
 import { AIDisclosure, Caption } from "./TalentLabMedia";
+import { AssetUsage } from "./TalentLibraryManager";
 import { TalentCaptionControls } from "./TalentCaptionControls";
 
 type Props = {
@@ -36,6 +37,7 @@ type Props = {
   busy: boolean;
   notify: (message: string) => void;
   notice: string;
+  onManage: () => void;
 };
 
 export function TalentLabProfile({
@@ -50,6 +52,7 @@ export function TalentLabProfile({
   busy,
   notify,
   notice,
+  onManage,
 }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const closeRef = useRef(onClose);
@@ -157,7 +160,13 @@ export function TalentLabProfile({
             <span className="tl-eyebrow">TALENT PROFILE</span>
             <h2 id="tl-profile-name">{talent.displayName}</h2>
           </div>
-          <span className="tl-demo-tag">Fictional talent</span>
+          <span className="tl-demo-tag">
+            {talent.provenance === "reference"
+              ? "Reference photo"
+              : talent.provenance === "uploaded"
+                ? "Uploaded profile"
+                : "Fictional talent"}
+          </span>
         </div>
         <button
           className="tl-icon-button"
@@ -167,6 +176,9 @@ export function TalentLabProfile({
           <LabIcon name="close" />
         </button>
       </header>
+      <div className="tl-profile-usage">
+        <AssetUsage asset={active} />
+      </div>
       <div className="tl-profile-toolbar">
         <div className="tl-tabs" aria-label="Profile sections">
           {(["overview", "assets", "data"] as const).map((item) => (
@@ -185,6 +197,9 @@ export function TalentLabProfile({
           ))}
         </div>
         <div className="tl-actions">
+          <button className="tl-button" onClick={onManage}>
+            Manage images
+          </button>
           <button className="tl-button" onClick={copyLink}>
             <LabIcon name="link" size={16} />
             <span>Copy link</span>
@@ -227,7 +242,7 @@ export function TalentLabProfile({
                   <LabIcon name="image" size={16} /> View portrait
                 </button>
               </div>
-              <AIDisclosure />
+              <AIDisclosure provenance={talent.provenance} />
             </div>
             <div className="tl-overview-info">
               <div className="tl-tags">
@@ -240,7 +255,9 @@ export function TalentLabProfile({
                 <LabIcon name="pin" size={15} />
                 {talent.location}
                 <span>·</span>
-                {talent.age} years old
+                {talent.age > 0
+                  ? `${talent.age} years old`
+                  : "Age not assigned"}
               </p>
               <p className="tl-bio">{talent.bio}</p>
               {talent.creativeDirection && (
@@ -350,7 +367,7 @@ export function TalentLabProfile({
                     src={talent.motion}
                     aria-label={`${talent.displayName} profile video`}
                   />
-                  <AIDisclosure />
+                  <AIDisclosure provenance={talent.provenance} />
                 </div>
               )}
             </div>
@@ -380,7 +397,9 @@ export function TalentLabProfile({
                             : "Image"}
                       </span>
                     </button>
-                    <AIDisclosure />
+                    <AIDisclosure
+                      provenance={a.tile?.provenance || talent.provenance}
+                    />
                   </div>
                 ))}
               </div>
@@ -413,7 +432,7 @@ export function TalentLabProfile({
                           loading="lazy"
                         />
                       </a>
-                      <AIDisclosure />
+                      <AIDisclosure provenance="reference" />
                       <a
                         className="tl-reference-link"
                         href={reference.src}
@@ -517,7 +536,10 @@ export function TalentLabProfile({
                     <Caption settings={caption} />
                   )}
                 </div>
-                <AIDisclosure className="tl-preview-disclosure" />
+                <AIDisclosure
+                  className="tl-preview-disclosure"
+                  provenance={active.tile?.provenance || talent.provenance}
+                />
               </div>
               <a
                 className="tl-fullsize-link"
