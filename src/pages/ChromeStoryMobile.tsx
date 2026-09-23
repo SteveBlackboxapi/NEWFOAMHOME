@@ -8,6 +8,7 @@ import {
 import { MobileFade } from "../components/MobileFade";
 import {
   CHROME_STORE,
+  KIT_STORY_CHROME_BACKGROUND,
   chromeWallpaperBackground,
   useChromeWallpaper,
   useChromePreviewEntry,
@@ -36,7 +37,11 @@ export function ChromeStoryMobile({
   const preview = useRef<HTMLElement>(null);
   useChromePreviewEntry(preview);
   const [panelStage, setPanelStage] = useState<ChromeStage>(2);
-  const background = { backgroundImage: chromeWallpaperBackground(wallpaper) };
+  const background = {
+    backgroundImage: embedded
+      ? KIT_STORY_CHROME_BACKGROUND
+      : chromeWallpaperBackground(wallpaper),
+  };
   return (
     <div className="cs-story cs-mobile-story">
       {!embedded && (

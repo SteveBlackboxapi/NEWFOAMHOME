@@ -1,0 +1,107 @@
+.story-scroll-cue {
+  position: absolute;
+  z-index: 31;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px #0009;
+  transform: translate(-50%, 6px);
+  opacity: 0;
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+  pointer-events: none;
+}
+.story-scroll-cue.is-visible {
+  opacity: 0.85;
+  transform: translate(-50%, 0);
+}
+.story-scroll-mouse {
+  display: block;
+  width: 23px;
+  height: 35px;
+  border: 1.5px solid currentColor;
+  border-radius: 14px;
+  box-shadow: 0 1px 8px #0002;
+}
+.story-scroll-mouse > span {
+  display: block;
+  width: 3px;
+  height: 7px;
+  margin: 7px auto 0;
+  border-radius: 3px;
+  background: currentColor;
+}
+.story-scroll-cue.is-visible .story-scroll-mouse > span {
+  animation: story-scroll-wheel 1500ms ease-in-out 500ms 2;
+}
+@keyframes story-scroll-wheel {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.story-nav-mobile-hero {
+  padding-bottom: 104px;
+}
+.story-return {
+  display: flex;
+  justify-content: center;
+  padding: 0 24px max(40px, env(safe-area-inset-bottom));
+  background: #fff6eb;
+}
+.story-return-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1px solid #10182826;
+  border-radius: 999px;
+  color: #101828;
+  font-size: 15px;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+.story-return-button:hover {
+  background: #fff9;
+}
+.story-return-button:active {
+  transform: scale(0.96);
+}
+.story-return-button:focus-visible {
+  outline: 3px solid #155eef;
+  outline-offset: 5px;
+}
+#kit-story-title:focus {
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-scroll-cue,
+  .story-return-button {
+    transition: none;
+  }
+  .story-scroll-cue.is-visible .story-scroll-mouse > span {
+    animation: none;
+  }
+}
