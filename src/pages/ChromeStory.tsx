@@ -15,6 +15,7 @@ import { useMediaQuery, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import {
   CHROME_STEPS,
   CHROME_STORE,
+  KIT_STORY_CHROME_BACKGROUND,
   chromeWallpaperBackground,
   useChromeWallpaper,
   useChromePreviewEntry,
@@ -171,7 +172,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
               <div
                 className="cs-desktop-wallpaper"
                 style={{
-                  backgroundImage: chromeWallpaperBackground(wallpaper),
+                  backgroundImage: embedded
+                    ? KIT_STORY_CHROME_BACKGROUND
+                    : chromeWallpaperBackground(wallpaper),
                 }}
               />
               <p className="cs-stage-caption">

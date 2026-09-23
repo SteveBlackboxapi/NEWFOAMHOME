@@ -399,11 +399,15 @@ for (const route of ["/kit-story", "/chrome-story"]) {
     "Foam for Chrome · Send finale",
   );
   artwork(
-    "chrome-desktop-landscape.webp",
-    "Chrome demo landscape wallpaper",
+    route === "/kit-story"
+      ? "chrome-desktop-blurio.webp"
+      : "chrome-desktop-landscape.webp",
+    route === "/kit-story"
+      ? "Blurio desktop wallpaper"
+      : "Chrome demo landscape wallpaper",
     route,
     "Foam for Chrome · Desktop background",
-    "product-demo",
+    route === "/kit-story" ? "supplied-reference" : "product-demo",
   );
   artwork(
     "fdb3b.svg",

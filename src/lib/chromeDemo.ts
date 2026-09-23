@@ -23,6 +23,8 @@ export const CHROME_STEPS = [
 ] as const;
 export type ChromeStage = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
+export const KIT_STORY_CHROME_BACKGROUND = `url("${A}/chrome-desktop-blurio.webp")`;
+
 export const CHROME_WALLPAPERS = {
   original: `url("${A}/chrome-desktop-landscape.webp")`,
   sage: "radial-gradient(ellipse at 20% 20%, #eef0df, transparent 62%), linear-gradient(130deg, #7b9383, #c0cebd 54%, #e2e5d3)",

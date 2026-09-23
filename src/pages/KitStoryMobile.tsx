@@ -20,6 +20,7 @@ import { kitMobileCountProgress } from "../lib/kitStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { FoundStory } from "./FoundStory";
 import { StoryNav } from "../components/StoryNav";
+import { StoryScrollCue } from "../components/StoryScrollControls";
 import {
   formatWebsiteMetric,
   websiteProfile,
@@ -446,6 +447,8 @@ export function KitStoryMobile() {
             The truth layer
           </p>
           <h1
+            id="kit-story-title"
+            tabIndex={-1}
             className={`${FG_SB} ks-hero-title ks-hero-title-mobile text-white`}
           >
             <span>Numbers that</span> <span>everyone in the</span>{" "}
@@ -502,6 +505,7 @@ export function KitStoryMobile() {
             </a>
           </div>
         </MobileFade>
+        <StoryScrollCue />
       </section>
 
       {/* 2. Kit */}

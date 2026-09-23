@@ -15,6 +15,10 @@ import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
+import {
+  StoryBackToTop,
+  StoryScrollCue,
+} from "../components/StoryScrollControls";
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
 import { KitStoryMobile } from "./KitStoryMobile";
@@ -781,7 +785,11 @@ function KitStoryDesktop() {
           >
             The truth layer
           </p>
-          <h1 className={`${FG_SB} ks-hero-title text-white`}>
+          <h1
+            id="kit-story-title"
+            tabIndex={-1}
+            className={`${FG_SB} ks-hero-title text-white`}
+          >
             <span>Numbers that</span> <span>everyone in the</span>{" "}
             <span>deal can trust</span>
           </h1>
@@ -824,9 +832,6 @@ function KitStoryDesktop() {
               </svg>
             </button>
           </div>
-          <p className="mt-5 text-[12px] text-white/60">
-            Scroll to explore. Scroll back to rewind.
-          </p>
         </div>
 
         <div
@@ -838,6 +843,7 @@ function KitStoryDesktop() {
           }}
         >
           {/* Editor + kit canvas */}
+          <StoryScrollCue />
           <div
             className="absolute inset-x-3 md:inset-x-4 top-[5.5%] bottom-[4.5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col shadow-[0_28px_70px_rgba(16,24,40,0.18)]"
             style={{
@@ -1222,5 +1228,10 @@ export function KitStory() {
     desktopKitSnapshot,
     () => false,
   );
-  return isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />;
+  return (
+    <>
+      {isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />}
+      <StoryBackToTop />
+    </>
+  );
 }
