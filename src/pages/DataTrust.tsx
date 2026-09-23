@@ -114,6 +114,35 @@ export function DataTrust() {
   );
   return (
     <MarketingPage className="dt-page">
+      <section className="dt-privacy" aria-labelledby="privacy-title">
+        <div className="dt-privacy-panel">
+          <img
+            src={`${A}/people-colour/trust-v1/privacy-helmet.webp`}
+            alt="Original AI-generated portrait of a fictional woman in a cream helmet and blush jacket"
+            fetchPriority="high"
+            width={1672}
+            height={941}
+            decoding="async"
+          />
+          <div className="dt-privacy-copy">
+            <p className="dt-eyebrow">A little peace of mind.</p>
+            <h2 id="privacy-title">
+              Your talent.
+              <br />
+              Your trust.
+            </h2>
+            <p>
+              Understand how information is handled, so you can focus on the
+              people behind it.
+            </p>
+            <a className="dt-text-link" href={PRIVACY_URL}>
+              Explore our privacy policy <span aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+        <p className="dt-image-note">Illustrative image · Made with AI</p>
+      </section>
+
       <section className="dt-hero dt-container" aria-labelledby="trust-title">
         <div className="dt-hero-symbol">
           <TrustIcon kind="privacy" />
@@ -146,36 +175,6 @@ export function DataTrust() {
       </section>
 
       <div className="dt-soft">
-        <section
-          className="dt-container dt-privacy"
-          aria-labelledby="privacy-title"
-        >
-          <div className="dt-privacy-panel">
-            <img
-              src={`${A}/people-colour/trust-v1/privacy-helmet.webp`}
-              alt="Original AI-generated portrait of a fictional woman in a cream helmet and blush jacket"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="dt-privacy-copy">
-              <p className="dt-eyebrow">A little peace of mind.</p>
-              <h2 id="privacy-title">
-                Your talent.
-                <br />
-                Your trust.
-              </h2>
-              <p>
-                Understand how information is handled, so you can focus on the
-                people behind it.
-              </p>
-              <a className="dt-text-link" href={PRIVACY_URL}>
-                Explore our privacy policy <span aria-hidden="true">›</span>
-              </a>
-            </div>
-          </div>
-          <p className="dt-image-note">Illustrative image · Made with AI</p>
-        </section>
-
         <section
           className="dt-container dt-principles"
           aria-labelledby="principles-title"
