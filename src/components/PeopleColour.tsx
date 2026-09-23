@@ -124,10 +124,10 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-six">
             <figure className="pc-creator-tile">
               <img
-                src={`${PC}/studio-creator.webp`}
-                alt="Creator at a studio desk in an illustrative photograph"
-                width="1110"
-                height="1664"
+                src={`${PC}/original-portraits-v1/studio-creator-original-v1.webp`}
+                alt="AI-generated fictional creative smiling at her studio desk"
+                width="1024"
+                height="1536"
                 loading="lazy"
                 decoding="async"
               />
@@ -146,10 +146,10 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-seven">
             <figure className="pc-creator-tile">
               <img
-                src={`${PC}/blue-portrait.webp`}
-                alt="Laughing creative portrait in an illustrative photograph"
-                width="808"
-                height="632"
+                src={`${PC}/original-portraits-v1/blue-portrait-original-v1.webp`}
+                alt="AI-generated fictional creative laughing against a vivid blue backdrop"
+                width="1448"
+                height="1086"
                 loading="lazy"
                 decoding="async"
               />

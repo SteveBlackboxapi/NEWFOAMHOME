@@ -137,10 +137,10 @@ export function About() {
               <div className="ep-invitation-mosaic">
                 <img
                   className="ep-invitation-portrait"
-                  src={`${PC}/studio-creator.webp`}
-                  alt="A creative at work in a colourful studio"
-                  width="1110"
-                  height="1664"
+                  src={`${PC}/original-portraits-v1/studio-creator-original-v1.webp`}
+                  alt="AI-generated fictional creative at work in a colourful studio"
+                  width="1024"
+                  height="1536"
                   loading="lazy"
                   decoding="async"
                 />
@@ -154,15 +154,15 @@ export function About() {
                 </div>
                 <img
                   className="ep-invitation-moment"
-                  src={`${PC}/blue-portrait.webp`}
-                  alt="A laughing person against a bright blue backdrop"
-                  width="808"
-                  height="632"
+                  src={`${PC}/original-portraits-v1/blue-portrait-original-v1.webp`}
+                  alt="AI-generated fictional person laughing against a bright blue backdrop"
+                  width="1448"
+                  height="1086"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
-              <figcaption>Illustrative photography</figcaption>
+              <figcaption>Fictional people made with AI</figcaption>
             </figure>
             <div>
               <p className="mp-eyebrow">From belief to the everyday</p>
