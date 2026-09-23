@@ -21,6 +21,7 @@ import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { FoundStory } from "./FoundStory";
 import { StoryNav } from "../components/StoryNav";
 import { StoryScrollCue } from "../components/StoryScrollControls";
+import { NetworkStatValue } from "../components/NetworkStatValue";
 import {
   formatWebsiteMetric,
   websiteProfile,
@@ -321,7 +322,7 @@ function MobileRoles() {
     },
   ];
   return (
-    <section className="bg-white px-5 py-16" id="after-share">
+    <section className="ks-roles bg-white px-5 py-16" id="after-share">
       <MobileFade>
         <p
           className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] text-center mb-3`}
@@ -329,7 +330,7 @@ function MobileRoles() {
           Start here
         </p>
         <p
-          className={`${FG_SB} text-[28px] leading-[1.08] tracking-[-0.8px] text-[#101828] text-center mb-8`}
+          className={`ks-role-title ${FG_SB} text-[28px] leading-[1.08] tracking-[-0.8px] text-[#101828] text-center mb-8`}
         >
           Who are you in the deal?
         </p>
@@ -339,7 +340,7 @@ function MobileRoles() {
           <MobileFade key={card.to} delayMs={i * 60}>
             <Link
               to={card.to}
-              className="block rounded-[20px] border border-[#e8e8e8] bg-white p-6 min-h-[140px] flex flex-col active:border-[#c6f31e] active:bg-[#c6f31e]"
+              className="ks-role-card block rounded-[20px] border border-[#e8e8e8] bg-white p-6 min-h-[140px] flex flex-col active:border-[#c6f31e] active:bg-[#c6f31e]"
             >
               <p
                 className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-3`}
@@ -347,7 +348,7 @@ function MobileRoles() {
                 {card.kicker}
               </p>
               <p
-                className={`${FG_SB} text-[20px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}
+                className={`ks-role-headline ${FG_SB} text-[20px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}
               >
                 {card.headline}
               </p>
@@ -390,7 +391,11 @@ function MobileNetwork() {
             <p
               className={`${FG_SB} text-[48px] tracking-[-1.5px] leading-none mb-3`}
             >
-              {s.val}
+              <NetworkStatValue
+                value={s.val}
+                delayMs={i * 70}
+                rootMargin="0px 0px -8% 0px"
+              />
             </p>
             <p
               className={`${FG_R} text-[15px] leading-6 text-white/55 max-w-[260px]`}
@@ -416,7 +421,7 @@ export function KitStoryMobile() {
     setMotionPreferenceReady(true);
   }, []);
   return (
-    <div className="text-[#101828] bg-[#dddddd]">
+    <div className="ks-mobile-story-shell text-[#101828] bg-[#dddddd]">
       {/* 1. Truth layer */}
       <section className="story-nav-mobile-hero relative min-h-[88vh] bg-black text-white flex flex-col justify-end px-5 pb-12 pt-10 overflow-hidden">
         <StoryNav />
@@ -511,7 +516,7 @@ export function KitStoryMobile() {
       {/* 2. Kit */}
       <section
         id="kit-beat"
-        className="mx-auto max-w-[1000px] px-5 py-14 bg-[#dddddd]"
+        className="ks-mobile-surround mx-auto max-w-[1000px] px-5 py-14 bg-[#dddddd]"
       >
         <MobileFade>
           <p
@@ -581,7 +586,7 @@ export function KitStoryMobile() {
       </section>
 
       {/* 4. Share / Shared */}
-      <section className="px-5 py-14 bg-[#dddddd]">
+      <section className="ks-mobile-surround px-5 py-14 bg-[#dddddd]">
         <MobileFade>
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[1.6px] text-[#6a7282] mb-3`}
@@ -610,7 +615,7 @@ export function KitStoryMobile() {
           </p>
           <MediaKitLogo className="w-[150px] mx-auto mb-5" />
           <p
-            className={`${FG_SB} text-[32px] leading-[1.02] tracking-[-1.2px] text-[#101828] max-w-[14ch] mx-auto`}
+            className={`ks-mobile-sendoff-title ${FG_SB} text-[32px] leading-[1.02] tracking-[-1.2px] text-[#101828] max-w-[14ch] mx-auto`}
           >
             Media Kit
           </p>

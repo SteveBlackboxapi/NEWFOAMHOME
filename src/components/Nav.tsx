@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router";
 import { A, img } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
+import { ThemeControl } from "./SiteTheme";
 import "./site-shell.css";
 import "./foam-brand.css";
 
@@ -60,7 +61,7 @@ export function Nav() {
   }, [open]);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 1100px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
     const onResize = () => {
       if (!desktop.matches) return;
       if (menu.current?.contains(document.activeElement)) {
@@ -120,6 +121,7 @@ export function Nav() {
           ))}
         </nav>
         <div className="site-nav-actions">
+          <ThemeControl />
           <a href={DEMO_URL} className="site-nav-demo">
             Get a demo <span aria-hidden="true">↗</span>
           </a>

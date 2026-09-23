@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { A } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
+import { ThemeControl } from "./SiteTheme";
 import "./story-nav.css";
 
 const LINKS = [
@@ -41,7 +42,7 @@ export function StoryNav() {
       )
         setOpen(false);
     };
-    const desktop = window.matchMedia("(min-width: 1100px)");
+    const desktop = window.matchMedia("(min-width: 1280px)");
     const onResize = () => {
       if (!desktop.matches) return;
       if (header.current?.contains(document.activeElement))
@@ -79,6 +80,7 @@ export function StoryNav() {
           ))}
         </nav>
         <div className="story-nav-actions">
+          <ThemeControl />
           <a className="story-nav-demo" href={DEMO_URL}>
             Get a demo <span aria-hidden="true">↗</span>
           </a>

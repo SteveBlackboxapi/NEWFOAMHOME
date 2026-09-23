@@ -15,6 +15,7 @@ import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
+import { NetworkStatValue } from "../components/NetworkStatValue";
 import {
   StoryBackToTop,
   StoryScrollCue,
@@ -29,6 +30,7 @@ import {
 } from "../data/websiteTalent";
 
 import { KitMetrics, KitGrowth, KitAudience } from "../components/KitAnalytics";
+import { KitAudienceContinuation } from "../components/KitAudienceContinuation";
 import {
   KitEditHandle,
   KitPlatformIcon,
@@ -258,7 +260,7 @@ function NetworkStats({ stats }: { stats: { val: string; label: string }[] }) {
               <p
                 className={`${FG_SB} text-[56px] md:text-[72px] tracking-[-2px] leading-none mb-4`}
               >
-                {s.val}
+                <NetworkStatValue value={s.val} delayMs={i * 90} />
               </p>
               <p
                 className={`${FG_R} text-[15px] leading-6 text-white/55 max-w-[220px]`}
@@ -428,7 +430,7 @@ function AfterShare() {
           </button>
         </div>
       </section>
-      <section className="relative h-[160vh]">
+      <section className="ks-roles relative h-[160vh]">
         <div className="sticky top-0 h-screen flex flex-col justify-center px-6">
           <div className="max-w-[1200px] mx-auto w-full">
             <p
@@ -437,7 +439,7 @@ function AfterShare() {
               Start here
             </p>
             <p
-              className={`${FG_SB} text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] text-[#101828] text-center mb-10`}
+              className={`ks-role-title ${FG_SB} text-[32px] md:text-[44px] leading-[1.05] tracking-[-1px] text-[#101828] text-center mb-10`}
             >
               Who are you in the deal?
             </p>
@@ -452,7 +454,7 @@ function AfterShare() {
                     key={card.to}
                     to={card.to}
                     onMouseEnter={() => setActive(i)}
-                    className={`aspect-square rounded-[24px] border p-8 md:p-9 flex flex-col ${on ? "border-[#c6f31e] bg-[#c6f31e] z-10" : "border-[#e8e8e8] bg-white z-0"}`}
+                    className={`ks-role-card ${on ? "is-active" : ""} aspect-square rounded-[24px] border p-8 md:p-9 flex flex-col ${on ? "border-[#c6f31e] bg-[#c6f31e] z-10" : "border-[#e8e8e8] bg-white z-0"}`}
                     style={{
                       transform: on ? "scale(1.08)" : "scale(0.92)",
                       transformOrigin: "center",
@@ -466,7 +468,7 @@ function AfterShare() {
                       {card.kicker}
                     </p>
                     <p
-                      className={`${FG_SB} text-[22px] md:text-[26px] leading-8 tracking-[-0.5px] text-[#101828] flex-1`}
+                      className={`ks-role-headline ${FG_SB} text-[22px] md:text-[26px] leading-8 tracking-[-0.5px] text-[#101828] flex-1`}
                     >
                       {card.headline}
                     </p>
@@ -546,7 +548,15 @@ function KitStoryDesktop() {
       const total = Math.max(1, el.offsetHeight - window.innerHeight);
       setProg(clamp(-el.getBoundingClientRect().top / total));
       const bodyRect = body.getBoundingClientRect();
-      const maxPan = Math.max(0, body.offsetHeight - panel.clientHeight);
+      // Continue the kit below the editor without moving the established
+      // audience reading position or the scroll-driven handoff to Share.
+      const continuationHeight =
+        body.querySelector<HTMLElement>("[data-kit-continuation]")
+          ?.offsetHeight ?? 0;
+      const maxPan = Math.max(
+        0,
+        body.offsetHeight - continuationHeight - panel.clientHeight,
+      );
       const next = {} as KitPanTargets;
       const nextReveal: KitRevealLayout = {
         viewportHeight: panel.clientHeight,
@@ -759,11 +769,11 @@ function KitStoryDesktop() {
     plane.style.transform = `translate(-50%, -50%) rotate(${pose.rotation}deg)`;
   });
   const cursorOn = aimShare > 0.02 && shareFade < 0.2;
-  const stageBg = canvasLight ? "#eef0f4" : "#000";
+  const stageBg = canvasLight ? "var(--story-canvas, #eef0f4)" : "#000";
 
   return (
     <div
-      className="text-[#101828] overflow-x-clip"
+      className="ks-story-shell text-[#101828] overflow-x-clip"
       style={{ background: stageBg }}
     >
       <section
@@ -845,7 +855,7 @@ function KitStoryDesktop() {
           {/* Editor + kit canvas */}
           <StoryScrollCue />
           <div
-            className="absolute inset-x-3 md:inset-x-4 top-[5.5%] bottom-[4.5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col shadow-[0_28px_70px_rgba(16,24,40,0.18)]"
+            className="ks-editor-window absolute inset-x-3 md:inset-x-4 top-[5.5%] bottom-[4.5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col shadow-[0_28px_70px_rgba(16,24,40,0.18)]"
             style={{
               opacity: kitFade,
               pointerEvents: kitVisible ? "auto" : "none",
@@ -1004,7 +1014,10 @@ function KitStoryDesktop() {
                     <div className="ks-analytics">
                       <KitMetrics progress={timeline.metrics} />
                       <KitGrowth progress={timeline.growth} />
-                      <KitAudience progress={timeline.audience} />
+                      <div>
+                        <KitAudience progress={timeline.audience} />
+                        <KitAudienceContinuation />
+                      </div>
                     </div>
                   </article>
                 </div>
@@ -1138,12 +1151,12 @@ function KitStoryDesktop() {
 
           {/* Separate layers let the plane emerge behind the opaque parts of the logo. */}
           <div
-            className="pointer-events-none absolute inset-0 z-40 bg-[#eef0f4]"
+            className="ks-story-wipe pointer-events-none absolute inset-0 z-40 bg-[#eef0f4]"
             aria-hidden="true"
             style={{ opacity: sharedOp }}
           />
           <div
-            className="pointer-events-none absolute inset-0 z-[42] flex flex-col items-center justify-center px-6 text-center"
+            className="ks-story-sendoff pointer-events-none absolute inset-0 z-[42] flex flex-col items-center justify-center px-6 text-center"
             aria-hidden={sharedOp < 0.02}
             style={{
               opacity: sharedOp,
@@ -1159,7 +1172,7 @@ function KitStoryDesktop() {
                 <MediaKitLogo className="w-full" />
               </div>
               <p
-                className={`${FG_SB} text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px]`}
+                className={`ks-sendoff-title ${FG_SB} text-[#101828] text-[72px] md:text-[96px] leading-none tracking-[-3px]`}
               >
                 Media Kit
               </p>
