@@ -237,24 +237,13 @@
   color: #c6f31e;
 }
 .site-footer-wordmark {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 35px;
   padding: 75px 0 30px;
 }
-.site-footer-wordmark > span {
-  font-size: clamp(155px, 30vw, 440px);
-  font-weight: 600;
-  letter-spacing: -0.085em;
-  line-height: 0.8;
-  margin-left: -0.025em;
-}
-.site-footer-flower {
-  width: clamp(90px, 15vw, 215px);
-  flex-shrink: 0;
-  color: #c6f31e;
-  transform: rotate(8deg);
+.site-footer-wordmark-art {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  filter: brightness(0) invert(1);
 }
 .site-footer-bottom {
   border-top: 1px solid #fff6eb2b;
@@ -790,13 +779,6 @@
   }
   .site-footer-wordmark {
     padding-top: 60px;
-    gap: 25px;
-  }
-  .site-footer-wordmark > span {
-    font-size: clamp(120px, 30vw, 230px);
-  }
-  .site-footer-flower {
-    width: 65px;
   }
   .site-footer-bottom {
     align-items: start;
@@ -866,12 +848,6 @@
   }
   .site-footer-columns {
     grid-template-columns: 1fr 1fr;
-  }
-  .site-footer-wordmark {
-    gap: 14px;
-  }
-  .site-footer-flower {
-    width: 45px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

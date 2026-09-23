@@ -78,7 +78,6 @@ function InboxIllustration() {
             +
           </span>
         </div>
-        <FoamGlyph kind="quarter" />
       </div>
       <figcaption>
         <AIDisclosure detail="Fictional creator · Workflow illustration" />

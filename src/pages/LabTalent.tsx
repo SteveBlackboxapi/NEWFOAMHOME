@@ -12,6 +12,7 @@ import { distributeTalentContent, talentContentColumns } from "../lib/talentLabL
 import { img } from "../lib/assets";
 import {
   assetsFor,
+  hasAssignedAudience,
   assetKind,
   readCaption,
   writeCaption,
@@ -237,13 +238,16 @@ export function LabTalent() {
           (!filters.talent || t.id === filters.talent) &&
           (!filters.category || t.verticals.includes(filters.category)) &&
           (!filters.platforms.length ||
-            t.platforms.some((p) => filters.platforms.includes(p.network))) &&
+            t.platforms.some((p) => filters.platforms.includes(p.network)) ||
+            (view !== "talent" &&
+              t.content.some((tile) => filters.platforms.includes(tile.platform)))) &&
           (!filters.audience ||
-            (filters.audience === "1m"
-              ? t.totalAudience >= 1_000_000
-              : filters.audience === "500k"
-                ? t.totalAudience >= 500_000 && t.totalAudience < 1_000_000
-                : t.totalAudience < 500_000)) &&
+            (hasAssignedAudience(t) &&
+              (filters.audience === "1m"
+                ? t.totalAudience >= 1_000_000
+                : filters.audience === "500k"
+                  ? t.totalAudience >= 500_000 && t.totalAudience < 1_000_000
+                  : t.totalAudience < 500_000))) &&
           (view !== "talent" || !search || text.includes(search))
         );
       }),
@@ -811,9 +815,15 @@ export function LabTalent() {
                       <div className="tl-talent-info">
                         <div>
                           <strong>
-                            {formatAudience(talent.totalAudience)}
+                            {hasAssignedAudience(talent)
+                              ? formatAudience(talent.totalAudience)
+                              : "—"}
                           </strong>
-                          <span>Total audience</span>
+                          <span>
+                            {hasAssignedAudience(talent)
+                              ? "Total audience"
+                              : "Audience not assigned"}
+                          </span>
                         </div>
                         <div className="tl-platform-pills">
                           {talent.platforms.map((p) => (

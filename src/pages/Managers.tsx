@@ -216,7 +216,6 @@ export function Managers() {
             </ActionLink>
           </div>
           <Reveal className="ap-mail-stage">
-            <FoamGlyph kind="quarter" className="ap-mail-shape" />
             <div className="ap-mail-card">
               <div className="ap-window-bar">
                 <span>Re: The everyday beauty brief</span>

@@ -1,5 +1,6 @@
 import { A } from "../lib/assets";
 import { stagedTalent, type StagedTalent, type TalentContentTile } from "./stagedTalent";
+import { creatorWorkKeywords, creatorWorkTalent } from "./creatorWorkTalent";
 
 const D = `${A}/talent/discovery-v1`;
 
@@ -24,9 +25,12 @@ export const discoveryAdditions: Addition[] = [
   { talentId: "nia-brooks", name: "skincare-shelf", caption: "what stays by the sink", aspectRatio: "4/5", platform: "instagram", keywords: ["skincare", "product", "review", "cleanser", "moisturiser", "serum", "bathroom"], captionSettings: { visible: false } },
 ];
 
-export const discoveryKeywords: Record<string, string[]> = Object.fromEntries(
-  discoveryAdditions.map((item) => [`${item.talentId}:discovery-${item.name}`, item.keywords]),
-);
+export const discoveryKeywords: Record<string, string[]> = {
+  ...Object.fromEntries(
+    discoveryAdditions.map((item) => [`${item.talentId}:discovery-${item.name}`, item.keywords]),
+  ),
+  ...creatorWorkKeywords,
+};
 
 /** Lab-only extension: original talent records, tile order and Kit selections remain untouched. */
 export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
@@ -55,14 +59,16 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
       })),
     ],
   };
-});
+}).concat(creatorWorkTalent);
 
 /** Mix new candid imagery with existing content, rather than grouping one creator repeatedly. */
 export const discoveryFeedOrder = [
+  "tessa-quinn:workout-selfie-v1",
+  "luca-marin:beach-cafe-v1",
   "jax-orin:discovery-jax-live-set",
-  "mira-vale:paused-makeup-v2",
   "zane-holt:discovery-zane-shoe-chat",
   "rue-dante:discovery-cats-sleeping",
+  "mira-vale:paused-makeup-v2",
   "elise-morgan:hotel-mirror-v1",
   "nia-brooks:skincare-review",
   "rue-dante:discovery-cat-laundry",
