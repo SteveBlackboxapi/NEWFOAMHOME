@@ -110,14 +110,19 @@
   inset: 45% 0 0;
   background: linear-gradient(transparent, #14203596);
 }
-.mui-d-result > span {
+.mui-d-result-caption {
   position: absolute;
   left: 10px;
+  right: 10px;
   bottom: 10px;
   z-index: 1;
   color: white;
   font-size: 13px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
 }
 .mui-d-result-bottom {
   display: flex;
@@ -329,6 +334,9 @@
 .mui-d-roster-person > .mui-bar {
   margin: 7px 3px 1px;
   height: 6px;
+}
+.mui-d-roster-person .mui-accounts {
+  margin: 7px 3px 1px;
 }
 .mui-d-roster-foot {
   height: 38px;

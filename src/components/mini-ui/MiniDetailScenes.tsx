@@ -1,4 +1,5 @@
 import {
+  MiniAccounts,
   MiniAvatar,
   MiniBar,
   MiniFoamMark,
@@ -25,8 +26,7 @@ export function MiniKit() {
               <br />
               Pikka.
             </h3>
-            <MiniBar width={80} />
-            <MiniBar width={58} />
+            <MiniAccounts person="samantha" size={18} />
           </div>
           <MiniPhoto person="samantha" />
         </div>

@@ -11,12 +11,13 @@ import {
 } from "../components/Marketing";
 import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { TalentSearchPreview } from "../components/TalentSearchDemo";
 import "./marketing-features.css";
 import "./feature-miniatures.css";
 
 const FEATURES: {
-  kind: "kit" | "roster" | "search" | "inbox";
-  illustration: "kit" | "shortlist" | "search" | "inbox";
+  kind: "kit" | "roster" | "talent" | "search" | "inbox";
+  illustration: "kit" | "shortlist" | "talent" | "search" | "inbox";
   name: string;
   heading: string;
   copy: string;
@@ -40,6 +41,15 @@ const FEATURES: {
     copy: "Bring the right people together for a brief. Give the brand a clear way to explore your recommendations.",
     link: "/managers",
     cta: "Explore the manager’s workflow",
+  },
+  {
+    kind: "talent",
+    illustration: "talent",
+    name: "Talent search",
+    heading: "Find the person behind the possibility.",
+    copy: "Start with an interest, a location or a platform audience. Find creators and see their Instagram, TikTok and YouTube accounts together.",
+    link: "/brands#talent-discovery",
+    cta: "Explore talent discovery",
   },
   {
     kind: "search",
@@ -126,9 +136,11 @@ function FeatureExplorer() {
             </span>
             <h3>{current.heading}</h3>
             <p>{current.copy}</p>
-            <ActionLink to={current.link}>{current.cta}</ActionLink>
+            {current.kind === "talent" ? (
+              <Link to={current.link} className="td-text-link">{current.cta} <span aria-hidden="true">↗</span></Link>
+            ) : <ActionLink to={current.link}>{current.cta}</ActionLink>}
           </div>
-          <MiniIllustration kind={current.illustration} />
+          {current.illustration === "talent" ? <TalentSearchPreview /> : <MiniIllustration kind={current.illustration} />}
         </div>
       </div>
     </section>

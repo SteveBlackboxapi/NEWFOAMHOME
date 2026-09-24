@@ -26,31 +26,31 @@ const illustrations = {
     scene: MiniKit,
     tint: "lilac",
     label:
-      "A small Foam media kit with Samantha’s profile, audience figures and a ready-to-share badge.",
+      "A small Foam media kit with Samantha’s Instagram, TikTok and YouTube accounts, audience figures and a ready-to-share badge.",
   },
   search: {
     scene: MiniSearch,
     tint: "blue",
     label:
-      "A content search in Foam with three fictional creators and a matching search result.",
+      "A content search in Foam showing fictional Instagram and TikTok posts, with each post’s platform logo.",
   },
   shortlist: {
     scene: MiniShortlist,
     tint: "sage",
     label:
-      "Three fictional creators collected into a Foam shortlist, ready to share.",
+      "Three fictional creators and their Instagram, TikTok and YouTube accounts collected into a Foam shortlist, ready to share.",
   },
   inbox: {
     scene: MiniInbox,
     tint: "cream",
     label:
-      "The Foam extension beside an email, with a creator profile ready to copy into a reply.",
+      "The Foam extension beside an email, with a creator’s Instagram, TikTok and YouTube accounts together in a profile ready to copy into a reply.",
   },
   chrome: {
     scene: MiniChromeScene,
     tint: "blue",
     label:
-      "Foam for Chrome: a small email window beside the Foam extension, with Samantha’s fictional profile ready to copy and a Chrome Web Store badge.",
+      "Foam for Chrome: a small email window beside the Foam extension, with Samantha’s fictional profile and Instagram, TikTok and YouTube accounts ready to copy, and a Chrome Web Store badge.",
   },
   analytics: {
     scene: MiniAnalytics,
@@ -62,12 +62,12 @@ const illustrations = {
     scene: MiniShare,
     tint: "pink",
     label:
-      "A creator’s media kit with its share link copied and ready to send.",
+      "Aria’s fictional media kit brings her Instagram, TikTok and YouTube accounts together, with a share link ready to send.",
   },
   roster: {
     scene: MiniRoster,
     tint: "cream",
-    label: "A Foam roster bringing three fictional creator profiles together.",
+    label: "A Foam roster bringing three fictional creators and their Instagram, TikTok and YouTube accounts together.",
   },
   watchlist: {
     scene: MiniWatchlist,

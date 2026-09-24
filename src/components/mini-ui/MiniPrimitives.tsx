@@ -1,7 +1,42 @@
 import type { ReactNode } from "react";
 import { A, img } from "../../lib/assets";
+import {
+  websiteAria,
+  websiteElise,
+  websiteNia,
+  websiteSamantha,
+  websiteProfile,
+} from "../../data/websiteTalent";
+import { KitPlatformIcon } from "../KitDetails";
 
 export type MiniPerson = "samantha" | "aria" | "nia" | "elise";
+const miniTalent = {
+  samantha: websiteSamantha,
+  aria: websiteAria,
+  nia: websiteNia,
+  elise: websiteElise,
+};
+
+/** Account presence follows the same approved cast as the full product demos. */
+export function MiniAccounts({
+  person,
+  size = 16,
+}: {
+  person: MiniPerson;
+  size?: number;
+}) {
+  const accounts = websiteProfile(miniTalent[person]).platforms.filter(
+    ({ network }) => ["instagram", "tiktok", "youtube"].includes(network),
+  );
+  return (
+    <div className="mui-accounts">
+      {accounts.map(({ network, label }) => (
+        <KitPlatformIcon key={network} network={network} label={label} size={size} />
+      ))}
+    </div>
+  );
+}
+
 const photos: Record<MiniPerson, string> = {
   samantha: "talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp",
   aria: "talent/aria-quen-v2/aria-quen-v2-portrait.webp",

@@ -3,6 +3,7 @@ import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
+import { PlatformPresence } from "../components/TalentSearchDemo";
 import {
   ActionLink,
   FoamGlyph,
@@ -121,6 +122,7 @@ export function Creators() {
                 <span>02</span>
                 <div>
                   <h3>Connect your platforms.</h3>
+                  <PlatformPresence />
                   <p>
                     Review the connection details and authorise the accounts you
                     want to use.

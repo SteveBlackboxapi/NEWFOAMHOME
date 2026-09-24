@@ -236,7 +236,7 @@ export function WorkspaceGrid() {
             All working together.
           </h2>
           <p>
-            A connected place to find the right content, bring your talent’s
+            A connected place to find the right talent and content, bring their
             story to life and get the next conversation started.
           </p>
         </div>

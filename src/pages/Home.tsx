@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { MarketingPage } from "../components/Marketing";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { TalentSearchSection } from "../components/TalentSearchDemo";
 import {
   CreatorWall,
   PhotoFeature,
@@ -44,6 +45,7 @@ export function Home() {
         </p>
       </section>
       <WorkspaceGrid />
+      <TalentSearchSection />
       <ProductFamily miniatures />
       <section
         className="pc-perspectives pc-shell"
