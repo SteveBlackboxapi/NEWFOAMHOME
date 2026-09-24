@@ -321,22 +321,15 @@ photo(
   "/about",
   "Invitation · Original blue portrait",
 );
-photo(
-  "people-colour/trust-v1/privacy-helmet.webp",
+miniature(
   "/data-trust",
-  "Opening · Privacy portrait",
+  "The person behind the profile · Connections miniature",
+  [websiteSamantha, websiteAria, websiteNia],
 );
-photo(
-  "people-colour/original-portraits-v1/blue-portrait-original-v1.webp",
-  "/data-trust",
-  "Reassurance · Closing portrait",
-);
-miniature("/data-trust", "Connected data · Connections miniature", [
+miniature("/data-trust", "The connection, explained · Permissions miniature", [
   websiteSamantha,
-  websiteAria,
-  websiteNia,
 ]);
-miniature("/data-trust", "Account permissions · Permissions miniature", [
+miniature("/data-trust", "Put it in context · Media kit miniature", [
   websiteSamantha,
 ]);
 use(websiteSamantha.portrait, "/updates", "Featured story · Media kits");

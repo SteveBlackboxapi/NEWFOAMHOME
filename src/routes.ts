@@ -6,7 +6,6 @@ import { Brands } from "./pages/Brands";
 import { Features } from "./pages/Features";
 import { About } from "./pages/About";
 import { Creators } from "./pages/Creators";
-import { DataTrust } from "./pages/DataTrust";
 import { Updates } from "./pages/Updates";
 import { Demo } from "./pages/Demo";
 import { KitStory } from "./pages/KitStory";
@@ -21,6 +20,13 @@ export const router = createBrowserRouter(
       children: [
         { path: "kit-story", Component: KitStory },
         { path: "chrome-story", Component: ChromeStory },
+        {
+          path: "data-trust",
+          HydrateFallback: () => null,
+          lazy: async () => ({
+            Component: (await import("./pages/DataTrust")).DataTrust,
+          }),
+        },
         { path: "lab/inspo", Component: LabInspo },
         {
           path: "lab/data-trust/:option?",
@@ -57,7 +63,6 @@ export const router = createBrowserRouter(
             { path: "features", Component: Features },
             { path: "about", Component: About },
             { path: "creators", Component: Creators },
-            { path: "data-trust", Component: DataTrust },
             { path: "updates", Component: Updates },
             { path: "demo", Component: Demo },
             { path: "*", Component: NotFound },
