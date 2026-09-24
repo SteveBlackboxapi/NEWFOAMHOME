@@ -1,6 +1,5 @@
+import { useState } from "react";
 import { PeopleTiles } from "../components/PeopleColour";
-import { MarketingImage } from "../components/MarketingImage";
-import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import { PlatformPresence } from "../components/TalentSearchDemo";
@@ -12,11 +11,15 @@ import {
   Reveal,
   SectionIntro,
 } from "../components/Marketing";
-import { creatorWorkPosts } from "../data/creatorWorkTalent";
+import { LiveActivityControl, LiveCreatorCard } from "../components/LiveCreatorCard";
+import { creatorLiveExamples } from "../data/creatorLiveExamples";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import "./audience-pages.css";
 import "./audience-miniatures.css";
 
 export function Creators() {
+  const [paused, setPaused] = useState(false);
+  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   return (
     <MarketingPage className="audience-page ap-creators">
       <PageIntro
@@ -52,22 +55,8 @@ export function Creators() {
               brand the chance to understand what makes your work yours.
             </p>
           </div>
-          <Reveal className="ap-work-spread">
-            <figure>
-              <MarketingImage
-                src={creatorWorkPosts[0].src}
-                alt={creatorWorkPosts[0].alt}
-                width="941"
-                height="1672"
-                style={{ objectPosition: "center top" }}
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                <span>The everyday moments.</span>
-                <AIDisclosure detail="Tessa Quinn · Fictional creator" />
-              </figcaption>
-            </figure>
+          <Reveal className="ap-work-spread ap-live-spread">
+            <LiveCreatorCard example={creatorLiveExamples[0]} paused={paused} reducedMotion={reducedMotion} variant="story" />
             <div className="ap-work-note">
               <FoamGlyph kind="spark" />
               <p>
@@ -77,21 +66,12 @@ export function Creators() {
               </p>
               <span>The numbers add context.</span>
             </div>
-            <figure>
-              <MarketingImage
-                src={creatorWorkPosts[1].src}
-                alt={creatorWorkPosts[1].alt}
-                width="941"
-                height="1672"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                <span>The things you know.</span>
-                <AIDisclosure detail="Luca Marin · Fictional creator" />
-              </figcaption>
-            </figure>
+            <LiveCreatorCard example={creatorLiveExamples[1]} paused={paused} reducedMotion={reducedMotion} variant="story" />
           </Reveal>
+          <div className="ap-live-toolbar">
+            <p>Illustrative live moments · Simulated comments and reactions</p>
+            <LiveActivityControl paused={paused} reducedMotion={reducedMotion} onToggle={() => setPaused((value) => !value)} />
+          </div>
         </div>
       </section>
 

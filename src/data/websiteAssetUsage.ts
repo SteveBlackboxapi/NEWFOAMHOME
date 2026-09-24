@@ -2,7 +2,7 @@ import { A } from "../lib/assets";
 import { labTalent } from "./labTalentCatalogue";
 import { stagedTalent } from "./stagedTalent";
 import { websiteAria, websiteNia, websiteSamantha } from "./websiteTalent";
-import { creatorWorkPosts } from "./creatorWorkTalent";
+import { creatorLiveExamples } from "./creatorLiveExamples";
 import { discoverySearches } from "./discoveryContent";
 import { KIT_FEATURED_CONTENT } from "./kitFeaturedContent";
 import { websiteFitness } from "./campaignTalent";
@@ -277,9 +277,19 @@ use(websiteFitness.content[0].thumb, "/brands", "From interesting to informed ·
 miniature("/brands", "Been sent a Foam link? · Sharing miniature", [
   websiteAria,
 ]);
-creatorWorkPosts.forEach(({ src }) =>
-  use(src, "/creators", "Your work · Creator spread"),
-);
+creatorLiveExamples.forEach(({ talentId, name, image }) => {
+  own(
+    image,
+    {
+      talentId,
+      label: `${name} · Conversational live portrait`,
+      kind: "person",
+      provenance: "ai-generated",
+    },
+    `${talentId}:live-portrait-v1`,
+  );
+  use(image, "/creators", "Your work · Live creator spread");
+});
 miniature("/creators", "Your side of the connection · Connections miniature", [
   websiteSamantha,
   websiteAria,

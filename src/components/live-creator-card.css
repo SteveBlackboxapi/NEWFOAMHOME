@@ -1,0 +1,80 @@
+.ls-activity-toggle { display: inline-flex; align-items: center; gap: 9px; padding: 8px 0 8px 12px; border: 0; background: transparent; color: inherit; font-size: 15px; white-space: nowrap; cursor: pointer; }
+.ls-activity-toggle svg { width: 13px; height: 13px; }
+.ls-activity-toggle:hover { text-decoration: underline; text-underline-offset: 4px; }
+.ls-activity-toggle:focus-visible { outline: 2px solid var(--theme-accent, #7a0036); outline-offset: 5px; }
+.ls-motion-note { font-size: 13px; color: var(--theme-muted, #626a70); white-space: nowrap; }
+.ls-platform-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+.ls-platform-label > span:first-child { display: inline-flex; align-items: center; gap: 11px; font-size: 17px; font-weight: 500; }
+.ls-example-number { font-size: 12px; color: var(--theme-muted, #626a70); }
+.ls-viewer { position: relative; width: 100%; aspect-ratio: 9/16; overflow: hidden; border-radius: 24px; background: #202829; color: #fff; isolation: isolate; font-family: Arial, Helvetica, sans-serif; box-shadow: 0 18px 45px #0c172015; container-type: inline-size; }
+.ls-portrait { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; animation: ls-image-drift 18s ease-in-out infinite alternate; animation-play-state: paused; }
+.ls-image-shade { position: absolute; inset: -2%; background: linear-gradient(180deg, #0c11124d 0, transparent 27%, transparent 43%, #0a101033 57%, #0a1010b8 87%, #0a1010df 100%); }
+.ls-viewer-top { position: absolute; top: 18px; left: 15px; right: 15px; display: flex; align-items: center; justify-content: space-between; gap: 6px; z-index: 2; }
+.ls-person-pill { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.ls-viewer-tiktok .ls-person-pill { background: #10141c66; border-radius: 30px; padding: 4px 11px 4px 4px; }
+.ls-avatar { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: center 25%; background: #53605d; }
+.ls-person-name { min-width: 0; line-height: 1.15; }
+.ls-person-name strong { display: block; font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.ls-person-name > span { display: block; margin-top: 3px; font-size: 9px; opacity: .86; }
+.ls-top-status { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.ls-live-badge { font-size: 10px; line-height: 22px; font-weight: 700; border-radius: 3px; padding: 0 5px; background: #e72465; }
+.ls-viewer-instagram .ls-live-badge { background: linear-gradient(100deg, #bd268a, #e42471); }
+.ls-viewer-count { display: flex; align-items: center; gap: 3px; background: #12162066; padding: 4px 5px; border-radius: 4px; font-size: 10px; line-height: 14px; font-variant-numeric: tabular-nums; }
+.ls-viewer-count svg { width: 13px; height: 13px; }
+.ls-decorative-close { display: flex; margin-left: 2px; }
+.ls-decorative-close svg { width: 21px; height: 21px; }
+.ls-live-topic { position: absolute; top: 76px; left: 20px; padding: 6px 9px; background: #1418204d; border-radius: 5px; font-size: 10px; }
+.ls-viewer-bottom { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 16px 20px; z-index: 2; }
+.ls-comments { display: grid; gap: 13px; padding: 0 30px 22px 0; min-height: 140px; align-content: end; }
+.ls-comment { display: flex; align-items: start; gap: 8px; animation: ls-comment-arrive 300ms ease both; animation-play-state: paused; }
+.ls-comment-avatar { display: flex; align-items: center; justify-content: center; border-radius: 50%; width: 27px; height: 27px; flex-shrink: 0; font-size: 12px; text-transform: uppercase; color: #fff; box-shadow: inset 0 0 0 1px #ffffff26; }
+.ls-comment p { margin: 0; font-size: 11px; line-height: 1.35; text-shadow: 0 1px 8px #0005; }
+.ls-comment strong { display: block; font-weight: 600; font-size: 10px; margin-bottom: 2px; }
+.ls-comment p > span { display: block; }
+.ls-viewer-instagram .ls-comments { gap: 14px; }
+.ls-viewer-instagram .ls-comment p { padding-top: 1px; }
+.ls-viewer-instagram .ls-comment strong { font-size: 11px; }
+.ls-composer { display: flex; align-items: center; gap: 13px; }
+.ls-comment-prompt { padding: 11px 14px; flex: 1; min-width: 0; border-radius: 30px; font-size: 11px; color: #ffffffe6; background: #ffffff1a; }
+.ls-viewer-instagram .ls-comment-prompt { background: transparent; border: 1px solid #ffffff66; }
+.ls-decorative-action { display: flex; }
+.ls-decorative-action svg { width: 22px; height: 22px; }
+.ls-heart-button { display: grid; place-items: center; width: 36px; height: 38px; flex-shrink: 0; padding: 6px; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
+.ls-heart-button svg { width: 24px; height: 24px; }
+.ls-heart-button:hover { background: #ffffff24; }
+.ls-heart-button:active { color: #ff76a8; }
+.ls-floating-hearts { position: absolute; bottom: 75px; right: 18px; width: 45px; height: 220px; z-index: 3; pointer-events: none; }
+.ls-floating-heart { position: absolute; bottom: 0; right: 3px; width: 23px; height: 23px; color: #ff578c; opacity: 0; animation: ls-heart-rise 3.5s linear infinite; animation-delay: calc(var(--heart-index) * -.7s); animation-play-state: paused; }
+.ls-floating-heart:nth-child(2n) { color: #ff98b9; width: 19px; height: 19px; }
+.ls-floating-heart:nth-child(3n) { color: #dfbcff; width: 26px; height: 26px; }
+.ls-floating-heart svg { width: 100%; height: 100%; stroke-width: 0; }
+.ls-heart-burst { animation-delay: 0s; animation-iteration-count: 1; animation-duration: 2.6s; width: 30px; height: 30px; }
+.ls-viewer[data-running="true"] :is(.ls-portrait, .ls-comment, .ls-floating-heart) { animation-play-state: running; }
+.ls-example-caption { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding-top: 20px; min-height: 91px; }
+.ls-example-caption h2 { margin: 0 0 7px; font-size: 25px; font-weight: 400; line-height: 1.05; letter-spacing: -.025em; }
+.ls-example-caption p { margin: 0; font-size: 15px; color: var(--theme-muted, #626a70); line-height: 1.35; }
+.ls-reaction-feedback { padding-top: 4px; flex-shrink: 0; font-size: 12px; color: var(--theme-accent, #7a0036); min-height: 20px; }
+.ls-viewer button:focus-visible { outline-color: #fff; outline-offset: 2px; }
+@keyframes ls-image-drift { from { transform: scale(1.015) translateY(0); } to { transform: scale(1.045) translateY(-.4%); } }
+@keyframes ls-comment-arrive { from { opacity: .35; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ls-heart-rise { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 12% { opacity: .92; } 35% { transform: translate(calc((var(--heart-index) - 2) * 5px), -60px) scale(1); } 68% { opacity: .8; transform: translate(calc((2 - var(--heart-index)) * 6px), -130px) scale(.95) rotate(-9deg); } 100% { opacity: 0; transform: translate(calc((var(--heart-index) - 2) * 4px), -205px) scale(.6) rotate(8deg); } }
+@container (max-width: 350px) {
+  .ls-viewer-top { top: 13px; left: 10px; right: 10px; gap: 4px; }
+  .ls-avatar { width: 27px; height: 27px; }
+  .ls-person-name strong { font-size: 10px; }
+  .ls-person-name > span { font-size: 8px; }
+  .ls-top-status { gap: 4px; }
+  .ls-live-badge { font-size: 9px; padding-inline: 4px; }
+  .ls-viewer-count { font-size: 9px; gap: 2px; padding-inline: 3px; }
+  .ls-viewer-count svg { width: 11px; height: 11px; }
+  .ls-decorative-close svg { width: 17px; height: 17px; }
+  .ls-viewer-bottom { padding: 0 13px 16px; }
+  .ls-comments { gap: 10px; padding-right: 22px; padding-bottom: 16px; }
+  .ls-comment p { font-size: 10px; }
+  .ls-live-topic { top: 63px; left: 15px; }
+  .ls-composer { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ls-viewer .ls-portrait, .ls-viewer .ls-comment { animation: none; }
+  .ls-floating-hearts { display: none; }
+}
