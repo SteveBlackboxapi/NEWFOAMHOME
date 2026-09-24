@@ -1,0 +1,2003 @@
+{
+  "version": 1,
+  "source": "User-supplied Google Drive folders",
+  "preparedAt": "2026-09-24T14:27:36.425Z",
+  "baseRefSHA": "a9a354161bf97667f104070c965758516e870a21",
+  "baseTreeSHA": "a892f326bed42651d4144bcf841579e958166077",
+  "excludedDriveIds": [],
+  "ageAudit": {
+    "camille-aubert": {
+      "explicitAges": [],
+      "evidence": []
+    },
+    "astrid-healthy-bites": {
+      "explicitAges": [],
+      "evidence": []
+    },
+    "creator-economy-scenes": {
+      "explicitAges": [],
+      "evidence": []
+    },
+    "poppi-festival-creator": {
+      "explicitAges": [
+        25
+      ],
+      "evidence": [
+        {
+          "imageDriveId": "1fVItboASrZPAMU2Ms-0P9apVbFe90ogM",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1IY-dAEPvlreeWBpvzfZ8Ff6QYeAi0liw",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "18RI7fFJ2JP8gIEtpCoPkjjsGp07q9Cfn",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1_3SziyV1MmOSqu_CLCMj_CKUWAY_UpQH",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "17ntwEfB0nLTsc-hdOPaFWg8bVc9zTjmE",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "11PspqDV2QpCpjAzkuE05Fyvm6MTQLPW9",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1LTRn2ry2hdB_TttW9IBsCrhk6V2Fa2w7",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1UtOeOqj7bYRhyGsiHB5rZvGkOVNBEGWk",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1KmO6bArlF1xC1HrOe-7H369ivs2WE8fp",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1O94O--7Au72gOFOafnLkEwMYzgMG4lJA",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1dem16DkhOXJ8mTQspo3L4CgAsSVK3osb",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "12W97jtsEmBedW9SREUzKgwxAcK-WnLax",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1pvM2ss6Ya7c5hcj0IfyXPk33jXBTzvl2",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1rmk9azcMZuNTcrQJexcVXjl_0ms5_E8q",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "18iohHeyEbu1eXMs8ZlaqEXMNVSmQQioR",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1NANdpRX1iMtACpmSCfV1g6D1Uk3Qzf44",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1jJ7jD64AT58ICIF_bzlMl21x8vO14x94",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1O47tS4UiEWRXy4FFoGbS_MebU6WtvPe8",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1FEAxuQsEubqp9OwSMm0nxIrGAT7nP0sz",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1faOhdmhl4FJgbNd7FO0eoGqHpe9DX6JI",
+          "phrase": "25-year-old"
+        },
+        {
+          "imageDriveId": "1TRrV1woLpQHoS_BgVDv-iAbBKkip_YFW",
+          "phrase": "25-year-old"
+        }
+      ]
+    }
+  },
+  "images": [
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "485e7d82-1339-46fb-a2f9-ecc28364e843",
+      "imageDriveId": "13ZUMx43jJaabBpbkk9SUhsI9McJuGnCj",
+      "sourceImageName": "485e7d82-1339-46fb-a2f9-ecc28364e843_Camille - Hotel Balcony 4.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/13ZUMx43jJaabBpbkk9SUhsI9McJuGnCj/view?usp=drivesdk",
+      "metadataDriveId": "1D-8siPO7JGp5TunR72b_yHePsy7qTLMR",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1D-8siPO7JGp5TunR72b_yHePsy7qTLMR/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial travel photograph of a young woman with fair skin and softly waved light brown hair. She is leaning against a pale stone balcony railing of a boutique Mediterranean hotel, half-turned towards the camera with a gentle, soft smile. She is wearing a sand-colored knit tank top, high-waisted linen trousers, and gold hoop earrings. The background is a beautifully blurred vista of a rugged coastline meeting a vibrant turquoise sea. The scene is bathed in the warm, golden light of morning sun, creating a serene and aspirational travel aesthetic.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Hotel Balcony 4"
+      },
+      "original": {
+        "bytes": 958706,
+        "sha256": "cfed6aeda290f70d842a715f6e209146bd9d4d6ae4c3e830ca10e8a037c3cfbd",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-485e7d82-original.webp"
+      },
+      "preview": {
+        "bytes": 71208,
+        "sha256": "7b5e88afee2c326e528db4283f55d3596a9866f75a09852e3c10fa0bf4313ec1",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-485e7d82.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "2b72df68-4d30-42ae-98e2-c8be5840905a",
+      "imageDriveId": "1eRZIKmL2PW7pH-6OoJpOLJ1JmCQ_J8N_",
+      "sourceImageName": "2b72df68-4d30-42ae-98e2-c8be5840905a_Camille - Hotel Balcony 2.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1eRZIKmL2PW7pH-6OoJpOLJ1JmCQ_J8N_/view?usp=drivesdk",
+      "metadataDriveId": "1-FwMHylKyQAK9HPDj9tDJPTR-5e_I3AF",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1-FwMHylKyQAK9HPDj9tDJPTR-5e_I3AF/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial travel photograph of a young woman seated barefoot on a rattan chair on a boutique hotel balcony. She has long brown hair tucked behind one ear and a gentle smile. She is wearing a soft beige linen shirt and tailored ivory shorts. On the balcony near her is a small breakfast tray holding a linen napkin and a ceramic coffee cup. The balcony railing is adorned with climbing pink bougainvillea. In the background is a stunning Mediterranean coastline with blue waters. The scene is illuminated by soft, warm morning light, creating a relaxed and luxurious atmosphere.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Hotel Balcony 2"
+      },
+      "original": {
+        "bytes": 1184886,
+        "sha256": "1767f3f46308597d242c3bfa0bf2db56d29f61c5cf2d2df68ae61db42bfb7fb5",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-2b72df68-original.webp"
+      },
+      "preview": {
+        "bytes": 118160,
+        "sha256": "413d89320c414c21b9287a58d9969edd4f89675b0d28770cfd59b1e865053e94",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-2b72df68.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "c793bb6b-d840-4bbf-ab57-e3522b08f378",
+      "imageDriveId": "1-dOfWVnVsjKwTtxgZo7M7RgGOe62-N0D",
+      "sourceImageName": "c793bb6b-d840-4bbf-ab57-e3522b08f378_Camille - Hotel Balcony 3.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1-dOfWVnVsjKwTtxgZo7M7RgGOe62-N0D/view?usp=drivesdk",
+      "metadataDriveId": "1MPDJ4qwd3vQcBQk99yPMclhuu94VVhTl",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1MPDJ4qwd3vQcBQk99yPMclhuu94VVhTl/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial travel creator photograph of a young woman standing in profile on an arched stone balcony of a boutique hotel. She has fair skin, brown hair left loose, and is gazing softly into the distance. She is wearing a white cotton sundress with delicate straps and a thin gold chain necklace. Beside her, a white linen curtain billows softly in the breeze. The background features a softly blurred, scenic Mediterranean coastline with blue waters. The scene is illuminated by warm, soft morning daylight, highlighting her features and creating a serene, inviting atmosphere. Editorial travel photography with photorealistic details, emphasizing the warm lighting and the romantic, tranquil mood.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Hotel Balcony 3"
+      },
+      "original": {
+        "bytes": 898424,
+        "sha256": "229bb68929f95598d6f3170ad9c318cd80366b48690c000a42273d9096b7bbec",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-c793bb6b-original.webp"
+      },
+      "preview": {
+        "bytes": 44754,
+        "sha256": "1c4eeeae72b39ccb1362d0c80fe63e75568446285b490357b41c26f8b3baec0b",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-c793bb6b.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "59c67fd6-7b4f-48f4-852f-7428f8b3d797",
+      "imageDriveId": "1Fp0YmquCzWzw2Sl4ioO8Xt3aPQqO1nrR",
+      "sourceImageName": "59c67fd6-7b4f-48f4-852f-7428f8b3d797_Camille - Hotel Balcony 1.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1Fp0YmquCzWzw2Sl4ioO8Xt3aPQqO1nrR/view?usp=drivesdk",
+      "metadataDriveId": "1iwrBnWJSDnq_59hIrEJu2KANMqn3F9tb",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1iwrBnWJSDnq_59hIrEJu2KANMqn3F9tb/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial travel photograph of a young woman standing on a boutique hotel balcony overlooking the sparkling Mediterranean coast. She has light skin, long loose natural wavy brown hair, and is wearing an understated cream linen slip dress. She is leaning gently against a black wrought iron railing, looking thoughtfully out toward the sea. The balcony features whitewashed stucco walls and warm terracotta floor tiles. A small white espresso cup sits on a round metal side table nearby. The scene is bathed in soft, warm morning light, creating a serene and inviting atmosphere with photorealistic details.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Hotel Balcony 1"
+      },
+      "original": {
+        "bytes": 874412,
+        "sha256": "d85b2e1036382e302b6c22db4b600b47fdcfa599d7e508de54a118b410480f35",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-59c67fd6-original.webp"
+      },
+      "preview": {
+        "bytes": 55666,
+        "sha256": "b190b400510deeb085d7dd171356301a640b3f358ca6d2b15105703474839788",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-59c67fd6.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "31bca4cb-0537-4be6-a12e-692186f32fc4",
+      "imageDriveId": "1mtNDe6QJ1c35K4ySYvX1Mko6oWGgDFbY",
+      "sourceImageName": "31bca4cb-0537-4be6-a12e-692186f32fc4_Camille - Boat SPF 3 _clean_.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1mtNDe6QJ1c35K4ySYvX1Mko6oWGgDFbY/view?usp=drivesdk",
+      "metadataDriveId": "1iaEQxnW5uas038n4ziejjOM9Zu87blkO",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1iaEQxnW5uas038n4ziejjOM9Zu87blkO/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic candid lifestyle photograph of a woman aboard a Mediterranean yacht. She has fair, sun-kissed skin, natural makeup, and long, straight brown hair that is loose and slightly damp from a swim. She is smiling gently and looking off to the side. She wears a sandy-beige one-piece swimsuit and delicate gold earrings. She holds a completely plain matte white SPF tube with absolutely no text, labels, graphics, or logos, and is in the motion of smoothing sunscreen across her collarbone. The background features a sparkling sea horizon. The scene is illuminated by soft golden afternoon light, capturing a premium travel creator aesthetic with warm tones and natural sunlight.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Boat SPF 3 (clean)"
+      },
+      "original": {
+        "bytes": 1010476,
+        "sha256": "29a889a3b6c01b6a4fd50fcf61e8e563d9d943a7637bba8744ad55dc9800518e",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-31bca4cb-original.webp"
+      },
+      "preview": {
+        "bytes": 95684,
+        "sha256": "b03a9c056c25107c0bb0baade800e62fa3eef37ea7cf6276d4709fd3c2d6930d",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-31bca4cb.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "82d62249-8cd0-408f-818c-5d4ac08706f6",
+      "imageDriveId": "1lMp-lw8YebLVI6e0p4SSLYgzScDXmL2b",
+      "sourceImageName": "82d62249-8cd0-408f-818c-5d4ac08706f6_Camille - Boat SPF 4.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1lMp-lw8YebLVI6e0p4SSLYgzScDXmL2b/view?usp=drivesdk",
+      "metadataDriveId": "1qPE_VGINh-LuBLdbEzgF3-ynKdAZrAeE",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qPE_VGINh-LuBLdbEzgF3-ynKdAZrAeE/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle photograph of a young woman with long wavy brown hair, sitting on the wooden swim platform of a boat in the Mediterranean. She is smiling softly at the camera. She is wearing a chic black bandeau swimsuit and a sheer linen sarong tied around her waist. She is holding a small, unbranded matte SPF tube in one hand, with her feet near the water. The boat's wooden deck is warm and inviting. The background features a bright, reflective blue sea under soft, golden sunlight. The scene is captured in a refined European resort aesthetic, with bright, natural lighting highlighting the serene and luxurious atmosphere.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Boat SPF 4"
+      },
+      "original": {
+        "bytes": 966982,
+        "sha256": "eb6c62ffe88dd15bca1625646ad9e3b8f925603cf8c1a97cc1914ef325a9fe77",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-82d62249-original.webp"
+      },
+      "preview": {
+        "bytes": 78706,
+        "sha256": "b23df5bf9ba6263d8eed1dfee1b1a09b8264eb6bbf62e85d437421555624d0e2",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-82d62249.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "6ccfd137-bd53-4434-91cb-7291c2183ca0",
+      "imageDriveId": "1FHr7ZFyPi59sx1z3vWRa_NCdVGaiWdes",
+      "sourceImageName": "6ccfd137-bd53-4434-91cb-7291c2183ca0_Camille - Boat SPF 3.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1FHr7ZFyPi59sx1z3vWRa_NCdVGaiWdes/view?usp=drivesdk",
+      "metadataDriveId": "1hXMqwdsXnUt9EuYV_qQaDnh9sUgcYv65",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1hXMqwdsXnUt9EuYV_qQaDnh9sUgcYv65/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle photograph of a young woman with sun-kissed skin and long, slightly damp brown hair aboard a Mediterranean yacht. She has a gentle smile and is looking off to the side. She is wearing a sandy-beige one-piece swimsuit and delicate gold earrings. She is holding a small, unbranded white tube of SPF in one hand and is smoothing sunscreen across her collarbone with her other hand. The background features a sparkling blue sea horizon under soft, warm golden afternoon sunlight. The scene is captured in a premium travel creator aesthetic, with bright, natural lighting and clear focus on the subject.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Boat SPF 3"
+      },
+      "original": {
+        "bytes": 870206,
+        "sha256": "493854b4a0411262f448bfa13fbc7e5d214bbb5acfae5cbe9ab76d3792ee0745",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-6ccfd137-original.webp"
+      },
+      "preview": {
+        "bytes": 56142,
+        "sha256": "0be860e11fe205f8127ba2547b414829fc377278367ef9c41b424485d6b903a8",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-6ccfd137.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "fbf42f96-fe1c-45a6-a86e-e5a1a03ed670",
+      "imageDriveId": "1NRoceRf0gbzGoAspzevoqF-YF_8ErxOT",
+      "sourceImageName": "fbf42f96-fe1c-45a6-a86e-e5a1a03ed670_Camille - Boat SPF 2.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1NRoceRf0gbzGoAspzevoqF-YF_8ErxOT/view?usp=drivesdk",
+      "metadataDriveId": "14mi2Tkq6afATsZJG-Htiy2HpRzi3v3xw",
+      "sourceMetadataURL": "https://drive.google.com/file/d/14mi2Tkq6afATsZJG-Htiy2HpRzi3v3xw/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic travel photography portrait of a young woman seated on the bow of a sleek, polished wooden boat cruising on the Mediterranean Sea. She has light skin, dark brown hair peeking out from under a wide-brimmed straw hat, and is wearing a flowing ivory linen kaftan. She is holding a small, unbranded matte white tube and applying sunscreen along her exposed forearm. Her facial expression is relaxed and pleasant, enjoying the sunshine. The background features glittering, deep blue water and a blurred, distant coastline in the background. The scene is illuminated by bright, clear midday sunlight, casting sharp but flattering shadows and highlighting the texture of the linen kaftan and the wood of the boat. The overall aesthetic is that of a refined, high-end European travel influencer's lifestyle shot, with crisp details and rich, natural colors.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Boat SPF 2"
+      },
+      "original": {
+        "bytes": 1166986,
+        "sha256": "b8e3a9fb821da25956b029ce4971861a3e5325ae63d2c6c596e1944e676f2342",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-fbf42f96-original.webp"
+      },
+      "preview": {
+        "bytes": 102026,
+        "sha256": "769c38e01a98f0bc579710a0c6aeba4f0a395171e7ae1b66458560e87e5678ea",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-fbf42f96.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "1fd3bc33-6215-463c-a6e7-fc864ea02fc9",
+      "imageDriveId": "1yd-9vwx0u0XZf66-X0dl7EfrbqryRKtO",
+      "sourceImageName": "1fd3bc33-6215-463c-a6e7-fc864ea02fc9_Camille - Boat SPF 1.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1yd-9vwx0u0XZf66-X0dl7EfrbqryRKtO/view?usp=drivesdk",
+      "metadataDriveId": "14gxr6eSjXxmf3KqnMD4jmwdiwoNQ67lw",
+      "sourceMetadataURL": "https://drive.google.com/file/d/14gxr6eSjXxmf3KqnMD4jmwdiwoNQ67lw/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle portrait of a young woman on a Mediterranean wooden boat deck on a sunny day. She has long, light brown hair that is softly tousled by the ocean breeze, and a warm smile. She is wearing an elegant, unbuttoned white linen shirt over a beige bikini top. She is dabbing sunscreen onto her cheekbone with the fingertips of one hand, while holding a small, plain, unbranded white SPF tube in her other hand. The background features a sparkling turquoise sea. The scene is illuminated by soft, bright natural sunlight, emphasizing the warm, golden tones of her skin and the vibrant blue of the water. The image has a refined European resortwear aesthetic with clean lines and a relaxed, luxurious atmosphere.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Boat SPF 1"
+      },
+      "original": {
+        "bytes": 996298,
+        "sha256": "e70986e364bcb6c39d2b95be16ff041c0d70460ae5d29947973cbbf3ef4d9ea7",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-1fd3bc33-original.webp"
+      },
+      "preview": {
+        "bytes": 71266,
+        "sha256": "836e53a73ef43806def47bd12f41b01375ccb0456ded6ca0e320ed5f81a6d8d0",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-1fd3bc33.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "2b46173e-88c2-44d3-b1cb-a05a23e406cc",
+      "imageDriveId": "1kaiYLGOzNfQ92RgXP5SUmWjerVdDJcFR",
+      "sourceImageName": "2b46173e-88c2-44d3-b1cb-a05a23e406cc_Camille - Seaside Lunch 4.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1kaiYLGOzNfQ92RgXP5SUmWjerVdDJcFR/view?usp=drivesdk",
+      "metadataDriveId": "1l5yruEThC83YKUy5MBtxW0NPUCDc3263",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1l5yruEThC83YKUy5MBtxW0NPUCDc3263/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle photograph of a young woman with fair skin, brown hair, and green eyes, seated at a table on a sun-drenched seaside terrace during the golden hour. She is wearing a light brown turtleneck sweater under a brown coat and simple gold hoop earrings. She is leaning slightly forward on the table, offering a soft, warm smile towards the camera. Beside her, on an empty chair, rests a wide-brimmed straw hat. The table is set with clear, unbranded glassware, a rustic ceramic carafe of water, and a small plate with olives and bread. The background is softly blurred, showing a calm sea horizon and vibrant bougainvillea flowers. The lighting is warm and golden, casting soft shadows and highlighting her features, creating an inviting and premium travel aesthetic.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Seaside Lunch 4"
+      },
+      "original": {
+        "bytes": 1037648,
+        "sha256": "47b57bd6fbb6ee5f50fa8c988ca11d8f3ac1c4c532cdf9c857dc956fa5d02f57",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-2b46173e-original.webp"
+      },
+      "preview": {
+        "bytes": 83032,
+        "sha256": "e267c05f0691908d1d60b3eeb0f7a9b7787037e19b16ea37b4626dad13e9c6c5",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-2b46173e.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "890f6ab6-b9ca-473e-8308-13c028d53923",
+      "imageDriveId": "1TGNdkZGY_l-5EVs4MR_5gklCk2STNEhE",
+      "sourceImageName": "890f6ab6-b9ca-473e-8308-13c028d53923_Camille - Seaside Lunch 3.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1TGNdkZGY_l-5EVs4MR_5gklCk2STNEhE/view?usp=drivesdk",
+      "metadataDriveId": "1NTE4kjsplOpGNlNV0AjCejLSVU-3NzBg",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1NTE4kjsplOpGNlNV0AjCejLSVU-3NzBg/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle photograph of a young woman with long, straight light brown hair and a fair complexion sitting at an elegant seaside lunch table in a three-quarter view. She is wearing a cozy beige turtleneck sweater and small gold hoop earrings, looking slightly off-camera with a serene expression. The table is beautifully set with a linen napkin, ceramic plates holding simple Mediterranean food, an unbranded wine glass filled with pale rosé, and a small bud vase. The background features a soft, out-of-focus view of an Amalfi-style coastline at sunset. The scene is bathed in soft, golden-hour light coming from the side, creating warm tones and a premium travel creator aesthetic.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Seaside Lunch 3"
+      },
+      "original": {
+        "bytes": 1071402,
+        "sha256": "f9dcf5913d4c7843285e89dd7b16a2da45c8df0e57044989808ff5a14f2c26b6",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-890f6ab6-original.webp"
+      },
+      "preview": {
+        "bytes": 88366,
+        "sha256": "544adf9093dcfaa563ce525260f5bbbe797c8025866d27d44603a185558b9788",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-890f6ab6.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "b81d7f82-c33a-46e4-8640-32fe38b7110f",
+      "imageDriveId": "1BZgGkXCzh-IhvFusIN1qHJkfMDsVeIBm",
+      "sourceImageName": "b81d7f82-c33a-46e4-8640-32fe38b7110f_Camille - Seaside Lunch 2.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1BZgGkXCzh-IhvFusIN1qHJkfMDsVeIBm/view?usp=drivesdk",
+      "metadataDriveId": "1GdaFBBq1zZDn5tnVrFtG3ynfhmBLdfo3",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1GdaFBBq1zZDn5tnVrFtG3ynfhmBLdfo3/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle portrait of a young woman with brown hair and gold hoop earrings, sitting at a Mediterranean seaside lunch on a stone terrace overlooking the deep blue sea. She is wearing a soft ivory linen dress and is holding an unbranded coupe glass filled with an orange aperitif. The background features soft, out-of-focus pale stucco architecture and olive trees. The scene is bathed in warm, golden-hour sunlight that catches her hair, creating a refined boutique hotel mood. Editorial photography with rich, warm tones and a beautiful interplay of light and shadow.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Seaside Lunch 2"
+      },
+      "original": {
+        "bytes": 1038246,
+        "sha256": "ecdb564d7fc5022e4769a4a90d6e3c8e9c522dacba0ac8c3b3c24f213ce1c40b",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-b81d7f82-original.webp"
+      },
+      "preview": {
+        "bytes": 74230,
+        "sha256": "6f9cad503a2e3d7170a0300245a183ea906fcdd931134469b90566ffdcd90ad0",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-b81d7f82.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "cb14d522-3c17-4453-9340-4fae46816b76",
+      "imageDriveId": "1qT-HXlXv1Bm-OpU7txK0cJsUzg_Njg00",
+      "sourceImageName": "cb14d522-3c17-4453-9340-4fae46816b76_Camille - Seaside Lunch 1.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1qT-HXlXv1Bm-OpU7txK0cJsUzg_Njg00/view?usp=drivesdk",
+      "metadataDriveId": "1eCXD4nie8_sllUj8QSQhrhpisVefUsFx",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1eCXD4nie8_sllUj8QSQhrhpisVefUsFx/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A premium lifestyle editorial photograph of a young woman with light brown hair, seated relaxed at a refined Mediterranean seaside lunch on a boutique hotel terrace. She has a gentle half-smile and is looking off to the side, wearing an elegant light summer blouse and gold hoop earrings. Before her is a table draped in a linen tablecloth, set with unbranded glassware holding a vibrant, spritz-colored aperitif and small plates of food. The background is a beautifully blurred vista of a turquoise sea and coastline. The scene is bathed in warm, golden-hour light, creating a luxurious and relaxed European summer mood with a shallow depth of field.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille - Seaside Lunch 1"
+      },
+      "original": {
+        "bytes": 963136,
+        "sha256": "0c214b09d83d6ab5f6d89d84884299bc573ab87d038500a5f391eb8afeef897f",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-cb14d522-original.webp"
+      },
+      "preview": {
+        "bytes": 61934,
+        "sha256": "f3495ba68e8712ec12d42054f66c83105178a4e0e19c45d7d65825c9709fd358",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-cb14d522.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "489c29d4-238d-4a23-80fa-9600b490fc52",
+      "imageDriveId": "1kpFD4Pu0yinM5GQmRFsELKSbw_tWvrFr",
+      "sourceImageName": "489c29d4-238d-4a23-80fa-9600b490fc52_Camille Aubert - Headshot 4.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1kpFD4Pu0yinM5GQmRFsELKSbw_tWvrFr/view?usp=drivesdk",
+      "metadataDriveId": "1pRcN8iNyvb5PEhamYKwPMKt0PLEdQUVD",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1pRcN8iNyvb5PEhamYKwPMKt0PLEdQUVD/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A realistic shoulders-up headshot photograph of Camille Aubert, a Parisian female travel and hospitality content creator, taken in her early 30s. She has center-parted brunette hair with soft natural waves framing her face. Her dewy makeup is minimal, featuring a subtle nude lip color and calm warm eyes that look directly at the camera. A slight closed-mouth smile graces her face as she wears a fine knit camel-colored sweater. The photograph is taken with soft natural daylight against a clean pale taupe background, cropped in a square format with photographic realism and no heavy retouching.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille Aubert - Headshot 4"
+      },
+      "original": {
+        "bytes": 1107650,
+        "sha256": "1a257f81cf59c56f792a472c201cd69409fc48aa546a6e1949d15e87f0574b35",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-489c29d4-original.webp"
+      },
+      "preview": {
+        "bytes": 99384,
+        "sha256": "ab228c402bafca60e0ba2bc4bb151c683d8b9321ea096fc93bd7e8d121afbf1c",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-489c29d4.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "47831f55-9584-4c1f-aabd-8396102705ff",
+      "imageDriveId": "1GGMgKfDqpeVJ8m8Q228BQCxpsDDmAp7X",
+      "sourceImageName": "47831f55-9584-4c1f-aabd-8396102705ff_Camille Aubert - Headshot 3.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1GGMgKfDqpeVJ8m8Q228BQCxpsDDmAp7X/view?usp=drivesdk",
+      "metadataDriveId": "14-yUbLTlHd9DukZoEMDk2acVXdn3Aan7",
+      "sourceMetadataURL": "https://drive.google.com/file/d/14-yUbLTlHd9DukZoEMDk2acVXdn3Aan7/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A realistic square social profile headshot photograph of Camille Aubert, a French travel and hospitality creator in her early 30s. Camille Aubert has soft wavy dark blonde hair that frames her face, light freckles scattered across her cheeks and nose, and fresh natural makeup. Camille Aubert displays a gentle confident smile as she gazes directly at the camera. Camille Aubert wears a tailored ivory linen blazer over a thin camisole, with the blazer partially open to reveal the camisole underneath. The photograph is taken with soft natural window light, creating a warm and inviting atmosphere, against a clean warm-grey neutral background that evokes a boutique hotel aesthetic. The framing captures Camille Aubert from the shoulders up, with crisp clear focus on her face.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille Aubert - Headshot 3"
+      },
+      "original": {
+        "bytes": 873596,
+        "sha256": "2a86a8923c1938dd3d7aeb92b180ca1db1c3e1e56989a24a1b43561da58389f2",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-47831f55-original.webp"
+      },
+      "preview": {
+        "bytes": 78906,
+        "sha256": "6ddc5a7fef92ad5e38e07d06fb65c000f5140100a660a297661cebf2c9842f0a",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-47831f55.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "b74b7602-16be-4efd-bcc6-71b09d1be230",
+      "imageDriveId": "1lBQhtKVG46AxaJewkpSeT0Hpybuoo5fX",
+      "sourceImageName": "b74b7602-16be-4efd-bcc6-71b09d1be230_Camille Aubert - Headshot 2.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1lBQhtKVG46AxaJewkpSeT0Hpybuoo5fX/view?usp=drivesdk",
+      "metadataDriveId": "1qiSgnB519nSw_VAiPfn1ixV8_mzfpXS8",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qiSgnB519nSw_VAiPfn1ixV8_mzfpXS8/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A realistic shoulders-up profile headshot photograph of Camille Aubert, a Paris-based female travel and hospitality creator in her early 30s. Camille Aubert has chestnut hair softly tucked behind one ear, revealing a delicate gold hoop earring. She wears a beige cashmere turtleneck sweater and has natural makeup with a subtle rosy lip. Her warm composed expression looks slightly off-camera. The image features soft diffused natural daylight illuminating her face against a clean off-white plaster wall background. The photograph is cropped in a square format with sharp facial detail.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille Aubert - Headshot 2"
+      },
+      "original": {
+        "bytes": 1007072,
+        "sha256": "bfa16e3cc8ab5e73a694401b9ab7a281949da6b09ba448773a6b457f03af6415",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-b74b7602-original.webp"
+      },
+      "preview": {
+        "bytes": 70258,
+        "sha256": "2b90f11b9428a7be0e09885d1b7a4b150b46629d35a1fd99a8c31ec2212adce1",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-b74b7602.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Camille",
+      "folderId": "1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+      "uuid": "fe411ba7-b426-465c-9d8f-79afa7af72b7",
+      "imageDriveId": "1AlfkZhODsK1qOuSKujipKh1Wz434lCEU",
+      "sourceImageName": "fe411ba7-b426-465c-9d8f-79afa7af72b7_Camille Aubert - Headshot 1.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1AlfkZhODsK1qOuSKujipKh1Wz434lCEU/view?usp=drivesdk",
+      "metadataDriveId": "1uW6MKPS-FH-7oCA4nqGcfo8vYA2n9eTl",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1uW6MKPS-FH-7oCA4nqGcfo8vYA2n9eTl/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A realistic shoulders-up social profile headshot of Camille Aubert, a Parisian female travel and hospitality creator in her early 30s, photographed with a shallow depth of field against a clean neutral beige background. She has soft brunette hair loosely styled and wears a simple cream silk blouse. Her natural minimal makeup complements her refined European style, and she displays a warm but composed closed-mouth smile. Soft natural window light illuminates her face from the left side, creating a gentle glow on her features. The image captures her sharp, clear face without any retouching artifacts, presenting a believable candid travel creator profile photo.",
+        "album_name": "Camille Aubert Profile Consultation",
+        "image_name": "Camille Aubert - Headshot 1"
+      },
+      "original": {
+        "bytes": 872596,
+        "sha256": "0205b54d955257d48d55bb8f853bc96369b4cc8632c28632cdec5eb2c936fd6a",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-fe411ba7-original.webp"
+      },
+      "preview": {
+        "bytes": 48110,
+        "sha256": "e71954fdef3ec8142c22cc2ad3d138ca440c22b68da8a0568b2cddcda8d0864c",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-camille-fe411ba7.webp"
+      },
+      "profileId": "camille-aubert"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "4a454192-b733-48c0-ace1-994daadb37e1",
+      "imageDriveId": "1ZNc1YG21PjoWX2fPbhDDdRZaZMo572gE",
+      "sourceImageName": "4a454192-b733-48c0-ace1-994daadb37e1_IG Post _ Farmers Market Haul.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1ZNc1YG21PjoWX2fPbhDDdRZaZMo572gE/view?usp=drivesdk",
+      "metadataDriveId": "1rzMJd_LAyXqZ9afNi6HnikjZNgNKLybR",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1rzMJd_LAyXqZ9afNi6HnikjZNgNKLybR/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A vibrant lifestyle photograph of a smiling young woman with long blonde hair, standing at a sunny outdoor farmers market. She is wearing a fitted olive green athletic set and a small crossbody bag. She is holding a woven basket overflowing with fresh produce, including leafy greens, red tomatoes, and herbs. The background consists of out-of-focus market stalls. The scene is bathed in warm, golden-hour sunlight, creating a bright, cheerful, and aesthetic influencer-style image with a shallow depth of field.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "IG Post – Farmers Market Haul"
+      },
+      "original": {
+        "bytes": 1156160,
+        "sha256": "79d4bf53a6b5ad13c0aac91815d0b0f8135848a8b542affe159ffcf11277073c",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-4a454192-original.webp"
+      },
+      "preview": {
+        "bytes": 105860,
+        "sha256": "9b6ba0468447497866ad8ab594f195255878d1803099abb3b63c37901e07fd99",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-4a454192.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "f25cae31-705c-40db-b66e-1cf8320d34f1",
+      "imageDriveId": "155Sc1q6-MmQT9sTbgY_3Dsa54mjNb8HA",
+      "sourceImageName": "f25cae31-705c-40db-b66e-1cf8320d34f1_IG Post _ Matcha Moment.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/155Sc1q6-MmQT9sTbgY_3Dsa54mjNb8HA/view?usp=drivesdk",
+      "metadataDriveId": "1Pp_R_1yg_yitTuRo_VdDw-H6bQlhdWIL",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1Pp_R_1yg_yitTuRo_VdDw-H6bQlhdWIL/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A close-up lifestyle photograph of a smiling woman holding a glass cup of green matcha latte with both hands close to her face. She has light skin, bright blue eyes, and blonde hair worn down and tousled. She is looking directly at the camera with a soft, warm smile. She is wearing a cream knit zip-up sweater layered over a white sports tank top. The background is a bright, cozy café or kitchen setting, beautifully blurred with dreamy bokeh. The scene is illuminated by warm, flattering light, creating a bright and inviting wellness influencer aesthetic.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "IG Post – Matcha Moment"
+      },
+      "original": {
+        "bytes": 1088174,
+        "sha256": "ec68acf64195cb499d4a47344b20c1e7279be066e98507bd5e92c99199b67a7f",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-f25cae31-original.webp"
+      },
+      "preview": {
+        "bytes": 78558,
+        "sha256": "2e844e756483ba6bbe37a09fbbfaebff3afd05ad1f53308d756088b53d8da4dd",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-f25cae31.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "42eb373e-c559-4832-8293-d9283e306658",
+      "imageDriveId": "1n9ufjxLC_1jxOEDuzoH03ehRKRk39QG0",
+      "sourceImageName": "42eb373e-c559-4832-8293-d9283e306658_IG Post _ Mirror Gym Selfie.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1n9ufjxLC_1jxOEDuzoH03ehRKRk39QG0/view?usp=drivesdk",
+      "metadataDriveId": "1Vvb5KZBjswpwq7RibMYRH39IgqAZ0SYn",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1Vvb5KZBjswpwq7RibMYRH39IgqAZ0SYn/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A medium full shot mirror selfie photograph of a young woman with a toned, athletic figure standing in a bright, modern home studio or gym. She has blonde hair pulled up into a high ponytail and a soft, confident smile, showing white teeth. She is holding a smartphone in one hand, taking a picture of herself in a large, full-length mirror. She is wearing a matching athletic set consisting of a beige sports bra and high-waisted beige leggings. The reflection shows a clean, minimalist background with light-colored flooring, a few green potted plants, and a large window out of frame. The scene is illuminated by bright, soft daylight streaming into the room, creating a fresh, energetic atmosphere. Editorial lifestyle fitness photography with a bright, clean aesthetic and natural lighting.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "IG Post – Mirror Gym Selfie"
+      },
+      "original": {
+        "bytes": 861182,
+        "sha256": "39e537fa87d74e610acdbf069010f4a9564a6df73feaa7e525d56204fa1efaf7",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-42eb373e-original.webp"
+      },
+      "preview": {
+        "bytes": 38136,
+        "sha256": "ba3a9f8387983202c06c1d393b4b71b24578ca1bd8646bb9124d699e252a0870",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-42eb373e.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "8eddce5b-73cd-4fb5-bfd9-ac72e8f3caea",
+      "imageDriveId": "1V7s6hTROJcFo0TnJ0L7AvnaV7C9hE6lq",
+      "sourceImageName": "8eddce5b-73cd-4fb5-bfd9-ac72e8f3caea_IG Post _ Smoothie Bowl Flat Lay Selfie.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1V7s6hTROJcFo0TnJ0L7AvnaV7C9hE6lq/view?usp=drivesdk",
+      "metadataDriveId": "1LpoIlXH7isA3Xo_NOu3Gs8M4NHL_8_91",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1LpoIlXH7isA3Xo_NOu3Gs8M4NHL_8_91/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An overhead view, square-format lifestyle photograph capturing a trendy wellness influencer aesthetic. A pair of hands holds a smartphone over a light wooden table. The phone screen displays a bright, smiling selfie of a young woman with long blonde hair and blue eyes. Next to the phone on the table is a beautifully styled smoothie bowl topped with fresh berries, granola, and delicate edible flowers. A textured linen napkin and scattered fresh fruits, such as berries and kiwi slices, surround the bowl. The scene is illuminated by bright, airy daylight, creating a fresh, clean, and inviting atmosphere typical of a high-quality Instagram feed.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "IG Post – Smoothie Bowl Flat Lay Selfie"
+      },
+      "original": {
+        "bytes": 1189710,
+        "sha256": "c6b281e113f585b814b6871082ca60906a6834d49b582de7817b2e5c1f71bd1f",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-8eddce5b-original.webp"
+      },
+      "preview": {
+        "bytes": 107756,
+        "sha256": "d1cc7e3f83e32f5925880fbdc99b541cfab2da921a14a3a2194fd1367da7bab9",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-8eddce5b.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "1e68c008-fd7b-4ef5-a778-bf6f4ea2a279",
+      "imageDriveId": "1cC2_jL6Llz5O9fb_wfa2XyS7ifE_9T8H",
+      "sourceImageName": "1e68c008-fd7b-4ef5-a778-bf6f4ea2a279_Outdoor Caf_ Portrait.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1cC2_jL6Llz5O9fb_wfa2XyS7ifE_9T8H/view?usp=drivesdk",
+      "metadataDriveId": "1qco6FYGkStKgwzNUJ2VhW-rP5SCu8Da7",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qco6FYGkStKgwzNUJ2VhW-rP5SCu8Da7/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A lifestyle influencer photograph of a young woman with long blonde hair, sitting at an outdoor café table on a sunny day. She is smiling softly, looking towards the camera. She is wearing a fitted beige zip-up athletic jacket. On the table in front of her sits a plate with avocado toast and a glass of matcha latte. The background features blurred, lush greenery. The scene is illuminated by soft, golden hour light, creating a warm, inviting, and aesthetic atmosphere.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Outdoor Café Portrait"
+      },
+      "original": {
+        "bytes": 1029482,
+        "sha256": "b73ac46066445d58c42c8d3d65eaf0955ac79795d4d2f08c19bdade6ad350b91",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-1e68c008-original.webp"
+      },
+      "preview": {
+        "bytes": 76574,
+        "sha256": "d40909f14d2c920b4129e10b54d0e6f32a212311fa0104279faa43fa3cd7aae3",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-1e68c008.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "f1d9f482-c8da-43da-b43c-780e3206d61c",
+      "imageDriveId": "1WgFwwdDi2ytbujZETn2dLgghlAEuSS_S",
+      "sourceImageName": "f1d9f482-c8da-43da-b43c-780e3206d61c_Yoga Mat with Green Juice.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1WgFwwdDi2ytbujZETn2dLgghlAEuSS_S/view?usp=drivesdk",
+      "metadataDriveId": "1tpgQt_BGWEQOCnEe2chAgquTJG8073D0",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1tpgQt_BGWEQOCnEe2chAgquTJG8073D0/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A bright lifestyle photograph of a smiling young woman with blonde hair styled in a relaxed low ponytail. She is sitting cross-legged on a yoga mat in a sunlit living room filled with green plants. She is wearing a black sports bra and matching black leggings. In one of her hands, she is holding a glass of green juice. The background features modern, airy living space elements with natural light streaming through windows, creating a warm, inviting atmosphere. The scene is captured in a lifestyle photography style, emphasizing health and wellness with a soft, bright aesthetic.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Yoga Mat with Green Juice"
+      },
+      "original": {
+        "bytes": 1112230,
+        "sha256": "982c4a99fd9656197d96ddea06ab5dbf8222ae2eb2a6b96d2a30d136407ef646",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-f1d9f482-original.webp"
+      },
+      "preview": {
+        "bytes": 89254,
+        "sha256": "1259cd917a37cbcd781b2102d0ac726545c2d6b72c78df3404b801fef52d4d19",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-f1d9f482.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "7af0a9af-88bb-4083-99d8-6b8590506dfb",
+      "imageDriveId": "1ghZyvXXPfQOYNIFaIAeXEnH2tmoOjhcS",
+      "sourceImageName": "7af0a9af-88bb-4083-99d8-6b8590506dfb_Cooking in the Kitchen.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1ghZyvXXPfQOYNIFaIAeXEnH2tmoOjhcS/view?usp=drivesdk",
+      "metadataDriveId": "1LbmwYNzzfIfK3hsWvtQMEuDZXE0nN6OG",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1LbmwYNzzfIfK3hsWvtQMEuDZXE0nN6OG/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid lifestyle photography shot of a young woman with long blonde hair, standing in a bright, modern Scandinavian kitchen. She is wearing a cream-colored matching activewear set consisting of a sports bra and leggings. She has a soft smile on her face as she looks down, focused on chopping fresh vegetables on a wooden cutting board on a white countertop. A colorful salad bowl sits beside the cutting board. The kitchen features white walls and light wood accents. The scene is illuminated by bright, natural daylight streaming in, creating a fresh, healthy, and vibrant atmosphere.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Cooking in the Kitchen"
+      },
+      "original": {
+        "bytes": 836740,
+        "sha256": "335c78d83183164f39a4aefc8355263211ae4dbee14e37bef229552de3ecb205",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-7af0a9af-original.webp"
+      },
+      "preview": {
+        "bytes": 49278,
+        "sha256": "da994ba59b3f98199569befb3399a5d49c64720343eb895cdf8310ee66c6cfa0",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-7af0a9af.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "89e5c759-281b-4991-80e9-a60c449391ae",
+      "imageDriveId": "1mMTn1eo0OX8O60B84ZfPVlfBgSBvDSJO",
+      "sourceImageName": "89e5c759-281b-4991-80e9-a60c449391ae_Profile Headshot _ Head _ Shoulders.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1mMTn1eo0OX8O60B84ZfPVlfBgSBvDSJO/view?usp=drivesdk",
+      "metadataDriveId": "16RgkiP-WZoedAQv6U95kw08cgbDkHjHI",
+      "sourceMetadataURL": "https://drive.google.com/file/d/16RgkiP-WZoedAQv6U95kw08cgbDkHjHI/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A bright, lifestyle profile photograph of a young Caucasian woman in a head and shoulders portrait. She has long, straight blonde hair falling over her shoulders and blue eyes. She is smiling warmly directly at the camera. She is wearing a clean white sports tank top. The background is a soft, minimalist kitchen, heavily blurred to create a shallow depth of field. The scene is illuminated by bright, soft daylight streaming from a window off-camera, highlighting her face and hair. Editorial lifestyle photography with a clean, uplifting, and approachable aesthetic.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Profile Headshot – Head & Shoulders"
+      },
+      "original": {
+        "bytes": 831874,
+        "sha256": "c2374f5e11348c34b9691a339c02c078538b33cb059f416f38eaec6d88f6ce59",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-89e5c759-original.webp"
+      },
+      "preview": {
+        "bytes": 48648,
+        "sha256": "2c8cd4339cdae8b09799e6b58771f9b87a86da1f2612b48f82b47f8129f5f107",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-89e5c759.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "11cdae98-a80e-4c70-91e3-7cd2ec2ebd98",
+      "imageDriveId": "1UcdC9rUSMmEzFNLjI7uuApPuFTMFS_wp",
+      "sourceImageName": "11cdae98-a80e-4c70-91e3-7cd2ec2ebd98_Nordic Foodie Creator _ Outdoor Run Break.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1UcdC9rUSMmEzFNLjI7uuApPuFTMFS_wp/view?usp=drivesdk",
+      "metadataDriveId": "1qW_kDzRdbEv8rBN0oicHkL3z9Hx8e0WP",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qW_kDzRdbEv8rBN0oicHkL3z9Hx8e0WP/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic lifestyle photograph of a fictional Nordic female fitness and health-food creator in her mid-twenties, sitting on a park bench after a run. She has long blonde hair styled in a high ponytail and blue eyes. Her athletic toned body is visible in a black sports bra and matching black leggings, paired with white running shoes. She holds a glass bottle of green juice in her right hand and looks directly at the camera with a bright smile. The setting is a Scandinavian city park with lush green trees in the background, illuminated by soft morning light that casts gentle shadows across the scene.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Nordic Foodie Creator – Outdoor Run Break"
+      },
+      "original": {
+        "bytes": 1100146,
+        "sha256": "aedf0bddf0396511d871471cbea426efa8317a2b5ede7a75488428ab0c71e3eb",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-11cdae98-original.webp"
+      },
+      "preview": {
+        "bytes": 79718,
+        "sha256": "528eb172a760f2320958678fc0409c436373c5f361c8597a99e3b693cee76698",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-11cdae98.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "1b9b3fed-563b-4852-9c28-c7ede682e6bc",
+      "imageDriveId": "14x2MzVCFNQoR01j7m6YJq-Nr9bfotUT4",
+      "sourceImageName": "1b9b3fed-563b-4852-9c28-c7ede682e6bc_Nordic Foodie Creator _ Studio Headshot.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/14x2MzVCFNQoR01j7m6YJq-Nr9bfotUT4/view?usp=drivesdk",
+      "metadataDriveId": "1RhO-XQH94XaBYuQDqswApA89Sd11M7Yx",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1RhO-XQH94XaBYuQDqswApA89Sd11M7Yx/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A studio headshot photograph of a Nordic Scandinavian woman in her mid-20s with long straight platinum-blonde hair and blue eyes, wearing a fitted olive green ribbed sports bra and matching leggings. Her skin appears glowing and she has fresh natural makeup. The woman stands with her arms crossed, displaying a confident relaxed smile. The background is a soft beige seamless backdrop illuminated by soft diffused studio lighting that creates a clean modern wellness aesthetic.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Nordic Foodie Creator – Studio Headshot"
+      },
+      "original": {
+        "bytes": 827656,
+        "sha256": "c47e53ef4b0e470b964fc3d4d2c45bc6a902b6e394e8b8a95b07405c2e68b3dc",
+        "width": 832,
+        "height": 1248,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-1b9b3fed-original.webp"
+      },
+      "preview": {
+        "bytes": 47200,
+        "sha256": "e1634a122fec0c6feaff21f777c6c5eee66fe7d80e15c2ae0392a1a5198293a4",
+        "width": 832,
+        "height": 1248,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-1b9b3fed.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "33e28294-9ca9-4c3b-954e-797c4cdfca72",
+      "imageDriveId": "1eNVdlJPtYZsgvT3lnoFyuh1oeZlOVtHx",
+      "sourceImageName": "33e28294-9ca9-4c3b-954e-797c4cdfca72_Nordic Foodie Creator _ Farmers Market.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1eNVdlJPtYZsgvT3lnoFyuh1oeZlOVtHx/view?usp=drivesdk",
+      "metadataDriveId": "19QMopT1PbjbKEL0sGaV02HKhzcUWkTl5",
+      "sourceMetadataURL": "https://drive.google.com/file/d/19QMopT1PbjbKEL0sGaV02HKhzcUWkTl5/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic candid portrait of a female health-food influencer with a Scandinavian/Nordic appearance, featuring long wavy blonde hair, fair skin, and light eyes, in her late 20s with an attractive, fit athletic build. She wears a cropped zip-up athletic jacket and leggings in cream and beige tones, paired with a small crossbody bag. The woman browses an outdoor farmers market on a sunny day, holding a woven basket filled with leafy greens and fresh fruit. Warm golden-hour light illuminates the scene, with a bokeh background of market stalls creating a natural lifestyle photography aesthetic.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Nordic Foodie Creator – Farmers Market"
+      },
+      "original": {
+        "bytes": 1036208,
+        "sha256": "bcaf7f2d5c90e6199aabbf1f5dd735ec1b6329cb8becb3464e719b7b5f456969",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-33e28294-original.webp"
+      },
+      "preview": {
+        "bytes": 81508,
+        "sha256": "2ffa940dac52e4cd79b63847f1245f140d9078bcee282cadce4ca9f840bb295a",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-33e28294.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Astrid",
+      "folderId": "18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+      "uuid": "9768bccb-0f76-42fb-b2f4-b1e320cacaec",
+      "imageDriveId": "15QpSsLl7fPc7BoBzTZzkeY-7SSdCxHeK",
+      "sourceImageName": "9768bccb-0f76-42fb-b2f4-b1e320cacaec_Nordic Foodie Creator _ Kitchen Portrait.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/15QpSsLl7fPc7BoBzTZzkeY-7SSdCxHeK/view?usp=drivesdk",
+      "metadataDriveId": "1BSLl5axIv02uTNZkFHkxL38ADcGCXh_X",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1BSLl5axIv02uTNZkFHkxL38ADcGCXh_X/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A photorealistic portrait of a young woman with Nordic Scandinavian features, long blonde hair flowing over her shoulders, and bright blue eyes, smiling directly at the camera while holding a vibrant smoothie bowl. She wears matching soft sage-colored athletic wear consisting of a sports bra and high-waisted leggings that showcase her athletic build. The woman stands in a bright, minimalist Scandinavian kitchen with white walls, light wooden cabinets, and large windows allowing natural light to flood the space. The smoothie bowl she holds features a deep purple base topped with fresh strawberries, blueberries, sliced banana, chia seeds, and golden granola clusters. The background kitchen remains softly blurred due to a shallow depth of field, emphasizing the woman and her breakfast bowl as the main focus of the lifestyle influencer-style photograph.",
+        "album_name": "Astrid Healthy Bites",
+        "image_name": "Nordic Foodie Creator – Kitchen Portrait"
+      },
+      "original": {
+        "bytes": 790186,
+        "sha256": "9b04e310db144608664b0fc7f9b59f2e67afd4cdf16690ab317e9dbe432a28f4",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-9768bccb-original.webp"
+      },
+      "preview": {
+        "bytes": 42330,
+        "sha256": "5bcbcc4abea99defa219ccc16e75d1a4a3daa407d67600721015e225763248d6",
+        "width": 1168,
+        "height": 880,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-astrid-9768bccb.webp"
+      },
+      "profileId": "astrid-healthy-bites"
+    },
+    {
+      "group": "Creator Econ",
+      "folderId": "1FIoIyQX1yWym_lLRdpv4mqDACDjJSz0G",
+      "uuid": "d46fa410-5b99-4ac2-aef6-6db4d94d6dda",
+      "imageDriveId": "1glUEIlTu7vXDjeF3-kpsu0fmBePFva3e",
+      "sourceImageName": "d46fa410-5b99-4ac2-aef6-6db4d94d6dda_Creator Desk Flat-Lay.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1glUEIlTu7vXDjeF3-kpsu0fmBePFva3e/view?usp=drivesdk",
+      "metadataDriveId": "1jWDM4ckXtGbsMhMCPhyAsuaGbSq9Xo-8",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1jWDM4ckXtGbsMhMCPhyAsuaGbSq9Xo-8/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A flat-lay photograph taken from directly above a wooden desk surface, featuring a collection of items arranged for a creator's workspace. A smartphone sits on a small black tripod in the center, with a ring light positioned nearby casting a soft glow. To the left, a glass filled with iced coffee sits next to several Polaroid photographs scattered across the desk. A pair of black sunglasses rests near the right edge, with white AirPods and a small digital camera placed nearby. A notebook lies open with handwritten content ideas visible on the pages, surrounded by several rolls of film scattered across the warm wooden surface. The entire scene is bathed in warm, peachy tones from natural sunlight streaming in from above.",
+        "album_name": "Whalar Foam Creator Economy",
+        "image_name": "Creator Desk Flat-Lay"
+      },
+      "original": {
+        "bytes": 1128356,
+        "sha256": "a3328a514b0ef678ada2c2a0983cf06d429088d26bdd58f47cf1fbe526cc9377",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-d46fa410-original.webp"
+      },
+      "preview": {
+        "bytes": 78614,
+        "sha256": "4bf7a27150069be3b033381fc4a306d38f780690d3cc9aa6fbe46be1477f7c1f",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-d46fa410.webp"
+      },
+      "profileId": "creator-economy-scenes"
+    },
+    {
+      "group": "Creator Econ",
+      "folderId": "1FIoIyQX1yWym_lLRdpv4mqDACDjJSz0G",
+      "uuid": "832ce3f3-4d09-4f94-8f5f-e2221b68952c",
+      "imageDriveId": "1pXAxwmhKRtqMUCpRyz0SKMYShvsRLFBQ",
+      "sourceImageName": "832ce3f3-4d09-4f94-8f5f-e2221b68952c_Studio Content Shoot BTS.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1pXAxwmhKRtqMUCpRyz0SKMYShvsRLFBQ/view?usp=drivesdk",
+      "metadataDriveId": "1qXovB_ubtu4_rTFClfd1fah-CLvuC2f-",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qXovB_ubtu4_rTFClfd1fah-CLvuC2f-/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A documentary-style photograph taken inside a minimalist studio with warm natural lighting pouring through a large window. A young woman poses for a smartphone mounted on a black tripod, her hair styled in loose waves and wearing a cream-colored sweater. To her left, a friend adjusts a large silver reflector positioned to bounce light onto the woman's face. Behind them, a black clothing rack displays a curated selection of outfits including a white button-down shirt, a navy blazer, and a pair of light-wash jeans. The studio walls are painted a soft cream color, and a few potted plants sit on a white shelf near the window. The overall aesthetic is warm and neutral, with soft shadows cast across the polished concrete floor.",
+        "album_name": "Whalar Foam Creator Economy",
+        "image_name": "Studio Content Shoot BTS"
+      },
+      "original": {
+        "bytes": 882296,
+        "sha256": "664e766f1d7302f6efb7de8827614ded1526609d89865bd8612106a0cae4a597",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-832ce3f3-original.webp"
+      },
+      "preview": {
+        "bytes": 55876,
+        "sha256": "1a5f95eb03c3200266adc43226cf8ae48f97e4a5a54e54539f00e49af882959d",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-832ce3f3.webp"
+      },
+      "profileId": "creator-economy-scenes"
+    },
+    {
+      "group": "Creator Econ",
+      "folderId": "1FIoIyQX1yWym_lLRdpv4mqDACDjJSz0G",
+      "uuid": "32b197b3-5352-4a4f-bd1d-b77b7e885025",
+      "imageDriveId": "1T9JLeX_IvmciuLq6vBF2qi3tOlqUrkzD",
+      "sourceImageName": "32b197b3-5352-4a4f-bd1d-b77b7e885025_Solo Creator with Ring Light.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1T9JLeX_IvmciuLq6vBF2qi3tOlqUrkzD/view?usp=drivesdk",
+      "metadataDriveId": "19sOsrFSmwoF_mBKq6q3B9mx8sxm9AyE5",
+      "sourceMetadataURL": "https://drive.google.com/file/d/19sOsrFSmwoF_mBKq6q3B9mx8sxm9AyE5/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A cinematic editorial fashion photograph of a solo creator sitting cross-legged on the hood of a vintage car in a parking lot at dusk. The creator holds a smartphone in their hand, positioned to record a video, with a ring light glowing on their face, casting a soft illumination. The vintage car has a glossy hood surface that reflects the warm magenta and amber tones of the dusk sky. Neon signs from nearby businesses reflect in the car's hood and windshield, creating colorful streaks across the scene. The parking lot surface is made of dark asphalt with faded yellow parking lines visible beneath the car.",
+        "album_name": "Whalar Foam Creator Economy",
+        "image_name": "Solo Creator with Ring Light"
+      },
+      "original": {
+        "bytes": 1097142,
+        "sha256": "a3b95405e43e60a797ed8fa4974ff7bec31b9135ad32563658dbb6fe3d670ba8",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-32b197b3-original.webp"
+      },
+      "preview": {
+        "bytes": 63382,
+        "sha256": "2e7b2be613170e8e2e53ecd128baec15a8b4077b9b858e36136c35fd2556d307",
+        "width": 1248,
+        "height": 832,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-32b197b3.webp"
+      },
+      "profileId": "creator-economy-scenes"
+    },
+    {
+      "group": "Creator Econ",
+      "folderId": "1FIoIyQX1yWym_lLRdpv4mqDACDjJSz0G",
+      "uuid": "94951ac8-e134-493d-824d-ce4f0aa9b971",
+      "imageDriveId": "1wzugqWywHi3yo0NXRepzjvP8mPbmeyh3",
+      "sourceImageName": "94951ac8-e134-493d-824d-ce4f0aa9b971_Rooftop Creators at Golden Hour.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1wzugqWywHi3yo0NXRepzjvP8mPbmeyh3/view?usp=drivesdk",
+      "metadataDriveId": "1--Uh3cxUtJMXSRwMQbyyv1BTodKquv2v",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1--Uh3cxUtJMXSRwMQbyyv1BTodKquv2v/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid lifestyle photograph of a diverse group of young adults on a Los Angeles rooftop during golden hour, captured with a 35mm film aesthetic. The group consists of six young people, arranged in a semi-circle, each holding either a smartphone or a vintage film camera, filming and photographing each other with joyful expressions. The individuals wear fashion-forward streetwear, including oversized hoodies, graphic t-shirts, distressed denim jeans, and trendy sneakers in various colors. Behind the group, several tall palm trees sway gently against the warm, orange-pink sunset sky that fills the frame with cinematic light. The camera captures the scene from a slightly low angle, emphasizing the relaxed, creative atmosphere as the golden light bathes the rooftop and surrounding buildings in a soft, warm glow.",
+        "album_name": "Whalar Foam Creator Economy",
+        "image_name": "Rooftop Creators at Golden Hour"
+      },
+      "original": {
+        "bytes": 1124098,
+        "sha256": "ee90f142ac82cd3a11012f0c0fa87786b4a8880baf8a8f1c2779ebef58263575",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-94951ac8-original.webp"
+      },
+      "preview": {
+        "bytes": 108110,
+        "sha256": "a45a3ff5cc52bb4236a7388488c133a9de2f0c4a66d5f8f9770f2fff04bde867",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-creator-economy-94951ac8.webp"
+      },
+      "profileId": "creator-economy-scenes"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "dcb3072e-5b69-4f88-87d4-b6432d0bc5f5",
+      "imageDriveId": "1fVItboASrZPAMU2Ms-0P9apVbFe90ogM",
+      "sourceImageName": "dcb3072e-5b69-4f88-87d4-b6432d0bc5f5_Creator - Morning Poppi Daybed.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1fVItboASrZPAMU2Ms-0P9apVbFe90ogM/view?usp=drivesdk",
+      "metadataDriveId": "11uMMOaNFn6n01COz4SKBBegpo8Iq7kWv",
+      "sourceMetadataURL": "https://drive.google.com/file/d/11uMMOaNFn6n01COz4SKBBegpo8Iq7kWv/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A lifestyle photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long, dark, natural curly hair worn down. She has a glowing complexion with minimal makeup and a relaxed, gentle smile. She is wearing a cozy, oversized white linen shirt and sitting cross-legged on an outdoor daybed with neutral cushions. In her hand, she is sipping from a pastel blue prebiotic soda can with the word \"poppi\" clearly visible on it. The setting is a modern desert house patio, surrounded by succulents and agave plants. The scene is bathed in soft, warm morning sunlight, creating a peaceful, calm energy indicative of a post-festival recovery moment. High realism photography with a soft depth of field, emphasizing the wellness aesthetic and the interplay of golden morning light and shadow.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Morning Poppi Daybed"
+      },
+      "original": {
+        "bytes": 973426,
+        "sha256": "1da2b2f8abb03adc51542ccee548795810e0730a57ee9ea6fe7865dfec6d81ac",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-dcb3072e-original.webp"
+      },
+      "preview": {
+        "bytes": 56306,
+        "sha256": "85b61796074808db55e6d99f012eae677e1b2d169577de2ee8653ab286fcfe9d",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-dcb3072e.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "23b28214-af67-4740-be99-fe93c22c540a",
+      "imageDriveId": "1IY-dAEPvlreeWBpvzfZ8Ff6QYeAi0liw",
+      "sourceImageName": "23b28214-af67-4740-be99-fe93c22c540a_Creator - Morning Poppi Patio.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1IY-dAEPvlreeWBpvzfZ8Ff6QYeAi0liw/view?usp=drivesdk",
+      "metadataDriveId": "10xAri313TKHgQ-yl1BW-aER7GVKm_9pg",
+      "sourceMetadataURL": "https://drive.google.com/file/d/10xAri313TKHgQ-yl1BW-aER7GVKm_9pg/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle photograph of a 25-year-old female lifestyle creator of mixed ethnicity with warm tan skin, sitting outside on a desert house patio in the morning. She has long dark curly hair loosely tied back, minimal natural makeup, and dewy skin. She wears a cozy oversized cream knit sweater and soft shorts. Her expression is calm and peaceful, with relaxed eyes, as she holds a light blue soda can with the word \"poppi\" clearly visible in white lettering. The background features a quiet morning desert landscape with succulents, palm trees, and a textured stone patio floor. Soft golden morning sunlight illuminates her face, creating a peaceful, post-festival recovery wellness vibe. The scene is captured with a soft depth of field, emphasizing a warm, golden hour aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Morning Poppi Patio"
+      },
+      "original": {
+        "bytes": 1202996,
+        "sha256": "917e2ffa9d122742ab57bcf49291f2ccc906a44d23a598cf1318794d903d9ede",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-23b28214-original.webp"
+      },
+      "preview": {
+        "bytes": 118908,
+        "sha256": "4b0c34b0dec0f002b820705c81e66d2042a6666c40872565ca9181ba13fec7a7",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-23b28214.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "eb3cd80a-0d08-438c-b204-1daf77e0f7b2",
+      "imageDriveId": "18RI7fFJ2JP8gIEtpCoPkjjsGp07q9Cfn",
+      "sourceImageName": "eb3cd80a-0d08-438c-b204-1daf77e0f7b2_Creator - Quiet Morning Read.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/18RI7fFJ2JP8gIEtpCoPkjjsGp07q9Cfn/view?usp=drivesdk",
+      "metadataDriveId": "1HPdewhDHM7DW9e8AzRNFwhbWRLb2jaws",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1HPdewhDHM7DW9e8AzRNFwhbWRLb2jaws/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid lifestyle photograph of a 25-year-old female creator with mixed ethnicity and warm tan skin, sitting on the concrete outdoor steps of a modern desert house. She has long, dark, naturally curly hair and soft, dewy skin with minimal makeup. She is wearing an oversized vintage band t-shirt and comfortable joggers. She is holding a colorful smoothie bowl in her hands, looking down at it with a serene, relaxed expression. The background includes elements of modern desert architecture, palm trees, and native desert plants. The scene is illuminated by soft, warm morning sunlight, creating a peaceful and quiet atmosphere with a soft glow and a shallow depth of field, emphasizing a wellness aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Quiet Morning Read"
+      },
+      "original": {
+        "bytes": 1101710,
+        "sha256": "b047f9e99ad1f114a8095997764cb66059a84fb489856ac565de4da0c66bc202",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-eb3cd80a-original.webp"
+      },
+      "preview": {
+        "bytes": 93108,
+        "sha256": "d423ffb82ff617a9d730045f2b34070618dee876ef7418d16bfbcf052fced4ca",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-eb3cd80a.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "68709832-d30d-4d63-b1bc-3ab0cf2196c5",
+      "imageDriveId": "1_3SziyV1MmOSqu_CLCMj_CKUWAY_UpQH",
+      "sourceImageName": "68709832-d30d-4d63-b1bc-3ab0cf2196c5_Creator - Morning Sun Face.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1_3SziyV1MmOSqu_CLCMj_CKUWAY_UpQH/view?usp=drivesdk",
+      "metadataDriveId": "1beCaFAgwx5DEp5SOnXWfHQ8jemaeqbE3",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1beCaFAgwx5DEp5SOnXWfHQ8jemaeqbE3/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A close-up lifestyle film photography portrait of a 25-year-old female lifestyle creator with warm tan skin and long, messy, natural dark curly hair. She has glowing, dewy skin with a bare-faced, no-makeup look. She is sitting outdoors in the morning, holding a warm drink in her hands. Her face is tilted upwards towards the sun, her eyes gently closed, conveying a peaceful and serene expression. She is wearing a cozy, oversized beige sweater. The background is a beautifully blurred desert landscape featuring warm earth tones. The scene is illuminated by soft, golden morning light that gently hits her face, emphasizing a calm, wellness-focused post-festival recovery energy. Captured with a shallow depth of field for high realism and a soft film aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Morning Sun Face"
+      },
+      "original": {
+        "bytes": 1078388,
+        "sha256": "7caf11dff122c02d220a7a4e448126121120fa098b6518d49a17d0eada3d5a37",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-68709832-original.webp"
+      },
+      "preview": {
+        "bytes": 91064,
+        "sha256": "02bf2dc2bbbd8397fc7051eade4513692baeb802bce3e1e78da0677e29bdb88c",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-68709832.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "0b4b3de6-ff2c-4ac3-aadc-9cc3e3df49d8",
+      "imageDriveId": "17ntwEfB0nLTsc-hdOPaFWg8bVc9zTjmE",
+      "sourceImageName": "0b4b3de6-ff2c-4ac3-aadc-9cc3e3df49d8_Creator - Sunrise Patio.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/17ntwEfB0nLTsc-hdOPaFWg8bVc9zTjmE/view?usp=drivesdk",
+      "metadataDriveId": "1Df9w1KzvwuINNcNP8pExeoOHcU1tHEL1",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1Df9w1KzvwuINNcNP8pExeoOHcU1tHEL1/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle photography portrait of a 25-year-old female creator with mixed ethnicity and warm tan skin, sitting cross-legged on an outdoor daybed with neutral cushions on a desert house patio. She is wearing a cozy, oversized white linen button-up shirt. Her long, dark curly hair is worn down and natural, and she has minimal makeup highlighting her dewy skin. She is holding and sipping from a glass of iced matcha, looking relaxed with a gentle smile. The background features a serene desert house patio with warm earth tones, succulents, and other desert plants. Soft morning sunlight streams across her face, creating a peaceful, soft glow. The image is captured in a lifestyle influencer style with high realism, emphasizing a calm, quiet morning atmosphere and a wellness vibe.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Sunrise Patio"
+      },
+      "original": {
+        "bytes": 1006692,
+        "sha256": "bbbe8aaeb21c47a832cd1037d1cc6fb7e0a09aeda5ad27b677c50fbac5876931",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-0b4b3de6-original.webp"
+      },
+      "preview": {
+        "bytes": 60694,
+        "sha256": "dc60f11f35e14b6224b635a2db4cb726dc88a1513d719977b0747d5d52ffa2df",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-0b4b3de6.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "c311d698-5c5b-4b0f-8a79-e12f1673cf96",
+      "imageDriveId": "11PspqDV2QpCpjAzkuE05Fyvm6MTQLPW9",
+      "sourceImageName": "c311d698-5c5b-4b0f-8a79-e12f1673cf96_Creator - Soda Cheers Smile.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/11PspqDV2QpCpjAzkuE05Fyvm6MTQLPW9/view?usp=drivesdk",
+      "metadataDriveId": "1yGHwpjYSK_gMYoGRxYYt_rU_2_vzDW8I",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1yGHwpjYSK_gMYoGRxYYt_rU_2_vzDW8I/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle influencer photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long, dark, naturally curly hair. She has soft natural makeup, expressive eyes, and a confident, relaxed smile. She has a slim build and is wearing a white trendy crocheted summer top and denim shorts. She is outdoors in bright sunlight, holding up a colorful light blue soda can near her face in a casual, candid moment. The background is a sunny outdoor patio with lush greenery and warm light, rendered with soft bokeh. The scene is captured with bright natural lighting and warm tones, emphasizing a natural lifestyle moment.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Soda Cheers Smile"
+      },
+      "original": {
+        "bytes": 1098422,
+        "sha256": "5a222ded5ea5dbd024eb45d6be336f8b54a395713d12da648ebe14553797e3cf",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-c311d698-original.webp"
+      },
+      "preview": {
+        "bytes": 88276,
+        "sha256": "9ff8fc39531ca4d59830fa5b05709cc88435b3622b1754fba0252009e5380d8a",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-c311d698.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "938c22af-e7c3-4f58-aa4a-36bf2268b285",
+      "imageDriveId": "1LTRn2ry2hdB_TttW9IBsCrhk6V2Fa2w7",
+      "sourceImageName": "938c22af-e7c3-4f58-aa4a-36bf2268b285_Creator - Soda Garden Moment.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1LTRn2ry2hdB_TttW9IBsCrhk6V2Fa2w7/view?usp=drivesdk",
+      "metadataDriveId": "1vFw_aakly5h8m3kssVBJ0UDs5vYykZS3",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1vFw_aakly5h8m3kssVBJ0UDs5vYykZS3/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A lifestyle influencer photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, sitting in a sunny outdoor cafe. She has long dark curly hair cascading past her shoulders, soft natural dewy makeup, and expressive brown eyes. She is laughing naturally in a candid moment. She is wearing layered gold necklaces and a breezy summer blouse. On the table in front of her sits a colorful soda can. The background features lush green plants with dappled sunlight filtering through the leaves, creating a bright, cheerful atmosphere. The image is captured with natural bright lighting, warm realistic colors, and a soft depth of field, typical of high-realism lifestyle influencer photography.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Soda Garden Moment"
+      },
+      "original": {
+        "bytes": 1117490,
+        "sha256": "2fa35db4363a4a3437e8fa224d0f430bbf5583867f96da2b1273241ad82b1379",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-938c22af-original.webp"
+      },
+      "preview": {
+        "bytes": 89610,
+        "sha256": "7ed9def5fffa0816be5ce58682e370ce28a75ed99da3c10f53e36031617fda29",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-938c22af.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "c38036a3-cc1e-4886-b05e-46327101b441",
+      "imageDriveId": "1UtOeOqj7bYRhyGsiHB5rZvGkOVNBEGWk",
+      "sourceImageName": "c38036a3-cc1e-4886-b05e-46327101b441_Creator - Morning Coffee Glow.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1UtOeOqj7bYRhyGsiHB5rZvGkOVNBEGWk/view?usp=drivesdk",
+      "metadataDriveId": "1WzIcs74HCsA_KVbTiIblTd_nSaENsSpZ",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1WzIcs74HCsA_KVbTiIblTd_nSaENsSpZ/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism candid lifestyle photograph of a 25-year-old female lifestyle creator of mixed ethnicity with warm tan skin. She has long dark curly hair loosely pulled back and is wearing soft, natural makeup with no sunglasses. She is sitting on an outdoor patio chair at a desert house, wearing an oversized cream knit sweater and cozy shorts. She holds a ceramic coffee mug with both hands, her eyes slightly closed in a calm, peaceful expression. The scene is illuminated by morning golden light that casts a soft, warm glow on her face. The background, softly blurred by a shallow depth of field, reveals a serene desert landscape with palm trees, evoking a quiet, post-festival wellness vibe. The image captures an intimate, relaxing morning moment.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Morning Coffee Glow"
+      },
+      "original": {
+        "bytes": 1056648,
+        "sha256": "3ba038891734a9b865a4527f3ef37899772d486aef24dc3e93d0b23b28875521",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-c38036a3-original.webp"
+      },
+      "preview": {
+        "bytes": 87838,
+        "sha256": "022f42f3a77e6bd0c22a90b806caf16ddacd35c0fab3b173a1d2a91952f129ad",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-c38036a3.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "5b7baf55-26e7-4707-bac3-df4a674701a8",
+      "imageDriveId": "1KmO6bArlF1xC1HrOe-7H369ivs2WE8fp",
+      "sourceImageName": "5b7baf55-26e7-4707-bac3-df4a674701a8_Creator - Soda Lean Back.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1KmO6bArlF1xC1HrOe-7H369ivs2WE8fp/view?usp=drivesdk",
+      "metadataDriveId": "15wNJr3gichXQE18KOhQatCXXUyxkoYUm",
+      "sourceMetadataURL": "https://drive.google.com/file/d/15wNJr3gichXQE18KOhQatCXXUyxkoYUm/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle influencer photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, long dark curly hair, and soft natural makeup. She is wearing gold necklaces, a white crocheted crop top, and denim shorts. She is outdoors on a bright sunny day, leaning casually against a vibrant, colorful painted wall. She holds a pastel-colored soda can loosely in one hand, looking off-camera with a relaxed, natural expression. The moment feels organic and unstaged. The scene is illuminated by natural bright lighting, creating soft shadows and warm realistic tones. The image is captured with a shallow depth of field, blurring the colorful wall slightly to keep the focus on the subject, perfectly capturing a casual chic summer vibe.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Soda Lean Back"
+      },
+      "original": {
+        "bytes": 1046844,
+        "sha256": "0455b79f9141cc44512401f10207a85a14384d685d827624fc048b4d4650e5a8",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-5b7baf55-original.webp"
+      },
+      "preview": {
+        "bytes": 71378,
+        "sha256": "be901267f631db3fafba75313c7387cb0c43e28d412c74aa5aaecb62a7150674",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-5b7baf55.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "d88cfbfa-edcc-45b5-ae79-422473639746",
+      "imageDriveId": "1O94O--7Au72gOFOafnLkEwMYzgMG4lJA",
+      "sourceImageName": "d88cfbfa-edcc-45b5-ae79-422473639746_Pool Party - Close-up Joy.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1O94O--7Au72gOFOafnLkEwMYzgMG4lJA/view?usp=drivesdk",
+      "metadataDriveId": "1tTwFGZXG8te2FAy_TSZaZ478ewuzHwjy",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1tTwFGZXG8te2FAy_TSZaZ478ewuzHwjy/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A close-up candid lifestyle photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, laughing genuinely. She has long dark curly hair, soft natural dewy makeup, and expressive brown eyes. She is wearing gold hoop earrings and layered thin gold necklaces, and is holding a bright colorful drink near her face. She is wearing a white crocheted halter top. The background is a vibrant but beautifully blurred poolside party scene, featuring turquoise pool water, colorful cushions, tropical plants, and out-of-focus friends mingling. The scene is bathed in bright sunny natural light, casting soft shadows and highlighting her warm skin tones. Shot with a shallow depth of field, vibrant colors, and high realism, capturing a candid moment of joy in a bright, summery atmosphere.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Pool Party - Close-up Joy"
+      },
+      "original": {
+        "bytes": 1045314,
+        "sha256": "56079fdbf57016c7b742d0caacaa89a83283ed97aceedaaedcbe707cff8e47ed",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d88cfbfa-original.webp"
+      },
+      "preview": {
+        "bytes": 66604,
+        "sha256": "09f9e160d3f85c80598146e25b3f0cd5fbe64ea9b8233d4d19fb9ecf4ade04b3",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d88cfbfa.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "d13c4d91-980a-4d02-9088-21bc64130132",
+      "imageDriveId": "1dem16DkhOXJ8mTQspo3L4CgAsSVK3osb",
+      "sourceImageName": "d13c4d91-980a-4d02-9088-21bc64130132_Pool Party - Standing Social.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1dem16DkhOXJ8mTQspo3L4CgAsSVK3osb/view?usp=drivesdk",
+      "metadataDriveId": "1X5B0wx6YAlYSihZabrnRpIpxxl_baVN5",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1X5B0wx6YAlYSihZabrnRpIpxxl_baVN5/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle influencer photograph of a 25-year-old mixed-ethnicity female creator with warm tan skin and long dark curly hair. She has soft natural makeup, expressive eyes, and a confident, relaxed energy. She is standing by a modern pool at a summer house party, holding a colorful drink in one hand, mid-conversation with a natural smile. She has a slim build and is wearing a stylish festival-meets-summer outfit consisting of a white cropped top and flowy wide-leg pants, accessorized with layered gold necklaces. The vibrant poolside decor includes bright cushions in pink, orange, and turquoise on modern lounge furniture, surrounded by tropical plants. The pool water glistens in the bright natural sunlight. A couple of friends are softly out of focus in the background. The scene features soft shadows and a vibrant but realistic color palette, characteristic of professional lifestyle photography.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Pool Party - Standing Social"
+      },
+      "original": {
+        "bytes": 1009480,
+        "sha256": "c53809b56776e00314ceb6af419d8f6b50e8ddeb42ff0deddccb701acea97044",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d13c4d91-original.webp"
+      },
+      "preview": {
+        "bytes": 62528,
+        "sha256": "89935c29dd1c8e0ba9940fb34b0aa6e827f78d3242636ee296e69c8507ed096f",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d13c4d91.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "6b05432e-5873-4a0e-83e5-b18abe8eba1f",
+      "imageDriveId": "12W97jtsEmBedW9SREUzKgwxAcK-WnLax",
+      "sourceImageName": "6b05432e-5873-4a0e-83e5-b18abe8eba1f_Creator - Soda Sip Walk.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/12W97jtsEmBedW9SREUzKgwxAcK-WnLax/view?usp=drivesdk",
+      "metadataDriveId": "1cSXMoI_78Xc6q27Fmn8mesgRt5Vvpwz_",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1cSXMoI_78Xc6q27Fmn8mesgRt5Vvpwz_/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An influencer-style lifestyle photograph of a 25-year-old mixed ethnicity female creator with warm tan skin and long dark curly hair. She has soft natural makeup and expressive brown eyes. She is wearing a casual stylish summer outfit with gold layered necklaces. She is walking outdoors on a bright sunny day, captured in a mid-step candid moment, smiling naturally and casually holding a colorful pastel soda can. The background features palm trees and a bright blue sky, conveying summer vibes. The scene is illuminated by bright, realistic natural lighting. High realism photography with a soft depth of field, emphasizing the subject while keeping the product visible naturally.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Soda Sip Walk"
+      },
+      "original": {
+        "bytes": 1094992,
+        "sha256": "f1071cbcf6be3b1fd51285a4e0ab05888824eba929d3fac8529b3d33cb6eb1c4",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6b05432e-original.webp"
+      },
+      "preview": {
+        "bytes": 106120,
+        "sha256": "32e79e56388a712c93feb25759a582ac344810289188f992f48b8c135e25fb39",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6b05432e.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "4cb02642-a8d2-44b3-a369-059a9b5d0976",
+      "imageDriveId": "1pvM2ss6Ya7c5hcj0IfyXPk33jXBTzvl2",
+      "sourceImageName": "4cb02642-a8d2-44b3-a369-059a9b5d0976_Pool Party - Lounging.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1pvM2ss6Ya7c5hcj0IfyXPk33jXBTzvl2/view?usp=drivesdk",
+      "metadataDriveId": "1I4NRxwGa5gcezoCbZwIx3UzCmpWlAn0n",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1I4NRxwGa5gcezoCbZwIx3UzCmpWlAn0n/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A realistic lifestyle photograph of a 25-year-old female lifestyle creator with warm tan skin lounging on a vibrant cushioned daybed by a sparkling turquoise pool at a modern house party. She has long dark curly hair flowing naturally, soft natural makeup, expressive brown eyes, and is wearing layered gold necklaces and gold hoop earrings. She is holding a tropical drink and laughing. Her outfit is a trendy, colorful summer look. Behind her, friends are chatting and mingling, slightly out of focus. The poolside setting features colorful pool floats, vibrant throw pillows in coral and turquoise, string lights, and lush greenery. The scene is lit by bright sunny midday light, casting soft shadows. The image captures a candid moment in an influencer lifestyle photography style, emphasizing vibrant colors and high realism.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Pool Party - Lounging"
+      },
+      "original": {
+        "bytes": 1269778,
+        "sha256": "bdd02fcc81e8a56024e82472a1746362f964833470b229e3497ef5c2f7346c49",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-4cb02642-original.webp"
+      },
+      "preview": {
+        "bytes": 110836,
+        "sha256": "c771a8f13f752c9aa3b7a371e20fb51f665091c7d789a4fdb5566bb57b47450d",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-4cb02642.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "22d5da1f-a8c8-4f0b-bea2-26cbc32f6ea8",
+      "imageDriveId": "1rmk9azcMZuNTcrQJexcVXjl_0ms5_E8q",
+      "sourceImageName": "22d5da1f-a8c8-4f0b-bea2-26cbc32f6ea8_Pool Party - Candid Smile.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1rmk9azcMZuNTcrQJexcVXjl_0ms5_E8q/view?usp=drivesdk",
+      "metadataDriveId": "1TIG_XXgNekD2v2AP4nevqR7npdMCkjOe",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1TIG_XXgNekD2v2AP4nevqR7npdMCkjOe/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A vibrant, candid lifestyle photograph of a 25-year-old woman with a mixed ethnicity, warm tan skin, long dark curly hair, and soft natural makeup. She has expressive brown eyes and a slim build, and is smiling warmly while holding a colorful tropical drink. She is wearing a bright, flowy sundress. The scene is a modern poolside house party, with slightly out-of-focus friends in the background. The environment is playful and bright, featuring vibrant cushions, colorful pool floats in a clear blue pool, modern white outdoor furniture, and lush tropical plants. The lighting is sunny and natural, creating soft shadows and vibrant, realistic colors, perfectly capturing a high-realism lifestyle influencer aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Pool Party - Candid Smile"
+      },
+      "original": {
+        "bytes": 1218818,
+        "sha256": "a5af3d823fdc08b4324f317ccb111b6f16956fabd65e47b107e9327d39e5740a",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-22d5da1f-original.webp"
+      },
+      "preview": {
+        "bytes": 94742,
+        "sha256": "ed206aeb1074fdc04b0072bc8d361e7efb15199928ec8d37bcc2328d8f2941c6",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-22d5da1f.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "56f4a62e-245f-40c5-8b2f-5a5ed3e17d9b",
+      "imageDriveId": "18iohHeyEbu1eXMs8ZlaqEXMNVSmQQioR",
+      "sourceImageName": "56f4a62e-245f-40c5-8b2f-5a5ed3e17d9b_Creator - Desert Golden Hour.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/18iohHeyEbu1eXMs8ZlaqEXMNVSmQQioR/view?usp=drivesdk",
+      "metadataDriveId": "1_flE68rM5YQgyeybdP6bd53WEQM-sTCJ",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1_flE68rM5YQgyeybdP6bd53WEQM-sTCJ/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism, candid movement photograph of a 25-year-old female lifestyle creator with mixed ethnicity and warm tan skin, walking confidently through an open desert landscape. Her long, dark curly hair is blowing slightly in the wind. She is wearing a modern festival outfit consisting of a fitted rust-colored bodysuit, high-waisted cream wide-leg pants, layered gold chains, and oversized sunglasses. The setting is a Coachella-inspired desert with scattered palm trees and distant mountains in the background. The scene is illuminated by warm golden hour sunset light, creating soft warm tones, long golden shadows, and a slight lens flare, making her skin glow with natural, confident energy. Fashion editorial meets candid influencer travel aesthetic photography.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Desert Golden Hour"
+      },
+      "original": {
+        "bytes": 1010000,
+        "sha256": "ed379820c9179d7da0a8964d13b69dbbb2c0c1e6dd1fcd1744a37dce07df69b1",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-56f4a62e-original.webp"
+      },
+      "preview": {
+        "bytes": 76344,
+        "sha256": "8f98c692d734819d8ecd834162d6ac818b642537b01a8c1b40ff38308ace15cc",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-56f4a62e.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "6dc5ae48-fc77-4fb5-a5a1-20b4b620f45a",
+      "imageDriveId": "1NANdpRX1iMtACpmSCfV1g6D1Uk3Qzf44",
+      "sourceImageName": "6dc5ae48-fc77-4fb5-a5a1-20b4b620f45a_Creator - Palm Tree Path.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1NANdpRX1iMtACpmSCfV1g6D1Uk3Qzf44/view?usp=drivesdk",
+      "metadataDriveId": "15Jr4bJxnO-pz8ULdWtT0A0pfK0O6bbbc",
+      "sourceMetadataURL": "https://drive.google.com/file/d/15Jr4bJxnO-pz8ULdWtT0A0pfK0O6bbbc/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A full-body candid photograph of a 25-year-old female lifestyle creator with mixed ethnicity, warm tan skin, and long dark curly hair. She is walking confidently along a dirt path lined with tall palm trees in a desert environment. She is wearing a stylish boho festival outfit featuring an off-shoulder cream blouse, distressed denim shorts, cowboy boots, stacked bracelets, and gold hoop earrings. She is looking off-camera, her hair catching the golden sunlight. The scene is illuminated by warm, golden hour sunset light filtering through the palm fronds, creating soft, natural shadows on the ground. The background features a blurred desert landscape, adding depth to the image. High realism candid photography with a fashion-forward, influencer travel aesthetic, emphasizing warm earthy tones and the interplay of light and shadow.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Palm Tree Path"
+      },
+      "original": {
+        "bytes": 1156268,
+        "sha256": "53d8efe5b63334ce8d530b7ec18eb908d45c984ac28324b05e0fe2a9be6c3b16",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6dc5ae48-original.webp"
+      },
+      "preview": {
+        "bytes": 104956,
+        "sha256": "3350d3b41c1e7d3864e9db1a99840d558c3761e90409080204129f87b23c7267",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6dc5ae48.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "6470a210-b83e-49d4-8211-8853ad70dde1",
+      "imageDriveId": "1jJ7jD64AT58ICIF_bzlMl21x8vO14x94",
+      "sourceImageName": "6470a210-b83e-49d4-8211-8853ad70dde1_Creator - Sunset Stride.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1jJ7jD64AT58ICIF_bzlMl21x8vO14x94/view?usp=drivesdk",
+      "metadataDriveId": "1YDGlJYyeqpORCMl1fq7W1WaaHFrpIhmm",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1YDGlJYyeqpORCMl1fq7W1WaaHFrpIhmm/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial lifestyle photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long dark curly hair. She is walking confidently along a dirt path lined with palm trees in a desert setting, evoking a Coachella festival vibe. She is wearing a white crochet halter top, wide-leg linen pants, layered gold necklaces, and has a woven bag slung over her shoulder. Her expression is relaxed and confident as she looks slightly toward the camera with a candid, natural stride. The scene is illuminated by a warm, golden hour sunset directly behind her, creating a soft backlit glow. The lighting produces rich warm sunset tones, long shadows on the ground, and a shallow depth of field that softly blurs the palm trees in the background. The style is high realism influencer travel photography, capturing an atmospheric and glowing aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Sunset Stride"
+      },
+      "original": {
+        "bytes": 1089210,
+        "sha256": "d91c0ccdc3e18a9714159c305f1ab12b30bfd370568be0f6824adc90b4a8d3d1",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6470a210-original.webp"
+      },
+      "preview": {
+        "bytes": 91008,
+        "sha256": "8b1b4587410628b7f431b90c14cf56283689b204083509d65750d409d86f637a",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-6470a210.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "3d9b0f20-a2e0-4453-8554-817e93d07c00",
+      "imageDriveId": "1O47tS4UiEWRXy4FFoGbS_MebU6WtvPe8",
+      "sourceImageName": "3d9b0f20-a2e0-4453-8554-817e93d07c00_Creator - Desert Walk Golden Hour.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1O47tS4UiEWRXy4FFoGbS_MebU6WtvPe8/view?usp=drivesdk",
+      "metadataDriveId": "1Kv7u0YK1avfq9qcIt_iXsEiQe73_3Ek1",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1Kv7u0YK1avfq9qcIt_iXsEiQe73_3Ek1/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A high-realism lifestyle photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin and long dark curly hair flowing in the breeze. She is captured mid-stride, walking confidently through a desert Coachella-inspired setting adorned with palm trees. She is looking off to the side with a relaxed smile. She wears a stylish festival outfit consisting of a fitted white tank top, a flowy sage green midi skirt, layered gold jewelry, and strappy sandals. The scene is illuminated by warm, golden hour sunset light, casting long, soft shadows and creating a rich, inviting atmosphere. The ground is a sandy desert floor. Influencer travel aesthetic photography with warm tones and soft lighting.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator - Desert Walk Golden Hour"
+      },
+      "original": {
+        "bytes": 1073794,
+        "sha256": "ac6215bd4c348267ae7d87ed7ce992227f4cbd045abebbee5028d242c496badb",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-3d9b0f20-original.webp"
+      },
+      "preview": {
+        "bytes": 89108,
+        "sha256": "03288f59771b041d9bee4ff140a0ac4ae3b2a86f642dfe3d2afdc991bfb42ecc",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-3d9b0f20.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "56938d11-b6f5-42e8-9aae-0719e274e7b4",
+      "imageDriveId": "1Z147u8yDMrRuRjKKonKUgCyqfnHUL-ps",
+      "sourceImageName": "56938d11-b6f5-42e8-9aae-0719e274e7b4_Creator Portrait - Candid.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1Z147u8yDMrRuRjKKonKUgCyqfnHUL-ps/view?usp=drivesdk",
+      "metadataDriveId": "1I75HN8lYzDzczs_MvoJN2fZY0v6PMAnc",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1I75HN8lYzDzczs_MvoJN2fZY0v6PMAnc/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid portrait photograph of a young woman with mixed ethnicity and warm tan skin. She has long, dark curly hair flowing naturally around her shoulders. She wears soft natural makeup, showcasing expressive eyes and a gentle smile. She is slim and dressed in a casual modern outfit consisting of a white crocheted top and denim shorts. She is outdoors, looking slightly off to the side with a relaxed, natural pose. The background is a beautifully blurred, shallow depth of field setting featuring lush greenery and illuminated by soft, warm afternoon light. The image is captured in a lifestyle photography style with an influencer aesthetic, emphasizing soft warm tones, high realism, and a slight film look.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator Portrait - Candid"
+      },
+      "original": {
+        "bytes": 962654,
+        "sha256": "d63997dd1f04f39e109d3436aec14759899adc0ae46a8c7b60b8503355ded1cd",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-56938d11-original.webp"
+      },
+      "preview": {
+        "bytes": 70540,
+        "sha256": "467c8fa052260e559948f0e79d295cd0bfaac4aedb0f53a47bbef2bff453726d",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-56938d11.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "ad2655de-e72b-4557-8453-efd9045c34a4",
+      "imageDriveId": "1FEAxuQsEubqp9OwSMm0nxIrGAT7nP0sz",
+      "sourceImageName": "ad2655de-e72b-4557-8453-efd9045c34a4_Creator Portrait - Editorial.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1FEAxuQsEubqp9OwSMm0nxIrGAT7nP0sz/view?usp=drivesdk",
+      "metadataDriveId": "1dDWTyGN4wWAhz7qApG7SMfH10ngIk8QG",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1dDWTyGN4wWAhz7qApG7SMfH10ngIk8QG/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A close-up portrait photograph of a 25-year-old female lifestyle content creator of mixed ethnicity with warm tan skin. She has long, dark brown, curly and wavy hair falling around her shoulders. Her makeup is soft, natural, and dewy, highlighting her expressive warm brown eyes. She wears several layered gold necklaces. She has a confident, relaxed expression, looking slightly past the camera. The background is a clean, minimal outdoor setting, beautifully blurred with soft, warm bokeh, captured with a shallow depth of field typical of an 85mm portrait lens. The lighting is soft, diffused natural sunlight, creating a gentle glow on her skin. The image is styled as an editorial influencer profile photo, combining high fashion aesthetics with a candid feel. High realism photography with a natural warm color grade and soft film grain, emphasizing an intimate and inviting atmosphere.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator Portrait - Editorial"
+      },
+      "original": {
+        "bytes": 1032576,
+        "sha256": "7a6f4b52fecaae1c344b9ee5806ae32fe56fe492dd60e48757af420681be374f",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-ad2655de-original.webp"
+      },
+      "preview": {
+        "bytes": 76018,
+        "sha256": "e111013150f53393c25a98339686bb2aef689feb12bc7d568f622cdac4c3b2a0",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-ad2655de.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "ed8bb39c-314c-4b92-aa81-97a4890c6445",
+      "imageDriveId": "1faOhdmhl4FJgbNd7FO0eoGqHpe9DX6JI",
+      "sourceImageName": "ed8bb39c-314c-4b92-aa81-97a4890c6445_Creator Portrait - Soft Light.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1faOhdmhl4FJgbNd7FO0eoGqHpe9DX6JI/view?usp=drivesdk",
+      "metadataDriveId": "1qy_X25sh-AHKf_Zy-plW_2g13KRJ6akJ",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1qy_X25sh-AHKf_Zy-plW_2g13KRJ6akJ/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial lifestyle portrait photography of a 25-year-old female creator of mixed ethnicity with warm tan skin, a slim build, and long dark wavy curly hair cascading past her shoulders. She has expressive brown eyes, soft natural makeup, and a glowing complexion. She is looking slightly off-camera with a gentle, confident smile. She wears a simple white top. The setting is outdoors, illuminated by soft golden sunlight that creates a gentle glow on her skin. The background is a beautifully blurred, clean natural environment featuring warm bokeh. The image has a candid, highly realistic film photography aesthetic, captured with an 85mm lens, characterized by slightly warm tones, a shallow depth of field, and a relaxed yet confident energy.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator Portrait - Soft Light"
+      },
+      "original": {
+        "bytes": 943132,
+        "sha256": "9a7abac0269e81ca8397f1a950517fbcf5dd4053e585117cb2302bcae4a241c0",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-ed8bb39c-original.webp"
+      },
+      "preview": {
+        "bytes": 53284,
+        "sha256": "59fb1ea2a9f8c5e60aed1661a22f1e961ab6d32ff5c181e2f08feb516b04edf8",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-ed8bb39c.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "9b569ebf-4dda-42b4-8a41-d6fc5dab5059",
+      "imageDriveId": "1TRrV1woLpQHoS_BgVDv-iAbBKkip_YFW",
+      "sourceImageName": "9b569ebf-4dda-42b4-8a41-d6fc5dab5059_Creator Portrait - Clean Profile.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1TRrV1woLpQHoS_BgVDv-iAbBKkip_YFW/view?usp=drivesdk",
+      "metadataDriveId": "1N6DrGG4VzfHzzM7qZud25UveHKxfC9HL",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1N6DrGG4VzfHzzM7qZud25UveHKxfC9HL/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "An editorial portrait photograph of a 25-year-old female lifestyle creator with mixed ethnicity, warm tan skin, and long dark curly hair. She has soft natural makeup, expressive eyes, and a confident but relaxed energy. She has a slim build and is wearing modern festival fashion, such as a white crochet top. She is outdoors, looking slightly off-camera with a natural pose. The background is a clean, minimal outdoor setting, heavily blurred due to a shallow depth of field. The scene is illuminated by soft sunlight. Candid lifestyle photography with a soft film look, slightly warm tones, and high realism, capturing an influencer lifestyle aesthetic.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Creator Portrait - Clean Profile"
+      },
+      "original": {
+        "bytes": 1015816,
+        "sha256": "0979fc4f2c5600d527c82f7d0afe58920166d779394c33b112e6ff6fbdeb411d",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-9b569ebf-original.webp"
+      },
+      "preview": {
+        "bytes": 75368,
+        "sha256": "6e2090061dc7767f3b89bd40a9c23d5fcd71275afe332fd411e040007c472cfe",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-9b569ebf.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "7115415d-26cf-42a5-92f1-fb776aad0512",
+      "imageDriveId": "1UHJNma88i61RJ3lgHrYUkKOsYv3K1rSB",
+      "sourceImageName": "7115415d-26cf-42a5-92f1-fb776aad0512_Poppi House - Sunset Lounge.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1UHJNma88i61RJ3lgHrYUkKOsYv3K1rSB/view?usp=drivesdk",
+      "metadataDriveId": "19kHmaiH1NGyTXUQwWfPmaT6CgwSMfBAg",
+      "sourceMetadataURL": "https://drive.google.com/file/d/19kHmaiH1NGyTXUQwWfPmaT6CgwSMfBAg/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid lifestyle photograph for social media featuring a young woman in her mid-20s with sun-kissed brown hair in loose waves, wearing white retro sunglasses, layered gold necklaces, a white crochet crop top, and high-waisted denim shorts. She is lounging casually on a white modern outdoor daybed and sipping from a light blue soda can with the word \"poppi\" on it. The scene is set at a Coachella desert house party during golden hour. Surrounding her are icy blue and white branded cushions, umbrellas, and string lights beginning to glow. In the background, palm trees and desert mountains are silhouetted against a warm, dreamy pink and orange sunset sky, with other party guests mingling softly out of focus. The lighting is warm and golden, capturing a relaxed, desert kickback vibe with an emphasis on lifestyle aesthetics.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Poppi House - Sunset Lounge"
+      },
+      "original": {
+        "bytes": 1012306,
+        "sha256": "3338a300bd12673be01932bdff5e0602862fcc6e5d4597a2fdc29150340371e5",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-7115415d-original.webp"
+      },
+      "preview": {
+        "bytes": 73938,
+        "sha256": "0ce1bf7b1de158418b9222a8963b9df04a79cb0454cd3a9f8dee3d70f574640a",
+        "width": 1360,
+        "height": 768,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-7115415d.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "291cd0b5-ad6d-4249-b236-a304b7de6292",
+      "imageDriveId": "1U0G3zZBCDsbBDOPswbew4rngofbNSJZT",
+      "sourceImageName": "291cd0b5-ad6d-4249-b236-a304b7de6292_Poppi House - Merch Wall.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1U0G3zZBCDsbBDOPswbew4rngofbNSJZT/view?usp=drivesdk",
+      "metadataDriveId": "1iBO19hHMKFHVlWMvjBUSc4Lbmd7tvWXh",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1iBO19hHMKFHVlWMvjBUSc4Lbmd7tvWXh/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A lifestyle photograph of a smiling young woman in her mid-20s posing in front of a branded \"poppi\" merch display wall at a Coachella desert house activation. She has sun-kissed brown hair styled in loose waves, with white retro sunglasses pushed up on her head. She is wearing a white crochet crop top, high-waisted denim shorts, and gold layered necklaces. She holds a branded tote bag and a blue \"poppi\" can. The merch display wall features an icy blue and white \"Alpine Blast\" themed decor, \"poppi\" logo signage, and shelves stocked with branded sweatshirts and hats. The setting is a modern minimalist desert estate interior with bright natural daylight illuminating the clean white and icy blue color palette, creating a vibrant, Instagram-worthy photo op moment. Editorial lifestyle photography with crisp details and beautiful bright lighting.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Poppi House - Merch Wall"
+      },
+      "original": {
+        "bytes": 1033996,
+        "sha256": "7aec15b7ab9027c2e163207d8144370c5eddd8b2a96dd4ca31680415c5f84bab",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-291cd0b5-original.webp"
+      },
+      "preview": {
+        "bytes": 82696,
+        "sha256": "4af9ef0d36f00d4eb56d7471fa460a78637434ebf67243ece314e65d5d85d991",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-291cd0b5.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "d28af5cc-1c35-4635-b204-cddf06691ae0",
+      "imageDriveId": "1KeZW6AFSOOajl4f0nwfUTiYiXiMn934F",
+      "sourceImageName": "d28af5cc-1c35-4635-b204-cddf06691ae0_Poppi House - Cheers Moment.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1KeZW6AFSOOajl4f0nwfUTiYiXiMn934F/view?usp=drivesdk",
+      "metadataDriveId": "1SAxghx8C3UUqTwgm-m5KwM34P9pAx4S6",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1SAxghx8C3UUqTwgm-m5KwM34P9pAx4S6/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A candid, social media style photograph of a young woman content creator, mid-20s, with sun-kissed brown hair in loose waves. She is wearing a white crochet crop top, high-waisted denim shorts, white retro sunglasses, and layered gold necklaces. She is smiling and laughing, doing a cheers gesture while holding up a light blue soda can that says \"poppi\" on it. The setting is a luxurious Coachella desert house party. The background features a beautifully decorated outdoor lounge area with icy blue and white branded decor, modern white furniture, tropical plants, and string lights. In the distance, desert mountains and palm trees are visible. The scene is illuminated by warm, golden afternoon light, with a slightly warm color grade, capturing the vibrant and energetic atmosphere of an influencer content photo.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Poppi House - Cheers Moment"
+      },
+      "original": {
+        "bytes": 1140442,
+        "sha256": "5ee1a6fc3f39893221cc070b298d5dfc3abb0328457db7e774783604988a5199",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d28af5cc-original.webp"
+      },
+      "preview": {
+        "bytes": 101038,
+        "sha256": "8d5f13a6077007dad375e395e9b6205c3e0ccbaae1956e08bdb9c35a521c63c2",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-d28af5cc.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    },
+    {
+      "group": "Poppi",
+      "folderId": "1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+      "uuid": "fb1dc0cc-ae3a-4c0b-a660-2ceff4fc9d2f",
+      "imageDriveId": "1FKwfY2a5zlmuIZp6HLFFmR1DdMyNfDZ0",
+      "sourceImageName": "fb1dc0cc-ae3a-4c0b-a660-2ceff4fc9d2f_Poppi House - Poolside Selfie.webp",
+      "sourceImageURL": "https://drive.google.com/file/d/1FKwfY2a5zlmuIZp6HLFFmR1DdMyNfDZ0/view?usp=drivesdk",
+      "metadataDriveId": "1dG0yFoq_X4v-c58N0quGIqShCnZHxR3k",
+      "sourceMetadataURL": "https://drive.google.com/file/d/1dG0yFoq_X4v-c58N0quGIqShCnZHxR3k/view?usp=drivesdk",
+      "sourceMetadata": {
+        "prompt": "A medium shot, natural social media style photograph of a young woman in her mid-20s with sun-kissed brown hair styled in loose waves. She is wearing a white crochet crop top, high-waisted denim shorts, and layered gold necklaces, with white retro sunglasses pushed up on her head. She is taking a selfie, holding a light blue soda can with the word \"poppi\" clearly visible. The background is a luxurious desert pool party at a modern white estate, with palm trees under a clear blue sky. The pool is filled with pink and blue inflatable floats and Poppi-branded pool accessories. Icy blue and white branded umbrellas and deck chairs surround the pool area. The scene is illuminated by warm golden hour desert light, creating a slightly overexposed, sun-drenched Coachella weekend vibe.",
+        "album_name": "Poppi Coachella Creator Persona",
+        "image_name": "Poppi House - Poolside Selfie"
+      },
+      "original": {
+        "bytes": 1068548,
+        "sha256": "0e11eaf427480836dba4d091954f53c4234aac80fccde85e159a762cb8038a1f",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-fb1dc0cc-original.webp"
+      },
+      "preview": {
+        "bytes": 99764,
+        "sha256": "f7fb5acb97217072eb231db1e72270bd919281cfc4e3f3aa59ef170d0a1b596c",
+        "width": 880,
+        "height": 1168,
+        "format": "webp",
+        "repoPath": "public/assets/talent/uploads/drive-poppi-fb1dc0cc.webp"
+      },
+      "profileId": "poppi-festival-creator"
+    }
+  ]
+}

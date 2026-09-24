@@ -90,6 +90,1194 @@
           "engagements": 17760
         }
       ]
+    },
+    {
+      "id": "camille-aubert",
+      "displayName": "Camille Aubert",
+      "provenance": "ai-generated",
+      "age": 0,
+      "location": "Illustrative profile",
+      "bio": "Fictional AI-generated travel and lifestyle creator. Mediterranean hotel mornings, seaside lunches and sun-care moments, supplied in the Camille Aubert collection. No real account, audience or campaign results are claimed.",
+      "verticals": [
+        "Travel",
+        "Lifestyle",
+        "Beauty"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/drive-camille-b74b7602.webp",
+      "originalPortrait": "assets/talent/uploads/drive-camille-b74b7602-original.webp",
+      "creativeDirection": {
+        "summary": "A coherent supplied fictional creator collection: relaxed coastal travel, natural portraits, hotel balconies, boat days and seaside lunches.",
+        "identityNotes": [
+          "Imported from the supplied Camille Drive folder: https://drive.google.com/drive/folders/1_HeLhb4f6w-xkW8zDkC5Mud-Rx4gJBCC",
+          "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
+          "Retain the supplied collection identity; do not merge this person into a different existing creator.",
+          "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "id": "485e7d82-1339-46fb-a2f9-ecc28364e843",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-485e7d82.webp",
+          "original": "assets/talent/uploads/drive-camille-485e7d82-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Hotel Balcony 4",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 485e7d82-1339-46fb-a2f9-ecc28364e843",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial travel photograph of a young woman with fair skin and softly waved light brown hair. She is leaning against a pale stone balcony railing of a boutique Mediterranean hotel, half-turned towards the camera with a gentle, soft smile. She is wearing a sand-colored knit tank top, high-waisted linen trousers, and gold hoop earrings. The background is a beautifully blurred vista of a rugged coastline meeting a vibrant turquoise sea. The scene is bathed in the warm, golden light of morning sun, creating a serene and aspirational travel aesthetic."
+          }
+        },
+        {
+          "id": "2b72df68-4d30-42ae-98e2-c8be5840905a",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-2b72df68.webp",
+          "original": "assets/talent/uploads/drive-camille-2b72df68-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Hotel Balcony 2",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 2b72df68-4d30-42ae-98e2-c8be5840905a",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial travel photograph of a young woman seated barefoot on a rattan chair on a boutique hotel balcony. She has long brown hair tucked behind one ear and a gentle smile. She is wearing a soft beige linen shirt and tailored ivory shorts. On the balcony near her is a small breakfast tray holding a linen napkin and a ceramic coffee cup. The balcony railing is adorned with climbing pink bougainvillea. In the background is a stunning Mediterranean coastline with blue waters. The scene is illuminated by soft, warm morning light, creating a relaxed and luxurious atmosphere."
+          }
+        },
+        {
+          "id": "c793bb6b-d840-4bbf-ab57-e3522b08f378",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-c793bb6b.webp",
+          "original": "assets/talent/uploads/drive-camille-c793bb6b-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Hotel Balcony 3",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · c793bb6b-d840-4bbf-ab57-e3522b08f378",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial travel creator photograph of a young woman standing in profile on an arched stone balcony of a boutique hotel. She has fair skin, brown hair left loose, and is gazing softly into the distance. She is wearing a white cotton sundress with delicate straps and a thin gold chain necklace. Beside her, a white linen curtain billows softly in the breeze. The background features a softly blurred, scenic Mediterranean coastline with blue waters. The scene is illuminated by warm, soft morning daylight, highlighting her features and creating a serene, inviting atmosphere. Editorial travel photography with photorealistic details, emphasizing the warm lighting and the romantic, tranquil mood."
+          }
+        },
+        {
+          "id": "59c67fd6-7b4f-48f4-852f-7428f8b3d797",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-59c67fd6.webp",
+          "original": "assets/talent/uploads/drive-camille-59c67fd6-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Hotel Balcony 1",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 59c67fd6-7b4f-48f4-852f-7428f8b3d797",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial travel photograph of a young woman standing on a boutique hotel balcony overlooking the sparkling Mediterranean coast. She has light skin, long loose natural wavy brown hair, and is wearing an understated cream linen slip dress. She is leaning gently against a black wrought iron railing, looking thoughtfully out toward the sea. The balcony features whitewashed stucco walls and warm terracotta floor tiles. A small white espresso cup sits on a round metal side table nearby. The scene is bathed in soft, warm morning light, creating a serene and inviting atmosphere with photorealistic details."
+          }
+        },
+        {
+          "id": "31bca4cb-0537-4be6-a12e-692186f32fc4",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-31bca4cb.webp",
+          "original": "assets/talent/uploads/drive-camille-31bca4cb-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Boat SPF 3 (clean)",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 31bca4cb-0537-4be6-a12e-692186f32fc4",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic candid lifestyle photograph of a woman aboard a Mediterranean yacht. She has fair, sun-kissed skin, natural makeup, and long, straight brown hair that is loose and slightly damp from a swim. She is smiling gently and looking off to the side. She wears a sandy-beige one-piece swimsuit and delicate gold earrings. She holds a completely plain matte white SPF tube with absolutely no text, labels, graphics, or logos, and is in the motion of smoothing sunscreen across her collarbone. The background features a sparkling sea horizon. The scene is illuminated by soft golden afternoon light, capturing a premium travel creator aesthetic with warm tones and natural sunlight."
+          }
+        },
+        {
+          "id": "82d62249-8cd0-408f-818c-5d4ac08706f6",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-82d62249.webp",
+          "original": "assets/talent/uploads/drive-camille-82d62249-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Boat SPF 4",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 82d62249-8cd0-408f-818c-5d4ac08706f6",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle photograph of a young woman with long wavy brown hair, sitting on the wooden swim platform of a boat in the Mediterranean. She is smiling softly at the camera. She is wearing a chic black bandeau swimsuit and a sheer linen sarong tied around her waist. She is holding a small, unbranded matte SPF tube in one hand, with her feet near the water. The boat's wooden deck is warm and inviting. The background features a bright, reflective blue sea under soft, golden sunlight. The scene is captured in a refined European resort aesthetic, with bright, natural lighting highlighting the serene and luxurious atmosphere."
+          }
+        },
+        {
+          "id": "6ccfd137-bd53-4434-91cb-7291c2183ca0",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-6ccfd137.webp",
+          "original": "assets/talent/uploads/drive-camille-6ccfd137-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Boat SPF 3",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 6ccfd137-bd53-4434-91cb-7291c2183ca0",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle photograph of a young woman with sun-kissed skin and long, slightly damp brown hair aboard a Mediterranean yacht. She has a gentle smile and is looking off to the side. She is wearing a sandy-beige one-piece swimsuit and delicate gold earrings. She is holding a small, unbranded white tube of SPF in one hand and is smoothing sunscreen across her collarbone with her other hand. The background features a sparkling blue sea horizon under soft, warm golden afternoon sunlight. The scene is captured in a premium travel creator aesthetic, with bright, natural lighting and clear focus on the subject."
+          }
+        },
+        {
+          "id": "fbf42f96-fe1c-45a6-a86e-e5a1a03ed670",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-fbf42f96.webp",
+          "original": "assets/talent/uploads/drive-camille-fbf42f96-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Boat SPF 2",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · fbf42f96-fe1c-45a6-a86e-e5a1a03ed670",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic travel photography portrait of a young woman seated on the bow of a sleek, polished wooden boat cruising on the Mediterranean Sea. She has light skin, dark brown hair peeking out from under a wide-brimmed straw hat, and is wearing a flowing ivory linen kaftan. She is holding a small, unbranded matte white tube and applying sunscreen along her exposed forearm. Her facial expression is relaxed and pleasant, enjoying the sunshine. The background features glittering, deep blue water and a blurred, distant coastline in the background. The scene is illuminated by bright, clear midday sunlight, casting sharp but flattering shadows and highlighting the texture of the linen kaftan and the wood of the boat. The overall aesthetic is that of a refined, high-end European travel influencer's lifestyle shot, with crisp details and rich, natural colors."
+          }
+        },
+        {
+          "id": "1fd3bc33-6215-463c-a6e7-fc864ea02fc9",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-1fd3bc33.webp",
+          "original": "assets/talent/uploads/drive-camille-1fd3bc33-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Boat SPF 1",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 1fd3bc33-6215-463c-a6e7-fc864ea02fc9",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle portrait of a young woman on a Mediterranean wooden boat deck on a sunny day. She has long, light brown hair that is softly tousled by the ocean breeze, and a warm smile. She is wearing an elegant, unbuttoned white linen shirt over a beige bikini top. She is dabbing sunscreen onto her cheekbone with the fingertips of one hand, while holding a small, plain, unbranded white SPF tube in her other hand. The background features a sparkling turquoise sea. The scene is illuminated by soft, bright natural sunlight, emphasizing the warm, golden tones of her skin and the vibrant blue of the water. The image has a refined European resortwear aesthetic with clean lines and a relaxed, luxurious atmosphere."
+          }
+        },
+        {
+          "id": "2b46173e-88c2-44d3-b1cb-a05a23e406cc",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-2b46173e.webp",
+          "original": "assets/talent/uploads/drive-camille-2b46173e-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Seaside Lunch 4",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 2b46173e-88c2-44d3-b1cb-a05a23e406cc",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle photograph of a young woman with fair skin, brown hair, and green eyes, seated at a table on a sun-drenched seaside terrace during the golden hour. She is wearing a light brown turtleneck sweater under a brown coat and simple gold hoop earrings. She is leaning slightly forward on the table, offering a soft, warm smile towards the camera. Beside her, on an empty chair, rests a wide-brimmed straw hat. The table is set with clear, unbranded glassware, a rustic ceramic carafe of water, and a small plate with olives and bread. The background is softly blurred, showing a calm sea horizon and vibrant bougainvillea flowers. The lighting is warm and golden, casting soft shadows and highlighting her features, creating an inviting and premium travel aesthetic."
+          }
+        },
+        {
+          "id": "890f6ab6-b9ca-473e-8308-13c028d53923",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-890f6ab6.webp",
+          "original": "assets/talent/uploads/drive-camille-890f6ab6-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Seaside Lunch 3",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 890f6ab6-b9ca-473e-8308-13c028d53923",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle photograph of a young woman with long, straight light brown hair and a fair complexion sitting at an elegant seaside lunch table in a three-quarter view. She is wearing a cozy beige turtleneck sweater and small gold hoop earrings, looking slightly off-camera with a serene expression. The table is beautifully set with a linen napkin, ceramic plates holding simple Mediterranean food, an unbranded wine glass filled with pale rosé, and a small bud vase. The background features a soft, out-of-focus view of an Amalfi-style coastline at sunset. The scene is bathed in soft, golden-hour light coming from the side, creating warm tones and a premium travel creator aesthetic."
+          }
+        },
+        {
+          "id": "b81d7f82-c33a-46e4-8640-32fe38b7110f",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-b81d7f82.webp",
+          "original": "assets/talent/uploads/drive-camille-b81d7f82-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Seaside Lunch 2",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · b81d7f82-c33a-46e4-8640-32fe38b7110f",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle portrait of a young woman with brown hair and gold hoop earrings, sitting at a Mediterranean seaside lunch on a stone terrace overlooking the deep blue sea. She is wearing a soft ivory linen dress and is holding an unbranded coupe glass filled with an orange aperitif. The background features soft, out-of-focus pale stucco architecture and olive trees. The scene is bathed in warm, golden-hour sunlight that catches her hair, creating a refined boutique hotel mood. Editorial photography with rich, warm tones and a beautiful interplay of light and shadow."
+          }
+        },
+        {
+          "id": "cb14d522-3c17-4453-9340-4fae46816b76",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-cb14d522.webp",
+          "original": "assets/talent/uploads/drive-camille-cb14d522-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille - Seaside Lunch 1",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · cb14d522-3c17-4453-9340-4fae46816b76",
+            "approach": "Supplied generation prompt for fictional AI imagery: A premium lifestyle editorial photograph of a young woman with light brown hair, seated relaxed at a refined Mediterranean seaside lunch on a boutique hotel terrace. She has a gentle half-smile and is looking off to the side, wearing an elegant light summer blouse and gold hoop earrings. Before her is a table draped in a linen tablecloth, set with unbranded glassware holding a vibrant, spritz-colored aperitif and small plates of food. The background is a beautifully blurred vista of a turquoise sea and coastline. The scene is bathed in warm, golden-hour light, creating a luxurious and relaxed European summer mood with a shallow depth of field."
+          }
+        },
+        {
+          "id": "489c29d4-238d-4a23-80fa-9600b490fc52",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-489c29d4.webp",
+          "original": "assets/talent/uploads/drive-camille-489c29d4-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille Aubert - Headshot 4",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 489c29d4-238d-4a23-80fa-9600b490fc52",
+            "approach": "Supplied generation prompt for fictional AI imagery: A realistic shoulders-up headshot photograph of Camille Aubert, a Parisian female travel and hospitality content creator, taken in her early 30s. She has center-parted brunette hair with soft natural waves framing her face. Her dewy makeup is minimal, featuring a subtle nude lip color and calm warm eyes that look directly at the camera. A slight closed-mouth smile graces her face as she wears a fine knit camel-colored sweater. The photograph is taken with soft natural daylight against a clean pale taupe background, cropped in a square format with photographic realism and no heavy retouching."
+          }
+        },
+        {
+          "id": "47831f55-9584-4c1f-aabd-8396102705ff",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-47831f55.webp",
+          "original": "assets/talent/uploads/drive-camille-47831f55-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille Aubert - Headshot 3",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 47831f55-9584-4c1f-aabd-8396102705ff",
+            "approach": "Supplied generation prompt for fictional AI imagery: A realistic square social profile headshot photograph of Camille Aubert, a French travel and hospitality creator in her early 30s. Camille Aubert has soft wavy dark blonde hair that frames her face, light freckles scattered across her cheeks and nose, and fresh natural makeup. Camille Aubert displays a gentle confident smile as she gazes directly at the camera. Camille Aubert wears a tailored ivory linen blazer over a thin camisole, with the blazer partially open to reveal the camisole underneath. The photograph is taken with soft natural window light, creating a warm and inviting atmosphere, against a clean warm-grey neutral background that evokes a boutique hotel aesthetic. The framing captures Camille Aubert from the shoulders up, with crisp clear focus on her face."
+          }
+        },
+        {
+          "id": "b74b7602-16be-4efd-bcc6-71b09d1be230",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-b74b7602.webp",
+          "original": "assets/talent/uploads/drive-camille-b74b7602-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille Aubert - Headshot 2",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · b74b7602-16be-4efd-bcc6-71b09d1be230",
+            "approach": "Supplied generation prompt for fictional AI imagery: A realistic shoulders-up profile headshot photograph of Camille Aubert, a Paris-based female travel and hospitality creator in her early 30s. Camille Aubert has chestnut hair softly tucked behind one ear, revealing a delicate gold hoop earring. She wears a beige cashmere turtleneck sweater and has natural makeup with a subtle rosy lip. Her warm composed expression looks slightly off-camera. The image features soft diffused natural daylight illuminating her face against a clean off-white plaster wall background. The photograph is cropped in a square format with sharp facial detail."
+          }
+        },
+        {
+          "id": "fe411ba7-b426-465c-9d8f-79afa7af72b7",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-camille-fe411ba7.webp",
+          "original": "assets/talent/uploads/drive-camille-fe411ba7-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Camille Aubert - Headshot 1",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · fe411ba7-b426-465c-9d8f-79afa7af72b7",
+            "approach": "Supplied generation prompt for fictional AI imagery: A realistic shoulders-up social profile headshot of Camille Aubert, a Parisian female travel and hospitality creator in her early 30s, photographed with a shallow depth of field against a clean neutral beige background. She has soft brunette hair loosely styled and wears a simple cream silk blouse. Her natural minimal makeup complements her refined European style, and she displays a warm but composed closed-mouth smile. Soft natural window light illuminates her face from the left side, creating a gentle glow on her features. The image captures her sharp, clear face without any retouching artifacts, presenting a believable candid travel creator profile photo."
+          }
+        }
+      ]
+    },
+    {
+      "id": "astrid-healthy-bites",
+      "displayName": "Astrid Healthy Bites",
+      "provenance": "ai-generated",
+      "age": 0,
+      "location": "Illustrative profile",
+      "bio": "Fictional AI-generated food and wellness creator from the supplied Astrid Healthy Bites collection. Farmers-market finds, kitchen routines, matcha breaks and everyday movement. No real social account or audience figures are assigned.",
+      "verticals": [
+        "Food",
+        "Wellness",
+        "Fitness",
+        "Lifestyle"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/drive-astrid-89e5c759.webp",
+      "originalPortrait": "assets/talent/uploads/drive-astrid-89e5c759-original.webp",
+      "creativeDirection": {
+        "summary": "Bright, approachable food and wellness imagery, combining clean portrait photography with everyday cooking, market visits, drinks and fitness.",
+        "identityNotes": [
+          "Imported from the supplied Astrid Drive folder: https://drive.google.com/drive/folders/18ZnlH_FMMZg_S99mM7qfP2LEn7BJ5HuV",
+          "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
+          "Retain the supplied collection identity; do not merge this person into a different existing creator.",
+          "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "id": "4a454192-b733-48c0-ace1-994daadb37e1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-4a454192.webp",
+          "original": "assets/talent/uploads/drive-astrid-4a454192-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "IG Post – Farmers Market Haul",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 4a454192-b733-48c0-ace1-994daadb37e1",
+            "approach": "Supplied generation prompt for fictional AI imagery: A vibrant lifestyle photograph of a smiling young woman with long blonde hair, standing at a sunny outdoor farmers market. She is wearing a fitted olive green athletic set and a small crossbody bag. She is holding a woven basket overflowing with fresh produce, including leafy greens, red tomatoes, and herbs. The background consists of out-of-focus market stalls. The scene is bathed in warm, golden-hour sunlight, creating a bright, cheerful, and aesthetic influencer-style image with a shallow depth of field."
+          }
+        },
+        {
+          "id": "f25cae31-705c-40db-b66e-1cf8320d34f1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-f25cae31.webp",
+          "original": "assets/talent/uploads/drive-astrid-f25cae31-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "IG Post – Matcha Moment",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · f25cae31-705c-40db-b66e-1cf8320d34f1",
+            "approach": "Supplied generation prompt for fictional AI imagery: A close-up lifestyle photograph of a smiling woman holding a glass cup of green matcha latte with both hands close to her face. She has light skin, bright blue eyes, and blonde hair worn down and tousled. She is looking directly at the camera with a soft, warm smile. She is wearing a cream knit zip-up sweater layered over a white sports tank top. The background is a bright, cozy café or kitchen setting, beautifully blurred with dreamy bokeh. The scene is illuminated by warm, flattering light, creating a bright and inviting wellness influencer aesthetic."
+          }
+        },
+        {
+          "id": "42eb373e-c559-4832-8293-d9283e306658",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-42eb373e.webp",
+          "original": "assets/talent/uploads/drive-astrid-42eb373e-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "IG Post – Mirror Gym Selfie",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 42eb373e-c559-4832-8293-d9283e306658",
+            "approach": "Supplied generation prompt for fictional AI imagery: A medium full shot mirror selfie photograph of a young woman with a toned, athletic figure standing in a bright, modern home studio or gym. She has blonde hair pulled up into a high ponytail and a soft, confident smile, showing white teeth. She is holding a smartphone in one hand, taking a picture of herself in a large, full-length mirror. She is wearing a matching athletic set consisting of a beige sports bra and high-waisted beige leggings. The reflection shows a clean, minimalist background with light-colored flooring, a few green potted plants, and a large window out of frame. The scene is illuminated by bright, soft daylight streaming into the room, creating a fresh, energetic atmosphere. Editorial lifestyle fitness photography with a bright, clean aesthetic and natural lighting."
+          }
+        },
+        {
+          "id": "8eddce5b-73cd-4fb5-bfd9-ac72e8f3caea",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-8eddce5b.webp",
+          "original": "assets/talent/uploads/drive-astrid-8eddce5b-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "IG Post – Smoothie Bowl Flat Lay Selfie",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 8eddce5b-73cd-4fb5-bfd9-ac72e8f3caea",
+            "approach": "Supplied generation prompt for fictional AI imagery: An overhead view, square-format lifestyle photograph capturing a trendy wellness influencer aesthetic. A pair of hands holds a smartphone over a light wooden table. The phone screen displays a bright, smiling selfie of a young woman with long blonde hair and blue eyes. Next to the phone on the table is a beautifully styled smoothie bowl topped with fresh berries, granola, and delicate edible flowers. A textured linen napkin and scattered fresh fruits, such as berries and kiwi slices, surround the bowl. The scene is illuminated by bright, airy daylight, creating a fresh, clean, and inviting atmosphere typical of a high-quality Instagram feed."
+          }
+        },
+        {
+          "id": "1e68c008-fd7b-4ef5-a778-bf6f4ea2a279",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-1e68c008.webp",
+          "original": "assets/talent/uploads/drive-astrid-1e68c008-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Outdoor Café Portrait",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 1e68c008-fd7b-4ef5-a778-bf6f4ea2a279",
+            "approach": "Supplied generation prompt for fictional AI imagery: A lifestyle influencer photograph of a young woman with long blonde hair, sitting at an outdoor café table on a sunny day. She is smiling softly, looking towards the camera. She is wearing a fitted beige zip-up athletic jacket. On the table in front of her sits a plate with avocado toast and a glass of matcha latte. The background features blurred, lush greenery. The scene is illuminated by soft, golden hour light, creating a warm, inviting, and aesthetic atmosphere."
+          }
+        },
+        {
+          "id": "f1d9f482-c8da-43da-b43c-780e3206d61c",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-f1d9f482.webp",
+          "original": "assets/talent/uploads/drive-astrid-f1d9f482-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Yoga Mat with Green Juice",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · f1d9f482-c8da-43da-b43c-780e3206d61c",
+            "approach": "Supplied generation prompt for fictional AI imagery: A bright lifestyle photograph of a smiling young woman with blonde hair styled in a relaxed low ponytail. She is sitting cross-legged on a yoga mat in a sunlit living room filled with green plants. She is wearing a black sports bra and matching black leggings. In one of her hands, she is holding a glass of green juice. The background features modern, airy living space elements with natural light streaming through windows, creating a warm, inviting atmosphere. The scene is captured in a lifestyle photography style, emphasizing health and wellness with a soft, bright aesthetic."
+          }
+        },
+        {
+          "id": "7af0a9af-88bb-4083-99d8-6b8590506dfb",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-7af0a9af.webp",
+          "original": "assets/talent/uploads/drive-astrid-7af0a9af-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Cooking in the Kitchen",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 7af0a9af-88bb-4083-99d8-6b8590506dfb",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid lifestyle photography shot of a young woman with long blonde hair, standing in a bright, modern Scandinavian kitchen. She is wearing a cream-colored matching activewear set consisting of a sports bra and leggings. She has a soft smile on her face as she looks down, focused on chopping fresh vegetables on a wooden cutting board on a white countertop. A colorful salad bowl sits beside the cutting board. The kitchen features white walls and light wood accents. The scene is illuminated by bright, natural daylight streaming in, creating a fresh, healthy, and vibrant atmosphere."
+          }
+        },
+        {
+          "id": "89e5c759-281b-4991-80e9-a60c449391ae",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-89e5c759.webp",
+          "original": "assets/talent/uploads/drive-astrid-89e5c759-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Profile Headshot – Head & Shoulders",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 89e5c759-281b-4991-80e9-a60c449391ae",
+            "approach": "Supplied generation prompt for fictional AI imagery: A bright, lifestyle profile photograph of a young Caucasian woman in a head and shoulders portrait. She has long, straight blonde hair falling over her shoulders and blue eyes. She is smiling warmly directly at the camera. She is wearing a clean white sports tank top. The background is a soft, minimalist kitchen, heavily blurred to create a shallow depth of field. The scene is illuminated by bright, soft daylight streaming from a window off-camera, highlighting her face and hair. Editorial lifestyle photography with a clean, uplifting, and approachable aesthetic."
+          }
+        },
+        {
+          "id": "11cdae98-a80e-4c70-91e3-7cd2ec2ebd98",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-11cdae98.webp",
+          "original": "assets/talent/uploads/drive-astrid-11cdae98-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Nordic Foodie Creator – Outdoor Run Break",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 11cdae98-a80e-4c70-91e3-7cd2ec2ebd98",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic lifestyle photograph of a fictional Nordic female fitness and health-food creator in her mid-twenties, sitting on a park bench after a run. She has long blonde hair styled in a high ponytail and blue eyes. Her athletic toned body is visible in a black sports bra and matching black leggings, paired with white running shoes. She holds a glass bottle of green juice in her right hand and looks directly at the camera with a bright smile. The setting is a Scandinavian city park with lush green trees in the background, illuminated by soft morning light that casts gentle shadows across the scene."
+          }
+        },
+        {
+          "id": "1b9b3fed-563b-4852-9c28-c7ede682e6bc",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-1b9b3fed.webp",
+          "original": "assets/talent/uploads/drive-astrid-1b9b3fed-original.webp",
+          "aspectRatio": "9/16",
+          "caption": "Nordic Foodie Creator – Studio Headshot",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 1b9b3fed-563b-4852-9c28-c7ede682e6bc",
+            "approach": "Supplied generation prompt for fictional AI imagery: A studio headshot photograph of a Nordic Scandinavian woman in her mid-20s with long straight platinum-blonde hair and blue eyes, wearing a fitted olive green ribbed sports bra and matching leggings. Her skin appears glowing and she has fresh natural makeup. The woman stands with her arms crossed, displaying a confident relaxed smile. The background is a soft beige seamless backdrop illuminated by soft diffused studio lighting that creates a clean modern wellness aesthetic."
+          }
+        },
+        {
+          "id": "33e28294-9ca9-4c3b-954e-797c4cdfca72",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-33e28294.webp",
+          "original": "assets/talent/uploads/drive-astrid-33e28294-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Nordic Foodie Creator – Farmers Market",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 33e28294-9ca9-4c3b-954e-797c4cdfca72",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic candid portrait of a female health-food influencer with a Scandinavian/Nordic appearance, featuring long wavy blonde hair, fair skin, and light eyes, in her late 20s with an attractive, fit athletic build. She wears a cropped zip-up athletic jacket and leggings in cream and beige tones, paired with a small crossbody bag. The woman browses an outdoor farmers market on a sunny day, holding a woven basket filled with leafy greens and fresh fruit. Warm golden-hour light illuminates the scene, with a bokeh background of market stalls creating a natural lifestyle photography aesthetic."
+          }
+        },
+        {
+          "id": "9768bccb-0f76-42fb-b2f4-b1e320cacaec",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-astrid-9768bccb.webp",
+          "original": "assets/talent/uploads/drive-astrid-9768bccb-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Nordic Foodie Creator – Kitchen Portrait",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 9768bccb-0f76-42fb-b2f4-b1e320cacaec",
+            "approach": "Supplied generation prompt for fictional AI imagery: A photorealistic portrait of a young woman with Nordic Scandinavian features, long blonde hair flowing over her shoulders, and bright blue eyes, smiling directly at the camera while holding a vibrant smoothie bowl. She wears matching soft sage-colored athletic wear consisting of a sports bra and high-waisted leggings that showcase her athletic build. The woman stands in a bright, minimalist Scandinavian kitchen with white walls, light wooden cabinets, and large windows allowing natural light to flood the space. The smoothie bowl she holds features a deep purple base topped with fresh strawberries, blueberries, sliced banana, chia seeds, and golden granola clusters. The background kitchen remains softly blurred due to a shallow depth of field, emphasizing the woman and her breakfast bowl as the main focus of the lifestyle influencer-style photograph."
+          }
+        }
+      ]
+    },
+    {
+      "id": "creator-economy-scenes",
+      "displayName": "Creator Economy scenes",
+      "provenance": "ai-generated",
+      "age": 0,
+      "location": "Illustrative scenes",
+      "bio": "A collection of fictional AI-generated creator-economy scenes: a desk flat-lay, a studio shoot, a solo creator and a rooftop gathering. These are separate illustrative people and settings, not one person, a Foam team portrait or a real customer story.",
+      "verticals": [
+        "Creator economy",
+        "Collaboration",
+        "Behind the scenes"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/drive-creator-economy-d46fa410.webp",
+      "originalPortrait": "assets/talent/uploads/drive-creator-economy-d46fa410-original.webp",
+      "creativeDirection": {
+        "summary": "General creator-economy photography. This record groups four mixed scenes and must not be treated as a single creator identity.",
+        "identityNotes": [
+          "Imported from the supplied Creator Econ Drive folder: https://drive.google.com/drive/folders/1FIoIyQX1yWym_lLRdpv4mqDACDjJSz0G",
+          "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
+          "This is a mixed collection of scenes and different fictional people, not one creator profile.",
+          "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "id": "d46fa410-5b99-4ac2-aef6-6db4d94d6dda",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-creator-economy-d46fa410.webp",
+          "original": "assets/talent/uploads/drive-creator-economy-d46fa410-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Creator Desk Flat-Lay",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · d46fa410-5b99-4ac2-aef6-6db4d94d6dda",
+            "approach": "Supplied generation prompt for fictional AI imagery: A flat-lay photograph taken from directly above a wooden desk surface, featuring a collection of items arranged for a creator's workspace. A smartphone sits on a small black tripod in the center, with a ring light positioned nearby casting a soft glow. To the left, a glass filled with iced coffee sits next to several Polaroid photographs scattered across the desk. A pair of black sunglasses rests near the right edge, with white AirPods and a small digital camera placed nearby. A notebook lies open with handwritten content ideas visible on the pages, surrounded by several rolls of film scattered across the warm wooden surface. The entire scene is bathed in warm, peachy tones from natural sunlight streaming in from above."
+          }
+        },
+        {
+          "id": "832ce3f3-4d09-4f94-8f5f-e2221b68952c",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-creator-economy-832ce3f3.webp",
+          "original": "assets/talent/uploads/drive-creator-economy-832ce3f3-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Studio Content Shoot BTS",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 832ce3f3-4d09-4f94-8f5f-e2221b68952c",
+            "approach": "Supplied generation prompt for fictional AI imagery: A documentary-style photograph taken inside a minimalist studio with warm natural lighting pouring through a large window. A young woman poses for a smartphone mounted on a black tripod, her hair styled in loose waves and wearing a cream-colored sweater. To her left, a friend adjusts a large silver reflector positioned to bounce light onto the woman's face. Behind them, a black clothing rack displays a curated selection of outfits including a white button-down shirt, a navy blazer, and a pair of light-wash jeans. The studio walls are painted a soft cream color, and a few potted plants sit on a white shelf near the window. The overall aesthetic is warm and neutral, with soft shadows cast across the polished concrete floor."
+          }
+        },
+        {
+          "id": "32b197b3-5352-4a4f-bd1d-b77b7e885025",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-creator-economy-32b197b3.webp",
+          "original": "assets/talent/uploads/drive-creator-economy-32b197b3-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Solo Creator with Ring Light",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 32b197b3-5352-4a4f-bd1d-b77b7e885025",
+            "approach": "Supplied generation prompt for fictional AI imagery: A cinematic editorial fashion photograph of a solo creator sitting cross-legged on the hood of a vintage car in a parking lot at dusk. The creator holds a smartphone in their hand, positioned to record a video, with a ring light glowing on their face, casting a soft illumination. The vintage car has a glossy hood surface that reflects the warm magenta and amber tones of the dusk sky. Neon signs from nearby businesses reflect in the car's hood and windshield, creating colorful streaks across the scene. The parking lot surface is made of dark asphalt with faded yellow parking lines visible beneath the car."
+          }
+        },
+        {
+          "id": "94951ac8-e134-493d-824d-ce4f0aa9b971",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-creator-economy-94951ac8.webp",
+          "original": "assets/talent/uploads/drive-creator-economy-94951ac8-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Rooftop Creators at Golden Hour",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 94951ac8-e134-493d-824d-ce4f0aa9b971",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid lifestyle photograph of a diverse group of young adults on a Los Angeles rooftop during golden hour, captured with a 35mm film aesthetic. The group consists of six young people, arranged in a semi-circle, each holding either a smartphone or a vintage film camera, filming and photographing each other with joyful expressions. The individuals wear fashion-forward streetwear, including oversized hoodies, graphic t-shirts, distressed denim jeans, and trendy sneakers in various colors. Behind the group, several tall palm trees sway gently against the warm, orange-pink sunset sky that fills the frame with cinematic light. The camera captures the scene from a slightly low angle, emphasizing the relaxed, creative atmosphere as the golden light bathes the rooftop and surrounding buildings in a soft, warm glow."
+          }
+        }
+      ]
+    },
+    {
+      "id": "poppi-festival-creator",
+      "displayName": "Poppi festival creator",
+      "provenance": "ai-generated",
+      "age": 25,
+      "location": "Illustrative profile",
+      "bio": "Fictional AI-generated festival and lifestyle creator from the supplied Poppi Coachella Creator Persona collection. Desert light, poolside gatherings and slow morning routines. The source collection name is retained; it does not claim a real Poppi or Coachella partnership, account or campaign result.",
+      "verticals": [
+        "Festivals",
+        "Lifestyle",
+        "Food & drink",
+        "Fashion"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/drive-poppi-9b569ebf.webp",
+      "originalPortrait": "assets/talent/uploads/drive-poppi-9b569ebf-original.webp",
+      "creativeDirection": {
+        "summary": "The supplied festival creator persona, with a consistent curly-haired subject across portraits, house-party scenes, desert walks and branded drink concepts.",
+        "identityNotes": [
+          "Imported from the supplied Poppi Drive folder: https://drive.google.com/drive/folders/1Tgac-rTucpi7CVNyVjm4oPBtHVUfV4dV",
+          "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
+          "Retain the supplied collection identity; do not merge this person into a different existing creator.",
+          "The age 25 is explicitly stated in the supplied generation prompts; it describes the fictional persona only.",
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "id": "dcb3072e-5b69-4f88-87d4-b6432d0bc5f5",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-dcb3072e.webp",
+          "original": "assets/talent/uploads/drive-poppi-dcb3072e-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Morning Poppi Daybed",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · dcb3072e-5b69-4f88-87d4-b6432d0bc5f5",
+            "approach": "Supplied generation prompt for fictional AI imagery: A lifestyle photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long, dark, natural curly hair worn down. She has a glowing complexion with minimal makeup and a relaxed, gentle smile. She is wearing a cozy, oversized white linen shirt and sitting cross-legged on an outdoor daybed with neutral cushions. In her hand, she is sipping from a pastel blue prebiotic soda can with the word \"poppi\" clearly visible on it. The setting is a modern desert house patio, surrounded by succulents and agave plants. The scene is bathed in soft, warm morning sunlight, creating a peaceful, calm energy indicative of a post-festival recovery moment. High realism photography with a soft depth of field, emphasizing the wellness aesthetic and the interplay of golden morning light and shadow."
+          }
+        },
+        {
+          "id": "23b28214-af67-4740-be99-fe93c22c540a",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-23b28214.webp",
+          "original": "assets/talent/uploads/drive-poppi-23b28214-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Morning Poppi Patio",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 23b28214-af67-4740-be99-fe93c22c540a",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle photograph of a 25-year-old female lifestyle creator of mixed ethnicity with warm tan skin, sitting outside on a desert house patio in the morning. She has long dark curly hair loosely tied back, minimal natural makeup, and dewy skin. She wears a cozy oversized cream knit sweater and soft shorts. Her expression is calm and peaceful, with relaxed eyes, as she holds a light blue soda can with the word \"poppi\" clearly visible in white lettering. The background features a quiet morning desert landscape with succulents, palm trees, and a textured stone patio floor. Soft golden morning sunlight illuminates her face, creating a peaceful, post-festival recovery wellness vibe. The scene is captured with a soft depth of field, emphasizing a warm, golden hour aesthetic."
+          }
+        },
+        {
+          "id": "eb3cd80a-0d08-438c-b204-1daf77e0f7b2",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-eb3cd80a.webp",
+          "original": "assets/talent/uploads/drive-poppi-eb3cd80a-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Quiet Morning Read",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · eb3cd80a-0d08-438c-b204-1daf77e0f7b2",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid lifestyle photograph of a 25-year-old female creator with mixed ethnicity and warm tan skin, sitting on the concrete outdoor steps of a modern desert house. She has long, dark, naturally curly hair and soft, dewy skin with minimal makeup. She is wearing an oversized vintage band t-shirt and comfortable joggers. She is holding a colorful smoothie bowl in her hands, looking down at it with a serene, relaxed expression. The background includes elements of modern desert architecture, palm trees, and native desert plants. The scene is illuminated by soft, warm morning sunlight, creating a peaceful and quiet atmosphere with a soft glow and a shallow depth of field, emphasizing a wellness aesthetic."
+          }
+        },
+        {
+          "id": "68709832-d30d-4d63-b1bc-3ab0cf2196c5",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-68709832.webp",
+          "original": "assets/talent/uploads/drive-poppi-68709832-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Morning Sun Face",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 68709832-d30d-4d63-b1bc-3ab0cf2196c5",
+            "approach": "Supplied generation prompt for fictional AI imagery: A close-up lifestyle film photography portrait of a 25-year-old female lifestyle creator with warm tan skin and long, messy, natural dark curly hair. She has glowing, dewy skin with a bare-faced, no-makeup look. She is sitting outdoors in the morning, holding a warm drink in her hands. Her face is tilted upwards towards the sun, her eyes gently closed, conveying a peaceful and serene expression. She is wearing a cozy, oversized beige sweater. The background is a beautifully blurred desert landscape featuring warm earth tones. The scene is illuminated by soft, golden morning light that gently hits her face, emphasizing a calm, wellness-focused post-festival recovery energy. Captured with a shallow depth of field for high realism and a soft film aesthetic."
+          }
+        },
+        {
+          "id": "0b4b3de6-ff2c-4ac3-aadc-9cc3e3df49d8",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-0b4b3de6.webp",
+          "original": "assets/talent/uploads/drive-poppi-0b4b3de6-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Sunrise Patio",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 0b4b3de6-ff2c-4ac3-aadc-9cc3e3df49d8",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle photography portrait of a 25-year-old female creator with mixed ethnicity and warm tan skin, sitting cross-legged on an outdoor daybed with neutral cushions on a desert house patio. She is wearing a cozy, oversized white linen button-up shirt. Her long, dark curly hair is worn down and natural, and she has minimal makeup highlighting her dewy skin. She is holding and sipping from a glass of iced matcha, looking relaxed with a gentle smile. The background features a serene desert house patio with warm earth tones, succulents, and other desert plants. Soft morning sunlight streams across her face, creating a peaceful, soft glow. The image is captured in a lifestyle influencer style with high realism, emphasizing a calm, quiet morning atmosphere and a wellness vibe."
+          }
+        },
+        {
+          "id": "c311d698-5c5b-4b0f-8a79-e12f1673cf96",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-c311d698.webp",
+          "original": "assets/talent/uploads/drive-poppi-c311d698-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Soda Cheers Smile",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · c311d698-5c5b-4b0f-8a79-e12f1673cf96",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle influencer photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long, dark, naturally curly hair. She has soft natural makeup, expressive eyes, and a confident, relaxed smile. She has a slim build and is wearing a white trendy crocheted summer top and denim shorts. She is outdoors in bright sunlight, holding up a colorful light blue soda can near her face in a casual, candid moment. The background is a sunny outdoor patio with lush greenery and warm light, rendered with soft bokeh. The scene is captured with bright natural lighting and warm tones, emphasizing a natural lifestyle moment."
+          }
+        },
+        {
+          "id": "938c22af-e7c3-4f58-aa4a-36bf2268b285",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-938c22af.webp",
+          "original": "assets/talent/uploads/drive-poppi-938c22af-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Soda Garden Moment",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 938c22af-e7c3-4f58-aa4a-36bf2268b285",
+            "approach": "Supplied generation prompt for fictional AI imagery: A lifestyle influencer photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, sitting in a sunny outdoor cafe. She has long dark curly hair cascading past her shoulders, soft natural dewy makeup, and expressive brown eyes. She is laughing naturally in a candid moment. She is wearing layered gold necklaces and a breezy summer blouse. On the table in front of her sits a colorful soda can. The background features lush green plants with dappled sunlight filtering through the leaves, creating a bright, cheerful atmosphere. The image is captured with natural bright lighting, warm realistic colors, and a soft depth of field, typical of high-realism lifestyle influencer photography."
+          }
+        },
+        {
+          "id": "c38036a3-cc1e-4886-b05e-46327101b441",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-c38036a3.webp",
+          "original": "assets/talent/uploads/drive-poppi-c38036a3-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Morning Coffee Glow",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · c38036a3-cc1e-4886-b05e-46327101b441",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism candid lifestyle photograph of a 25-year-old female lifestyle creator of mixed ethnicity with warm tan skin. She has long dark curly hair loosely pulled back and is wearing soft, natural makeup with no sunglasses. She is sitting on an outdoor patio chair at a desert house, wearing an oversized cream knit sweater and cozy shorts. She holds a ceramic coffee mug with both hands, her eyes slightly closed in a calm, peaceful expression. The scene is illuminated by morning golden light that casts a soft, warm glow on her face. The background, softly blurred by a shallow depth of field, reveals a serene desert landscape with palm trees, evoking a quiet, post-festival wellness vibe. The image captures an intimate, relaxing morning moment."
+          }
+        },
+        {
+          "id": "5b7baf55-26e7-4707-bac3-df4a674701a8",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-5b7baf55.webp",
+          "original": "assets/talent/uploads/drive-poppi-5b7baf55-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Soda Lean Back",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 5b7baf55-26e7-4707-bac3-df4a674701a8",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle influencer photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, long dark curly hair, and soft natural makeup. She is wearing gold necklaces, a white crocheted crop top, and denim shorts. She is outdoors on a bright sunny day, leaning casually against a vibrant, colorful painted wall. She holds a pastel-colored soda can loosely in one hand, looking off-camera with a relaxed, natural expression. The moment feels organic and unstaged. The scene is illuminated by natural bright lighting, creating soft shadows and warm realistic tones. The image is captured with a shallow depth of field, blurring the colorful wall slightly to keep the focus on the subject, perfectly capturing a casual chic summer vibe."
+          }
+        },
+        {
+          "id": "d88cfbfa-edcc-45b5-ae79-422473639746",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-d88cfbfa.webp",
+          "original": "assets/talent/uploads/drive-poppi-d88cfbfa-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Pool Party - Close-up Joy",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · d88cfbfa-edcc-45b5-ae79-422473639746",
+            "approach": "Supplied generation prompt for fictional AI imagery: A close-up candid lifestyle photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin, laughing genuinely. She has long dark curly hair, soft natural dewy makeup, and expressive brown eyes. She is wearing gold hoop earrings and layered thin gold necklaces, and is holding a bright colorful drink near her face. She is wearing a white crocheted halter top. The background is a vibrant but beautifully blurred poolside party scene, featuring turquoise pool water, colorful cushions, tropical plants, and out-of-focus friends mingling. The scene is bathed in bright sunny natural light, casting soft shadows and highlighting her warm skin tones. Shot with a shallow depth of field, vibrant colors, and high realism, capturing a candid moment of joy in a bright, summery atmosphere."
+          }
+        },
+        {
+          "id": "d13c4d91-980a-4d02-9088-21bc64130132",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-d13c4d91.webp",
+          "original": "assets/talent/uploads/drive-poppi-d13c4d91-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Pool Party - Standing Social",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · d13c4d91-980a-4d02-9088-21bc64130132",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle influencer photograph of a 25-year-old mixed-ethnicity female creator with warm tan skin and long dark curly hair. She has soft natural makeup, expressive eyes, and a confident, relaxed energy. She is standing by a modern pool at a summer house party, holding a colorful drink in one hand, mid-conversation with a natural smile. She has a slim build and is wearing a stylish festival-meets-summer outfit consisting of a white cropped top and flowy wide-leg pants, accessorized with layered gold necklaces. The vibrant poolside decor includes bright cushions in pink, orange, and turquoise on modern lounge furniture, surrounded by tropical plants. The pool water glistens in the bright natural sunlight. A couple of friends are softly out of focus in the background. The scene features soft shadows and a vibrant but realistic color palette, characteristic of professional lifestyle photography."
+          }
+        },
+        {
+          "id": "6b05432e-5873-4a0e-83e5-b18abe8eba1f",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-6b05432e.webp",
+          "original": "assets/talent/uploads/drive-poppi-6b05432e-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Soda Sip Walk",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 6b05432e-5873-4a0e-83e5-b18abe8eba1f",
+            "approach": "Supplied generation prompt for fictional AI imagery: An influencer-style lifestyle photograph of a 25-year-old mixed ethnicity female creator with warm tan skin and long dark curly hair. She has soft natural makeup and expressive brown eyes. She is wearing a casual stylish summer outfit with gold layered necklaces. She is walking outdoors on a bright sunny day, captured in a mid-step candid moment, smiling naturally and casually holding a colorful pastel soda can. The background features palm trees and a bright blue sky, conveying summer vibes. The scene is illuminated by bright, realistic natural lighting. High realism photography with a soft depth of field, emphasizing the subject while keeping the product visible naturally."
+          }
+        },
+        {
+          "id": "4cb02642-a8d2-44b3-a369-059a9b5d0976",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-4cb02642.webp",
+          "original": "assets/talent/uploads/drive-poppi-4cb02642-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Pool Party - Lounging",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 4cb02642-a8d2-44b3-a369-059a9b5d0976",
+            "approach": "Supplied generation prompt for fictional AI imagery: A realistic lifestyle photograph of a 25-year-old female lifestyle creator with warm tan skin lounging on a vibrant cushioned daybed by a sparkling turquoise pool at a modern house party. She has long dark curly hair flowing naturally, soft natural makeup, expressive brown eyes, and is wearing layered gold necklaces and gold hoop earrings. She is holding a tropical drink and laughing. Her outfit is a trendy, colorful summer look. Behind her, friends are chatting and mingling, slightly out of focus. The poolside setting features colorful pool floats, vibrant throw pillows in coral and turquoise, string lights, and lush greenery. The scene is lit by bright sunny midday light, casting soft shadows. The image captures a candid moment in an influencer lifestyle photography style, emphasizing vibrant colors and high realism."
+          }
+        },
+        {
+          "id": "22d5da1f-a8c8-4f0b-bea2-26cbc32f6ea8",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-22d5da1f.webp",
+          "original": "assets/talent/uploads/drive-poppi-22d5da1f-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Pool Party - Candid Smile",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 22d5da1f-a8c8-4f0b-bea2-26cbc32f6ea8",
+            "approach": "Supplied generation prompt for fictional AI imagery: A vibrant, candid lifestyle photograph of a 25-year-old woman with a mixed ethnicity, warm tan skin, long dark curly hair, and soft natural makeup. She has expressive brown eyes and a slim build, and is smiling warmly while holding a colorful tropical drink. She is wearing a bright, flowy sundress. The scene is a modern poolside house party, with slightly out-of-focus friends in the background. The environment is playful and bright, featuring vibrant cushions, colorful pool floats in a clear blue pool, modern white outdoor furniture, and lush tropical plants. The lighting is sunny and natural, creating soft shadows and vibrant, realistic colors, perfectly capturing a high-realism lifestyle influencer aesthetic."
+          }
+        },
+        {
+          "id": "56f4a62e-245f-40c5-8b2f-5a5ed3e17d9b",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-56f4a62e.webp",
+          "original": "assets/talent/uploads/drive-poppi-56f4a62e-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Desert Golden Hour",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 56f4a62e-245f-40c5-8b2f-5a5ed3e17d9b",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism, candid movement photograph of a 25-year-old female lifestyle creator with mixed ethnicity and warm tan skin, walking confidently through an open desert landscape. Her long, dark curly hair is blowing slightly in the wind. She is wearing a modern festival outfit consisting of a fitted rust-colored bodysuit, high-waisted cream wide-leg pants, layered gold chains, and oversized sunglasses. The setting is a Coachella-inspired desert with scattered palm trees and distant mountains in the background. The scene is illuminated by warm golden hour sunset light, creating soft warm tones, long golden shadows, and a slight lens flare, making her skin glow with natural, confident energy. Fashion editorial meets candid influencer travel aesthetic photography."
+          }
+        },
+        {
+          "id": "6dc5ae48-fc77-4fb5-a5a1-20b4b620f45a",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-6dc5ae48.webp",
+          "original": "assets/talent/uploads/drive-poppi-6dc5ae48-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Palm Tree Path",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 6dc5ae48-fc77-4fb5-a5a1-20b4b620f45a",
+            "approach": "Supplied generation prompt for fictional AI imagery: A full-body candid photograph of a 25-year-old female lifestyle creator with mixed ethnicity, warm tan skin, and long dark curly hair. She is walking confidently along a dirt path lined with tall palm trees in a desert environment. She is wearing a stylish boho festival outfit featuring an off-shoulder cream blouse, distressed denim shorts, cowboy boots, stacked bracelets, and gold hoop earrings. She is looking off-camera, her hair catching the golden sunlight. The scene is illuminated by warm, golden hour sunset light filtering through the palm fronds, creating soft, natural shadows on the ground. The background features a blurred desert landscape, adding depth to the image. High realism candid photography with a fashion-forward, influencer travel aesthetic, emphasizing warm earthy tones and the interplay of light and shadow."
+          }
+        },
+        {
+          "id": "6470a210-b83e-49d4-8211-8853ad70dde1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-6470a210.webp",
+          "original": "assets/talent/uploads/drive-poppi-6470a210-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Sunset Stride",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 6470a210-b83e-49d4-8211-8853ad70dde1",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial lifestyle photograph of a 25-year-old female creator with mixed ethnicity, warm tan skin, and long dark curly hair. She is walking confidently along a dirt path lined with palm trees in a desert setting, evoking a Coachella festival vibe. She is wearing a white crochet halter top, wide-leg linen pants, layered gold necklaces, and has a woven bag slung over her shoulder. Her expression is relaxed and confident as she looks slightly toward the camera with a candid, natural stride. The scene is illuminated by a warm, golden hour sunset directly behind her, creating a soft backlit glow. The lighting produces rich warm sunset tones, long shadows on the ground, and a shallow depth of field that softly blurs the palm trees in the background. The style is high realism influencer travel photography, capturing an atmospheric and glowing aesthetic."
+          }
+        },
+        {
+          "id": "3d9b0f20-a2e0-4453-8554-817e93d07c00",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-3d9b0f20.webp",
+          "original": "assets/talent/uploads/drive-poppi-3d9b0f20-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator - Desert Walk Golden Hour",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 3d9b0f20-a2e0-4453-8554-817e93d07c00",
+            "approach": "Supplied generation prompt for fictional AI imagery: A high-realism lifestyle photograph of a 25-year-old female creator of mixed ethnicity with warm tan skin and long dark curly hair flowing in the breeze. She is captured mid-stride, walking confidently through a desert Coachella-inspired setting adorned with palm trees. She is looking off to the side with a relaxed smile. She wears a stylish festival outfit consisting of a fitted white tank top, a flowy sage green midi skirt, layered gold jewelry, and strappy sandals. The scene is illuminated by warm, golden hour sunset light, casting long, soft shadows and creating a rich, inviting atmosphere. The ground is a sandy desert floor. Influencer travel aesthetic photography with warm tones and soft lighting."
+          }
+        },
+        {
+          "id": "56938d11-b6f5-42e8-9aae-0719e274e7b4",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-56938d11.webp",
+          "original": "assets/talent/uploads/drive-poppi-56938d11-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator Portrait - Candid",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 56938d11-b6f5-42e8-9aae-0719e274e7b4",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid portrait photograph of a young woman with mixed ethnicity and warm tan skin. She has long, dark curly hair flowing naturally around her shoulders. She wears soft natural makeup, showcasing expressive eyes and a gentle smile. She is slim and dressed in a casual modern outfit consisting of a white crocheted top and denim shorts. She is outdoors, looking slightly off to the side with a relaxed, natural pose. The background is a beautifully blurred, shallow depth of field setting featuring lush greenery and illuminated by soft, warm afternoon light. The image is captured in a lifestyle photography style with an influencer aesthetic, emphasizing soft warm tones, high realism, and a slight film look."
+          }
+        },
+        {
+          "id": "ad2655de-e72b-4557-8453-efd9045c34a4",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-ad2655de.webp",
+          "original": "assets/talent/uploads/drive-poppi-ad2655de-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator Portrait - Editorial",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · ad2655de-e72b-4557-8453-efd9045c34a4",
+            "approach": "Supplied generation prompt for fictional AI imagery: A close-up portrait photograph of a 25-year-old female lifestyle content creator of mixed ethnicity with warm tan skin. She has long, dark brown, curly and wavy hair falling around her shoulders. Her makeup is soft, natural, and dewy, highlighting her expressive warm brown eyes. She wears several layered gold necklaces. She has a confident, relaxed expression, looking slightly past the camera. The background is a clean, minimal outdoor setting, beautifully blurred with soft, warm bokeh, captured with a shallow depth of field typical of an 85mm portrait lens. The lighting is soft, diffused natural sunlight, creating a gentle glow on her skin. The image is styled as an editorial influencer profile photo, combining high fashion aesthetics with a candid feel. High realism photography with a natural warm color grade and soft film grain, emphasizing an intimate and inviting atmosphere."
+          }
+        },
+        {
+          "id": "ed8bb39c-314c-4b92-aa81-97a4890c6445",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-ed8bb39c.webp",
+          "original": "assets/talent/uploads/drive-poppi-ed8bb39c-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator Portrait - Soft Light",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · ed8bb39c-314c-4b92-aa81-97a4890c6445",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial lifestyle portrait photography of a 25-year-old female creator of mixed ethnicity with warm tan skin, a slim build, and long dark wavy curly hair cascading past her shoulders. She has expressive brown eyes, soft natural makeup, and a glowing complexion. She is looking slightly off-camera with a gentle, confident smile. She wears a simple white top. The setting is outdoors, illuminated by soft golden sunlight that creates a gentle glow on her skin. The background is a beautifully blurred, clean natural environment featuring warm bokeh. The image has a candid, highly realistic film photography aesthetic, captured with an 85mm lens, characterized by slightly warm tones, a shallow depth of field, and a relaxed yet confident energy."
+          }
+        },
+        {
+          "id": "9b569ebf-4dda-42b4-8a41-d6fc5dab5059",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-9b569ebf.webp",
+          "original": "assets/talent/uploads/drive-poppi-9b569ebf-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Creator Portrait - Clean Profile",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 9b569ebf-4dda-42b4-8a41-d6fc5dab5059",
+            "approach": "Supplied generation prompt for fictional AI imagery: An editorial portrait photograph of a 25-year-old female lifestyle creator with mixed ethnicity, warm tan skin, and long dark curly hair. She has soft natural makeup, expressive eyes, and a confident but relaxed energy. She has a slim build and is wearing modern festival fashion, such as a white crochet top. She is outdoors, looking slightly off-camera with a natural pose. The background is a clean, minimal outdoor setting, heavily blurred due to a shallow depth of field. The scene is illuminated by soft sunlight. Candid lifestyle photography with a soft film look, slightly warm tones, and high realism, capturing an influencer lifestyle aesthetic."
+          }
+        },
+        {
+          "id": "7115415d-26cf-42a5-92f1-fb776aad0512",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-7115415d.webp",
+          "original": "assets/talent/uploads/drive-poppi-7115415d-original.webp",
+          "aspectRatio": "16/9",
+          "caption": "Poppi House - Sunset Lounge",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 7115415d-26cf-42a5-92f1-fb776aad0512",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid lifestyle photograph for social media featuring a young woman in her mid-20s with sun-kissed brown hair in loose waves, wearing white retro sunglasses, layered gold necklaces, a white crochet crop top, and high-waisted denim shorts. She is lounging casually on a white modern outdoor daybed and sipping from a light blue soda can with the word \"poppi\" on it. The scene is set at a Coachella desert house party during golden hour. Surrounding her are icy blue and white branded cushions, umbrellas, and string lights beginning to glow. In the background, palm trees and desert mountains are silhouetted against a warm, dreamy pink and orange sunset sky, with other party guests mingling softly out of focus. The lighting is warm and golden, capturing a relaxed, desert kickback vibe with an emphasis on lifestyle aesthetics."
+          }
+        },
+        {
+          "id": "291cd0b5-ad6d-4249-b236-a304b7de6292",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-291cd0b5.webp",
+          "original": "assets/talent/uploads/drive-poppi-291cd0b5-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Poppi House - Merch Wall",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · 291cd0b5-ad6d-4249-b236-a304b7de6292",
+            "approach": "Supplied generation prompt for fictional AI imagery: A lifestyle photograph of a smiling young woman in her mid-20s posing in front of a branded \"poppi\" merch display wall at a Coachella desert house activation. She has sun-kissed brown hair styled in loose waves, with white retro sunglasses pushed up on her head. She is wearing a white crochet crop top, high-waisted denim shorts, and gold layered necklaces. She holds a branded tote bag and a blue \"poppi\" can. The merch display wall features an icy blue and white \"Alpine Blast\" themed decor, \"poppi\" logo signage, and shelves stocked with branded sweatshirts and hats. The setting is a modern minimalist desert estate interior with bright natural daylight illuminating the clean white and icy blue color palette, creating a vibrant, Instagram-worthy photo op moment. Editorial lifestyle photography with crisp details and beautiful bright lighting."
+          }
+        },
+        {
+          "id": "d28af5cc-1c35-4635-b204-cddf06691ae0",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-d28af5cc.webp",
+          "original": "assets/talent/uploads/drive-poppi-d28af5cc-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Poppi House - Cheers Moment",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · d28af5cc-1c35-4635-b204-cddf06691ae0",
+            "approach": "Supplied generation prompt for fictional AI imagery: A candid, social media style photograph of a young woman content creator, mid-20s, with sun-kissed brown hair in loose waves. She is wearing a white crochet crop top, high-waisted denim shorts, white retro sunglasses, and layered gold necklaces. She is smiling and laughing, doing a cheers gesture while holding up a light blue soda can that says \"poppi\" on it. The setting is a luxurious Coachella desert house party. The background features a beautifully decorated outdoor lounge area with icy blue and white branded decor, modern white furniture, tropical plants, and string lights. In the distance, desert mountains and palm trees are visible. The scene is illuminated by warm, golden afternoon light, with a slightly warm color grade, capturing the vibrant and energetic atmosphere of an influencer content photo."
+          }
+        },
+        {
+          "id": "fb1dc0cc-ae3a-4c0b-a660-2ceff4fc9d2f",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/drive-poppi-fb1dc0cc.webp",
+          "original": "assets/talent/uploads/drive-poppi-fb1dc0cc-original.webp",
+          "aspectRatio": "4/5",
+          "caption": "Poppi House - Poolside Selfie",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "generation": {
+            "version": "Supplied Drive collection · fb1dc0cc-ae3a-4c0b-a660-2ceff4fc9d2f",
+            "approach": "Supplied generation prompt for fictional AI imagery: A medium shot, natural social media style photograph of a young woman in her mid-20s with sun-kissed brown hair styled in loose waves. She is wearing a white crochet crop top, high-waisted denim shorts, and layered gold necklaces, with white retro sunglasses pushed up on her head. She is taking a selfie, holding a light blue soda can with the word \"poppi\" clearly visible. The background is a luxurious desert pool party at a modern white estate, with palm trees under a clear blue sky. The pool is filled with pink and blue inflatable floats and Poppi-branded pool accessories. Icy blue and white branded umbrellas and deck chairs surround the pool area. The scene is illuminated by warm golden hour desert light, creating a slightly overexposed, sun-drenched Coachella weekend vibe."
+          }
+        }
+      ]
     }
   ],
   "removedTalentIds": []
