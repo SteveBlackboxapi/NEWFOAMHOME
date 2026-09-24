@@ -2,7 +2,7 @@ import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
-import { KitPlatformIcon } from "../components/KitDetails";
+import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import {
   ActionLink,
   FoamGlyph,
@@ -11,50 +11,9 @@ import {
   Reveal,
   SectionIntro,
 } from "../components/Marketing";
-import { websiteAria, websiteProfile } from "../data/websiteTalent";
 import { creatorWorkPosts } from "../data/creatorWorkTalent";
 import "./audience-pages.css";
-
-const aria = websiteProfile(websiteAria);
-
-function ConnectedProfile() {
-  return (
-    <div className="ap-connected-card">
-      <div className="ap-connected-person">
-        <MarketingImage
-          src={aria.portrait}
-          alt={aria.name}
-          loading="lazy"
-          decoding="async"
-        />
-        <div>
-          <span className="ap-small-label">Creator profile</span>
-          <h3>{aria.name}</h3>
-          <p>{aria.loc}</p>
-        </div>
-      </div>
-      <div className="ap-connected-label">
-        <span>Platforms</span>
-        <span>Illustrative profile</span>
-      </div>
-      {aria.platforms.map((platform) => (
-        <div className="ap-connected-row" key={platform.network}>
-          <KitPlatformIcon
-            network={platform.network}
-            label={platform.label}
-            size={23}
-          />
-          <div>
-            <strong>{platform.label}</strong>
-            <span>{platform.handle}</span>
-          </div>
-          <span className="ap-connected-status">Demo</span>
-        </div>
-      ))}
-      <AIDisclosure detail="Fictional creator · Example data" />
-    </div>
-  );
-}
+import "./audience-miniatures.css";
 
 export function Creators() {
   return (
@@ -179,9 +138,12 @@ export function Creators() {
                 </div>
               </li>
             </ol>
+            <div className="mp-actions">
+              <ActionLink to="/kit-story">See how it comes together</ActionLink>
+            </div>
           </div>
-          <Reveal className="ap-connected-stage">
-            <ConnectedProfile />
+          <Reveal className="ap-miniature-stage">
+            <MiniIllustration kind="connections" />
           </Reveal>
         </div>
       </section>

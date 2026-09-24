@@ -1,0 +1,11 @@
+.ap-miniature-stage {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  .ap-miniature-first {
+    order: 2;
+  }
+}

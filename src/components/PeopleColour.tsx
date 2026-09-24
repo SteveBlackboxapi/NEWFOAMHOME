@@ -1,3 +1,5 @@
+import { MiniIllustration } from "./mini-ui/MiniIllustration";
+import "./mini-ui/mini-product-cards.css";
 import { Link } from "react-router";
 import { DiscoveryArtwork, DiscoverySearch } from "./DiscoverySearch";
 import { A } from "../lib/assets";
@@ -373,10 +375,16 @@ export function WorkspaceGrid() {
   );
 }
 
-export function ProductFamily({ heading = true }: { heading?: boolean }) {
+export function ProductFamily({
+  heading = true,
+  miniatures = false,
+}: {
+  heading?: boolean;
+  miniatures?: boolean;
+}) {
   return (
     <section
-      className="pc-design pc-product-family pc-shell"
+      className={`pc-design pc-product-family pc-shell${miniatures ? " pc-product-miniatures" : ""}`}
       aria-label="Explore Foam products"
     >
       {heading && (
@@ -392,63 +400,93 @@ export function ProductFamily({ heading = true }: { heading?: boolean }) {
       )}
       <div className="pc-tool-row">
         <Link className="pc-tool-card" to="/kit-story/">
-          <div className="pc-tool-image pc-cream">
-            <img
-              src={`${A}/foam-media-kit.webp`}
-              alt="Foam Media Kit icon"
-              width="300"
-              height="300"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {miniatures ? (
+            <MiniIllustration kind="kit" />
+          ) : (
+            <div className="pc-tool-image pc-cream">
+              <img
+                src={`${A}/foam-media-kit.webp`}
+                alt="Foam Media Kit icon"
+                width="300"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          )}
           <div className="pc-tool-info">
             <div>
               <span className="pc-eyebrow">MAKE THE INTRODUCTION</span>
               <h3>Media Kit</h3>
               <p>The whole story. One link.</p>
             </div>
-            <span className="pc-round-arrow" aria-hidden="true">
-              ↗
-            </span>
+            {miniatures ? (
+              <span className="pc-miniature-cta">
+                Explore the media kit <span aria-hidden="true">↗</span>
+              </span>
+            ) : (
+              <span className="pc-round-arrow" aria-hidden="true">
+                ↗
+              </span>
+            )}
           </div>
         </Link>
         <Link className="pc-tool-card" to="/kit-story/#found-with-foam">
-          <div className="pc-tool-image pc-ice">
-            <DiscoveryArtwork />
-          </div>
+          {miniatures ? (
+            <MiniIllustration kind="search" />
+          ) : (
+            <div className="pc-tool-image pc-ice">
+              <DiscoveryArtwork />
+            </div>
+          )}
           <div className="pc-tool-info">
             <div>
               <span className="pc-eyebrow">FIND THE MOMENT</span>
               <h3>Found with Foam</h3>
               <p>The right content. In context.</p>
             </div>
-            <span className="pc-round-arrow" aria-hidden="true">
-              ↗
-            </span>
+            {miniatures ? (
+              <span className="pc-miniature-cta">
+                Find content <span aria-hidden="true">↗</span>
+              </span>
+            ) : (
+              <span className="pc-round-arrow" aria-hidden="true">
+                ↗
+              </span>
+            )}
           </div>
         </Link>
         <Link className="pc-tool-card" to="/chrome-story/">
-          <div className="pc-tool-image pc-mist pc-chrome-artwork">
-            <img
-              className="pc-chrome-tool"
-              src={`${A}/chrome-store.webp`}
-              alt="Chrome Web Store logo"
-              width="300"
-              height="300"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {miniatures ? (
+            <MiniIllustration kind="inbox" />
+          ) : (
+            <div className="pc-tool-image pc-mist pc-chrome-artwork">
+              <img
+                className="pc-chrome-tool"
+                src={`${A}/chrome-store.webp`}
+                alt="Chrome Web Store logo"
+                width="300"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          )}
           <div className="pc-tool-info">
             <div>
               <span className="pc-eyebrow">KEEP THINGS MOVING</span>
               <h3>Foam for Chrome</h3>
               <p>Your talent. Close at hand.</p>
             </div>
-            <span className="pc-round-arrow" aria-hidden="true">
-              ↗
-            </span>
+            {miniatures ? (
+              <span className="pc-miniature-cta">
+                See Foam for Chrome <span aria-hidden="true">↗</span>
+              </span>
+            ) : (
+              <span className="pc-round-arrow" aria-hidden="true">
+                ↗
+              </span>
+            )}
           </div>
         </Link>
       </div>

@@ -3,6 +3,7 @@ import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { KitPlatformIcon } from "../components/KitDetails";
+import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import {
   ActionLink,
   FoamGlyph,
@@ -19,10 +20,9 @@ import {
   websiteSamantha,
 } from "../data/websiteTalent";
 import "./audience-pages.css";
+import "./audience-miniatures.css";
 
 const roster = [websiteSamantha, websiteAria, websiteNia];
-const samantha = websiteProfile(websiteSamantha);
-const aria = websiteProfile(websiteAria);
 
 function RosterPreview() {
   return (
@@ -133,45 +133,8 @@ export function Managers() {
 
       <section className="mp-section mp-cream">
         <div className="mp-container ap-editorial-split">
-          <Reveal className="ap-kit-stage">
-            <div className="ap-kit-sheet">
-              <div className="ap-kit-sheet-top">
-                <span>Media kit</span>
-                <span>Example preview</span>
-              </div>
-              <div className="ap-kit-person">
-                <div>
-                  <span className="ap-small-label">Beauty · Haircare</span>
-                  <h3>{samantha.name}</h3>
-                  <p>{samantha.loc}</p>
-                </div>
-                <MarketingImage
-                  src={samantha.portrait}
-                  alt={`${samantha.name} portrait`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="ap-kit-strip">
-                {samantha.platforms.slice(0, 3).map((platform) => (
-                  <div key={platform.network}>
-                    <KitPlatformIcon
-                      network={platform.network}
-                      label={platform.label}
-                      size={18}
-                    />
-                    <strong>{platform.count}</strong>
-                    <span>{platform.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="ap-kit-disclosure">
-                <AIDisclosure detail="Fictional creator · Demo figures" />
-              </div>
-            </div>
-            <span className="ap-floating-note">
-              One considered introduction.
-            </span>
+          <Reveal className="ap-miniature-stage ap-miniature-first">
+            <MiniIllustration kind="kit" />
           </Reveal>
           <div>
             <SectionIntro
@@ -215,37 +178,8 @@ export function Managers() {
               See the inbox workflow
             </ActionLink>
           </div>
-          <Reveal className="ap-mail-stage">
-            <div className="ap-mail-card">
-              <div className="ap-window-bar">
-                <span>Re: The everyday beauty brief</span>
-                <span className="ap-example">Example draft</span>
-              </div>
-              <div className="ap-mail-body">
-                <p>Here's a creator to consider for the brief.</p>
-                <div className="ap-email-creator">
-                  <MarketingImage
-                    src={aria.portrait}
-                    alt={aria.name}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div>
-                    <h3>{aria.name}</h3>
-                    <p>{aria.verticals}</p>
-                    <span>{aria.totalShort} demo audience</span>
-                  </div>
-                </div>
-                <AIDisclosure detail="Fictional creator" />
-                <p>
-                  Her everyday routines give you a feel for the content. The kit
-                  brings the audience into view.
-                </p>
-                <span className="ap-mail-signoff">
-                  The right context, already in the conversation.
-                </span>
-              </div>
-            </div>
+          <Reveal className="ap-miniature-stage">
+            <MiniIllustration kind="inbox" />
           </Reveal>
         </div>
       </section>
