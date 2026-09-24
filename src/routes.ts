@@ -21,6 +21,13 @@ export const router = createBrowserRouter(
         { path: "kit-story", Component: KitStory },
         { path: "chrome-story", Component: ChromeStory },
         {
+          path: "live-study",
+          HydrateFallback: () => null,
+          lazy: async () => ({
+            Component: (await import("./pages/LiveStudy")).LiveStudy,
+          }),
+        },
+        {
           path: "data-trust",
           HydrateFallback: () => null,
           lazy: async () => ({

@@ -99,7 +99,7 @@ test("every public placement points to a real file and a truthful catalogue owne
 
 test("website photo records preserve provenance and masters, including retired photography", () => {
   assert.equal(websitePhotoTalent.length, 7);
-  assert.equal(usage.websiteReferencePhotos.length, 5);
+  assert.equal(usage.websiteReferencePhotos.length, 3);
   for (const talent of websitePhotoTalent) {
     assert.ok(!stagedTalent.some((original) => original.id === talent.id));
     assert.equal(talent.totalAudience, 0);

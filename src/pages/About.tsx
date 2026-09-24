@@ -137,8 +137,8 @@ export function About() {
               <div className="ep-invitation-mosaic">
                 <img
                   className="ep-invitation-portrait"
-                  src={`${PC}/original-portraits-v1/studio-creator-original-v1.webp`}
-                  alt="AI-generated fictional creative at work in a colourful studio"
+                  src={`${PC}/story-refresh-v1/ada-flash.webp`}
+                  alt="AI-generated fictional creative Ada at her studio desk, photographed with direct flash"
                   width="1024"
                   height="1536"
                   loading="lazy"

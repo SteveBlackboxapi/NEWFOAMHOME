@@ -855,7 +855,7 @@ function KitStoryDesktop() {
           {/* Editor + kit canvas */}
           <StoryScrollCue />
           <div
-            className="ks-editor-window absolute inset-x-3 md:inset-x-4 top-[5.5%] bottom-[4.5%] z-10 rounded-[20px] bg-white border border-[#e2e4e8] overflow-hidden flex flex-col shadow-[0_28px_70px_rgba(16,24,40,0.18)]"
+            className="ks-editor-window absolute inset-x-3 md:inset-x-4 top-[5.5%] bottom-[4.5%] z-10 rounded-[20px] bg-white overflow-hidden flex flex-col shadow-[0_28px_70px_rgba(16,24,40,0.18)]"
             style={{
               opacity: kitFade,
               pointerEvents: kitVisible ? "auto" : "none",
