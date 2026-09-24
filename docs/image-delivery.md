@@ -2,6 +2,10 @@
 
 Prefer WebP for photographs and raster backgrounds when it produces a smaller file at the required visual quality. Keep SVG artwork as vectors and use lossless compression for sharp text or transparency. Retain source masters.
 
+## Transparent Chrome Store mark
+
+`chrome-store-transparent.webp` is a lossless conversion of the existing transparent `chrome-store.png` master, preserving all RGBA pixels and its 192 × 192 dimensions. At 6,840 bytes it is 53.5% smaller than the 14,702-byte PNG. The previous opaque `chrome-store.webp` and all source masters remain available. Chrome Store placements use the transparent version; the story finale no longer needs a white glow or multiply blending to hide an opaque image background.
+
 ## September 2026 image pass
 
 These 22 delivered assets total 3,570,064 bytes, down from 18,429,323 bytes (80.6% smaller). This compares the prior bitmap payloads, not the full page transfer. Dimensions are unchanged. PNG/JPEG masters remain available in the repository.

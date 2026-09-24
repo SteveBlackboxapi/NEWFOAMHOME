@@ -134,7 +134,7 @@ export function ChromeStoryMobile({
           <a href={CHROME_STORE} target="_blank" rel="noreferrer">
             <div className="cs-store-mark">
               <img
-                src={`${A}/chrome-store.webp`}
+                src={`${A}/chrome-store-transparent.webp`}
                 alt=""
                 width={150}
                 height={131}
