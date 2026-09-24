@@ -114,7 +114,8 @@
           "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
           "Retain the supplied collection identity; do not merge this person into a different existing creator.",
           "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
-          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs.",
+          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned."
         ]
       },
       "motion": null,
@@ -149,7 +150,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 2b72df68-4d30-42ae-98e2-c8be5840905a",
@@ -167,7 +168,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · c793bb6b-d840-4bbf-ab57-e3522b08f378",
@@ -203,7 +204,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 31bca4cb-0537-4be6-a12e-692186f32fc4",
@@ -239,7 +240,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 6ccfd137-bd53-4434-91cb-7291c2183ca0",
@@ -257,7 +258,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · fbf42f96-fe1c-45a6-a86e-e5a1a03ed670",
@@ -293,7 +294,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 2b46173e-88c2-44d3-b1cb-a05a23e406cc",
@@ -329,7 +330,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · b81d7f82-c33a-46e4-8640-32fe38b7110f",
@@ -452,7 +453,8 @@
           "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
           "Retain the supplied collection identity; do not merge this person into a different existing creator.",
           "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
-          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs.",
+          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned."
         ]
       },
       "motion": null,
@@ -541,7 +543,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 1e68c008-fd7b-4ef5-a778-bf6f4ea2a279",
@@ -559,7 +561,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · f1d9f482-c8da-43da-b43c-780e3206d61c",
@@ -577,7 +579,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 7af0a9af-88bb-4083-99d8-6b8590506dfb",
@@ -613,7 +615,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 11cdae98-a80e-4c70-91e3-7cd2ec2ebd98",
@@ -649,7 +651,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 33e28294-9ca9-4c3b-954e-797c4cdfca72",
@@ -667,7 +669,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 9768bccb-0f76-42fb-b2f4-b1e320cacaec",
@@ -699,7 +701,8 @@
           "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
           "This is a mixed collection of scenes and different fictional people, not one creator profile.",
           "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
-          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs.",
+          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned."
         ]
       },
       "motion": null,
@@ -716,7 +719,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · d46fa410-5b99-4ac2-aef6-6db4d94d6dda",
@@ -734,7 +737,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 832ce3f3-4d09-4f94-8f5f-e2221b68952c",
@@ -803,7 +806,8 @@
           "Fictional AI imagery confirmed by the supplied generation-prompt sidecars. No real social account, audience, post performance or endorsement is assigned.",
           "Retain the supplied collection identity; do not merge this person into a different existing creator.",
           "The age 25 is explicitly stated in the supplied generation prompts; it describes the fictional persona only.",
-          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs."
+          "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs.",
+          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned."
         ]
       },
       "motion": null,
@@ -838,7 +842,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 23b28214-af67-4740-be99-fe93c22c540a",
@@ -856,7 +860,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · eb3cd80a-0d08-438c-b204-1daf77e0f7b2",
@@ -892,7 +896,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 0b4b3de6-ff2c-4ac3-aadc-9cc3e3df49d8",
@@ -910,7 +914,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · c311d698-5c5b-4b0f-8a79-e12f1673cf96",
@@ -964,7 +968,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 5b7baf55-26e7-4707-bac3-df4a674701a8",
@@ -1000,7 +1004,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · d13c4d91-980a-4d02-9088-21bc64130132",
@@ -1018,7 +1022,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 6b05432e-5873-4a0e-83e5-b18abe8eba1f",
@@ -1054,7 +1058,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 22d5da1f-a8c8-4f0b-bea2-26cbc32f6ea8",
@@ -1072,7 +1076,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 56f4a62e-245f-40c5-8b2f-5a5ed3e17d9b",
@@ -1108,7 +1112,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 6470a210-b83e-49d4-8211-8853ad70dde1",
@@ -1216,7 +1220,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "youtube",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 7115415d-26cf-42a5-92f1-fb776aad0512",
@@ -1234,7 +1238,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · 291cd0b5-ad6d-4249-b236-a304b7de6292",
@@ -1270,7 +1274,7 @@
           "captionSettings": {
             "visible": false
           },
-          "platform": "instagram",
+          "platform": "tiktok",
           "strongKind": "photo",
           "generation": {
             "version": "Supplied Drive collection · fb1dc0cc-ae3a-4c0b-a660-2ceff4fc9d2f",
