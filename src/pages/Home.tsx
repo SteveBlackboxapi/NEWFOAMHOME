@@ -44,7 +44,7 @@ export function Home() {
         </p>
       </section>
       <WorkspaceGrid />
-      <ProductFamily />
+      <ProductFamily miniatures />
       <section
         className="pc-perspectives pc-shell"
         aria-labelledby="perspective-title"

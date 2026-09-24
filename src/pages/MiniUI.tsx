@@ -1,3 +1,4 @@
+import { MiniCanvas } from "../components/mini-ui/MiniIllustration";
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { A } from "../lib/assets";
@@ -146,29 +147,12 @@ function readFavourites(): string[] {
 }
 
 function Miniature({ concept }: { concept: Concept }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const resize = () =>
-      el.style.setProperty("--mini-scale", String(el.clientWidth / 560));
-    resize();
-    const observer = new ResizeObserver(resize);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  const Scene = concept.scene;
   return (
-    <div
-      ref={ref}
-      className={`mui-art mui-tint-${concept.tint}`}
-      role="img"
-      aria-label={`${concept.title} ${concept.description} Simplified Foam interface illustration.`}
-    >
-      <div className="mui-stage" aria-hidden="true">
-        <Scene />
-      </div>
-    </div>
+    <MiniCanvas
+      scene={concept.scene}
+      tint={concept.tint}
+      label={`${concept.title} ${concept.description} Simplified Foam interface illustration.`}
+    />
   );
 }
 

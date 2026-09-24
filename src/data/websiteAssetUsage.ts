@@ -131,6 +131,16 @@ function artwork(
   use(`${A}/${path}`, route, section, { kind: "artwork", label, provenance });
 }
 
+/** Keep the miniature casts aligned with MiniPrimitives and their rendered scenes. */
+function miniature(
+  route: string,
+  section: string,
+  talent: { portrait: string }[],
+) {
+  talent.forEach(({ portrait }) => use(portrait, route, section));
+  artwork("d6571.svg", "Foam symbol", route, section);
+}
+
 /** Public route/section manifest, including reachable tabs, scroll stages and mobile variants.
  * Lab pages and saved design concepts are deliberately not public placements.
  * Keep this alongside the pages when moving imagery; the coverage check catches literal new assets.
@@ -204,25 +214,22 @@ discoverySearches.forEach((search) =>
     use(src, "/", `Content discovery · ${search.query}`),
   ),
 );
-for (const route of ["/", "/features"]) {
-  artwork(
-    "foam-media-kit.webp",
-    "Media Kit product mark",
-    route,
-    "Product family · Media Kit",
-    "ai-generated",
-  );
-  artwork(
-    "chrome-store.webp",
-    "Chrome Web Store mark",
-    route,
-    "Product family · Foam for Chrome",
-  );
-  discoverySearches[0].assets.forEach(({ src }) =>
-    use(src, route, "Product family · Found with Foam"),
-  );
-}
-
+artwork(
+  "foam-media-kit.webp",
+  "Media Kit product mark",
+  "/features",
+  "Product family · Media Kit",
+  "ai-generated",
+);
+artwork(
+  "chrome-store.webp",
+  "Chrome Web Store mark",
+  "/features",
+  "Product family · Foam for Chrome",
+);
+discoverySearches[0].assets.forEach(({ src }) =>
+  use(src, "/features", "Product family · Found with Foam"),
+);
 const peopleTiles: Record<string, string[]> = {
   "/managers": [
     "elise-morgan/elise-morgan-hotel-selfie.webp",
@@ -253,8 +260,8 @@ Object.entries(peopleTiles).forEach(([route, paths]) =>
 [websiteSamantha, websiteAria, websiteNia].forEach((talent) =>
   use(talent.portrait, "/managers", "A home for your roster · The beauty edit"),
 );
-use(websiteSamantha.portrait, "/managers", "The media kit · Example preview");
-use(websiteAria.portrait, "/managers", "Foam for Chrome · Email introduction");
+miniature("/managers", "The media kit · Miniature preview", [websiteSamantha]);
+miniature("/managers", "Foam for Chrome · Inbox miniature", [websiteSamantha]);
 [websiteAria, websiteSamantha, websiteNia].forEach((talent) =>
   use(
     talent.content[0].thumb,
@@ -262,20 +269,18 @@ use(websiteAria.portrait, "/managers", "Foam for Chrome · Email introduction");
     "Start with the work · Content examples",
   ),
 );
-use(
-  websiteSamantha.portrait,
-  "/brands",
-  "From interesting to informed · Creator context",
-);
+miniature("/brands", "Been sent a Foam link? · Sharing miniature", [
+  websiteAria,
+]);
 creatorWorkPosts.forEach(({ src }) =>
   use(src, "/creators", "Your work · Creator spread"),
 );
-use(
-  websiteAria.portrait,
-  "/creators",
-  "Your side of the connection · Connected profile",
-);
-for (const route of ["/managers", "/creators", "/kit-story", "/chrome-story"]) {
+miniature("/creators", "Your side of the connection · Connections miniature", [
+  websiteSamantha,
+  websiteAria,
+  websiteNia,
+]);
+for (const route of ["/managers", "/kit-story", "/chrome-story"]) {
   for (const [path, label] of [
     ["60920.svg", "Instagram interface icon"],
     ["31c2a.svg", "TikTok interface icon"],
@@ -285,30 +290,21 @@ for (const route of ["/managers", "/creators", "/kit-story", "/chrome-story"]) {
   }
 }
 
-artwork(
-  "fdb3b.svg",
-  "Foam app symbol",
-  "/features",
-  "Explore the platform · Product previews",
-);
-use(websiteSamantha.portrait, "/features", "Product preview · Media Kit");
-websiteSamantha.content
-  .slice(0, 3)
-  .forEach((tile) =>
-    use(tile.thumb, "/features", "Product preview · Media Kit"),
-  );
-[websiteSamantha, websiteAria, websiteNia].forEach((talent) =>
-  use(talent.portrait, "/features", "Product preview · Roster"),
-);
-[
-  websiteAria.content[0],
-  websiteNia.content[0],
-  websiteSamantha.content[2],
-  websiteSamantha.content[0],
-].forEach((tile) =>
-  use(tile.thumb, "/features", "Product preview · Content search"),
-);
-use(websiteSamantha.portrait, "/features", "Product preview · Foam for Chrome");
+for (const route of ["/", "/features"]) {
+  const section = route === "/" ? "Product family" : "Product preview";
+  miniature(route, `${section} · Media kit miniature`, [websiteSamantha]);
+  miniature(route, `${section} · Content search miniature`, [
+    websiteSamantha,
+    websiteAria,
+    websiteNia,
+  ]);
+  miniature(route, `${section} · Foam for Chrome miniature`, [websiteSamantha]);
+}
+miniature("/features", "Product preview · Shortlist miniature", [
+  websiteSamantha,
+  websiteAria,
+  websiteNia,
+]);
 
 photo(
   "people-colour/studio-moment.webp",
@@ -335,7 +331,14 @@ photo(
   "/data-trust",
   "Reassurance · Closing portrait",
 );
-artwork("d6571.svg", "Foam symbol", "/data-trust", "Connection and consent");
+miniature("/data-trust", "Connected data · Connections miniature", [
+  websiteSamantha,
+  websiteAria,
+  websiteNia,
+]);
+miniature("/data-trust", "Account permissions · Permissions miniature", [
+  websiteSamantha,
+]);
 use(websiteSamantha.portrait, "/updates", "Featured story · Media kits");
 use(websiteAria.portrait, "/updates", "Two more ways in · Foam for Chrome");
 use(

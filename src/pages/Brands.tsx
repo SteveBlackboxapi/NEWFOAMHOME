@@ -2,6 +2,7 @@ import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import {
   ActionLink,
   FoamGlyph,
@@ -13,12 +14,11 @@ import {
 import {
   websiteAria,
   websiteNia,
-  websiteProfile,
   websiteSamantha,
 } from "../data/websiteTalent";
 import "./audience-pages.css";
+import "./audience-miniatures.css";
 
-const samantha = websiteProfile(websiteSamantha);
 const evidence = [
   {
     talent: websiteAria,
@@ -157,29 +157,8 @@ export function Brands() {
 
       <section className="mp-section mp-cream">
         <div className="mp-container ap-editorial-split ap-brand-link-section">
-          <Reveal className="ap-shared-stage">
-            <div className="ap-shared-card">
-              <div className="ap-window-bar">
-                <span>Media kit</span>
-                <span className="ap-example">Example preview</span>
-              </div>
-              <MarketingImage
-                className="ap-shared-photo"
-                src={samantha.portrait}
-                alt={samantha.name}
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="ap-shared-body">
-                <span className="ap-small-label">{samantha.verticals}</span>
-                <h3>{samantha.name}</h3>
-                <p>
-                  {samantha.totalShort} <span>total demo audience</span>
-                </p>
-                <AIDisclosure detail="Fictional creator · Demo figures" />
-              </div>
-            </div>
-            <span className="ap-link-ribbon">One link. A fuller picture.</span>
+          <Reveal className="ap-miniature-stage ap-miniature-first">
+            <MiniIllustration kind="share" />
           </Reveal>
           <div>
             <SectionIntro

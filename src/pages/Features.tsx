@@ -9,15 +9,14 @@ import {
   Reveal,
   SectionIntro,
 } from "../components/Marketing";
-import {
-  ProductPreview,
-  type ProductKind,
-} from "../components/MarketingProduct";
+import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import { ClosingCTA } from "../components/ClosingCTA";
 import "./marketing-features.css";
+import "./feature-miniatures.css";
 
 const FEATURES: {
-  kind: ProductKind;
+  kind: "kit" | "roster" | "search" | "inbox";
+  illustration: "kit" | "shortlist" | "search" | "inbox";
   name: string;
   heading: string;
   copy: string;
@@ -26,6 +25,7 @@ const FEATURES: {
 }[] = [
   {
     kind: "kit",
+    illustration: "kit",
     name: "Media kits",
     heading: "The whole story. In one link.",
     copy: "Put a creator’s work, connected platform numbers and audience insights together in a kit that’s ready to share.",
@@ -34,6 +34,7 @@ const FEATURES: {
   },
   {
     kind: "roster",
+    illustration: "shortlist",
     name: "Lists & rosters",
     heading: "A shortlist with a point of view.",
     copy: "Bring the right people together for a brief. Give the brand a clear way to explore your recommendations.",
@@ -42,6 +43,7 @@ const FEATURES: {
   },
   {
     kind: "search",
+    illustration: "search",
     name: "Content search",
     heading: "Find the moment that makes the case.",
     copy: "A routine. A product review. A perfect example. Search for the content that helps explain why a creator fits.",
@@ -50,6 +52,7 @@ const FEATURES: {
   },
   {
     kind: "inbox",
+    illustration: "inbox",
     name: "Chrome extension",
     heading: "Your roster, right where you reply.",
     copy: "Open Foam beside your inbox. Choose a creator, copy their profile and paste it into the conversation.",
@@ -111,7 +114,7 @@ function FeatureExplorer() {
         </div>
         <div
           key={current.kind}
-          className="mf-feature-panel"
+          className="mf-feature-panel mf-feature-panel-mini"
           role="tabpanel"
           tabIndex={0}
           id={`feature-panel-${current.kind}`}
@@ -123,12 +126,9 @@ function FeatureExplorer() {
             </span>
             <h3>{current.heading}</h3>
             <p>{current.copy}</p>
-            <Link className="mp-link" to={current.link}>
-              {current.cta}
-              <span aria-hidden="true">↗</span>
-            </Link>
+            <ActionLink to={current.link}>{current.cta}</ActionLink>
           </div>
-          <ProductPreview kind={current.kind} />
+          <MiniIllustration kind={current.illustration} />
         </div>
       </div>
     </section>

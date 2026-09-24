@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import { MarketingPage } from "../components/Marketing";
-import { A, img } from "../lib/assets";
+import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
+import { A } from "../lib/assets";
 import { PRIVACY_URL, TERMS_URL } from "../lib/siteLinks";
 import "./data-trust.css";
+import "./trust-miniatures.css";
 
 type TrustTopic = "source" | "permissions" | "privacy" | "question";
 function TrustIcon({
@@ -195,35 +197,11 @@ export function DataTrust() {
                   Bring content and performance information from connected
                   platforms into the same conversation as the creator’s work.
                 </p>
-                <a className="dt-text-link" href="#trust-answers">
-                  Understand the connection <span aria-hidden="true">›</span>
+                <a className="mp-button dt-miniature-cta" href="#trust-answers">
+                  Understand the connection <span aria-hidden="true">↓</span>
                 </a>
               </div>
-              <div
-                className="dt-source-art"
-                role="img"
-                aria-label="Illustration: connected platforms bring content, profile and performance information into Foam"
-              >
-                <div className="dt-source-platforms">
-                  <span>Instagram</span>
-                  <span>TikTok</span>
-                  <span>YouTube</span>
-                </div>
-                <div className="dt-source-wires" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                </div>
-                <div className="dt-source-foam">
-                  <img src={img.foamSymbol} alt="" />
-                  <span>foam</span>
-                </div>
-                <div className="dt-source-output">
-                  <span>Content</span>
-                  <span>Profile</span>
-                  <span>Performance</span>
-                </div>
-              </div>
+              <MiniIllustration kind="connections" className="dt-miniature" />
             </article>
             <article className="dt-feature" id="account-permissions">
               <div className="dt-feature-copy">
@@ -238,30 +216,14 @@ export function DataTrust() {
                   our team about the information your agency needs and how it
                   will be used.
                 </p>
-                <a className="dt-text-link" href="mailto:hello@foam.io">
-                  Talk to the Foam team <span aria-hidden="true">›</span>
+                <a
+                  className="mp-button dt-miniature-cta"
+                  href="mailto:hello@foam.io"
+                >
+                  Talk to the Foam team <span aria-hidden="true">↗</span>
                 </a>
               </div>
-              <div className="dt-permission-art" aria-hidden="true">
-                <div className="dt-permission-sheet">
-                  <span className="dt-permission-heading">
-                    A clear starting point
-                  </span>
-                  <div>
-                    <span className="dt-step">1</span>
-                    <span>Choose an account</span>
-                  </div>
-                  <div>
-                    <span className="dt-step">2</span>
-                    <span>Review the permissions</span>
-                  </div>
-                  <div>
-                    <span className="dt-step">3</span>
-                    <span>Understand the connection</span>
-                  </div>
-                  <small>Every connection starts with a person.</small>
-                </div>
-              </div>
+              <MiniIllustration kind="permissions" className="dt-miniature" />
             </article>
           </div>
         </section>

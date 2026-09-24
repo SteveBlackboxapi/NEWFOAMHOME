@@ -1,0 +1,22 @@
+.pc-site .mf-feature-panel-mini {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.mf-feature-panel-mini > * {
+  min-width: 0;
+}
+
+.mf-feature-panel-mini .mf-feature-copy .mp-button {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .pc-site .mf-feature-panel-mini {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .mf-feature-panel-mini .mf-feature-copy {
+    max-width: 560px;
+  }
+}
