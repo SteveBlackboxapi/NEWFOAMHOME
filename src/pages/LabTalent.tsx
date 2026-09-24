@@ -52,7 +52,7 @@ import {
   TalentNetworkIcon,
   type TalentLayout,
 } from "../components/TalentLabTables";
-import { matchesTalentPlatforms, talentNetworks } from "../lib/talentPlatforms";
+import { matchesTalentPlatforms, mixFeaturedPlatforms, talentNetworks } from "../lib/talentPlatforms";
 import { ChromeWallpaperSettings } from "../components/ChromeWallpaperSettings";
 import "./talent-lab.css";
 import "./lab-marketing.css";
@@ -313,7 +313,7 @@ export function LabTalent() {
         ? b.totalAudience - a.totalAudience
         : 0,
   );
-  const visibleAssets = (
+  const sortedAssets = (
     view === "saved"
       ? allAssets.filter((a) => saved.includes(a.id))
       : contentAssets
@@ -338,6 +338,9 @@ export function LabTalent() {
               a.index - b.index ||
               stagedTalent.indexOf(a.talent) - stagedTalent.indexOf(b.talent),
     );
+  const visibleAssets = view === "content" && sort === "curated" && !query.trim()
+    ? mixFeaturedPlatforms(sortedAssets)
+    : sortedAssets;
   const visibleProfiles =
     view === "talent"
       ? visibleTalent
