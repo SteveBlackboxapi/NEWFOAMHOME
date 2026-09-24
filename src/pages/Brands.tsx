@@ -61,6 +61,8 @@ export function Brands() {
         </ActionLink>
       </PageIntro>
 
+      <TalentSearchSection />
+
       <section className="mp-section">
         <div className="mp-container">
           <div className="ap-section-top ap-evidence-heading">
@@ -116,8 +118,6 @@ export function Brands() {
           </div>
         </div>
       </section>
-
-      <TalentSearchSection />
 
       <section className="mp-section ap-decision-section">
         <div className="mp-container ap-decision-layout">

@@ -8,6 +8,9 @@ export const demoNetworks: { network: ContentPlatform; label: string }[] = [
   { network: "youtube", label: "YouTube" },
 ];
 
+// Illustrative roster size for the search animation, not a live catalogue count.
+export const demoReviewTotal = 195;
+
 // Public examples use the same fictional account figures as the creator kits.
 // Filter the small approved cast so the displayed results meet the query.
 const cast = [websiteSamantha, websiteAria, websiteNia, websiteFitness];
