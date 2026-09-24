@@ -1,9 +1,13 @@
 import { MiniIllustration } from "./mini-ui/MiniIllustration";
+import { Reveal } from "./Marketing";
+import { websiteFitness } from "../data/campaignTalent";
+import { websiteMatcha } from "../data/matchaTalent";
 import "./mini-ui/mini-product-cards.css";
 import { Link } from "react-router";
 import { DiscoveryArtwork, DiscoverySearch } from "./DiscoverySearch";
 import { A } from "../lib/assets";
 import "./people-colour.css";
+import "./home-creative-polish.css";
 
 export const PC = `${A}/people-colour`;
 
@@ -158,10 +162,10 @@ export function CreatorWall() {
             </figure>
             <figure className="pc-creator-tile">
               <img
-                src={`${A}/talent/lena-croft-v2/lena-croft-grwm.webp`}
-                alt="Fictional creator Lena sharing her skincare routine"
-                width="941"
-                height="1672"
+                src={websiteFitness.content[0].thumb}
+                alt="Avery Cole’s fictional fitness profile, using supplied waterfront imagery"
+                width="1800"
+                height="1282"
                 loading="lazy"
                 decoding="async"
               />
@@ -182,7 +186,7 @@ export function PhotoFeature() {
       className="pc-design pc-photo-section pc-shell"
       aria-label="For creators and their champions"
     >
-      <div className="pc-photo-banner">
+      <Reveal className="pc-photo-banner pc-photo-reveal">
         <img
           className="pc-banner-image"
           src={`${PC}/studio-moment.webp`}
@@ -213,7 +217,7 @@ export function PhotoFeature() {
         <small className="pc-banner-credit">
           Illustrative scene · Made with AI
         </small>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -343,26 +347,20 @@ export function WorkspaceGrid() {
                 </div>
               </div>
             </article>
-            <article className="pc-chrome-card">
-              <img
-                src={`${A}/chrome-store.webp`}
-                alt="Chrome Web Store"
-                loading="lazy"
-                decoding="async"
-              />
-              <div>
+            <article className="pc-chrome-card pc-chrome-preview">
+              <Reveal className="pc-chrome-preview-art">
+                <MiniIllustration kind="chrome" disclosure={false} />
+              </Reveal>
+              <div className="pc-chrome-preview-copy">
                 <span className="pc-eyebrow">FOAM FOR CHROME</span>
                 <h3>
                   Right where
                   <br /> you work.
                 </h3>
+                <Link to="https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf">
+                  Get Foam for Chrome <span aria-hidden="true">↗</span>
+                </Link>
               </div>
-              <Link
-                to="https://chromewebstore.google.com/detail/foam-the-essential-chrome/iocblckedogkccdepdjfceomgncpeadf"
-                aria-label="Foam in the Chrome Web Store"
-              >
-                ↗
-              </Link>
             </article>
           </div>
         </div>
@@ -501,9 +499,9 @@ const portraits = {
     "nova-reed-v2/nova-reed-walk.webp",
   ],
   brands: [
+    "fitness-creator/waterfront.webp",
     "nia-brooks/nia-brooks-skincare.webp",
-    "lena-croft-v2/lena-croft-grwm.webp",
-    "aria-quen-v2/aria-quen-v2-c1.webp",
+    "theo-lane/matcha.webp",
   ],
   creators: [
     "nova-reed-v2/nova-reed-walk.webp",
@@ -527,8 +525,8 @@ export function PeopleTiles({
     <div className="pc-design pc-people-tiles">
       <div className="pc-people-tiles-grid">
         <img
-          src={`${A}/talent/${portraits[kind][0]}`}
-          alt="Fictional creator made with AI"
+          src={kind === "brands" ? websiteFitness.content[0].thumb : `${A}/talent/${portraits[kind][0]}`}
+          alt={kind === "brands" ? "Avery Cole, a fictional fitness profile using supplied imagery" : "Fictional creator made with AI"}
           decoding="async"
         />
         <div className="pc-person-colour">
@@ -546,12 +544,12 @@ export function PeopleTiles({
           decoding="async"
         />
         <img
-          src={`${A}/talent/${portraits[kind][2]}`}
-          alt="Fictional creator sharing their work, made with AI"
+          src={kind === "brands" ? websiteMatcha.portrait : `${A}/talent/${portraits[kind][2]}`}
+          alt={kind === "brands" ? "Theo Lane enjoying an iced matcha, fictional lifestyle creator made with AI" : "Fictional creator sharing their work, made with AI"}
           decoding="async"
         />
       </div>
-      <p className="pc-image-note">Fictional creators · Made with AI</p>
+      <p className="pc-image-note">{kind === "brands" ? "Fictional profiles · Supplied and AI-generated imagery" : "Fictional creators · Made with AI"}</p>
     </div>
   );
 }

@@ -2,6 +2,8 @@ import { A } from "../lib/assets";
 import { stagedTalent, type StagedTalent, type TalentContentTile } from "./stagedTalent";
 import { creatorWorkKeywords, creatorWorkTalent } from "./creatorWorkTalent";
 import { websitePhotoTalent } from "./websitePhotoTalent";
+import { websiteMatcha } from "./matchaTalent";
+import { campaignKeywords, campaignTalent } from "./campaignTalent";
 
 const D = `${A}/talent/discovery-v1`;
 
@@ -27,10 +29,12 @@ export const discoveryAdditions: Addition[] = [
 ];
 
 export const discoveryKeywords: Record<string, string[]> = {
+  "theo-lane:matcha-moment": ["matcha", "café", "food", "drink", "lifestyle", "ritual", "iced latte"],
   ...Object.fromEntries(
     discoveryAdditions.map((item) => [`${item.talentId}:discovery-${item.name}`, item.keywords]),
   ),
   ...creatorWorkKeywords,
+  ...campaignKeywords,
 };
 
 /** Lab-only extension: original talent records, tile order and Kit selections remain untouched. */
@@ -60,7 +64,7 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
       })),
     ],
   };
-}).concat(creatorWorkTalent, websitePhotoTalent);
+}).concat(creatorWorkTalent, websitePhotoTalent, campaignTalent, [websiteMatcha]);
 
 /** Mix new candid imagery with existing content, rather than grouping one creator repeatedly. */
 export const discoveryFeedOrder = [
@@ -69,6 +73,8 @@ export const discoveryFeedOrder = [
   "jax-orin:discovery-jax-live-set",
   "zane-holt:discovery-zane-shoe-chat",
   "rue-dante:discovery-cats-sleeping",
+  "avery-cole:steps",
+  "theo-lane:matcha-moment",
   "mira-vale:paused-makeup-v2",
   "elise-morgan:hotel-mirror-v1",
   "nia-brooks:skincare-review",
