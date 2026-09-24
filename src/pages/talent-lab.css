@@ -954,6 +954,36 @@
   padding: 4px 6px;
   border-radius: 5px;
 }
+/* Match the product's wide YouTube cards without cropping portrait uploads. */
+.tl-card-media.is-youtube {
+  background: #101828;
+}
+.tl-card-media.is-youtube .tl-cover {
+  object-fit: contain;
+  transform: none;
+}
+.tl-card-media.is-youtube .tl-card-shade {
+  background: linear-gradient(180deg, transparent 40%, #10182840 60%, #101828f5);
+}
+.tl-card-media.is-youtube .tl-content-bottom {
+  inset: auto clamp(8px, 4cqw, 13px) clamp(8px, 4cqw, 13px);
+  gap: clamp(4px, 2cqw, 7px);
+}
+.tl-card-media.is-youtube .tl-metrics {
+  font-size: clamp(11px, 4.8cqw, 16px);
+  gap: 0.65em;
+}
+.tl-card-media.is-youtube .tl-content-person {
+  font-size: clamp(10px, 4.5cqw, 14px);
+  gap: clamp(4px, 2cqw, 7px);
+}
+.tl-card-media.is-youtube .tl-content-person > img {
+  width: clamp(18px, 8cqw, 25px);
+  height: clamp(18px, 8cqw, 25px);
+}
+.tl-card-media.is-youtube .content-platform-icon {
+  font-size: clamp(14px, 5.7cqw, 19px);
+}
 .tl-empty {
   min-height: 450px;
   padding: 75px 25px;
