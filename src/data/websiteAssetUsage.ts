@@ -206,7 +206,7 @@ artwork(
   "ai-generated",
 );
 artwork(
-  "chrome-store.webp",
+  "chrome-store-transparent.webp",
   "Chrome Web Store mark",
   "/",
   "A little of everything · Foam for Chrome",
@@ -225,7 +225,7 @@ artwork(
   "ai-generated",
 );
 artwork(
-  "chrome-store.webp",
+  "chrome-store-transparent.webp",
   "Chrome Web Store mark",
   "/features",
   "Product family · Foam for Chrome",
@@ -394,7 +394,7 @@ KIT_FEATURED_CONTENT.forEach((tile) => {
 });
 for (const route of ["/kit-story", "/chrome-story"]) {
   artwork(
-    "chrome-store.webp",
+    "chrome-store-transparent.webp",
     "Chrome Web Store mark",
     route,
     "Foam for Chrome · Send finale",

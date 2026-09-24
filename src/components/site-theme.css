@@ -780,10 +780,6 @@ html[data-theme="dark"] .ks-mobile-surround > div > .ks-mobile-sendoff-title {
 }
 
 /* These halos blend the store artwork into pale surfaces in light mode only. */
-html[data-theme="dark"] .cs-store-mark::before,
 html[data-theme="dark"] .pc-site .pc-chrome-artwork::before {
   display: none;
-}
-html[data-theme="dark"] .cs-store-mark img {
-  mix-blend-mode: normal;
 }

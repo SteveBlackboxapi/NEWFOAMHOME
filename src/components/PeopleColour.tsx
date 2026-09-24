@@ -461,7 +461,7 @@ export function ProductFamily({
             <div className="pc-tool-image pc-mist pc-chrome-artwork">
               <img
                 className="pc-chrome-tool"
-                src={`${A}/chrome-store.webp`}
+                src={`${A}/chrome-store-transparent.webp`}
                 alt="Chrome Web Store logo"
                 width="300"
                 height="300"

@@ -10,3 +10,9 @@ The glyphs were laid out as `foam` at weight 500 with the font's normal kerning 
 - Source font SHA-256: `3dd4c2c38e3a33da06e7a9a870ab23dddd404dc14705baf35753833c3b75f6a9`.
 
 The standalone SVG can be reused beside the original F badge. The footer renders it with its intrinsic aspect ratio. Footer CSS changes only its overall width and, on the legacy dark footer, its colour; it cannot apply tracking or font substitutions to the outlined letters.
+
+## Kit Story white lockup
+
+`foam-story-lockup-white.svg` combines the original white outlined F badge from `foam-logotype-white.svg` with the exact Founders Grotesk Medium paths from `foam-wordmark.svg`, recoloured white. The double-storey `a` matches the reference supplied on 24 September 2026 (`Screenshot 2026-09-24 at 17.07.05.png`).
+
+The 90 × 35 view box, badge paths and horizontal wordmark bounds are retained. The new lettering is scaled uniformly and vertically centred in the former lettering area. Both desktop and mobile Kit Story use this lockup through `StoryNav`; other logo assets and site typography are unchanged.

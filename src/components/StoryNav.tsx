@@ -66,7 +66,7 @@ export function StoryNav() {
       <div className="story-nav-row">
         <Link to="/" aria-label="Foam home" className="story-nav-brand">
           <img
-            src={`${A}/brand/foam-logotype-white.svg`}
+            src={`${A}/brand/foam-story-lockup-white.svg`}
             alt=""
             width={90}
             height={35}

@@ -29,7 +29,7 @@ export function MiniChromeScene() {
       </div>
 
       <div className="mui-card mui-chrome-store">
-        <img src={`${A}/chrome-store.webp`} width="42" height="42" alt="" loading="lazy" decoding="async" />
+        <img src={`${A}/chrome-store-transparent.webp`} width="42" height="42" alt="" loading="lazy" decoding="async" />
         <div><strong>Made for Chrome.</strong><span>Meet your inbox’s plus-one.</span></div>
       </div>
       <span className="mui-chrome-ready"><MiniIcon name="check" size={13} /> Ready to reply</span>
