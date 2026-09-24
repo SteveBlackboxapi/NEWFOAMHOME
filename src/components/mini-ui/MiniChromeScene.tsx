@@ -1,5 +1,5 @@
 import { A } from "../../lib/assets";
-import { MiniAvatar, MiniBar, MiniFoamMark, MiniIcon } from "./MiniPrimitives";
+import { MiniAccounts, MiniAvatar, MiniBar, MiniFoamMark, MiniIcon } from "./MiniPrimitives";
 import "./mini-chrome.css";
 
 /** A decorative email and extension pairing; the enclosing card owns the CTA. */
@@ -24,7 +24,7 @@ export function MiniChromeScene() {
         <div className="mui-chrome-brand"><MiniFoamMark size={29} /><strong>foam</strong><MiniIcon name="close" size={14} /></div>
         <div className="mui-chrome-search"><MiniIcon name="search" size={15} /><span>Find your talent</span></div>
         <div className="mui-chrome-person"><MiniAvatar person="samantha" size={45} /><div><strong>Samantha Pikka</strong><span>Beauty · Lifestyle</span></div></div>
-        <div className="mui-chrome-profile-lines"><MiniBar width={135} /><MiniBar width={103} /></div>
+        <div className="mui-chrome-profile-lines"><MiniAccounts person="samantha" size={18} /></div>
         <span className="mui-chrome-copy"><MiniIcon name="copy" size={16} /> Copy profile</span>
       </div>
 

@@ -1,10 +1,13 @@
 import {
+  MiniAccounts,
   MiniAvatar,
   MiniBar,
   MiniFoamMark,
   MiniIcon,
   MiniPhoto,
 } from "./MiniPrimitives";
+import { websiteAria, websiteNia, websiteSamantha } from "../../data/websiteTalent";
+import { KitPlatformIcon } from "../KitDetails";
 import "./mini-discovery.css";
 
 const people = [
@@ -12,6 +15,12 @@ const people = [
   { person: "aria", name: "Aria", category: "Everyday style" },
   { person: "nia", name: "Nia", category: "Life, beautifully" },
 ] as const;
+
+const contentResults = [
+  { name: "Samantha", tile: websiteSamantha.content.find((tile) => tile.id === "0")! },
+  { name: "Aria", tile: websiteAria.content[0] },
+  { name: "Nia", tile: websiteNia.content[0] },
+];
 
 export function MiniSearch() {
   return (
@@ -23,10 +32,13 @@ export function MiniSearch() {
           <MiniIcon name="grid" size={18} />
         </div>
         <div className="mui-d-search-results">
-          {people.map(({ person, name }) => (
-            <div className="mui-d-result" key={person}>
-              <MiniPhoto person={person} />
-              <span>{name}</span>
+          {contentResults.map(({ name, tile }) => (
+            <div className="mui-d-result" key={name}>
+              <img src={tile.thumb} alt="" loading="lazy" decoding="async" />
+              <span className="mui-d-result-caption">
+                {name}
+                <KitPlatformIcon network={tile.platform} label={tile.platform} size={17} />
+              </span>
             </div>
           ))}
         </div>
@@ -70,7 +82,7 @@ export function MiniShortlist() {
               <MiniAvatar person={person} size={40} />
               <div>
                 <strong>{name}</strong>
-                <MiniBar width={75} />
+                <MiniAccounts person={person} />
               </div>
               <span className="mui-d-small-check">
                 <MiniIcon name="check" size={13} />
@@ -127,7 +139,7 @@ export function MiniRoster() {
               <div className="mui-d-roster-person" key={person}>
                 <MiniPhoto person={person} />
                 <strong>{name}</strong>
-                <MiniBar width={67} />
+                <MiniAccounts person={person} />
               </div>
             ))}
           </div>

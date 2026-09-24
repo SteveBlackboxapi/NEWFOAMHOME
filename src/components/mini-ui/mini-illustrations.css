@@ -122,6 +122,17 @@
   object-fit: cover;
   object-position: 50% 25%;
 }
+.mui-stage .mui-accounts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #445367;
+}
+.mui-stage .mui-accounts .kit-platform-icon {
+  flex: 0 0 auto;
+  margin: 0;
+  color: inherit;
+}
 .mui-bar {
   display: block;
   height: 8px;

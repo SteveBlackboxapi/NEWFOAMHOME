@@ -3,6 +3,7 @@ import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
+import { TalentSearchSection } from "../components/TalentSearchDemo";
 import {
   ActionLink,
   MarketingPage,
@@ -115,6 +116,8 @@ export function Brands() {
           </div>
         </div>
       </section>
+
+      <TalentSearchSection />
 
       <section className="mp-section ap-decision-section">
         <div className="mp-container ap-decision-layout">

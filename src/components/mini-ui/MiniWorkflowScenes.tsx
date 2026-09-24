@@ -1,4 +1,5 @@
 import {
+  MiniAccounts,
   MiniAvatar,
   MiniBar,
   MiniFoamMark,
@@ -6,6 +7,7 @@ import {
   MiniIcon,
   MiniPhoto,
 } from "./MiniPrimitives";
+import { formatWebsiteMetric, websiteSamantha } from "../../data/websiteTalent";
 import "./mini-workflow.css";
 
 export function MiniInbox() {
@@ -45,9 +47,9 @@ export function MiniInbox() {
               <br />
               Pikka
             </strong>
-            <span>Beauty · Lifestyle</span>
-            <b>570.1K</b>
-            <small>Instagram audience</small>
+            <MiniAccounts person="samantha" />
+            <b>{formatWebsiteMetric(websiteSamantha.totalAudience)}</b>
+            <small>Total audience</small>
           </div>
         </div>
         <span className="mui-w-blue-action">
@@ -88,8 +90,7 @@ export function MiniShare() {
           </div>
         </div>
         <div className="mui-w-kit-lines">
-          <MiniBar width={170} />
-          <MiniBar width={135} />
+          <MiniAccounts person="aria" size={18} />
         </div>
       </MiniFrame>
       <div className="mui-card mui-w-share-panel">

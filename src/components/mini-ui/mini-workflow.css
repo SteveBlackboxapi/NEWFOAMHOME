@@ -147,10 +147,13 @@
   font-size: 16px;
   line-height: 1.12;
 }
-.mui-w-inbox-person span {
+.mui-w-inbox-person > div > span {
   margin-top: 6px;
   color: #86909a;
   font-size: 12px;
+}
+.mui-w-inbox-person .mui-accounts {
+  margin-top: 9px;
 }
 .mui-w-inbox-person b {
   margin-top: 10px;
