@@ -97,14 +97,22 @@ test("every public placement points to a real file and a truthful catalogue owne
   }
 });
 
-test("new public-photo records are metric-free, preserve provenance and retain available masters", () => {
+test("website photo records preserve provenance and masters, including retired photography", () => {
   assert.equal(websitePhotoTalent.length, 7);
   assert.equal(usage.websiteReferencePhotos.length, 3);
   for (const talent of websitePhotoTalent) {
     assert.ok(!stagedTalent.some((original) => original.id === talent.id));
     assert.equal(talent.totalAudience, 0);
     assert.deepEqual(talent.platforms, []);
-    assert.ok(websiteUsageFor(talent.portrait));
+    assert.ok(
+      existsSync(path.join(root, "public", talent.portrait)),
+      talent.portrait,
+    );
+    if (talent.id === "privacy-portrait") {
+      assert.equal(websiteUsageFor(talent.portrait), undefined);
+    } else {
+      assert.ok(websiteUsageFor(talent.portrait), talent.id);
+    }
     for (const tile of talent.content) {
       assert.equal(tile.provenance, talent.provenance);
       assert.equal(tile.views, undefined);
@@ -159,7 +167,9 @@ test("dynamic discovery, product content, videos and extension roster states are
 });
 
 test("lookup supports the GitHub Pages base, absolute URLs and query strings without basename collisions", () => {
-  const src = "/assets/people-colour/trust-v1/privacy-helmet.webp";
+  const src =
+    "/assets/people-colour/original-portraits-v1/blue-portrait-original-v1.webp";
+  assert.ok(websiteUsageFor(src));
   for (const alternative of [
     src,
     `assets${src.slice(7)}`,
@@ -173,7 +183,7 @@ test("lookup supports the GitHub Pages base, absolute URLs and query strings wit
     );
   }
   assert.equal(
-    websiteUsageFor("/assets/unrelated/privacy-helmet.webp"),
+    websiteUsageFor("/assets/unrelated/blue-portrait-original-v1.webp"),
     undefined,
   );
 });
