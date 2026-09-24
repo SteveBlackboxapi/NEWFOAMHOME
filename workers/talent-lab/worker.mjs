@@ -11,6 +11,12 @@ const MAX_BODY = 32 * 1024 * 1024;
 const TOKEN_KEY = "github-token-v1";
 const SHA = /^[a-f0-9]{40}$/;
 const UPLOAD = /^public\/assets\/talent\/uploads\/[a-z0-9-]+\.(png|jpg|webp)$/;
+const REVIEWED_WEBM = new Set([
+  "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm",
+  "/assets/talent/lena-croft-v2/lena-croft-grwm.webm",
+  "/assets/talent/nia-brooks/nia-brooks-skincare.webm",
+  "/assets/talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.webm",
+]);
 const encoder = new TextEncoder();
 class HttpError extends Error {
   constructor(status, message) {
@@ -583,17 +589,33 @@ export async function handleRequest(
       /^\/(?:assets|ideas-two|fonts)\/[a-zA-Z0-9_./ -]+$/.test(url.pathname) &&
       !url.pathname.split("/").some((part) => part === "." || part === "..")
     ) {
-      const upstream = await fetcher(`${PUBLIC_SITE}${url.pathname}`, {
+      const pinnedMedia =
+        typeof env.LAB_MEDIA_REF === "string" &&
+        SHA.test(env.LAB_MEDIA_REF) &&
+        REVIEWED_WEBM.has(url.pathname);
+      const upstreamUrl = pinnedMedia
+        ? `https://raw.githubusercontent.com/${REPOSITORY}/${env.LAB_MEDIA_REF}/public${url.pathname}`
+        : `${PUBLIC_SITE}${url.pathname}`;
+      const upstream = await fetcher(upstreamUrl, {
         method: request.method,
         redirect: "error",
+        headers: Object.fromEntries(
+          ["Range", "If-Range"]
+            .filter((name) => request.method === "GET" && request.headers.has(name))
+            .map((name) => [name, request.headers.get(name)]),
+        ),
       });
-      if (!upstream.ok) fail(404, "Asset not found.");
-      return response(upstream.body, 200, {
+      if (!upstream.ok && upstream.status !== 416) fail(404, "Asset not found.");
+      return response(request.method === "HEAD" ? null : upstream.body, upstream.status, {
         "Content-Type":
-          upstream.headers.get("Content-Type") || "application/octet-stream",
-        ...(upstream.headers.has("Content-Length")
-          ? { "Content-Length": upstream.headers.get("Content-Length") }
-          : {}),
+          pinnedMedia
+            ? "video/webm"
+            : upstream.headers.get("Content-Type") || "application/octet-stream",
+        ...Object.fromEntries(
+          ["Content-Length", "Content-Range", "Accept-Ranges", "ETag", "Last-Modified"]
+            .filter((name) => upstream.headers.has(name))
+            .map((name) => [name, upstream.headers.get(name)]),
+        ),
       });
     }
     fail(404, "Not found.");

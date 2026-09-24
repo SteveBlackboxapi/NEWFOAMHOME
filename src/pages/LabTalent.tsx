@@ -38,7 +38,6 @@ import {
   readyVideoSources,
   SAVED_KEY,
   NETWORK_NAMES,
-  SHORT_NAMES,
   downloadPack,
   exportData,
   type LabAsset,
@@ -46,6 +45,14 @@ import {
 import { LabIcon, type LabIconName } from "../components/TalentLabIcon";
 import { AIDisclosure, AssetCard } from "../components/TalentLabMedia";
 import { TalentLabProfile } from "../components/TalentLabProfile";
+import {
+  TalentContentTable,
+  TalentDirectoryTable,
+  TalentLayoutSelect,
+  TalentNetworkIcon,
+  type TalentLayout,
+} from "../components/TalentLabTables";
+import { matchesTalentPlatforms, talentNetworks } from "../lib/talentPlatforms";
 import { ChromeWallpaperSettings } from "../components/ChromeWallpaperSettings";
 import "./talent-lab.css";
 import "./lab-marketing.css";
@@ -68,7 +75,7 @@ const EMPTY: Filters = {
   views: "",
 };
 const navItems: { view: View; icon: LabIconName; label: string }[] = [
-  { view: "talent", icon: "people", label: "Talent library" },
+  { view: "talent", icon: "people", label: "Talent directory" },
   { view: "content", icon: "explore", label: "Explore content" },
   { view: "saved", icon: "bookmark", label: "Saved assets" },
 ];
@@ -112,7 +119,24 @@ export function LabTalent() {
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [draft, setDraft] = useState<Filters>(EMPTY);
   const [filterOpen, setFilterOpen] = useState(false);
-  const [compact, setCompact] = useState(false);
+  const layout: TalentLayout = params.get("layout") === "table"
+    ? "table"
+    : params.get("layout") === "compact"
+      ? "compact"
+      : "gallery";
+  const compact = layout === "compact";
+  const setLayout = (next: TalentLayout) => setParams((prev) => {
+    const updated = new URLSearchParams(prev);
+    if (next === "gallery") updated.delete("layout");
+    else updated.set("layout", next);
+    return updated;
+  }, { replace: true });
+  const directoryNetworks = useMemo<TalentNetwork[]>(() => [
+    "instagram", "tiktok", "youtube",
+    ...(["twitch", "linkedin"] as const).filter((network) =>
+      stagedTalent.some((talent) => talent.platforms.some((platform) => platform.network === network)),
+    ),
+  ], [stagedTalent]);
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
   const contentColumnCount = talentContentColumns(viewportWidth, compact);
   const [sort, setSort] = useState("curated");
@@ -269,12 +293,7 @@ export function LabTalent() {
         return (
           (!filters.talent || t.id === filters.talent) &&
           (!filters.category || t.verticals.includes(filters.category)) &&
-          (!filters.platforms.length ||
-            t.platforms.some((p) => filters.platforms.includes(p.network)) ||
-            (view !== "talent" &&
-              t.content.some((tile) =>
-                filters.platforms.includes(tile.platform),
-              ))) &&
+          matchesTalentPlatforms(t, filters.platforms) &&
           (!filters.audience ||
             (hasAssignedAudience(t) &&
               (filters.audience === "1m"
@@ -586,6 +605,7 @@ export function LabTalent() {
                       <label key={p}>
                         <input
                           type="checkbox"
+                          aria-label={NETWORK_NAMES[p]}
                           checked={draft.platforms.includes(p)}
                           onChange={() =>
                             setDraft({
@@ -596,6 +616,7 @@ export function LabTalent() {
                             })
                           }
                         />
+                        <TalentNetworkIcon network={p} />
                         {NETWORK_NAMES[p]}
                       </label>
                     ))}
@@ -723,24 +744,7 @@ export function LabTalent() {
                     )}
                   </select>
                 </label>
-                <div className="tl-density">
-                  <button
-                    className={!compact ? "active" : ""}
-                    onClick={() => setCompact(false)}
-                    aria-label="Comfortable grid"
-                    aria-pressed={!compact}
-                  >
-                    <LabIcon name="grid" size={16} />
-                  </button>
-                  <button
-                    className={compact ? "active" : ""}
-                    onClick={() => setCompact(true)}
-                    aria-label="Compact grid"
-                    aria-pressed={compact}
-                  >
-                    <LabIcon name="compact" size={16} />
-                  </button>
-                </div>
+                <TalentLayoutSelect talentView={view === "talent"} value={layout} onChange={setLayout} />
               </div>
             </div>
             <div className="tl-results-meta">
@@ -869,6 +873,12 @@ export function LabTalent() {
                     : "Clear filters"}
                 </button>
               </div>
+            ) : layout === "table" ? (
+              view === "talent" ? (
+                <TalentDirectoryTable talent={visibleTalent} networks={directoryNetworks} saved={saved} onOpen={openProfile} onSave={toggleSaved} />
+              ) : (
+                <TalentContentTable assets={visibleAssets} saved={saved} onOpen={openProfile} onSave={toggleSaved} />
+              )
             ) : view === "talent" ? (
               <div className={`tl-talent-grid ${compact ? "compact" : ""}`}>
                 {visibleTalent.map((talent) => (
@@ -913,13 +923,14 @@ export function LabTalent() {
                           </span>
                         </div>
                         <div className="tl-platform-pills">
-                          {talent.platforms.map((p) => (
-                            <abbr
-                              key={p.network}
-                              title={NETWORK_NAMES[p.network]}
+                          {talentNetworks(talent).map((network) => (
+                            <span
+                              className="tl-network-pill"
+                              key={network}
+                              title={NETWORK_NAMES[network]}
                             >
-                              {SHORT_NAMES[p.network]}
-                            </abbr>
+                              <TalentNetworkIcon network={network} />
+                            </span>
                           ))}
                         </div>
                       </div>
