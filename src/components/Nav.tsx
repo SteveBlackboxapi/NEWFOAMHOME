@@ -5,6 +5,7 @@ import { DEMO_URL } from "../lib/siteLinks";
 import { ThemeControl } from "./SiteTheme";
 import "./site-shell.css";
 import "./foam-brand.css";
+import "./marketing-header-layout.css";
 
 const LINKS = [
   { label: "Home", to: "/" },

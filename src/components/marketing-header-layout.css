@@ -1,0 +1,139 @@
+/* Match the kit-story header's geometry without widening page content or
+   changing either header's colours, positioning behaviour or navigation. */
+.pc-site .site-header {
+  --marketing-header-height: 100px;
+}
+
+.pc-site .site-header .site-nav-bar {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: var(--marketing-header-height);
+  padding: 22px clamp(24px, 4.45vw, 76px);
+  gap: 28px;
+  font-family: "Founders Grotesk", system-ui, sans-serif;
+}
+
+.pc-site .site-header .site-desktop-nav {
+  gap: clamp(18px, 1.75vw, 30px);
+}
+
+.pc-site .site-header .site-desktop-nav a {
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.pc-site .site-header .site-nav-actions {
+  gap: 12px;
+}
+
+.pc-site .site-header .site-nav-demo {
+  height: auto;
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 1px solid transparent;
+  gap: 22px;
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pc-site .site-header .site-nav-demo > span {
+  font-size: inherit;
+}
+
+.pc-site .site-header .site-brand.site-foam-brand {
+  gap: 7px;
+}
+
+.pc-site .site-header .site-brand.site-foam-brand > .site-foam-symbol {
+  width: 45px;
+  height: 45px;
+  padding: 6.875px;
+  border-radius: 11.25px;
+}
+
+.pc-site .site-header .site-brand.site-foam-brand > .site-foam-wordmark {
+  width: 64px;
+}
+
+@media (max-width: 1279px) {
+  .pc-site .site-header .site-mobile-menu:not([hidden]) {
+    max-height: calc(100dvh - var(--marketing-header-height) - 1px);
+  }
+
+  .pc-site .site-header .site-menu-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 11px;
+  }
+}
+
+@media (max-width: 1099px) {
+  .pc-site .site-header {
+    --marketing-header-height: 88px;
+  }
+
+  .pc-site .site-header .site-nav-bar {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pc-site .site-header .site-nav-bar {
+    padding-inline: 14px;
+    gap: 10px;
+  }
+
+  .pc-site .site-header .site-nav-actions {
+    gap: 6px;
+  }
+
+  .pc-site .site-header .site-nav-demo {
+    min-height: 40px;
+    padding-inline: 12px;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .pc-site .site-header .site-menu-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 9px;
+  }
+
+  .pc-site .site-header .site-brand.site-foam-brand {
+    gap: 6px;
+  }
+
+  .pc-site .site-header .site-brand.site-foam-brand > .site-foam-symbol {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .pc-site .site-header .site-brand.site-foam-brand > .site-foam-wordmark {
+    width: 50px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pc-site .site-header .site-nav-bar {
+    padding-inline: 10px;
+    gap: 6px;
+  }
+
+  .pc-site .site-header .site-nav-demo {
+    padding-inline: 10px;
+  }
+
+  .pc-site .site-header .site-brand.site-foam-brand > .site-foam-symbol {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pc-site .site-header .site-brand.site-foam-brand > .site-foam-wordmark {
+    width: 40px;
+  }
+}
