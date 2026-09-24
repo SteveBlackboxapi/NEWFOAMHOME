@@ -5,6 +5,8 @@ import { websiteAria, websiteNia, websiteSamantha } from "./websiteTalent";
 import { creatorWorkPosts } from "./creatorWorkTalent";
 import { discoverySearches } from "./discoveryContent";
 import { KIT_FEATURED_CONTENT } from "./kitFeaturedContent";
+import { websiteFitness } from "./campaignTalent";
+import { websiteMatcha } from "./matchaTalent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "./foundWithFoam";
 
 export type WebsiteLocation = { route: string; section: string };
@@ -175,7 +177,7 @@ const wall = [
   "talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp",
   "people-colour/original-portraits-v1/studio-creator-original-v1.webp",
   "people-colour/original-portraits-v1/blue-portrait-original-v1.webp",
-  "talent/lena-croft-v2/lena-croft-grwm.webp",
+  "talent/fitness-creator/waterfront.webp",
 ];
 wall.forEach((path) => photo(path, "/", "A world of talent · Creator wall"));
 discoverySearches[0].assets.forEach(({ src }) =>
@@ -209,6 +211,7 @@ artwork(
   "/",
   "A little of everything · Foam for Chrome",
 );
+miniature("/", "A little of everything · Foam for Chrome", [websiteSamantha]);
 discoverySearches.forEach((search) =>
   search.assets.forEach(({ src }) =>
     use(src, "/", `Content discovery · ${search.query}`),
@@ -237,9 +240,9 @@ const peopleTiles: Record<string, string[]> = {
     "nova-reed-v2/nova-reed-walk.webp",
   ],
   "/brands": [
+    "fitness-creator/waterfront.webp",
     "nia-brooks/nia-brooks-skincare.webp",
-    "lena-croft-v2/lena-croft-grwm.webp",
-    "aria-quen-v2/aria-quen-v2-c1.webp",
+    "theo-lane/matcha.webp",
   ],
   "/creators": [
     "nova-reed-v2/nova-reed-walk.webp",
@@ -262,13 +265,15 @@ Object.entries(peopleTiles).forEach(([route, paths]) =>
 );
 miniature("/managers", "The media kit · Miniature preview", [websiteSamantha]);
 miniature("/managers", "Foam for Chrome · Inbox miniature", [websiteSamantha]);
-[websiteAria, websiteSamantha, websiteNia].forEach((talent) =>
+[websiteMatcha, websiteNia].forEach((talent) =>
   use(
     talent.content[0].thumb,
     "/brands",
     "Start with the work · Content examples",
   ),
 );
+use(websiteFitness.content[1].thumb, "/brands", "Start with the work · Content examples");
+use(websiteFitness.content[0].thumb, "/brands", "From interesting to informed · Fitness moment");
 miniature("/brands", "Been sent a Foam link? · Sharing miniature", [
   websiteAria,
 ]);

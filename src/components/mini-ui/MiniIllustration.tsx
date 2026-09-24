@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ComponentType } from "react";
 import { AIDisclosure } from "../AIDisclosure";
+import { MiniChromeScene } from "./MiniChromeScene";
 import {
   MiniSearch,
   MiniShortlist,
@@ -44,6 +45,12 @@ const illustrations = {
     tint: "cream",
     label:
       "The Foam extension beside an email, with a creator profile ready to copy into a reply.",
+  },
+  chrome: {
+    scene: MiniChromeScene,
+    tint: "blue",
+    label:
+      "Foam for Chrome: a small email window beside the Foam extension, with Samantha’s fictional profile ready to copy and a Chrome Web Store badge.",
   },
   analytics: {
     scene: MiniAnalytics,

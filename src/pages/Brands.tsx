@@ -5,37 +5,35 @@ import { ClosingCTA } from "../components/ClosingCTA";
 import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import {
   ActionLink,
-  FoamGlyph,
   MarketingPage,
   PageIntro,
   Reveal,
   SectionIntro,
 } from "../components/Marketing";
-import {
-  websiteAria,
-  websiteNia,
-  websiteSamantha,
-} from "../data/websiteTalent";
+import { websiteNia } from "../data/websiteTalent";
+import { websiteFitness } from "../data/campaignTalent";
+import { websiteMatcha } from "../data/matchaTalent";
 import "./audience-pages.css";
 import "./audience-miniatures.css";
+import "./brands-creative-range.css";
 
 const evidence = [
   {
-    talent: websiteAria,
-    tile: websiteAria.content[0],
-    label: "Everyday beauty",
+    talent: websiteFitness,
+    tile: websiteFitness.content[1],
+    label: "Made to move",
     className: "ap-evidence-tall",
-  },
-  {
-    talent: websiteSamantha,
-    tile: websiteSamantha.content[0],
-    label: "A little personality",
-    className: "ap-evidence-short",
   },
   {
     talent: websiteNia,
     tile: websiteNia.content[0],
-    label: "A closer look",
+    label: "Everyday beauty",
+    className: "ap-evidence-short",
+  },
+  {
+    talent: websiteMatcha,
+    tile: websiteMatcha.content[0],
+    label: "The little rituals",
     className: "ap-evidence-medium",
   },
 ];
@@ -52,7 +50,7 @@ export function Brands() {
             Better context.
           </>
         }
-        description="Meet the creator. Explore the work. Understand the audience. A Foam link gives your next partnership a clearer starting point."
+        description="From the first run to the everyday ritual. Meet the creator, explore the work and understand the audience behind your next partnership."
         tone="blue"
         visual={<PeopleTiles kind="brands" message="Find your fit." />}
       >
@@ -74,7 +72,7 @@ export function Brands() {
                   more than a number.
                 </>
               }
-              description="The way someone talks, makes, moves and shares matters. Put their content alongside the data when you're considering a collaboration."
+              description="A training session. A beauty routine. A matcha moment. Different worlds, different ways to connect. Put the work alongside the audience when you're considering a collaboration."
             />
             <span className="ap-side-note">
               Real context.
@@ -82,25 +80,33 @@ export function Brands() {
               Room for instinct.
             </span>
           </div>
-          <Reveal className="ap-evidence-grid">
-            {evidence.map(({ talent, tile, label, className }) => (
-              <figure key={talent.id} className={className}>
-                <div className="ap-evidence-photo">
-                  <MarketingImage
-                    src={tile.thumb}
-                    alt={`${talent.displayName}: ${tile.caption}`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span>{label}</span>
-                </div>
-                <figcaption>
-                  <strong>{talent.displayName}</strong>
-                  <AIDisclosure detail="Fictional creator" />
-                </figcaption>
-              </figure>
+          <div className="ap-evidence-grid">
+            {evidence.map(({ talent, tile, label, className }, index) => (
+              <Reveal key={talent.id} className={className} delay={index * 80}>
+                <figure>
+                  <div className="ap-evidence-photo">
+                    <MarketingImage
+                      src={tile.thumb}
+                      alt={`${talent.displayName}: ${tile.caption}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>{label}</span>
+                  </div>
+                  <figcaption>
+                    <strong>{talent.displayName}</strong>
+                    {talent.provenance === "reference" ? (
+                      <small className="ap-supplied-credit">
+                        Fictional profile · Supplied imagery
+                      </small>
+                    ) : (
+                      <AIDisclosure detail="Fictional creator" />
+                    )}
+                  </figcaption>
+                </figure>
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
           <div className="ap-evidence-footer">
             <p>Discover the content, then follow it back to the creator.</p>
             <ActionLink to="/features" secondary>
@@ -123,7 +129,11 @@ export function Brands() {
                 </>
               }
             />
-            <FoamGlyph kind="orbit" className="ap-decision-glyph" />
+            <Reveal className="ap-fitness-moment">
+              <MarketingImage src={websiteFitness.content[0].thumb} alt="Avery Cole’s illustrative fitness story: a pause after a waterfront run" loading="lazy" />
+              <span>Energy you can see.<br />Context you can explore.</span>
+              <small>Fictional profile · Supplied imagery</small>
+            </Reveal>
           </div>
           <div className="ap-decision-list">
             {[

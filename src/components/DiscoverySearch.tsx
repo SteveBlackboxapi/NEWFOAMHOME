@@ -96,8 +96,8 @@ export function DiscoverySearch() {
           window.clearInterval(typingTimer);
           setActive(nextIndex);
         }
-      }, 48);
-    }, 4400);
+      }, 36);
+    }, 3200);
     return () => {
       window.clearTimeout(holdTimer);
       window.clearInterval(typingTimer);

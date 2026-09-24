@@ -1,0 +1,71 @@
+/* Email stays in the background; the useful little extension sits beside it. */
+.mui-chrome-scene {
+  position: relative;
+  width: 560px;
+  height: 360px;
+  color: #27323a;
+}
+.mui-chrome-browser {
+  position: absolute;
+  inset: 36px auto auto 30px;
+  width: 423px;
+  height: 266px;
+  overflow: hidden;
+}
+.mui-chrome-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 43px;
+  padding: 0 16px;
+  background: #f7f9fb;
+  border-bottom: 1px solid #e9edf1;
+}
+.mui-chrome-window-dots { display: flex; gap: 4px; }
+.mui-chrome-window-dots i { width: 5px; height: 5px; background: #bec8d1; border-radius: 50%; }
+.mui-chrome-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  height: 23px;
+  padding: 0 11px;
+  border-radius: 7px;
+  background: #eaf0f5;
+  color: #788696;
+  font-size: 10px;
+}
+.mui-chrome-email { padding: 25px 23px; }
+.mui-chrome-mail-title { display: flex; align-items: center; gap: 9px; font-size: 16px; letter-spacing: -.3px; }
+.mui-chrome-mail-title > svg { color: #8396a7; }
+.mui-chrome-sender { display: flex; align-items: center; gap: 9px; margin-top: 19px; }
+.mui-chrome-sender > span { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: #f2e6ec; color: #7a0036; font-size: 12px; }
+.mui-chrome-sender strong { display: block; font-size: 12px; }
+.mui-chrome-sender small { display: block; color: #919ba5; font-size: 10px; margin-top: 1px; }
+.mui-chrome-mail-lines { display: grid; gap: 8px; margin-top: 18px; }
+.mui-chrome-mail-lines .mui-bar { height: 7px; }
+.mui-chrome-reply { display: flex; align-items: center; gap: 6px; width: fit-content; border: 1px solid #dde5ec; border-radius: 20px; padding: 5px 12px; margin-top: 17px; font-size: 10px; color: #738494; }
+.mui-chrome-extension {
+  position: absolute;
+  top: 89px;
+  right: 27px;
+  width: 223px;
+  padding: 16px;
+  border-color: #dfe7ed;
+  box-shadow: 0 18px 38px #22324a20, 0 3px 8px #22324a08;
+}
+.mui-chrome-brand { display: flex; align-items: center; gap: 7px; }
+.mui-chrome-brand strong { font-size: 22px; letter-spacing: -.8px; }
+.mui-chrome-brand > svg { margin-left: auto; color: #a1aab2; }
+.mui-chrome-search { display: flex; align-items: center; gap: 8px; padding: 10px; margin-top: 15px; border-radius: 9px; background: #f1f5f8; font-size: 10px; color: #7e8d9b; }
+.mui-chrome-person { display: flex; align-items: center; gap: 9px; margin-top: 16px; }
+.mui-chrome-person strong { display: block; font-size: 12px; letter-spacing: -.2px; }
+.mui-chrome-person div > span { display: block; font-size: 9px; margin-top: 4px; color: #8a96a1; }
+.mui-chrome-profile-lines { display: grid; gap: 7px; margin: 13px 0 16px; }
+.mui-chrome-profile-lines .mui-bar { height: 6px; }
+.mui-chrome-copy { display: flex; align-items: center; justify-content: center; gap: 8px; height: 34px; border-radius: 9px; background: #2463cc; color: #fff; font-weight: 600; font-size: 12px; }
+.mui-chrome-store { position: absolute; left: 43px; bottom: 20px; display: flex; align-items: center; gap: 11px; width: 234px; padding: 11px 15px; border-radius: 15px; }
+.mui-chrome-store > img { display: block; width: 42px; height: 42px; object-fit: contain; }
+.mui-chrome-store strong { display: block; font-size: 13px; letter-spacing: -.2px; }
+.mui-chrome-store div > span { display: block; font-size: 9px; color: #86939d; margin-top: 3px; }
+.mui-chrome-ready { position: absolute; top: 24px; right: 27px; display: flex; align-items: center; gap: 6px; padding: 8px 11px; border-radius: 99px; background: #e6f598; color: #34431b; font-size: 10px; box-shadow: 0 4px 10px #3043180c; }
