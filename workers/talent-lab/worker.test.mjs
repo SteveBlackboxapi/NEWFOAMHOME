@@ -28,6 +28,7 @@ async function fixture() {
   const store = new Map();
   const calls = [];
   let head = null;
+  let redirectStatus = null;
   const env = {
     LAB_PASSWORD_HASH: await sha256(PASSWORD),
     SESSION_SECRET: "test-session-secret-with-at-least-32-characters",
@@ -57,7 +58,12 @@ async function fixture() {
     },
   };
   const fetcher = async (url, options = {}) => {
+    assert.equal(options.redirect, "manual", "Worker upstream requests must use the supported manual redirect mode");
     calls.push({ url, options });
+    if (redirectStatus) return new Response(null, {
+      status: redirectStatus,
+      headers: { Location: "https://untrusted.example/redirect" },
+    });
     const path = new URL(url).pathname.replace(
       "/repos/SteveBlackboxapi/NEWFOAMHOME",
       "",
@@ -150,6 +156,9 @@ async function fixture() {
     connect,
     setHead(value) {
       head = value;
+    },
+    setRedirectStatus(value) {
+      redirectStatus = value;
     },
   };
 }
@@ -295,7 +304,7 @@ test("reviewed WebM media can use a fixed repository revision only after authent
       Range: "bytes=0-3",
       "If-Range": '"reviewed-video"',
     });
-    assert.equal(calls.at(-1).options.redirect, "error");
+    assert.equal(calls.at(-1).options.redirect, "manual");
   }
   for (const path of [
     "/assets/talent/unreviewed.webm",
@@ -373,7 +382,7 @@ test("forged, expired, and password-rotation sessions cannot read private assets
 test("login rate limiting and Origin checks cover mutations including login/logout", async () => {
   const f = await fixture();
   const cookie = await f.login();
-  for (const origin of [null, "https://attacker.example"])
+  for (const origin of [null, "null", "https://attacker.example"])
     for (const path of [
       "/api/login",
       "/api/connect",
@@ -685,4 +694,45 @@ test("streaming body limit applies even without a Content-Length header", async 
     ).status,
     413,
   );
+});
+
+test("short Lab addresses require sign-in and redirect to the full Lab address", async () => {
+  const f = await fixture();
+  for (const path of ["/lab", "/lab/"]) {
+    const locked = await f.send(path);
+    assert.equal(locked.status, 200);
+    assert.match(await locked.text(), /Open the Lab/);
+    assert.equal(locked.headers.get("Referrer-Policy"), "same-origin");
+  }
+  const cookie = await f.login();
+  for (const path of ["/", "/login", "/lab", "/lab/"]) {
+    const result = await f.send(path, { cookie });
+    assert.equal(result.status, 303);
+    assert.equal(result.headers.get("Location"), "/lab/talent/?view=content");
+  }
+  const table = await f.send("/lab/?view=talent&layout=table", { cookie });
+  assert.equal(table.headers.get("Location"), "/lab/talent/?view=talent&layout=table");
+  assert.equal(f.calls.length, 0);
+});
+
+test("GitHub, library images and public media reject redirects without following or forwarding them", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  for (const status of [301, 302, 303, 307, 308]) {
+    f.setRedirectStatus(status);
+    for (const path of [
+      `/api/github/git/ref/heads/${BRANCH}`,
+      `/api/asset?path=assets/talent/uploads/test.webp&ref=${MAIN}`,
+      "/assets/talent/nia-brooks/nia-brooks-skincare.webp",
+    ]) {
+      const before = f.calls.length;
+      const result = await f.send(path, { cookie });
+      assert.equal(result.status, 502);
+      assert.equal(result.headers.has("Location"), false);
+      assert.deepEqual(await result.json(), { error: "The library source returned an unexpected redirect." });
+      assert.equal(f.calls.length, before + 1);
+    }
+  }
+  assert.ok(f.calls.every(({ url }) => !url.includes("untrusted.example")));
 });

@@ -214,13 +214,27 @@ function loginPage(error = "", status = 200) {
   return response(
     `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Foam Talent Lab</title><style>body{font:16px/1.5 system-ui,sans-serif;color:#1d2635;background:#f7f7f8;margin:0;display:grid;place-items:center;min-height:100svh}main{box-sizing:border-box;width:min(440px,calc(100% - 40px));padding:40px;background:white;border:1px solid #e6e7eb;border-radius:22px}h1{font-size:28px;letter-spacing:-1px;margin:0 0 12px}p{color:#667085}label{display:block;margin:24px 0 8px}input,button{box-sizing:border-box;width:100%;font:inherit;padding:13px 15px;border:1px solid #d0d5dd;border-radius:9px}button{margin-top:18px;background:#1d2635;color:white;cursor:pointer}a{color:inherit}.error{color:#7a0036}</style><main><h1>Foam Talent Lab</h1><p>A private workspace for your fictional creator library.</p>${error ? `<p class="error" role="alert">${error}</p>` : ""}<form method="post" action="/api/login"><label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password" autofocus maxlength="256"><button type="submit">Open the Lab</button></form></main></html>`,
     status,
-    { "Content-Type": "text/html; charset=utf-8" },
+    {
+      "Content-Type": "text/html; charset=utf-8",
+      // A native form POST under no-referrer sends Origin: null. Same-origin
+      // preserves the login Origin without revealing referrers to other sites.
+      "Referrer-Policy": "same-origin",
+    },
   );
 }
+async function fetchUpstream(url, options, fetcher) {
+  // workerd supports manual/follow, not redirect: "error". Keep redirects
+  // blocked explicitly so credentials can never follow an upstream Location.
+  const result = await fetcher(url, { ...options, redirect: "manual" });
+  if (result.status >= 300 && result.status < 400) {
+    await result.body?.cancel();
+    fail(502, "The library source returned an unexpected redirect.");
+  }
+  return result;
+}
 async function github(path, token, method = "GET", body, fetcher = fetch) {
-  const result = await fetcher(`${GITHUB}${path}`, {
+  const result = await fetchUpstream(`${GITHUB}${path}`, {
     method,
-    redirect: "error",
     headers: {
       Accept: "application/vnd.github+json",
       "X-GitHub-Api-Version": "2026-03-10",
@@ -229,7 +243,7 @@ async function github(path, token, method = "GET", body, fetcher = fetch) {
       ...(body ? { "Content-Type": "application/json" } : {}),
     },
     ...(body ? { body: JSON.stringify(body) } : {}),
-  });
+  }, fetcher);
   if (!result.ok)
     fail(
       result.status >= 500 ? 502 : result.status,
@@ -499,6 +513,7 @@ export async function handleRequest(
         read &&
         (url.pathname === "/" ||
           url.pathname === "/login" ||
+          url.pathname === "/lab" ||
           url.pathname.startsWith("/lab/"))
       )
         return loginPage();
@@ -535,11 +550,10 @@ export async function handleRequest(
       )
         fail(403, "This library image path is not allowed.");
       const token = await readToken(env);
-      const upstream = await fetcher(
+      const upstream = await fetchUpstream(
         `${GITHUB}/contents/public/${path}?ref=${revision}`,
         {
           method: request.method,
-          redirect: "error",
           headers: {
             Accept: "application/vnd.github.raw+json",
             "X-GitHub-Api-Version": "2026-03-10",
@@ -547,6 +561,7 @@ export async function handleRequest(
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
           },
         },
+        fetcher,
       );
       if (!upstream.ok)
         fail(
@@ -569,8 +584,8 @@ export async function handleRequest(
       return await proxyGithub(request, url, env, fetcher);
     if (url.pathname.startsWith("/api/")) fail(404, "Not found.");
     if (!read) fail(405, "Method not allowed.");
-    if (url.pathname === "/" || url.pathname === "/login")
-      return redirect("/lab/talent/?view=content");
+    if (["/", "/login", "/lab", "/lab/"].includes(url.pathname))
+      return redirect(`/lab/talent/${url.search || "?view=content"}`);
     const asset = Object.hasOwn(assets, url.pathname)
       ? assets[url.pathname]
       : url.pathname === "/lab/talent/" || url.pathname === "/lab/talent"
@@ -596,15 +611,14 @@ export async function handleRequest(
       const upstreamUrl = pinnedMedia
         ? `https://raw.githubusercontent.com/${REPOSITORY}/${env.LAB_MEDIA_REF}/public${url.pathname}`
         : `${PUBLIC_SITE}${url.pathname}`;
-      const upstream = await fetcher(upstreamUrl, {
+      const upstream = await fetchUpstream(upstreamUrl, {
         method: request.method,
-        redirect: "error",
         headers: Object.fromEntries(
           ["Range", "If-Range"]
             .filter((name) => request.method === "GET" && request.headers.has(name))
             .map((name) => [name, request.headers.get(name)]),
         ),
-      });
+      }, fetcher);
       if (!upstream.ok && upstream.status !== 416) fail(404, "Asset not found.");
       return response(request.method === "HEAD" ? null : upstream.body, upstream.status, {
         "Content-Type":
