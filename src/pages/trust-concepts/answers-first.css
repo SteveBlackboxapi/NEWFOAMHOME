@@ -1,0 +1,483 @@
+.trust-lab .ta-page {
+  padding-top: 64px;
+}
+
+.trust-lab .ta-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: end;
+  gap: 56px;
+  padding-bottom: 58px;
+}
+
+.trust-lab .ta-intro h1 {
+  margin: 18px 0 0;
+  color: var(--tl-ink);
+  font-size: clamp(42px, 5.6vw, 72px);
+  line-height: 1.03;
+  font-weight: 600;
+  letter-spacing: -0.052em;
+}
+
+.trust-lab .ta-intro h1 > span {
+  color: #456770;
+}
+
+.trust-lab .ta-intro-aside {
+  padding-bottom: 3px;
+}
+
+.trust-lab .ta-intro-aside .tl-lede {
+  max-width: 370px;
+  margin-top: 0;
+  margin-bottom: 23px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.trust-lab .ta-guide {
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 32px;
+  padding-top: 32px;
+  padding-bottom: 80px;
+  border-top: 1px solid var(--tl-line);
+}
+
+.trust-lab .ta-index-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 8px 19px;
+  color: var(--tl-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.trust-lab .ta-index-heading > span:last-child {
+  font-size: 21px;
+  color: var(--tl-ink);
+}
+
+.trust-lab .ta-topic-list {
+  display: grid;
+  gap: 10px;
+}
+
+.trust-lab .ta-topic {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr) 14px;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  min-height: 139px;
+  padding: 23px 17px;
+  border: 1px solid var(--tl-line);
+  border-radius: 15px;
+  background: transparent;
+  color: var(--tl-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.trust-lab .ta-topic:hover {
+  background: var(--tl-soft);
+}
+
+.trust-lab .ta-topic[aria-selected="true"] {
+  border-color: #bed2d9;
+  background: #e4f0f5;
+  color: #203039;
+}
+
+.trust-lab .ta-topic-number {
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+}
+
+.trust-lab .ta-topic-copy strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.018em;
+}
+
+.trust-lab .ta-topic-copy > span {
+  display: block;
+  margin-top: 9px;
+  color: var(--tl-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.trust-lab .ta-topic[aria-selected="true"] .ta-topic-copy > span {
+  color: #526775;
+}
+
+.trust-lab .ta-topic-arrow {
+  opacity: 0;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.trust-lab .ta-topic[aria-selected="true"] .ta-topic-arrow {
+  opacity: 1;
+}
+
+.trust-lab .ta-human-note {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  margin: 27px 8px 0;
+}
+
+.trust-lab .ta-human-mark {
+  flex: 0 0 auto;
+  color: var(--tl-muted);
+}
+
+.trust-lab .ta-human-note p {
+  margin: 0;
+  color: var(--tl-muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.trust-lab .ta-human-note a {
+  color: var(--tl-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.trust-lab .ta-answers {
+  min-width: 0;
+}
+
+.trust-lab .ta-answer {
+  overflow: hidden;
+  border: 1px solid var(--tl-line);
+  border-radius: 24px;
+  background: var(--tl-card);
+}
+
+.trust-lab .ta-answer[hidden] {
+  display: none;
+}
+
+.trust-lab .ta-answer-copy {
+  padding: 32px 36px 22px;
+}
+
+.trust-lab .ta-answer-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 17px;
+  color: var(--tl-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.trust-lab .ta-answer-label > span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #e7eddf;
+  color: #354a37;
+  font-size: 10px;
+}
+
+.trust-lab .ta-answer-copy h2 {
+  max-width: 620px;
+  margin: 0 0 16px;
+  color: var(--tl-ink);
+  font-size: clamp(27px, 3vw, 37px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.trust-lab .ta-answer-lede {
+  max-width: 660px;
+  margin: 0 0 12px;
+  color: var(--tl-ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.trust-lab .ta-answer-detail {
+  max-width: 660px;
+  margin: 0;
+  color: var(--tl-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.trust-lab .ta-answer-art {
+  max-width: 740px;
+  padding: 0 24px 24px;
+  margin: 0 auto;
+}
+
+.trust-lab .ta-answer-art .mui-art {
+  border-radius: 17px;
+}
+
+.trust-lab .ta-answer-art .foam-mini > figcaption {
+  margin-left: 12px;
+  margin-top: 9px;
+}
+
+.trust-lab .ta-answer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 23px 36px;
+  border-top: 1px solid var(--tl-line);
+}
+
+.trust-lab .ta-answer-footer > p {
+  display: flex;
+  align-items: start;
+  gap: 9px;
+  max-width: 235px;
+  margin: 0;
+  color: var(--tl-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.trust-lab .ta-answer-footer > p svg {
+  flex: 0 0 auto;
+  color: #47724b;
+}
+
+.trust-lab .ta-more {
+  padding-bottom: 84px;
+}
+
+.trust-lab .ta-more-heading {
+  margin-bottom: 25px;
+}
+
+.trust-lab .ta-more-heading h2 {
+  margin: 10px 0 0;
+  color: var(--tl-ink);
+  font-size: clamp(27px, 3.5vw, 38px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.trust-lab .ta-more-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.trust-lab .ta-more-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+  border: 1px solid var(--tl-line);
+  border-radius: 20px;
+}
+
+.trust-lab .ta-privacy-card {
+  background: var(--tl-soft);
+}
+
+.trust-lab .ta-demo-card {
+  background: var(--tl-card);
+}
+
+.trust-lab .ta-card-icon {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 25px;
+  border-radius: 13px;
+  background: #e7eddf;
+  color: #354a37;
+}
+
+.trust-lab .ta-demo-card .ta-card-icon {
+  background: #e4f0f5;
+  color: #34586b;
+}
+
+.trust-lab .ta-more-card h3 {
+  margin: 0 0 12px;
+  color: var(--tl-ink);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.trust-lab .ta-more-card > p {
+  flex: 1;
+  margin: 0 0 25px;
+  color: var(--tl-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.trust-lab .ta-page :is(button, a, [role="tabpanel"]):focus-visible {
+  outline: 3px solid var(--tl-ink);
+  outline-offset: 4px;
+}
+
+html[data-theme="dark"] .trust-lab .ta-intro h1 > span {
+  color: #b7d8e7;
+}
+
+html[data-theme="dark"] .trust-lab .ta-topic[aria-selected="true"] {
+  background: #263e49;
+  border-color: #4c6b7a;
+  color: #e6f0f4;
+}
+
+html[data-theme="dark"]
+  .trust-lab
+  .ta-topic[aria-selected="true"]
+  .ta-topic-copy
+  > span {
+  color: #b7cbd5;
+}
+
+html[data-theme="dark"] .trust-lab .ta-answer-footer > p svg {
+  color: #b5d2a4;
+}
+
+@media (max-width: 900px) {
+  .trust-lab .ta-intro {
+    gap: 32px;
+  }
+
+  .trust-lab .ta-guide {
+    grid-template-columns: 235px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .trust-lab .ta-topic {
+    grid-template-columns: 20px minmax(0, 1fr);
+    padding: 20px 14px;
+  }
+
+  .trust-lab .ta-topic-arrow {
+    display: none;
+  }
+
+  .trust-lab .ta-answer-copy {
+    padding: 26px 25px 22px;
+  }
+
+  .trust-lab .ta-answer-art {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .trust-lab .ta-answer-footer {
+    padding: 23px 25px;
+  }
+}
+
+@media (max-width: 700px) {
+  .trust-lab .ta-page {
+    padding-top: 35px;
+  }
+
+  .trust-lab .ta-intro {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-bottom: 32px;
+  }
+
+  .trust-lab .ta-intro-aside .tl-lede {
+    max-width: 550px;
+    font-size: 16px;
+  }
+
+  .trust-lab .ta-guide {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-top: 22px;
+    padding-bottom: 50px;
+  }
+
+  .trust-lab .ta-index-heading {
+    margin-bottom: 12px;
+  }
+
+  .trust-lab .ta-topic {
+    grid-template-columns: 24px minmax(0, 1fr) 15px;
+    min-height: 0;
+    gap: 8px;
+    padding: 17px;
+    border-radius: 12px;
+  }
+
+  .trust-lab .ta-topic-copy > span {
+    margin-top: 4px;
+  }
+
+  .trust-lab .ta-topic-arrow {
+    display: block;
+  }
+
+  .trust-lab .ta-human-note {
+    display: none;
+  }
+
+  .trust-lab .ta-answer-copy {
+    padding: 25px 22px 22px;
+  }
+
+  .trust-lab .ta-answer-art {
+    padding: 0 12px 20px;
+  }
+
+  .trust-lab .ta-answer-footer {
+    padding: 23px 22px;
+  }
+
+  .trust-lab .ta-answer-footer > p {
+    max-width: 100%;
+  }
+
+  .trust-lab .ta-more {
+    padding-bottom: 50px;
+  }
+
+  .trust-lab .ta-more-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .trust-lab .ta-more-card {
+    padding: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-lab .ta-topic {
+    transition: none;
+  }
+}
