@@ -23,6 +23,13 @@ export const router = createBrowserRouter(
         { path: "chrome-story", Component: ChromeStory },
         { path: "lab/inspo", Component: LabInspo },
         {
+          path: "lab/data-trust/:option?",
+          HydrateFallback: () => null,
+          lazy: async () => ({
+            Component: (await import("./pages/TrustConcepts")).TrustConcepts,
+          }),
+        },
+        {
           path: "lab/mini-ui",
           HydrateFallback: () => null,
           lazy: async () => ({
