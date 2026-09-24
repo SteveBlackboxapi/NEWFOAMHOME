@@ -419,8 +419,8 @@ export function ProductFamily({
               <p>The whole story. One link.</p>
             </div>
             {miniatures ? (
-              <span className="pc-miniature-cta">
-                Explore the media kit <span aria-hidden="true">↗</span>
+              <span className="pc-miniature-link">
+                <span>Explore the media kit</span> <span aria-hidden="true">↗</span>
               </span>
             ) : (
               <span className="pc-round-arrow" aria-hidden="true">
@@ -444,8 +444,8 @@ export function ProductFamily({
               <p>The right content. In context.</p>
             </div>
             {miniatures ? (
-              <span className="pc-miniature-cta">
-                Find content <span aria-hidden="true">↗</span>
+              <span className="pc-miniature-link">
+                <span>Find content</span> <span aria-hidden="true">↗</span>
               </span>
             ) : (
               <span className="pc-round-arrow" aria-hidden="true">
@@ -477,8 +477,8 @@ export function ProductFamily({
               <p>Your talent. Close at hand.</p>
             </div>
             {miniatures ? (
-              <span className="pc-miniature-cta">
-                See Foam for Chrome <span aria-hidden="true">↗</span>
+              <span className="pc-miniature-link">
+                <span>See Foam for Chrome</span> <span aria-hidden="true">↗</span>
               </span>
             ) : (
               <span className="pc-round-arrow" aria-hidden="true">
