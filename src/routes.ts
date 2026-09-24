@@ -22,6 +22,13 @@ export const router = createBrowserRouter(
         { path: "kit-story", Component: KitStory },
         { path: "chrome-story", Component: ChromeStory },
         { path: "lab/inspo", Component: LabInspo },
+        {
+          path: "lab/mini-ui",
+          HydrateFallback: () => null,
+          lazy: async () => ({
+            Component: (await import("./pages/MiniUI")).MiniUI,
+          }),
+        },
         ...(import.meta.env.DEV || import.meta.env.VITE_PRIVATE_LAB === "true"
           ? [
               {
