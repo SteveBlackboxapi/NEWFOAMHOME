@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import type { ReactNode } from "react";
 import { MarketingPage } from "../components/Marketing";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { TalentSearchSection } from "../components/TalentSearchDemo";
@@ -9,7 +10,7 @@ import {
   WorkspaceGrid,
 } from "../components/PeopleColour";
 
-export function Home() {
+export function Home({ afterWorkspace }: { afterWorkspace?: ReactNode } = {}) {
   return (
     <MarketingPage className="pc-home pc-design">
       <section className="pc-home-hero" aria-labelledby="home-title">
@@ -45,6 +46,7 @@ export function Home() {
         </p>
       </section>
       <WorkspaceGrid />
+      {afterWorkspace}
       <TalentSearchSection />
       <ProductFamily miniatures />
       <section

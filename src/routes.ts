@@ -65,6 +65,13 @@ export const router = createBrowserRouter(
           Component: Root,
           children: [
             { index: true, Component: Home },
+            {
+              path: "home-film-preview",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/HomeFilmPreview")).HomeFilmPreview,
+              }),
+            },
             { path: "managers", Component: Managers },
             { path: "brands", Component: Brands },
             { path: "features", Component: Features },
