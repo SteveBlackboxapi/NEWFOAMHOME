@@ -178,6 +178,142 @@ test("missing configuration fails closed", async () => {
   delete f.env.SESSION_SECRET;
   assert.equal((await f.send("/lab/talent/")).status, 503);
 });
+test("video byte ranges stay authenticated and preserve playback and seeking responses", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  const upstreamCalls = [];
+  const sendVideo = (headers, authenticated = true, method = "GET") =>
+    handleRequest(
+      new Request(`${ORIGIN}/assets/talent/clip.webm`, {
+        method,
+        headers: { ...headers, ...(authenticated ? { Cookie: cookie } : {}) },
+      }),
+      f.env,
+      {},
+      async (url, options) => {
+        upstreamCalls.push({ url, options });
+        const range = options.headers.Range;
+        if (range === "bytes=9000-")
+          return new Response(null, {
+            status: 416,
+            headers: { "Content-Range": "bytes */1000", "Accept-Ranges": "bytes" },
+          });
+        const partial = range === "bytes=200-203";
+        return new Response(method === "HEAD" ? null : partial ? "part" : "whole", {
+          status: partial ? 206 : 200,
+          headers: {
+            "Content-Type": "video/webm",
+            "Content-Length": partial ? "4" : "5",
+            "Accept-Ranges": "bytes",
+            ETag: '"video-v1"',
+            ...(partial ? { "Content-Range": "bytes 200-203/1000" } : {}),
+          },
+        });
+      },
+    );
+  assert.equal((await sendVideo({ Range: "bytes=0-" }, false)).status, 401);
+  assert.equal(upstreamCalls.length, 0, "unauthenticated requests never reach the source");
+
+  const partial = await sendVideo({ Range: "bytes=200-203", "If-Range": '"video-v1"' });
+  assert.equal(partial.status, 206);
+  assert.equal(partial.headers.get("Content-Type"), "video/webm");
+  assert.equal(partial.headers.get("Content-Range"), "bytes 200-203/1000");
+  assert.equal(partial.headers.get("Content-Length"), "4");
+  assert.equal(partial.headers.get("Accept-Ranges"), "bytes");
+  assert.equal(partial.headers.get("ETag"), '"video-v1"');
+  assert.match(partial.headers.get("Cache-Control"), /no-store, private/);
+  assert.equal(await partial.text(), "part");
+  assert.equal(upstreamCalls[0].url, "https://steveblackboxapi.github.io/NEWFOAMHOME/assets/talent/clip.webm");
+  assert.deepEqual(upstreamCalls[0].options.headers, {
+    Range: "bytes=200-203",
+    "If-Range": '"video-v1"',
+  }, "only byte-range headers are forwarded, never the private session");
+
+  const unsatisfiable = await sendVideo({ Range: "bytes=9000-" });
+  assert.equal(unsatisfiable.status, 416);
+  assert.equal(unsatisfiable.headers.get("Content-Range"), "bytes */1000");
+  assert.equal(unsatisfiable.headers.get("Accept-Ranges"), "bytes");
+
+  const whole = await sendVideo({});
+  assert.equal(whole.status, 200);
+  assert.equal(whole.headers.get("Content-Range"), null);
+  assert.equal(await whole.text(), "whole");
+  const ignoredRange = await sendVideo({ Range: "bytes=0-" });
+  assert.equal(ignoredRange.status, 200, "an origin that ignores Range still returns a full response");
+  assert.equal(await ignoredRange.text(), "whole");
+  const head = await sendVideo({ Range: "bytes=200-203" }, true, "HEAD");
+  assert.equal(head.status, 200);
+  assert.equal(head.body, null);
+  assert.equal(head.headers.get("Content-Length"), "5");
+  assert.deepEqual(upstreamCalls.at(-1).options.headers, {}, "Range is a GET-only header");
+});
+test("reviewed WebM media can use a fixed repository revision only after authentication", async () => {
+  const f = await fixture();
+  f.env.LAB_MEDIA_REF = MAIN;
+  const cookie = await f.login();
+  const calls = [];
+  const mediaPaths = [
+    "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm",
+    "/assets/talent/lena-croft-v2/lena-croft-grwm.webm",
+    "/assets/talent/nia-brooks/nia-brooks-skincare.webm",
+    "/assets/talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.webm",
+  ];
+  const sendMedia = (path, authenticated = true) => handleRequest(
+    new Request(`${ORIGIN}${path}`, {
+      headers: {
+        Range: "bytes=0-3",
+        "If-Range": '"reviewed-video"',
+        ...(authenticated ? { Cookie: cookie } : {}),
+      },
+    }),
+    f.env,
+    {},
+    async (url, options) => {
+      calls.push({ url, options });
+      return new Response("clip", {
+        status: 206,
+        headers: {
+          "Content-Type": "application/octet-stream",
+          "Content-Range": "bytes 0-3/100",
+          "Accept-Ranges": "bytes",
+          "Content-Length": "4",
+        },
+      });
+    },
+  );
+  for (const path of mediaPaths)
+    assert.equal((await sendMedia(path, false)).status, 401);
+  assert.equal(calls.length, 0);
+  for (const path of mediaPaths) {
+    const response = await sendMedia(path);
+    assert.equal(calls.at(-1).url, `https://raw.githubusercontent.com/SteveBlackboxapi/NEWFOAMHOME/${MAIN}/public${path}`);
+    assert.equal(response.status, 206);
+    assert.equal(response.headers.get("Content-Type"), "video/webm");
+    assert.equal(response.headers.get("Content-Range"), "bytes 0-3/100");
+    assert.match(response.headers.get("Cache-Control"), /no-store, private/);
+    assert.deepEqual(calls.at(-1).options.headers, {
+      Range: "bytes=0-3",
+      "If-Range": '"reviewed-video"',
+    });
+    assert.equal(calls.at(-1).options.redirect, "error");
+  }
+  for (const path of [
+    "/assets/talent/unreviewed.webm",
+    "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.mp4",
+    "/assets/talent/uploads/custom.webm",
+    "/assets/talent/portrait.webp",
+  ]) {
+    await sendMedia(`${path}?ref=${COMMIT}&repo=other/repository`);
+    assert.equal(calls.at(-1).url, `https://steveblackboxapi.github.io/NEWFOAMHOME${path}`);
+  }
+  await sendMedia(`${mediaPaths[0]}?ref=${COMMIT}&repo=other/repository`);
+  assert.equal(calls.at(-1).url, `https://raw.githubusercontent.com/SteveBlackboxapi/NEWFOAMHOME/${MAIN}/public${mediaPaths[0]}`, "query parameters cannot change repository or revision");
+  for (const ref of [undefined, "main", "../other/repository", "A".repeat(40), `${MAIN}/extra`]) {
+    f.env.LAB_MEDIA_REF = ref;
+    await sendMedia(mediaPaths[0]);
+    assert.equal(calls.at(-1).url, `https://steveblackboxapi.github.io/NEWFOAMHOME${mediaPaths[0]}`, "missing or invalid revision keeps the existing origin");
+  }
+});
 test("login rejects wrong password and sets a twelve-hour secure HttpOnly host cookie", async () => {
   const f = await fixture();
   assert.equal(
@@ -309,7 +445,7 @@ test("ordinary login form redirects after sign-in and public source assets need 
       f.calls.at(-1).url,
       `https://steveblackboxapi.github.io/NEWFOAMHOME${path}`,
     );
-    assert.equal(f.calls.at(-1).options.headers, undefined);
+    assert.deepEqual(f.calls.at(-1).options.headers, {});
   }
 });
 test("GitHub token is verified, encrypted in KV, never echoed, and never needed for public reads", async () => {

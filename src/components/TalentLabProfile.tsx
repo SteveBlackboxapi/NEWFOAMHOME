@@ -21,6 +21,7 @@ import {
   type LabAsset,
 } from "../lib/talentLab";
 import { LabIcon } from "./TalentLabIcon";
+import { talentVideoSources } from "../lib/talentVideo";
 import { AIDisclosure, Caption } from "./TalentLabMedia";
 import { AssetUsage } from "./TalentLibraryManager";
 import { TalentCaptionControls } from "./TalentCaptionControls";
@@ -357,6 +358,8 @@ export function TalentLabProfile({
                 <div className="tl-profile-motion-block">
                   <video
                     className="tl-profile-motion"
+                    key={talent.motion}
+                    playsInline
                     controls
                     preload="metadata"
                     poster={
@@ -364,9 +367,12 @@ export function TalentLabProfile({
                         (tile) => tile.video === talent.motion,
                       )?.thumb || talent.portrait
                     }
-                    src={talent.motion}
                     aria-label={`${talent.displayName} profile video`}
-                  />
+                  >
+                    {talentVideoSources(talent.motion).map((source) => (
+                      <source key={source.src} src={source.src} type={source.type} />
+                    ))}
+                  </video>
                   <AIDisclosure provenance={talent.provenance} />
                 </div>
               )}
@@ -522,13 +528,17 @@ export function TalentLabProfile({
                     />
                   ) : active.tile?.video ? (
                     <video
-                      key={active.id}
-                      src={active.tile.video}
+                      key={`${active.id}:${active.tile.video}`}
+                      playsInline
                       poster={active.src}
                       controls
                       preload="metadata"
                       aria-label={active.title}
-                    />
+                    >
+                      {talentVideoSources(active.tile.video).map((source) => (
+                        <source key={source.src} src={source.src} type={source.type} />
+                      ))}
+                    </video>
                   ) : (
                     <img src={active.src} alt={active.title} />
                   )}

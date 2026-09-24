@@ -24,6 +24,15 @@ Cloudflare API metadata uses a `kv_namespace` binding for KV and a `ratelimit` b
 
 `site-assets.mjs` exports a default map of URL paths to `{ body, contentType, encoding? }`, where `body` is base64 and `encoding` may be `gzip`. It must include `/index.html` and all hashed build files. The Worker uses `encodeBody: 'manual'` for already compressed files. Authenticated requests for `/assets/*`, `/fonts/*` and `/ideas-two/*` fall back to the existing public GitHub Pages site. No GitHub key is needed for these assets or initial public library reads.
 
+Optional binding: `LAB_MEDIA_REF` is a nonsecret `plain_text` value containing an exact 40-character lowercase Git commit SHA. It allows the private deployment to serve the four reviewed WebM alternatives before the marketing site has deployed that commit. Only these paths are fetched from `https://raw.githubusercontent.com/SteveBlackboxapi/NEWFOAMHOME/<LAB_MEDIA_REF>/public`:
+
+- `/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm`
+- `/assets/talent/lena-croft-v2/lena-croft-grwm.webm`
+- `/assets/talent/nia-brooks/nia-brooks-skincare.webm`
+- `/assets/talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.webm`
+
+The files must exist in the pinned commit. An absent or invalid binding keeps the existing GitHub Pages origin; all other assets always keep that origin. Browser requests remain same-origin and password protected, and request parameters cannot select another repository, revision or media path. The proxy forwards only byte-range request headers, preserves partial-content and unsatisfiable-range responses, and does not send the session cookie or GitHub key upstream. This binding does not permit video uploads or change the image-only library upload rules. Preserve existing secret, KV and rate-limit bindings when updating this optional value.
+
 ## Login, key connection and rotation
 
 The login form posts to `/api/login`. Successful login creates a 12-hour `Secure; HttpOnly; SameSite=Strict` host-only session cookie, then opens `/lab/talent/?view=content`. JSON login is also supported with `{ "password": "…" }`. `/api/logout` clears that browser's cookie; it does not disconnect the shared GitHub key.
