@@ -1,8 +1,8 @@
 import { Link } from "react-router";
-import type { ReactNode } from "react";
 import { MarketingPage } from "../components/Marketing";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { TalentSearchSection } from "../components/TalentSearchDemo";
+import { OverviewFilm } from "../components/OverviewFilm";
 import {
   CreatorWall,
   PhotoFeature,
@@ -10,7 +10,7 @@ import {
   WorkspaceGrid,
 } from "../components/PeopleColour";
 
-export function Home({ afterWorkspace }: { afterWorkspace?: ReactNode } = {}) {
+export function Home() {
   return (
     <MarketingPage className="pc-home pc-design">
       <section className="pc-home-hero" aria-labelledby="home-title">
@@ -46,7 +46,7 @@ export function Home({ afterWorkspace }: { afterWorkspace?: ReactNode } = {}) {
         </p>
       </section>
       <WorkspaceGrid />
-      {afterWorkspace}
+      <OverviewFilm />
       <TalentSearchSection />
       <ProductFamily miniatures />
       <section

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useLocation } from "react-router";
 import { overviewFilm } from "../data/overviewFilm";
 import { Reveal } from "./Marketing";
 import "./overview-film.css";
@@ -54,6 +55,12 @@ function FilmPlayer({ onClose }: { onClose: () => void }) {
 
 export function OverviewFilm() {
   const [open, setOpen] = useState(false);
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash !== "#foam-film") return;
+    const frame = requestAnimationFrame(() => document.getElementById("foam-film")?.scrollIntoView({ block: "start" }));
+    return () => cancelAnimationFrame(frame);
+  }, [hash]);
   return (
     <section className="of-section pc-shell" id="foam-film" aria-labelledby="overview-film-title">
       <Reveal className="of-layout">

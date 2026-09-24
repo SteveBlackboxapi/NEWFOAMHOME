@@ -1,6 +1,6 @@
 # Foam overview film — supplied original
 
-Added on 24 September 2026 for a separate homepage placement preview. The film and poster are supplied assets, not AI-generated media. The source files are unchanged; the copies have descriptive filenames and have not been recompressed, resized or re-encoded.
+Added on 24 September 2026 for the “See Foam in action” section on the homepage, following approval of the separate placement preview. The preview remains available at `/home-film-preview/`. The film and poster are supplied assets, not AI-generated media. The source files are unchanged; the copies have descriptive filenames and have not been recompressed, resized or re-encoded.
 
 ## Files
 
@@ -24,4 +24,4 @@ Duration and audio presence were inspected with native AVFoundation. Poster dime
 
 ## Replacing the film later
 
-Treat the film, poster, accessible description and displayed duration as independently editable presentation data. Keep the original files in this versioned folder and add replacement media in a new versioned folder. Update the preview's media references together, then verify playback, audio, poster framing and the duration label. Avoid loading the film until the visitor chooses to watch it. A future replacement does not require changing the homepage section's layout.
+Treat the film, poster, accessible description and displayed duration as independently editable presentation data. Keep the original files in this versioned folder and add replacement media in a new versioned folder. Update the shared references in `src/data/overviewFilm.ts` for both the homepage and retained preview, then verify playback, audio, poster framing and the duration label. Avoid loading the film until the visitor chooses to watch it. A future replacement does not require changing the homepage section's layout.
