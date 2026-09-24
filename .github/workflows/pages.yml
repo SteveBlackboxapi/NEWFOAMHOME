@@ -26,7 +26,7 @@ jobs:
       # /kit-story and siblings return 200 on GitHub Pages (basename intact).
       - run: |
           cp dist/index.html dist/404.html
-          for route in kit-story chrome-story managers brands features about creators data-trust updates demo lab/inspo; do
+          for route in kit-story chrome-story managers brands features about creators data-trust updates demo home-film-preview lab/inspo; do
             mkdir -p "dist/$route"
             cp dist/index.html "dist/$route/index.html"
           done

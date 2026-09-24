@@ -8,6 +8,7 @@ import { KIT_FEATURED_CONTENT } from "./kitFeaturedContent";
 import { websiteFitness } from "./campaignTalent";
 import { websiteMatcha } from "./matchaTalent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "./foundWithFoam";
+import { overviewFilm } from "./overviewFilm";
 
 export type WebsiteLocation = { route: string; section: string };
 export type WebsiteAssetUsage = {
@@ -212,6 +213,16 @@ artwork(
   "A little of everything · Foam for Chrome",
 );
 miniature("/", "A little of everything · Foam for Chrome", [websiteSamantha]);
+use(overviewFilm.poster, "/", "See Foam in action", {
+  kind: "artwork",
+  label: "Foam overview film · Poster",
+  provenance: "supplied-reference",
+});
+use(overviewFilm.src, "/", "See Foam in action", {
+  kind: "artwork",
+  label: "Foam overview film · Product demonstration",
+  provenance: "supplied-reference",
+});
 discoverySearches.forEach((search) =>
   search.assets.forEach(({ src }) =>
     use(src, "/", `Content discovery · ${search.query}`),

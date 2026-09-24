@@ -1,0 +1,5 @@
+.hfp-preview-label { position: fixed; z-index: 80; bottom: 18px; left: 20px; display: flex; align-items: center; gap: 18px; padding: 11px 16px; border-radius: 14px; background: var(--theme-page, #fff); color: var(--theme-ink, #1c2128); border: 1px solid var(--theme-line, #d8dcdf); box-shadow: 0 5px 25px #0002; font-size: 12px; }
+.hfp-preview-label > span { color: var(--theme-muted, #626a70); }
+.hfp-preview-label a { color: var(--theme-accent, #7a0036); text-decoration: none; }
+.hfp-preview-label a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) { .hfp-preview-label { bottom: 12px; left: 12px; right: 12px; justify-content: space-between; gap: 10px; padding: 10px 12px; font-size: 11px; } }

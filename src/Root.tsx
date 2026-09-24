@@ -19,6 +19,7 @@ export function Root() {
   useEffect(() => {
     const titles: Record<string, string> = {
       "/": "A world of talent",
+      "/home-film-preview": "Homepage film preview",
       "/managers": "For talent managers",
       "/brands": "For brands and agencies",
       "/creators": "For creators",

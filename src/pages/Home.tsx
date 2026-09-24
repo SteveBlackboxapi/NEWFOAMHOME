@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { MarketingPage } from "../components/Marketing";
 import { ClosingCTA } from "../components/ClosingCTA";
 import { TalentSearchSection } from "../components/TalentSearchDemo";
+import { OverviewFilm } from "../components/OverviewFilm";
 import {
   CreatorWall,
   PhotoFeature,
@@ -45,6 +46,7 @@ export function Home() {
         </p>
       </section>
       <WorkspaceGrid />
+      <OverviewFilm />
       <TalentSearchSection />
       <ProductFamily miniatures />
       <section
