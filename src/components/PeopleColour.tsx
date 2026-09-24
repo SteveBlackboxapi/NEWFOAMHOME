@@ -66,10 +66,10 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-three">
             <figure className="pc-creator-tile">
               <img
-                src={`${PC}/music-creator.webp`}
-                alt="Musician in a home studio in an illustrative photograph"
-                width="678"
-                height="1024"
+                src={`${PC}/story-refresh-v1/music-creator.webp`}
+                alt="AI-generated fictional musician Nico having coffee at his home-studio desk"
+                width="1024"
+                height="1536"
                 loading="lazy"
                 decoding="async"
               />
@@ -89,10 +89,10 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-four">
             <figure className="pc-creator-tile">
               <img
-                src={`${PC}/outdoor-creator.webp`}
-                alt="Outdoor creator portrait with blue sky in an illustrative photograph"
-                width="960"
-                height="1200"
+                src={`${PC}/story-refresh-v1/outdoor-creator.webp`}
+                alt="AI-generated fictional creator Iris wearing sunglasses beneath a bright blue sky"
+                width="1024"
+                height="1536"
                 loading="lazy"
                 decoding="async"
               />
@@ -130,8 +130,8 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-six">
             <figure className="pc-creator-tile">
               <img
-                src={`${PC}/original-portraits-v1/studio-creator-original-v1.webp`}
-                alt="AI-generated fictional creative smiling at her studio desk"
+                src={`${PC}/story-refresh-v1/ada-flash.webp`}
+                alt="AI-generated fictional creative Ada at her studio desk, photographed with direct flash"
                 width="1024"
                 height="1536"
                 loading="lazy"

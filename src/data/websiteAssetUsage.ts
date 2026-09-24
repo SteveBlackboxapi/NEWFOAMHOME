@@ -171,11 +171,11 @@ for (const route of publicWebsiteRoutes.filter(
 const wall = [
   "talent/elise-morgan/elise-morgan-hotel-selfie.webp",
   "talent/nia-brooks/nia-brooks-skincare.webp",
-  "people-colour/music-creator.webp",
+  "people-colour/story-refresh-v1/music-creator.webp",
   "talent/discovery-v1/jax-live-set.webp",
-  "people-colour/outdoor-creator.webp",
+  "people-colour/story-refresh-v1/outdoor-creator.webp",
   "talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp",
-  "people-colour/original-portraits-v1/studio-creator-original-v1.webp",
+  "people-colour/story-refresh-v1/ada-flash.webp",
   "people-colour/original-portraits-v1/blue-portrait-original-v1.webp",
   "talent/fitness-creator/waterfront.webp",
 ];
@@ -317,7 +317,7 @@ photo(
   "Our belief · Creative collaboration",
 );
 photo(
-  "people-colour/original-portraits-v1/studio-creator-original-v1.webp",
+  "people-colour/story-refresh-v1/ada-flash.webp",
   "/about",
   "Invitation · Original studio portrait",
 );
@@ -346,8 +346,8 @@ use(
 );
 
 artwork(
-  "brand/foam-logotype-white.svg",
-  "Foam white wordmark",
+  "brand/foam-story-lockup-white.svg",
+  "Foam white story lockup",
   "/kit-story",
   "Opening · Story navigation",
 );
