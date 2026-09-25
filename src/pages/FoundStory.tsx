@@ -537,9 +537,9 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
       <figure className="fs-campaign">
         <div ref={artwork} className="fs-campaign-art">
           <img
-            src={`${A}/campaigns/found-with-foam-skincare-v2.webp`}
-            width={1412}
-            height={1114}
+            src={`${A}/campaigns/found-with-foam-skincare-v3.webp`}
+            width={2824}
+            height={2232}
             loading="lazy"
             decoding="async"
             alt="Concept outdoor advert: Nia Brooks, the same fictional creator found in the skincare review, cleansing her face against pink, beneath Skincare product reviews and above Found with Foam."

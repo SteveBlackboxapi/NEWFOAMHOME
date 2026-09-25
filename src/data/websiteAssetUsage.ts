@@ -358,9 +358,9 @@ photo(
   "Invitation · Original studio portrait",
 );
 photo(
-  "people-colour/original-portraits-v1/blue-portrait-original-v1.webp",
+  "people-colour/story-refresh-v1/outdoor-creator.webp",
   "/about",
-  "Invitation · Original blue portrait",
+  "Invitation · Outdoor portrait",
 );
 miniature(
   "/data-trust",
@@ -511,7 +511,7 @@ artwork(
   "Found with Foam · Workspace",
 );
 artwork(
-  "campaigns/found-with-foam-skincare-v2.webp",
+  "campaigns/found-with-foam-skincare-v3.webp",
   "Found with Foam · Illustrative skincare campaign",
   "/kit-story",
   "From a search to your next campaign",
