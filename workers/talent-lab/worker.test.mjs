@@ -766,6 +766,96 @@ test("the library tree rejects malformed publication maps before saving Git obje
   assert.ok(f.calls.every((call) => !call.url.endsWith("/git/trees")));
 });
 
+test("a scoped image save preserves independent page and section replacements and publishes its commit", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  const websitePlacementReplacements = {
+    [JSON.stringify(["assets/talent/demo.webp", "/", "Featured creators"])]: "assets/talent/uploads/home.webp",
+    [JSON.stringify(["assets/talent/demo.webp", "/content-creation", "Featured creators"])]: "assets/talent/uploads/content.webp",
+    [JSON.stringify(["assets/talent/demo.webp", "/content-creation", "Campaigns & collaborations"])]: "assets/talent/uploads/campaign.png",
+  };
+  const catalogue = { version: 1, profiles: [], removedTalentIds: [], websitePlacementReplacements };
+  const tree = await f.send("/api/github/git/trees", { method: "POST", cookie, body: {
+    base_tree: BASE_TREE,
+    tree: [{ path: MANIFEST, type: "blob", mode: "100644", content: JSON.stringify(catalogue) }],
+  } });
+  assert.equal(tree.status, 201);
+  const upstreamTree = f.calls.find((call) => call.url.endsWith("/git/trees"));
+  assert.deepEqual(JSON.parse(JSON.parse(upstreamTree.options.body).tree[0].content), catalogue);
+  assert.equal((await f.send("/api/github/git/commits", {
+    method: "POST", cookie, body: { message: "Save page images", tree: TREE, parents: [MAIN] },
+  })).status, 201);
+  const saved = await f.send("/api/github/git/refs", {
+    method: "POST", cookie, body: { ref: `refs/heads/${BRANCH}`, sha: COMMIT },
+  });
+  assert.equal(saved.status, 201);
+  assert.deepEqual((await saved.json()).publication, { revision: COMMIT, queued: true });
+});
+
+test("the library tree rejects malformed scoped image maps before saving Git objects", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  const source = "assets/talent/demo.webp";
+  const upload = "assets/talent/uploads/new.webp";
+  const key = JSON.stringify([source, "/", "Featured creators"]);
+  const invalidKeys = [
+    "not JSON", JSON.stringify({ source, route: "/", section: "Featured creators" }),
+    JSON.stringify([source, "/"]), JSON.stringify([source, "/", "Featured creators", "extra"]),
+    JSON.stringify([source, "/", "Featured creators"], null, 2),
+    key.replace("assets", "\\u0061ssets"),
+    ...[
+      null, "/assets/talent/demo.webp", "public/assets/talent/demo.webp", "https://example.com/demo.webp",
+      "assets/talent/uploads/demo.webp", "assets/../demo.webp", "assets/./demo.webp", "assets//demo.webp",
+      "assets/demo.svg", "assets/demo.mp4", "assets/demo.webp\n", "assets/demo.webp\u2028",
+    ].map((badSource) => JSON.stringify([badSource, "/", "Featured creators"])),
+    ...[
+      null, "", "content", "//content", "/content//work", "/content/../work", "/content/./work",
+      "/content?tab=work", "/content#work", "/content%2fwork", "/content work", "/content\n", "/content\u2028", `/${"x".repeat(200)}`,
+    ].map((route) => JSON.stringify([source, route, "Featured creators"])),
+    ...[null, "", "   ", "\t", "Featured\ncreators", "Featured\u0000creators", "Featured\u007fcreators", "x".repeat(201)]
+      .map((section) => JSON.stringify([source, "/", section])),
+  ];
+  const invalidMaps = [
+    null, [], "invalid", ...invalidKeys.map((badKey) => ({ [badKey]: upload })),
+    ...[null, 12, "https://example.com/new.webp", "public/assets/talent/uploads/new.webp",
+      "assets/talent/uploads/../new.webp", "assets/talent/uploads/new.svg", "assets/talent/uploads/new.jpeg",
+      "assets/talent/uploads/new.webp\n", "assets/talent/uploads/new.webp\u2028"]
+      .map((badUpload) => ({ [key]: badUpload })),
+    Object.fromEntries(Array.from({ length: 3001 }, (_, index) => [JSON.stringify([source, "/", `Section ${index}`]), upload])),
+  ];
+  for (const [index, websitePlacementReplacements] of invalidMaps.entries()) {
+    const result = await f.send("/api/github/git/trees", { method: "POST", cookie, body: {
+      base_tree: BASE_TREE, tree: [{ path: MANIFEST, type: "blob", mode: "100644", content: JSON.stringify({
+        version: 1, profiles: [], removedTalentIds: [], websitePlacementReplacements,
+      }) }],
+    } });
+    assert.equal(result.status, 400, `Malformed placement map ${index}`);
+  }
+  assert.ok(f.calls.every((call) => !call.url.endsWith("/git/trees")));
+});
+
+test("scoped image maps accept empty maps and the documented size and label boundaries", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  for (const websitePlacementReplacements of [
+    {},
+    Object.fromEntries(Array.from({ length: 3000 }, (_, index) => [
+      JSON.stringify(["assets/artwork/Campaign cover.jpeg", `/${"x".repeat(199)}`, `Section ${index}`.padEnd(200, " ")]),
+      "assets/talent/uploads/new.jpg",
+    ])),
+  ]) {
+    const result = await f.send("/api/github/git/trees", { method: "POST", cookie, body: {
+      base_tree: BASE_TREE, tree: [{ path: MANIFEST, type: "blob", mode: "100644", content: JSON.stringify({
+        version: 1, profiles: [], removedTalentIds: [], websitePlacementReplacements,
+      }) }],
+    } });
+    assert.equal(result.status, 201);
+  }
+});
+
 test("publication status reads only the public marker after authentication without forwarding credentials", async () => {
   const f = await fixture();
   assert.equal((await f.send("/api/publication")).status, 401);

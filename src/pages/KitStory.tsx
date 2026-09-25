@@ -1,3 +1,5 @@
+import { OptimizedImage } from "../components/OptimizedImage";
+import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { DEMO_URL } from "../lib/siteLinks";
 import {
   useEffect,
@@ -340,7 +342,7 @@ function AfterShare() {
       displayWidth: 168,
     },
   ];
-  const sheet = `${A}/agency-logos.webp`;
+  const sheet = useWebsiteImage(`${A}/agency-logos.webp`, "In good company · Agency ticker");
   const CARDS = [
     {
       kicker: "I manage talent",
@@ -497,6 +499,7 @@ function AfterShare() {
 }
 
 function KitStoryDesktop() {
+  const portraitPoster = useWebsiteImage(POSTER, "Media Kit · Samantha portrait film");
   useKitAssetWarmup();
   const track = useRef<HTMLElement | null>(null);
   const stage = useRef<HTMLDivElement | null>(null);
@@ -924,7 +927,7 @@ function KitStoryDesktop() {
                       </div>
                       <figure className="ks-portrait">
                         <div ref={well}>
-                          <img src={POSTER} alt={`${STAGE.name} portrait`} />
+                          <OptimizedImage section="Media Kit · Samantha portrait film" src={POSTER} alt={`${STAGE.name} portrait`} />
                         </div>
                         <figcaption className="ks-disclosure">
                           <AIDisclosure detail="Fictional creator" />
@@ -1053,7 +1056,7 @@ function KitStoryDesktop() {
                 ref={vid}
                 className="size-full object-cover object-[center_20%]"
                 src={CLIP}
-                poster={POSTER}
+                poster={portraitPoster}
                 muted
                 loop
                 playsInline

@@ -15,6 +15,8 @@ export type LibraryManifest = {
   removedTalentIds: string[];
   /** Explicit replacements only; legacy profile drafts are never publication instructions. */
   websiteReplacements?: Record<string, string>;
+  /** One exact source/page/section placement; takes precedence over a global replacement. */
+  websitePlacementReplacements?: Record<string, string>;
 };
 export type WebsitePublication = { revision: string; queued: boolean; published?: boolean; error?: string };
 export type LibrarySnapshot = {
@@ -335,6 +337,44 @@ export function parseWebsiteReplacements(input: unknown): Record<string, string>
   }
   return Object.fromEntries(entries) as Record<string, string>;
 }
+/** Stable across public base paths and repeated replacements; never use an uploaded preview as source. */
+export function websitePlacementKey(source: string, route: string, section: string): string {
+  return JSON.stringify([assetPath(source), route, section]);
+}
+export function parseWebsitePlacementReplacements(input: unknown): Record<string, string> {
+  if (!input || typeof input !== "object" || Array.isArray(input) || Object.keys(input).length > 3000)
+    throw new LibraryError("The website placement replacements have an unsupported format.");
+  const entries = Object.entries(input);
+  for (const [key, replacement] of entries) {
+    let placement: unknown;
+    try { placement = JSON.parse(key); } catch { /* Reject malformed tuple keys below. */ }
+    if (!Array.isArray(placement) || placement.length !== 3 || !placement.every((value) => typeof value === "string") ||
+      JSON.stringify(placement) !== key)
+      throw new LibraryError("Unrecognised website image placement.");
+    const [source, route, section] = placement as string[];
+    if (route.length > 200 || !route.startsWith("/") || /[^a-zA-Z0-9/_-]/.test(route) || route.includes("//") ||
+      !section.trim() || section.length > 200 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(source + section + replacement))
+      throw new LibraryError("Unrecognised website image placement.");
+    parseWebsiteReplacements({ [source]: replacement });
+  }
+  return Object.fromEntries(entries) as Record<string, string>;
+}
+export function withWebsiteImageReplacement(manifest: LibraryManifest, source: string, replacement: string): LibraryManifest {
+  const canonical = assetPath(source);
+  const global = parseWebsiteReplacements({ [canonical]: replacement });
+  return {
+    ...manifest,
+    websiteReplacements: { ...manifest.websiteReplacements, ...global },
+    ...(manifest.websitePlacementReplacements === undefined ? {} : {
+      websitePlacementReplacements: Object.fromEntries(Object.entries(manifest.websitePlacementReplacements)
+        .filter(([key]) => JSON.parse(key)[0] !== canonical)),
+    }),
+  };
+}
+export function withWebsitePlacementReplacement(manifest: LibraryManifest, source: string, route: string, section: string, replacement: string): LibraryManifest {
+  const placement = parseWebsitePlacementReplacements({ [websitePlacementKey(source, route, section)]: replacement });
+  return { ...manifest, websitePlacementReplacements: { ...manifest.websitePlacementReplacements, ...placement } };
+}
 export function parseLibrary(input: unknown): LibraryManifest {
   const value = input as LibraryManifest;
   if (
@@ -455,6 +495,9 @@ export function parseLibrary(input: unknown): LibraryManifest {
     ...(value.websiteReplacements === undefined ? {} : {
       websiteReplacements: parseWebsiteReplacements(value.websiteReplacements),
     }),
+    ...(value.websitePlacementReplacements === undefined ? {} : {
+      websitePlacementReplacements: parseWebsitePlacementReplacements(value.websitePlacementReplacements),
+    }),
   };
 }
 export function materializeLibrary(
@@ -532,6 +575,9 @@ export async function verifyGithubAccess(token: string) {
 function uploadedPaths(manifest: LibraryManifest): Set<string> {
   const paths = new Set<string>();
   Object.values(manifest.websiteReplacements || {}).forEach((src) =>
+    paths.add(`public/${src}`),
+  );
+  Object.values(manifest.websitePlacementReplacements || {}).forEach((src) =>
     paths.add(`public/${src}`),
   );
   manifest.profiles

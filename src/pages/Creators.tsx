@@ -125,7 +125,7 @@ export function Creators() {
             </div>
           </div>
           <Reveal className="ap-miniature-stage">
-            <MiniIllustration kind="connections" />
+            <MiniIllustration section="Your side of the connection · Connections miniature" kind="connections" />
           </Reveal>
         </div>
       </section>

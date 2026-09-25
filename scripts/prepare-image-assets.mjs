@@ -10,6 +10,11 @@ const publicDir = path.join(root, 'public');
 const load = applicationData(root);
 const { websiteAssetUsage } = load('src/data/websiteAssetUsage.ts');
 const sources = new Set(websiteAssetUsage.map(({ src }) => src.replace(/^\//, '')));
+const placements = JSON.parse(await readFile(path.join(root, 'src/data/websitePlacementImages.json'), 'utf8'));
+for (const source of Object.values(placements.replacements || {})) {
+  if (!/^assets\/website-placements\/[a-z0-9-]+\.webp$/.test(source)) throw new Error('Invalid published placement image path.');
+  sources.add(source);
+}
 // Public video players choose these smaller alternates; masters remain available.
 for (const file of await readdir(path.join(publicDir, 'assets/video-previews-v2')).catch(() => []))
   if (/\.(mp4|webm)$/.test(file)) sources.add(`assets/video-previews-v2/${file}`);

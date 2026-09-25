@@ -1,3 +1,4 @@
+import { resolveWebsitePlacementImage } from "../lib/websitePlacementImages";
 import { useEffect } from "react";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "../data/foundWithFoam";
@@ -74,24 +75,34 @@ export async function warmImageQueue(sources: readonly (string | WarmImageReques
   await Promise.all([run(), run()]);
 }
 
+function kitImage(src: string, section: string) {
+  return resolveWebsitePlacementImage(src, "/kit-story", section);
+}
+
 function kitImages() {
-  const responsive = (src: string, sizes: string): WarmImageRequest => ({ src, srcSet: imageSources(src), sizes });
+  const responsive = (source: string, sizes: string, section: string): WarmImageRequest => {
+    const src = kitImage(source, section);
+    return { src, srcSet: imageSources(src), sizes };
+  };
   const samantha = stagedTalent.find((talent) => talent.id === "samantha-pikka");
   return [
-    ...KIT_FEATURED_CONTENT.map((tile) => responsive(tile.thumb, "(max-width: 767px) 44vw, (max-width: 1100px) 23vw, 240px")),
-    // These two are fixed CSS/native-image sources, not responsive img elements.
-    imageSource(`${A}/chrome-desktop-blurio.webp`),
-    ...stagedTalent.map((talent) => responsive(talent.portrait, "130px")),
-    ...(samantha ? [responsive(samantha.portrait, "43vw"), responsive(samantha.portrait, "105px"), responsive(samantha.portrait, "48px")] : []),
-    imageSource(`${A}/chrome-store-transparent.webp`),
+    ...KIT_FEATURED_CONTENT.map((tile) => responsive(tile.thumb, "(max-width: 767px) 44vw, (max-width: 1100px) 23vw, 240px", "Media Kit · Featured content")),
+    imageSource(kitImage(`${A}/chrome-desktop-blurio.webp`, "Foam for Chrome · Desktop background")),
+    ...stagedTalent.map((talent) => responsive(talent.portrait, "130px", "Foam for Chrome · Extension roster")),
+    ...(samantha ? [
+      responsive(samantha.portrait, "43vw", "Media Kit · Profile and sharing preview"),
+      responsive(samantha.portrait, "105px", "Foam for Chrome · Selected profile and pasted email"),
+      responsive(samantha.portrait, "48px", "Foam for Chrome · Selected profile and pasted email"),
+    ] : []),
+    imageSource(kitImage(`${A}/chrome-store-transparent.webp`, "Foam for Chrome · Send finale")),
     ...FOUND_RESULTS.flatMap(({ talent, tile }) => [
-      responsive(tile.thumb, "(max-width: 700px) 45vw, 280px"),
-      responsive(talent.portrait, "48px"),
+      responsive(tile.thumb, "(max-width: 700px) 45vw, 280px", "Found with Foam · Search results"),
+      responsive(talent.portrait, "48px", "Found with Foam · Result avatars"),
     ]),
-    responsive(FOUND_SELECTED.tile.thumb, "(max-width: 700px) 90vw, 400px"),
-    ...FOUND_SEEN.map((moment) => responsive(moment.image, "(max-width: 700px) 42vw, 240px")),
-    responsive(`${A}/campaigns/found-with-foam-skincare-v4.webp`, "(max-width: 700px) 100vw, 1200px"),
-    imageSource(`${A}/agency-logos.webp`),
+    responsive(FOUND_SELECTED.tile.thumb, "(max-width: 700px) 90vw, 400px", "Found with Foam · Review video poster"),
+    ...FOUND_SEEN.map((moment) => responsive(moment.image, "(max-width: 700px) 42vw, 240px", `Found with Foam · Evidence: ${moment.label}`)),
+    responsive(`${A}/campaigns/found-with-foam-skincare-v4.webp`, "(max-width: 700px) 100vw, 1200px", "From a search to your next campaign"),
+    imageSource(kitImage(`${A}/agency-logos.webp`, "In good company · Agency ticker")),
   ];
 }
 
@@ -101,7 +112,7 @@ export function useKitAssetWarmup() {
     void (async () => {
       // Start from the opening poster. The rest never competes at high priority.
       await Promise.all([
-        warmImage(imageSource(`${A}/io-portrait-poster.webp`), controller.signal),
+        warmImage(imageSource(kitImage(`${A}/io-portrait-poster.webp`, "Media Kit · Samantha portrait film")), controller.signal),
         waitForMediaCache(),
       ]);
       if (!controller.signal.aborted) await warmImageQueue(kitImages(), controller.signal);

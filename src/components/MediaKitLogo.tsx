@@ -1,9 +1,10 @@
+import { OptimizedImage } from "./OptimizedImage";
 import { A } from "../lib/assets";
 
 /** Decorative beside the visible Media Kit title. */
 export function MediaKitLogo({ className = "" }: { className?: string }) {
   return (
-    <img
+    <OptimizedImage section="Media Kit · Opening and send finale"
       src={`${A}/foam-media-kit.webp`}
       alt=""
       width={640}

@@ -1,3 +1,4 @@
+import { useWebsiteImageResolver } from "./WebsiteImageScope";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { discoverySearches } from "../data/discoveryContent";
@@ -20,8 +21,10 @@ function SearchIcon() {
 /** A small product scene, replacing the exploratory magnifying-glass artwork. */
 export function DiscoveryArtwork({
   resultLabel = "Found with Foam",
+  section,
 }: {
   resultLabel?: string;
+  section?: string;
 }) {
   const search = discoverySearches[0];
   return (
@@ -32,7 +35,7 @@ export function DiscoveryArtwork({
       </div>
       <div className="pc-discovery-art-results">
         {search.assets.slice(0, 3).map((asset) => (
-          <OptimizedImage
+          <OptimizedImage section={section}
             key={asset.id}
             src={asset.src}
             sizes={DISCOVERY_IMAGE_SIZES}
@@ -51,6 +54,7 @@ export function DiscoveryArtwork({
 
 /** Search text and its results advance as one sequence. Controls work without motion. */
 export function DiscoverySearch() {
+  const resolve = useWebsiteImageResolver();
   const card = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const [query, setQuery] = useState(discoverySearches[0].query);
@@ -81,7 +85,8 @@ export function DiscoverySearch() {
     // Preload the next result set only when this section enters the viewport.
     if (!visible) return;
     const next = discoverySearches[(active + 1) % discoverySearches.length];
-    next.assets.forEach(({ src }) => {
+    next.assets.forEach(({ src: original }) => {
+      const src = resolve(original, `Content discovery · ${next.query}`);
       const image = new Image();
       image.sizes = DISCOVERY_IMAGE_SIZES;
       const sources = imageSources(src);
@@ -143,7 +148,7 @@ export function DiscoverySearch() {
       >
         {current.assets.slice(0, 3).map((asset) => (
           <figure key={asset.id}>
-            <OptimizedImage
+            <OptimizedImage section={`Content discovery · ${current.query}`}
               src={asset.src}
               sizes={DISCOVERY_IMAGE_SIZES}
               alt={asset.alt}

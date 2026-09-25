@@ -60,7 +60,7 @@ export function CreatorFirst() {
             </div>
           </div>
           <MiniIllustration
-            kind="connections"
+            section="The person behind the profile · Connections miniature" kind="connections"
             className="tc-connections-art"
             label="Illustrative Foam account connections, bringing profile, content, audience and performance into one view."
           />
@@ -111,7 +111,7 @@ export function CreatorFirst() {
               A SMALL LOOK AT THE DETAILS
             </span>
             <MiniIllustration
-              kind="permissions"
+              section="The connection, explained · Permissions miniature" kind="permissions"
               label="An illustrative account-permissions panel, showing example audience and content categories."
             />
           </div>
@@ -123,7 +123,7 @@ export function CreatorFirst() {
         aria-labelledby="tc-introduction-title"
       >
         <MiniIllustration
-          kind="kit"
+          section="Put it in context · Media kit miniature" kind="kit"
           className="tc-kit-art"
           label="An illustrative media kit combining a fictional creator, content and sample audience figures."
         />

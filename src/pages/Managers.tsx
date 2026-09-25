@@ -41,7 +41,7 @@ function RosterPreview() {
       </div>
       {roster.map((talent) => (
         <div className="ap-roster-row" key={talent.id}>
-          <MarketingImage
+          <MarketingImage section="A home for your roster · The beauty edit"
             src={talent.portrait}
             alt={talent.displayName}
             loading="lazy"
@@ -134,7 +134,7 @@ export function Managers() {
       <section className="mp-section mp-cream">
         <div className="mp-container ap-editorial-split">
           <Reveal className="ap-miniature-stage ap-miniature-first">
-            <MiniIllustration kind="kit" />
+            <MiniIllustration section="The media kit · Miniature preview" kind="kit" />
           </Reveal>
           <div>
             <SectionIntro
@@ -179,7 +179,7 @@ export function Managers() {
             </ActionLink>
           </div>
           <Reveal className="ap-miniature-stage">
-            <MiniIllustration kind="inbox" />
+            <MiniIllustration section="Foam for Chrome · Inbox miniature" kind="inbox" />
           </Reveal>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { OptimizedImage } from "../components/OptimizedImage";
 import { imageSource } from "../lib/imageAssets";
 import { talentVideoSources } from "../lib/talentVideo";
@@ -174,7 +175,7 @@ function ResultCard({
             index === 0 ? `rgba(198,243,30,${highlight})` : "transparent",
         }}
       >
-        <OptimizedImage src={tile.thumb} alt="" sizes="(max-width: 700px) 45vw, 280px" loading="lazy" />
+        <OptimizedImage section="Found with Foam · Search results" src={tile.thumb} alt="" sizes="(max-width: 700px) 45vw, 280px" loading="lazy" />
         <span className="content-card-fade" />
         <div className="fs-result-meta">
           <span className="fs-result-strong" aria-label="Strong visual match">
@@ -182,7 +183,7 @@ function ResultCard({
             {tile.strongKind === "hashtag" && <span aria-label="Hashtag match">#</span>}
           </span>
           <div className="fs-result-footer">
-            <OptimizedImage sizes="48px" src={talent.portrait} alt={talent.displayName} loading="lazy" />
+            <OptimizedImage sizes="48px" section="Found with Foam · Result avatars" src={talent.portrait} alt={talent.displayName} loading="lazy" />
             <ContentMetrics tile={tile} className="fs-result-metrics" uppercaseSuffix />
             <ContentPlatformIcon network={tile.platform} />
           </div>
@@ -259,6 +260,7 @@ function SelectedPost({
   reducedMotion: boolean;
 }) {
   const { talent, tile } = FOUND_SELECTED;
+  const reviewPoster = useWebsiteImage(tile.thumb, "Found with Foam · Review video poster");
   const video = useRef<HTMLVideoElement>(null);
   const pendingSeek = useRef<number | null>(null);
   const [playbackIntent, setPlaybackIntent] = useState<
@@ -360,7 +362,7 @@ function SelectedPost({
   return (
     <>
       <div className="fs-detail-header">
-        <OptimizedImage sizes="48px" src={talent.portrait} alt="" />
+        <OptimizedImage sizes="48px" section="Found with Foam · Result avatars" src={talent.portrait} alt="" />
         <span>
           <strong>{talent.displayName}</strong>
           <small>TikTok · Video</small>
@@ -370,11 +372,11 @@ function SelectedPost({
       <div className="fs-detail-body">
         <figure className="fs-detail-picture">
           <div className="fs-video-stage">
-            <OptimizedImage sizes="(max-width: 700px) 90vw, 400px" className="fs-video-blur" src={tile.thumb} alt="" />
+            <OptimizedImage sizes="(max-width: 700px) 90vw, 400px" className="fs-video-blur" section="Found with Foam · Review video poster" src={tile.thumb} alt="" />
             <video
               ref={video}
               data-block-site-update
-              poster={imageSource(tile.thumb, 768)}
+              poster={imageSource(reviewPoster, 768)}
               muted
               playsInline
               loop
@@ -390,7 +392,7 @@ function SelectedPost({
               ))}
             </video>
             <div className="fs-video-identity">
-              <OptimizedImage sizes="48px" src={talent.portrait} alt="" />
+              <OptimizedImage sizes="48px" section="Found with Foam · Result avatars" src={talent.portrait} alt="" />
               <span>
                 {talent.displayName}
                 <small>{handle}</small>
@@ -455,7 +457,7 @@ function SelectedPost({
                   {moment.end.toString().padStart(2, "0")}
                 </span>
                 <span className="fs-seen-picture">
-                  <OptimizedImage sizes="(max-width: 700px) 42vw, 240px" src={moment.image} alt={moment.label} loading="lazy" />
+                  <OptimizedImage sizes="(max-width: 700px) 42vw, 240px" section={`Found with Foam · Evidence: ${moment.label}`} src={moment.image} alt={moment.label} loading="lazy" />
                   <span>skincare product reviews</span>
                 </span>
               </button>
@@ -547,7 +549,7 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
         <div ref={artwork} className="fs-campaign-art">
           <OptimizedImage
             sizes="(max-width: 700px) 100vw, 1200px"
-            src={`${A}/campaigns/found-with-foam-skincare-v4.webp`}
+            section="From a search to your next campaign" src={`${A}/campaigns/found-with-foam-skincare-v4.webp`}
             width={2824}
             height={2232}
             loading="lazy"

@@ -1,3 +1,5 @@
+import { OptimizedImage } from "../components/OptimizedImage";
+import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { PC, PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
@@ -39,6 +41,7 @@ const relationships = [
 ];
 
 export function About() {
+  const beliefImage = useWebsiteImage(`${PC}/studio-moment.webp`, "Our belief · Creative collaboration");
   return (
     <MarketingPage className="ep-page ep-about">
       <PageIntro
@@ -59,7 +62,7 @@ export function About() {
           See the story
         </ActionLink>
       </PageIntro>
-      <section className="mp-section mp-dark ep-belief" style={{ backgroundImage: `url("${PC}/studio-moment.webp")` }}>
+      <section className="mp-section mp-dark ep-belief" style={{ backgroundImage: `url("${beliefImage}")` }}>
         <div className="mp-container">
           <Reveal>
             <div className="ep-belief-top">
@@ -135,8 +138,8 @@ export function About() {
           <Reveal className="ep-invitation-layout">
             <figure className="ep-invitation-people">
               <div className="ep-invitation-mosaic">
-                <img
-                  className="ep-invitation-portrait"
+                <OptimizedImage
+                  section="Invitation · Original studio portrait" className="ep-invitation-portrait"
                   src={`${PC}/story-refresh-v1/ada-flash.webp`}
                   alt="AI-generated fictional creative Ada at her studio desk, photographed with direct flash"
                   width="1024"
@@ -152,8 +155,8 @@ export function About() {
                     possible.
                   </p>
                 </div>
-                <img
-                  className="ep-invitation-moment"
+                <OptimizedImage
+                  section="Invitation · Outdoor portrait" className="ep-invitation-moment"
                   src={`${PC}/story-refresh-v1/outdoor-creator.webp`}
                   alt="AI-generated fictional creator Iris wearing sunglasses beneath a bright blue sky"
                   width="1024"

@@ -1,3 +1,4 @@
+import { OptimizedImage } from "../OptimizedImage";
 import { A } from "../../lib/assets";
 import { MiniAccounts, MiniAvatar, MiniBar, MiniFoamMark, MiniIcon } from "./MiniPrimitives";
 import "./mini-chrome.css";
@@ -29,7 +30,7 @@ export function MiniChromeScene() {
       </div>
 
       <div className="mui-card mui-chrome-store">
-        <img src={`${A}/chrome-store-transparent.webp`} width="42" height="42" alt="" loading="lazy" decoding="async" />
+        <OptimizedImage sizes="42px" src={`${A}/chrome-store-transparent.webp`} width="42" height="42" alt="" loading="lazy" decoding="async" />
         <div><strong>Made for Chrome.</strong><span>Meet your inbox’s plus-one.</span></div>
       </div>
       <span className="mui-chrome-ready"><MiniIcon name="check" size={13} /> Ready to reply</span>

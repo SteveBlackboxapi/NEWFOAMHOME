@@ -1,3 +1,4 @@
+import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { OptimizedImage } from "../components/OptimizedImage";
 import { DEMO_URL } from "../lib/siteLinks";
 import { useEffect, useState, type ComponentType } from "react";
@@ -181,7 +182,7 @@ function MobileKitCard() {
             <figure className="w-[43%] shrink-0">
               <OptimizedImage
                 sizes="43vw"
-                src={TALENT.portrait}
+                section="Media Kit · Profile and sharing preview" src={TALENT.portrait}
                 alt={`${TALENT.name} portrait`}
                 loading="lazy"
                 className="block w-full aspect-[3/4] rounded-[12px] object-cover object-top"
@@ -417,6 +418,7 @@ function MobileNetwork() {
  * No tall pinned chapters; kit charts reveal with the natural page scroll.
  */
 export function KitStoryMobile() {
+  const portraitPoster = useWebsiteImage(POSTER, "Media Kit · Samantha portrait film");
   useKitAssetWarmup();
   const reducedMotion = usePrefersReducedMotion();
   const platformReveal = useScrollRevealProgress(reducedMotion);
@@ -434,14 +436,14 @@ export function KitStoryMobile() {
             <video
               className="size-full object-cover object-[center_20%] opacity-55"
               src={CLIP}
-              poster={POSTER}
+              poster={portraitPoster}
               muted
               loop
               playsInline
               autoPlay
             />
           ) : (
-            <img
+            <OptimizedImage section="Media Kit · Samantha portrait film"
               className="size-full object-cover object-[center_20%] opacity-55"
               src={POSTER}
               alt=""
@@ -633,7 +635,7 @@ export function KitStoryMobile() {
               <div className="ks-mobile-kit-avatar size-12 rounded-[10px] overflow-hidden bg-[#eeefe8] shrink-0">
                 <OptimizedImage
                   sizes="48px"
-                  src={TALENT.portrait}
+                  section="Media Kit · Profile and sharing preview" src={TALENT.portrait}
                   alt={`${TALENT.name} portrait`}
                   loading="lazy"
                   className="size-full object-cover object-top"

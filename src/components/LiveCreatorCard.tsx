@@ -1,3 +1,4 @@
+import { OptimizedImage } from "./OptimizedImage";
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { KitPlatformIcon } from "./KitDetails";
 import { AIDisclosure } from "./AIDisclosure";
@@ -83,11 +84,11 @@ export function LiveCreatorCard({ example, paused, reducedMotion, variant = "stu
         {variant === "study" && <span className="ls-example-number">{tiktok ? "01" : "02"}</span>}
       </div>
       <section ref={card} className={`ls-viewer ls-viewer-${example.platform}`} data-running={running} aria-label={`${example.name} — ${label} concept`}>
-        <img className="ls-portrait" src={example.image} alt={example.alt} width="941" height="1672" loading="lazy" decoding="async" />
+        <OptimizedImage section="Your work · Live creator spread" className="ls-portrait" src={example.image} alt={example.alt} width="941" height="1672" loading="lazy" decoding="async" />
         <div className="ls-image-shade" />
         <div className="ls-viewer-top">
           <div className="ls-person-pill">
-            <img className="ls-avatar" src={example.image} alt="" width="38" height="38" />
+            <OptimizedImage section="Your work · Live creator spread" sizes="38px" className="ls-avatar" src={example.image} alt="" width="38" height="38" />
             <div className="ls-person-name">
               <strong>{example.handle}</strong>
               {tiktok && <span>12.8K likes</span>}

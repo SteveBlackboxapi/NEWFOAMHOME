@@ -45,6 +45,9 @@ const {
   saveGithubLibrary,
   prepareLibraryImage,
   verifyGithubAccess,
+  websitePlacementKey,
+  withWebsiteImageReplacement,
+  withWebsitePlacementReplacement,
 } = loadLibrary();
 const catalogueModules = new Map();
 function loadCatalogueModule(filename) {
@@ -874,6 +877,65 @@ test("published uploads survive removal from draft profiles", async (t) => {
   const api = mockGithub(t, saveSteps(retained, [], BEFORE, current));
   const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, retained, []);
   assert.deepEqual(saved.manifest.websiteReplacements, retained.websiteReplacements);
+  api.done();
+});
+
+test("placement maps round-trip exactly and reject malformed sources, routes, sections and uploads", () => {
+  const source = "assets/talent/june-c1.webp";
+  const key = websitePlacementKey(source, "/kit-story", "Featured content");
+  assert.equal(websitePlacementKey(`/NEWFOAMHOME/${source}`, "/kit-story", "Featured content"), key);
+  const map = { [key]: src("new") };
+  assert.deepEqual(parseLibrary({ ...manifest([]), websitePlacementReplacements: map }).websitePlacementReplacements, map);
+  assert.equal(parseLibrary(manifest([])).websitePlacementReplacements, undefined);
+  for (const value of [null, [], "bad", { bad: src("new") }, { [key]: "https://attacker.example/a.png" },
+    { [JSON.stringify([source, "//kit-story", "Featured content"])]: src("new") },
+    { [JSON.stringify([source, "/../kit-story", "Featured content"])]: src("new") },
+    { [JSON.stringify([source, "/kit-story?other=yes", "Featured content"])]: src("new") },
+    { [JSON.stringify([source, "/kit-story", "   "])]: src("new") },
+    { [JSON.stringify([source, "/kit-story", "x".repeat(201)])]: src("new") },
+    { [JSON.stringify([source, "/kit-story", "a\nb"])]: src("new") },
+    { [JSON.stringify([src("old"), "/kit-story", "Featured content"])]: src("new") },
+    { [` ${key}`]: src("new") }, { [JSON.stringify([source, "/kit-story", "Featured content", "extra"])]: src("new") },
+  ]) assert.throws(() => parseLibrary({ ...manifest([]), websitePlacementReplacements: value }), LibraryError);
+});
+
+test("replace here changes one placement; replace everywhere clears only that source's overrides", () => {
+  const source = "assets/talent/june-c1.webp", other = "assets/talent/other.webp";
+  const first = websitePlacementKey(source, "/", "Hero");
+  const second = websitePlacementKey(source, "/kit-story", "Featured content");
+  const unrelated = websitePlacementKey(other, "/", "Hero");
+  const baseline = { ...manifest([]), websiteReplacements: { [source]: src("global") } };
+  const one = withWebsitePlacementReplacement(baseline, source, "/", "Hero", src("first"));
+  const two = withWebsitePlacementReplacement(one, source, "/kit-story", "Featured content", src("second"));
+  const three = withWebsitePlacementReplacement(two, other, "/", "Hero", src("other"));
+  assert.deepEqual(three.websitePlacementReplacements, { [first]: src("first"), [second]: src("second"), [unrelated]: src("other") });
+  assert.deepEqual(three.websiteReplacements, baseline.websiteReplacements);
+  const all = withWebsiteImageReplacement(three, source, src("all"));
+  assert.deepEqual(all.websitePlacementReplacements, { [unrelated]: src("other") });
+  assert.deepEqual(all.websiteReplacements, { [source]: src("all") });
+  assert.equal(three.websitePlacementReplacements[first], src("first"), "The previous draft is unchanged");
+});
+
+test("placement-only uploads survive profile removal and save independently of global replacements", async (t) => {
+  const key = websitePlacementKey("assets/talent/june-c1.webp", "/kit-story", "Featured content");
+  const retained = { ...manifest([]), websitePlacementReplacements: { [key]: src("old") } };
+  const current = { ...manifest([profile({ portrait: src("old") })]), websitePlacementReplacements: retained.websitePlacementReplacements };
+  const api = mockGithub(t, saveSteps(retained, [], BEFORE, current));
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, retained, []);
+  assert.deepEqual(saved.manifest.websitePlacementReplacements, retained.websitePlacementReplacements);
+  api.done();
+});
+
+test("replacing one placement retains a shared upload until its last placement is changed", async (t) => {
+  const first = websitePlacementKey("assets/talent/june-c1.webp", "/", "Hero");
+  const second = websitePlacementKey("assets/talent/june-c1.webp", "/kit-story", "Featured content");
+  const current = { ...manifest([]), websitePlacementReplacements: { [first]: src("old"), [second]: src("old") } };
+  const input = withWebsitePlacementReplacement(current, "assets/talent/june-c1.webp", "/", "Hero", src("new"));
+  const steps = saveSteps(input, [{ path: image("new").path, mode: "100644", type: "blob", sha: "new-image" }], BEFORE, current);
+  steps.splice(3, 0, { path: "/git/blobs", method: "POST", value: { sha: "new-image" } });
+  const api = mockGithub(t, steps);
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, input, [image("new")]);
+  assert.equal(saved.manifest.websitePlacementReplacements[second], src("old"));
   api.done();
 });
 

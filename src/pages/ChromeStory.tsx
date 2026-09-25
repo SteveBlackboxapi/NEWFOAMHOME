@@ -1,3 +1,5 @@
+import { OptimizedImage } from "../components/OptimizedImage";
+import { useWebsiteBackground } from "../components/WebsiteImageScope";
 import {
   useCallback,
   useEffect,
@@ -45,6 +47,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const [flightGeometry, setFlightGeometry] =
     useState<ChromeFlightGeometry | null>(null);
   const wallpaper = useChromeWallpaper();
+  const desktopBackground = useWebsiteBackground(embedded ? KIT_STORY_CHROME_BACKGROUND : chromeWallpaperBackground(wallpaper), "Foam for Chrome · Desktop background");
   useChromePreviewEntry(track);
   useLayoutEffect(() => {
     let frame = 0;
@@ -172,9 +175,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
               <div
                 className="cs-desktop-wallpaper"
                 style={{
-                  backgroundImage: embedded
-                    ? KIT_STORY_CHROME_BACKGROUND
-                    : chromeWallpaperBackground(wallpaper),
+                  backgroundImage: desktopBackground,
                 }}
               />
               <p className="cs-stage-caption">
@@ -201,7 +202,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
             >
               <a href={CHROME_STORE} target="_blank" rel="noreferrer">
                 <div className="cs-store-mark">
-                  <img
+                  <OptimizedImage section="Foam for Chrome · Send finale"
                     src={`${A}/chrome-store-transparent.webp`}
                     alt=""
                     width={180}

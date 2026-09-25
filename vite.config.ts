@@ -36,7 +36,10 @@ export default defineConfig({
       if (privateLab) return [];
       const { revision } = JSON.parse(readFileSync(new URL('./src/data/imageVariants.json', import.meta.url), 'utf8'));
       const base = process.env.GITHUB_PAGES === 'true' ? '/NEWFOAMHOME/' : '/';
-      const poster = `${base}media/${revision}/assets/io-portrait-poster.webp`;
+      const { replacements } = JSON.parse(readFileSync(new URL('./src/data/websitePlacementImages.json', import.meta.url), 'utf8'));
+      const key = JSON.stringify(['assets/io-portrait-poster.webp', '/kit-story', 'Media Kit · Samantha portrait film']);
+      const source = replacements[key] || 'assets/io-portrait-poster.webp';
+      const poster = `${base}media/${revision}/${source}`;
       return [{ tag: 'script', injectTo: 'head' as const, children:
         `if(location.pathname.replace(/\\/$/,'').endsWith('/kit-story')){const l=document.createElement('link');l.rel='preload';l.as='image';l.fetchPriority='high';l.href=${JSON.stringify(poster)};document.head.appendChild(l);}`,
       }];

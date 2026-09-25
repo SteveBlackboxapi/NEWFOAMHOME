@@ -112,7 +112,7 @@ export function KitMetrics({
         <div className="ka-account-identity">
           <OptimizedImage
             className="ka-account-avatar"
-            src={KIT_ANALYTICS_PROFILE.portrait}
+            section="Media Kit · Profile and sharing preview" src={KIT_ANALYTICS_PROFILE.portrait}
             sizes="39px"
             alt=""
             loading="lazy"

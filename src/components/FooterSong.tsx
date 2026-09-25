@@ -1,3 +1,4 @@
+import { OptimizedImage } from "./OptimizedImage";
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import { footerSong } from "../data/footerSong";
@@ -150,7 +151,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
       <section className={`song-player${fading ? " is-fading" : ""}`} style={{ transitionDuration: `${SONG_FADE_MS}ms` }} aria-label="Feed the Feed music player">
         <div className="song-player-inner">
           <div className="song-player-track">
-            <img src={footerSong.thumbnail} alt="" width="52" height="52" />
+            <OptimizedImage section="Footer · A song from Foam" sizes="52px" src={footerSong.thumbnail} alt="" width="52" height="52" />
             <div><strong>{footerSong.title}</strong><span>{error ? "Couldn’t play. Please try again." : pending ? "Loading the song…" : "A song from Foam"}</span></div>
             <span className={`song-equalizer${playing ? " is-playing" : ""}`} aria-hidden="true"><i /><i /><i /><i /></span>
           </div>
@@ -189,7 +190,7 @@ export function FooterSongCard() {
   return <div className="footer-song" id="foam-song">
     <p className="footer-song-eyebrow">A song from Foam</p>
     <button className="footer-song-card" onClick={toggle} type="button" aria-label={`${playing || pending ? "Pause" : "Play"} Feed the Feed — a song from Foam`}>
-      <img src={footerSong.cover} alt="" width={footerSong.coverWidth} height={footerSong.coverHeight} loading="lazy" decoding="async" />
+      <OptimizedImage section="Footer · A song from Foam" sizes="240px" src={footerSong.cover} alt="" width={footerSong.coverWidth} height={footerSong.coverHeight} loading="lazy" decoding="async" />
       <span className="footer-song-details"><span><strong>{footerSong.title}</strong><span>{footerSong.subtitle}</span></span><span className="footer-song-play"><PlayIcon playing={playing || pending} /></span></span>
     </button>
   </div>;

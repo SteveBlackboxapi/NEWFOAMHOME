@@ -1,3 +1,4 @@
+import { WebsiteImageScope } from "../WebsiteImageScope";
 import { useEffect, useRef, type ComponentType } from "react";
 import { AIDisclosure } from "../AIDisclosure";
 import { MiniChromeScene } from "./MiniChromeScene";
@@ -140,14 +141,16 @@ export function MiniIllustration({
   className = "",
   disclosure = true,
   label,
+  section,
 }: {
   kind: MiniIllustrationKind;
   className?: string;
   disclosure?: boolean;
   label?: string;
+  section?: string;
 }) {
   const artwork = illustrations[kind];
-  return (
+  const content = (
     <figure className={`foam-mini ${className}`.trim()} data-miniature={kind}>
       <MiniCanvas
         scene={artwork.scene}
@@ -161,4 +164,5 @@ export function MiniIllustration({
       )}
     </figure>
   );
+  return section ? <WebsiteImageScope section={section}>{content}</WebsiteImageScope> : content;
 }

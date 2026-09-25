@@ -1,3 +1,5 @@
+import { OptimizedImage } from "./OptimizedImage";
+import { useWebsiteImage } from "./WebsiteImageScope";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLocation } from "react-router";
@@ -7,6 +9,7 @@ import { useStopFooterSong } from "./FooterSong";
 import "./overview-film.css";
 
 function FilmPlayer({ onClose }: { onClose: () => void }) {
+  const poster = useWebsiteImage(overviewFilm.poster, "See Foam in action");
   const dialog = useRef<HTMLDialogElement>(null);
   const video = useRef<HTMLVideoElement>(null);
 
@@ -45,7 +48,7 @@ function FilmPlayer({ onClose }: { onClose: () => void }) {
           Close <span aria-hidden="true">×</span>
         </button>
       </div>
-      <video ref={video} controls playsInline preload="metadata" poster={overviewFilm.poster} aria-label="Foam overview film">
+      <video ref={video} controls playsInline preload="metadata" poster={poster} aria-label="Foam overview film">
         <source src={overviewFilm.src} type="video/mp4" />
         Your browser cannot play this film. <a href={overviewFilm.src}>Open the video</a>.
       </video>
@@ -76,7 +79,7 @@ export function OverviewFilm() {
           </button>
         </div>
         <button className="of-poster" type="button" onClick={openFilm} aria-label="Play the Foam overview film" aria-haspopup="dialog">
-          <img src={overviewFilm.poster} alt="" width={overviewFilm.posterWidth} height={overviewFilm.posterHeight} loading="lazy" decoding="async" />
+          <OptimizedImage section="See Foam in action" src={overviewFilm.poster} alt="" width={overviewFilm.posterWidth} height={overviewFilm.posterHeight} loading="lazy" decoding="async" />
         </button>
       </Reveal>
       {open && <FilmPlayer onClose={() => setOpen(false)} />}
