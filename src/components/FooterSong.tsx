@@ -3,8 +3,8 @@ import { useLocation } from "react-router";
 import { footerSong } from "../data/footerSong";
 import "./footer-song.css";
 
-type SongContextValue = { available: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
-const SongContext = createContext<SongContextValue>({ available: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
+type SongContextValue = { available: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
+const SongContext = createContext<SongContextValue>({ available: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
 const SONG_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/chrome-story", "/home-film-preview"]);
 
 export function useStopFooterSong() { return useContext(SongContext).stop; }
@@ -23,6 +23,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const available = SONG_ROUTES.has(pathname.replace(/\/+$/, "") || "/");
   const audio = useRef<HTMLAudioElement>(null);
+  const playerToggle = useRef<HTMLButtonElement>(null);
   const attempt = useRef(0);
   const [open, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -49,6 +50,9 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => { if (!available) stop(); }, [available, stop]);
+  useEffect(() => {
+    if (open) playerToggle.current?.focus({ preventScroll: true });
+  }, [open]);
   useEffect(() => {
     const player = audio.current;
     // A film ends the listening session; closing it must not bring music back.
@@ -93,14 +97,16 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
 
   function dismiss() {
     stop();
-    // The close control disappears; leave keyboard users at a useful landmark.
-    const card = document.querySelector<HTMLButtonElement>(".footer-song-card");
-    const target = card && card.getBoundingClientRect().top < window.innerHeight && card.getBoundingClientRect().bottom > 0
-      ? card : document.getElementById("main-content");
-    target?.focus({ preventScroll: true });
+    // Wait for the footer card to return before handing keyboard focus back.
+    requestAnimationFrame(() => {
+      const card = document.querySelector<HTMLButtonElement>(".footer-song-card");
+      const target = card && card.getBoundingClientRect().top < window.innerHeight && card.getBoundingClientRect().bottom > 0
+        ? card : document.getElementById("main-content");
+      target?.focus({ preventScroll: true });
+    });
   }
 
-  return <SongContext.Provider value={{ available, playing, pending, toggle, stop }}>
+  return <SongContext.Provider value={{ available, open, playing, pending, toggle, stop }}>
     {children}
     <audio ref={audio} preload="none" aria-hidden="true"
       onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
@@ -118,7 +124,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
             <div><strong>{footerSong.title}</strong><span>{error ? "Couldn’t play. Please try again." : pending ? "Loading the song…" : "A song from Foam"}</span></div>
             <span className={`song-equalizer${playing ? " is-playing" : ""}`} aria-hidden="true"><i /><i /><i /><i /></span>
           </div>
-          <button className="song-player-toggle" type="button" onClick={toggle} aria-label={playing || pending ? "Pause Feed the Feed" : "Play Feed the Feed"}>
+          <button ref={playerToggle} className="song-player-toggle" type="button" onClick={toggle} aria-label={playing || pending ? "Pause Feed the Feed" : "Play Feed the Feed"}>
             <PlayIcon playing={playing || pending} />
           </button>
           <div className="song-player-progress">
@@ -142,14 +148,14 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
 }
 
 export function FooterSongCard() {
-  const { available, playing, pending, toggle } = useContext(SongContext);
+  const { available, open, playing, pending, toggle } = useContext(SongContext);
   const { hash } = useLocation();
   useEffect(() => {
     if (!available || hash !== "#foam-song") return;
     const frame = requestAnimationFrame(() => document.getElementById("foam-song")?.scrollIntoView({ block: "center" }));
     return () => cancelAnimationFrame(frame);
   }, [available, hash]);
-  if (!available) return null;
+  if (!available || open) return null;
   return <div className="footer-song" id="foam-song">
     <p className="footer-song-eyebrow">A song from Foam</p>
     <button className="footer-song-card" onClick={toggle} type="button" aria-label={`${playing || pending ? "Pause" : "Play"} Feed the Feed — a song from Foam`}>
