@@ -537,7 +537,7 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
       <figure className="fs-campaign">
         <div ref={artwork} className="fs-campaign-art">
           <img
-            src={`${A}/campaigns/found-with-foam-skincare-v3.webp`}
+            src={`${A}/campaigns/found-with-foam-skincare-v4.webp`}
             width={2824}
             height={2232}
             loading="lazy"

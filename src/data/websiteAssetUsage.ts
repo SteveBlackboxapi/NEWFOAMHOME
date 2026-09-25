@@ -511,7 +511,7 @@ artwork(
   "Found with Foam · Workspace",
 );
 artwork(
-  "campaigns/found-with-foam-skincare-v3.webp",
+  "campaigns/found-with-foam-skincare-v4.webp",
   "Found with Foam · Illustrative skincare campaign",
   "/kit-story",
   "From a search to your next campaign",
