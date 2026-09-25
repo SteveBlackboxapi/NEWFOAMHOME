@@ -5,6 +5,8 @@ Worker name: `foam-talent-lab`
 Repository: `SteveBlackboxapi/NEWFOAMHOME`
 Library branch: `content/talent-library`
 
+Bookmark `/lab/` or `/lab/talent/`. After sign-in, `/`, `/login`, `/lab` and `/lab/` redirect to the full Lab address. Existing view/layout query parameters are preserved by these authenticated redirects.
+
 The Worker protects the Lab HTML, JavaScript, assets and API behind one shared password. The public marketing build must omit the Lab route. This is a separate deployment; deploying the marketing site does not update this Worker.
 
 ## Deployment inputs
@@ -37,6 +39,8 @@ The files must exist in the pinned commit. An absent or invalid binding keeps th
 
 The login form posts to `/api/login`. Successful login creates a 12-hour `Secure; HttpOnly; SameSite=Strict` host-only session cookie, then opens `/lab/talent/?view=content`. JSON login is also supported with `{ "password": "…" }`. `/api/logout` clears that browser's cookie; it does not disconnect the shared GitHub key.
 
+The login document uses `Referrer-Policy: same-origin` so native form submissions retain the same-origin `Origin` header required by the mutation guard. Other responses keep `no-referrer`. Missing, null and foreign origins remain rejected.
+
 After login, connect a GitHub fine-grained access key once through the Lab UI. Scope it to this repository with Contents read and write permission. The UI sends it to `POST /api/connect` as `{ "token": "…" }`; the Worker verifies repository write access and stores it encrypted with AES-GCM in KV. The key is never returned to the browser. `GET /api/status` returns only `{ "connected": true|false }`. Reconnecting replaces the stored key.
 
 To rotate the password, generate a new strong random password, calculate its SHA-256 digest without adding a trailing newline, and replace the `LAB_PASSWORD_HASH` secret. Existing cookies then stop working. The GitHub connection survives this password change. Rotating `SESSION_SECRET` also invalidates cookies, but requires reconnecting GitHub because the previous encrypted key can no longer be decrypted. Never put a password, hash, session secret or GitHub key in this repository or deployment logs.
@@ -50,6 +54,8 @@ All mutations require an exact same-origin `Origin` header. Login attempts are l
 `/api/asset?path=assets/talent/uploads/<filename>&ref=<40-character-commit>` serves an authenticated image from an immutable revision. **The underlying repository is public: images and catalogue data saved there remain publicly accessible through GitHub.** The password protects the editing workspace and server-held key, not the public repository itself.
 
 All responses disable caching and indexing. The Content Security Policy restricts application scripts to this origin; media and source downloads may also use the existing Foam GitHub Pages origin. No passwords or keys are logged by the Worker.
+
+All upstream requests use `redirect: "manual"` and reject 3xx responses with a generic 502. The Workers runtime does not support `redirect: "error"`; that value throws before contacting GitHub or the public media host. Never replace this with automatic redirect following: GitHub credentials must remain on the approved origin.
 
 ## Verification
 

@@ -133,14 +133,17 @@ export function AssetCard({
   position?: number;
 }) {
   const kind = assetKind(asset);
+  const isYouTube = asset.tile?.platform === "youtube";
   return (
     <article className="tl-content-card">
       <div
-        className={`tl-card-media tl-ratio-${position % 4}`}
+        className={`tl-card-media tl-ratio-${position % 4}${isYouTube ? " is-youtube" : ""}`}
         style={
-          asset.tile?.aspectRatio
-            ? { aspectRatio: asset.tile.aspectRatio }
-            : undefined
+          isYouTube
+            ? { aspectRatio: "4 / 3" }
+            : asset.tile?.aspectRatio
+              ? { aspectRatio: asset.tile.aspectRatio }
+              : undefined
         }
       >
         <button
@@ -154,7 +157,8 @@ export function AssetCard({
             alt={asset.title}
             loading="lazy"
           />
-          {kind !== "video" && <Caption settings={caption} />}
+          {/* Wide YouTube previews reserve the overlay for metrics; editor captions stay unchanged. */}
+          {kind !== "video" && !isYouTube && <Caption settings={caption} />}
           <span className="tl-card-shade" />
           {kind !== "still" && (
             <span className="tl-media-kind">
