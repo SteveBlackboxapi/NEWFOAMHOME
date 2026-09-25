@@ -1236,13 +1236,18 @@ function desktopKitSnapshot() {
   );
 }
 
-/** Resolve layout on the first client render so browser scroll restoration has a full-height page. */
+/** Resolve the story layout on the first client render. */
 export function KitStory() {
   const isDesktop = useSyncExternalStore(
     subscribeKitLayout,
     desktopKitSnapshot,
     () => false,
   );
+  useLayoutEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    return () => { window.history.scrollRestoration = "auto"; };
+  }, []);
   return (
     <>
       {isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />}

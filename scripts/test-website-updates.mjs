@@ -43,7 +43,7 @@ class Element {
   getClientRects() { return this.shown ? [{}] : []; }
 }
 
-function environment({ production = true, privateLab = false, current = CURRENT, latest = NEXT, href = "https://example.test/NEWFOAMHOME/kit-story/?view=preview#chapter", storage = new Map(), storageBlocked = false, initialNow = 0, readyState = "complete" } = {}) {
+function environment({ production = true, privateLab = false, current = CURRENT, latest = NEXT, href = "https://example.test/NEWFOAMHOME/kit-story/?view=preview#chapter", baseUrl = "/NEWFOAMHOME/", storage = new Map(), storageBlocked = false, initialNow = 0, readyState = "complete" } = {}) {
   let now = initialNow;
   let serial = 0;
   const timers = new Map();
@@ -80,7 +80,7 @@ function environment({ production = true, privateLab = false, current = CURRENT,
   const module = { exports: {} };
   new Function("module", "exports", "window", "document", "navigator", "fetch", "Date", "Element", "__ENV__", outputText)(
     module, module.exports, window, document, navigator, fetch, { now: () => now }, Element,
-    { PROD: production, VITE_PRIVATE_LAB: privateLab ? "true" : "false", VITE_WEBSITE_VERSION: current, BASE_URL: "/NEWFOAMHOME/" },
+    { PROD: production, VITE_PRIVATE_LAB: privateLab ? "true" : "false", VITE_WEBSITE_VERSION: current, BASE_URL: baseUrl },
   );
   return {
     ...module.exports, window, document, navigator, calls, replacements, timers, media, dialogs, storage, scrolls,
@@ -118,15 +118,15 @@ test("unchanged versions poll every minute with no-store and a fresh timestamp",
   stop();
 });
 
-test("a changed version refreshes after15 idle seconds preserving route, parameters and hash", async () => {
-  const env = environment();
+test("a changed version refreshes other pages after 15 idle seconds preserving route, parameters and hash", async () => {
+  const env = environment({ href: "https://example.test/NEWFOAMHOME/about/?view=preview#chapter" });
   const stop = env.registerWebsiteUpdates();
   await env.advance(14999);
   assert.equal(env.replacements.length, 0);
   await env.advance(1);
   assert.equal(env.replacements.length, 1);
   const url = new URL(env.replacements[0]);
-  assert.equal(url.pathname, "/NEWFOAMHOME/kit-story/");
+  assert.equal(url.pathname, "/NEWFOAMHOME/about/");
   assert.equal(url.searchParams.get("view"), "preview");
   assert.equal(url.searchParams.get("foam-update"), NEXT);
   assert.equal(url.hash, "#chapter");
@@ -369,7 +369,7 @@ test("a stalled version request times out and later polling can recover", async 
 });
 
 test("an automatic refresh hands off reading position and restores it once after rendering", async () => {
-  const original = environment();
+  const original = environment({ href: "https://example.test/NEWFOAMHOME/about/?view=preview#chapter" });
   original.window.scrollX = 24;
   original.window.scrollY = 8320;
   const stopOriginal = original.registerWebsiteUpdates();
@@ -394,6 +394,57 @@ test("an automatic refresh hands off reading position and restores it once after
   await refreshed.advance(32);
   assert.equal(refreshed.scrolls.length, 1);
   stop();
+});
+
+test("Kit Story updates clear the anchor and reading-position handoff for base and root routes", async () => {
+  for (const baseUrl of ["/NEWFOAMHOME/", "/NEWFOAMHOME", "/"]) {
+    for (const trailingSlash of ["", "/"]) {
+      const path = `${baseUrl.replace(/\/+$/, "")}/kit-story${trailingSlash}`;
+      const href = `https://example.test${path}?view=preview#chapter`;
+      const storage = new Map([["foam:website-update-scroll:v1", "stale handoff"]]);
+      const env = environment({ href, baseUrl, storage });
+      env.window.scrollY = 8320;
+      const stop = env.registerWebsiteUpdates();
+      assert.equal(storage.size, 0, "discard any existing handoff on arrival");
+      // A handoff from another page must not survive the automatic navigation.
+      storage.set("foam:website-update-scroll:v1", "another handoff");
+      await env.advance(15000);
+      assert.equal(env.replacements.length, 1);
+      const destination = new URL(env.replacements[0]);
+      assert.equal(destination.pathname, path);
+      assert.equal(destination.searchParams.get("view"), "preview");
+      assert.equal(destination.searchParams.get("foam-update"), NEXT);
+      assert.equal(destination.hash, "");
+      assert.equal(storage.size, 0);
+      assert.equal(env.scrolls.length, 0, "Kit Story mount owns scrolling to the top");
+      stop();
+    }
+  }
+});
+
+test("Kit Story never restores a matching handoff saved by an earlier site version", async () => {
+  const href = `https://example.test/NEWFOAMHOME/kit-story/?foam-update=${NEXT}#chapter`;
+  const storage = new Map([["foam:website-update-scroll:v1", JSON.stringify({ url: href, version: NEXT, at: 0, x: 24, y: 8320 })]]);
+  const env = environment({ href, current: NEXT, latest: NEXT, storage, readyState: "loading" });
+  const stop = env.registerWebsiteUpdates();
+  env.document.emit("DOMContentLoaded");
+  env.window.emit("load");
+  await env.advance(32);
+  assert.equal(storage.size, 0);
+  assert.equal(env.scrolls.length, 0);
+  stop();
+});
+
+test("similarly named pages and Kit Story outside the configured base retain normal handoffs", async () => {
+  for (const path of ["/NEWFOAMHOME/kit-storyboard/", "/NEWFOAMHOME/kit-story/details/", "/other/kit-story/"]) {
+    const env = environment({ href: `https://example.test${path}?view=preview#chapter` });
+    env.window.scrollY = 8320;
+    const stop = env.registerWebsiteUpdates();
+    await env.advance(15000);
+    assert.equal(new URL(env.replacements[0]).hash, "#chapter");
+    assert.equal(JSON.parse(env.storage.get("foam:website-update-scroll:v1")).y, 8320);
+    stop();
+  }
 });
 
 test("a saved position is discarded for a different URL, version token or expired handoff", async () => {
