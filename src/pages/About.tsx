@@ -154,10 +154,10 @@ export function About() {
                 </div>
                 <img
                   className="ep-invitation-moment"
-                  src={`${PC}/original-portraits-v1/blue-portrait-original-v1.webp`}
-                  alt="AI-generated fictional person laughing against a bright blue backdrop"
-                  width="1448"
-                  height="1086"
+                  src={`${PC}/story-refresh-v1/outdoor-creator.webp`}
+                  alt="AI-generated fictional creator Iris wearing sunglasses beneath a bright blue sky"
+                  width="1024"
+                  height="1536"
                   loading="lazy"
                   decoding="async"
                 />
