@@ -115,7 +115,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
         <div className="song-player-inner">
           <div className="song-player-track">
             <img src={footerSong.thumbnail} alt="" width="52" height="52" />
-            <div><strong>{footerSong.title}</strong><span>{error ? "Couldn’t play. Please try again." : pending ? "Loading the song…" : "A song for Foam"}</span></div>
+            <div><strong>{footerSong.title}</strong><span>{error ? "Couldn’t play. Please try again." : pending ? "Loading the song…" : "A song from Foam"}</span></div>
             <span className={`song-equalizer${playing ? " is-playing" : ""}`} aria-hidden="true"><i /><i /><i /><i /></span>
           </div>
           <button className="song-player-toggle" type="button" onClick={toggle} aria-label={playing || pending ? "Pause Feed the Feed" : "Play Feed the Feed"}>
@@ -151,8 +151,8 @@ export function FooterSongCard() {
   }, [available, hash]);
   if (!available) return null;
   return <div className="footer-song" id="foam-song">
-    <p className="footer-song-eyebrow">A song for Foam</p>
-    <button className="footer-song-card" onClick={toggle} type="button" aria-label={`${playing || pending ? "Pause" : "Play"} Feed the Feed — a song for Foam`}>
+    <p className="footer-song-eyebrow">A song from Foam</p>
+    <button className="footer-song-card" onClick={toggle} type="button" aria-label={`${playing || pending ? "Pause" : "Play"} Feed the Feed — a song from Foam`}>
       <img src={footerSong.cover} alt="" width={footerSong.coverWidth} height={footerSong.coverHeight} loading="lazy" decoding="async" />
       <span className="footer-song-details"><span><strong>{footerSong.title}</strong><span>{footerSong.subtitle}</span></span><span className="footer-song-play"><PlayIcon playing={playing || pending} /></span></span>
     </button>

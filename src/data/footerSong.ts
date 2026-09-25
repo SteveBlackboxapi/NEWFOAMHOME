@@ -8,7 +8,7 @@ export const footerSong = {
   thumbnail: `${A}/music/feed-the-feed-v1/cover-small.webp`,
   originalCover: `${A}/music/feed-the-feed-v1/cover-original.png`,
   title: "Feed the Feed",
-  subtitle: "Starring the people of Foam",
+  subtitle: "A Fun song to make you smile",
   duration: 189.573,
   coverWidth: 640,
   coverHeight: 640,

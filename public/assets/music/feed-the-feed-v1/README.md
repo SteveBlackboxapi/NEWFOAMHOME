@@ -6,7 +6,7 @@ Supplied by Steven Lewis on 25 September 2026 for the shared marketing footer an
 
 - Song: `/Users/stevenlewis/Desktop/Whalar/FOAM/2026/NEW FOAM WEBSITE/Music/Feed the Feed.m4a`
 - Cover: `/var/folders/4k/whmm7b4j7rq_6rj5vsb0f5n80000gn/T/codex-clipboard-0cad979f-e3c5-4046-b15f-e2d5990d068f.png`
-- Title and subtitle are the user's supplied presentation copy: **Feed the Feed** / **Starring the people of Foam**.
+- Title and subtitle use the user's approved presentation copy: **Feed the Feed** / **A Fun song to make you smile**, under **A song from Foam**.
 - The supplied image and audio are not assigned fictional talent identities. No claim is made here about their creation method or the identities of the pictured performers.
 
 ## Files

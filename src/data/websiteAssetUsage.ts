@@ -176,7 +176,7 @@ for (const route of publicWebsiteRoutes.filter((route) => route !== "/kit-story"
     [footerSong.thumbnail, "Feed the Feed · Player thumbnail"],
     [footerSong.src, "Feed the Feed · Supplied song"],
   ]) {
-    use(src, route, "Footer · A song for Foam", {
+    use(src, route, "Footer · A song from Foam", {
       kind: "artwork",
       label,
       provenance: "supplied-reference",
