@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
+import { FooterSongProvider } from "./components/FooterSong";
 import "./components/people-colour-theme.css";
 
 /** Keep history and deep links working across both marketing and story routes. */
 export function NavigationLayout() {
   return (
-    <>
+    <FooterSongProvider>
       <ScrollRestoration />
       <Outlet />
-    </>
+    </FooterSongProvider>
   );
 }
 
