@@ -6,6 +6,8 @@ import "./footer-song.css";
 type SongContextValue = { cardAvailable: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
 const SongContext = createContext<SongContextValue>({ cardAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
 const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/chrome-story", "/home-film-preview"]);
+const SONG_END_DELAY_MS = 6500;
+const SONG_FADE_MS = 200;
 
 export function useStopFooterSong() { return useContext(SongContext).stop; }
 
@@ -16,6 +18,16 @@ function timeLabel(seconds: number) {
 
 function PlayIcon({ playing }: { playing: boolean }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">{playing ? <path d="M6 4h4v16H6zm8 0h4v16h-4z" /> : <path d="M7 3.5v17l14-8.5z" />}</svg>;
+}
+
+function restorePageFocus() {
+  // Wait for the footer card to return before handing keyboard focus back.
+  requestAnimationFrame(() => {
+    const card = document.querySelector<HTMLButtonElement>(".footer-song-card");
+    const target = card && card.getBoundingClientRect().top < window.innerHeight && card.getBoundingClientRect().bottom > 0
+      ? card : document.getElementById("main-content") ?? document.querySelector<HTMLAnchorElement>(".story-nav-brand");
+    target?.focus({ preventScroll: true });
+  });
 }
 
 /** Lives above page layouts so internal navigation never restarts the song. */
@@ -35,6 +47,8 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
   const [error, setError] = useState(false);
+  const [ended, setEnded] = useState(false);
+  const [fading, setFading] = useState(false);
 
   const stop = useCallback(() => {
     attempt.current += 1;
@@ -50,7 +64,23 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
     setCurrent(0);
     setDuration(0);
     setError(false);
+    setEnded(false);
+    setFading(false);
   }, []);
+
+  useEffect(() => {
+    if (!ended) return;
+    const fadeTimer = window.setTimeout(() => setFading(true), SONG_END_DELAY_MS);
+    const closeTimer = window.setTimeout(() => {
+      const playerHadFocus = document.activeElement?.closest(".song-player");
+      stop();
+      if (playerHadFocus) restorePageFocus();
+    }, SONG_END_DELAY_MS + SONG_FADE_MS);
+    return () => {
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(closeTimer);
+    };
+  }, [ended, stop]);
 
   useEffect(() => { if (!playbackAvailable) stop(); }, [playbackAvailable, stop]);
   useEffect(() => {
@@ -71,6 +101,8 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   function toggle() {
     const player = audio.current;
     if (!playbackAvailable || !player) return;
+    setEnded(false);
+    setFading(false);
     if (!player.paused || pending) {
       attempt.current += 1;
       player.pause();
@@ -100,27 +132,22 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
 
   function dismiss() {
     stop();
-    // Wait for the footer card to return before handing keyboard focus back.
-    requestAnimationFrame(() => {
-      const card = document.querySelector<HTMLButtonElement>(".footer-song-card");
-      const target = card && card.getBoundingClientRect().top < window.innerHeight && card.getBoundingClientRect().bottom > 0
-        ? card : document.getElementById("main-content") ?? document.querySelector<HTMLAnchorElement>(".story-nav-brand");
-      target?.focus({ preventScroll: true });
-    });
+    restorePageFocus();
   }
 
   return <SongContext.Provider value={{ cardAvailable, open, playing, pending, toggle, stop }}>
     {children}
     <audio ref={audio} preload="none" aria-hidden="true"
-      onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
-      onEnded={() => { setPlaying(false); setPending(false); }}
+      onPlay={() => { setPlaying(true); setEnded(false); setFading(false); }} onPause={() => setPlaying(false)}
+      onEnded={() => { setPlaying(false); setPending(false); setEnded(true); }}
+      onSeeking={() => { setEnded(false); setFading(false); }}
       onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
       onDurationChange={(e) => setDuration(Number.isFinite(e.currentTarget.duration) ? e.currentTarget.duration : 0)}
       onError={() => { if (audio.current?.getAttribute("src")) { setError(true); setPlaying(false); setPending(false); } }}
     />
     {playbackAvailable && open && <>
       <div className="song-player-space" aria-hidden="true" />
-      <section className="song-player" aria-label="Feed the Feed music player">
+      <section className={`song-player${fading ? " is-fading" : ""}`} style={{ transitionDuration: `${SONG_FADE_MS}ms` }} aria-label="Feed the Feed music player">
         <div className="song-player-inner">
           <div className="song-player-track">
             <img src={footerSong.thumbnail} alt="" width="52" height="52" />

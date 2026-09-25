@@ -14,7 +14,11 @@ function SearchIcon() {
 }
 
 /** A small product scene, replacing the exploratory magnifying-glass artwork. */
-export function DiscoveryArtwork() {
+export function DiscoveryArtwork({
+  resultLabel = "Found with Foam",
+}: {
+  resultLabel?: string;
+}) {
   const search = discoverySearches[0];
   return (
     <div className="pc-discovery-art" aria-hidden="true">
@@ -34,7 +38,7 @@ export function DiscoveryArtwork() {
         ))}
       </div>
       <span className="pc-discovery-art-found">
-        Found with Foam <span>↗</span>
+        {resultLabel} <span>↗</span>
       </span>
     </div>
   );

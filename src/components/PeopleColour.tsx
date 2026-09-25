@@ -112,8 +112,8 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-five">
             <figure className="pc-creator-tile pc-colour-tile pc-blue">
               <div className="pc-tile-message">
-                <DiscoveryArtwork />
-                <p>Found it.</p>
+                <DiscoveryArtwork resultLabel="(3) Strong matches" />
+                <p>Found with Foam</p>
               </div>
             </figure>
             <figure className="pc-creator-tile">
