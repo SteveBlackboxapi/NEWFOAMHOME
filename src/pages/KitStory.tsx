@@ -23,6 +23,7 @@ import {
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
 import { KitStoryMobile } from "./KitStoryMobile";
+import { useKitAssetWarmup } from "../hooks/useKitAssetWarmup";
 import {
   formatWebsiteMetric,
   websiteProfile,
@@ -52,7 +53,7 @@ import {
 } from "../lib/kitStoryMotion";
 import "./kit-story.css";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 const CLIP = `${A}/io-portrait-web.mp4`;
 const POSTER = `${A}/io-portrait-poster.webp`;
 const FG_R = "font-founders font-normal";
@@ -496,6 +497,7 @@ function AfterShare() {
 }
 
 function KitStoryDesktop() {
+  useKitAssetWarmup();
   const track = useRef<HTMLElement | null>(null);
   const stage = useRef<HTMLDivElement | null>(null);
   const well = useRef<HTMLDivElement | null>(null);

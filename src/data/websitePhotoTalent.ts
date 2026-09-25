@@ -57,11 +57,11 @@ export const websitePhotos: WebsitePhoto[] = [
     id: "studio-collaborators",
     name: "Studio collaborators",
     src: `${P}/studio-moment.webp`,
-    original: `${A.replace(/\/assets$/, "")}/ideas-two/assets/masters/studio-moment.png`,
+    original: `${A.replace(/(?:\/media\/[a-f0-9]+)?\/assets$/, "")}/ideas-two/assets/masters/studio-moment.png`,
     aspectRatio: "16/9",
     provenance: "ai-generated",
     bio: "An original AI-generated collaboration scene featuring two fictional adults reviewing creative work. This record catalogues the shared scene, not a single person or actual Foam team. No real identities, accounts or audience figures are claimed.",
-    source: `${A.replace(/\/assets$/, "")}/ideas-two/README.md`,
+    source: `${A.replace(/(?:\/media\/[a-f0-9]+)?\/assets$/, "")}/ideas-two/README.md`,
     verticals: ["Collaboration", "Website photography"],
   },
   {
@@ -95,7 +95,7 @@ export const websitePhotos: WebsitePhoto[] = [
     aspectRatio: "16/9",
     provenance: "reference",
     bio: "Unidentified people in supplied reference photography, extracted from page 13 of the supplied design deck (p13-asset-00-X1.png). This group is not identified as Foam staff or customers. This record preserves the supplied source; it does not invent individual identities, employment or endorsements.",
-    source: `${A.replace(/\/assets$/, "")}/ideas-two/assets/README.md`,
+    source: `${A.replace(/(?:\/media\/[a-f0-9]+)?\/assets$/, "")}/ideas-two/assets/README.md`,
     verticals: ["Collaboration", "Supplied reference"],
   },
 ];

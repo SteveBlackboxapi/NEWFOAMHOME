@@ -10,6 +10,7 @@ import {
   prepareLibraryImage,
 } from "../lib/githubTalentLibrary";
 import type { TalentLibraryController } from "../hooks/useTalentLibrary";
+import { websiteReplacementSource } from "../lib/websiteImageReplacement";
 import "./talent-library-manager.css";
 
 const websiteUrl = (route: string) =>
@@ -147,6 +148,7 @@ export function TalentLibraryManager({
       if (replaceId) {
         const target = activeAssets.find((a) => a.id === replaceId);
         if (!target) throw new Error("This image is no longer available.");
+        const websiteSource = websiteReplacementSource(target.id);
         if (!target.tile) {
           next.portrait = prepared[0].src;
           next.originalPortrait =
@@ -174,6 +176,7 @@ export function TalentLibraryManager({
             provenance: "uploaded",
           };
         }
+        if (websiteSource) library.replaceWebsiteImage(websiteSource, prepared[0].src);
       } else {
         next.content.push(
           ...prepared.map((item): TalentContentTile => ({
@@ -246,8 +249,8 @@ export function TalentLibraryManager({
                 : "Connect GitHub to save online"}
           </strong>
           <p>
-            Changes stay in the library for review. They don’t publish to the
-            website automatically.
+            Replacing an image used on the website updates its existing placements
+            after you save. New images and profiles stay in the library.
           </p>
         </div>
         {library.connected ? (
@@ -327,6 +330,21 @@ export function TalentLibraryManager({
       {message && (
         <p role="status" className="tl-library-message">
           {message}
+        </p>
+      )}
+      {library.hasWebsiteReplacements && (
+        <p role="status" className={library.publication?.queued === false ? "tl-library-error" : "tl-library-message"}>
+          {library.publication?.published
+            ? "Website image replacements are published. Refresh the website to see the update."
+            : library.publication?.queued
+            ? "Website image update queued. It will appear when the website finishes publishing."
+            : library.publication?.error || "Saved website replacements are included whenever the website publishes."}
+          {library.publication?.queued === false && (
+            <button className="tl-button" disabled={busy || library.dirty || !library.connected}
+              onClick={() => void library.retryPublication()}>
+              Retry website update
+            </button>
+          )}
         </p>
       )}
       <div className="tl-library-actions">
@@ -610,8 +628,8 @@ export function TalentLibraryManager({
                 </div>
                 {placementsForAsset(asset).length > 0 && (
                   <p className="tl-library-small">
-                    This image has website placements. A replacement is a draft
-                    until applied to those pages.
+                    Save a replacement to update this image’s existing website
+                    placements. Video playback and the page layout stay as they are.
                   </p>
                 )}
               </article>

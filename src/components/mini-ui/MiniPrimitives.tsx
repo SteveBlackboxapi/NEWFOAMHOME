@@ -8,6 +8,7 @@ import {
   websiteProfile,
 } from "../../data/websiteTalent";
 import { KitPlatformIcon } from "../KitDetails";
+import { OptimizedImage } from "../OptimizedImage";
 
 export type MiniPerson = "samantha" | "aria" | "nia" | "elise";
 const miniTalent = {
@@ -163,9 +164,10 @@ export function MiniAvatar({
   className?: string;
 }) {
   return (
-    <img
+    <OptimizedImage
       className={`mui-avatar ${className}`}
       src={`${A}/${photos[person]}`}
+      sizes={`${size}px`}
       alt=""
       width={size}
       height={size}
@@ -183,9 +185,10 @@ export function MiniPhoto({
   className?: string;
 }) {
   return (
-    <img
+    <OptimizedImage
       className={`mui-photo ${className}`}
       src={`${A}/${photos[person]}`}
+      sizes="180px"
       alt=""
       loading="lazy"
       decoding="async"

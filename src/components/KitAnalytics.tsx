@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { OptimizedImage } from "./OptimizedImage";
 import {
   clampKitProgress,
   formatKitCount,
@@ -109,9 +110,10 @@ export function KitMetrics({
     >
       <header className="ka-account-header">
         <div className="ka-account-identity">
-          <img
+          <OptimizedImage
             className="ka-account-avatar"
             src={KIT_ANALYTICS_PROFILE.portrait}
+            sizes="39px"
             alt=""
             loading="lazy"
           />

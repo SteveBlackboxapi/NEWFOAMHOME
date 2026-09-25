@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { discoverySearches } from "../data/discoveryContent";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { imageSources } from "../lib/imageAssets";
+import { OptimizedImage } from "./OptimizedImage";
 import "./discovery-search.css";
+
+const DISCOVERY_IMAGE_SIZES = "(max-width: 700px) 28vw, (max-width: 1100px) 22vw, 200px";
 
 function SearchIcon() {
   return (
@@ -28,9 +32,10 @@ export function DiscoveryArtwork({
       </div>
       <div className="pc-discovery-art-results">
         {search.assets.slice(0, 3).map((asset) => (
-          <img
+          <OptimizedImage
             key={asset.id}
             src={asset.src}
+            sizes={DISCOVERY_IMAGE_SIZES}
             alt=""
             loading="lazy"
             decoding="async"
@@ -78,6 +83,9 @@ export function DiscoverySearch() {
     const next = discoverySearches[(active + 1) % discoverySearches.length];
     next.assets.forEach(({ src }) => {
       const image = new Image();
+      image.sizes = DISCOVERY_IMAGE_SIZES;
+      const sources = imageSources(src);
+      if (sources) image.srcset = sources;
       image.src = src;
     });
   }, [active, visible]);
@@ -135,8 +143,9 @@ export function DiscoverySearch() {
       >
         {current.assets.slice(0, 3).map((asset) => (
           <figure key={asset.id}>
-            <img
+            <OptimizedImage
               src={asset.src}
+              sizes={DISCOVERY_IMAGE_SIZES}
               alt={asset.alt}
               loading="lazy"
               decoding="async"

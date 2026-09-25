@@ -1,3 +1,4 @@
+import { A } from "../lib/assets";
 import type { StagedTalent, TalentContentTile } from "./stagedTalent";
 import {
   websiteAria,
@@ -50,13 +51,13 @@ export const FOUND_SELECTED = FOUND_RESULTS[0];
 /** Real frame captures from the generated ten-second review; ranges stay within it. */
 export const FOUND_SEEN = [
   {
-    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-1.webp`,
+    image: `${A}/talent/nia-brooks/nia-brooks-seen-1.webp`,
     start: 0,
     end: 4,
     label: "Cleanser applied to skin",
   },
   {
-    image: `${import.meta.env.BASE_URL}assets/talent/nia-brooks/nia-brooks-seen-2.webp`,
+    image: `${A}/talent/nia-brooks/nia-brooks-seen-2.webp`,
     start: 5,
     end: 10,
     label: "Product shown in routine",

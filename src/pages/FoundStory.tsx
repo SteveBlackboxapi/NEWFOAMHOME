@@ -1,3 +1,6 @@
+import { OptimizedImage } from "../components/OptimizedImage";
+import { imageSource } from "../lib/imageAssets";
+import { talentVideoSources } from "../lib/talentVideo";
 import { DEMO_URL } from "../lib/siteLinks";
 import {
   useEffect,
@@ -29,7 +32,7 @@ import {
 } from "../lib/foundStoryMotion";
 import "./found-story.css";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 const motionQuery = "(prefers-reduced-motion: reduce)";
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 function subscribeMotion(listener: () => void) {
@@ -171,7 +174,7 @@ function ResultCard({
             index === 0 ? `rgba(198,243,30,${highlight})` : "transparent",
         }}
       >
-        <img src={tile.thumb} alt="" loading="lazy" />
+        <OptimizedImage src={tile.thumb} alt="" sizes="(max-width: 700px) 45vw, 280px" loading="lazy" />
         <span className="content-card-fade" />
         <div className="fs-result-meta">
           <span className="fs-result-strong" aria-label="Strong visual match">
@@ -179,7 +182,7 @@ function ResultCard({
             {tile.strongKind === "hashtag" && <span aria-label="Hashtag match">#</span>}
           </span>
           <div className="fs-result-footer">
-            <img src={talent.portrait} alt={talent.displayName} loading="lazy" />
+            <OptimizedImage sizes="48px" src={talent.portrait} alt={talent.displayName} loading="lazy" />
             <ContentMetrics tile={tile} className="fs-result-metrics" uppercaseSuffix />
             <ContentPlatformIcon network={tile.platform} />
           </div>
@@ -277,6 +280,8 @@ function SelectedPost({
     observer.observe(video.current);
     return () => observer.disconnect();
   }, []);
+  // Source children are attached only for the active scene; rescan when it changes.
+  useEffect(() => { video.current?.load(); }, [active]);
   useEffect(() => {
     const element = video.current;
     if (!element) return;
@@ -355,7 +360,7 @@ function SelectedPost({
   return (
     <>
       <div className="fs-detail-header">
-        <img src={talent.portrait} alt="" />
+        <OptimizedImage sizes="48px" src={talent.portrait} alt="" />
         <span>
           <strong>{talent.displayName}</strong>
           <small>TikTok · Video</small>
@@ -365,11 +370,10 @@ function SelectedPost({
       <div className="fs-detail-body">
         <figure className="fs-detail-picture">
           <div className="fs-video-stage">
-            <img className="fs-video-blur" src={tile.thumb} alt="" />
+            <OptimizedImage sizes="(max-width: 700px) 90vw, 400px" className="fs-video-blur" src={tile.thumb} alt="" />
             <video
               ref={video}
-              src={active ? tile.video : undefined}
-              poster={tile.thumb}
+              poster={imageSource(tile.thumb, 768)}
               muted
               playsInline
               loop
@@ -379,9 +383,13 @@ function SelectedPost({
               onLoadedMetadata={applyPendingSeek}
               onTimeUpdate={() => setElapsed(video.current?.currentTime ?? 0)}
               aria-label={`${talent.displayName} demonstrates a cleanser in a fictional skincare review`}
-            />
+            >
+              {active && tile.video && talentVideoSources(tile.video).map((source) => (
+                <source key={source.src} src={source.src} type={source.type} />
+              ))}
+            </video>
             <div className="fs-video-identity">
-              <img src={talent.portrait} alt="" />
+              <OptimizedImage sizes="48px" src={talent.portrait} alt="" />
               <span>
                 {talent.displayName}
                 <small>{handle}</small>
@@ -446,7 +454,7 @@ function SelectedPost({
                   {moment.end.toString().padStart(2, "0")}
                 </span>
                 <span className="fs-seen-picture">
-                  <img src={moment.image} alt={moment.label} loading="lazy" />
+                  <OptimizedImage sizes="(max-width: 700px) 42vw, 240px" src={moment.image} alt={moment.label} loading="lazy" />
                   <span>skincare product reviews</span>
                 </span>
               </button>
@@ -536,7 +544,8 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
       </header>
       <figure className="fs-campaign">
         <div ref={artwork} className="fs-campaign-art">
-          <img
+          <OptimizedImage
+            sizes="(max-width: 700px) 100vw, 1200px"
             src={`${A}/campaigns/found-with-foam-skincare-v4.webp`}
             width={2824}
             height={2232}

@@ -59,7 +59,7 @@ export function About() {
           See the story
         </ActionLink>
       </PageIntro>
-      <section className="mp-section mp-dark ep-belief">
+      <section className="mp-section mp-dark ep-belief" style={{ backgroundImage: `url("${PC}/studio-moment.webp")` }}>
         <div className="mp-container">
           <Reveal>
             <div className="ep-belief-top">

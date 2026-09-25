@@ -5,6 +5,7 @@ import {
   type ImgHTMLAttributes,
 } from "react";
 import { observeKitImage, type KitImageStatus } from "../lib/kitFeaturedMedia";
+import { OptimizedImage } from "./OptimizedImage";
 
 /** Reuse the story's decode-aware reveal, including cached and failed images. */
 export function MarketingImage({
@@ -30,7 +31,7 @@ export function MarketingImage({
   }, [src]);
 
   return (
-    <img
+    <OptimizedImage
       decoding="async"
       {...props}
       ref={image}

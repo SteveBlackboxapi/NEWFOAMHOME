@@ -1,0 +1,75 @@
+{
+  "method": "FFmpeg 7.1 stream copy with all tracks/metadata, faststart; SHA-256 packet-stream hashes match for both video and audio. Original master checksum matches supplied source audit.",
+  "original": {
+    "file": "public/assets/films/foam-overview-v1/overview.mp4",
+    "bytes": 11628594,
+    "sha256": "59a972252fd7858d660b6837a38fdd4c488f40bd171335461618a8f0c10e7102",
+    "boxes": [
+      {
+        "type": "ftyp",
+        "offset": 0,
+        "bytes": 32
+      },
+      {
+        "type": "free",
+        "offset": 32,
+        "bytes": 8
+      },
+      {
+        "type": "mdat",
+        "offset": 40,
+        "bytes": 11531214
+      },
+      {
+        "type": "moov",
+        "offset": 11531254,
+        "bytes": 97340
+      }
+    ],
+    "packetStreamHashes": [
+      "0,v,SHA256=a963e8fc6535c6751976db75b73d1ae457f09ecf77cc8b4464021fd7e224b398",
+      "1,a,SHA256=2a85be3f97c415478dbbc4c17cd0097df2c92654e2001f011043a265458b7ea9"
+    ],
+    "metadata": [
+      "Duration: 00:01:58.87, start: 0.000000, bitrate: 782 kb/s",
+      "Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 612 kb/s, 23.98 fps, 23.98 tbr, 90k tbn (default)",
+      "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 163 kb/s (default)"
+    ]
+  },
+  "playback": {
+    "file": "public/assets/films/foam-overview-v1/overview-playback.mp4",
+    "bytes": 11625668,
+    "sha256": "dd3b15c8b81709640ce66ff79217bdf40a616602f40b598c2a9590ed3cde6367",
+    "boxes": [
+      {
+        "type": "ftyp",
+        "offset": 0,
+        "bytes": 32
+      },
+      {
+        "type": "moov",
+        "offset": 32,
+        "bytes": 94414
+      },
+      {
+        "type": "free",
+        "offset": 94446,
+        "bytes": 8
+      },
+      {
+        "type": "mdat",
+        "offset": 94454,
+        "bytes": 11531214
+      }
+    ],
+    "packetStreamHashes": [
+      "0,v,SHA256=a963e8fc6535c6751976db75b73d1ae457f09ecf77cc8b4464021fd7e224b398",
+      "1,a,SHA256=2a85be3f97c415478dbbc4c17cd0097df2c92654e2001f011043a265458b7ea9"
+    ],
+    "metadata": [
+      "Duration: 00:01:58.87, start: 0.000000, bitrate: 782 kb/s",
+      "Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 612 kb/s, 23.98 fps, 23.98 tbr, 90k tbn (default)",
+      "Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 163 kb/s (default)"
+    ]
+  }
+}
