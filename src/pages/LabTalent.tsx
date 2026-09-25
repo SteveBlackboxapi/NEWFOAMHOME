@@ -53,11 +53,13 @@ import {
   type TalentLayout,
 } from "../components/TalentLabTables";
 import { matchesTalentPlatforms, talentNetworks } from "../lib/talentPlatforms";
-import { ChromeWallpaperSettings } from "../components/ChromeWallpaperSettings";
+import { TalentLabAccountMenu } from "../components/TalentLabAccountMenu";
+import { TalentLabSettings } from "../components/TalentLabSettings";
+import { enterLabSettings, exitLabSettings } from "../lib/websiteImageSettings";
 import "./talent-lab.css";
 import "./lab-marketing.css";
 
-type View = "talent" | "content" | "saved";
+type View = "talent" | "content" | "saved" | "settings";
 type Filters = {
   talent: string;
   platforms: TalentNetwork[];
@@ -101,7 +103,7 @@ export function LabTalent() {
   const [managing, setManaging] = useState<string | null>(null);
   const [params, setParams] = useSearchParams();
   const view: View =
-    params.get("view") === "content" || params.get("view") === "saved"
+    params.get("view") === "content" || params.get("view") === "saved" || params.get("view") === "settings"
       ? (params.get("view") as View)
       : "talent";
   const selected = stagedTalent.find((t) => t.id === params.get("talent"));
@@ -156,7 +158,11 @@ export function LabTalent() {
     (n, value) => n + (Array.isArray(value) ? value.length : value ? 1 : 0),
     0,
   );
-  const title = navItems.find((n) => n.view === view)!.label;
+  const title = view === "settings" ? "Settings" : navItems.find((n) => n.view === view)!.label;
+  const openSettings = () => {
+    setFilterOpen(false);
+    setParams(enterLabSettings);
+  };
 
   useEffect(() => {
     document.title = `${title} · Foam Lab`;
@@ -208,6 +214,9 @@ export function LabTalent() {
       p.delete("talent");
       p.delete("asset");
       p.delete("q");
+      p.delete("from");
+      p.delete("settingsPage");
+      p.delete("settingsTab");
       return p;
     });
     setFilters(EMPTY);
@@ -398,18 +407,16 @@ export function LabTalent() {
           >
             <LabIcon name="external" />
           </a>
-          <span className="tl-avatar" title="Demo workspace">
-            FL
-          </span>
+          <TalentLabAccountMenu onSettings={openSettings} settingsActive={view === "settings"} />
         </div>
       </nav>
       <div className="tl-main">
         <header className="tl-header">
           <div className="tl-title">
             <span className="tl-eyebrow">FOAM LAB</span>
-            <h1>{title}</h1>
+            <h1 tabIndex={-1}>{title}</h1>
           </div>
-          <label className="tl-search">
+          {view !== "settings" && <label className="tl-search">
             <LabIcon name="search" size={20} />
             <span className="tl-sr-only">Search talent and content</span>
             <input
@@ -432,47 +439,27 @@ export function LabTalent() {
                 <LabIcon name="close" size={16} />
               </button>
             )}
-          </label>
+          </label>}
           <span className="tl-workspace-label">
             <span /> Demo workspace
           </span>
-          <ChromeWallpaperSettings />
         </header>
-        <div className="tl-online-status">
+        {view === "settings" ? <TalentLabSettings library={library} onManage={setManaging} onBack={() => {
+          setParams(exitLabSettings);
+          requestAnimationFrame(() => document.querySelector<HTMLHeadingElement>(".tl-title h1")?.focus());
+        }} /> : <>
+        {(library.loading || library.error || library.dirty) && <div className="tl-library-notice" role="status">
           <span>
             {library.loading
               ? "Loading the online library…"
               : library.error
-                ? "Online library unavailable — open Manage library to reconnect."
+                ? "The online library could not be loaded. Open Settings to reconnect."
                 : library.dirty
                   ? "Unsaved library changes"
-                  : "GitHub library · changes saved for review"}
+                  : "Your library changes are saved"}
           </span>
-          {PRIVATE_LIBRARY && (
-            <button
-              className="tl-button"
-              onClick={() => {
-                if (
-                  !library.dirty ||
-                  window.confirm(
-                    "Discard your unsaved draft and lock the library?",
-                  )
-                ) {
-                  library.reset();
-                  void library.disconnect();
-                }
-              }}
-            >
-              Lock library
-            </button>
-          )}
-          <button
-            className="tl-button tl-primary"
-            onClick={() => setManaging("")}
-          >
-            Add talent / manage images
-          </button>
-        </div>
+          {!library.loading && <button className="tl-text-button" type="button" onClick={openSettings}>Open Settings</button>}
+        </div>}
         <div className="tl-intro">
           <p>
             {view === "talent"
@@ -1004,8 +991,9 @@ export function LabTalent() {
             GitHub library · Bookmarks and captions saved in this browser
           </span>
         </footer>
+        </>}
       </div>
-      {selected && (
+      {selected && view !== "settings" && (
         <TalentLabProfile
           key={selected.id}
           talent={selected}

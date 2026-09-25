@@ -373,6 +373,7 @@ function SelectedPost({
             <OptimizedImage sizes="(max-width: 700px) 90vw, 400px" className="fs-video-blur" src={tile.thumb} alt="" />
             <video
               ref={video}
+              data-block-site-update
               poster={imageSource(tile.thumb, 768)}
               muted
               playsInline

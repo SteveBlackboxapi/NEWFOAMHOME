@@ -463,17 +463,7 @@ export function materializeLibrary(
   revision: string | null,
   pending: Record<string, string> = {},
 ): StagedTalent[] {
-  const convert = (src: string) => {
-    const path = assetPath(src);
-    return (
-      pending[path] ||
-      (path.startsWith("assets/talent/uploads/") && revision
-        ? PRIVATE_LIBRARY
-          ? `/api/asset?path=${encodeURIComponent(path)}&ref=${encodeURIComponent(revision)}`
-          : `https://raw.githubusercontent.com/${LIBRARY_REPO}/${revision}/public/${path}`
-        : `${SITE_ROOT}/${path}`)
-    );
-  };
+  const convert = (src: string) => materializeLibraryImage(src, revision, pending);
   const overrides = new Map(
     manifest.profiles.map((p) => [p.id, mapSources(p, convert)]),
   );
@@ -483,6 +473,20 @@ export function materializeLibrary(
       .filter((p) => !base.some((b) => b.id === p.id))
       .map((p) => overrides.get(p.id)!),
   ].filter((p) => !manifest.removedTalentIds.includes(p.id));
+}
+/** The sitemap and library share the same pending-preview and immutable-image resolution. */
+export function materializeLibraryImage(
+  src: string,
+  revision: string | null,
+  pending: Record<string, string> = {},
+): string {
+  const path = assetPath(src);
+  return pending[path] ||
+    (path.startsWith("assets/talent/uploads/") && revision
+      ? PRIVATE_LIBRARY
+        ? `/api/asset?path=${encodeURIComponent(path)}&ref=${encodeURIComponent(revision)}`
+        : `https://raw.githubusercontent.com/${LIBRARY_REPO}/${revision}/public/${path}`
+      : `${SITE_ROOT}/${path}`);
 }
 export async function readGithubLibrary(token = ""): Promise<LibrarySnapshot> {
   let ref;

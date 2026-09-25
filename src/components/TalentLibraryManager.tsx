@@ -253,14 +253,14 @@ export function TalentLibraryManager({
             after you save. New images and profiles stay in the library.
           </p>
         </div>
-        {library.connected ? (
+        {library.connected ? !PRIVATE_LIBRARY && (
           <button
             className="tl-button"
             disabled={busy}
             onClick={() =>
               library.dirty
                 ? setConfirm({
-                    label: "Discard your unsaved draft and lock the library?",
+                    label: "Discard your unsaved draft and disconnect?",
                     run: () => {
                       library.reset();
                       void library.disconnect();
@@ -269,7 +269,7 @@ export function TalentLibraryManager({
                 : void library.disconnect()
             }
           >
-            {PRIVATE_LIBRARY ? "Lock library" : "Disconnect"}
+            Disconnect
           </button>
         ) : (
           <details>
@@ -335,7 +335,7 @@ export function TalentLibraryManager({
       {library.hasWebsiteReplacements && (
         <p role="status" className={library.publication?.queued === false ? "tl-library-error" : "tl-library-message"}>
           {library.publication?.published
-            ? "Website image replacements are published. Refresh the website to see the update."
+            ? "Website image replacements are live. Open website pages will refresh when idle."
             : library.publication?.queued
             ? "Website image update queued. It will appear when the website finishes publishing."
             : library.publication?.error || "Saved website replacements are included whenever the website publishes."}

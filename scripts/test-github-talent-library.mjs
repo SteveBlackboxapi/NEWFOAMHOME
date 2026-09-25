@@ -928,6 +928,15 @@ test("private publication retries send only the pinned revision, and status retu
   assert.equal(calls.length, 2);
 });
 
+test("website settings previews prefer unsaved image bytes and retain saved revision URLs for artwork and photos", () => {
+  const api = loadLibrary(true);
+  const uploaded = src("website-artwork");
+  assert.equal(api.materializeLibraryImage(uploaded, BEFORE, { [uploaded]: "data:image/png;base64,local-draft" }), "data:image/png;base64,local-draft");
+  assert.equal(api.materializeLibraryImage(uploaded, AFTER), `/api/asset?path=${encodeURIComponent(uploaded)}&ref=${AFTER}`);
+  assert.equal(api.materializeLibraryImage("assets/campaigns/billboard.webp", AFTER), "/NEWFOAMHOME/assets/campaigns/billboard.webp");
+  assert.throws(() => api.materializeLibraryImage("https://other.example/artwork.png", AFTER), api.LibraryError);
+});
+
 // Node has no browser decoder; create a replaceable stub, always mocked per test.
 if (!("createImageBitmap" in globalThis))
   globalThis.createImageBitmap = async () => {

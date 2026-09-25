@@ -7,6 +7,7 @@ import {
   canonicalProfile,
   emptyLibrary,
   materializeLibrary,
+  materializeLibraryImage,
   readGithubLibrary,
   saveGithubLibrary,
   retryWebsitePublication,
@@ -191,6 +192,12 @@ export function useTalentLibrary() {
     () => materializeLibrary(labTalent, manifest, snapshot.revision, previews),
     [manifest, snapshot.revision, previews],
   );
+  const websiteImages = useMemo(() => Object.fromEntries(
+    Object.entries(manifest.websiteReplacements || {}).map(([source, replacement]) =>
+      [source, materializeLibraryImage(replacement, snapshot.revision, previews)]),
+  ), [manifest.websiteReplacements, snapshot.revision, previews]);
+  const changedWebsiteImages = Object.keys(manifest.websiteReplacements || {}).filter((source) =>
+    manifest.websiteReplacements?.[source] !== snapshot.manifest.websiteReplacements?.[source]);
   const upsert = (profile: StagedTalent) =>
     setManifest((previous) => ({
       ...previous,
@@ -214,6 +221,8 @@ export function useTalentLibrary() {
   return {
     profiles,
     rawProfiles,
+    websiteImages,
+    changedWebsiteImages,
     loading,
     saving,
     ready,

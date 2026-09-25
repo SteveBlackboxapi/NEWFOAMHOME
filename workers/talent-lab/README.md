@@ -53,6 +53,10 @@ All responses disable caching and indexing. The Content Security Policy restrict
 
 ## Publishing website image replacements
 
+Open the bottom-left workspace menu, choose **Settings → Website images**, and select a page in the image map. Each section shows its current images and shared placements. **Replace** stages a new image; **Save changes** saves it and queues website publishing. **Talent library** keeps profile and content management separate from Explore content. Returning from Settings preserves the current search and library view.
+
+**Lock this browser** lives in Settings. It closes the current browser's editing session and requires the password next time; saved images and the shared GitHub connection remain intact. Unsaved changes receive a discard confirmation first.
+
 Saving a replacement for an image with an existing website placement adds an explicit `websiteReplacements` entry to the library manifest. Its key is the original canonical website image path (for example, `assets/talent/nia-brooks/nia-brooks-skincare.webp`) and its value is a canonical uploaded image path. Stable asset IDs keep the same source key through repeated replacements. New images, new profiles, old saved drafts, removed profiles and other profile edits do not become publication instructions. Replacing a video poster changes the public poster only; the public demo's video, identity, metrics and layout remain unchanged. Referenced published uploads are retained even when a draft profile no longer uses them.
 
 After an approved library branch reference advances, the Worker sends one fixed GitHub `repository_dispatch` event: `talent-library-saved`, with `client_payload.libraryRevision` set to the saved commit SHA. The existing Contents-write GitHub key is sufficient. The public workflow must exist on `main` and build source from `main`; the separate, older library branch is never merged or executed. A failed dispatch returns a successful save with a separate failed publication status, so the editor keeps the saved revision and can retry without resaving or overwriting the catalogue.
