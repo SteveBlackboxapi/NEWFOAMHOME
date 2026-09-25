@@ -229,7 +229,9 @@ function loginPage(error = "", status = 200) {
 async function github(path, token, method = "GET", body, fetcher = fetch) {
   const result = await fetcher(`${GITHUB}${path}`, {
     method,
-    redirect: "error",
+    // workerd supports manual/follow only. Never follow an upstream redirect,
+    // particularly when the request carries the private GitHub access key.
+    redirect: "manual",
     headers: {
       Accept: "application/vnd.github+json",
       "X-GitHub-Api-Version": "2026-03-10",
@@ -241,7 +243,7 @@ async function github(path, token, method = "GET", body, fetcher = fetch) {
   });
   if (!result.ok)
     fail(
-      result.status >= 500 ? 502 : result.status,
+      result.status >= 500 || (result.status >= 300 && result.status < 400) ? 502 : result.status,
       result.status === 404
         ? "The library record was not found."
         : "GitHub could not complete this library request.",
@@ -551,7 +553,7 @@ export async function handleRequest(
     }
     if (url.pathname === "/api/publication" && request.method === "GET") {
       const upstream = await fetcher(`${PUBLIC_SITE}/website-publication.json?check=${Date.now()}`, {
-        redirect: "error",
+        redirect: "manual",
         headers: { "Cache-Control": "no-cache" },
       });
       if (!upstream.ok) return json({ revision: null });
@@ -591,7 +593,7 @@ export async function handleRequest(
         `${GITHUB}/contents/public/${path}?ref=${revision}`,
         {
           method: request.method,
-          redirect: "error",
+          redirect: "manual",
           headers: {
             Accept: "application/vnd.github.raw+json",
             "X-GitHub-Api-Version": "2026-03-10",
@@ -650,7 +652,7 @@ export async function handleRequest(
         : `${PUBLIC_SITE}${url.pathname}`;
       const upstream = await fetcher(upstreamUrl, {
         method: request.method,
-        redirect: "error",
+        redirect: "manual",
         headers: Object.fromEntries(
           ["Range", "If-Range"]
             .filter((name) => request.method === "GET" && request.headers.has(name))

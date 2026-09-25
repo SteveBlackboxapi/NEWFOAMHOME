@@ -58,6 +58,9 @@ async function fixture() {
     },
   };
   const fetcher = async (url, options = {}) => {
+    // Match workerd: Node also accepts "error", masking a production exception.
+    if (options.redirect !== undefined && !["follow", "manual"].includes(options.redirect))
+      throw new TypeError("Invalid redirect value: workerd supports follow or manual.");
     calls.push({ url, options });
     const path = new URL(url).pathname.replace(
       "/repos/SteveBlackboxapi/NEWFOAMHOME",
@@ -299,7 +302,7 @@ test("reviewed WebM media can use a fixed repository revision only after authent
       Range: "bytes=0-3",
       "If-Range": '"reviewed-video"',
     });
-    assert.equal(calls.at(-1).options.redirect, "error");
+    assert.equal(calls.at(-1).options.redirect, "manual");
   }
   for (const path of [
     "/assets/talent/unreviewed.webm",
@@ -775,6 +778,31 @@ test("publication status reads only the public marker after authentication witho
   assert.deepEqual(await result.json(), { revision: COMMIT });
   assert.match(upstreamCalls[0].url, /^https:\/\/steveblackboxapi.github.io\/NEWFOAMHOME\/website-publication.json\?check=\d+$/);
   assert.deepEqual(upstreamCalls[0].options.headers, { "Cache-Control": "no-cache" });
+  assert.equal(upstreamCalls[0].options.redirect, "manual");
+});
+test("upstream redirects are rejected without forwarding locations or access keys", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  for (const [path, expected] of [
+    ["/api/github/git/ref/heads/main", 502],
+    [`/api/asset?path=assets/talent/uploads/example.webp&ref=${COMMIT}`, 502],
+    ["/assets/talent/example.webp", 404],
+    ["/api/publication", 200],
+  ]) {
+    const calls = [];
+    const result = await handleRequest(new Request(`${ORIGIN}${path}`, { headers: { Cookie: cookie } }), f.env, {}, async (url, options) => {
+      calls.push({ url, options });
+      assert.equal(options.redirect, "manual");
+      return new Response("untrusted-upstream-body", { status: 302, headers: { Location: "https://attacker.example/capture" } });
+    });
+    assert.equal(result.status, expected, path);
+    assert.equal(calls.length, 1, path);
+    assert.equal(result.headers.get("Location"), null);
+    const body = await result.text();
+    assert.ok(!body.includes("attacker.example") && !body.includes("untrusted-upstream-body") && !body.includes(TOKEN));
+    if (path === "/api/publication") assert.deepEqual(JSON.parse(body), { revision: null });
+  }
 });
 test("streaming body limit applies even without a Content-Length header", async () => {
   const f = await fixture();
