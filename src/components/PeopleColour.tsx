@@ -1,3 +1,5 @@
+import { OptimizedImage } from "./OptimizedImage";
+import { useLocation } from "react-router";
 import { MiniIllustration } from "./mini-ui/MiniIllustration";
 import { Reveal } from "./Marketing";
 import { websiteFitness } from "../data/campaignTalent";
@@ -19,7 +21,7 @@ export function CreatorWall() {
         <div className="pc-creator-wall">
           <div className="pc-wall-column pc-col-one">
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
                 alt="Fictional creator Elise taking a hotel mirror selfie"
                 width="941"
@@ -53,7 +55,7 @@ export function CreatorWall() {
               </div>
             </figure>
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${A}/talent/nia-brooks/nia-brooks-skincare.webp`}
                 alt="Fictional creator Nia sharing her skincare routine"
                 width="941"
@@ -65,7 +67,7 @@ export function CreatorWall() {
           </div>
           <div className="pc-wall-column pc-col-three">
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${PC}/story-refresh-v1/music-creator.webp`}
                 alt="AI-generated fictional musician Nico having coffee at his home-studio desk"
                 width="1024"
@@ -75,7 +77,7 @@ export function CreatorWall() {
               />
             </figure>
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${A}/talent/discovery-v1/jax-live-set.webp`}
                 alt="Fictional creator Jax playing a live synth set, made with AI"
                 width="1122"
@@ -88,7 +90,7 @@ export function CreatorWall() {
           </div>
           <div className="pc-wall-column pc-col-four">
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${PC}/story-refresh-v1/outdoor-creator.webp`}
                 alt="AI-generated fictional creator Iris wearing sunglasses beneath a bright blue sky"
                 width="1024"
@@ -112,12 +114,12 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-five">
             <figure className="pc-creator-tile pc-colour-tile pc-blue">
               <div className="pc-tile-message">
-                <DiscoveryArtwork resultLabel="(3) Strong matches" />
+                <DiscoveryArtwork section="A world of talent · Found preview" resultLabel="(3) Strong matches" />
                 <p>Found with Foam</p>
               </div>
             </figure>
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${A}/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp`}
                 alt="Fictional creator Samantha sharing a dance moment"
                 width="941"
@@ -129,7 +131,7 @@ export function CreatorWall() {
           </div>
           <div className="pc-wall-column pc-col-six">
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${PC}/story-refresh-v1/ada-flash.webp`}
                 alt="AI-generated fictional creative Ada at her studio desk, photographed with direct flash"
                 width="1024"
@@ -151,7 +153,7 @@ export function CreatorWall() {
           </div>
           <div className="pc-wall-column pc-col-seven">
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={`${PC}/original-portraits-v1/blue-portrait-original-v1.webp`}
                 alt="AI-generated fictional creative laughing against a vivid blue backdrop"
                 width="1448"
@@ -161,7 +163,7 @@ export function CreatorWall() {
               />
             </figure>
             <figure className="pc-creator-tile">
-              <img
+              <OptimizedImage section="A world of talent · Creator wall"
                 src={websiteFitness.content[0].thumb}
                 alt="Avery Cole’s fictional fitness profile, using supplied waterfront imagery"
                 width="1800"
@@ -187,7 +189,7 @@ export function PhotoFeature() {
       aria-label="For creators and their champions"
     >
       <Reveal className="pc-photo-banner pc-photo-reveal">
-        <img
+        <OptimizedImage section="Good work. Deserves to be seen."
           className="pc-banner-image"
           src={`${PC}/studio-moment.webp`}
           width="1672"
@@ -250,8 +252,8 @@ export function WorkspaceGrid() {
                   <br /> your kind of team.
                 </h3>
               </div>
-              <img
-                src={`${PC}/collaborators.webp`}
+              <OptimizedImage
+                section="A little of everything · Your people" src={`${PC}/collaborators.webp`}
                 alt="Collaborators using laptops, in an illustrative photograph"
                 width="736"
                 height="552"
@@ -288,8 +290,8 @@ export function WorkspaceGrid() {
                   Explore Media Kit <span aria-hidden="true">↗</span>
                 </Link>
               </div>
-              <img
-                src={`${A}/foam-media-kit.webp`}
+              <OptimizedImage
+                section="A little of everything · Media Kit" src={`${A}/foam-media-kit.webp`}
                 width="300"
                 height="300"
                 alt="Foam Media Kit icon"
@@ -326,8 +328,8 @@ export function WorkspaceGrid() {
                   <div className="pc-phone-logo">
                     foam <span>MEDIA KIT</span>
                   </div>
-                  <img
-                    src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
+                  <OptimizedImage
+                    section="A little of everything · Phone media kit" src={`${A}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`}
                     alt="Elise’s fictional travel and fashion media kit"
                     loading="lazy"
                     decoding="async"
@@ -349,7 +351,7 @@ export function WorkspaceGrid() {
             </article>
             <article className="pc-chrome-card pc-chrome-preview">
               <Reveal className="pc-chrome-preview-art">
-                <MiniIllustration kind="chrome" disclosure={false} />
+                <MiniIllustration section="A little of everything · Foam for Chrome" kind="chrome" disclosure={false} />
               </Reveal>
               <div className="pc-chrome-preview-copy">
                 <span className="pc-eyebrow">FOAM FOR CHROME</span>
@@ -380,6 +382,8 @@ export function ProductFamily({
   heading?: boolean;
   miniatures?: boolean;
 }) {
+  const { pathname } = useLocation();
+  const miniatureSection = pathname === "/" ? "Product family" : "Product preview";
   return (
     <section
       className={`pc-design pc-product-family pc-shell${miniatures ? " pc-product-miniatures" : ""}`}
@@ -399,11 +403,11 @@ export function ProductFamily({
       <div className="pc-tool-row">
         <Link className="pc-tool-card" to="/kit-story/">
           {miniatures ? (
-            <MiniIllustration kind="kit" />
+            <MiniIllustration section={`${miniatureSection} · Media kit miniature`} kind="kit" />
           ) : (
             <div className="pc-tool-image pc-cream">
-              <img
-                src={`${A}/foam-media-kit.webp`}
+              <OptimizedImage
+                section="Product family · Media Kit" src={`${A}/foam-media-kit.webp`}
                 alt="Foam Media Kit icon"
                 width="300"
                 height="300"
@@ -431,10 +435,10 @@ export function ProductFamily({
         </Link>
         <Link className="pc-tool-card" to="/kit-story/#found-with-foam">
           {miniatures ? (
-            <MiniIllustration kind="search" />
+            <MiniIllustration section={`${miniatureSection} · Content search miniature`} kind="search" />
           ) : (
             <div className="pc-tool-image pc-ice">
-              <DiscoveryArtwork />
+              <DiscoveryArtwork section="Product family · Found with Foam" />
             </div>
           )}
           <div className="pc-tool-info">
@@ -456,12 +460,12 @@ export function ProductFamily({
         </Link>
         <Link className="pc-tool-card" to="/chrome-story/">
           {miniatures ? (
-            <MiniIllustration kind="inbox" />
+            <MiniIllustration section={`${miniatureSection} · Foam for Chrome miniature`} kind="inbox" />
           ) : (
             <div className="pc-tool-image pc-mist pc-chrome-artwork">
-              <img
+              <OptimizedImage
                 className="pc-chrome-tool"
-                src={`${A}/chrome-store-transparent.webp`}
+                section="Product family · Foam for Chrome" src={`${A}/chrome-store-transparent.webp`}
                 alt="Chrome Web Store logo"
                 width="300"
                 height="300"
@@ -524,7 +528,7 @@ export function PeopleTiles({
   return (
     <div className="pc-design pc-people-tiles">
       <div className="pc-people-tiles-grid">
-        <img
+        <OptimizedImage section="Opening collage"
           src={kind === "brands" ? websiteFitness.content[0].thumb : `${A}/talent/${portraits[kind][0]}`}
           alt={kind === "brands" ? "Avery Cole, a fictional fitness profile using supplied imagery" : "Fictional creator made with AI"}
           decoding="async"
@@ -534,7 +538,7 @@ export function PeopleTiles({
           <p>{message}</p>
           <span aria-hidden="true">↗</span>
         </div>
-        <img
+        <OptimizedImage section="Opening collage"
           src={`${A}/talent/${portraits[kind][1]}`}
           alt={
             kind === "managers"
@@ -543,7 +547,7 @@ export function PeopleTiles({
           }
           decoding="async"
         />
-        <img
+        <OptimizedImage section="Opening collage"
           src={kind === "brands" ? websiteMatcha.portrait : `${A}/talent/${portraits[kind][2]}`}
           alt={kind === "brands" ? "Theo Lane enjoying an iced matcha, fictional lifestyle creator made with AI" : "Fictional creator sharing their work, made with AI"}
           decoding="async"

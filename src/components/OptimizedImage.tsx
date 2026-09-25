@@ -1,7 +1,12 @@
 import type { ComponentPropsWithRef } from 'react';
 import { imageSources } from '../lib/imageAssets';
+import { useWebsiteImageResolver } from './WebsiteImageScope';
 
-/** Native responsive selection retains the original image as a safe fallback. */
-export function OptimizedImage({ src, sizes = '(max-width: 700px) 90vw, 640px', srcSet, decoding = 'async', ...props }: ComponentPropsWithRef<'img'>) {
-  return <img {...props} src={src} srcSet={srcSet || (src ? imageSources(src) : undefined)} sizes={sizes} decoding={decoding} />;
+export type WebsiteImageProps = ComponentPropsWithRef<'img'> & { section?: string };
+
+/** Resolve this placement before selecting its responsive variants. */
+export function OptimizedImage({ src, section, sizes = '(max-width: 700px) 90vw, 640px', srcSet, decoding = 'async', ...props }: WebsiteImageProps) {
+  const resolve = useWebsiteImageResolver(section);
+  const resolved = src ? resolve(src) : src;
+  return <img {...props} src={resolved} srcSet={srcSet || (resolved ? imageSources(resolved) : undefined)} sizes={sizes} decoding={decoding} />;
 }

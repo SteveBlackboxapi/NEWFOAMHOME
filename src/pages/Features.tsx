@@ -140,7 +140,7 @@ function FeatureExplorer() {
               <Link to={current.link} className="td-text-link">{current.cta} <span aria-hidden="true">↗</span></Link>
             ) : <ActionLink to={current.link}>{current.cta}</ActionLink>}
           </div>
-          {current.illustration === "talent" ? <TalentSearchPreview /> : <MiniIllustration kind={current.illustration} />}
+          {current.illustration === "talent" ? <TalentSearchPreview /> : <MiniIllustration section={`Product preview · ${{ kit: "Media kit miniature", shortlist: "Shortlist miniature", search: "Content search miniature", inbox: "Foam for Chrome miniature" }[current.illustration]}`} kind={current.illustration} />}
         </div>
       </div>
     </section>

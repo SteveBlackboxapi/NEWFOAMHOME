@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router";
-import { normalizeWebsiteAssetSrc, websiteAssetUsage, type WebsiteAssetUsage } from "../data/websiteAssetUsage";
+import { normalizeWebsiteAssetSrc, websiteAssetUsage, type WebsiteAssetUsage, type WebsiteLocation } from "../data/websiteAssetUsage";
 import { websiteSettingsPages } from "../lib/websiteImageSettings";
-import { PRIVATE_LIBRARY, prepareLibraryImage } from "../lib/githubTalentLibrary";
+import { PRIVATE_LIBRARY, prepareLibraryImage, websitePlacementKey } from "../lib/githubTalentLibrary";
 import type { TalentLibraryController } from "../hooks/useTalentLibrary";
 import { LabIcon } from "./TalentLabIcon";
 
@@ -25,10 +25,10 @@ export function TalentLabSettings({ library, onBack, onManage }: {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const fileInput = useRef<HTMLInputElement>(null);
-  const replacement = useRef<WebsiteAssetUsage | null>(null);
+  const replacement = useRef<{ asset: WebsiteAssetUsage; placement?: WebsiteLocation } | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const tabs = useRef<HTMLDivElement>(null);
-  const busy = library.saving || processing;
+  const busy = library.saving || library.loading || processing;
   const editable = library.ready && !library.loading && !busy;
   useEffect(() => { heading.current?.focus(); }, []);
   const changeTab = (next: "website" | "library") => {
@@ -40,21 +40,33 @@ export function TalentLabSettings({ library, onBack, onManage }: {
     setMessage("");
     setError("");
   };
-  const imageFor = (asset: WebsiteAssetUsage) => library.websiteImages[canonical(asset.src)] || asset.src;
+  const imageFor = (asset: WebsiteAssetUsage, placement?: WebsiteLocation) =>
+    (placement && library.websitePlacementImages[websitePlacementKey(canonical(asset.src), placement.route, placement.section)]) ||
+    library.websiteImages[canonical(asset.src)] || asset.src;
+  const chooseReplacement = (asset: WebsiteAssetUsage, placement?: WebsiteLocation) => {
+    replacement.current = { asset, placement };
+    fileInput.current?.click();
+  };
   const returnLabel = params.get("from") === "talent" ? "Talent directory" : params.get("from") === "saved" ? "Saved assets" : "Explore content";
   const otherAssets = websiteAssetUsage.filter((asset) =>
     asset.uses.some((use) => use.route === page.route) && !/\.(?:png|jpe?g|webp)$/i.test(canonical(asset.src)));
   const replace = async (file: File) => {
-    const asset = replacement.current;
-    if (!asset || !editable) return;
+    const target = replacement.current;
+    if (!target || !editable) return;
+    const { asset, placement } = target;
     setProcessing(true);
     setError("");
     setMessage("");
     try {
       const prepared = await prepareLibraryImage(file);
       library.addUpload(prepared.upload, prepared.preview);
-      library.replaceWebsiteImage(canonical(asset.src), prepared.src);
-      setMessage(`Replacement ready for ${asset.label}. Save changes to update all ${asset.uses.length} website ${asset.uses.length === 1 ? "placement" : "placements"}.`);
+      if (placement) {
+        library.replaceWebsitePlacement(canonical(asset.src), placement.route, placement.section, prepared.src);
+        setMessage(`Replacement ready for ${pageNames.get(placement.route) || placement.route} · ${placement.section}. Save changes to publish it here.`);
+      } else {
+        library.replaceWebsiteImage(canonical(asset.src), prepared.src);
+        setMessage(`Replacement ready for all ${asset.uses.length} places using ${asset.label}. Save changes to publish everywhere.`);
+      }
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "This image could not be opened.");
     } finally {
@@ -88,7 +100,7 @@ export function TalentLabSettings({ library, onBack, onManage }: {
           <div>
             <h2 ref={heading} tabIndex={-1}>{tab === "website" ? "Website images" : "Talent library"}</h2>
             <p>{tab === "website"
-              ? "Find an image by page and section. Replace it once, then save to update every place it appears."
+              ? "Choose a page and section, then replace an image just there. Open its other appearances to change them individually or all at once."
               : "Add talent, update profiles and organize your library images."}</p>
           </div>
           <span className={`tl-settings-connection ${library.connected ? "is-connected" : ""}`}>
@@ -106,8 +118,9 @@ export function TalentLabSettings({ library, onBack, onManage }: {
             {library.dirty && <button className="tl-button" type="button" disabled={busy} onClick={() => {
               if (window.confirm("Discard your unsaved changes? Your saved images stay as they are.")) { library.reset(); setMessage(""); setError(""); }
             }}>Discard draft</button>}
-            <button className="tl-button tl-primary" type="button" disabled={!library.dirty || !library.connected || busy} onClick={async () => {
+            <button className="tl-button tl-primary" type="button" disabled={!library.ready || !library.dirty || !library.connected || busy} onClick={async () => {
               setError("");
+              setMessage("");
               try { const saved = await library.save(); if (saved) setMessage("Changes saved."); } catch { /* The library reports the save error. */ }
             }}>{library.saving ? "Saving…" : "Save changes"}</button>
           </div>
@@ -131,7 +144,7 @@ export function TalentLabSettings({ library, onBack, onManage }: {
                 const preview = item.sections.find((section) => !section.name.startsWith("Footer"))?.assets[0] || item.sections[0]?.assets[0];
                 return <button type="button" key={item.route} aria-current={item.route === page.route ? "page" : undefined}
                   onClick={() => setParams((previous) => { const updated = new URLSearchParams(previous); updated.set("settingsPage", item.route); return updated; })}>
-                  {preview && <img src={imageFor(preview)} alt="" loading="lazy" />}
+                  {preview && <img src={imageFor(preview, preview.uses.find((use) => use.route === item.route))} alt="" loading="lazy" />}
                   <span><strong>{item.label}</strong><small>{item.imageCount} images</small></span>
                   <LabIcon name="chevron" size={14} />
                 </button>;
@@ -146,24 +159,43 @@ export function TalentLabSettings({ library, onBack, onManage }: {
                 <section className="tl-website-section" key={section.name} aria-label={section.name}>
                   <h4><span aria-hidden="true" />{section.name}<small>{section.assets.length}</small></h4>
                   <div className="tl-website-images">
-                    {section.assets.map((asset) => {
+                    {section.assets.map((asset, index) => {
                       const source = canonical(asset.src);
-                      const changed = library.changedWebsiteImages.includes(source);
+                      const placement = { route: page.route, section: section.name };
+                      const key = websitePlacementKey(source, placement.route, placement.section);
+                      const changed = library.changedWebsiteImages.includes(source) || library.changedWebsitePlacements.includes(key);
                       return <article className="tl-website-image" key={source}>
-                        <div className="tl-website-thumbnail"><img src={imageFor(asset)} alt={asset.label} loading="lazy" decoding="async" />
+                        <div className="tl-website-thumbnail"><img src={imageFor(asset, placement)} alt={asset.label} loading="lazy" decoding="async" />
+                          <small className="tl-website-image-number">Image {index + 1}</small>
                           {changed && <span>Unsaved replacement</span>}
                         </div>
                         <div className="tl-website-image-info">
                           <h5>{asset.label}</h5>
                           <p>{asset.kind === "artwork" ? "Artwork / background" : asset.kind === "reference-photo" ? "Website photograph" : "Talent image"}</p>
-                          <details className="tl-website-placements">
-                            <summary>{asset.uses.length} website {asset.uses.length === 1 ? "placement" : "placements"} <LabIcon name="chevron" size={12} /></summary>
-                            <ul>{asset.uses.map((use) => <li key={`${use.route}:${use.section}`}><strong>{pageNames.get(use.route) || use.route}</strong><span>{use.section}</span></li>)}</ul>
-                          </details>
                           <button className="tl-button" type="button" disabled={!editable}
-                            aria-label={`Replace ${asset.label} in ${section.name}`} onClick={() => { replacement.current = asset; fileInput.current?.click(); }}>
-                            <LabIcon name="image" size={15} /> Replace image
+                            aria-label={`Replace ${asset.label} here in ${page.label} · ${section.name}`} onClick={() => chooseReplacement(asset, placement)}>
+                            <LabIcon name="image" size={15} /> Replace here
                           </button>
+                          <p className="tl-website-replace-hint">This appearance only</p>
+                          {asset.uses.length > 1 && <details className="tl-website-placements">
+                            <summary>Used in {asset.uses.length} places <LabIcon name="chevron" size={12} /></summary>
+                            <ul>{asset.uses.map((use) => {
+                              const useKey = websitePlacementKey(source, use.route, use.section);
+                              const isHere = useKey === key;
+                              return <li key={useKey} className={isHere ? "is-current" : undefined}>
+                                <img src={imageFor(asset, use)} alt="" loading="lazy" />
+                                <div><strong>{pageNames.get(use.route) || use.route}{isHere && <small>Here</small>}</strong><span>{use.section}</span></div>
+                                <button type="button" className="tl-button tl-placement-replace" disabled={!editable}
+                                  aria-label={`Replace ${asset.label} only in ${pageNames.get(use.route) || use.route} · ${use.section}`}
+                                  onClick={() => chooseReplacement(asset, use)}><LabIcon name="image" size={13} /> Replace here</button>
+                              </li>;
+                            })}</ul>
+                            <button className="tl-website-replace-all" type="button" disabled={!editable}
+                              onClick={() => chooseReplacement(asset)}
+                              aria-label={`Replace ${asset.label} everywhere in all ${asset.uses.length} places`}>
+                              Replace everywhere <span>All {asset.uses.length} places</span>
+                            </button>
+                          </details>}
                         </div>
                       </article>;
                     })}

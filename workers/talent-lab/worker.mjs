@@ -11,14 +11,39 @@ const MAX_BODY = 32 * 1024 * 1024;
 const TOKEN_KEY = "github-token-v1";
 const SHA = /^[a-f0-9]{40}$/;
 const UPLOAD = /^public\/assets\/talent\/uploads\/[a-z0-9-]+\.(png|jpg|webp)$/;
+function validWebsiteReplacementSource(source) {
+  return typeof source === "string" &&
+    /^assets\/[a-zA-Z0-9_./ -]+\.(?:png|jpe?g|webp)$/.test(source) &&
+    !source.startsWith("assets/talent/uploads/") &&
+    !source.split("/").some((part) => !part || part === "." || part === "..");
+}
 function validWebsiteReplacements(value) {
   if (value === undefined) return true;
   return value !== null && typeof value === "object" && !Array.isArray(value) &&
     Object.keys(value).length <= 1000 && Object.entries(value).every(([source, upload]) =>
-      /^assets\/[a-zA-Z0-9_./ -]+\.(?:png|jpe?g|webp)$/.test(source) &&
-      !source.startsWith("assets/talent/uploads/") &&
-      !source.split("/").some((part) => !part || part === "." || part === "..") &&
+      validWebsiteReplacementSource(source) &&
       typeof upload === "string" && UPLOAD.test(`public/${upload}`));
+}
+function validWebsitePlacementReplacements(value) {
+  if (value === undefined) return true;
+  return value !== null && typeof value === "object" && !Array.isArray(value) &&
+    Object.keys(value).length <= 3000 && Object.entries(value).every(([key, upload]) => {
+      let placement;
+      try {
+        placement = JSON.parse(key);
+      } catch {
+        return false;
+      }
+      if (!Array.isArray(placement) || placement.length !== 3 || JSON.stringify(placement) !== key)
+        return false;
+      const [source, route, section] = placement;
+      return validWebsiteReplacementSource(source) && !/[\u0000-\u001f\u007f\u2028\u2029]/.test(source) &&
+        typeof route === "string" && route.length <= 200 &&
+        route.startsWith("/") && !/[^a-zA-Z0-9/_-]/.test(route) && !route.includes("//") &&
+        typeof section === "string" && section.length <= 200 && section.trim().length > 0 &&
+        !/[\u0000-\u001f\u007f\u2028\u2029]/.test(section) &&
+        typeof upload === "string" && UPLOAD.exec(`public/${upload}`)?.[0] === `public/${upload}`;
+    });
 }
 const REVIEWED_WEBM = new Set([
   "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm",
@@ -412,7 +437,8 @@ async function proxyGithub(request, url, env, fetcher) {
           !Array.isArray(manifest.profiles) ||
           manifest.profiles.length > 500 ||
           !Array.isArray(manifest.removedTalentIds) ||
-          !validWebsiteReplacements(manifest.websiteReplacements)
+          !validWebsiteReplacements(manifest.websiteReplacements) ||
+          !validWebsitePlacementReplacements(manifest.websitePlacementReplacements)
         )
           fail(400, "Invalid library catalogue.");
       } else {

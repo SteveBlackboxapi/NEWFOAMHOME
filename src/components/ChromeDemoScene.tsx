@@ -107,7 +107,7 @@ export function ChromeCreatorEmbed() {
   return (
     <div className="cs-creator-embed">
       <div className="cs-embed-identity">
-        <OptimizedImage src={PROFILE.portrait} sizes="48px" alt={`${PROFILE.name} portrait`} />
+        <OptimizedImage section="Foam for Chrome · Selected profile and pasted email" src={PROFILE.portrait} sizes="48px" alt={`${PROFILE.name} portrait`} />
         <div>
           <strong>{PROFILE.name}</strong>
           <p>
@@ -291,12 +291,12 @@ export function ChromeExtensionPanel({
                       onClick={() => onStage?.(3)}
                       aria-label="Choose Samantha Pikka"
                     >
-                      <OptimizedImage src={talent.portrait} sizes="130px" alt="" />
+                      <OptimizedImage section="Foam for Chrome · Extension roster" src={talent.portrait} sizes="130px" alt="" />
                       <strong>{talent.name}</strong>
                     </button>
                   ) : (
                     <div className="cs-talent-choice">
-                      <OptimizedImage src={talent.portrait} sizes="130px" alt="" />
+                      <OptimizedImage section="Foam for Chrome · Extension roster" src={talent.portrait} sizes="130px" alt="" />
                       <strong>{talent.name}</strong>
                     </div>
                   )}
@@ -321,7 +321,7 @@ export function ChromeExtensionPanel({
               ‹
             </button>
             <figure>
-              <OptimizedImage src={PROFILE.portrait} sizes="105px" alt={`${PROFILE.name} portrait`} />
+              <OptimizedImage section="Foam for Chrome · Selected profile and pasted email" src={PROFILE.portrait} sizes="105px" alt={`${PROFILE.name} portrait`} />
               <figcaption>
                 <AIDisclosure size={8} className="justify-center" />
               </figcaption>

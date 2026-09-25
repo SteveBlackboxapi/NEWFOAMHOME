@@ -8,6 +8,8 @@ import {
   emptyLibrary,
   materializeLibrary,
   materializeLibraryImage,
+  withWebsiteImageReplacement,
+  withWebsitePlacementReplacement,
   readGithubLibrary,
   saveGithubLibrary,
   retryWebsitePublication,
@@ -198,6 +200,14 @@ export function useTalentLibrary() {
   ), [manifest.websiteReplacements, snapshot.revision, previews]);
   const changedWebsiteImages = Object.keys(manifest.websiteReplacements || {}).filter((source) =>
     manifest.websiteReplacements?.[source] !== snapshot.manifest.websiteReplacements?.[source]);
+  const websitePlacementImages = useMemo(() => Object.fromEntries(
+    Object.entries(manifest.websitePlacementReplacements || {}).map(([key, replacement]) =>
+      [key, materializeLibraryImage(replacement, snapshot.revision, previews)]),
+  ), [manifest.websitePlacementReplacements, snapshot.revision, previews]);
+  const changedWebsitePlacements = [...new Set([
+    ...Object.keys(manifest.websitePlacementReplacements || {}),
+    ...Object.keys(snapshot.manifest.websitePlacementReplacements || {}),
+  ])].filter((key) => manifest.websitePlacementReplacements?.[key] !== snapshot.manifest.websitePlacementReplacements?.[key]);
   const upsert = (profile: StagedTalent) =>
     setManifest((previous) => ({
       ...previous,
@@ -223,13 +233,16 @@ export function useTalentLibrary() {
     rawProfiles,
     websiteImages,
     changedWebsiteImages,
+    websitePlacementImages,
+    changedWebsitePlacements,
     loading,
     saving,
     ready,
     error,
     dirty,
     publication: snapshot.publication,
-    hasWebsiteReplacements: Object.keys(snapshot.manifest.websiteReplacements || {}).length > 0,
+    hasWebsiteReplacements: Object.keys(snapshot.manifest.websiteReplacements || {}).length > 0 ||
+      Object.keys(snapshot.manifest.websitePlacementReplacements || {}).length > 0,
     connected: PRIVATE_LIBRARY ? serverConnected : !!token,
     connect,
     disconnect,
@@ -239,10 +252,9 @@ export function useTalentLibrary() {
     upsert,
     remove,
     replaceWebsiteImage: (source: string, replacement: string) =>
-      setManifest((previous) => ({
-        ...previous,
-        websiteReplacements: { ...previous.websiteReplacements, [source]: replacement },
-      })),
+      setManifest((previous) => withWebsiteImageReplacement(previous, source, replacement)),
+    replaceWebsitePlacement: (source: string, route: string, section: string, replacement: string) =>
+      setManifest((previous) => withWebsitePlacementReplacement(previous, source, route, section, replacement)),
     reset: () => applySnapshot(snapshot),
     addUpload: (upload: LibraryUpload, preview: string) => {
       setUploads((p) => ({ ...p, [upload.path]: upload }));

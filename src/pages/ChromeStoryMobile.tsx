@@ -1,3 +1,5 @@
+import { OptimizedImage } from "../components/OptimizedImage";
+import { useWebsiteBackground } from "../components/WebsiteImageScope";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import {
@@ -24,6 +26,7 @@ export function ChromeStoryMobile({
 }: { embedded?: boolean } = {}) {
   const Heading = embedded ? "h2" : "h1";
   const wallpaper = useChromeWallpaper();
+  const desktopBackground = useWebsiteBackground(embedded ? KIT_STORY_CHROME_BACKGROUND : chromeWallpaperBackground(wallpaper), "Foam for Chrome · Desktop background");
   const reduced = usePrefersReducedMotion();
   const [sent, setSent] = useState(false);
   const finale = useRef<HTMLDivElement>(null);
@@ -38,9 +41,7 @@ export function ChromeStoryMobile({
   useChromePreviewEntry(preview);
   const [panelStage, setPanelStage] = useState<ChromeStage>(2);
   const background = {
-    backgroundImage: embedded
-      ? KIT_STORY_CHROME_BACKGROUND
-      : chromeWallpaperBackground(wallpaper),
+    backgroundImage: desktopBackground,
   };
   return (
     <div className="cs-story cs-mobile-story">
@@ -133,7 +134,7 @@ export function ChromeStoryMobile({
           )}
           <a href={CHROME_STORE} target="_blank" rel="noreferrer">
             <div className="cs-store-mark">
-              <img
+              <OptimizedImage section="Foam for Chrome · Send finale"
                 src={`${A}/chrome-store-transparent.webp`}
                 alt=""
                 width={150}

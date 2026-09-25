@@ -88,7 +88,7 @@ export function Brands() {
               <Reveal key={talent.id} className={className} delay={index * 80}>
                 <figure>
                   <div className="ap-evidence-photo">
-                    <MarketingImage
+                    <MarketingImage section="Start with the work · Content examples"
                       src={tile.thumb}
                       alt={`${talent.displayName}: ${tile.caption}`}
                       loading="lazy"
@@ -133,7 +133,7 @@ export function Brands() {
               }
             />
             <Reveal className="ap-fitness-moment">
-              <MarketingImage src={websiteFitness.content[0].thumb} alt="Avery Cole’s illustrative fitness story: a pause after a waterfront run" loading="lazy" />
+              <MarketingImage section="From interesting to informed · Fitness moment" src={websiteFitness.content[0].thumb} alt="Avery Cole’s illustrative fitness story: a pause after a waterfront run" loading="lazy" />
               <span>Energy you can see.<br />Context you can explore.</span>
               <small>Fictional profile · Supplied imagery</small>
             </Reveal>
@@ -171,7 +171,7 @@ export function Brands() {
       <section className="mp-section mp-cream">
         <div className="mp-container ap-editorial-split ap-brand-link-section">
           <Reveal className="ap-miniature-stage ap-miniature-first">
-            <MiniIllustration kind="share" />
+            <MiniIllustration section="Been sent a Foam link? · Sharing miniature" kind="share" />
           </Reveal>
           <div>
             <SectionIntro

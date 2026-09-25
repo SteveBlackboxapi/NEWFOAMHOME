@@ -1,3 +1,5 @@
+import { OptimizedImage } from "./OptimizedImage";
+import { useLocation } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { demoNetworks, demoReviewTotal, talentSearchExamples } from "../data/talentSearchExamples";
@@ -21,6 +23,7 @@ export function PlatformPresence() {
 
 /** A guided public demonstration, with no connection to the private Lab. */
 export function TalentSearchPreview() {
+  const { pathname } = useLocation();
   const [visible, setVisible] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [suggestionsFocused, setSuggestionsFocused] = useState(false);
@@ -86,7 +89,7 @@ export function TalentSearchPreview() {
             <tbody key={example.id}>
               {example.matches.map((talent) => (
                 <tr key={talent.id}>
-                  <th scope="row"><div className="td-demo-person"><img src={talent.portrait} alt="" loading="lazy" decoding="async" /><span><strong>{talent.displayName}</strong><small>{talent.location.replace(" · demo profile", "")} · {talent.verticals[0]}</small></span></div></th>
+                  <th scope="row"><div className="td-demo-person"><OptimizedImage section={`${pathname.replace(/\/$/, "") === "/features" ? "Product preview · Talent search" : "Talent discovery"} · ${example.query}`} src={talent.portrait} sizes="46px" alt="" loading="lazy" decoding="async" /><span><strong>{talent.displayName}</strong><small>{talent.location.replace(" · demo profile", "")} · {talent.verticals[0]}</small></span></div></th>
                   {demoNetworks.map(({ network, label }) => {
                     const account = talent.platforms.find((item) => item.network === network);
                     return <td key={network} data-match={example.network === network} aria-label={`${label}: ${account ? account.followers.toLocaleString("en-US") : "No account"}${network === "youtube" ? " subscribers" : " followers"}`}><span className="td-mobile-platform"><KitPlatformIcon network={network} label={label} size={15} /></span>{account ? formatWebsiteMetric(account.followers) : "—"}</td>;

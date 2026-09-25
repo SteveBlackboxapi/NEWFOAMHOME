@@ -31,7 +31,7 @@ function KitCover() {
           <em>possibility.</em>
         </div>
         <MarketingImage
-          src={websiteSamantha.portrait}
+          section="Featured story · Media kits" src={websiteSamantha.portrait}
           alt="Fictional creator Samantha Pikka in a sample media kit"
           fetchPriority="high"
           decoding="async"
@@ -65,7 +65,7 @@ function InboxIllustration() {
         </div>
         <div className="ep-inbox-talent">
           <MarketingImage
-            src={websiteAria.portrait}
+            section="Two more ways in · Foam for Chrome" src={websiteAria.portrait}
             alt="Fictional creator Aria Quen"
             loading="lazy"
             decoding="async"
@@ -91,7 +91,7 @@ function ContentIllustration() {
     <figure className="ep-content-illustration">
       <div className="ep-content-scene">
         <MarketingImage
-          src={websiteNia.content[0].thumb}
+          section="Two more ways in · Content discovery" src={websiteNia.content[0].thumb}
           alt="Fictional creator Nia Brooks demonstrating a skincare product"
           loading="lazy"
           decoding="async"

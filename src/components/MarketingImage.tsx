@@ -2,17 +2,16 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  type ImgHTMLAttributes,
 } from "react";
 import { observeKitImage, type KitImageStatus } from "../lib/kitFeaturedMedia";
-import { OptimizedImage } from "./OptimizedImage";
+import { OptimizedImage, type WebsiteImageProps } from "./OptimizedImage";
 
 /** Reuse the story's decode-aware reveal, including cached and failed images. */
 export function MarketingImage({
   src,
   className = "",
   ...props
-}: ImgHTMLAttributes<HTMLImageElement>) {
+}: WebsiteImageProps) {
   const image = useRef<HTMLImageElement>(null);
   const [state, setState] = useState<{
     src: typeof src;

@@ -1,3 +1,5 @@
+import { miniSearchContent } from "./miniSearchContent";
+import { talentSearchExamples } from "./talentSearchExamples";
 import { A } from "../lib/assets";
 import { labTalent } from "./labTalentCatalogue";
 import { stagedTalent } from "./stagedTalent";
@@ -303,6 +305,12 @@ use(websiteFitness.content[0].thumb, "/brands", "From interesting to informed ·
 miniature("/brands", "Been sent a Foam link? · Sharing miniature", [
   websiteAria,
 ]);
+for (const route of ["/brands", "/features"]) {
+  talentSearchExamples.forEach((example) => example.matches.forEach((talent) =>
+    use(talent.portrait, route, `${route === "/features" ? "Product preview · Talent search" : "Talent discovery"} · ${example.query}`),
+  ));
+}
+
 creatorLiveExamples.forEach(({ talentId, name, image }) => {
   own(
     image,
@@ -334,11 +342,8 @@ for (const route of ["/managers", "/kit-story", "/chrome-story"]) {
 for (const route of ["/", "/features"]) {
   const section = route === "/" ? "Product family" : "Product preview";
   miniature(route, `${section} · Media kit miniature`, [websiteSamantha]);
-  miniature(route, `${section} · Content search miniature`, [
-    websiteSamantha,
-    websiteAria,
-    websiteNia,
-  ]);
+  miniature(route, `${section} · Content search miniature`, []);
+  miniSearchContent.forEach(({ tile }) => use(tile.thumb, route, `${section} · Content search miniature`));
   miniature(route, `${section} · Foam for Chrome miniature`, [websiteSamantha]);
 }
 miniature("/features", "Product preview · Shortlist miniature", [

@@ -1,3 +1,4 @@
+import { OptimizedImage } from "../OptimizedImage";
 import {
   MiniAccounts,
   MiniAvatar,
@@ -6,7 +7,7 @@ import {
   MiniIcon,
   MiniPhoto,
 } from "./MiniPrimitives";
-import { websiteAria, websiteNia, websiteSamantha } from "../../data/websiteTalent";
+import { miniSearchContent } from "../../data/miniSearchContent";
 import { KitPlatformIcon } from "../KitDetails";
 import "./mini-discovery.css";
 
@@ -16,11 +17,7 @@ const people = [
   { person: "nia", name: "Nia", category: "Life, beautifully" },
 ] as const;
 
-const contentResults = [
-  { name: "Samantha", tile: websiteSamantha.content.find((tile) => tile.id === "0")! },
-  { name: "Aria", tile: websiteAria.content[0] },
-  { name: "Nia", tile: websiteNia.content[0] },
-];
+
 
 export function MiniSearch() {
   return (
@@ -32,9 +29,9 @@ export function MiniSearch() {
           <MiniIcon name="grid" size={18} />
         </div>
         <div className="mui-d-search-results">
-          {contentResults.map(({ name, tile }) => (
+          {miniSearchContent.map(({ name, tile }) => (
             <div className="mui-d-result" key={name}>
-              <img src={tile.thumb} alt="" loading="lazy" decoding="async" />
+              <OptimizedImage src={tile.thumb} alt="" loading="lazy" decoding="async" />
               <span className="mui-d-result-caption">
                 {name}
                 <KitPlatformIcon network={tile.platform} label={tile.platform} size={17} />
