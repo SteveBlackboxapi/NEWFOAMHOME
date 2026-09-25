@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { A } from "../lib/assets";
 import { PRIVACY_URL, TERMS_URL } from "../lib/siteLinks";
+import { FooterSongCard } from "./FooterSong";
 import "./site-shell.css";
 
 const COLS = [
@@ -59,14 +60,17 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="site-footer-wordmark">
-          <img
-            className="site-footer-wordmark-art"
-            src={`${A}/brand/foam-wordmark.svg`}
-            alt="Foam"
-            width={2076}
-            height={654}
-          />
+        <div className="site-footer-personality">
+          <div className="site-footer-wordmark">
+            <img
+              className="site-footer-wordmark-art"
+              src={`${A}/brand/foam-wordmark.svg`}
+              alt="Foam"
+              width={2076}
+              height={654}
+            />
+          </div>
+          <FooterSongCard />
         </div>
         <div className="site-footer-bottom">
           <p>© {new Date().getFullYear()} Foam</p>

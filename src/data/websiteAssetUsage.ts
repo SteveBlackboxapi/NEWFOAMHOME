@@ -9,6 +9,7 @@ import { websiteFitness } from "./campaignTalent";
 import { websiteMatcha } from "./matchaTalent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "./foundWithFoam";
 import { overviewFilm } from "./overviewFilm";
+import { footerSong } from "./footerSong";
 
 export type WebsiteLocation = { route: string; section: string };
 export type WebsiteAssetUsage = {
@@ -167,6 +168,20 @@ for (const route of publicWebsiteRoutes.filter(
   artwork("d6571.svg", "Foam symbol", route, "Navigation");
   artwork("brand/foam-wordmark.svg", "Foam wordmark", route, "Navigation");
   artwork("brand/foam-wordmark.svg", "Foam wordmark", route, "Footer");
+}
+
+for (const route of publicWebsiteRoutes.filter((route) => route !== "/kit-story")) {
+  for (const [src, label] of [
+    [footerSong.cover, "Feed the Feed · Supplied cover artwork"],
+    [footerSong.thumbnail, "Feed the Feed · Player thumbnail"],
+    [footerSong.src, "Feed the Feed · Supplied song"],
+  ]) {
+    use(src, route, "Footer · A song for Foam", {
+      kind: "artwork",
+      label,
+      provenance: "supplied-reference",
+    });
+  }
 }
 
 const wall = [

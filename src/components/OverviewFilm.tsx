@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useLocation } from "react-router";
 import { overviewFilm } from "../data/overviewFilm";
 import { Reveal } from "./Marketing";
+import { useStopFooterSong } from "./FooterSong";
 import "./overview-film.css";
 
 function FilmPlayer({ onClose }: { onClose: () => void }) {
@@ -55,6 +56,8 @@ function FilmPlayer({ onClose }: { onClose: () => void }) {
 
 export function OverviewFilm() {
   const [open, setOpen] = useState(false);
+  const stopSong = useStopFooterSong();
+  const openFilm = () => { stopSong(); setOpen(true); };
   const { hash } = useLocation();
   useEffect(() => {
     if (hash !== "#foam-film") return;
@@ -68,11 +71,11 @@ export function OverviewFilm() {
           <p className="pc-eyebrow">A closer look</p>
           <h2 id="overview-film-title">See Foam<br />in action.</h2>
           <p className="of-description">See how Foam brings talent, content and conversations together.</p>
-          <button className="of-watch-link" type="button" onClick={() => setOpen(true)} aria-haspopup="dialog">
+          <button className="of-watch-link" type="button" onClick={openFilm} aria-haspopup="dialog">
             Watch the film <span className="of-duration">· {overviewFilm.duration}</span> <span aria-hidden="true">↗</span>
           </button>
         </div>
-        <button className="of-poster" type="button" onClick={() => setOpen(true)} aria-label="Play the Foam overview film" aria-haspopup="dialog">
+        <button className="of-poster" type="button" onClick={openFilm} aria-label="Play the Foam overview film" aria-haspopup="dialog">
           <img src={overviewFilm.poster} alt="" width={overviewFilm.posterWidth} height={overviewFilm.posterHeight} loading="lazy" decoding="async" />
         </button>
       </Reveal>
