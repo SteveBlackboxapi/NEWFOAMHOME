@@ -8,6 +8,17 @@ const SCROLL_KEY = "foam:website-update-scroll:v1";
 const SCROLL_MAX_AGE = 5 * 60_000;
 const CANCEL_RESTORE_EVENTS = ["pointerdown", "keydown", "touchstart", "wheel", "hashchange", "popstate"] as const;
 
+function isKitStoryURL(url: URL, baseUrl: string) {
+  const base = new URL(baseUrl, window.location.href);
+  const storyPath = `${base.pathname.replace(/\/+$/, "")}/kit-story`;
+  return url.origin === base.origin && url.pathname.replace(/\/+$/, "") === storyPath;
+}
+
+function clearUpdateScroll() {
+  try { window.sessionStorage.removeItem(SCROLL_KEY); }
+  catch { /* The page can still start at the top when storage is unavailable. */ }
+}
+
 function saveUpdateScroll(destination: URL, version: string) {
   if (destination.href.length > 2048) return;
   try {
@@ -20,7 +31,12 @@ function saveUpdateScroll(destination: URL, version: string) {
 }
 
 /** One-use reading-position handoff for this exact automatic navigation only. */
-export function restoreWebsiteUpdateScroll(): () => void {
+export function restoreWebsiteUpdateScroll(baseUrl = import.meta.env.BASE_URL): () => void {
+  // Kit Story always starts with its opening scene, including after an update.
+  if (isKitStoryURL(new URL(window.location.href), baseUrl)) {
+    clearUpdateScroll();
+    return () => undefined;
+  }
   let saved: Record<string, unknown>;
   try {
     const raw = window.sessionStorage.getItem(SCROLL_KEY);
@@ -67,7 +83,7 @@ export function restoreWebsiteUpdateScroll(): () => void {
 /** Keep public pages current without interrupting playback, editing or a dialog. */
 export function startWebsiteUpdateChecks(currentVersion: string | undefined, baseUrl: string): () => void {
   if (!currentVersion || !VERSION.test(currentVersion)) return () => undefined;
-  const cancelScrollRestore = restoreWebsiteUpdateScroll();
+  const cancelScrollRestore = restoreWebsiteUpdateScroll(baseUrl);
   const current = currentVersion.toLowerCase();
   const endpoint = new URL("website-version.json", new URL(baseUrl, window.location.href));
   const dirtyForms = new Set<Element>();
@@ -128,7 +144,10 @@ export function startWebsiteUpdateChecks(currentVersion: string | undefined, bas
     // If a deployment is still propagating, never loop on the same new token.
     if (destination.searchParams.get("foam-update") === pendingVersion) return;
     destination.searchParams.set("foam-update", pendingVersion);
-    saveUpdateScroll(destination, pendingVersion);
+    if (isKitStoryURL(destination, baseUrl)) {
+      destination.hash = "";
+      clearUpdateScroll();
+    } else saveUpdateScroll(destination, pendingVersion);
     reloading = true;
     window.location.replace(destination.href);
   };
