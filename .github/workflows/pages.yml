@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [talent-library-saved]
 permissions:
   contents: read
   pages: write
@@ -15,10 +17,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
+      - run: npm ci
+      - name: Check media delivery and publishing
+        run: |
+          npx tsc --noEmit
+          node --test scripts/test-*.mjs workers/talent-lab/worker.test.mjs
+      - name: Apply saved website image replacements
+        run: node scripts/publish-library-images.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Always resolve and pin the newest saved catalogue. A delayed dispatch
+        # cannot roll newer replacements back to the event's older revision.
       - run: npm run build
         env:
           GITHUB_PAGES: "true"

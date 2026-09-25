@@ -1,4 +1,8 @@
-export const A = `${import.meta.env.BASE_URL}assets`.replace(/([^:]\/)+\//g, "$1");
+import imageManifest from '../data/imageVariants.json';
+
+// A new media directory is generated from file contents for every changed release.
+// Public cache entries are immutable; the private editor keeps its protected proxy.
+export const A = `${import.meta.env.BASE_URL}${import.meta.env.VITE_PRIVATE_LAB === 'true' || imageManifest.revision === 'development' ? '' : `media/${imageManifest.revision}/`}assets`;
 
 export const img = {
   foamSymbol:   `${A}/d6571.svg`,

@@ -10,7 +10,7 @@ import { LabIcon } from "./TalentLabIcon";
 import { formatWebsiteMetric, websiteAria, websiteProfile, websiteSamantha } from "../data/websiteTalent";
 import type { TalentContentTile } from "../data/stagedTalent";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 
 // ─── Sidebar icons (from Figma design assets) ──────────────────────────────
 const icNavHome    = `${A}/db233.svg`; // people/roster

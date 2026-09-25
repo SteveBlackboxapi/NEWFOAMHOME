@@ -1,0 +1,190 @@
+{
+  "encoder": "ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers",
+  "settings": {
+    "width": 720,
+    "scale": "Lanczos, even output height, no crop",
+    "webm": "VP9 CRF 28, b:v 0, cpu-used 2, row-mt 1",
+    "mp4": "H.264 CRF 22, slow, High profile, faststart",
+    "audio": "Preserved if present; all four current sources are silent",
+    "timing": "Original fps and every frame retained"
+  },
+  "qualityMeasurement": "VMAF against original scaled to delivery dimensions; timestamps aligned by frame index. Does not measure downscale loss.",
+  "videos": [
+    {
+      "name": "aria-makeup",
+      "original": {
+        "path": "public/assets/talent/aria-quen-v2/aria-quen-v2-makeup.mp4",
+        "bytes": 18074810,
+        "sha256": "c4b509daad4ea11ada20383331b9c331e02dd759dc4247d4a44b558f9f592c0d",
+        "width": 1080,
+        "height": 1916,
+        "fps": 24.0,
+        "frames": 241,
+        "hasAudio": false
+      },
+      "previousWebmBytes": 4049535,
+      "previews": {
+        "webm": {
+          "bytes": 1630879,
+          "sha256": "376c74c9edd97eb82f949decca8e12020e57f839a9eb281b14c27cdb06fa3190",
+          "width": 720,
+          "height": 1278,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/aria-makeup-720.webm",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 93.933663,
+          "vmafMinimumAtDeliverySize": 90.767914,
+          "savingVsOriginalPercent": 90.98
+        },
+        "mp4": {
+          "bytes": 1745985,
+          "sha256": "cf761af60953fabc160d95d60a6aa94e738269f71f827ca2371ed60addcb06af",
+          "width": 720,
+          "height": 1278,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/aria-makeup-720.mp4",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 94.036753,
+          "vmafMinimumAtDeliverySize": 91.045305,
+          "savingVsOriginalPercent": 90.34
+        }
+      }
+    },
+    {
+      "name": "lena-grwm",
+      "original": {
+        "path": "public/assets/talent/lena-croft-v2/lena-croft-grwm.mp4",
+        "bytes": 6751974,
+        "sha256": "7b4208fee1cdccb3de9aa9cde5b2f6c1b4b430d2fb42165643fe1646b466c25c",
+        "width": 1080,
+        "height": 1920,
+        "fps": 24.0,
+        "frames": 241,
+        "hasAudio": false
+      },
+      "previousWebmBytes": 4664600,
+      "previews": {
+        "webm": {
+          "bytes": 1077980,
+          "sha256": "1b0f899f883909224e7195d0147cee4694cdf5dcacf1c9360968bb7c0a7f1ecb",
+          "width": 720,
+          "height": 1280,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/lena-grwm-720.webm",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 92.431381,
+          "vmafMinimumAtDeliverySize": 90.293252,
+          "savingVsOriginalPercent": 84.03
+        },
+        "mp4": {
+          "bytes": 1503922,
+          "sha256": "adf1395e403476516c431fd4da7632ff5babffeebe7d00018249bce6e032fdfd",
+          "width": 720,
+          "height": 1280,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/lena-grwm-720.mp4",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 93.881342,
+          "vmafMinimumAtDeliverySize": 90.557327,
+          "savingVsOriginalPercent": 77.73
+        }
+      }
+    },
+    {
+      "name": "nia-skincare",
+      "original": {
+        "path": "public/assets/talent/nia-brooks/nia-brooks-skincare.mp4",
+        "bytes": 3538617,
+        "sha256": "4513df5ddb09b041fdfff099db12d1c16052aedf0b1be686c9e1ae8cdff8611b",
+        "width": 720,
+        "height": 1280,
+        "fps": 24.0,
+        "frames": 242,
+        "hasAudio": false
+      },
+      "previousWebmBytes": 2292745,
+      "previews": {
+        "webm": {
+          "bytes": 1582415,
+          "sha256": "2a892e8e01c53eb4dabf038a9643af65ead87eac173005a725f4117720c6b7a1",
+          "width": 720,
+          "height": 1280,
+          "fps": 24.0,
+          "frames": 242,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/nia-skincare-720.webm",
+          "durationSeconds": 10.083333333333334,
+          "vmafMeanAtDeliverySize": 95.855112,
+          "vmafMinimumAtDeliverySize": 92.971277,
+          "savingVsOriginalPercent": 55.28
+        },
+        "mp4": {
+          "bytes": 1730490,
+          "sha256": "3bd01e2a573cde8d96a8dceb689fbac798c38261d89a5ddc3284a0be7ee5f91e",
+          "width": 720,
+          "height": 1280,
+          "fps": 24.0,
+          "frames": 242,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/nia-skincare-720.mp4",
+          "durationSeconds": 10.083333333333334,
+          "vmafMeanAtDeliverySize": 95.907209,
+          "vmafMinimumAtDeliverySize": 93.754496,
+          "savingVsOriginalPercent": 51.1
+        }
+      }
+    },
+    {
+      "name": "samantha-curl-refresh",
+      "original": {
+        "path": "public/assets/talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh.mp4",
+        "bytes": 18922728,
+        "sha256": "b13c3dfbabc5c6db5a4f6c0615d5e8797a30c06727399cf29f0dbf0923899b86",
+        "width": 1080,
+        "height": 1916,
+        "fps": 24.0,
+        "frames": 241,
+        "hasAudio": false
+      },
+      "previousWebmBytes": 3765141,
+      "previews": {
+        "webm": {
+          "bytes": 1490970,
+          "sha256": "ea876ce18a9bebedfef9e1cd6dbcb154f2e49ef25c5f412572b2ad817655ded3",
+          "width": 720,
+          "height": 1278,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/samantha-curl-refresh-720.webm",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 94.186031,
+          "vmafMinimumAtDeliverySize": 90.719204,
+          "savingVsOriginalPercent": 92.12
+        },
+        "mp4": {
+          "bytes": 1834835,
+          "sha256": "c286977019394df13cd363846cda8b4e7105456278a08284d02a958fd6938e73",
+          "width": 720,
+          "height": 1278,
+          "fps": 24.0,
+          "frames": 241,
+          "hasAudio": false,
+          "path": "public/assets/video-previews-v2/samantha-curl-refresh-720.mp4",
+          "durationSeconds": 10.041666666666666,
+          "vmafMeanAtDeliverySize": 94.270323,
+          "vmafMinimumAtDeliverySize": 89.457895,
+          "savingVsOriginalPercent": 90.3
+        }
+      }
+    }
+  ]
+}

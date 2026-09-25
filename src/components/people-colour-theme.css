@@ -501,8 +501,7 @@
   font-size: clamp(48px, 5.6vw, 80px);
 }
 .pc-site .ep-belief {
-  background: #321321 url("/assets/people-colour/studio-moment.webp")
-    center/cover;
+  background: #321321 center/cover;
   color: white;
   position: relative;
   isolation: isolate;

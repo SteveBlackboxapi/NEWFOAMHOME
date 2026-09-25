@@ -8,7 +8,7 @@ import ts from "typescript";
 const filename = new URL("../src/lib/githubTalentLibrary.ts", import.meta.url);
 function loadLibrary(privateMode = false) {
   const { outputText } = ts.transpileModule(
-    readFileSync(filename, "utf8").replaceAll(
+    readFileSync(filename, "utf8").replaceAll("import.meta.env.BASE_URL", JSON.stringify("/NEWFOAMHOME/")).replaceAll(
       "import.meta.env.VITE_PRIVATE_LAB",
       JSON.stringify(privateMode ? "true" : "false"),
     ),
@@ -54,7 +54,7 @@ function loadCatalogueModule(filename) {
     return catalogueModules.get(filename.href).exports;
   const module = { exports: {} };
   catalogueModules.set(filename.href, module);
-  const { outputText } = ts.transpileModule(readFileSync(filename, "utf8"), {
+  const { outputText } = ts.transpileModule(readFileSync(filename, "utf8").replaceAll("import.meta.env.BASE_URL", JSON.stringify("/NEWFOAMHOME/")), {
     compilerOptions: {
       module: ts.ModuleKind.CommonJS,
       target: ts.ScriptTarget.ES2022,
@@ -851,6 +851,90 @@ test("private saving needs no browser key and private uploads use the authentica
     `/api/asset?path=assets/talent/uploads/x.png&ref=${BEFORE}&token=bad`,
   ])
     assert.throws(() => privateApi.assetPath(invalid), privateApi.LibraryError);
+});
+
+test("publication is explicit: legacy drafts stay unpublished and valid replacement maps survive round trips", () => {
+  const legacy = manifest([profile({ portrait: src("draft") })]);
+  assert.equal(parseLibrary(legacy).websiteReplacements, undefined);
+  const map = { "assets/talent/june-c1.webp": src("new") };
+  assert.deepEqual(parseLibrary({ ...legacy, websiteReplacements: map }).websiteReplacements, map);
+  for (const websiteReplacements of [null, [], "bad",
+    { "assets/talent/june-c1.mp4": src("new") },
+    { "assets/talent/../index.webp": src("new") },
+    { "assets/talent/june-c1.webp": "https://external.example/image.png" },
+    { "assets/talent/june-c1.webp": "assets/talent/uploads/a.svg" },
+    { "/assets/talent/june-c1.webp": src("new") },
+    { [src("old")]: src("new") },
+  ]) assert.throws(() => parseLibrary({ ...legacy, websiteReplacements }), LibraryError);
+});
+
+test("published uploads survive removal from draft profiles", async (t) => {
+  const retained = { ...manifest([]), websiteReplacements: { "assets/talent/june-c1.webp": src("old") } };
+  const current = { ...manifest([profile({ portrait: src("old") })]), websiteReplacements: retained.websiteReplacements };
+  const api = mockGithub(t, saveSteps(retained, [], BEFORE, current));
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, retained, []);
+  assert.deepEqual(saved.manifest.websiteReplacements, retained.websiteReplacements);
+  api.done();
+});
+
+test("a map-only replacement commits its new upload and retires the previous unreferenced upload", async (t) => {
+  const current = { ...manifest([]), websiteReplacements: { "assets/talent/june-c1.webp": src("old") } };
+  const input = { ...current, websiteReplacements: { "assets/talent/june-c1.webp": src("new") } };
+  const steps = saveSteps(input, [
+    { path: image("new").path, mode: "100644", type: "blob", sha: "new-image" },
+    { path: image("old").path, mode: "100644", type: "blob", sha: null },
+  ], BEFORE, current);
+  steps.splice(3, 0, { path: "/git/blobs", method: "POST", value: { sha: "new-image" } });
+  const api = mockGithub(t, steps);
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, input, [image("new")]);
+  assert.deepEqual(saved.manifest.websiteReplacements, input.websiteReplacements);
+  api.done();
+});
+
+test("new website-map uploads cannot be missing and replacement revisions keep the canonical source", async (t) => {
+  const current = { ...manifest([]), websiteReplacements: { "assets/talent/june-c1.webp": src("old") } };
+  const input = { ...current, websiteReplacements: { "assets/talent/june-c1.webp": src("new") } };
+  const api = mockGithub(t, readSteps(BEFORE, current));
+  await rejected(saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, input, []));
+  api.done();
+});
+
+test("a private save exposes a publication failure without failing the saved catalogue", async (t) => {
+  const privateApi = loadLibrary(true);
+  const input = manifest([profile()]);
+  const steps = saveSteps(input);
+  const publication = { revision: AFTER, queued: false, error: "Library saved. Retry website update." };
+  steps.at(-1).value = { object: { sha: AFTER }, publication };
+  const api = mockGithub(t, steps, true);
+  const saved = await privateApi.saveGithubLibrary("", { revision: BEFORE, manifest: emptyLibrary() }, input, []);
+  assert.equal(saved.revision, AFTER);
+  assert.deepEqual(saved.publication, publication);
+  api.done();
+});
+
+test("private publication retries send only the pinned revision, and status returns only a validated SHA", async (t) => {
+  const privateApi = loadLibrary(true);
+  const calls = [];
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    calls.push({ url, options });
+    return new Response(JSON.stringify(url === "/api/publish" ? { revision: AFTER, queued: true } : { revision: AFTER }));
+  });
+  assert.deepEqual(await privateApi.retryWebsitePublication(AFTER), { revision: AFTER, queued: true });
+  assert.equal(calls[0].url, "/api/publish");
+  assert.deepEqual(JSON.parse(calls[0].options.body), { revision: AFTER });
+  assert.equal(calls[0].options.credentials, "same-origin");
+  assert.equal(await privateApi.readWebsitePublication(), AFTER);
+  await assert.rejects(privateApi.retryWebsitePublication("main"));
+  assert.equal(calls.length, 2);
+});
+
+test("website settings previews prefer unsaved image bytes and retain saved revision URLs for artwork and photos", () => {
+  const api = loadLibrary(true);
+  const uploaded = src("website-artwork");
+  assert.equal(api.materializeLibraryImage(uploaded, BEFORE, { [uploaded]: "data:image/png;base64,local-draft" }), "data:image/png;base64,local-draft");
+  assert.equal(api.materializeLibraryImage(uploaded, AFTER), `/api/asset?path=${encodeURIComponent(uploaded)}&ref=${AFTER}`);
+  assert.equal(api.materializeLibraryImage("assets/campaigns/billboard.webp", AFTER), "/NEWFOAMHOME/assets/campaigns/billboard.webp");
+  assert.throws(() => api.materializeLibraryImage("https://other.example/artwork.png", AFTER), api.LibraryError);
 });
 
 // Node has no browser decoder; create a replaceable stub, always mocked per test.

@@ -2,7 +2,7 @@ import type { TalentContentTile } from "../data/stagedTalent";
 import { formatWebsiteMetric } from "../data/websiteTalent";
 import "./content-metrics.css";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 const platforms = {
   instagram: { label: "Instagram", icon: "958bd.svg" },
   tiktok: { label: "TikTok", icon: "31c2a.svg" },

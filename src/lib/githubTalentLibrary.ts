@@ -7,16 +7,20 @@ export const LIBRARY_PATH = "public/assets/talent/library.json";
 export const LIBRARY_REVIEW_URL = `https://github.com/${LIBRARY_REPO}/tree/${LIBRARY_BRANCH}/public/assets/talent`;
 const API = `https://api.github.com/repos/${LIBRARY_REPO}`;
 export const PRIVATE_LIBRARY = import.meta.env.VITE_PRIVATE_LAB === "true";
-const SITE_ROOT = A.replace(/\/assets$/, "");
+const SITE_ROOT = import.meta.env.BASE_URL.replace(/\/$/, "");
 const UPLOAD_PATH = "public/assets/talent/uploads/";
 export type LibraryManifest = {
   version: 1;
   profiles: StagedTalent[];
   removedTalentIds: string[];
+  /** Explicit replacements only; legacy profile drafts are never publication instructions. */
+  websiteReplacements?: Record<string, string>;
 };
+export type WebsitePublication = { revision: string; queued: boolean; published?: boolean; error?: string };
 export type LibrarySnapshot = {
   manifest: LibraryManifest;
   revision: string | null;
+  publication?: WebsitePublication;
 };
 export type LibraryUpload = { path: string; base64: string };
 export const emptyLibrary = (): LibraryManifest => ({
@@ -69,7 +73,7 @@ async function request(
             : `GitHub could not complete the request (${response.status}). Please try again.`;
     throw new LibraryError(message, response.status);
   }
-  return response.json();
+  return response.status === 204 ? null : response.json();
 }
 async function privateSessionRequest(
   path: string,
@@ -129,6 +133,7 @@ export function assetPath(src: string): string {
     if (at < 0) throw new LibraryError("Unrecognised library image path.");
     value = value.slice(at + "/public".length);
   }
+  if (value.startsWith(`${A}/`)) value = `assets/${value.slice(A.length + 1)}`;
   if (SITE_ROOT && value.startsWith(`${SITE_ROOT}/`))
     value = value.slice(SITE_ROOT.length + 1);
   value = value.replace(/^public\//, "").replace(/^\/(?!\/)/, "");
@@ -313,6 +318,23 @@ function validCaption(input: unknown): boolean {
     )
   );
 }
+export function parseWebsiteReplacements(input: unknown): Record<string, string> {
+  if (!input || typeof input !== "object" || Array.isArray(input))
+    throw new LibraryError("The website image replacements have an unsupported format.");
+  const entries = Object.entries(input);
+  if (entries.length > 1000)
+    throw new LibraryError("The website image replacement list is too large.");
+  for (const [source, replacement] of entries) {
+    if (
+      assetPath(source) !== source ||
+      !/^assets\/.+\.(?:png|jpe?g|webp)$/.test(source) ||
+      source.startsWith("assets/talent/uploads/") ||
+      typeof replacement !== "string" ||
+      !/^assets\/talent\/uploads\/[a-z0-9-]+\.(?:png|jpg|webp)$/.test(replacement)
+    ) throw new LibraryError("Unrecognised website image replacement.");
+  }
+  return Object.fromEntries(entries) as Record<string, string>;
+}
 export function parseLibrary(input: unknown): LibraryManifest {
   const value = input as LibraryManifest;
   if (
@@ -430,6 +452,9 @@ export function parseLibrary(input: unknown): LibraryManifest {
     version: 1,
     profiles: value.profiles.map(canonicalProfile),
     removedTalentIds: [...new Set(value.removedTalentIds)],
+    ...(value.websiteReplacements === undefined ? {} : {
+      websiteReplacements: parseWebsiteReplacements(value.websiteReplacements),
+    }),
   };
 }
 export function materializeLibrary(
@@ -438,17 +463,7 @@ export function materializeLibrary(
   revision: string | null,
   pending: Record<string, string> = {},
 ): StagedTalent[] {
-  const convert = (src: string) => {
-    const path = assetPath(src);
-    return (
-      pending[path] ||
-      (path.startsWith("assets/talent/uploads/") && revision
-        ? PRIVATE_LIBRARY
-          ? `/api/asset?path=${encodeURIComponent(path)}&ref=${encodeURIComponent(revision)}`
-          : `https://raw.githubusercontent.com/${LIBRARY_REPO}/${revision}/public/${path}`
-        : `${SITE_ROOT}/${path}`)
-    );
-  };
+  const convert = (src: string) => materializeLibraryImage(src, revision, pending);
   const overrides = new Map(
     manifest.profiles.map((p) => [p.id, mapSources(p, convert)]),
   );
@@ -458,6 +473,20 @@ export function materializeLibrary(
       .filter((p) => !base.some((b) => b.id === p.id))
       .map((p) => overrides.get(p.id)!),
   ].filter((p) => !manifest.removedTalentIds.includes(p.id));
+}
+/** The sitemap and library share the same pending-preview and immutable-image resolution. */
+export function materializeLibraryImage(
+  src: string,
+  revision: string | null,
+  pending: Record<string, string> = {},
+): string {
+  const path = assetPath(src);
+  return pending[path] ||
+    (path.startsWith("assets/talent/uploads/") && revision
+      ? PRIVATE_LIBRARY
+        ? `/api/asset?path=${encodeURIComponent(path)}&ref=${encodeURIComponent(revision)}`
+        : `https://raw.githubusercontent.com/${LIBRARY_REPO}/${revision}/public/${path}`
+      : `${SITE_ROOT}/${path}`);
 }
 export async function readGithubLibrary(token = ""): Promise<LibrarySnapshot> {
   let ref;
@@ -502,6 +531,9 @@ export async function verifyGithubAccess(token: string) {
 }
 function uploadedPaths(manifest: LibraryManifest): Set<string> {
   const paths = new Set<string>();
+  Object.values(manifest.websiteReplacements || {}).forEach((src) =>
+    paths.add(`public/${src}`),
+  );
   manifest.profiles
     .filter((p) => !manifest.removedTalentIds.includes(p.id))
     .forEach((p) =>
@@ -639,17 +671,42 @@ export async function saveGithubLibrary(
     tree: resultTree.sha,
     parents: [parent],
   });
+  let saved;
   if (current.revision)
-    await request(`/git/refs/heads/${LIBRARY_BRANCH}`, token, "PATCH", {
+    saved = await request(`/git/refs/heads/${LIBRARY_BRANCH}`, token, "PATCH", {
       sha: commit.sha,
       force: false,
     });
   else
-    await request("/git/refs", token, "POST", {
+    saved = await request("/git/refs", token, "POST", {
       ref: `refs/heads/${LIBRARY_BRANCH}`,
       sha: commit.sha,
     });
-  return { manifest, revision: commit.sha };
+  const publication = PRIVATE_LIBRARY ? saved?.publication : undefined;
+  return {
+    manifest,
+    revision: commit.sha,
+    ...(publication ? { publication } : {}),
+  };
+}
+/** A retry publishes only the saved current revision, never the editor's unsaved draft. */
+export async function retryWebsitePublication(revision: string, token = ""): Promise<WebsitePublication> {
+  if (!/^[a-f0-9]{40}$/.test(revision))
+    throw new LibraryError("Save the library before publishing its replacements.");
+  if (PRIVATE_LIBRARY) return privateSessionRequest("publish", "POST", { revision });
+  const latest = await readGithubLibrary(token);
+  if (latest.revision !== revision)
+    throw new LibraryError("The library changed. Refresh before publishing.", 409);
+  await request("/dispatches", token, "POST", {
+    event_type: "talent-library-saved",
+    client_payload: { libraryRevision: revision },
+  });
+  return { revision, queued: true };
+}
+export async function readWebsitePublication(): Promise<string | null> {
+  if (!PRIVATE_LIBRARY) return null;
+  const value = await privateSessionRequest("publication");
+  return /^[a-f0-9]{40}$/.test(value.revision || "") ? value.revision : null;
 }
 export async function prepareLibraryImage(file: File): Promise<{
   upload: LibraryUpload;

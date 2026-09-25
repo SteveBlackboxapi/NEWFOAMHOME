@@ -1,3 +1,4 @@
+import { OptimizedImage } from "../components/OptimizedImage";
 import { DEMO_URL } from "../lib/siteLinks";
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
@@ -16,6 +17,7 @@ import { MobileFade } from "../components/MobileFade";
 import { KitAudience, KitGrowth, KitMetrics } from "../components/KitAnalytics";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import { useScrollRevealProgress } from "../hooks/useScrollRevealProgress";
+import { useKitAssetWarmup } from "../hooks/useKitAssetWarmup";
 import { kitMobileCountProgress } from "../lib/kitStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { FoundStory } from "./FoundStory";
@@ -28,7 +30,7 @@ import {
   websiteSamantha,
 } from "../data/websiteTalent";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 const CLIP = `${A}/io-portrait-web.mp4`;
 const POSTER = `${A}/io-portrait-poster.webp`;
 const FG_R = "font-founders font-normal";
@@ -177,7 +179,8 @@ function MobileKitCard() {
               </div>
             </div>
             <figure className="w-[43%] shrink-0">
-              <img
+              <OptimizedImage
+                sizes="43vw"
                 src={TALENT.portrait}
                 alt={`${TALENT.name} portrait`}
                 loading="lazy"
@@ -414,6 +417,7 @@ function MobileNetwork() {
  * No tall pinned chapters; kit charts reveal with the natural page scroll.
  */
 export function KitStoryMobile() {
+  useKitAssetWarmup();
   const reducedMotion = usePrefersReducedMotion();
   const platformReveal = useScrollRevealProgress(reducedMotion);
   const [motionPreferenceReady, setMotionPreferenceReady] = useState(false);
@@ -627,7 +631,8 @@ export function KitStoryMobile() {
           <div className="ks-mobile-share-kit mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#e2e4e8] bg-white text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
               <div className="ks-mobile-kit-avatar size-12 rounded-[10px] overflow-hidden bg-[#eeefe8] shrink-0">
-                <img
+                <OptimizedImage
+                  sizes="48px"
                   src={TALENT.portrait}
                   alt={`${TALENT.name} portrait`}
                   loading="lazy"

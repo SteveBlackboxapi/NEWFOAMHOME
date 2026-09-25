@@ -9,3 +9,5 @@ build/
 
 dist-lab/
 workers/talent-lab/site-assets.mjs
+public/media/
+public/website-publication.json

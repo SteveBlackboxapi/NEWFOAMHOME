@@ -4,6 +4,7 @@ export type LabIconName =
   | "bookmark"
   | "search"
   | "filter"
+  | "settings"
   | "chevron"
   | "download"
   | "close"
@@ -46,6 +47,12 @@ const paths: Record<LabIconName, React.ReactNode> = {
       <path d="M3 7h5m4 0h9M3 17h9m4 0h5" />
       <circle cx="10" cy="7" r="2" />
       <circle cx="14" cy="17" r="2" />
+    </>
+  ),
+  settings: (
+    <>
+      <path d="m9.5 3-.5 2-1.7 1-2-.6-2.5 4.2 1.5 1.4v2l-1.5 1.4 2.5 4.2 2-.6 1.7 1 .5 2h5l.5-2 1.7-1 2 .6 2.5-4.2-1.5-1.4v-2l1.5-1.4-2.5-4.2-2 .6-1.7-1-.5-2h-5Z" />
+      <circle cx="12" cy="12" r="3" />
     </>
   ),
   chevron: <path d="m7 10 5 5 5-5" />,

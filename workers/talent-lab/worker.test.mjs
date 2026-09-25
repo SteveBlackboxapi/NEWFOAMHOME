@@ -28,6 +28,7 @@ async function fixture() {
   const store = new Map();
   const calls = [];
   let head = null;
+  let dispatchStatus = 204;
   const env = {
     LAB_PASSWORD_HASH: await sha256(PASSWORD),
     SESSION_SECRET: "test-session-secret-with-at-least-32-characters",
@@ -70,6 +71,8 @@ async function fixture() {
         headers: { "Content-Type": "application/json" },
       });
     if (path === "") return reply({ permissions: { push: true } });
+    if (path === "/dispatches" && method === "POST")
+      return dispatchStatus === 204 ? new Response(null, { status: 204 }) : reply({}, dispatchStatus);
     if (path === `/git/ref/heads/${BRANCH}`)
       return head ? reply({ object: { sha: head } }) : reply({}, 404);
     if (path === "/git/ref/heads/main") return reply({ object: { sha: MAIN } });
@@ -151,6 +154,7 @@ async function fixture() {
     setHead(value) {
       head = value;
     },
+    setDispatchStatus(value) { dispatchStatus = value; },
   };
 }
 
@@ -673,6 +677,104 @@ test("upload image proxy scopes filenames and immutable revisions and authentica
       .status,
     403,
   );
+});
+
+async function approveLibraryCommit(f, cookie) {
+  await f.send("/api/github/git/trees", {
+    method: "POST", cookie, body: { base_tree: BASE_TREE, tree: [{
+      path: MANIFEST, mode: "100644", type: "blob",
+      content: JSON.stringify({ version: 1, profiles: [], removedTalentIds: [], websiteReplacements: {
+        "assets/talent/demo.webp": "assets/talent/uploads/new.webp",
+      } }),
+    }] },
+  });
+  await f.send("/api/github/git/commits", {
+    method: "POST", cookie, body: { message: "Save", tree: TREE, parents: [MAIN] },
+  });
+}
+
+test("successful library save queues only the fixed website event with the committed SHA", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  await approveLibraryCommit(f, cookie);
+  const result = await f.send("/api/github/git/refs", {
+    method: "POST", cookie, body: { ref: `refs/heads/${BRANCH}`, sha: COMMIT },
+  });
+  assert.equal(result.status, 201);
+  assert.deepEqual((await result.json()).publication, { revision: COMMIT, queued: true });
+  const dispatch = f.calls.at(-1);
+  assert.equal(dispatch.url, "https://api.github.com/repos/SteveBlackboxapi/NEWFOAMHOME/dispatches");
+  assert.deepEqual(JSON.parse(dispatch.options.body), {
+    event_type: "talent-library-saved", client_payload: { libraryRevision: COMMIT },
+  });
+  assert.equal(dispatch.options.headers.Authorization, `Bearer ${TOKEN}`);
+});
+
+test("a failed publication trigger preserves save success and supports a scoped retry", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  await approveLibraryCommit(f, cookie);
+  f.setDispatchStatus(503);
+  const result = await f.send("/api/github/git/refs", {
+    method: "POST", cookie, body: { ref: `refs/heads/${BRANCH}`, sha: COMMIT },
+  });
+  assert.equal(result.status, 201);
+  const saved = await result.json();
+  assert.equal(saved.object.sha, COMMIT);
+  assert.equal(saved.publication.queued, false);
+  assert.match(saved.publication.error, /Library saved/);
+  assert.ok(!JSON.stringify(saved).includes(TOKEN));
+  f.setDispatchStatus(204);
+  const retry = await f.send("/api/publish", { method: "POST", cookie, body: { revision: COMMIT } });
+  assert.deepEqual(await retry.json(), { revision: COMMIT, queued: true });
+});
+
+test("publication retries require auth, origin, exact current revision and fixed payload", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  assert.equal((await f.send("/api/publish", { method: "POST", body: { revision: COMMIT } })).status, 401);
+  assert.equal((await f.send("/api/publish", { method: "POST", cookie, origin: "https://elsewhere.example", body: { revision: COMMIT } })).status, 403);
+  assert.equal((await f.send("/api/publish", { method: "POST", cookie, body: { revision: COMMIT } })).status, 409);
+  await f.connect(cookie);
+  f.setHead(COMMIT);
+  for (const body of [{ revision: "main" }, { revision: COMMIT, event_type: "other" }, { revision: COMMIT, repository: "other/repo" }])
+    assert.equal((await f.send("/api/publish", { method: "POST", cookie, body })).status, 400);
+  assert.equal((await f.send("/api/publish", { method: "POST", cookie, body: { revision: MAIN } })).status, 409);
+  assert.equal((await f.send("/api/github/dispatches", { method: "POST", cookie, body: { event_type: "anything" } })).status, 403);
+  assert.ok(f.calls.every((call) => !call.url.endsWith("/dispatches")));
+});
+
+test("the library tree rejects malformed publication maps before saving Git objects", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  await f.connect(cookie);
+  for (const websiteReplacements of [null, [], { "assets/talent/demo.webp": "https://attacker.example/a.png" },
+    { "assets/talent/demo.mp4": "assets/talent/uploads/new.png" },
+    { "assets/../demo.webp": "assets/talent/uploads/new.png" }]) {
+    const result = await f.send("/api/github/git/trees", { method: "POST", cookie, body: {
+      base_tree: BASE_TREE, tree: [{ path: MANIFEST, type: "blob", mode: "100644", content: JSON.stringify({
+        version: 1, profiles: [], removedTalentIds: [], websiteReplacements,
+      }) }],
+    } });
+    assert.equal(result.status, 400);
+  }
+  assert.ok(f.calls.every((call) => !call.url.endsWith("/git/trees")));
+});
+
+test("publication status reads only the public marker after authentication without forwarding credentials", async () => {
+  const f = await fixture();
+  assert.equal((await f.send("/api/publication")).status, 401);
+  const cookie = await f.login();
+  const upstreamCalls = [];
+  const result = await handleRequest(new Request(`${ORIGIN}/api/publication`, { headers: { Cookie: cookie } }), f.env, {}, async (url, options) => {
+    upstreamCalls.push({ url, options });
+    return new Response(JSON.stringify({ libraryRevision: COMMIT, replacementCount: 1 }));
+  });
+  assert.deepEqual(await result.json(), { revision: COMMIT });
+  assert.match(upstreamCalls[0].url, /^https:\/\/steveblackboxapi.github.io\/NEWFOAMHOME\/website-publication.json\?check=\d+$/);
+  assert.deepEqual(upstreamCalls[0].options.headers, { "Cache-Control": "no-cache" });
 });
 test("streaming body limit applies even without a Content-Length header", async () => {
   const f = await fixture();

@@ -11,6 +11,15 @@ const MAX_BODY = 32 * 1024 * 1024;
 const TOKEN_KEY = "github-token-v1";
 const SHA = /^[a-f0-9]{40}$/;
 const UPLOAD = /^public\/assets\/talent\/uploads\/[a-z0-9-]+\.(png|jpg|webp)$/;
+function validWebsiteReplacements(value) {
+  if (value === undefined) return true;
+  return value !== null && typeof value === "object" && !Array.isArray(value) &&
+    Object.keys(value).length <= 1000 && Object.entries(value).every(([source, upload]) =>
+      /^assets\/[a-zA-Z0-9_./ -]+\.(?:png|jpe?g|webp)$/.test(source) &&
+      !source.startsWith("assets/talent/uploads/") &&
+      !source.split("/").some((part) => !part || part === "." || part === "..") &&
+      typeof upload === "string" && UPLOAD.test(`public/${upload}`));
+}
 const REVIEWED_WEBM = new Set([
   "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm",
   "/assets/talent/lena-croft-v2/lena-croft-grwm.webm",
@@ -238,7 +247,25 @@ async function github(path, token, method = "GET", body, fetcher = fetch) {
         : "GitHub could not complete this library request.",
     );
   // GitHub's response is bounded too; never reflect arbitrary upstream text/errors.
+  if (result.status === 204) return null;
   return JSON.parse(await readText(result, MAX_BODY));
+}
+async function queueWebsitePublication(revision, token, fetcher) {
+  try {
+    await github("/dispatches", token, "POST", {
+      event_type: "talent-library-saved",
+      client_payload: { libraryRevision: revision },
+    }, fetcher);
+    return { revision, queued: true };
+  } catch {
+    // The catalogue has already saved. A deployment-trigger failure must not undo
+    // that success or leave the editor attempting a stale duplicate save.
+    return {
+      revision,
+      queued: false,
+      error: "Library saved. Could not confirm the website update was queued. Retry the website update.",
+    };
+  }
 }
 async function currentParent(token, fetcher) {
   try {
@@ -382,7 +409,8 @@ async function proxyGithub(request, url, env, fetcher) {
           manifest.version !== 1 ||
           !Array.isArray(manifest.profiles) ||
           manifest.profiles.length > 500 ||
-          !Array.isArray(manifest.removedTalentIds)
+          !Array.isArray(manifest.removedTalentIds) ||
+          !validWebsiteReplacements(manifest.websiteReplacements)
         )
           fail(400, "Invalid library catalogue.");
       } else {
@@ -441,7 +469,8 @@ async function proxyGithub(request, url, env, fetcher) {
     if (commit.parent !== (await currentParent(token, fetcher)))
       fail(409, "The library changed. Refresh before saving.");
     const result = await github(path, token, request.method, body, fetcher);
-    return json(result, create ? 201 : 200);
+    const publication = await queueWebsitePublication(body.sha, token, fetcher);
+    return json({ ...result, publication }, create ? 201 : 200);
   }
   fail(403, "This GitHub operation is not allowed.");
 }
@@ -508,6 +537,29 @@ export async function handleRequest(
       return json({ ok: true }, 200, { "Set-Cookie": sessionCookie("", 0) });
     if (url.pathname === "/api/status" && request.method === "GET")
       return json({ connected: Boolean(await readToken(env)) });
+    if (url.pathname === "/api/publish" && request.method === "POST") {
+      const body = await readJson(request, 256);
+      if (!keysOnly(body, ["revision"]) || !SHA.test(body.revision || ""))
+        fail(400, "Choose a saved library revision.");
+      const token = await readToken(env);
+      if (!token) fail(409, "Connect GitHub before publishing.");
+      // Do not accept an arbitrary commit or main fallback for this endpoint.
+      const head = await github(`/git/ref/heads/${BRANCH}`, token, "GET", undefined, fetcher);
+      if (body.revision !== head.object.sha)
+        fail(409, "The library changed. Refresh before publishing.");
+      return json(await queueWebsitePublication(body.revision, token, fetcher));
+    }
+    if (url.pathname === "/api/publication" && request.method === "GET") {
+      const upstream = await fetcher(`${PUBLIC_SITE}/website-publication.json?check=${Date.now()}`, {
+        redirect: "error",
+        headers: { "Cache-Control": "no-cache" },
+      });
+      if (!upstream.ok) return json({ revision: null });
+      let status;
+      try { status = JSON.parse(await readText(upstream, 2048)); }
+      catch { return json({ revision: null }); }
+      return json({ revision: SHA.test(status?.libraryRevision || "") ? status.libraryRevision : null });
+    }
     if (url.pathname === "/api/connect" && request.method === "POST") {
       const body = await readJson(request, 4096);
       if (

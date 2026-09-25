@@ -1,24 +1,27 @@
 import { A } from "./assets";
 
-/** Reviewed, smaller previews only. MP4 masters remain the source of downloads. */
-const WEBM_PREVIEWS = new Map(
+/** Reviewed 720px playback versions; catalogue URLs still identify download masters. */
+const VIDEO_PREVIEWS = new Map(
   [
-    "talent/aria-quen-v2/aria-quen-v2-makeup",
-    "talent/lena-croft-v2/lena-croft-grwm",
-    "talent/nia-brooks/nia-brooks-skincare",
-    "talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh",
-  ].map((path) => [`${A}/${path}.mp4`, `${A}/${path}.webm`]),
+    ["talent/aria-quen-v2/aria-quen-v2-makeup", "aria-makeup"],
+    ["talent/lena-croft-v2/lena-croft-grwm", "lena-grwm"],
+    ["talent/nia-brooks/nia-brooks-skincare", "nia-skincare"],
+    ["talent/samantha-pikka-v2/samantha-pikka-v2-curl-refresh", "samantha-curl-refresh"],
+  ].map(([original, preview]) => [
+    `${A}/${original}.mp4`,
+    `${A}/video-previews-v2/${preview}-720`,
+  ]),
 );
 
 export type TalentVideoSource = { src: string; type?: string };
 
-/** Native source selection skips unsupported WebM and retains the MP4 fallback. */
+/** Native source selection skips unsupported WebM and uses the small MP4 fallback. */
 export function talentVideoSources(original: string): TalentVideoSource[] {
-  const webm = WEBM_PREVIEWS.get(original);
-  if (webm) {
+  const preview = VIDEO_PREVIEWS.get(original);
+  if (preview) {
     return [
-      { src: webm, type: 'video/webm; codecs="vp9"' },
-      { src: original, type: "video/mp4" },
+      { src: `${preview}.webm`, type: 'video/webm; codecs="vp9"' },
+      { src: `${preview}.mp4`, type: "video/mp4" },
     ];
   }
   // Do not guess alternate paths for uploads or outside sources.

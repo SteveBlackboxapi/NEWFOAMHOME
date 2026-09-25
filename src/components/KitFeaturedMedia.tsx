@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import type { TalentContentTile } from "../data/stagedTalent";
 import { observeKitImage, type KitImageStatus } from "../lib/kitFeaturedMedia";
 import { ContentCardOverlay } from "./ContentMetrics";
+import { OptimizedImage } from "./OptimizedImage";
 
 /** Only the four featured Kit photos load early; the rest of the library stays lazy. */
 export function KitFeaturedMedia({
@@ -38,9 +39,10 @@ export function KitFeaturedMedia({
         style={{ opacity: ready ? 1 : 0 }}
         aria-hidden={!ready}
       >
-        <img
+        <OptimizedImage
           ref={image}
           src={tile.thumb}
+          sizes="(max-width: 767px) 44vw, (max-width: 1100px) 23vw, 240px"
           alt={alt}
           loading="eager"
           fetchPriority="low"

@@ -1,4 +1,5 @@
-const ASSETS = `${import.meta.env.BASE_URL}assets/people-colour/story-refresh-v1`;
+import { A } from "../lib/assets";
+const ASSETS = `${A}/people-colour/story-refresh-v1`;
 
 type Platform = "tiktok" | "instagram";
 type Comment = { name: string; text: string; colour: string };

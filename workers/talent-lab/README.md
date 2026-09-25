@@ -51,6 +51,24 @@ All mutations require an exact same-origin `Origin` header. Login attempts are l
 
 All responses disable caching and indexing. The Content Security Policy restricts application scripts to this origin; media and source downloads may also use the existing Foam GitHub Pages origin. No passwords or keys are logged by the Worker.
 
+## Publishing website image replacements
+
+Open the bottom-left workspace menu, choose **Settings → Website images**, and select a page in the image map. Each section shows its current images and shared placements. **Replace** stages a new image; **Save changes** saves it and queues website publishing. **Talent library** keeps profile and content management separate from Explore content. Returning from Settings preserves the current search and library view.
+
+**Lock this browser** lives in Settings. It closes the current browser's editing session and requires the password next time; saved images and the shared GitHub connection remain intact. Unsaved changes receive a discard confirmation first.
+
+Saving a replacement for an image with an existing website placement adds an explicit `websiteReplacements` entry to the library manifest. Its key is the original canonical website image path (for example, `assets/talent/nia-brooks/nia-brooks-skincare.webp`) and its value is a canonical uploaded image path. Stable asset IDs keep the same source key through repeated replacements. New images, new profiles, old saved drafts, removed profiles and other profile edits do not become publication instructions. Replacing a video poster changes the public poster only; the public demo's video, identity, metrics and layout remain unchanged. Referenced published uploads are retained even when a draft profile no longer uses them.
+
+After an approved library branch reference advances, the Worker sends one fixed GitHub `repository_dispatch` event: `talent-library-saved`, with `client_payload.libraryRevision` set to the saved commit SHA. The existing Contents-write GitHub key is sufficient. The public workflow must exist on `main` and build source from `main`; the separate, older library branch is never merged or executed. A failed dispatch returns a successful save with a separate failed publication status, so the editor keeps the saved revision and can retry without resaving or overwriting the catalogue.
+
+`POST /api/publish` retries that fixed dispatch. It accepts only `{ "revision": "<40-character-commit>" }`, requires the authenticated session and exact same-origin Origin header, and verifies the revision still equals the current library branch head. It cannot select another repository, workflow, event, branch or historical commit. The generic GitHub proxy does not expose the dispatch endpoint.
+
+Before generating responsive media or building the public website, run `node scripts/publish-library-images.mjs --revision <saved-commit>` in a disposable build checkout. Omitting the argument (and `LIBRARY_REVISION`) reads and pins the latest library branch revision once. `GITHUB_TOKEN` may be supplied by CI for read access. The script reads only explicit map entries, verifies their destinations against the website's current image-placement catalogue, fetches uploaded bytes from the same repository at that exact revision, validates/decodes the images, and overlays working copies at their existing filenames. It does not publish Lab profile drafts or modify source files, IDs, videos or archived masters. Run the responsive-media preparation next to produce new content-versioned URLs. Do not commit these temporary overlaid originals.
+
+The build writes `public/website-publication.json` with `{ "version": 1, "libraryRevision": "<commit>", "replacementCount": 1 }`. Once deployed, authenticated `GET /api/publication` reads only this fixed public marker without forwarding credentials. After saving, the Lab checks it for up to ten minutes and reports when its saved revision is live. A queued event alone is never presented as a completed deployment.
+
 ## Verification
 
 Run `node --test workers/talent-lab/worker.test.mjs` and `node --check workers/talent-lab/worker.mjs` before deployment. The tests exercise authentication, CSRF, session tampering/expiry/rotation, encrypted key persistence, rate limiting, gzip headers, private asset denial, public source proxies, body bounds and Git write scope with mocked upstream GitHub responses. After deployment, verify login, compressed app loading, a connected library read/save and logout in the actual Worker runtime.
+
+Run `node --test scripts/test-github-talent-library.mjs scripts/test-publish-library-images.mjs` for explicit publication, old-draft isolation, upload retention, fixed revision reads and replacement-image validation. Worker tests also verify dispatch failure preserves saves, retries remain scoped, and publication status cannot expose private credentials.

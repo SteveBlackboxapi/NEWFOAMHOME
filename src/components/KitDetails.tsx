@@ -1,7 +1,7 @@
 import type { TalentNetwork } from "../data/stagedTalent";
 import "./kit-details.css";
 
-const A = `${import.meta.env.BASE_URL}assets`;
+import { A } from "../lib/assets";
 const platformAssets: Partial<Record<TalentNetwork, string>> = {
   instagram: `${A}/60920.svg`,
   tiktok: `${A}/31c2a.svg`,

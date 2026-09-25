@@ -1,0 +1,1371 @@
+{
+  "revision": "75513e0a2a5c34fa",
+  "images": {
+    "assets/agency-logos.webp": {
+      "src": "assets/agency-logos.webp",
+      "width": 3520,
+      "height": 1120,
+      "variants": [
+        {
+          "src": "assets/responsive/bb26615f6281b8ab32e6/96/agency-logos.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/bb26615f6281b8ab32e6/256/agency-logos.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/bb26615f6281b8ab32e6/480/agency-logos.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/bb26615f6281b8ab32e6/768/agency-logos.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/bb26615f6281b8ab32e6/1280/agency-logos.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/campaigns/found-with-foam-skincare-v4.webp": {
+      "src": "assets/campaigns/found-with-foam-skincare-v4.webp",
+      "width": 2824,
+      "height": 2232,
+      "variants": [
+        {
+          "src": "assets/responsive/7079f925397fa06d4d00/96/campaigns/found-with-foam-skincare-v4.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/7079f925397fa06d4d00/256/campaigns/found-with-foam-skincare-v4.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/7079f925397fa06d4d00/480/campaigns/found-with-foam-skincare-v4.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/7079f925397fa06d4d00/768/campaigns/found-with-foam-skincare-v4.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/7079f925397fa06d4d00/1280/campaigns/found-with-foam-skincare-v4.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/chrome-desktop-blurio.webp": {
+      "src": "assets/chrome-desktop-blurio.webp",
+      "width": 3418,
+      "height": 1846,
+      "variants": [
+        {
+          "src": "assets/responsive/af90a8c40fe6650f58e0/96/chrome-desktop-blurio.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/af90a8c40fe6650f58e0/256/chrome-desktop-blurio.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/af90a8c40fe6650f58e0/480/chrome-desktop-blurio.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/af90a8c40fe6650f58e0/768/chrome-desktop-blurio.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/af90a8c40fe6650f58e0/1280/chrome-desktop-blurio.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/chrome-desktop-landscape.webp": {
+      "src": "assets/chrome-desktop-landscape.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": [
+        {
+          "src": "assets/responsive/a0b0dc93c15056e9b3c0/96/chrome-desktop-landscape.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/a0b0dc93c15056e9b3c0/256/chrome-desktop-landscape.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/a0b0dc93c15056e9b3c0/480/chrome-desktop-landscape.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/a0b0dc93c15056e9b3c0/768/chrome-desktop-landscape.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/a0b0dc93c15056e9b3c0/1280/chrome-desktop-landscape.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/chrome-store-transparent.webp": {
+      "src": "assets/chrome-store-transparent.webp",
+      "width": 192,
+      "height": 192,
+      "variants": []
+    },
+    "assets/films/foam-overview-v1/poster.webp": {
+      "src": "assets/films/foam-overview-v1/poster.webp",
+      "width": 1872,
+      "height": 1056,
+      "variants": [
+        {
+          "src": "assets/responsive/1eefcc2279c2643147c3/96/films/foam-overview-v1/poster.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/1eefcc2279c2643147c3/256/films/foam-overview-v1/poster.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/1eefcc2279c2643147c3/480/films/foam-overview-v1/poster.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/1eefcc2279c2643147c3/768/films/foam-overview-v1/poster.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/1eefcc2279c2643147c3/1280/films/foam-overview-v1/poster.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/foam-media-kit.webp": {
+      "src": "assets/foam-media-kit.webp",
+      "width": 640,
+      "height": 640,
+      "variants": [
+        {
+          "src": "assets/responsive/48db5c6e36a6f51294da/96/foam-media-kit.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/48db5c6e36a6f51294da/256/foam-media-kit.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/48db5c6e36a6f51294da/480/foam-media-kit.webp.webp",
+          "width": 480
+        }
+      ]
+    },
+    "assets/io-portrait-poster.webp": {
+      "src": "assets/io-portrait-poster.webp",
+      "width": 960,
+      "height": 540,
+      "variants": [
+        {
+          "src": "assets/responsive/5a746cd5f17b581fd271/96/io-portrait-poster.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/5a746cd5f17b581fd271/256/io-portrait-poster.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/5a746cd5f17b581fd271/480/io-portrait-poster.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/5a746cd5f17b581fd271/768/io-portrait-poster.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/music/feed-the-feed-v1/cover-small.webp": {
+      "src": "assets/music/feed-the-feed-v1/cover-small.webp",
+      "width": 144,
+      "height": 144,
+      "variants": []
+    },
+    "assets/music/feed-the-feed-v1/cover.webp": {
+      "src": "assets/music/feed-the-feed-v1/cover.webp",
+      "width": 640,
+      "height": 640,
+      "variants": [
+        {
+          "src": "assets/responsive/02d1824e70cfa2cacc16/96/music/feed-the-feed-v1/cover.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/02d1824e70cfa2cacc16/256/music/feed-the-feed-v1/cover.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/02d1824e70cfa2cacc16/480/music/feed-the-feed-v1/cover.webp.webp",
+          "width": 480
+        }
+      ]
+    },
+    "assets/people-colour/collaborators.webp": {
+      "src": "assets/people-colour/collaborators.webp",
+      "width": 736,
+      "height": 552,
+      "variants": [
+        {
+          "src": "assets/responsive/9fce2db82d66b08e6f88/96/people-colour/collaborators.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/9fce2db82d66b08e6f88/256/people-colour/collaborators.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/9fce2db82d66b08e6f88/480/people-colour/collaborators.webp.webp",
+          "width": 480
+        }
+      ]
+    },
+    "assets/people-colour/original-portraits-v1/blue-portrait-original-v1.webp": {
+      "src": "assets/people-colour/original-portraits-v1/blue-portrait-original-v1.webp",
+      "width": 1448,
+      "height": 1086,
+      "variants": [
+        {
+          "src": "assets/responsive/b60d11bf07e04119ffcd/96/people-colour/original-portraits-v1/blue-portrait-original-v1.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/b60d11bf07e04119ffcd/256/people-colour/original-portraits-v1/blue-portrait-original-v1.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/b60d11bf07e04119ffcd/480/people-colour/original-portraits-v1/blue-portrait-original-v1.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/b60d11bf07e04119ffcd/768/people-colour/original-portraits-v1/blue-portrait-original-v1.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/b60d11bf07e04119ffcd/1280/people-colour/original-portraits-v1/blue-portrait-original-v1.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/people-colour/story-refresh-v1/ada-flash.webp": {
+      "src": "assets/people-colour/story-refresh-v1/ada-flash.webp",
+      "width": 1024,
+      "height": 1536,
+      "variants": [
+        {
+          "src": "assets/responsive/67854dda4ae8363a56b5/96/people-colour/story-refresh-v1/ada-flash.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/67854dda4ae8363a56b5/256/people-colour/story-refresh-v1/ada-flash.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/67854dda4ae8363a56b5/480/people-colour/story-refresh-v1/ada-flash.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/67854dda4ae8363a56b5/768/people-colour/story-refresh-v1/ada-flash.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/people-colour/story-refresh-v1/luca-live.webp": {
+      "src": "assets/people-colour/story-refresh-v1/luca-live.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/336f26f2bae032df5e2e/96/people-colour/story-refresh-v1/luca-live.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/336f26f2bae032df5e2e/256/people-colour/story-refresh-v1/luca-live.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/336f26f2bae032df5e2e/480/people-colour/story-refresh-v1/luca-live.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/336f26f2bae032df5e2e/768/people-colour/story-refresh-v1/luca-live.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/people-colour/story-refresh-v1/music-creator.webp": {
+      "src": "assets/people-colour/story-refresh-v1/music-creator.webp",
+      "width": 1024,
+      "height": 1536,
+      "variants": [
+        {
+          "src": "assets/responsive/13b409764d837327829f/96/people-colour/story-refresh-v1/music-creator.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/13b409764d837327829f/256/people-colour/story-refresh-v1/music-creator.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/13b409764d837327829f/480/people-colour/story-refresh-v1/music-creator.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/13b409764d837327829f/768/people-colour/story-refresh-v1/music-creator.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/people-colour/story-refresh-v1/outdoor-creator.webp": {
+      "src": "assets/people-colour/story-refresh-v1/outdoor-creator.webp",
+      "width": 1024,
+      "height": 1536,
+      "variants": [
+        {
+          "src": "assets/responsive/abfd79bc05926ffdd098/96/people-colour/story-refresh-v1/outdoor-creator.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/abfd79bc05926ffdd098/256/people-colour/story-refresh-v1/outdoor-creator.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/abfd79bc05926ffdd098/480/people-colour/story-refresh-v1/outdoor-creator.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/abfd79bc05926ffdd098/768/people-colour/story-refresh-v1/outdoor-creator.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/people-colour/story-refresh-v1/tessa-live.webp": {
+      "src": "assets/people-colour/story-refresh-v1/tessa-live.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/83667fe070874db5f70c/96/people-colour/story-refresh-v1/tessa-live.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/83667fe070874db5f70c/256/people-colour/story-refresh-v1/tessa-live.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/83667fe070874db5f70c/480/people-colour/story-refresh-v1/tessa-live.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/83667fe070874db5f70c/768/people-colour/story-refresh-v1/tessa-live.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/people-colour/studio-moment.webp": {
+      "src": "assets/people-colour/studio-moment.webp",
+      "width": 1672,
+      "height": 940,
+      "variants": [
+        {
+          "src": "assets/responsive/fc3006447ddf81a5c318/96/people-colour/studio-moment.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/fc3006447ddf81a5c318/256/people-colour/studio-moment.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/fc3006447ddf81a5c318/480/people-colour/studio-moment.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/fc3006447ddf81a5c318/768/people-colour/studio-moment.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/fc3006447ddf81a5c318/1280/people-colour/studio-moment.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp": {
+      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/5ae99cdbc8692668274c/96/talent/aria-quen-v2/aria-quen-v2-c1.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/5ae99cdbc8692668274c/256/talent/aria-quen-v2/aria-quen-v2-c1.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/5ae99cdbc8692668274c/480/talent/aria-quen-v2/aria-quen-v2-c1.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/5ae99cdbc8692668274c/768/talent/aria-quen-v2/aria-quen-v2-c1.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/aria-quen-v2/aria-quen-v2-c3.webp": {
+      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c3.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/b939346a6bb15834c218/96/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/b939346a6bb15834c218/256/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/b939346a6bb15834c218/480/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/b939346a6bb15834c218/768/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/aria-quen-v2/aria-quen-v2-c4.webp": {
+      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c4.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/9f5986e7fa70f7109429/96/talent/aria-quen-v2/aria-quen-v2-c4.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/9f5986e7fa70f7109429/256/talent/aria-quen-v2/aria-quen-v2-c4.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/9f5986e7fa70f7109429/480/talent/aria-quen-v2/aria-quen-v2-c4.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/9f5986e7fa70f7109429/768/talent/aria-quen-v2/aria-quen-v2-c4.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/aria-quen-v2/aria-quen-v2-c5.webp": {
+      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c5.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/756a857233b4a33db7bf/96/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/756a857233b4a33db7bf/256/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/756a857233b4a33db7bf/480/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/756a857233b4a33db7bf/768/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp": {
+      "src": "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp",
+      "width": 1086,
+      "height": 1448,
+      "variants": [
+        {
+          "src": "assets/responsive/486a582bd8f3de8667c1/96/talent/aria-quen-v2/aria-quen-v2-portrait.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/486a582bd8f3de8667c1/256/talent/aria-quen-v2/aria-quen-v2-portrait.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/486a582bd8f3de8667c1/480/talent/aria-quen-v2/aria-quen-v2-portrait.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/486a582bd8f3de8667c1/768/talent/aria-quen-v2/aria-quen-v2-portrait.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/bode-niles-portrait.jpg": {
+      "src": "assets/talent/bode-niles-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/f35e4ecb28e71fed4b10/96/talent/bode-niles-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/f35e4ecb28e71fed4b10/256/talent/bode-niles-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/f35e4ecb28e71fed4b10/480/talent/bode-niles-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/f35e4ecb28e71fed4b10/768/talent/bode-niles-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/cat-laundry.webp": {
+      "src": "assets/talent/discovery-v1/cat-laundry.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/ef2fe29f56ecc9876947/96/talent/discovery-v1/cat-laundry.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/ef2fe29f56ecc9876947/256/talent/discovery-v1/cat-laundry.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/ef2fe29f56ecc9876947/480/talent/discovery-v1/cat-laundry.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/ef2fe29f56ecc9876947/768/talent/discovery-v1/cat-laundry.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/cat-window.webp": {
+      "src": "assets/talent/discovery-v1/cat-window.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": [
+        {
+          "src": "assets/responsive/4a71cabbece5e728d464/96/talent/discovery-v1/cat-window.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/4a71cabbece5e728d464/256/talent/discovery-v1/cat-window.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/4a71cabbece5e728d464/480/talent/discovery-v1/cat-window.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/4a71cabbece5e728d464/768/talent/discovery-v1/cat-window.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/4a71cabbece5e728d464/1280/talent/discovery-v1/cat-window.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/cats-sleeping.webp": {
+      "src": "assets/talent/discovery-v1/cats-sleeping.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/ce7d761277d38c3c6d21/96/talent/discovery-v1/cats-sleeping.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/ce7d761277d38c3c6d21/256/talent/discovery-v1/cats-sleeping.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/ce7d761277d38c3c6d21/480/talent/discovery-v1/cats-sleeping.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/ce7d761277d38c3c6d21/768/talent/discovery-v1/cats-sleeping.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/jax-live-set.webp": {
+      "src": "assets/talent/discovery-v1/jax-live-set.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/0093cb5dc893bd4b6384/96/talent/discovery-v1/jax-live-set.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/0093cb5dc893bd4b6384/256/talent/discovery-v1/jax-live-set.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/0093cb5dc893bd4b6384/480/talent/discovery-v1/jax-live-set.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/0093cb5dc893bd4b6384/768/talent/discovery-v1/jax-live-set.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/nike-after-run.webp": {
+      "src": "assets/talent/discovery-v1/nike-after-run.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/76b4a62aecf66c181d40/96/talent/discovery-v1/nike-after-run.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/76b4a62aecf66c181d40/256/talent/discovery-v1/nike-after-run.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/76b4a62aecf66c181d40/480/talent/discovery-v1/nike-after-run.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/76b4a62aecf66c181d40/768/talent/discovery-v1/nike-after-run.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/nike-lacing.webp": {
+      "src": "assets/talent/discovery-v1/nike-lacing.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/aa0ef455f841b2da2a6b/96/talent/discovery-v1/nike-lacing.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/aa0ef455f841b2da2a6b/256/talent/discovery-v1/nike-lacing.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/aa0ef455f841b2da2a6b/480/talent/discovery-v1/nike-lacing.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/aa0ef455f841b2da2a6b/768/talent/discovery-v1/nike-lacing.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/skincare-shelf.webp": {
+      "src": "assets/talent/discovery-v1/skincare-shelf.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/09d498a05932666b261b/96/talent/discovery-v1/skincare-shelf.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/09d498a05932666b261b/256/talent/discovery-v1/skincare-shelf.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/09d498a05932666b261b/480/talent/discovery-v1/skincare-shelf.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/09d498a05932666b261b/768/talent/discovery-v1/skincare-shelf.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/discovery-v1/zane-shoe-chat.webp": {
+      "src": "assets/talent/discovery-v1/zane-shoe-chat.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/e62a512fa86aa87b7741/96/talent/discovery-v1/zane-shoe-chat.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/e62a512fa86aa87b7741/256/talent/discovery-v1/zane-shoe-chat.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/e62a512fa86aa87b7741/480/talent/discovery-v1/zane-shoe-chat.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/e62a512fa86aa87b7741/768/talent/discovery-v1/zane-shoe-chat.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/elio-voss-portrait.jpg": {
+      "src": "assets/talent/elio-voss-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/58eb7c95b10cb668bba5/96/talent/elio-voss-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/58eb7c95b10cb668bba5/256/talent/elio-voss-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/58eb7c95b10cb668bba5/480/talent/elio-voss-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/58eb7c95b10cb668bba5/768/talent/elio-voss-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/elise-morgan/elise-morgan-hotel-selfie.webp": {
+      "src": "assets/talent/elise-morgan/elise-morgan-hotel-selfie.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/5ef5cc35ff76abcadf4d/96/talent/elise-morgan/elise-morgan-hotel-selfie.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/5ef5cc35ff76abcadf4d/256/talent/elise-morgan/elise-morgan-hotel-selfie.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/5ef5cc35ff76abcadf4d/480/talent/elise-morgan/elise-morgan-hotel-selfie.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/5ef5cc35ff76abcadf4d/768/talent/elise-morgan/elise-morgan-hotel-selfie.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/elise-morgan/elise-morgan-portrait.webp": {
+      "src": "assets/talent/elise-morgan/elise-morgan-portrait.webp",
+      "width": 1254,
+      "height": 1254,
+      "variants": [
+        {
+          "src": "assets/responsive/bfdc1adbd9177a1b846a/96/talent/elise-morgan/elise-morgan-portrait.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/bfdc1adbd9177a1b846a/256/talent/elise-morgan/elise-morgan-portrait.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/bfdc1adbd9177a1b846a/480/talent/elise-morgan/elise-morgan-portrait.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/bfdc1adbd9177a1b846a/768/talent/elise-morgan/elise-morgan-portrait.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/fitness-creator/steps.webp": {
+      "src": "assets/talent/fitness-creator/steps.webp",
+      "width": 1500,
+      "height": 2179,
+      "variants": [
+        {
+          "src": "assets/responsive/a28c433a859fcf9ca262/96/talent/fitness-creator/steps.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/a28c433a859fcf9ca262/256/talent/fitness-creator/steps.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/a28c433a859fcf9ca262/480/talent/fitness-creator/steps.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/a28c433a859fcf9ca262/768/talent/fitness-creator/steps.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/a28c433a859fcf9ca262/1280/talent/fitness-creator/steps.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/talent/fitness-creator/waterfront.webp": {
+      "src": "assets/talent/fitness-creator/waterfront.webp",
+      "width": 1800,
+      "height": 1282,
+      "variants": [
+        {
+          "src": "assets/responsive/179e1c97a41c039b0f01/96/talent/fitness-creator/waterfront.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/179e1c97a41c039b0f01/256/talent/fitness-creator/waterfront.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/179e1c97a41c039b0f01/480/talent/fitness-creator/waterfront.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/179e1c97a41c039b0f01/768/talent/fitness-creator/waterfront.webp.webp",
+          "width": 768
+        },
+        {
+          "src": "assets/responsive/179e1c97a41c039b0f01/1280/talent/fitness-creator/waterfront.webp.webp",
+          "width": 1280
+        }
+      ]
+    },
+    "assets/talent/jax-orin-portrait.jpg": {
+      "src": "assets/talent/jax-orin-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/4907f177c74788567c82/96/talent/jax-orin-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/4907f177c74788567c82/256/talent/jax-orin-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/4907f177c74788567c82/480/talent/jax-orin-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/4907f177c74788567c82/768/talent/jax-orin-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/kai-solen-portrait.jpg": {
+      "src": "assets/talent/kai-solen-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/f223f1eae1daeca1e614/96/talent/kai-solen-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/f223f1eae1daeca1e614/256/talent/kai-solen-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/f223f1eae1daeca1e614/480/talent/kai-solen-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/f223f1eae1daeca1e614/768/talent/kai-solen-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/lena-croft-portrait.jpg": {
+      "src": "assets/talent/lena-croft-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/cda1bda32c594496316b/96/talent/lena-croft-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/cda1bda32c594496316b/256/talent/lena-croft-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/cda1bda32c594496316b/480/talent/lena-croft-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/cda1bda32c594496316b/768/talent/lena-croft-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/lena-croft-v2/lena-croft-grwm.webp": {
+      "src": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/e953da1ad1b223a72e7a/96/talent/lena-croft-v2/lena-croft-grwm.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/e953da1ad1b223a72e7a/256/talent/lena-croft-v2/lena-croft-grwm.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/e953da1ad1b223a72e7a/480/talent/lena-croft-v2/lena-croft-grwm.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/e953da1ad1b223a72e7a/768/talent/lena-croft-v2/lena-croft-grwm.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/lena-croft-v2/lena-croft-outfit.webp": {
+      "src": "assets/talent/lena-croft-v2/lena-croft-outfit.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/ad15f97c84e5d2882259/96/talent/lena-croft-v2/lena-croft-outfit.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/ad15f97c84e5d2882259/256/talent/lena-croft-v2/lena-croft-outfit.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/ad15f97c84e5d2882259/480/talent/lena-croft-v2/lena-croft-outfit.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/ad15f97c84e5d2882259/768/talent/lena-croft-v2/lena-croft-outfit.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/mira-vale-portrait.jpg": {
+      "src": "assets/talent/mira-vale-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/1dd7589e845a193d4778/96/talent/mira-vale-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/1dd7589e845a193d4778/256/talent/mira-vale-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/1dd7589e845a193d4778/480/talent/mira-vale-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/1dd7589e845a193d4778/768/talent/mira-vale-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": {
+      "src": "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/1c4c3799a4a27f55853c/96/talent/mira-vale-v2/mira-vale-paused-makeup.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/1c4c3799a4a27f55853c/256/talent/mira-vale-v2/mira-vale-paused-makeup.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/1c4c3799a4a27f55853c/480/talent/mira-vale-v2/mira-vale-paused-makeup.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/1c4c3799a4a27f55853c/768/talent/mira-vale-v2/mira-vale-paused-makeup.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/nia-brooks/nia-brooks-profile.webp": {
+      "src": "assets/talent/nia-brooks/nia-brooks-profile.webp",
+      "width": 1254,
+      "height": 1254,
+      "variants": [
+        {
+          "src": "assets/responsive/8629c0dbc546640e0eab/96/talent/nia-brooks/nia-brooks-profile.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/8629c0dbc546640e0eab/256/talent/nia-brooks/nia-brooks-profile.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/8629c0dbc546640e0eab/480/talent/nia-brooks/nia-brooks-profile.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/8629c0dbc546640e0eab/768/talent/nia-brooks/nia-brooks-profile.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/nia-brooks/nia-brooks-seen-1.webp": {
+      "src": "assets/talent/nia-brooks/nia-brooks-seen-1.webp",
+      "width": 720,
+      "height": 1280,
+      "variants": [
+        {
+          "src": "assets/responsive/9a688e8e1af6a5008225/96/talent/nia-brooks/nia-brooks-seen-1.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/9a688e8e1af6a5008225/256/talent/nia-brooks/nia-brooks-seen-1.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/9a688e8e1af6a5008225/480/talent/nia-brooks/nia-brooks-seen-1.webp.webp",
+          "width": 480
+        }
+      ]
+    },
+    "assets/talent/nia-brooks/nia-brooks-seen-2.webp": {
+      "src": "assets/talent/nia-brooks/nia-brooks-seen-2.webp",
+      "width": 720,
+      "height": 1280,
+      "variants": [
+        {
+          "src": "assets/responsive/7b1f6f8e8f29c87471ff/96/talent/nia-brooks/nia-brooks-seen-2.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/7b1f6f8e8f29c87471ff/256/talent/nia-brooks/nia-brooks-seen-2.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/7b1f6f8e8f29c87471ff/480/talent/nia-brooks/nia-brooks-seen-2.webp.webp",
+          "width": 480
+        }
+      ]
+    },
+    "assets/talent/nia-brooks/nia-brooks-skincare.webp": {
+      "src": "assets/talent/nia-brooks/nia-brooks-skincare.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/e87f61189dd8af4ffeae/96/talent/nia-brooks/nia-brooks-skincare.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/e87f61189dd8af4ffeae/256/talent/nia-brooks/nia-brooks-skincare.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/e87f61189dd8af4ffeae/480/talent/nia-brooks/nia-brooks-skincare.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/e87f61189dd8af4ffeae/768/talent/nia-brooks/nia-brooks-skincare.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/nova-reed-portrait.jpg": {
+      "src": "assets/talent/nova-reed-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/3b6e6c61b9b7fc5072ac/96/talent/nova-reed-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/3b6e6c61b9b7fc5072ac/256/talent/nova-reed-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/3b6e6c61b9b7fc5072ac/480/talent/nova-reed-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/3b6e6c61b9b7fc5072ac/768/talent/nova-reed-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/nova-reed-v2/nova-reed-walk.webp": {
+      "src": "assets/talent/nova-reed-v2/nova-reed-walk.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/b949e33fc97f0e65785c/96/talent/nova-reed-v2/nova-reed-walk.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/b949e33fc97f0e65785c/256/talent/nova-reed-v2/nova-reed-walk.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/b949e33fc97f0e65785c/480/talent/nova-reed-v2/nova-reed-walk.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/b949e33fc97f0e65785c/768/talent/nova-reed-v2/nova-reed-walk.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/rue-dante-portrait.jpg": {
+      "src": "assets/talent/rue-dante-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/1b8e6fc478546e284650/96/talent/rue-dante-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/1b8e6fc478546e284650/256/talent/rue-dante-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/1b8e6fc478546e284650/480/talent/rue-dante-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/1b8e6fc478546e284650/768/talent/rue-dante-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": {
+      "src": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/67d66a6e57a32c4904e8/96/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/67d66a6e57a32c4904e8/256/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/67d66a6e57a32c4904e8/480/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/67d66a6e57a32c4904e8/768/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp": {
+      "src": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/38aa5a573040346bed73/96/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/38aa5a573040346bed73/256/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/38aa5a573040346bed73/480/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/38aa5a573040346bed73/768/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": {
+      "src": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp",
+      "width": 1086,
+      "height": 1448,
+      "variants": [
+        {
+          "src": "assets/responsive/335a9720d2bdbd50f2c6/96/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/335a9720d2bdbd50f2c6/256/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/335a9720d2bdbd50f2c6/480/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/335a9720d2bdbd50f2c6/768/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": {
+      "src": "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/ae36f95d2eaef6c7fc38/96/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/ae36f95d2eaef6c7fc38/256/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/ae36f95d2eaef6c7fc38/480/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/ae36f95d2eaef6c7fc38/768/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp": {
+      "src": "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/a22fe75719e70f71c33f/96/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/a22fe75719e70f71c33f/256/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/a22fe75719e70f71c33f/480/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/a22fe75719e70f71c33f/768/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/suki-prent-portrait.jpg": {
+      "src": "assets/talent/suki-prent-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/67353e7a059748d2f997/96/talent/suki-prent-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/67353e7a059748d2f997/256/talent/suki-prent-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/67353e7a059748d2f997/480/talent/suki-prent-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/67353e7a059748d2f997/768/talent/suki-prent-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/theo-lane/matcha.webp": {
+      "src": "assets/talent/theo-lane/matcha.webp",
+      "width": 1122,
+      "height": 1402,
+      "variants": [
+        {
+          "src": "assets/responsive/5e9f9d1c2883b29ec167/96/talent/theo-lane/matcha.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/5e9f9d1c2883b29ec167/256/talent/theo-lane/matcha.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/5e9f9d1c2883b29ec167/480/talent/theo-lane/matcha.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/5e9f9d1c2883b29ec167/768/talent/theo-lane/matcha.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/theo-maris-portrait.jpg": {
+      "src": "assets/talent/theo-maris-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/da38fff60010db3b7ead/96/talent/theo-maris-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/da38fff60010db3b7ead/256/talent/theo-maris-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/da38fff60010db3b7ead/480/talent/theo-maris-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/da38fff60010db3b7ead/768/talent/theo-maris-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/zane-holt-portrait.jpg": {
+      "src": "assets/talent/zane-holt-portrait.jpg",
+      "width": 810,
+      "height": 1080,
+      "variants": [
+        {
+          "src": "assets/responsive/728ecb89157a7f46aeae/96/talent/zane-holt-portrait.jpg.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/728ecb89157a7f46aeae/256/talent/zane-holt-portrait.jpg.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/728ecb89157a7f46aeae/480/talent/zane-holt-portrait.jpg.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/728ecb89157a7f46aeae/768/talent/zane-holt-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    }
+  }
+}

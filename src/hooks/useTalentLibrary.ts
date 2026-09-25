@@ -7,8 +7,11 @@ import {
   canonicalProfile,
   emptyLibrary,
   materializeLibrary,
+  materializeLibraryImage,
   readGithubLibrary,
   saveGithubLibrary,
+  retryWebsitePublication,
+  readWebsitePublication,
   verifyGithubAccess,
   type LibraryManifest,
   type LibrarySnapshot,
@@ -31,6 +34,27 @@ export function useTalentLibrary() {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
   const dirty = JSON.stringify(manifest) !== JSON.stringify(snapshot.manifest);
+  useEffect(() => {
+    const publication = snapshot.publication;
+    if (!PRIVATE_LIBRARY || !publication?.queued || publication.published) return;
+    let active = true;
+    let timer: ReturnType<typeof setTimeout>;
+    let attempts = 0;
+    const check = async () => {
+      try {
+        const revision = await readWebsitePublication();
+        if (active && revision === publication.revision) {
+          setSnapshot((previous) => previous.revision === revision
+            ? { ...previous, publication: { ...publication, published: true } }
+            : previous);
+          return;
+        }
+      } catch { /* A saved catalogue remains safe while publishing or offline. */ }
+      if (active && ++attempts < 40) timer = setTimeout(check, 15_000);
+    };
+    timer = setTimeout(check, 10_000);
+    return () => { active = false; clearTimeout(timer); };
+  }, [snapshot.publication]);
   const applySnapshot = useCallback((next: LibrarySnapshot) => {
     setSnapshot(next);
     setManifest(next.manifest);
@@ -108,14 +132,14 @@ export function useTalentLibrary() {
     setSaving(true);
     setError("");
     try {
-      applySnapshot(
-        await saveGithubLibrary(
-          token,
-          snapshot,
-          manifest,
-          Object.values(uploads),
-        ),
+      const next = await saveGithubLibrary(
+        token,
+        snapshot,
+        manifest,
+        Object.values(uploads),
       );
+      applySnapshot(next);
+      return next;
     } catch (e) {
       setError(
         e instanceof Error
@@ -123,6 +147,19 @@ export function useTalentLibrary() {
           : "Could not save. Your draft is still here.",
       );
       throw e;
+    } finally {
+      setSaving(false);
+    }
+  };
+  const retryPublication = async () => {
+    if (!snapshot.revision || dirty) return;
+    setSaving(true);
+    setError("");
+    try {
+      const publication = await retryWebsitePublication(snapshot.revision, token);
+      setSnapshot((previous) => ({ ...previous, publication }));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not queue the website update.");
     } finally {
       setSaving(false);
     }
@@ -155,6 +192,12 @@ export function useTalentLibrary() {
     () => materializeLibrary(labTalent, manifest, snapshot.revision, previews),
     [manifest, snapshot.revision, previews],
   );
+  const websiteImages = useMemo(() => Object.fromEntries(
+    Object.entries(manifest.websiteReplacements || {}).map(([source, replacement]) =>
+      [source, materializeLibraryImage(replacement, snapshot.revision, previews)]),
+  ), [manifest.websiteReplacements, snapshot.revision, previews]);
+  const changedWebsiteImages = Object.keys(manifest.websiteReplacements || {}).filter((source) =>
+    manifest.websiteReplacements?.[source] !== snapshot.manifest.websiteReplacements?.[source]);
   const upsert = (profile: StagedTalent) =>
     setManifest((previous) => ({
       ...previous,
@@ -178,18 +221,28 @@ export function useTalentLibrary() {
   return {
     profiles,
     rawProfiles,
+    websiteImages,
+    changedWebsiteImages,
     loading,
     saving,
     ready,
     error,
     dirty,
+    publication: snapshot.publication,
+    hasWebsiteReplacements: Object.keys(snapshot.manifest.websiteReplacements || {}).length > 0,
     connected: PRIVATE_LIBRARY ? serverConnected : !!token,
     connect,
     disconnect,
     refresh,
     save,
+    retryPublication,
     upsert,
     remove,
+    replaceWebsiteImage: (source: string, replacement: string) =>
+      setManifest((previous) => ({
+        ...previous,
+        websiteReplacements: { ...previous.websiteReplacements, [source]: replacement },
+      })),
     reset: () => applySnapshot(snapshot),
     addUpload: (upload: LibraryUpload, preview: string) => {
       setUploads((p) => ({ ...p, [upload.path]: upload }));
