@@ -1,10 +1,12 @@
-// Three and a half viewport heights of travel, plus the final sticky viewport.
-export const KIT_STORY_HEIGHT_VH = 450;
-// Reuse the outgoing sticky viewport for the next story rather than scrolling
-// an empty full screen after the plane has gone. Earlier kit timing is unchanged.
+// Preserve the original demo travel, adding a reading beat only at its finale.
+export const KIT_SEQUENCE_SCROLL_VH = 350;
+export const KIT_FINALE_HOLD_VH = 65;
+export const KIT_STORY_HEIGHT_VH = 100 + KIT_SEQUENCE_SCROLL_VH + KIT_FINALE_HOLD_VH;
+const FINALE_HOLD_PROGRESS = 0.94;
+// Reuse the outgoing sticky viewport once the readable finale has finished.
 export const KIT_CHROME_OVERLAP_VH = 100;
 export const KIT_COUNT_SCROLL_VH = 24;
-const COUNT_SPAN = KIT_COUNT_SCROLL_VH / (KIT_STORY_HEIGHT_VH - 100);
+const COUNT_SPAN = KIT_COUNT_SCROLL_VH / KIT_SEQUENCE_SCROLL_VH;
 
 export const clampProgress = (value: number) =>
   Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
@@ -14,6 +16,22 @@ export const smoothProgress = (p: number) => {
   const t = clampProgress(p);
   return t * t * (3 - 2 * t);
 };
+
+/** Hold the completed title and emerged plane without slowing earlier scenes. */
+export function kitTimelineProgress(scrollProgress: number) {
+  const distance = clampProgress(scrollProgress) * (KIT_STORY_HEIGHT_VH - 100);
+  const holdStart = FINALE_HOLD_PROGRESS * KIT_SEQUENCE_SCROLL_VH;
+  if (distance <= holdStart) return distance / KIT_SEQUENCE_SCROLL_VH;
+  if (distance <= holdStart + KIT_FINALE_HOLD_VH) return FINALE_HOLD_PROGRESS;
+  return clampProgress((distance - KIT_FINALE_HOLD_VH) / KIT_SEQUENCE_SCROLL_VH);
+}
+
+/** Chapter links use the same mapping as natural scroll, in either direction. */
+export function kitScrollProgress(timelineProgress: number) {
+  const p = clampProgress(timelineProgress);
+  const hold = p > FINALE_HOLD_PROGRESS ? KIT_FINALE_HOLD_VH : 0;
+  return (p * KIT_SEQUENCE_SCROLL_VH + hold) / (KIT_STORY_HEIGHT_VH - 100);
+}
 
 export type KitRevealStarts = {
   platforms: number;
