@@ -17,6 +17,7 @@ import {
   websiteSamantha,
 } from "../data/websiteTalent";
 import "./editorial-pages.css";
+import "./inside-foam-preview.css";
 
 function CreatorCircleAccents() {
   return (
@@ -172,7 +173,7 @@ function ContentIllustration({ preview = false }: { preview?: boolean }) {
   );
 }
 
-export function Updates({ portraitDiscovery = false }: { portraitDiscovery?: boolean } = {}) {
+export function Updates({ portraitDiscovery = true }: { portraitDiscovery?: boolean } = {}) {
   return (
     <MarketingPage className={`ep-page ep-inside${portraitDiscovery ? " ep-inside--portrait" : ""}`}>
       <header className="ep-inside-intro mp-cream">

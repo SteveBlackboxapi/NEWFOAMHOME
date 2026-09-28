@@ -35,6 +35,12 @@
   stroke-width: 0.65;
 }
 
+/* Give the fine connections more presence against the light page. */
+html:not([data-theme="dark"]) .creator-network-links {
+  stroke: #1c2128;
+  stroke-width: 1.4;
+}
+
 .creator-network-dot-blue {
   fill: var(--network-blue);
 }
