@@ -1,5 +1,5 @@
 {
-  "revision": "37dc49d03acabffa",
+  "revision": "541bac42cf8df89f",
   "images": {
     "assets/agency-logos.webp": {
       "src": "assets/agency-logos.webp",
@@ -209,21 +209,21 @@
         }
       ]
     },
-    "assets/people-colour/collaborators.webp": {
-      "src": "assets/people-colour/collaborators.webp",
+    "assets/people-colour/collaborators-foam-feed-v3.webp": {
+      "src": "assets/people-colour/collaborators-foam-feed-v3.webp",
       "width": 736,
       "height": 552,
       "variants": [
         {
-          "src": "assets/responsive/0caff1aa3525ce7726a8/96/people-colour/collaborators.webp.webp",
+          "src": "assets/responsive/0caff1aa3525ce7726a8/96/people-colour/collaborators-foam-feed-v3.webp.webp",
           "width": 96
         },
         {
-          "src": "assets/responsive/0caff1aa3525ce7726a8/256/people-colour/collaborators.webp.webp",
+          "src": "assets/responsive/0caff1aa3525ce7726a8/256/people-colour/collaborators-foam-feed-v3.webp.webp",
           "width": 256
         },
         {
-          "src": "assets/responsive/0caff1aa3525ce7726a8/480/people-colour/collaborators.webp.webp",
+          "src": "assets/responsive/0caff1aa3525ce7726a8/480/people-colour/collaborators-foam-feed-v3.webp.webp",
           "width": 480
         }
       ]

@@ -253,7 +253,7 @@ export function WorkspaceGrid() {
                 </h3>
               </div>
               <OptimizedImage
-                section="A little of everything · Your people" src={`${PC}/collaborators.webp`}
+                section="A little of everything · Your people" src={`${PC}/collaborators-foam-feed-v3.webp`}
                 alt="Collaborators on a sofa, with an illustrative Foam demo content feed on the tablet"
                 width="736"
                 height="552"
