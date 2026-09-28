@@ -498,7 +498,9 @@ function AfterShare() {
   );
 }
 
-function KitStoryDesktop({ separateChapters = false }: { separateChapters?: boolean }) {
+type KitStoryOptions = { separateChapters?: boolean; stabilizeDiscovery?: boolean };
+
+function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false }: KitStoryOptions) {
   const portraitPoster = useWebsiteImage(POSTER, "Media Kit · Samantha portrait film");
   useKitAssetWarmup();
   const track = useRef<HTMLElement | null>(null);
@@ -1216,7 +1218,7 @@ function KitStoryDesktop({ separateChapters = false }: { separateChapters?: bool
         <ChromeStory embedded />
       </div>
       <AfterShare />
-      <FoundStory />
+      <FoundStory stableDetail={stabilizeDiscovery} />
     </div>
   );
 }
@@ -1241,7 +1243,7 @@ function desktopKitSnapshot() {
 }
 
 /** Resolve the story layout on the first client render. */
-export function KitStory({ separateChapters = false }: { separateChapters?: boolean } = {}) {
+export function KitStory({ separateChapters = false, stabilizeDiscovery = false }: KitStoryOptions = {}) {
   const isDesktop = useSyncExternalStore(
     subscribeKitLayout,
     desktopKitSnapshot,
@@ -1254,7 +1256,7 @@ export function KitStory({ separateChapters = false }: { separateChapters?: bool
   }, []);
   return (
     <>
-      {isDesktop ? <KitStoryDesktop separateChapters={separateChapters} /> : <KitStoryMobile />}
+      {isDesktop ? <KitStoryDesktop separateChapters={separateChapters} stabilizeDiscovery={stabilizeDiscovery} /> : <KitStoryMobile stabilizeDiscovery={stabilizeDiscovery} />}
       <StoryBackToTop />
     </>
   );

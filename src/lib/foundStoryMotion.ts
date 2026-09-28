@@ -55,6 +55,12 @@ export function foundStoryTimeline(progress: number) {
   };
 }
 
+/** Separate open/close points prevent trackpad jitter from flickering the preview. */
+export function foundDetailOpen(progress: number, wasOpen: boolean) {
+  const p = clamp(progress);
+  return wasOpen ? p > 0.60 : p >= 0.66;
+}
+
 /** Natural page travel enlarges the complete artwork; its layout box never changes. */
 export function foundCampaignScale(
   top: number,

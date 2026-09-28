@@ -18,12 +18,18 @@ export function KitTransitionPreview() {
       behavior: "instant",
     });
   };
+  const replaySearch = () => {
+    const track = document.querySelector<HTMLElement>(".fs-track");
+    if (!track) return;
+    window.scrollTo({ top: window.scrollY + track.getBoundingClientRect().top, behavior: "instant" });
+  };
   return <>
     <aside className="ktp-tools" aria-label="Transition test controls">
       <span>Transition test</span>
-      <button type="button" onClick={replay}>Replay transition ↑</button>
+      <button className="ktp-replay-kit" type="button" onClick={replay}>Replay transition ↑</button>
+      <button type="button" onClick={replaySearch}>Replay search ↑</button>
       <a href="https://steveblackboxapi.github.io/NEWFOAMHOME/kit-story/" target="_blank" rel="noopener noreferrer">Current live page ↗</a>
     </aside>
-    <WebsiteImageRoute route="/kit-story"><KitStory separateChapters /></WebsiteImageRoute>
+    <WebsiteImageRoute route="/kit-story"><KitStory separateChapters stabilizeDiscovery /></WebsiteImageRoute>
   </>;
 }
