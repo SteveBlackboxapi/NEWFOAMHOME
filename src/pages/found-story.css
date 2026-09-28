@@ -483,7 +483,7 @@
   flex-shrink: 0;
 }
 
-/* Test-page variant: the video sits on a solid panel, never a scrubbed crossfade. */
+/* The video sits on a solid panel, never a scrubbed crossfade. */
 .fs-post-detail--stable {
   visibility: hidden;
   opacity: 1;

@@ -293,7 +293,7 @@ const SelectedPost = memo(function SelectedPost({
     observer.observe(video.current);
     return () => observer.disconnect();
   }, []);
-  // The test keeps the source after first approach, so small back-scrolls cannot
+  // Keep the source after first approach, so small back-scrolls cannot
   // unload the video and flash its poster. Playback still follows scene visibility.
   useEffect(() => { video.current?.load(); }, [sourceEnabled]);
   useEffect(() => {

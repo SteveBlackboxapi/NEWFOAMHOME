@@ -1243,7 +1243,7 @@ function desktopKitSnapshot() {
 }
 
 /** Resolve the story layout on the first client render. */
-export function KitStory({ separateChapters = false, stabilizeDiscovery = false }: KitStoryOptions = {}) {
+export function KitStory({ separateChapters = true, stabilizeDiscovery = true }: KitStoryOptions = {}) {
   const isDesktop = useSyncExternalStore(
     subscribeKitLayout,
     desktopKitSnapshot,

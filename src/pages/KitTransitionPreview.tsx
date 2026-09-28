@@ -3,7 +3,7 @@ import { KitStory } from "./KitStory";
 import { WebsiteImageRoute } from "../components/WebsiteImageScope";
 import "./kit-transition-preview.css";
 
-/** An isolated study; the published /kit-story route keeps its original transition. */
+/** A separate review page for trying story changes before promoting them live. */
 export function KitTransitionPreview() {
   useEffect(() => {
     const title = document.title;
