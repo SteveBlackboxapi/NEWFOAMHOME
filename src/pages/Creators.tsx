@@ -5,7 +5,6 @@ import { MiniIllustration } from "../components/mini-ui/MiniIllustration";
 import { PlatformPresence } from "../components/TalentSearchDemo";
 import {
   ActionLink,
-  FoamGlyph,
   MarketingPage,
   PageIntro,
   Reveal,
@@ -58,7 +57,9 @@ export function Creators() {
           <Reveal className="ap-work-spread ap-live-spread">
             <LiveCreatorCard example={creatorLiveExamples[0]} paused={paused} reducedMotion={reducedMotion} variant="story" />
             <div className="ap-work-note">
-              <FoamGlyph kind="spark" />
+              <svg className="mp-glyph ap-creator-star" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                <path d="M50 5 63.5 33.5 95 38 72.2 60.2 77.6 91.5 50 76.7 22.4 91.5 27.8 60.2 5 38 36.5 33.5Z" fill="currentColor" />
+              </svg>
               <p>
                 Your content
                 <br />
@@ -132,7 +133,11 @@ export function Creators() {
 
       <section className="mp-section ap-creator-question">
         <div className="mp-container ap-question-layout">
-          <FoamGlyph kind="orbit" />
+          <svg className="mp-glyph ap-questions-symbol" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <path d="M27 12H73C83.5 12 90 18.5 90 29V60C90 70.5 83.5 77 73 77H43L23 91V76.5C14.5 75 10 69 10 60V29C10 18.5 16.5 12 27 12Z" fill="none" stroke="currentColor" strokeWidth="6" strokeLinejoin="round" />
+            <path d="M39 34C39 20 63 20 63 34C63 43 51 44 51 52" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+            <circle cx="51" cy="63" r="3.5" fill="currentColor" />
+          </svg>
           <div>
             <p className="mp-eyebrow">Know what you're connecting</p>
             <h2 className="mp-heading">

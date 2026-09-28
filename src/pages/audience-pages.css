@@ -892,6 +892,14 @@
   max-width: 520px;
 }
 
+.pc-site .ap-creators .ap-questions-symbol {
+  height: auto;
+}
+
+.pc-site .ap-creators .ap-creator-star {
+  color: #1c2128;
+}
+
 @media (max-width: 1000px) {
   .ap-roster-row {
     grid-template-columns: 65px minmax(135px, 1fr) 150px 80px;
