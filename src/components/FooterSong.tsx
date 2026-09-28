@@ -6,7 +6,7 @@ import "./footer-song.css";
 
 type SongContextValue = { cardAvailable: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
 const SongContext = createContext<SongContextValue>({ cardAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
-const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/chrome-story", "/home-film-preview"]);
+const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/chrome-story", "/home-film-preview", "/inside-foam-preview"]);
 const SONG_END_DELAY_MS = 6500;
 const SONG_FADE_MS = 200;
 

@@ -28,6 +28,7 @@ export function Root() {
       "/about": "About Foam",
       "/data-trust": "Data & trust",
       "/updates": "Inside Foam",
+      "/inside-foam-preview": "Inside Foam · Portrait preview",
       "/demo": "Meet Foam",
     };
     document.title = `${titles[pathname.replace(/\/$/, "") || "/"] || "Page not found"} | Foam`;
