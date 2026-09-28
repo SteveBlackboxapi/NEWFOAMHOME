@@ -64,10 +64,18 @@ html[data-theme="dark"] .ifp-circle-spark--two { color: var(--ifp-cyan); }
   overflow: hidden;
   box-shadow: 0 12px 32px #0002;
 }
-.ifp-content-back { width: 55%; top: 9%; left: 22.5%; transform-origin: 50% 90%; }
-.ifp-content-back--left { background: var(--ifp-blue); transform: translateX(-16%) rotate(-13deg); }
-.ifp-content-back--right { background: var(--ifp-lime); transform: translateX(16%) rotate(13deg); }
-.ep-inside--portrait .ep-content-scene { width: 60%; top: 4%; left: 20%; z-index: 1; }
+.ifp-content-back {
+  width: 55%;
+  top: 3%;
+  left: 8%;
+  transform-origin: 50% 90%;
+  background: var(--theme-surface, #f5f7f6);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #1c212818;
+}
+.ifp-content-back--left { transform: rotate(12deg); z-index: -1; }
+.ifp-content-back--right { transform: rotate(25deg); z-index: -2; }
+.ep-inside--portrait .ep-content-scene { width: 60%; top: 4%; left: 4%; z-index: 1; }
 .ep-inside--portrait .ep-content-scene > img { object-position: center; }
 .ep-inside--portrait .ep-content-query {
   top: 2.5cqw;
