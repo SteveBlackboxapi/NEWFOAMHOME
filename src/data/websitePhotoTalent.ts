@@ -91,10 +91,11 @@ export const websitePhotos: WebsitePhoto[] = [
   {
     id: "reference-collaborators",
     name: "Collaborators reference",
-    src: `${P}/collaborators.webp`,
+    src: `${P}/collaborators-foam-feed-v3.webp`,
+    original: `${A.replace(/(?:\/media\/[a-f0-9]+)?\/assets$/, "")}/ideas-two/assets/collaborators.webp`,
     aspectRatio: "16/9",
     provenance: "reference",
-    bio: "Unidentified people in supplied reference photography, extracted from page 13 of the supplied design deck (p13-asset-00-X1.png). This group is not identified as Foam staff or customers. This record preserves the supplied source; it does not invent individual identities, employment or endorsements.",
+    bio: "Unidentified people in supplied reference photography, extracted from page 13 of the supplied design deck (p13-asset-00-X1.png). The tablet screen has been composited with an illustrative Foam page containing fictional creators. This group is not identified as Foam staff or customers. The original supplied photograph remains available; no individual identities, employment or endorsements are implied.",
     source: `${A.replace(/(?:\/media\/[a-f0-9]+)?\/assets$/, "")}/ideas-two/assets/README.md`,
     verticals: ["Collaboration", "Supplied reference"],
   },

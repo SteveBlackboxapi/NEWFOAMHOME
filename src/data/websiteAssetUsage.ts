@@ -207,7 +207,7 @@ photo(
   "Good work. Deserves to be seen.",
 );
 photo(
-  "people-colour/collaborators.webp",
+  "people-colour/collaborators-foam-feed-v3.webp",
   "/",
   "A little of everything · Your people",
 );
