@@ -498,7 +498,7 @@ function AfterShare() {
   );
 }
 
-function KitStoryDesktop() {
+function KitStoryDesktop({ separateChapters = false }: { separateChapters?: boolean }) {
   const portraitPoster = useWebsiteImage(POSTER, "Media Kit · Samantha portrait film");
   useKitAssetWarmup();
   const track = useRef<HTMLElement | null>(null);
@@ -728,7 +728,8 @@ function KitStoryDesktop() {
   const pan = kitPan(p, targets);
   const kitIn = clamp((pack - 0.68) / 0.32);
   const landed = pack === 1;
-  const sharedOp = sharedIn * (1 - ease(sharedOut));
+  const sharedOp = sharedIn * (separateChapters ? 1 : 1 - ease(sharedOut));
+  const chromeOpacity = separateChapters ? 1 : timeline.chromeIn;
   const shareModalOp = shareOpen * (1 - shareFade);
   const canvasLight = kitIn > 0.12 || sharedIn > 0 || fold > 0;
   const kitVisible = kitIn > 0.01 && kitOut < 0.98;
@@ -1202,15 +1203,15 @@ function KitStoryDesktop() {
       </section>
 
       <div
-        className="ks-chrome-handoff"
+        className={`ks-chrome-handoff${separateChapters ? " ks-chrome-handoff--separate" : ""}`}
         data-kit-chrome-handoff
         style={{
-          marginTop: `-${KIT_CHROME_OVERLAP_VH}vh`,
-          opacity: timeline.chromeIn,
-          pointerEvents: timeline.chromeIn === 1 ? "auto" : "none",
+          marginTop: separateChapters ? 0 : `-${KIT_CHROME_OVERLAP_VH}vh`,
+          opacity: chromeOpacity,
+          pointerEvents: chromeOpacity === 1 ? "auto" : "none",
         }}
-        inert={timeline.chromeIn < 1}
-        aria-hidden={timeline.chromeIn < 1}
+        inert={chromeOpacity < 1}
+        aria-hidden={chromeOpacity < 1}
       >
         <ChromeStory embedded />
       </div>
@@ -1240,7 +1241,7 @@ function desktopKitSnapshot() {
 }
 
 /** Resolve the story layout on the first client render. */
-export function KitStory() {
+export function KitStory({ separateChapters = false }: { separateChapters?: boolean } = {}) {
   const isDesktop = useSyncExternalStore(
     subscribeKitLayout,
     desktopKitSnapshot,
@@ -1253,7 +1254,7 @@ export function KitStory() {
   }, []);
   return (
     <>
-      {isDesktop ? <KitStoryDesktop /> : <KitStoryMobile />}
+      {isDesktop ? <KitStoryDesktop separateChapters={separateChapters} /> : <KitStoryMobile />}
       <StoryBackToTop />
     </>
   );
