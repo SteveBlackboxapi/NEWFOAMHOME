@@ -405,7 +405,7 @@
   }
 }
 
-/* Bring the next story into the final sticky viewport as the plane departs.
+/* After the Media Kit reading beat, bring Chrome into the final sticky viewport.
    Its reveal is tied to the kit timeline so reversing scroll restores both. */
 .ks-chrome-handoff {
   position: relative;

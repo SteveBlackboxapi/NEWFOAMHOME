@@ -21,6 +21,10 @@ const {
   progressBetween,
   smoothProgress,
   kitStoryTimeline,
+  kitTimelineProgress,
+  kitScrollProgress,
+  KIT_SEQUENCE_SCROLL_VH,
+  KIT_FINALE_HOLD_VH,
   kitPan,
   kitRevealStarts,
   KIT_CHAPTERS,
@@ -114,7 +118,7 @@ test("every count reaches its final result within 24vh of scroll rather than the
     audience: 0.4,
   };
   assert.equal(KIT_COUNT_SCROLL_VH, 24);
-  const span = 24 / (KIT_STORY_HEIGHT_VH - 100);
+  const span = 24 / KIT_SEQUENCE_SCROLL_VH;
   for (const [field, start] of Object.entries(starts)) {
     assert.equal(kitStoryTimeline(start)[field], 0);
     nearly(kitStoryTimeline(start + span / 2)[field], 0.5, `${field} halfway`);
@@ -238,10 +242,10 @@ test("measured reveal starts eliminate visible zero exposure across viewport geo
       // Counts rise continuously through one short interval and then settle.
       const finish = Math.min(
         ends[field],
-        starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100),
+        starts[field] + 24 / KIT_SEQUENCE_SCROLL_VH,
       );
       assert.ok(
-        (finish - starts[field]) * (KIT_STORY_HEIGHT_VH - 100) <= 24.000001,
+        (finish - starts[field]) * KIT_SEQUENCE_SCROLL_VH <= 24.000001,
       );
       assert.equal(kitStoryTimeline(finish + 0.000001, starts)[field], 1);
       let previous = -1;
@@ -270,7 +274,7 @@ test("growth starts counting while visible below metrics, before its own pan", (
   assert.ok(starts.growth < duringMetrics);
   assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
   nearly(
-    kitStoryTimeline(starts.growth + 12 / (KIT_STORY_HEIGHT_VH - 100), starts)
+    kitStoryTimeline(starts.growth + 12 / KIT_SEQUENCE_SCROLL_VH, starts)
       .growth,
     0.5,
     "visible growth halfway",
@@ -450,8 +454,8 @@ test("normalised easing settles at endpoints and preserves the middle position",
 });
 
 test("profile and panel reading beats are brief instead of consuming whole gestures", () => {
-  const travelVh = KIT_STORY_HEIGHT_VH - 100;
-  assert.ok(KIT_STORY_HEIGHT_VH >= 430 && KIT_STORY_HEIGHT_VH <= 460);
+  const travelVh = KIT_SEQUENCE_SCROLL_VH;
+  assert.equal(KIT_SEQUENCE_SCROLL_VH, 350);
   assert.ok(
     travelVh <= (700 - 100) * 0.6,
     "at least 40% less travel than the previous story",
@@ -477,7 +481,7 @@ test("profile and panel reading beats are brief instead of consuming whole gestu
 });
 
 test("a short 8vh scroll gesture always advances the profile-to-analytics sequence", () => {
-  const gesture = 8 / (KIT_STORY_HEIGHT_VH - 100);
+  const gesture = 8 / KIT_SEQUENCE_SCROLL_VH;
   for (const start of samples(0.14, 0.51, 500)) {
     const end = start + gesture;
     const panDistance = kitPan(end, targets) - kitPan(start, targets);
@@ -501,6 +505,41 @@ test("share and preview controls jump to the retimed complete views", () => {
   const audience = kitStoryTimeline(KIT_JUMP_POINTS.audience);
   assert.equal(audience.audience, 1);
   assert.equal(audience.shareOpen, 0);
+});
+
+test("the completed Media Kit finale gets a readable scroll beat before Chrome", () => {
+  const physicalTravel = KIT_STORY_HEIGHT_VH - 100;
+  const holdStart = 0.94 * KIT_SEQUENCE_SCROLL_VH;
+  assert.ok(KIT_FINALE_HOLD_VH >= 60 && KIT_FINALE_HOLD_VH <= 70);
+  for (const distance of samples(holdStart, holdStart + KIT_FINALE_HOLD_VH, 65)) {
+    const state = kitStoryTimeline(kitTimelineProgress(distance / physicalTravel));
+    assert.equal(state.sharedIn, 1, "Media Kit is fully visible throughout the reading beat");
+    assert.equal(state.sharedOut, 0);
+    assert.equal(state.planeEmerge, 1, "plane has emerged beside the title");
+    assert.equal(state.fly, 0, "departure waits until the reading beat finishes");
+    assert.equal(state.chromeIn, 0, "Chrome remains hidden and inert");
+  }
+  const after = kitStoryTimeline(kitTimelineProgress((holdStart + KIT_FINALE_HOLD_VH + 1) / physicalTravel));
+  assert.ok(after.fly > 0);
+  assert.ok(after.sharedOut > 0);
+});
+
+test("extra finale space preserves early scroll distances and reversible chapter jumps", () => {
+  const physicalTravel = KIT_STORY_HEIGHT_VH - 100;
+  for (const p of samples(0, 0.94, 94)) {
+    nearly(kitScrollProgress(p) * physicalTravel, p * KIT_SEQUENCE_SCROLL_VH, "original early scroll distance");
+    nearly(kitTimelineProgress(kitScrollProgress(p)), p, "early chapter round trip");
+  }
+  for (const p of samples(0.941, 1, 59)) {
+    nearly(kitTimelineProgress(kitScrollProgress(p)), p, "late chapter round trip");
+  }
+  const scroll = samples(0, 1, 500);
+  const forward = scroll.map(kitTimelineProgress);
+  assert.deepEqual(scroll.toReversed().map(kitTimelineProgress).toReversed(), forward);
+  assert.ok(forward.every((p, index) => index === 0 || p >= forward[index - 1]));
+  assert.equal(kitTimelineProgress(-1), 0);
+  assert.equal(kitTimelineProgress(2), 1);
+  assert.equal(kitScrollProgress(2), 1);
 });
 
 test("logo and title stay fully readable while the plane emerges, before its flight", () => {
@@ -567,8 +606,8 @@ test("the old lockup clears before Chrome enters while the plane bridges the han
 });
 
 test("the overlapping Chrome intro occupies the released viewport without changing earlier kit travel", () => {
-  assert.equal(KIT_STORY_HEIGHT_VH, 450, "keep the existing kit track length");
-  const travelVh = KIT_STORY_HEIGHT_VH - 100;
+  assert.equal(KIT_STORY_HEIGHT_VH, 515, "only the finale gains extra reading space");
+  const travelVh = KIT_SEQUENCE_SCROLL_VH;
   for (const [chapter, expectedVh] of [
     ["profile", 50.75],
     ["audience", 187.25],
@@ -585,7 +624,7 @@ test("the overlapping Chrome intro occupies the released viewport without changi
     const kitTravel = kitTrackHeight - height;
     const chromeDocumentTop =
       kitTrackHeight - (KIT_CHROME_OVERLAP_VH * height) / 100;
-    const introTop = (progress) => chromeDocumentTop - kitTravel * progress;
+    const introTop = (progress) => chromeDocumentTop - kitTravel * kitScrollProgress(progress);
     // This is the flow geometry; browser checks verify the wrapper and its 40px intro padding.
     nearly(
       introTop(1),
@@ -779,7 +818,7 @@ test("a visible panel edge or header cannot spend the count before the numbers a
     );
     assert.equal(
       kitStoryTimeline(
-        starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100) + 0.000001,
+        starts[field] + 24 / KIT_SEQUENCE_SCROLL_VH + 0.000001,
         starts,
       )[field],
       1,
