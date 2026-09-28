@@ -94,6 +94,14 @@ test("the private Lab never applies public placement substitutions to catalogue 
   assert.ok(!markup.includes("website-placements"));
 });
 
+test("an isolated story preview uses the original story's saved image placements", () => {
+  const { OptimizedImage, WebsiteImageRoute } = fixture("/assets");
+  const image = React.createElement(OptimizedImage, { src: `/${ZANE}`, section: "Foam for Chrome · Extension roster", alt: "Zane" });
+  const markup = render("/kit-transition-preview", React.createElement(WebsiteImageRoute, { route: "/kit-story" }, image));
+  assert.ok(markup.includes('src="/assets/website-placements/zane-kit.webp"'));
+  assert.ok(render("/chrome-story", image).includes(`src="/${ZANE}"`));
+});
+
 test("missing or untrusted placement paths keep the original image without guessing another section", () => {
   const base = "/NEWFOAMHOME/media/revision/assets";
   const { resolveWebsitePlacementImage: resolve } = fixture(base);

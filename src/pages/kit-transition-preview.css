@@ -1,0 +1,27 @@
+.ktp-tools {
+  position: fixed;
+  z-index: 100;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: calc(100vw - 36px);
+  padding: 11px 15px;
+  border: 1px solid #ffffff24;
+  border-radius: 12px;
+  background: #1b222bf2;
+  color: #f2f3ed;
+  font: 13px/1.4 "Founders Grotesk", system-ui, sans-serif;
+  box-shadow: 0 5px 20px #0002;
+}
+.ktp-tools > span { color: #b5bdc4; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.ktp-tools button { color: #eafe82; cursor: pointer; }
+.ktp-tools a { color: #f2f3ed; text-decoration: none; }
+.ktp-tools :is(button,a):focus-visible { outline: 2px solid #eafe82; outline-offset: 4px; }
+@media (max-width: 600px) {
+  .ktp-tools { flex-wrap: wrap; gap: 6px 14px; font-size: 12px; }
+}
+@media (max-width: 1023px), (max-height: 599px), (prefers-reduced-motion: reduce) {
+  .ktp-tools .ktp-replay-kit { display: none; }
+}

@@ -4,6 +4,7 @@ import { imageSource } from "../lib/imageAssets";
 import { talentVideoSources } from "../lib/talentVideo";
 import { DEMO_URL } from "../lib/siteLinks";
 import {
+  memo,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -27,6 +28,7 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 import {
   foundSearchExample,
   foundStoryTimeline,
+  foundDetailOpen,
   foundCampaignScale,
   FOUND_SEARCH_QUERY,
   FOUND_STORY_HEIGHT_VH,
@@ -252,12 +254,16 @@ function SearchFilters() {
   );
 }
 
-function SelectedPost({
+const SelectedPost = memo(function SelectedPost({
   active,
   reducedMotion,
+  retainSource = false,
+  prepare = false,
 }: {
   active: boolean;
   reducedMotion: boolean;
+  retainSource?: boolean;
+  prepare?: boolean;
 }) {
   const { talent, tile } = FOUND_SELECTED;
   const reviewPoster = useWebsiteImage(tile.thumb, "Found with Foam · Review video poster");
@@ -269,6 +275,11 @@ function SelectedPost({
   const [playing, setPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [visible, setVisible] = useState(false);
+  const [prepared, setPrepared] = useState(false);
+  useEffect(() => {
+    if (retainSource && prepare) setPrepared(true);
+  }, [retainSource, prepare]);
+  const sourceEnabled = retainSource ? prepared : active;
   const handle = talent.platforms.find(
     ({ network }) => network === tile.platform,
   )?.handle;
@@ -282,14 +293,16 @@ function SelectedPost({
     observer.observe(video.current);
     return () => observer.disconnect();
   }, []);
-  // Source children are attached only for the active scene; rescan when it changes.
-  useEffect(() => { video.current?.load(); }, [active]);
+  // Keep the source after first approach, so small back-scrolls cannot
+  // unload the video and flash its poster. Playback still follows scene visibility.
+  useEffect(() => { video.current?.load(); }, [sourceEnabled]);
   useEffect(() => {
     const element = video.current;
     if (!element) return;
     const sync = () => {
       if (
         active &&
+        sourceEnabled &&
         visible &&
         (playbackIntent === "play" ||
           (playbackIntent === "auto" && !reducedMotion)) &&
@@ -306,13 +319,13 @@ function SelectedPost({
       element.pause();
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [active, visible, reducedMotion, playbackIntent]);
+  }, [active, sourceEnabled, visible, reducedMotion, playbackIntent]);
   useEffect(() => {
     if (!active) {
       pendingSeek.current = null;
-      setElapsed(0);
+      if (!retainSource) setElapsed(0);
     }
-  }, [active]);
+  }, [active, retainSource]);
   const play = (element: HTMLVideoElement) => {
     setPlaybackIntent("play");
     void element.play().catch(() => {
@@ -380,14 +393,14 @@ function SelectedPost({
               muted
               playsInline
               loop
-              preload="none"
+              preload={retainSource && sourceEnabled ? "auto" : "none"}
               onPlay={() => setPlaying(true)}
               onPause={() => setPlaying(false)}
               onLoadedMetadata={applyPendingSeek}
               onTimeUpdate={() => setElapsed(video.current?.currentTime ?? 0)}
               aria-label={`${talent.displayName} demonstrates a cleanser in a fictional skincare review`}
             >
-              {active && tile.video && talentVideoSources(tile.video).map((source) => (
+              {sourceEnabled && tile.video && talentVideoSources(tile.video).map((source) => (
                 <source key={source.src} src={source.src} type={source.type} />
               ))}
             </video>
@@ -491,7 +504,7 @@ function SelectedPost({
       </div>
     </>
   );
-}
+});
 
 function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
   const artwork = useRef<HTMLDivElement>(null);
@@ -566,7 +579,7 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
 }
 
 /** A continuous camera move: the opening search is the same bar in the results UI. */
-export function FoundStory() {
+export function FoundStory({ stableDetail = false }: { stableDetail?: boolean } = {}) {
   const narrow = useMediaQuery("(max-width: 800px)");
   const columnCount = narrow ? 2 : 5;
   // Fill across the first row, then stack each column independently like the app.
@@ -585,6 +598,10 @@ export function FoundStory() {
   const app = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [detailOpen, setDetailOpen] = useState(false);
+  useLayoutEffect(() => {
+    if (stableDetail) setDetailOpen((open) => reducedMotion || foundDetailOpen(progress, open));
+  }, [stableDetail, reducedMotion, progress]);
   const [examplesPaused, setExamplesPaused] = useState(false);
   const [camera, setCamera] = useState({
     x: 0,
@@ -656,6 +673,8 @@ export function FoundStory() {
   }, []);
 
   const state = foundStoryTimeline(reducedMotion ? 1 : progress);
+  const detailActive = stableDetail ? detailOpen : state.detail > 0.95;
+  const detailAmount = stableDetail ? Number(detailOpen) : state.detail;
   const zoom = state.zoom;
   const intro = 1 - clamp(zoom * 2.2);
   return (
@@ -780,7 +799,7 @@ export function FoundStory() {
                         index={index}
                         progress={state.results}
                         highlight={state.highlight}
-                        detail={state.detail}
+                        detail={detailAmount}
                       />
                     ))}
                   </div>
@@ -788,20 +807,23 @@ export function FoundStory() {
               </div>
             </div>
             <div
-              className="fs-detail-backdrop"
-              style={{ opacity: state.detail }}
+              className={`fs-detail-backdrop${stableDetail ? " fs-detail-backdrop--stable" : ""}`}
+              style={{ opacity: detailAmount }}
             />
             <div
-              className="fs-post-detail"
-              aria-hidden={state.detail <= 0.95}
-              style={{
+              className={`fs-post-detail${stableDetail ? ` fs-post-detail--stable${detailOpen ? " is-open" : ""}` : ""}`}
+              aria-hidden={!detailActive}
+              inert={stableDetail && !detailOpen}
+              style={stableDetail ? undefined : {
                 opacity: state.detail,
                 transform: `translateY(${(1 - state.detail) * 24}px) scale(${0.96 + 0.04 * state.detail})`,
               }}
             >
               <SelectedPost
-                active={state.detail > 0.95}
+                active={detailActive}
                 reducedMotion={reducedMotion}
+                retainSource={stableDetail}
+                prepare={stableDetail && (reducedMotion || progress >= 0.52)}
               />
             </div>
           </div>
@@ -825,7 +847,7 @@ export function FoundStory() {
           </p>
           <p
             className="fs-stage-note"
-            style={{ opacity: state.results * (1 - state.detail) }}
+            style={{ opacity: state.results * (1 - detailAmount) }}
             aria-hidden="true"
           >
             The right content. With the context behind it.

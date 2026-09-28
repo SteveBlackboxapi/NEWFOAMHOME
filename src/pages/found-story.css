@@ -482,6 +482,25 @@
   border-bottom: 1px solid #eaecf0;
   flex-shrink: 0;
 }
+
+/* The video sits on a solid panel, never a scrubbed crossfade. */
+.fs-post-detail--stable {
+  visibility: hidden;
+  opacity: 1;
+  transform: translateY(12px);
+  transition: transform 160ms ease-out;
+}
+.fs-post-detail--stable.is-open {
+  visibility: visible;
+  transform: translateY(0);
+}
+.fs-detail-backdrop--stable {
+  transition: opacity 160ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-post-detail--stable,
+  .fs-detail-backdrop--stable { transition: none; }
+}
 .fs-detail-header > img {
   width: 30px;
   height: 30px;

@@ -18,6 +18,7 @@ const module = { exports: {} };
 new Function("module", "exports", outputText)(module, module.exports);
 const {
   foundStoryTimeline,
+  foundDetailOpen,
   foundCampaignScale,
   FOUND_STORY_HEIGHT_VH,
   FOUND_CAMPAIGN_SCROLL_VH,
@@ -48,6 +49,24 @@ const nearly = (actual, expected, message, tolerance = 1e-9) =>
     Math.abs(actual - expected) <= tolerance,
     `${message}: ${actual} ≠ ${expected}`,
   );
+
+test("the preview detail resists scroll jitter and still closes on deliberate reverse scroll", () => {
+  let open = false;
+  for (const p of [0, 0.52, 0.60, 0.64, 0.659]) {
+    open = foundDetailOpen(p, open);
+    assert.equal(open, false);
+  }
+  open = foundDetailOpen(0.66, open);
+  assert.equal(open, true);
+  for (const p of [0.80, 0.64, 0.61, 0.65, 0.601, 1]) {
+    open = foundDetailOpen(p, open);
+    assert.equal(open, true);
+  }
+  assert.equal(foundDetailOpen(0.60, open), false);
+  assert.equal(foundDetailOpen(0.61, false), false);
+  assert.equal(foundDetailOpen(1, false), true, "direct jumps open the detail");
+  assert.equal(foundDetailOpen(0, true), false, "back-to-top closes the detail");
+});
 
 test("each timed example types one character at a time, holds, then erases into a blank gap", () => {
   assert.deepEqual(FOUND_SEARCH_EXAMPLES, exampleQueries);

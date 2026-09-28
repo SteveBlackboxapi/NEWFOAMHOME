@@ -417,7 +417,7 @@ function MobileNetwork() {
  * Mobile kit-story: same narrative as desktop, normal stacked sections.
  * No tall pinned chapters; kit charts reveal with the natural page scroll.
  */
-export function KitStoryMobile() {
+export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscovery?: boolean } = {}) {
   const portraitPoster = useWebsiteImage(POSTER, "Media Kit · Samantha portrait film");
   useKitAssetWarmup();
   const reducedMotion = usePrefersReducedMotion();
@@ -677,7 +677,7 @@ export function KitStoryMobile() {
       {/* 6. Roles + network */}
       <MobileRoles />
       <MobileNetwork />
-      <FoundStory />
+      <FoundStory stableDetail={stabilizeDiscovery} />
     </div>
   );
 }

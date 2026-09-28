@@ -37,7 +37,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   const route = pathname.replace(/\/+$/, "") || "/";
   const cardAvailable = SONG_CARD_ROUTES.has(route);
   // Kit Story can carry an existing listening session, but has no song card.
-  const playbackAvailable = cardAvailable || route === "/kit-story";
+  const playbackAvailable = cardAvailable || route === "/kit-story" || route === "/kit-transition-preview";
   const audio = useRef<HTMLAudioElement>(null);
   const playerToggle = useRef<HTMLButtonElement>(null);
   const attempt = useRef(0);

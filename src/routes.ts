@@ -19,6 +19,13 @@ export const router = createBrowserRouter(
       Component: NavigationLayout,
       children: [
         { path: "kit-story", Component: KitStory },
+        {
+          path: "kit-transition-preview",
+          HydrateFallback: () => null,
+          lazy: async () => ({
+            Component: (await import("./pages/KitTransitionPreview")).KitTransitionPreview,
+          }),
+        },
         { path: "chrome-story", Component: ChromeStory },
         {
           path: "live-study",

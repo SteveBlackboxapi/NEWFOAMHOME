@@ -417,3 +417,8 @@
 .ks-chrome-handoff .cs-story-intro.is-embedded {
   padding-top: 40px;
 }
+
+/* Let the completed kit leave in normal document flow before Chrome. */
+.ks-chrome-handoff--separate .cs-story-intro.is-embedded {
+  padding-top: 75px;
+}
