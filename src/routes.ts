@@ -85,6 +85,13 @@ export const router = createBrowserRouter(
             { path: "about", Component: About },
             { path: "creators", Component: Creators },
             { path: "updates", Component: Updates },
+            {
+              path: "inside-foam-preview",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/InsideFoamPreview")).InsideFoamPreview,
+              }),
+            },
             { path: "demo", Component: Demo },
             { path: "*", Component: NotFound },
           ],

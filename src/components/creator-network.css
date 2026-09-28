@@ -1,0 +1,55 @@
+.creator-network {
+  display: block;
+  width: 250px;
+  height: auto;
+  max-width: 100%;
+  overflow: visible;
+  color: inherit;
+  fill: currentColor;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  --network-blue: #1c2128;
+  --network-lime: #1c2128;
+}
+
+.creator-network[data-dragging] {
+  cursor: grabbing;
+}
+
+.creator-network:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.creator-network:focus-visible:not([data-pointer-focus]) {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+  border-radius: 50%;
+}
+
+.creator-network-links {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.65;
+}
+
+.creator-network-dot-blue {
+  fill: var(--network-blue);
+}
+
+.creator-network-dot-lime {
+  fill: var(--network-lime);
+}
+
+html[data-theme="dark"] .creator-network {
+  --network-blue: #c1e5ff;
+  --network-lime: #e8f97e;
+}
+
+@media (max-width: 740px) {
+  .creator-network {
+    width: 150px;
+  }
+}

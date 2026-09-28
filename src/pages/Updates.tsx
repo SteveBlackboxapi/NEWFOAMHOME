@@ -2,6 +2,8 @@ import { MarketingImage } from "../components/MarketingImage";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { KitPlatformIcon } from "../components/KitDetails";
+import { CreatorNetwork } from "../components/CreatorNetwork";
 import {
   ActionLink,
   FoamGlyph,
@@ -10,14 +12,49 @@ import {
 } from "../components/Marketing";
 import {
   websiteAria,
+  websiteElise,
   websiteNia,
   websiteSamantha,
 } from "../data/websiteTalent";
 import "./editorial-pages.css";
 
-function KitCover() {
+function CreatorCircleAccents() {
   return (
-    <figure className="ep-kit-cover">
+    <div className="ifp-creator-accents" aria-hidden="true">
+      {[
+        { talent: websiteNia, position: "top" },
+        { talent: websiteAria, position: "left" },
+        { talent: websiteElise, position: "bottom" },
+      ].map(({ talent, position }) => (
+        <span className={`ifp-creator-circle ifp-creator-circle--${position}`} key={talent.id}>
+          <MarketingImage
+            section="Featured story · Creator circles" src={talent.portrait}
+            alt="" loading="lazy" sizes="(max-width: 740px) 22vw, 150px"
+          />
+        </span>
+      ))}
+      {([
+        ["instagram", "Instagram"],
+        ["tiktok", "TikTok"],
+        ["youtube", "YouTube"],
+      ] as const).map(([network, label]) => (
+        <span className={`ifp-social-circle ifp-social-circle--${network}`} key={network}>
+          <KitPlatformIcon network={network} label={label} size={28} />
+        </span>
+      ))}
+      <svg className="ifp-circle-spark ifp-circle-spark--one" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0 15 9 24 12 15 15 12 24 9 15 0 12 9 9Z" />
+      </svg>
+      <svg className="ifp-circle-spark ifp-circle-spark--two" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0 15 9 24 12 15 15 12 24 9 15 0 12 9 9Z" />
+      </svg>
+    </div>
+  );
+}
+
+function KitCover({ preview = false }: { preview?: boolean }) {
+  return (
+    <figure className="ep-kit-cover" id={preview ? "inside-kit-cover" : undefined}>
       <Link
         className="ep-kit-cover-art"
         to="/kit-story"
@@ -36,19 +73,20 @@ function KitCover() {
           fetchPriority="high"
           decoding="async"
         />
+        {preview && <CreatorCircleAccents />}
         <span className="ep-kit-cover-tag">
           Foam Media Kits <span aria-hidden="true">↗</span>
         </span>
-        <FoamGlyph kind="spark" />
+        {!preview && <FoamGlyph kind="spark" />}
       </Link>
       <figcaption>
-        <AIDisclosure detail="Fictional creator" />
+        <AIDisclosure detail={preview ? "Fictional creators" : "Fictional creator"} />
       </figcaption>
     </figure>
   );
 }
 
-function InboxIllustration() {
+function InboxIllustration({ preview = false }: { preview?: boolean }) {
   return (
     <figure className="ep-inbox-illustration">
       <div className="ep-inbox-scene">
@@ -75,7 +113,11 @@ function InboxIllustration() {
             <span>Beauty · Lifestyle</span>
           </div>
           <span className="ep-inbox-plus" aria-hidden="true">
-            +
+            {preview ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            ) : "+"}
           </span>
         </div>
       </div>
@@ -86,9 +128,8 @@ function InboxIllustration() {
   );
 }
 
-function ContentIllustration() {
-  return (
-    <figure className="ep-content-illustration">
+function ContentIllustration({ preview = false }: { preview?: boolean }) {
+  const featuredCard = (
       <div className="ep-content-scene">
         <MarketingImage
           section="Two more ways in · Content discovery" src={websiteNia.content[0].thumb}
@@ -111,9 +152,19 @@ function ContentIllustration() {
         </span>
         <span className="ep-content-caption">
           A brief.
-          <br />A better starting point.
+          <br />A better <span className="ep-content-caption-ending">starting point.</span>
         </span>
       </div>
+  );
+  return (
+    <figure className="ep-content-illustration" id={preview ? "inside-discovery" : undefined}>
+      {preview ? (
+        <div className="ifp-content-hand">
+          <div className="ifp-content-back ifp-content-back--left" aria-hidden="true" />
+          <div className="ifp-content-back ifp-content-back--right" aria-hidden="true" />
+          {featuredCard}
+        </div>
+      ) : featuredCard}
       <figcaption>
         <AIDisclosure detail="Fictional creator · Workflow illustration" />
       </figcaption>
@@ -121,9 +172,9 @@ function ContentIllustration() {
   );
 }
 
-export function Updates() {
+export function Updates({ portraitDiscovery = false }: { portraitDiscovery?: boolean } = {}) {
   return (
-    <MarketingPage className="ep-page ep-inside">
+    <MarketingPage className={`ep-page ep-inside${portraitDiscovery ? " ep-inside--portrait" : ""}`}>
       <header className="ep-inside-intro mp-cream">
         <div className="mp-container">
           <div className="ep-inside-masthead">
@@ -148,7 +199,7 @@ export function Updates() {
       <section className="mp-section ep-lead-story">
         <div className="mp-container">
           <Reveal className="ep-lead-layout">
-            <KitCover />
+            <KitCover preview={portraitDiscovery} />
             <div className="ep-lead-copy">
               <p className="mp-eyebrow">In focus / Media kits</p>
               <h2>
@@ -178,7 +229,7 @@ export function Updates() {
           </div>
           <Reveal>
             <article className="ep-feature-story">
-              <InboxIllustration />
+              <InboxIllustration preview={portraitDiscovery} />
               <div className="ep-feature-copy">
                 <p className="mp-eyebrow">The everyday / Foam for Chrome</p>
                 <h3>
@@ -199,7 +250,7 @@ export function Updates() {
           </Reveal>
           <Reveal>
             <article className="ep-feature-story ep-feature-story-reverse">
-              <ContentIllustration />
+              <ContentIllustration preview={portraitDiscovery} />
               <div className="ep-feature-copy">
                 <p className="mp-eyebrow">Discovery / Content & context</p>
                 <h3>
@@ -220,10 +271,10 @@ export function Updates() {
           </Reveal>
         </div>
       </section>
-      <section className="mp-section ep-reading">
+      <section className="mp-section ep-reading" id={portraitDiscovery ? "inside-network" : undefined}>
         <div className="mp-container">
           <Reveal className="ep-reading-layout">
-            <FoamGlyph kind="orbit" />
+            {portraitDiscovery ? <CreatorNetwork /> : <FoamGlyph kind="orbit" />}
             <div>
               <p className="mp-eyebrow">Keep exploring</p>
               <h2 className="mp-heading">The bigger picture.</h2>
