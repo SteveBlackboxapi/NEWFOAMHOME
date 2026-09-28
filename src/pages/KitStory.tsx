@@ -44,8 +44,6 @@ import {
   kitPan,
   kitRevealStarts,
   kitStoryTimeline,
-  kitTimelineProgress,
-  kitScrollProgress,
   kitShareCursor,
   kitPlanePose,
   kitFeaturedOpacity,
@@ -553,7 +551,7 @@ function KitStoryDesktop() {
       frame = 0;
       if (!active) return;
       const total = Math.max(1, el.offsetHeight - window.innerHeight);
-      setProg(kitTimelineProgress(-el.getBoundingClientRect().top / total));
+      setProg(clamp(-el.getBoundingClientRect().top / total));
       const bodyRect = body.getBoundingClientRect();
       // Continue the kit below the editor without moving the established
       // audience reading position or the scroll-driven handoff to Share.
@@ -699,7 +697,7 @@ function KitStoryDesktop() {
       top: Math.ceil(
         window.scrollY +
           el.getBoundingClientRect().top +
-          kitScrollProgress(progress) * (el.offsetHeight - window.innerHeight),
+          progress * (el.offsetHeight - window.innerHeight),
       ),
       behavior: "instant",
     });
