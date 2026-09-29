@@ -262,11 +262,6 @@ discoverySearches[0].assets.forEach(({ src }) =>
   use(src, "/features", "Product family · Found with Foam"),
 );
 const peopleTiles: Record<string, string[]> = {
-  "/managers": [
-    "elise-morgan/elise-morgan-hotel-selfie.webp",
-    "discovery-v1/jax-live-set.webp",
-    "nova-reed-v2/nova-reed-walk.webp",
-  ],
   "/brands": [
     "fitness-creator/waterfront.webp",
     "nia-brooks/nia-brooks-skincare.webp",
@@ -288,6 +283,8 @@ Object.entries(peopleTiles).forEach(([route, paths]) =>
   paths.forEach((path) => photo(`talent/${path}`, route, "Opening collage")),
 );
 
+// The merged landing page retains its two original placement scopes so saved
+// image replacements still apply at both / and /managers.
 [websiteSamantha, websiteAria, websiteNia].forEach((talent) =>
   use(talent.portrait, "/managers", "A home for your roster · The beauty edit"),
 );

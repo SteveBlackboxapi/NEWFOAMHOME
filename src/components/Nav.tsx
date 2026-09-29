@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, Link, useLocation } from "react-router";
+import { Link, matchPath, useLocation } from "react-router";
 import { A, img } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
 import { ThemeControl } from "./SiteTheme";
@@ -8,7 +8,6 @@ import "./foam-brand.css";
 import "./marketing-header-layout.css";
 
 const LINKS = [
-  { label: "Home", to: "/" },
   { label: "Managers", to: "/managers" },
   { label: "Brands", to: "/brands" },
   { label: "Creators", to: "/creators" },
@@ -17,9 +16,17 @@ const LINKS = [
   { label: "About", to: "/about" },
 ];
 
-export function Nav() {
+export function Nav({ managersLanding }: { managersLanding?: string } = {}) {
   const [open, setOpen] = useState(false);
+  const links = managersLanding
+    ? LINKS.map((link) =>
+        link.to === "/managers" ? { ...link, to: managersLanding } : link,
+      )
+    : LINKS;
   const location = useLocation();
+  const isLinkActive = (to: string) =>
+    (to === (managersLanding || "/managers") && location.pathname === "/") ||
+    matchPath({ path: to, end: false }, location.pathname) !== null;
   const header = useRef<HTMLElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
   const menu = useRef<HTMLDivElement>(null);
@@ -90,8 +97,8 @@ export function Nav() {
       </a>
       <div className="site-nav-bar">
         <Link
-          to="/kit-story/"
-          aria-label="Foam — Media Kit story"
+          to={managersLanding || "/"}
+          aria-label="Foam — Managers"
           className="site-brand site-foam-brand"
         >
           <img
@@ -110,15 +117,15 @@ export function Nav() {
           />
         </Link>
         <nav className="site-desktop-nav" aria-label="Main navigation">
-          {LINKS.map(({ label, to }) => (
-            <NavLink
+          {links.map(({ label, to }) => (
+            <Link
               key={to}
               to={to}
-              end={to === "/"}
-              className={({ isActive }) => (isActive ? "is-active" : "")}
+              aria-current={isLinkActive(to) ? "page" : undefined}
+              className={isLinkActive(to) ? "is-active" : ""}
             >
               {label}
-            </NavLink>
+            </Link>
           ))}
         </nav>
         <div className="site-nav-actions">
@@ -157,13 +164,13 @@ export function Nav() {
       >
         <p className="site-menu-eyebrow">A whole world of talent.</p>
         <nav aria-label="Mobile navigation">
-          {LINKS.map(({ label, to }, index) => (
-            <NavLink
+          {links.map(({ label, to }, index) => (
+            <Link
               key={to}
               to={to}
-              end={to === "/"}
               onClick={onMobileNavigate}
-              className={({ isActive }) => (isActive ? "is-active" : "")}
+              aria-current={isLinkActive(to) ? "page" : undefined}
+              className={isLinkActive(to) ? "is-active" : ""}
             >
               <span className="site-menu-number" aria-hidden="true">
                 0{index + 1}
@@ -172,7 +179,7 @@ export function Nav() {
               <span className="site-menu-arrow" aria-hidden="true">
                 ↗
               </span>
-            </NavLink>
+            </Link>
           ))}
         </nav>
         <a href={DEMO_URL} className="site-mobile-demo">

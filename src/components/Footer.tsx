@@ -16,7 +16,6 @@ const COLS = [
   {
     head: "Explore Foam",
     links: [
-      { label: "Home", to: "/" },
       { label: "Features", to: "/features" },
       { label: "The kit story", to: "/kit-story/" },
       { label: "Data & trust", to: "/data-trust" },
@@ -32,7 +31,15 @@ const COLS = [
   },
 ];
 
-export function Footer() {
+export function Footer({ managersLanding }: { managersLanding?: string } = {}) {
+  const columns = managersLanding
+    ? COLS.map((column) => ({
+        ...column,
+        links: column.links.map((link) =>
+          link.to === "/managers" ? { ...link, to: managersLanding } : link,
+        ),
+      }))
+    : COLS;
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
@@ -48,7 +55,7 @@ export function Footer() {
             </a>
           </div>
           <div className="site-footer-columns">
-            {COLS.map((column) => (
+            {columns.map((column) => (
               <nav key={column.head} aria-label={column.head}>
                 <h2>{column.head}</h2>
                 {column.links.map((link) => (

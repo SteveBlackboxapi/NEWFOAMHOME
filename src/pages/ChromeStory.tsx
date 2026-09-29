@@ -142,7 +142,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
     <div className="cs-story">
       {!embedded && (
         <div className="cs-back-link">
-          <Link to="/">← Home</Link>
+          <Link to="/">← Managers</Link>
           <span>Chrome story</span>
         </div>
       )}

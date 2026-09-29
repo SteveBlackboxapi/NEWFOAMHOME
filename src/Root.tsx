@@ -19,7 +19,7 @@ export function Root() {
   const { pathname } = useLocation();
   useEffect(() => {
     const titles: Record<string, string> = {
-      "/": "A world of talent",
+      "/": "For talent managers",
       "/home-film-preview": "Homepage film preview",
       "/managers": "For talent managers",
       "/brands": "For brands and agencies",
