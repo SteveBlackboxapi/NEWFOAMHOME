@@ -1,54 +1,42 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta name="robots" content="noindex, nofollow, noarchive" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      // The Kit Story starts from its opening scene on every refresh.
-      if (/\/kit-story\/?$/.test(location.pathname)) {
-        history.scrollRestoration = "manual";
-        if (
-          location.hash &&
-          performance.getEntriesByType("navigation")[0]?.type === "reload"
-        ) {
-          history.replaceState(history.state, "", location.pathname + location.search);
-        }
-      }
-    </script>
-    <script>
-      // Resolve appearance before the app paints, including on direct links.
-      (() => {
-        let saved;
-        try {
-          saved = localStorage.getItem("foam-site-theme");
-        } catch {}
-        document.documentElement.dataset.theme =
-          saved === "light" || saved === "dark"
-            ? saved
-            : matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
-      })();
-    </script>
-    <title>Foam: get back to the part you're actually good at</title>
-    <meta
-      name="description"
-      content="The pitch platform for talent managers, built around how deals actually get done."
-    />
-    <script type="module" crossorigin src="/NEWFOAMHOME/archive-sept-2026/pages/assets/index-C3yzrMFk.js"></script>
-    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/KitDetails-bhl5MFNr.js">
-    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/site-shell-C4OuMHkl.js">
-    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/SiteTheme-D9rMeAaJ.js">
-    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/FooterSong-Dnwo4VHq.js">
-    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/kitFeaturedMedia-COtwUoIj.js">
-    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/KitDetails-SpE2BTOL.css">
-    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/site-shell-D8wEZxCO.css">
-    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/FooterSong-BBXTZjEm.css">
-    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/index-6GFTHwrt.css">
-    <script>if(location.pathname.replace(/\/$/,'').endsWith('/kit-story')){const l=document.createElement('link');l.rel='preload';l.as='image';l.fetchPriority='high';l.href="/NEWFOAMHOME/archive-sept-2026/pages/media/1c3d7615fa6a9668/assets/io-portrait-poster.webp";document.head.appendChild(l);}</script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="refresh" content="2;url=https://foam-archive.stevendavidlewis80.workers.dev/NEWFOAMHOME/archive-sept-2026/pages/">
+<title>Foam — your private archive</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f7f5;color:#1c2128;font:18px/1.6 system-ui,sans-serif}main{max-width:760px;margin:10vh auto;padding:40px}small{color:#52616e;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(36px,6vw,58px);letter-spacing:-.045em;line-height:1.1;margin:24px 0}p{color:#52616e}a{display:inline-block;padding:16px 28px;background:#1c2128;color:#fff;border-radius:32px;text-decoration:none;font-weight:600;margin-top:20px}a:focus-visible{outline:3px solid #285dcc;outline-offset:5px}
+</style>
+</head>
+<body>
+<main>
+<small>Foam · Private archive</small>
+<h1>Your saved pages have moved.</h1>
+<p>The archive now has email sign-in. You’ll be taken to its new address.</p>
+<a href="https://foam-archive.stevendavidlewis80.workers.dev/NEWFOAMHOME/archive-sept-2026/pages/">Open the private archive ↗</a>
+</main>
+<script>
+(async () => {
+  const archiveScope = '/NEWFOAMHOME/archive-sept-2026/pages/';
+  const cachePrefix = 'foam-media-v1:' + archiveScope + ':';
+  const cleanup = async () => {
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.filter(registration => {
+        const scope = new URL(registration.scope);
+        return scope.origin === location.origin && scope.pathname === archiveScope;
+      }).map(registration => registration.unregister()));
+    }
+    if ('caches' in window) {
+      await Promise.all((await caches.keys()).filter(name => name.startsWith(cachePrefix)).map(name => caches.delete(name)));
+    }
+  };
+  await Promise.race([cleanup().catch(() => {}), new Promise(resolve => setTimeout(resolve, 500))]);
+  location.replace('https://foam-archive.stevendavidlewis80.workers.dev/NEWFOAMHOME/archive-sept-2026/pages/');
+})();
+</script>
+</body>
 </html>

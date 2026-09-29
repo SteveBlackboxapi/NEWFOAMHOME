@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "foam-archive",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": ".assets",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "vars": {
+    "APP_ORIGIN": "https://foam-archive.stevendavidlewis80.workers.dev",
+    "ACCESS_TEAM_DOMAIN": "https://foam-archive-steven.cloudflareaccess.com",
+    "ACCESS_AUD": "e325a1290782ed9c48b264a483744135ac6f712cba1a6077c66d52c647142b5a"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "foam-archive-access",
+    "database_id": "11c37b3c-8a61-41d9-bcf4-b88309dc8ecf"
+  }],
+  "observability": {"enabled": true, "redact_query_string": true}
+}
