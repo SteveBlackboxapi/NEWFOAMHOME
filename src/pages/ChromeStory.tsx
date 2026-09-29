@@ -258,9 +258,6 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
 }
 
 export function ChromeStory({ embedded = false }: { embedded?: boolean } = {}) {
-  useEffect(() => {
-    if (!embedded) document.title = "Foam for Chrome | Foam";
-  }, [embedded]);
   const desktop = useMediaQuery("(min-width: 1024px) and (min-height: 640px)");
   const reduced = usePrefersReducedMotion();
   if (desktop === null)
