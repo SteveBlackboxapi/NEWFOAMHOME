@@ -1,0 +1,78 @@
+[
+  {
+    "name": "outdoor-creator",
+    "prompt": "Use case: photorealistic-natural. Create one entirely original fictional adult woman aged 27 in a candid outdoor creator selfie. Vertical portrait 2:3 photograph with full bleed, no rounded corners or interface. An original face with short windblown dark chestnut bob, amber-brown eyes partly seen through translucent blue oval sunglasses, small silver hoop earrings, a muted blue sleeveless knitted top and a simple small silver pendant. Spontaneous low-angle arm-length phone photograph, her face near upper-middle of frame turned to one side looking toward the sun, shoulders and upper torso visible, slightly off-level wide-angle framing. Deep clear cobalt-blue sky, one tall palm trunk rising at the left and sparse coastal greenery low in background. Bright harsh natural coastal midday sunlight, hard honest shadows and sunlit skin with real pores, fine hair flyaways, grainy compact-camera texture, saturated but believable colors. Stylish ordinary person, not a polished campaign image. Distinct new fictional identity, do not copy a real person. No text, logo, watermark, UI, collage or extra limbs. Keep face/head fully in frame and leave enough top space for flexible tall website crops.",
+    "sourceFile": "exec-c1e4992c-bd12-4884-971c-9437d1e535f4.png",
+    "generator": "Built-in imagegen",
+    "mode": "Original fictional generation from written prompt",
+    "references": [],
+    "master": "masters/outdoor-creator.png",
+    "web": "outdoor-creator.webp",
+    "width": 1024,
+    "height": 1536,
+    "masterBytes": 2785705,
+    "webBytes": 218488
+  },
+  {
+    "name": "music-creator",
+    "prompt": "Use case: photorealistic-natural. Create one original fictional adult male music producer age 31, not an existing real person, in a candid home recording studio snapshot. Portrait 2:3 full photograph with no borders. New identity: softly angular face, medium olive skin, dark hazel eyes, dark wavy hair peeking from an unbranded faded black baseball cap, short moustache and stubble. Relaxed black sweatshirt, dark loose trousers, pale grey socks. He sits in a black wheeled office chair at a white music desk, legs casually crossed at the ankles, his right hand resting near small unbranded synthesizer keys and his left hand holding a plain off-white coffee mug at chest height below his fully visible face. Looking toward camera with a small easy half-smile. Ordinary lived-in compact studio with blinds at window, a potted fern, studio monitor speakers, small keyboard/controller, coiled cable on wooden floor, plain paper sketches without readable words. DIRECT ON-CAMERA HARSH FLASH aesthetic: frontal bright slightly blown highlights on face and mug, crisp dark shadow edges behind subject and equipment, darker ambient room, slight cool-green compact-camera white balance and fine grain, realistic ordinary phone/disposable-camera photo. Not softbox light, not glossy advertising. Exactly two arms and two hands with correct anatomy, both visible and clearly attached. No text, logos, watermark, UI or collage.",
+    "sourceFile": "exec-824821fc-aa5a-4f02-b248-f436d1a76cb1.png",
+    "generator": "Built-in imagegen",
+    "mode": "Original fictional generation from written prompt",
+    "references": [],
+    "master": "masters/music-creator.png",
+    "web": "music-creator.webp",
+    "width": 1024,
+    "height": 1536,
+    "masterBytes": 2358258,
+    "webBytes": 144166
+  },
+  {
+    "name": "ada-flash",
+    "prompt": "Use case: lighting-weather. Input image 1 is the edit target, an already-generated fictional adult creator. Preserve her recognizable identity, face, natural twists, denim outfit, smile, seated position at her art desk, chair, studio setting and portrait composition. Change the photography to strong DIRECT ON-CAMERA HARSH FLASH, matching a candid compact-camera music-studio snapshot: pronounced bright frontal light, clear crisp shadows cast behind her onto the wall and workspace, slightly blown specular highlights on cheekbones and forehead, darker ambient room/background, cool-neutral flash white balance, tactile fine grain and honest skin texture. Remove the soft warm editorial window-light treatment. It should feel like a spontaneous flash photo by a friend. Keep exactly two arms and two natural hands, preserve room and original abstract art without readable text. No extra people, no new text, no watermark, no UI, no border. Return one full bleed portrait photograph.",
+    "sourceFile": "exec-4c91322d-d1a8-4f52-97d9-f39b0b8d5daf.png",
+    "generator": "Built-in imagegen",
+    "mode": "Reference-based generation/edit",
+    "references": [
+      "public/assets/people-colour/original-portraits-v1/studio-creator-original-v1.webp"
+    ],
+    "master": "masters/ada-flash.png",
+    "web": "ada-flash.webp",
+    "width": 1024,
+    "height": 1536,
+    "masterBytes": 2704167,
+    "webBytes": 251854
+  },
+  {
+    "name": "tessa-live",
+    "prompt": "Use case: identity-preserve. Reference image 1 is Tessa Quinn, an AI-generated fictional adult woman aged 25, and is the exact identity anchor. Preserve recognizable facial features, hazel-brown eyes, tan skin with realistic subtle freckles, high dark-blonde ponytail, lavender headphones and fitted pink long-sleeve workout top over a white sports layer. Generate a new 9:16 portrait smartphone camera still as though she is hosting a friendly fitness livestream outdoors after exercise. She is now sitting upright on the charcoal exercise mat on green turf, phone propped at eye level rather than held overhead. Medium close-up from head to upper waist, full head with a little space above. She looks directly into lens, eyebrows lightly raised and mouth gently open mid-sentence in an easy smile as if answering a viewer. One natural hand near shoulder making a relaxed small explanatory gesture, other hand resting on her knee low in frame. Exactly two arms/hands attached correctly; no complex finger pose. Natural bright outdoor daylight with honest contrast and skin texture, casual smartphone depth of field, ordinary candid framing, not an advertising portrait or glossy beauty filter. Keep background simple and softly legible, leave lower quarter and right edge useful for viewer controls to be overlaid in code. No phone visible, no text, logos, comments, UI, hearts, border or watermark. One new photograph, preserve her existing adult identity.",
+    "sourceFile": "exec-a4eb0bdc-f3d7-4617-a9c0-cea25e4389dc.png",
+    "generator": "Built-in imagegen",
+    "mode": "Reference-based generation/edit",
+    "references": [
+      "public/assets/talent/creator-ugc-v1/tessa-quinn-workout-v1.webp"
+    ],
+    "master": "masters/tessa-live.png",
+    "web": "tessa-live.webp",
+    "width": 941,
+    "height": 1672,
+    "masterBytes": 2335364,
+    "webBytes": 188486
+  },
+  {
+    "name": "luca-live",
+    "prompt": "Use case: identity-preserve. Reference image 1 is Luca Marin, an AI-generated fictional adult man aged 28. Preserve exact recognizable facial identity, platinum buzzcut, natural stubble, olive-bronze skin, lean build, thin silver chain and original botanical shoulder/chest tattoos. Create a new 9:16 smartphone photograph that feels like a frame from his friendly Instagram Live at the same beach cafe under a purple umbrella. Mid-chest-up composition, full head comfortably inside frame with some space above. Now turn his face toward camera, looking into lens and smiling with lips gently parted as if casually answering a comment. White wraparound sunglasses pushed up onto the top of his head so his eyes are visible; single white earbud may remain. One hand casually holding a plain iced coffee low toward the frame edge; other arm relaxed mostly out of frame. Exactly two anatomically correct arms, no duplicated hands. Purple sun umbrella overhead, palm-lined boardwalk and small glimpse of sea behind. Bright outdoor midday daylight and authentic umbrella shade; natural smartphone texture, real pores and subtle heat sheen, no studio flash indoors effect, no beauty retouch. Leave lower quarter/right edge suitable for UI overlay in code. No text, interface, hearts, logos, watermark or border. This is a new scene of the same fictional adult, not a new face.",
+    "sourceFile": "exec-e1845422-bf3b-4299-b801-438e3a0b610c.png",
+    "generator": "Built-in imagegen",
+    "mode": "Reference-based generation/edit",
+    "references": [
+      "public/assets/talent/creator-ugc-v1/luca-marin-beach-v1.webp"
+    ],
+    "master": "masters/luca-live.png",
+    "web": "luca-live.webp",
+    "width": 941,
+    "height": 1672,
+    "masterBytes": 2112974,
+    "webBytes": 154502
+  }
+]

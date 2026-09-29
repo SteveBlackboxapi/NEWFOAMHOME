@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Masonry Grid">
+<g id="Vector">
+</g>
+<path id="Vector_2" d="M2.5 3.5H13.5V11C13.5 11.1326 13.4473 11.2598 13.3536 11.3536C13.2598 11.4473 13.1326 11.5 13 11.5H10.5C10.3674 11.5 10.2402 11.4473 10.1464 11.3536C10.0527 11.2598 10 11.1326 10 11V9.5H6V13C6 13.1326 5.94732 13.2598 5.85355 13.3536C5.75979 13.4473 5.63261 13.5 5.5 13.5H3C2.86739 13.5 2.74021 13.4473 2.64645 13.3536C2.55268 13.2598 2.5 13.1326 2.5 13V3.5Z" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M6 7.5H2.5" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M6 3.5V9.5" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M10 7.5H13.5" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M10 3.5V9.5" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 56" d="M3.00154 13.4961L13.0545 13.5C13.3321 13.5001 13.5566 13.2741 13.5546 12.9964L13.4964 4.83957M9.99768 4.29718L10.0008 12.9576" stroke="#1E2939" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+</svg>
