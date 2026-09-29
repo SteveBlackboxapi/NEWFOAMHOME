@@ -1,1 +1,0 @@
-var e=`https://form.typeform.com/to/AypKWhBU`,t=`https://app.usefoam.com/privacy`,n=`https://app.usefoam.com/terms`;export{t as n,n as r,e as t};

@@ -11,3 +11,8 @@ dist-lab/
 workers/talent-lab/site-assets.mjs
 public/media/
 public/website-publication.json
+
+workers/archive/.assets/
+workers/archive/.assets-preparing/
+workers/archive/.deploy/
+workers/archive/.wrangler/
