@@ -172,7 +172,9 @@ for (const route of publicWebsiteRoutes.filter(
   artwork("brand/foam-wordmark.svg", "Foam wordmark", route, "Footer");
 }
 
-for (const route of publicWebsiteRoutes.filter((route) => route !== "/kit-story")) {
+artwork("brand/foam-wordmark.svg", "Foam wordmark", "/kit-story", "Footer");
+
+for (const route of publicWebsiteRoutes) {
   for (const [src, label] of [
     [footerSong.cover, "Feed the Feed · Supplied cover artwork"],
     [footerSong.thumbnail, "Feed the Feed · Player thumbnail"],

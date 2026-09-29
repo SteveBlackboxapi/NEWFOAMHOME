@@ -6,7 +6,7 @@ import "./footer-song.css";
 
 type SongContextValue = { cardAvailable: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
 const SongContext = createContext<SongContextValue>({ cardAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
-const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/chrome-story", "/home-film-preview", "/inside-foam-preview"]);
+const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/kit-story", "/kit-transition-preview", "/chrome-story", "/home-film-preview", "/inside-foam-preview"]);
 const SONG_END_DELAY_MS = 6500;
 const SONG_FADE_MS = 200;
 
@@ -36,8 +36,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const route = pathname.replace(/\/+$/, "") || "/";
   const cardAvailable = SONG_CARD_ROUTES.has(route);
-  // Kit Story can carry an existing listening session, but has no song card.
-  const playbackAvailable = cardAvailable || route === "/kit-story" || route === "/kit-transition-preview";
+  const playbackAvailable = cardAvailable;
   const audio = useRef<HTMLAudioElement>(null);
   const playerToggle = useRef<HTMLButtonElement>(null);
   const attempt = useRef(0);

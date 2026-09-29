@@ -17,6 +17,7 @@ import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { KitShareStatus } from "../components/KitShareStatus";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
+import { Footer } from "../components/Footer";
 import { NetworkStatValue } from "../components/NetworkStatValue";
 import {
   StoryBackToTop,
@@ -1257,6 +1258,9 @@ export function KitStory({ separateChapters = true, stabilizeDiscovery = true }:
     <>
       {isDesktop ? <KitStoryDesktop separateChapters={separateChapters} stabilizeDiscovery={stabilizeDiscovery} /> : <KitStoryMobile stabilizeDiscovery={stabilizeDiscovery} />}
       <StoryBackToTop />
+      <div className="pc-site">
+        <Footer />
+      </div>
     </>
   );
 }
