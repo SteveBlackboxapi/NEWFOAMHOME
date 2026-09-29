@@ -97,8 +97,8 @@ export function Nav({ managersLanding }: { managersLanding?: string } = {}) {
       </a>
       <div className="site-nav-bar">
         <Link
-          to={managersLanding || "/"}
-          aria-label="Foam — Managers"
+          to="/kit-story/"
+          aria-label="Foam — Media Kit story"
           className="site-brand site-foam-brand"
         >
           <img
