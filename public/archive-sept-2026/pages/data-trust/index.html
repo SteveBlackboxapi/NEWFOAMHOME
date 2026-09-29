@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // The Kit Story starts from its opening scene on every refresh.
+      if (/\/kit-story\/?$/.test(location.pathname)) {
+        history.scrollRestoration = "manual";
+        if (
+          location.hash &&
+          performance.getEntriesByType("navigation")[0]?.type === "reload"
+        ) {
+          history.replaceState(history.state, "", location.pathname + location.search);
+        }
+      }
+    </script>
+    <script>
+      // Resolve appearance before the app paints, including on direct links.
+      (() => {
+        let saved;
+        try {
+          saved = localStorage.getItem("foam-site-theme");
+        } catch {}
+        document.documentElement.dataset.theme =
+          saved === "light" || saved === "dark"
+            ? saved
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+      })();
+    </script>
+    <title>Foam: get back to the part you're actually good at</title>
+    <meta
+      name="description"
+      content="The pitch platform for talent managers, built around how deals actually get done."
+    />
+    <script type="module" crossorigin src="/NEWFOAMHOME/archive-sept-2026/pages/assets/index-C3yzrMFk.js"></script>
+    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/KitDetails-bhl5MFNr.js">
+    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/site-shell-C4OuMHkl.js">
+    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/SiteTheme-D9rMeAaJ.js">
+    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/FooterSong-Dnwo4VHq.js">
+    <link rel="modulepreload" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/kitFeaturedMedia-COtwUoIj.js">
+    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/KitDetails-SpE2BTOL.css">
+    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/site-shell-D8wEZxCO.css">
+    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/FooterSong-BBXTZjEm.css">
+    <link rel="stylesheet" crossorigin href="/NEWFOAMHOME/archive-sept-2026/pages/assets/index-6GFTHwrt.css">
+    <script>if(location.pathname.replace(/\/$/,'').endsWith('/kit-story')){const l=document.createElement('link');l.rel='preload';l.as='image';l.fetchPriority='high';l.href="/NEWFOAMHOME/archive-sept-2026/pages/media/1c3d7615fa6a9668/assets/io-portrait-poster.webp";document.head.appendChild(l);}</script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

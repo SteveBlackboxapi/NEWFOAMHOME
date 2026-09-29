@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-22",
+  "mode": "Built-in image generation",
+  "version": "Realism v2 pilot",
+  "synthetic": true,
+  "identityReference": "../lena-croft-portrait.jpg",
+  "outputs": [
+    {
+      "id": "lena-ready",
+      "filename": "lena-croft-grwm.webp",
+      "master": "masters/lena-croft-grwm.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 160518,
+      "prompt": "Use case: identity-preserve. Asset type: fictional creator social content for the Foam talent library. Generate ONE photograph, not a collage. The supplied reference is the existing fictional adult creator's identity anchor; preserve the exact recognizable face, facial proportions, eyes, nose, lips, hair color and age. This is a candid ordinary smartphone frame, not fashion editorial or stock photography. Real restrained skin texture, faint under-eye detail, small facial asymmetry, unretouched ordinary exposure, legible domestic background with phone depth of field. Imperfect everyday framing, no cinematic grading, no beauty filter, no airbrushing, no exaggerated blemishes or pore sharpening. Natural hands and anatomy. No baked text, no logos, no watermark, no UI.\nSubject: Lena Croft, fictional adult aged 29. Keep her short tousled dark-blonde bob, grey-green eyes, straight nose and softly angular jaw from the identity reference. New scene: she has just clipped one side of her bob away from her face and is applying a small amount of plain moisturizer to one cheek, at home before getting dressed. One hand lightly rests against cheek, fingers relaxed and anatomically correct. Grey oversized cotton sweatshirt with natural folds. Expression caught mid-conversation, mouth just slightly parted, eyes briefly looking beside the phone toward a mirror; no model pout or posed smile. Framing: vertical 9:16, chest-up from a phone propped a little low on a bathroom shelf; full head and the working hand in view with comfortable headroom. Ordinary Manchester flat bathroom, off-white wall, cheap white door and rumpled hand towel at edge, unbranded bottle cropped near bottom. Cool overcast window light on one side, warmer weak ceiling light on the other, slightly uneven shadows. Her skin has subtle realistic moisture sheen and looks like actual unretouched skin. A believable paused casual GRWM video."
+    },
+    {
+      "id": "lena-outfit",
+      "filename": "lena-croft-outfit.webp",
+      "master": "masters/lena-croft-outfit.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 185042,
+      "prompt": "Use case: identity-preserve. Asset type: fictional creator social content for the Foam talent library. Generate ONE photograph, not a collage. The supplied reference is the existing fictional adult creator's identity anchor; preserve the exact recognizable face, facial proportions, eyes, nose, lips, hair color and age. This is a candid ordinary smartphone frame, not fashion editorial or stock photography. Real restrained skin texture, faint under-eye detail, small facial asymmetry, unretouched ordinary exposure, legible domestic background with phone depth of field. Imperfect everyday framing, no cinematic grading, no beauty filter, no airbrushing, no exaggerated blemishes or pore sharpening. Natural hands and anatomy. No baked text, no logos, no watermark, no UI.\nSubject: Lena Croft, fictional adult aged 29. Preserve her tousled dark-blonde short bob, grey-green eyes, recognizable face and age. Scene: an ordinary mirror outfit check in a lived-in Manchester bedroom, vertical 9:16 full-length. Lena is wearing a rumpled soft navy cardigan loosely tucked into straight-leg faded blue jeans, a plain ivory tee, mismatched-in-use everyday socks. She's holding an unbranded dark phone at chest height with one hand, the phone does NOT hide her face. She glances at her reflection with a crooked amused smile, free hand lightly pulls the cardigan hem, shoulders relaxed, weight on one foot. Candid paused reel rather than fashion editorial. Mirror is an inexpensive tall leaning mirror with physically coherent reflection; shoe pair and canvas tote on floor at the edge, unmade cotton bed, partly open wardrobe. Cool cloudy daylight from off-frame window, normal phone exposure, a slight angle to the composition and minor motion softness in moving fingers. No luxury styling, warm beige showroom or cinematic bokeh."
+    }
+  ],
+  "motion": {
+    "id": "grwm-motion-v2",
+    "filename": "lena-croft-grwm.mp4",
+    "provider": "Runway",
+    "model": "seedance-2",
+    "taskId": "912eca88-2335-47e6-a2ff-c5b2c748d6ee",
+    "date": "2026-09-22",
+    "source": "masters/lena-croft-grwm.png",
+    "poster": "lena-croft-grwm.webp",
+    "width": 1080,
+    "height": 1920,
+    "durationSeconds": 10.041667,
+    "audio": false,
+    "bytes": 6751974,
+    "sha256": "7b4208fee1cdccb3de9aa9cde5b2f6c1b4b430d2fb42165643fe1646b466c25c",
+    "prompt": "One continuous natural smartphone video of the same fictional adult woman in the starting image, Lena aged 29. Preserve her exact face, short dark-blonde bob with hair clip, grey sweatshirt, working hand, and ordinary bathroom. She gently finishes smoothing the small dab of moisturizer on her cheek with two fingertips, lowers her hand out of frame, pauses for half a second, glances toward the mirror just beside the lens, blinks naturally and gives a small amused half-smile. Subtle breathing and a tiny relaxed shoulder movement; ordinary uneven timing. Her face stays recognizable, skin retains real texture and realistic slight moisture sheen. The phone remains propped on its shelf, stationary, no camera drift, zoom or cuts. Preserve mixed cool window and warm ceiling light, room details and unretouched phone-camera exposure. Small everyday actions only; avoid exaggerated gestures, perfect rhythmic movements, smoothing, beauty lighting, changing face shape or extra fingers. Silent, no speech, no captions, no added interface."
+  }
+}
