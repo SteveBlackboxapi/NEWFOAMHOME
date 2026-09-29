@@ -18,6 +18,15 @@ export const router = createBrowserRouter(
     {
       Component: NavigationLayout,
       children: [
+        ...(import.meta.env.DEV
+          ? [{
+              path: "managers-home-preview",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/ManagersHomePreview")).ManagersHomePreview,
+              }),
+            }]
+          : []),
         { path: "kit-story", Component: KitStory },
         {
           path: "kit-transition-preview",

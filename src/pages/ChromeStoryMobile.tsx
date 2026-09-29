@@ -47,7 +47,7 @@ export function ChromeStoryMobile({
     <div className="cs-story cs-mobile-story">
       {!embedded && (
         <div className="cs-mobile-back">
-          <Link to="/">← Home</Link>
+          <Link to="/">← Managers</Link>
           <span>Chrome story</span>
         </div>
       )}

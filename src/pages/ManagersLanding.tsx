@@ -1,0 +1,92 @@
+import { Link } from "react-router";
+import { WebsiteImageRoute } from "../components/WebsiteImageScope";
+import { ManagersWorkflowSections } from "../components/ManagersWorkflowSections";
+import { ActionLink, MarketingPage } from "../components/Marketing";
+import { ClosingCTA } from "../components/ClosingCTA";
+import { TalentSearchSection } from "../components/TalentSearchDemo";
+import { OverviewFilm } from "../components/OverviewFilm";
+import { CreatorWall, PhotoFeature, ProductFamily, WorkspaceGrid } from "../components/PeopleColour";
+import "./managers-landing.css";
+
+/** Shared landing page; both existing addresses retain their links and image placements. */
+export function ManagersLanding() {
+  return (
+    <WebsiteImageRoute route="/">
+      <MarketingPage className="pc-home pc-design audience-page ap-managers managers-landing">
+        <section className="pc-home-hero" aria-labelledby="home-title">
+          <div className="pc-wall-heading pc-shell">
+            <p className="pc-eyebrow">THE TRUTH LAYER</p>
+            <h1 id="home-title">
+              Numbers that everyone{" "}
+              <br />
+              in the deal can trust
+            </h1>
+            <p>
+              Creators connect their data at source. Managers pitch with it. Brands decide on it.
+              No screenshots, no guesswork, no &quot;let me check and get back to you.&quot;
+            </p>
+            <div className="mp-actions managers-landing-actions">
+              <ActionLink to="/demo">Get a demo</ActionLink>
+              <ActionLink to="/kit-story" secondary>Follow a pitch</ActionLink>
+            </div>
+          </div>
+          <CreatorWall />
+        </section>
+        <PhotoFeature />
+        <section className="pc-quiet-statement pc-shell">
+          <p className="pc-eyebrow">A LITTLE CLARITY GOES A LONG WAY</p>
+          <h2>
+            Less between you
+            <br />
+            and the next opportunity.
+          </h2>
+          <p>
+            Your talent, their content and the story behind it.
+            <br />
+            Connected, clear and ready when you are.
+          </p>
+        </section>
+        <WorkspaceGrid peopleTo="#combined-roster" />
+        <ManagersWorkflowSections />
+        <OverviewFilm />
+        <TalentSearchSection />
+        <ProductFamily miniatures />
+        <section
+          className="pc-perspectives pc-shell"
+          aria-labelledby="perspective-title"
+        >
+          <div>
+            <p className="pc-eyebrow">A SHARED AMBITION</p>
+            <h2 id="perspective-title">
+              Your side of
+              <br />
+              the conversation.
+            </h2>
+          </div>
+          <div className="pc-perspective-links">
+            {[
+              ["Managers", "More room to champion your talent.", "#combined-roster"],
+              ["Brands", "Meet the work. Understand the fit.", "/brands"],
+              ["Creators", "Your work, in a better light.", "/creators"],
+            ].map(([name, description, to]) => (
+              <Link key={to} to={to}>
+                <div>
+                  <h3>{name}</h3>
+                  <p>{description}</p>
+                </div>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+        <ClosingCTA
+          headline="For the talent. And everyone behind them."
+          sub="Bring your people, your questions or your next big idea. Let’s see what’s possible."
+          primaryLabel="Let’s talk"
+          secondaryLabel="About Foam"
+          secondaryTo="/about"
+        />
+      </MarketingPage>
+    </WebsiteImageRoute>
+  );
+}

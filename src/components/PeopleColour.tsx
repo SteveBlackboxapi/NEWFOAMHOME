@@ -224,7 +224,7 @@ export function PhotoFeature() {
   );
 }
 
-export function WorkspaceGrid() {
+export function WorkspaceGrid({ peopleTo = "/managers" }: { peopleTo?: string } = {}) {
   return (
     <section
       className="pc-design pc-mixed-idea"
@@ -244,7 +244,7 @@ export function WorkspaceGrid() {
         </div>
         <div className="pc-mixed-grid">
           <div className="pc-mixed-column">
-            <Link className="pc-people-card" to="/managers">
+            <Link className="pc-people-card" to={peopleTo}>
               <div className="pc-card-copy">
                 <span className="pc-eyebrow">THE PEOPLE</span>
                 <h3>
