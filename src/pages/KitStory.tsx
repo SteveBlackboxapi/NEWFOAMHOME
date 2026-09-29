@@ -834,21 +834,6 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
                 />
               </svg>
             </a>
-            <button
-              type="button"
-              onClick={() => jumpTo(KIT_JUMP_POINTS.profile)}
-              className={`${FG_M} text-[16px] text-white flex items-center gap-2 border-b border-white/40 pb-[2px]`}
-            >
-              Follow a pitch
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M6 2V10M6 10L2 6M6 10L10 6"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
           </div>
         </div>
 
