@@ -4,8 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { DEFAULT_SITE_URL, normalizeSiteUrl } from "./src/lib/siteMetadata.ts";
+import { siteMetadataPlugin } from "./scripts/site-metadata-plugin.ts";
 
 const privateLab = process.env.VITE_PRIVATE_LAB === "true";
+const siteUrl = normalizeSiteUrl(process.env.SITE_URL || DEFAULT_SITE_URL);
 // Match the running client to its published assets without relying on a cached
 // HTML document or a Git commit (Lab image-only builds keep the same commit).
 const websiteHash = createHash('sha256');
@@ -22,12 +25,15 @@ for (const filename of ['index.html', 'vite.config.ts', 'package-lock.json', 'pu
 const websiteVersion = websiteHash.digest('hex');
 
 export default defineConfig({
-  define: { 'import.meta.env.VITE_WEBSITE_VERSION': JSON.stringify(websiteVersion) },
+  define: {
+    'import.meta.env.VITE_WEBSITE_VERSION': JSON.stringify(websiteVersion),
+    'import.meta.env.VITE_SITE_URL': JSON.stringify(siteUrl),
+  },
   base:
-    !privateLab && process.env.GITHUB_PAGES === "true" ? "/NEWFOAMHOME/" : "/",
+    privateLab ? "/" : process.env.SITE_URL ? new URL(siteUrl).pathname : process.env.GITHUB_PAGES === "true" ? "/NEWFOAMHOME/" : "/",
   publicDir: privateLab ? false : "public",
   build: { outDir: privateLab ? "dist-lab" : "dist" },
-  plugins: [react(), tailwindcss(), {
+  plugins: [react(), tailwindcss(), siteMetadataPlugin(siteUrl, privateLab), {
     name: 'kit-opening-poster',
     generateBundle() {
       if (!privateLab) this.emitFile({ type: 'asset', fileName: 'website-version.json', source: JSON.stringify({ version: websiteVersion }) + '\n' });
@@ -35,7 +41,7 @@ export default defineConfig({
     transformIndexHtml() {
       if (privateLab) return [];
       const { revision } = JSON.parse(readFileSync(new URL('./src/data/imageVariants.json', import.meta.url), 'utf8'));
-      const base = process.env.GITHUB_PAGES === 'true' ? '/NEWFOAMHOME/' : '/';
+      const base = process.env.SITE_URL ? new URL(siteUrl).pathname : process.env.GITHUB_PAGES === 'true' ? '/NEWFOAMHOME/' : '/';
       const { replacements } = JSON.parse(readFileSync(new URL('./src/data/websitePlacementImages.json', import.meta.url), 'utf8'));
       const key = JSON.stringify(['assets/io-portrait-poster.webp', '/kit-story', 'Media Kit · Samantha portrait film']);
       const source = replacements[key] || 'assets/io-portrait-poster.webp';

@@ -40,14 +40,9 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: "true"
-      # SPA fallback: 404.html for unknown paths, plus real route folders so
-      # /kit-story and siblings return 200 on GitHub Pages (basename intact).
-      - run: |
-          cp dist/index.html dist/404.html
-          for route in kit-story kit-transition-preview chrome-story managers brands features about creators data-trust updates demo home-film-preview lab/inspo; do
-            mkdir -p "dist/$route"
-            cp dist/index.html "dist/$route/index.html"
-          done
+          # Optional when moving to a new public domain; includes any path prefix.
+          SITE_URL: ${{ vars.SITE_URL }}
+      # The build emits route-specific metadata, sitemap and the SPA fallback.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
