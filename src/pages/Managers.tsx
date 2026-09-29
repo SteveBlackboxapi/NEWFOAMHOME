@@ -83,19 +83,21 @@ export function Managers() {
   return (
     <MarketingPage className="audience-page ap-managers">
       <PageIntro
-        eyebrow="For talent managers"
+        eyebrow="The truth layer"
         title={
           <>
-            Big talent.
+            Numbers that
             <br />
-            Small admin.
+            everyone in the
+            <br />
+            deal can trust
           </>
         }
-        description="Give every creator a stronger introduction. Bring the roster, the numbers and the pitch together in Foam."
+        description={'Creators connect their data at source. Managers pitch with it. Brands decide on it. No screenshots, no guesswork, no "let me check and get back to you."'}
         tone="cream"
         visual={<PeopleTiles kind="managers" message="Your people." />}
       >
-        <ActionLink to="/demo">Let's talk about your roster</ActionLink>
+        <ActionLink to="/demo">Get a demo</ActionLink>
         <ActionLink to="/kit-story" secondary>
           Follow a pitch
         </ActionLink>
