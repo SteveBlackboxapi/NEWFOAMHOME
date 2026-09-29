@@ -801,22 +801,21 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}
           >
-            The truth layer
+            For talent managers
           </p>
           <h1
             id="kit-story-title"
             tabIndex={-1}
             className={`${FG_SB} ks-hero-title text-white`}
           >
-            <span>Numbers that</span> <span>everyone in the</span>{" "}
-            <span>deal can trust</span>
+            <span>Big talent.</span> <span>Small admin.</span>
           </h1>
           <p
             className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}
           >
-            Creators connect their data at source. Managers pitch with it.
-            Brands decide on it. No screenshots, no guesswork, no "let me check
-            and get back to you."
+            Give every creator a stronger introduction. Bring the roster,
+            <br />
+            the numbers and the pitch together in Foam.
           </p>
           <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
             <a
@@ -824,7 +823,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
               className={`${FG_SB} text-[#101828] text-[16px] px-8 h-14 rounded-full inline-flex items-center gap-2`}
               style={{ background: "#c6f31e" }}
             >
-              Get a demo
+              Let's talk about your roster
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M2 12L12 2M12 2H5M12 2V9"
