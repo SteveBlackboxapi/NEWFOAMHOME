@@ -63,7 +63,7 @@ export function StoryNav() {
   return (
     <header className="story-nav" ref={header}>
       <div className="story-nav-row">
-        <Link to="/" aria-label="Foam — Managers" className="story-nav-brand">
+        <Link to="/kit-story/" aria-label="Foam — Media Kit story" className="story-nav-brand">
           <img
             src={`${A}/brand/foam-story-lockup-white.svg`}
             alt=""
