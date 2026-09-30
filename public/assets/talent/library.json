@@ -1287,5 +1287,11 @@
   "removedTalentIds": [],
   "websiteReplacements": {
     "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": "assets/talent/uploads/960ac1dc-9273-483d-b722-c4b312d08dc6.webp"
+  },
+  "websitePlacementReplacements": {
+    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/b379af24-8b0f-476f-b276-15c1db3ede8f.webp",
+    "[\"assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/6d32dd15-a455-41b5-b7b4-068a29060722.webp",
+    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/7e604e9a-a48f-45b0-84c1-88e132256696.webp",
+    "[\"assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/bb713d77-bd84-4ada-b61d-dfce2b30ec30.webp"
   }
 }
