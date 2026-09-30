@@ -1,0 +1,18 @@
+.khp-preview-note {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 60;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  max-width: calc(100% - 24px);
+  padding: 10px 14px;
+  border: 1px solid #ffffff38;
+  border-radius: 12px;
+  background: #171b1fef;
+  color: #fff;
+  font: 11px/1.4 Arial, sans-serif;
+}
+.khp-preview-note > span { color: #c3c8ce; }
+.khp-preview-note a { text-underline-offset: 3px; }

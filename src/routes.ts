@@ -25,6 +25,12 @@ export const router = createBrowserRouter(
               lazy: async () => ({
                 Component: (await import("./pages/ManagersHomePreview")).ManagersHomePreview,
               }),
+            }, {
+              path: "kit-hero-preview",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/KitHeroPreview")).KitHeroPreview,
+              }),
             }]
           : []),
         { path: "kit-story", Component: KitStory },

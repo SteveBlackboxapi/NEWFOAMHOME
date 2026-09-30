@@ -1,6 +1,7 @@
 import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { OptimizedImage } from "../components/OptimizedImage";
 import { DEMO_URL } from "../lib/siteLinks";
+import { KIT_STORY_EYEBROW, KitStoryHeroTitle } from "../components/KitStoryHeroTitle";
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
@@ -455,14 +456,14 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-5`}
           >
-            For talent managers
+            {KIT_STORY_EYEBROW}
           </p>
           <h1
             id="kit-story-title"
             tabIndex={-1}
             className={`${FG_SB} ks-hero-title ks-hero-title-mobile text-white`}
           >
-            <span>Big talent.</span> <span>Small admin.</span>
+            <KitStoryHeroTitle />
           </h1>
           <p
             className={`${FG_R} mt-5 max-w-[34em] text-[16px] leading-7 text-white/85`}

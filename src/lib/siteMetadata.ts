@@ -69,13 +69,14 @@ const previews: Record<string, string> = {
   "/inside-foam-preview": "Inside Foam preview | Foam",
   "/live-study": "A little more live — Concept preview | Foam",
   "/managers-home-preview": "Managers · Combined page test | Foam",
+  "/kit-hero-preview": "Foam · Larger headline dev preview",
   "/lab/inspo": "Inspiration | Foam Lab",
   "/lab/mini-ui": "The Foam miniatures | Foam",
   "/lab/data-trust": "Data & trust concepts | Foam",
 };
 
 export const PUBLIC_PAGE_PATHS = Object.keys(pages);
-export const STATIC_PAGE_PATHS = [...PUBLIC_PAGE_PATHS, ...Object.keys(previews).filter(path => path !== "/managers-home-preview")];
+export const STATIC_PAGE_PATHS = [...PUBLIC_PAGE_PATHS, ...Object.keys(previews).filter(path => !["/managers-home-preview", "/kit-hero-preview"].includes(path))];
 
 export function normalizeSiteUrl(input: string) {
   const url = new URL(input);
