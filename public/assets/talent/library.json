@@ -1929,6 +1929,123 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "mira-vale",
+      "displayName": "Mira Vale",
+      "age": 27,
+      "location": "Austin, TX",
+      "bio": "Plant-forward weeknight cooking with a calm camera and clear grocery lists. Staged catalogue entry only.",
+      "verticals": [
+        "Food",
+        "Wellness",
+        "Home"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@mira.vale.fake",
+          "followers": 184200
+        },
+        {
+          "network": "tiktok",
+          "handle": "@miravale.fake",
+          "followers": 312000
+        },
+        {
+          "network": "youtube",
+          "handle": "@mira.vale.fake",
+          "followers": 61400
+        }
+      ],
+      "totalAudience": 557600,
+      "portrait": "assets/talent/uploads/f78644ba-0a3c-4fb7-90c9-c77b65275284.webp",
+      "originalPortrait": "assets/talent/mira-vale-portrait.jpg",
+      "creativeDirection": {
+        "summary": "Everyday wellness and getting-ready moments. The new makeup photograph catches Mira mid-sentence and half-blink, with slight motion blur in her brush hand.",
+        "identityNotes": [
+          "Mira is a fictional adult aged 27. Preserve the face, brown eyes and dark messy updo from her existing portrait.",
+          "The paused-video look is a generated still photograph. It is not a frame extracted from a video; no video or new performance figures were created."
+        ],
+        "promptFile": "assets/talent/mira-vale-v2/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "ai-generated",
+          "id": "0",
+          "type": "clip",
+          "thumb": "assets/talent/mira-vale-c1.jpg",
+          "views": 218000,
+          "caption": "chop board dinner",
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 18400
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "1",
+          "type": "still",
+          "thumb": "assets/talent/mira-vale-c2.jpg",
+          "views": 64100,
+          "caption": "calm bowl Sunday",
+          "platform": "instagram",
+          "strongKind": "hashtag",
+          "engagements": 4900
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "2",
+          "type": "still",
+          "thumb": "assets/talent/mira-vale-c3.jpg",
+          "views": 91800,
+          "caption": "taste test mid cook",
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 7200
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "3",
+          "type": "still",
+          "thumb": "assets/talent/mira-vale-c4.jpg",
+          "views": 42300,
+          "caption": "herb shelf reset",
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "4",
+          "type": "clip",
+          "thumb": "assets/talent/mira-vale-c5.jpg",
+          "views": 156000,
+          "caption": "grocery prep list",
+          "platform": "tiktok",
+          "strongKind": "link",
+          "engagements": 11100
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "paused-makeup-v2",
+          "type": "still",
+          "thumb": "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/mira-vale-v2/masters/mira-vale-paused-makeup.png",
+          "generation": {
+            "version": "Realism v2 · candid still",
+            "approach": "A generated phone-video-style still with a half-blink, mid-sentence expression and subtle brush-hand blur, preserving Mira's existing fictional identity."
+          },
+          "caption": "getting ready between plans",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
@@ -1941,7 +2058,8 @@
     "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp",
     "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp",
     "assets/talent/elise-morgan/elise-morgan-portrait.webp": "assets/talent/uploads/865d7f76-9e71-4316-a8e5-43f60a758a7c.webp",
-    "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp": "assets/talent/uploads/a7b7dad1-56c0-42f5-a0f4-592de5dc1dd5.webp"
+    "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp": "assets/talent/uploads/a7b7dad1-56c0-42f5-a0f4-592de5dc1dd5.webp",
+    "assets/talent/mira-vale-portrait.jpg": "assets/talent/uploads/f78644ba-0a3c-4fb7-90c9-c77b65275284.webp"
   },
   "websitePlacementReplacements": {}
 }
