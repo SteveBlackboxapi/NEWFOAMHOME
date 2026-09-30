@@ -1738,6 +1738,197 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "aria-quen",
+      "displayName": "Aria Quen",
+      "age": 22,
+      "location": "Seoul",
+      "bio": "Everyday beauty, honest skincare check-ins, and little moments around Seoul. Morning GRWMs, coffee breaks, and a makeup bag that goes everywhere. Fictional demo creator.",
+      "verticals": [
+        "Beauty",
+        "Skincare",
+        "GRWM"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@aria.quen.fake",
+          "followers": 419000
+        },
+        {
+          "network": "tiktok",
+          "handle": "@ariaquen.fake",
+          "followers": 1240000
+        },
+        {
+          "network": "youtube",
+          "handle": "@aria.quen.fake",
+          "followers": 112000
+        }
+      ],
+      "totalAudience": 1771000,
+      "portrait": "assets/talent/uploads/a7b7dad1-56c0-42f5-a0f4-592de5dc1dd5.webp",
+      "originalPortrait": "assets/talent/aria-quen-portrait.jpg",
+      "creativeDirection": {
+        "summary": "Everyday beauty in Seoul. A consistent character photographed across real-feeling moments, with natural skin, mixed light and the imperfect framing of a phone camera.",
+        "identityNotes": [
+          "Aria is a fictional adult, aged 22, based on her original character portrait.",
+          "Keep her face shape, eye spacing, nose, lips and long black hair consistent.",
+          "Vary expression, clothes and surroundings; preserve everyday skin texture and phone-camera detail."
+        ],
+        "motionBrief": "A 10-second silent bathroom GRWM, generated from Aria's approved makeup image, is available below and in the content collection. Natural movement and a consistent fictional identity, with the source photograph retained as a separate asset.",
+        "promptFile": "assets/talent/aria-quen-v2/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "ai-generated",
+          "id": "0",
+          "type": "still",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/aria-quen-c1.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Phone-camera GRWM; identity anchored to Aria's refreshed portrait."
+          },
+          "views": 820400,
+          "caption": "five-minute face before coffee",
+          "captionSettings": {
+            "y": 72,
+            "font": "sf",
+            "size": 16,
+            "strokeWidth": 1
+          },
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 64200
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "1",
+          "type": "still",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c2.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/aria-quen-c2.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Candid café moment in cool afternoon light."
+          },
+          "views": 194200,
+          "caption": "coffee first, everything else later",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "hashtag",
+          "engagements": 12800
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "2",
+          "type": "still",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c3.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/aria-quen-c3.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Evening front-camera check-in with domestic lamplight."
+          },
+          "views": 410000,
+          "caption": "a very low-effort night routine",
+          "captionSettings": {
+            "y": 74,
+            "font": "sf",
+            "size": 15,
+            "strokeWidth": 1
+          },
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 38100
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "3",
+          "type": "still",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c4.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/aria-quen-c4.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Used everyday makeup photographed in natural window light."
+          },
+          "views": 88600,
+          "caption": "what actually lives on my desk",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "4",
+          "type": "clip",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c5.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/aria-quen-c5.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Mid-task packing frame with ordinary bedroom surroundings."
+          },
+          "views": 267000,
+          "caption": "packing the essentials (and three lip balms)",
+          "captionSettings": {
+            "y": 75,
+            "font": "sf",
+            "size": 15,
+            "strokeWidth": 1
+          },
+          "platform": "tiktok",
+          "strongKind": "link",
+          "engagements": 21400
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "5",
+          "type": "still",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c6.webp",
+          "aspectRatio": "9/16",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Night selfie with mixed shop and street lighting; new unpublished demo asset."
+          },
+          "views": 0,
+          "caption": "one last stop on the way home",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "6",
+          "type": "clip",
+          "thumb": "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp",
+          "aspectRatio": "9/16",
+          "generation": {
+            "version": "Realism v2 · video",
+            "approach": "Generated from the approved makeup image; natural movement, consistent fictional identity. 10-second silent video."
+          },
+          "video": "assets/talent/aria-quen-v2/aria-quen-v2-makeup.mp4",
+          "caption": "Aria · five-minute face in motion",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
@@ -1749,7 +1940,8 @@
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp",
     "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp",
     "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp",
-    "assets/talent/elise-morgan/elise-morgan-portrait.webp": "assets/talent/uploads/865d7f76-9e71-4316-a8e5-43f60a758a7c.webp"
+    "assets/talent/elise-morgan/elise-morgan-portrait.webp": "assets/talent/uploads/865d7f76-9e71-4316-a8e5-43f60a758a7c.webp",
+    "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp": "assets/talent/uploads/a7b7dad1-56c0-42f5-a0f4-592de5dc1dd5.webp"
   },
   "websitePlacementReplacements": {}
 }
