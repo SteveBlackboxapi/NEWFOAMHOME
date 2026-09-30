@@ -26,6 +26,7 @@ import {
 import { ChromeStory } from "./ChromeStory";
 import { FoundStory } from "./FoundStory";
 import { KitStoryMobile } from "./KitStoryMobile";
+import { KIT_STORY_EYEBROW, KitStoryHeroTitle } from "../components/KitStoryHeroTitle";
 import { useKitAssetWarmup } from "../hooks/useKitAssetWarmup";
 import {
   formatWebsiteMetric,
@@ -55,6 +56,7 @@ import {
   type KitRevealLayout,
 } from "../lib/kitStoryMotion";
 import "./kit-story.css";
+import "./kit-story-hero.css";
 
 import { A } from "../lib/assets";
 const CLIP = `${A}/io-portrait-web.mp4`;
@@ -802,14 +804,14 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-6`}
           >
-            For talent managers
+            {KIT_STORY_EYEBROW}
           </p>
           <h1
             id="kit-story-title"
             tabIndex={-1}
             className={`${FG_SB} ks-hero-title text-white`}
           >
-            <span>Big talent.</span> <span>Small admin.</span>
+            <KitStoryHeroTitle />
           </h1>
           <p
             className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}

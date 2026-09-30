@@ -1,0 +1,61 @@
+/* Approved doorway typography, scoped to the desktop and mobile kit story. */
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy {
+  padding-right: clamp(24px, 3.8vw, 64px);
+  padding-left: clamp(24px, 3.8vw, 64px);
+  padding-bottom: 100px;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-hero-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy .ks-hero-title {
+  font-size: clamp(72px, min(8vw, 18vh), 176px);
+  line-height: .94;
+  letter-spacing: -.026em;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-hero-full-stop {
+  font-family: var(--font-sf);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > p:first-child,
+:is(.ks-story-shell, .ks-mobile-story-shell) .story-nav-mobile-hero h1 + p {
+  text-wrap: pretty;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > p:first-child {
+  max-width: 52em;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: .08em;
+  color: #ffffffeb;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > h1 + p {
+  margin-top: 24px;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > div {
+  margin-top: 28px;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .story-nav-mobile-hero {
+  padding-bottom: 100px;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .story-nav-mobile-hero .ks-hero-title-mobile {
+  font-size: clamp(40px, 13vw, 108px);
+  line-height: .96;
+  letter-spacing: -.026em;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .story-nav-mobile-hero h1 {
+  max-width: 100%;
+}
+:is(.ks-story-shell, .ks-mobile-story-shell) .story-nav-mobile-hero p:first-child {
+  max-width: 35em;
+  line-height: 1.5;
+  color: #ffffffeb;
+}
+@media (max-height: 680px) and (min-width: 1024px) {
+  :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy .ks-hero-title { font-size: min(8vw, 18vh); }
+  :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > p:first-child { margin-bottom: 12px; }
+  :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > h1 + p { margin-top: 16px; }
+  :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > div { margin-top: 20px; }
+}
