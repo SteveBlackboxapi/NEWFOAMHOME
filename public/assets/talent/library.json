@@ -1282,16 +1282,203 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "samantha-pikka",
+      "displayName": "Samantha Pikka",
+      "age": 26,
+      "gender": "Female",
+      "location": "Los Angeles, CA",
+      "bio": "Samantha Pikka is an LA-based beauty creator with a passion for making skincare and haircare feel simple, approachable, and fun. At 26, she shares honest product reviews, easy-to-follow routines, beauty discoveries, and practical tips with her growing audience. Known for her warm, relatable style, Samantha focuses on products she genuinely loves, helping her community discover what's worth trying while making everyday beauty feel a little less complicated.",
+      "verticals": [
+        "Beauty",
+        "Advocacy",
+        "Education"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@samanthapikka3",
+          "followers": 570100
+        },
+        {
+          "network": "tiktok",
+          "handle": "@sampikka",
+          "followers": 157200
+        },
+        {
+          "network": "youtube",
+          "handle": "@samiepikka4",
+          "followers": 418000
+        },
+        {
+          "network": "linkedin",
+          "handle": "",
+          "followers": 10000
+        }
+      ],
+      "totalAudience": 1155300,
+      "portrait": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp",
+      "originalPortrait": "assets/io-portrait-poster.webp",
+      "referenceImages": [
+        {
+          "label": "Earlier content and family images",
+          "src": "assets/talent/samantha-pikka-v2/references/earlier-content.png"
+        },
+        {
+          "label": "Original portrait reference",
+          "src": "assets/talent/samantha-pikka-v2/references/portrait-reference.png"
+        },
+        {
+          "label": "Original profile and audience data",
+          "src": "assets/talent/samantha-pikka-v2/references/original-profile.png"
+        }
+      ],
+      "creativeDirection": {
+        "summary": "Approachable beauty and relaxed adult dance moments in Los Angeles. Natural phone photography, unposed movement, everyday clothes and candid activity. Keep Samantha's face and dark curls consistent with her original portrait.",
+        "identityNotes": [
+          "Samantha is a fictional adult aged 26. Her original portrait and existing portrait video are the identity references.",
+          "Preserve her face shape, brown eyes, brows, nose, lips and shoulder-length dark curls. The earlier content sheet used a different highlighted hairstyle.",
+          "The solo and duo dance images revisit the first two scenes from the earlier content sheet. The companion in the duo is an adult; preserve the casual home setting and natural movement.",
+          "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics."
+        ],
+        "motionBrief": "The original portrait video and the 10-second silent curl-refresh video remain available in the content collection and download pack. The dance images are stills; no dance video has been generated.",
+        "promptFile": "assets/talent/samantha-pikka-v3/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "uploaded",
+          "id": "dance-solo-v3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/2dc26e9e-0a05-4c14-a297-4a93fc538ba3.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp",
+          "caption": "a quick dance break",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "dance-duo-v3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/20281254-9cea-4ed6-9d6e-6a76bd7c0adf.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp",
+          "caption": "one more take together",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "0",
+          "type": "still",
+          "thumb": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp",
+          "caption": "a quick curl refresh",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/427a3106-3851-443f-9bb1-aabbf622b822.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp",
+          "caption": "between takes",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "4",
+          "type": "still",
+          "thumb": "assets/talent/uploads/70b919a9-efb6-43b2-8640-36cb48f97b3e.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c5.webp",
+          "caption": "coffee before the day starts",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "5",
+          "type": "still",
+          "thumb": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c6.webp",
+          "aspectRatio": "4/5",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "Unstyled haircare detail with everyday wear; unpublished demo asset."
+          },
+          "views": 0,
+          "caption": "what actually gets used",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "6",
+          "type": "clip",
+          "thumb": "assets/io-portrait-poster.webp",
+          "aspectRatio": "16/9",
+          "generation": {
+            "version": "Original motion",
+            "approach": "Existing 15-second portrait video (960 × 540, 24 fps, no audio), preserved from the original site. No new animation has been generated."
+          },
+          "video": "assets/io-portrait-web.mp4",
+          "caption": "Samantha · portrait in motion",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "7",
+          "type": "still",
+          "thumb": "assets/talent/uploads/5047d5f1-9670-4d40-a2a3-45c4ae9aef07.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp",
+          "caption": "Samantha · curl refresh in motion",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
   "websiteReplacements": {
-    "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": "assets/talent/uploads/960ac1dc-9273-483d-b722-c4b312d08dc6.webp"
+    "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": "assets/talent/uploads/20281254-9cea-4ed6-9d6e-6a76bd7c0adf.webp",
+    "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp": "assets/talent/uploads/2dc26e9e-0a05-4c14-a297-4a93fc538ba3.webp",
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp": "assets/talent/uploads/427a3106-3851-443f-9bb1-aabbf622b822.webp",
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp"
   },
-  "websitePlacementReplacements": {
-    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/b379af24-8b0f-476f-b276-15c1db3ede8f.webp",
-    "[\"assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/6d32dd15-a455-41b5-b7b4-068a29060722.webp",
-    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/7e604e9a-a48f-45b0-84c1-88e132256696.webp",
-    "[\"assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/bb713d77-bd84-4ada-b61d-dfce2b30ec30.webp"
-  }
+  "websitePlacementReplacements": {}
 }
