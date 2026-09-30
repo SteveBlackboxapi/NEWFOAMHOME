@@ -2,9 +2,9 @@
 export const DEFAULT_SITE_URL = "https://steveblackboxapi.github.io/NEWFOAMHOME/";
 
 export const PREVIEW_IMAGE = {
-  path: "social/foam-preview-2026-09-29.webp",
-  width: 2000,
-  height: 1070,
+  path: "social/foam-preview-2026-09-30.webp",
+  width: 1800,
+  height: 973,
   type: "image/webp",
   alt: "Foam — Big talent. Small admin. A smiling creator on the talent management website.",
 };

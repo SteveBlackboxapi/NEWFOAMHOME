@@ -54,11 +54,11 @@ for (const siteUrl of [
     const canonical = one(tags, "link", "rel", "canonical", "href");
     assert.equal(urlKey(canonical), urlKey(new URL("kit-story/", siteUrl).href));
     assert.equal(one(tags, "meta", "property", "og:url"), canonical);
-    const expectedImage = new URL("social/foam-preview-2026-09-29.webp", siteUrl).href;
+    const expectedImage = new URL("social/foam-preview-2026-09-30.webp", siteUrl).href;
     assert.equal(one(tags, "meta", "property", "og:image"), expectedImage);
     assert.equal(one(tags, "meta", "name", "twitter:image"), expectedImage);
-    assert.equal(one(tags, "meta", "property", "og:image:width"), "2000");
-    assert.equal(one(tags, "meta", "property", "og:image:height"), "1070");
+    assert.equal(one(tags, "meta", "property", "og:image:width"), "1800");
+    assert.equal(one(tags, "meta", "property", "og:image:height"), "973");
     assert.equal(one(tags, "meta", "property", "og:image:type"), "image/webp");
     const canonicalUrl = new URL(canonical);
     assert.equal(canonicalUrl.search, "");
