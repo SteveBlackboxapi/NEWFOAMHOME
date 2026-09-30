@@ -380,7 +380,7 @@ test("forged, expired, and password-rotation sessions cannot read private assets
 test("login rate limiting and Origin checks cover mutations including login/logout", async () => {
   const f = await fixture();
   const cookie = await f.login();
-  for (const origin of [null, "https://attacker.example"])
+  for (const origin of [null, "null", "https://attacker.example"])
     for (const path of [
       "/api/login",
       "/api/connect",
@@ -412,6 +412,7 @@ test("authenticated assets use no-store, preserve gzip, root redirects, logout o
   assert.equal(r.headers.get("Content-Encoding"), "gzip");
   assert.match(r.headers.get("Cache-Control"), /no-store/);
   assert.equal(r.headers.get("X-Robots-Tag"), "noindex, nofollow");
+  assert.equal(r.headers.get("Referrer-Policy"), "no-referrer");
   assert.match(
     await (await f.send("/lab/talent/?view=content", { cookie })).text(),
     /Private Lab/,
@@ -429,6 +430,19 @@ test("authenticated assets use no-store, preserve gzip, root redirects, logout o
 });
 test("ordinary login form redirects after sign-in and public source assets need no GitHub token", async () => {
   const f = await fixture();
+  const page = await f.send("/lab/talent/");
+  assert.equal(page.headers.get("Referrer-Policy"), "same-origin");
+  const retry = await handleRequest(new Request(`${ORIGIN}/api/login`, {
+    method: "POST",
+    headers: {
+      Origin: ORIGIN,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({ password: "incorrect-password" }),
+  }), f.env);
+  assert.equal(retry.status, 401);
+  assert.equal(retry.headers.get("Referrer-Policy"), "same-origin");
+  assert.match(await retry.text(), /Incorrect password\. Please try again\./);
   const request = new Request(`${ORIGIN}/api/login`, {
     method: "POST",
     headers: {
