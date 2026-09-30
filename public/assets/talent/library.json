@@ -1592,6 +1592,104 @@
           "engagements": 6100
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "nia-brooks",
+      "displayName": "Nia Brooks",
+      "age": 27,
+      "gender": "Female",
+      "location": "London, UK",
+      "bio": "Skincare made approachable: product textures, everyday routines and thoughtful beauty reviews from London. Nia shares what she likes about a product and how it fits into her day. Fictional demo creator; profile details and audience figures are illustrative.",
+      "verticals": [
+        "Skincare",
+        "Beauty",
+        "Product reviews"
+      ],
+      "platforms": [
+        {
+          "network": "tiktok",
+          "handle": "@nia.brooks.fake",
+          "followers": 412000
+        },
+        {
+          "network": "instagram",
+          "handle": "@niabrooks.fake",
+          "followers": 186000
+        },
+        {
+          "network": "youtube",
+          "handle": "@nia.brooks.fake",
+          "followers": 54000
+        }
+      ],
+      "totalAudience": 652000,
+      "portrait": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp",
+      "originalPortrait": "assets/talent/nia-brooks/nia-brooks-profile.png",
+      "referenceImages": [
+        {
+          "label": "Skincare video reference frame · 2 seconds",
+          "src": "assets/talent/nia-brooks/nia-brooks-seen-1.webp"
+        },
+        {
+          "label": "Skincare video reference frame · 7 seconds",
+          "src": "assets/talent/nia-brooks/nia-brooks-seen-2.webp"
+        }
+      ],
+      "creativeDirection": {
+        "summary": "A fictional Black adult skincare and beauty creator for Found with Foam. Natural skin texture, ordinary phone-camera framing, relaxed product demonstrations and a consistent face across her portrait and review content.",
+        "identityNotes": [
+          "Nia is a fictional adult, aged 27. Keep her identity consistent with the approved Nia portrait and skincare reference.",
+          "Use natural expressions and believable hands when showing the skincare product; avoid beauty-filter smoothing or exaggerated transformations.",
+          "Her profile, handles, audience and post figures are invented demo data, not verified live account results."
+        ],
+        "motionBrief": "A reviewed 10.084-second skincare clip at 720 × 1280: Nia gently massages cleanser into her skin while holding an unbranded white tube. Generated with Runway gen-4-turbo from her skincare still. The references at 2 and 7 seconds are frames from this same clip, not separate social posts.",
+        "promptFile": "assets/talent/nia-brooks/GENERATIONS.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-review",
+          "type": "clip",
+          "thumb": "assets/talent/nia-brooks/nia-brooks-skincare.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/nia-brooks/nia-brooks-skincare.png",
+          "generation": {
+            "version": "Skincare v1 · video",
+            "approach": "Portrait and source still created with OpenAI image generation. Reviewed 10.084-second, 720 × 1280 video generated from the skincare still with Runway gen-4-turbo, task e83fc978-c4f1-4c52-aaa8-74abef74191a. Natural gentle cleanser massage with an unbranded white tube."
+          },
+          "video": "assets/talent/nia-brooks/nia-brooks-skincare.mp4",
+          "views": 265600,
+          "caption": "a closer look at my everyday skincare",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 15500
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "discovery-skincare-shelf",
+          "type": "still",
+          "thumb": "assets/talent/discovery-v1/skincare-shelf.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/discovery-v1/masters/skincare-shelf.png",
+          "generation": {
+            "version": "Discovery v1 · illustrative still",
+            "approach": "AI-generated illustrative social post. Original fictional identity references used for people; no sponsorship, real post or performance figures claimed.",
+            "prompt": "assets/talent/discovery-v1/creative-brief.md"
+          },
+          "caption": "what stays by the sink",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
@@ -1601,7 +1699,8 @@
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp": "assets/talent/uploads/427a3106-3851-443f-9bb1-aabbf622b822.webp",
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp",
-    "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp"
+    "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp",
+    "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp"
   },
   "websitePlacementReplacements": {}
 }
