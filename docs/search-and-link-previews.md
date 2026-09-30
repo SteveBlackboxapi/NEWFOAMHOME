@@ -4,7 +4,7 @@
 
 `scripts/site-metadata-plugin.ts` writes metadata into the initial HTML during every public build, including each route's `index.html`. Crawlers do not need to execute JavaScript to read the preview. Do not copy the homepage HTML over these route files after building.
 
-The supplied preview is preserved unchanged at `public/social/foam-preview-2026-09-29.webp` (2000 × 1070). It has a dated filename for independent preview caching and lives outside the responsive-image pipeline. Use a new filename when replacing it, and update `PREVIEW_IMAGE` with the matching dimensions and MIME type.
+The supplied preview is preserved unchanged at `public/social/foam-preview-2026-09-30.webp` (1800 × 973). It has a dated filename for independent preview caching and lives outside the responsive-image pipeline. Use a new filename when replacing it, and update `PREVIEW_IMAGE` with the matching dimensions and MIME type.
 
 ## Moving to the final address
 
