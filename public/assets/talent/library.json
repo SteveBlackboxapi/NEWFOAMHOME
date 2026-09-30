@@ -1690,6 +1690,54 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "elise-morgan",
+      "displayName": "Elise Morgan",
+      "age": 27,
+      "location": "London, UK",
+      "bio": "Travel, beauty and getting-ready moments. A fictional adult creator for Foam's demo library; audience figures have not been assigned.",
+      "verticals": [
+        "Travel",
+        "Beauty",
+        "Lifestyle"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/865d7f76-9e71-4316-a8e5-43f60a758a7c.webp",
+      "originalPortrait": "assets/talent/elise-morgan/masters/elise-morgan-portrait.png",
+      "creativeDirection": {
+        "summary": "A luxury hotel bathroom mirror selfie following the supplied creative prompt: long wavy blonde hair, black zip-up jacket, dark wide-leg jeans and open-toe sandals.",
+        "identityNotes": [
+          "Elise is a new fictional adult aged 27. The hotel selfie defines her identity; her avatar preserves the same face, hair and outfit.",
+          "Keep warm bathroom lighting, natural skin and hair texture, realistic hands and a coherent mirror reflection.",
+          "These are generated still photographs. No video, audience, views or engagement figures have been generated for Elise."
+        ],
+        "promptFile": "assets/talent/elise-morgan/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "ai-generated",
+          "id": "hotel-mirror-v1",
+          "type": "still",
+          "thumb": "assets/talent/elise-morgan/elise-morgan-hotel-selfie.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/elise-morgan/masters/elise-morgan-hotel-selfie.png",
+          "generation": {
+            "version": "Hotel selfie v1",
+            "approach": "Generated from the supplied luxury hotel mirror-selfie prompt, with a full-body outfit composition and realistic photographic detail. New fictional adult identity."
+          },
+          "caption": "ready for the evening",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
@@ -1700,7 +1748,8 @@
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp",
     "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp",
-    "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp"
+    "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp",
+    "assets/talent/elise-morgan/elise-morgan-portrait.webp": "assets/talent/uploads/865d7f76-9e71-4316-a8e5-43f60a758a7c.webp"
   },
   "websitePlacementReplacements": {}
 }
