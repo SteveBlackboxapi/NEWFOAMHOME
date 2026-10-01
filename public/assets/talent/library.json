@@ -3385,84 +3385,6 @@
     },
     {
       "provenance": "reference",
-      "id": "jenny-macmillian",
-      "displayName": "Jenny MacMillian",
-      "age": 0,
-      "location": "",
-      "bio": "Jenny shares approachable beauty ideas and everyday outfit details with a warm, conversational style. Her content pairs simple makeup moments with the small finishing touches that make a look feel personal. Fictional creator; audience figures are illustrative.",
-      "verticals": [
-        "Beauty",
-        "Style",
-        "Lifestyle"
-      ],
-      "platforms": [
-        {
-          "network": "instagram",
-          "handle": "@jenny.macmillian.demo",
-          "followers": 186500
-        },
-        {
-          "network": "tiktok",
-          "handle": "@jenny.macmillian.demo",
-          "followers": 241700
-        },
-        {
-          "network": "youtube",
-          "handle": "@jenny.macmillian.demo",
-          "followers": 28400
-        }
-      ],
-      "totalAudience": 456600,
-      "portrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
-      "originalPortrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
-      "creativeDirection": {
-        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
-        "identityNotes": [
-          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
-          "Source folder name: Jenny MacMillian. Images and creator grouping supplied by the owner.",
-          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
-          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
-        ]
-      },
-      "motion": null,
-      "motionStatus": "placeholder",
-      "content": [
-        {
-          "provenance": "reference",
-          "id": "content-01",
-          "type": "still",
-          "thumb": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
-          "views": 15600,
-          "caption": "One last lip touch-up before heading out.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 380
-        },
-        {
-          "provenance": "reference",
-          "id": "content-02",
-          "type": "still",
-          "thumb": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
-          "views": 27500,
-          "caption": "Soft layers and the little details I keep coming back to.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 610
-        }
-      ]
-    },
-    {
-      "provenance": "reference",
       "id": "mandy-mortimer",
       "displayName": "Mandy Mortimer",
       "age": 0,
@@ -4274,6 +4196,68 @@
           "platform": "instagram",
           "strongKind": "photo",
           "engagements": 5600
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "jenny-macmillian",
+      "displayName": "Jenny MacMillian",
+      "age": 0,
+      "location": "",
+      "bio": "Jenny shares approachable beauty ideas and everyday outfit details with a warm, conversational style. Her content pairs simple makeup moments with the small finishing touches that make a look feel personal. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Beauty",
+        "Style",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 186500
+        },
+        {
+          "network": "tiktok",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 241700
+        },
+        {
+          "network": "youtube",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 28400
+        }
+      ],
+      "totalAudience": 456600,
+      "portrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Jenny MacMillian. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "reference",
+          "id": "content-02",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
+          "views": 27500,
+          "caption": "Soft layers and the little details I keep coming back to.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 610
         }
       ]
     }
