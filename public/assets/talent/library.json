@@ -2046,6 +2046,2125 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "reference",
+      "id": "angelina-lemon",
+      "displayName": "Angelina Lemon",
+      "age": 0,
+      "location": "",
+      "bio": "Angelina brings a relaxed, encouraging voice to everyday movement and casual style. Her content centres on comfortable layers, small routines and making space for a little fresh air. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Lifestyle",
+        "Fitness",
+        "Everyday style"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@angelina.lemon.demo",
+          "followers": 82400
+        },
+        {
+          "network": "tiktok",
+          "handle": "@angelina.lemon.demo",
+          "followers": 126800
+        }
+      ],
+      "totalAudience": 209200,
+      "portrait": "assets/talent/uploads/angelina-lemon-02-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/angelina-lemon-02-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Angelina Lemon. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/angelina-lemon-01-20261001.webp",
+          "original": "assets/talent/uploads/angelina-lemon-01-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Comfy layers, good company, and a reason to get out the door.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 12300,
+          "engagements": 430
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/angelina-lemon-02-20261001.webp",
+          "original": "assets/talent/uploads/angelina-lemon-02-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Keeping the everyday uniform simple.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 13400,
+          "engagements": 560
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "cameron-walsh",
+      "displayName": "Cameron Walsh",
+      "age": 0,
+      "location": "",
+      "bio": "Cameron makes informal, talking-to-camera content built around everyday observations and easy conversation. His casual desk-side style gives lifestyle stories and quick catch-ups a familiar, personal feel. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Lifestyle",
+        "Everyday stories"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@cameron.walsh.demo",
+          "followers": 107600
+        },
+        {
+          "network": "tiktok",
+          "handle": "@cameron.walsh.demo",
+          "followers": 268400
+        },
+        {
+          "network": "youtube",
+          "handle": "@cameron.walsh.demo",
+          "followers": 34200
+        }
+      ],
+      "totalAudience": 410200,
+      "portrait": "assets/talent/uploads/cameron-walsh-01-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/cameron-walsh-01-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Cameron Walsh. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/cameron-walsh-01-20261001.webp",
+          "original": "assets/talent/uploads/cameron-walsh-01-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Pull up a chair. I've got a little story for you.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 81700,
+          "engagements": 5100
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/cameron-walsh-02-20261001.webp",
+          "original": "assets/talent/uploads/cameron-walsh-02-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "A quick catch-up from my usual spot.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 30700,
+          "engagements": 1480
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "felicia-mansel",
+      "displayName": "Felicia Mansel",
+      "age": 0,
+      "location": "",
+      "bio": "Felicia shares colourful portrait illustrations, drawing sessions and the small details of a working studio. Her content moves between tablet sketches and time at the easel, with a relaxed look at the creative process. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Art & Illustration",
+        "Creative Process",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@feliciamansel.demo",
+          "followers": 84300
+        },
+        {
+          "network": "tiktok",
+          "handle": "@feliciamansel.demo",
+          "followers": 126700
+        },
+        {
+          "network": "youtube",
+          "handle": "@feliciamansel.demo",
+          "followers": 28400
+        }
+      ],
+      "totalAudience": 239400,
+      "portrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Felicia Mansel. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
+          "caption": "I said a quick studio tour, then started talking about every picture on the wall.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 36300,
+          "engagements": 1340
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
+          "caption": "My favourite corner: a little art, a lot of daylight and somewhere to stop for a chat.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 10600,
+          "engagements": 450
+        },
+        {
+          "id": "content-03",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Keeping my portrait simple today: a black knit and soft window light.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 10500,
+          "engagements": 330
+        },
+        {
+          "id": "content-04",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Back at my easel, deciding whether this really is the final brushstroke.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 24400,
+          "engagements": 1340
+        },
+        {
+          "id": "content-05",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I've been playing with bold shapes and softer colours in this tablet portrait.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 18800,
+          "engagements": 980
+        },
+        {
+          "id": "content-06",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
+          "caption": "A closer look at the portraits keeping me company on the studio wall.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 52700,
+          "engagements": 3130
+        },
+        {
+          "id": "content-07",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "My desk is half brushes, half pixels. I like having both within reach.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 47700,
+          "engagements": 2720
+        },
+        {
+          "id": "content-08",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I kept the outfit simple and let the light do the rest.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 42400,
+          "engagements": 2100
+        },
+        {
+          "id": "content-09",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Headphones ready, drawing open, plants taking over my desk as usual.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 16000,
+          "engagements": 770
+        },
+        {
+          "id": "content-10",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
+          "caption": "Ask me about a painting and suddenly I'm explaining the whole process with my hands.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 13500,
+          "engagements": 920
+        },
+        {
+          "id": "content-11",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
+          "caption": "A quiet moment at my desk before I get back to the portrait on screen.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 10500,
+          "engagements": 640
+        },
+        {
+          "id": "content-12",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I leaned into purple shadows for this one. Here's the portrait up close.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 35800,
+          "engagements": 800
+        },
+        {
+          "id": "content-13",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I've been building a little world around this portrait, one colour at a time.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 29000,
+          "engagements": 690
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "gina-turner",
+      "displayName": "Gina Turner",
+      "age": 0,
+      "location": "",
+      "bio": "Gina mixes colourful everyday outfits with gym sessions and quiet moments outdoors. Her content moves from street photography and playful styling to simple workouts and days by the water. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Fashion",
+        "Fitness",
+        "Lifestyle",
+        "Photography"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@gina.turner.demo",
+          "followers": 186400
+        },
+        {
+          "network": "tiktok",
+          "handle": "@gina.turner.demo",
+          "followers": 312700
+        },
+        {
+          "network": "youtube",
+          "handle": "@gina.turner.demo",
+          "followers": 28400
+        }
+      ],
+      "totalAudience": 527500,
+      "portrait": "assets/talent/uploads/gina-turner-26-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/gina-turner-26-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Gina Turner. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-01-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-01-20261001.webp",
+          "caption": "I found a wall as bright as my jacket. Had to stop.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 74700,
+          "engagements": 3590
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-02-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-02-20261001.webp",
+          "caption": "My answer to a grey day: pink, green and very roomy jeans.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 74700,
+          "engagements": 2750
+        },
+        {
+          "id": "content-03",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-03-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-03-20261001.webp",
+          "caption": "I'm making the most of the wait between wash cycles.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 29900,
+          "engagements": 640
+        },
+        {
+          "id": "content-04",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-04-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-04-20261001.webp",
+          "caption": "I took the long way up for this view.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 25600,
+          "engagements": 1530
+        },
+        {
+          "id": "content-05",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-05-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-05-20261001.webp",
+          "caption": "I've got my dumbbells and a sunny corner. Time to move.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 70000,
+          "engagements": 2710
+        },
+        {
+          "id": "content-06",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-06-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-06-20261001.webp",
+          "caption": "I'm letting the window light do its thing today.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 25200,
+          "engagements": 780
+        },
+        {
+          "id": "content-07",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-07-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-07-20261001.webp",
+          "caption": "My favourite kind of stop: an old car and the last of the sunshine.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 89700,
+          "engagements": 2310
+        },
+        {
+          "id": "content-08",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-08-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-08-20261001.webp",
+          "caption": "I'm keeping it simple today: a graphic tee, jeans and green trainers.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 90100,
+          "engagements": 2110
+        },
+        {
+          "id": "content-09",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-09-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-09-20261001.webp",
+          "caption": "I couldn't leave without one more photo beside this little green car.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 72800,
+          "engagements": 4130
+        },
+        {
+          "id": "content-10",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-10-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-10-20261001.webp",
+          "caption": "I'm trying a blazer with my usual jeans. The yellow chair is a bonus.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 47600,
+          "engagements": 2010
+        },
+        {
+          "id": "content-11",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-11-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-11-20261001.webp",
+          "caption": "I love a T-shirt with something going on at the back.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 42500,
+          "engagements": 1820
+        },
+        {
+          "id": "content-12",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-12-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-12-20261001.webp",
+          "caption": "I've brought my red jacket out for a little autumn colour.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 90100,
+          "engagements": 2160
+        },
+        {
+          "id": "content-13",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-13-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-13-20261001.webp",
+          "caption": "My jacket is doing a very good job of matching the trees.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 36200,
+          "engagements": 1330
+        },
+        {
+          "id": "content-14",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-14-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-14-20261001.webp",
+          "caption": "I found the most colourful steps on my walk and stayed a while.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 49200,
+          "engagements": 3080
+        },
+        {
+          "id": "content-15",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-15-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-15-20261001.webp",
+          "caption": "I'm keeping the jacket open while the sun is still out.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 79800,
+          "engagements": 4380
+        },
+        {
+          "id": "content-16",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-16-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-16-20261001.webp",
+          "caption": "I'm taking a quiet minute among the tulips.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 16600,
+          "engagements": 1070
+        },
+        {
+          "id": "content-17",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-17-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-17-20261001.webp",
+          "caption": "I'm slowing this set down and paying attention to each rep.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 73200,
+          "engagements": 4790
+        },
+        {
+          "id": "content-18",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-18-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-18-20261001.webp",
+          "caption": "My pause between sets. The dumbbells can wait another moment.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 46800,
+          "engagements": 1790
+        },
+        {
+          "id": "content-19",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-19-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-19-20261001.webp",
+          "caption": "I've found my seat for a very unhurried afternoon.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 85700,
+          "engagements": 4500
+        },
+        {
+          "id": "content-20",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-20-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-20-20261001.webp",
+          "caption": "I always come back to a white top and a bit of sea air.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 15000,
+          "engagements": 880
+        },
+        {
+          "id": "content-21",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-21-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-21-20261001.webp",
+          "caption": "I'm letting the sea breeze make all the hair decisions.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 114800,
+          "engagements": 6940
+        },
+        {
+          "id": "content-22",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-22-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-22-20261001.webp",
+          "caption": "I stayed by the water until the light started to soften.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 83400,
+          "engagements": 2770
+        },
+        {
+          "id": "content-23",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-23-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-23-20261001.webp",
+          "caption": "I came up here for a walk and left with a camera roll full of this view.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 54300,
+          "engagements": 3560
+        },
+        {
+          "id": "content-24",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-24-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-24-20261001.webp",
+          "caption": "My pink weights are back out. Making a little time to move.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 89300,
+          "engagements": 5550
+        },
+        {
+          "id": "content-25",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-25-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-25-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I'm keeping this portrait simple: soft light and a little smile.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 46400,
+          "engagements": 1330
+        },
+        {
+          "id": "content-26",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-26-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-26-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I think this one might be my new profile photo.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 91200,
+          "engagements": 6050
+        },
+        {
+          "id": "content-27",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-27-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-27-20261001.webp",
+          "caption": "My spot for a stretch comes with tulips and a very big sky.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 33500,
+          "engagements": 1750
+        },
+        {
+          "id": "content-28",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-28-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-28-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I've got my camera, a trench coat and no particular route in mind.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 23200,
+          "engagements": 1410
+        },
+        {
+          "id": "content-29",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/gina-turner-29-20261001.webp",
+          "original": "assets/talent/uploads/gina-turner-29-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I've set up the phone and grabbed my bands. Let's give this a go.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 64500,
+          "engagements": 3770
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "jack-jones",
+      "displayName": "Jack Jones",
+      "age": 0,
+      "location": "",
+      "bio": "Jack brings music, personal style and life behind the camera into the same feed. He shares moments at the decks, sharp and casual outfits, outdoor training and the everyday stops in between. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Music",
+        "Menswear",
+        "Photography",
+        "Fitness",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@jack.jones.demo",
+          "followers": 274800
+        },
+        {
+          "network": "tiktok",
+          "handle": "@jack.jones.demo",
+          "followers": 96400
+        },
+        {
+          "network": "youtube",
+          "handle": "@jack.jones.demo",
+          "followers": 61800
+        }
+      ],
+      "totalAudience": 433000,
+      "portrait": "assets/talent/uploads/jack-jones-25-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/jack-jones-25-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Jack Jones. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-01-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-01-20261001.webp",
+          "caption": "I'm on the other side of the camera today. Getting the frame just right.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 67800,
+          "engagements": 2810
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-02-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-02-20261001.webp",
+          "caption": "I've got the headphones ready and my next track lined up.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 82600,
+          "engagements": 3580
+        },
+        {
+          "id": "content-03",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-03-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-03-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "My outfit is simple today. The smile came with it.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 80400,
+          "engagements": 4120
+        },
+        {
+          "id": "content-04",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-04-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-04-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I'm keeping it to a black tee, a chain and my sunglasses.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 37500,
+          "engagements": 2160
+        },
+        {
+          "id": "content-05",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-05-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-05-20261001.webp",
+          "caption": "I've reached for a cap and a few extra layers today.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 55500,
+          "engagements": 3250
+        },
+        {
+          "id": "content-06",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-06-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-06-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I'm looking up for this one. Couldn't waste that blue light.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 51000,
+          "engagements": 2590
+        },
+        {
+          "id": "content-07",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-07-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-07-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "My blazer, a little city light and one last portrait.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 34200,
+          "engagements": 1090
+        },
+        {
+          "id": "content-08",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-08-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-08-20261001.webp",
+          "caption": "I'm trying a little movement in this black-and-white frame.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 49400,
+          "engagements": 3140
+        },
+        {
+          "id": "content-09",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-09-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-09-20261001.webp",
+          "caption": "I wanted this portrait to feel stripped back: just light and shadow.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 58400,
+          "engagements": 3680
+        },
+        {
+          "id": "content-10",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-10-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-10-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I'm taking a moment under the spotlight before the next line.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 14900,
+          "engagements": 520
+        },
+        {
+          "id": "content-11",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-11-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-11-20261001.webp",
+          "caption": "I'm pairing the roll neck with a blazer today.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 83000,
+          "engagements": 5460
+        },
+        {
+          "id": "content-12",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-12-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-12-20261001.webp",
+          "caption": "My last sunglasses adjustment before we take the shot.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 92300,
+          "engagements": 2810
+        },
+        {
+          "id": "content-13",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-13-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-13-20261001.webp",
+          "caption": "I'm settling into the mix and letting the rest of the room fade out.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 81700,
+          "engagements": 3210
+        },
+        {
+          "id": "content-14",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-14-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-14-20261001.webp",
+          "caption": "I've got one ear on the room and the next track ready to go.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 28100,
+          "engagements": 1330
+        },
+        {
+          "id": "content-15",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-15-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-15-20261001.webp",
+          "caption": "I'm taking my training outside today. One stretch of path at a time.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 93000,
+          "engagements": 6000
+        },
+        {
+          "id": "content-16",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-16-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-16-20261001.webp",
+          "caption": "I'm taking my time choosing a pineapple. This one looks promising.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 94900,
+          "engagements": 5600
+        },
+        {
+          "id": "content-17",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-17-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-17-20261001.webp",
+          "caption": "I've got my sunglasses on and a few minutes before heading off.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 35500,
+          "engagements": 1520
+        },
+        {
+          "id": "content-18",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-18-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-18-20261001.webp",
+          "caption": "My favourite thing about this portrait is how little colour it needs.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 90700,
+          "engagements": 4090
+        },
+        {
+          "id": "content-19",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-19-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-19-20261001.webp",
+          "caption": "I'm working on that next transition, one small adjustment at a time.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 34900,
+          "engagements": 1910
+        },
+        {
+          "id": "content-20",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-20-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-20-20261001.webp",
+          "caption": "I'm letting the green pattern do the work with this outfit.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 83900,
+          "engagements": 3770
+        },
+        {
+          "id": "content-21",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-21-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-21-20261001.webp",
+          "caption": "My pick for a sunny walk: an open patterned shirt and dark shades.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 28400,
+          "engagements": 1440
+        },
+        {
+          "id": "content-22",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-22-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-22-20261001.webp",
+          "caption": "I'm mixing my blazer with a cap today. Keeping it relaxed.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 79100,
+          "engagements": 2040
+        },
+        {
+          "id": "content-23",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-23-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-23-20261001.webp",
+          "caption": "I've found a sunny bit of path for today's run.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 32300,
+          "engagements": 1330
+        },
+        {
+          "id": "content-24",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-24-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-24-20261001.webp",
+          "caption": "I've gone for the full suit today, right down to the red tie.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 78800,
+          "engagements": 3110
+        },
+        {
+          "id": "content-25",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-25-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-25-20261001.webp",
+          "caption": "I tried a serious portrait, but this is the one I'm keeping.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 16200,
+          "engagements": 570
+        },
+        {
+          "id": "content-26",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-26-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-26-20261001.webp",
+          "caption": "My headphones are on standby. I'm ready for the next session.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 28800,
+          "engagements": 1030
+        },
+        {
+          "id": "content-27",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-27-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-27-20261001.webp",
+          "caption": "I'm supposed to stand still for the photo. Clearly, that's not happening.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 72300,
+          "engagements": 4680
+        },
+        {
+          "id": "content-28",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-28-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-28-20261001.webp",
+          "caption": "I think the outtakes might be better than the planned shot.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 36200,
+          "engagements": 1850
+        },
+        {
+          "id": "content-29",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-29-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-29-20261001.webp",
+          "caption": "I've come in for a few groceries and got distracted by the fruit.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 49100,
+          "engagements": 1050
+        },
+        {
+          "id": "content-30",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jack-jones-30-20261001.webp",
+          "original": "assets/talent/uploads/jack-jones-30-20261001.webp",
+          "caption": "I'm back at the decks and very happy about it.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 14200,
+          "engagements": 890
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "jade-harrison",
+      "displayName": "Jade Harrison",
+      "age": 0,
+      "location": "",
+      "bio": "Jade brings outfit ideas, everyday style and cheerful conversations to the feed. Her content pairs wardrobe choices with moments at the microphone and playful glimpses behind the camera. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Fashion",
+        "Lifestyle",
+        "Entertainment"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@jadeharrison.demo",
+          "followers": 214600
+        },
+        {
+          "network": "tiktok",
+          "handle": "@jadeharrison.demo",
+          "followers": 372900
+        },
+        {
+          "network": "youtube",
+          "handle": "@jadeharrison.demo",
+          "followers": 61800
+        }
+      ],
+      "totalAudience": 649300,
+      "portrait": "assets/talent/uploads/jade-harrison-02-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/jade-harrison-02-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Jade Harrison. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-01-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-01-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I sat down to get something done and immediately got distracted by a good conversation.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 114800,
+          "engagements": 7570
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-02-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-02-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "My simplest portrait look: a black knit, small hoops and nothing extra.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 88700,
+          "engagements": 5920
+        },
+        {
+          "id": "content-03",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-03-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-03-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I've reached for another grey layer. Some outfit habits are worth keeping.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 67900,
+          "engagements": 2710
+        },
+        {
+          "id": "content-04",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-04-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-04-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Soft light and my favourite kind of knit for today's close-up.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 116700,
+          "engagements": 6210
+        },
+        {
+          "id": "content-05",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-05-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-05-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "I kept this look soft and simple, right down to the little gold hoops.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 45600,
+          "engagements": 2860
+        },
+        {
+          "id": "content-06",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-06-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-06-20261001.webp",
+          "caption": "Taking a break from the screen to spend a little time at the canvas.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 102700,
+          "engagements": 5600
+        },
+        {
+          "id": "content-07",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-07-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-07-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "My grey blazer is doing all the work for this portrait.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 70300,
+          "engagements": 4250
+        },
+        {
+          "id": "content-08",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-08-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-08-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Notes in hand, mic ready. I'm trying to make it through the opening without going off on a tangent.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 130300,
+          "engagements": 3890
+        },
+        {
+          "id": "content-09",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-09-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-09-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "One more frame in my black knit because the light was too good to leave.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 65400,
+          "engagements": 1810
+        },
+        {
+          "id": "content-10",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-10-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-10-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "My answer to an undecided outfit day: denim overalls and a white tee.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 49500,
+          "engagements": 2990
+        },
+        {
+          "id": "content-11",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-11-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-11-20261001.webp",
+          "caption": "I tried to keep a straight face for the thumbnail. You can see how that went.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 59200,
+          "engagements": 2730
+        },
+        {
+          "id": "content-12",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-12-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-12-20261001.webp",
+          "caption": "I put on the sunglasses and immediately forgot how to pose normally.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 34500,
+          "engagements": 860
+        },
+        {
+          "id": "content-13",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-13-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-13-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Checking my phone between takes, still laughing at the last one.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 85800,
+          "engagements": 4160
+        },
+        {
+          "id": "content-14",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-14-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-14-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I'm pulling out a few pieces and seeing which combinations feel right today.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 88200,
+          "engagements": 4680
+        },
+        {
+          "id": "content-15",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-15-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-15-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Headphones round my neck, mic on the desk and plenty I still want to say.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 94000,
+          "engagements": 3590
+        },
+        {
+          "id": "content-16",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-16-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-16-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "I love the unplanned smile that happens just before the photo is supposed to start.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 107500,
+          "engagements": 6060
+        },
+        {
+          "id": "content-17",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-17-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-17-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "A little laptop time before I get back in front of the camera.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 121100,
+          "engagements": 7480
+        },
+        {
+          "id": "content-18",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-18-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-18-20261001.webp",
+          "caption": "I came for one quick clip and stayed for the pink lighting.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 51900,
+          "engagements": 1670
+        },
+        {
+          "id": "content-19",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-19-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-19-20261001.webp",
+          "caption": "I've narrowed it down to these two. The blue blazer is making a strong case.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 66400,
+          "engagements": 3730
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "jenny-macmillian",
+      "displayName": "Jenny MacMillian",
+      "age": 0,
+      "location": "",
+      "bio": "Jenny shares approachable beauty ideas and everyday outfit details with a warm, conversational style. Her content pairs simple makeup moments with the small finishing touches that make a look feel personal. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Beauty",
+        "Style",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 186500
+        },
+        {
+          "network": "tiktok",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 241700
+        },
+        {
+          "network": "youtube",
+          "handle": "@jenny.macmillian.demo",
+          "followers": 28400
+        }
+      ],
+      "totalAudience": 456600,
+      "portrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Jenny MacMillian. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+          "original": "assets/talent/uploads/jenny-macmillian-01-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "One last lip touch-up before heading out.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 15600,
+          "engagements": 380
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
+          "original": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Soft layers and the little details I keep coming back to.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 27500,
+          "engagements": 610
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "mandy-mortimer",
+      "displayName": "Mandy Mortimer",
+      "age": 0,
+      "location": "",
+      "bio": "Mandy explores personal style through colour, texture and everyday places. From autumn light to bright street-art backdrops, her visual stories turn a simple walk into fresh outfit inspiration. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Style",
+        "Lifestyle",
+        "Photography"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@mandy.mortimer.demo",
+          "followers": 94500
+        },
+        {
+          "network": "tiktok",
+          "handle": "@mandy.mortimer.demo",
+          "followers": 63800
+        }
+      ],
+      "totalAudience": 158300,
+      "portrait": "assets/talent/uploads/mandy-mortimer-02-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/mandy-mortimer-02-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Mandy Mortimer. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/mandy-mortimer-01-20261001.webp",
+          "original": "assets/talent/uploads/mandy-mortimer-01-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "A little autumn colour on the way home.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 24400,
+          "engagements": 1440
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/mandy-mortimer-02-20261001.webp",
+          "original": "assets/talent/uploads/mandy-mortimer-02-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Simple outfit. A wall doing all the colour work.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 25600,
+          "engagements": 830
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "michael-michaelson",
+      "displayName": "Michael Michaelson",
+      "age": 0,
+      "location": "",
+      "bio": "Michael brings playful energy to city-life stories, everyday style and conversational content. His expressive, camera-ready approach moves easily from casual street moments to a sharper studio look. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Lifestyle",
+        "Style",
+        "Entertainment"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@michael.michaelson.demo",
+          "followers": 213800
+        },
+        {
+          "network": "tiktok",
+          "handle": "@michael.michaelson.demo",
+          "followers": 385600
+        },
+        {
+          "network": "youtube",
+          "handle": "@michael.michaelson.demo",
+          "followers": 56200
+        }
+      ],
+      "totalAudience": 655600,
+      "portrait": "assets/talent/uploads/michael-michaelson-07-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/michael-michaelson-07-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Michael Michaelson. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-01-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-01-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "The story got a little more animated than I planned.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 138800,
+          "engagements": 4630
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-02-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-02-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Out for a wander, stayed for the conversation.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 77300,
+          "engagements": 3900
+        },
+        {
+          "id": "content-03",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-03-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-03-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "Trying to tell one short story without using my hands. Impossible.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 70500,
+          "engagements": 2180
+        },
+        {
+          "id": "content-04",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-04-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-04-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "A sharper look for a change of pace.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 57800,
+          "engagements": 2420
+        },
+        {
+          "id": "content-05",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-05-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-05-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "That message deserved a reaction.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 95400,
+          "engagements": 5710
+        },
+        {
+          "id": "content-06",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-06-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-06-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "The serious studio look lasted about three seconds.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 119300,
+          "engagements": 5500
+        },
+        {
+          "id": "content-07",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/michael-michaelson-07-20261001.webp",
+          "original": "assets/talent/uploads/michael-michaelson-07-20261001.webp",
+          "aspectRatio": "4/5",
+          "caption": "A denim layer and a good mood. Keeping it simple today.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 114400,
+          "engagements": 6070
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "mo-anders",
+      "displayName": "Mo Anders",
+      "age": 0,
+      "location": "",
+      "bio": "Mo makes desk-side technology and work-life content feel approachable. His relaxed explanations and smart workspace setting offer a friendly starting point for everyday tools, digital habits and practical ideas. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Technology",
+        "Work life",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@mo.anders.demo",
+          "followers": 68700
+        },
+        {
+          "network": "tiktok",
+          "handle": "@mo.anders.demo",
+          "followers": 142300
+        },
+        {
+          "network": "youtube",
+          "handle": "@mo.anders.demo",
+          "followers": 91400
+        }
+      ],
+      "totalAudience": 302400,
+      "portrait": "assets/talent/uploads/mo-anders-02-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/mo-anders-02-20261001.webp",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Mo Anders. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "content": [
+        {
+          "id": "content-01",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/mo-anders-01-20261001.webp",
+          "original": "assets/talent/uploads/mo-anders-01-20261001.webp",
+          "aspectRatio": "9/16",
+          "caption": "Phone in hand, quick thought to share.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 26500,
+          "engagements": 590
+        },
+        {
+          "id": "content-02",
+          "provenance": "reference",
+          "type": "still",
+          "thumb": "assets/talent/uploads/mo-anders-02-20261001.webp",
+          "original": "assets/talent/uploads/mo-anders-02-20261001.webp",
+          "caption": "Back at the desk, making room for the next good idea.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "views": 22700,
+          "engagements": 820
+        }
+      ]
     }
   ],
   "removedTalentIds": [],
