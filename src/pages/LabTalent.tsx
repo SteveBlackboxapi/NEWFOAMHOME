@@ -993,7 +993,7 @@ export function LabTalent() {
         </footer>
         </>}
       </div>
-      {selected && view !== "settings" && (
+      {selected && managing === null && view !== "settings" && (
         <TalentLabProfile
           key={selected.id}
           talent={selected}

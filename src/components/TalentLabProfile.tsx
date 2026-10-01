@@ -178,7 +178,7 @@ export function TalentLabProfile({
         </button>
       </header>
       <div className="tl-profile-usage">
-        <AssetUsage asset={active} />
+        <AssetUsage key={active.id} asset={active} collapsible />
       </div>
       <div className="tl-profile-toolbar">
         <div className="tl-tabs" aria-label="Profile sections">

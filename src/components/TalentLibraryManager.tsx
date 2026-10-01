@@ -26,26 +26,36 @@ export function placementsForAsset(asset: LabAsset) {
   ];
   return [...new Map(uses.map((u) => [`${u.route}:${u.section}`, u])).values()];
 }
-export function AssetUsage({ asset }: { asset: LabAsset }) {
+export function AssetUsage({ asset, collapsible = false }: { asset: LabAsset; collapsible?: boolean }) {
   const uses = placementsForAsset(asset);
+  const label = uses.length
+    ? `Website · ${uses.length} ${uses.length === 1 ? "placement" : "placements"}`
+    : "Library only";
+  const placements = uses.length > 0 && (
+    <ul className={collapsible ? "tl-usage-links" : undefined} tabIndex={collapsible ? 0 : undefined} aria-label="Website placements">
+      {uses.map((u) => (
+        <li key={`${u.route}:${u.section}`}>
+          <a href={websiteUrl(u.route)} target="_blank" rel="noopener">
+            {u.section} ↗
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+  if (collapsible && uses.length > 0) return (
+    <details className="tl-usage tl-usage-disclosure">
+      <summary>
+        <strong>{label}</strong>
+        <span className="tl-usage-show">Show placements</span>
+        <span className="tl-usage-hide">Hide placements</span>
+      </summary>
+      {placements}
+    </details>
+  );
   return (
     <div className="tl-usage">
-      <strong>
-        {uses.length
-          ? `Website · ${uses.length} ${uses.length === 1 ? "placement" : "placements"}`
-          : "Library only"}
-      </strong>
-      {uses.length > 0 && (
-        <ul>
-          {uses.map((u) => (
-            <li key={`${u.route}:${u.section}`}>
-              <a href={websiteUrl(u.route)} target="_blank" rel="noopener">
-                {u.section} ↗
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <strong>{label}</strong>
+      {placements}
     </div>
   );
 }
@@ -85,6 +95,8 @@ export function TalentLibraryManager({
   useEffect(() => {
     const d = dialog.current!;
     const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     d.showModal();
     const cancel = (e: Event) => {
       e.preventDefault();
@@ -94,6 +106,7 @@ export function TalentLibraryManager({
     return () => {
       d.removeEventListener("cancel", cancel);
       d.close();
+      document.body.style.overflow = overflow;
       previous?.focus();
     };
   }, []);
