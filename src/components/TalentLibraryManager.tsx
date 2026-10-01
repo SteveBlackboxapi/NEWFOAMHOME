@@ -69,6 +69,7 @@ export function TalentLibraryManager({
   onClose: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const confirmation = useRef<HTMLDivElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const replaceInput = useRef<HTMLInputElement>(null);
   const [selectedId, setSelectedId] = useState(initialId || "");
@@ -84,6 +85,11 @@ export function TalentLibraryManager({
     run: () => void;
   } | null>(null);
   const [artwork, setArtwork] = useState(false);
+  useEffect(() => {
+    if (!confirm) return;
+    confirmation.current?.focus({ preventScroll: true });
+    confirmation.current?.scrollIntoView({ block: "center" });
+  }, [confirm]);
   const profile = library.rawProfiles.find((p) => p.id === selectedId);
   const rendered = library.profiles.find((p) => p.id === selectedId);
   const activeAssets = rendered ? assetsFor(rendered) : [];
@@ -417,7 +423,7 @@ export function TalentLibraryManager({
         </button>
       </div>
       {confirm && (
-        <div className="tl-library-confirm" role="alert">
+        <div ref={confirmation} className="tl-library-confirm" role="alert" tabIndex={-1}>
           <p>{confirm.label}</p>
           <button className="tl-button" onClick={() => setConfirm(null)}>
             Keep it
@@ -659,6 +665,8 @@ export function TalentLibraryManager({
                     run: () => {
                       library.remove(profile.id);
                       pick("");
+                      setMessage(`${profile.displayName} removed from this draft. Save changes to finish, or discard the draft to undo.`);
+                      dialog.current?.scrollTo({ top: 0 });
                     },
                   })
                 }
