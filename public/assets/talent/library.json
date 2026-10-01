@@ -4184,22 +4184,6 @@
         },
         {
           "provenance": "reference",
-          "id": "content-08",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
-          "views": 42400,
-          "caption": "I kept the outfit simple and let the light do the rest.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 2100
-        },
-        {
-          "provenance": "reference",
           "id": "content-09",
           "type": "still",
           "thumb": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
