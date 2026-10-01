@@ -4242,24 +4242,7 @@
       },
       "motion": null,
       "motionStatus": "placeholder",
-      "content": [
-        {
-          "provenance": "reference",
-          "id": "content-02",
-          "type": "still",
-          "thumb": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/jenny-macmillian-02-20261001.webp",
-          "views": 27500,
-          "caption": "Soft layers and the little details I keep coming back to.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 610
-        }
-      ]
+      "content": []
     }
   ],
   "removedTalentIds": [
