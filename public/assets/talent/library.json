@@ -4310,7 +4310,9 @@
       ]
     }
   ],
-  "removedTalentIds": [],
+  "removedTalentIds": [
+    "privacy-portrait"
+  ],
   "websiteReplacements": {
     "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": "assets/talent/uploads/283e31ed-eec6-48f2-8182-ee47281e015d.webp",
     "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp": "assets/talent/uploads/87b07825-c226-4c21-8ca6-58c6d7fa8eff.webp",
