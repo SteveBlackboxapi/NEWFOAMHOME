@@ -2082,286 +2082,6 @@
     },
     {
       "provenance": "reference",
-      "id": "felicia-mansel",
-      "displayName": "Felicia Mansel",
-      "age": 0,
-      "location": "",
-      "bio": "Felicia shares colourful portrait illustrations, drawing sessions and the small details of a working studio. Her content moves between tablet sketches and time at the easel, with a relaxed look at the creative process. Fictional creator; audience figures are illustrative.",
-      "verticals": [
-        "Art & Illustration",
-        "Creative Process",
-        "Lifestyle"
-      ],
-      "platforms": [
-        {
-          "network": "instagram",
-          "handle": "@feliciamansel.demo",
-          "followers": 84300
-        },
-        {
-          "network": "tiktok",
-          "handle": "@feliciamansel.demo",
-          "followers": 126700
-        },
-        {
-          "network": "youtube",
-          "handle": "@feliciamansel.demo",
-          "followers": 28400
-        }
-      ],
-      "totalAudience": 239400,
-      "portrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
-      "originalPortrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
-      "creativeDirection": {
-        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
-        "identityNotes": [
-          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
-          "Source folder name: Felicia Mansel. Images and creator grouping supplied by the owner.",
-          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
-          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
-        ]
-      },
-      "motion": null,
-      "motionStatus": "placeholder",
-      "content": [
-        {
-          "provenance": "reference",
-          "id": "content-01",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
-          "original": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
-          "views": 36300,
-          "caption": "I said a quick studio tour, then started talking about every picture on the wall.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 1340
-        },
-        {
-          "provenance": "reference",
-          "id": "content-02",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
-          "original": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
-          "views": 10600,
-          "caption": "My favourite corner: a little art, a lot of daylight and somewhere to stop for a chat.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 450
-        },
-        {
-          "provenance": "reference",
-          "id": "content-03",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
-          "views": 10500,
-          "caption": "Keeping my portrait simple today: a black knit and soft window light.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 330
-        },
-        {
-          "provenance": "reference",
-          "id": "content-04",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
-          "views": 24400,
-          "caption": "Back at my easel, deciding whether this really is the final brushstroke.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 1340
-        },
-        {
-          "provenance": "reference",
-          "id": "content-05",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
-          "views": 18800,
-          "caption": "I've been playing with bold shapes and softer colours in this tablet portrait.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 980
-        },
-        {
-          "provenance": "reference",
-          "id": "content-06",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
-          "original": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
-          "views": 52700,
-          "caption": "A closer look at the portraits keeping me company on the studio wall.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 3130
-        },
-        {
-          "provenance": "reference",
-          "id": "content-07",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
-          "views": 47700,
-          "caption": "My desk is half brushes, half pixels. I like having both within reach.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 2720
-        },
-        {
-          "provenance": "reference",
-          "id": "content-08",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
-          "views": 42400,
-          "caption": "I kept the outfit simple and let the light do the rest.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 2100
-        },
-        {
-          "provenance": "reference",
-          "id": "content-09",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
-          "views": 16000,
-          "caption": "Headphones ready, drawing open, plants taking over my desk as usual.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 770
-        },
-        {
-          "provenance": "reference",
-          "id": "content-10",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
-          "original": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
-          "views": 13500,
-          "caption": "Ask me about a painting and suddenly I'm explaining the whole process with my hands.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 920
-        },
-        {
-          "provenance": "reference",
-          "id": "content-11",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
-          "original": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
-          "views": 10500,
-          "caption": "A quiet moment at my desk before I get back to the portrait on screen.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 640
-        },
-        {
-          "provenance": "reference",
-          "id": "content-12",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
-          "views": 35800,
-          "caption": "I leaned into purple shadows for this one. Here's the portrait up close.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 800
-        },
-        {
-          "provenance": "reference",
-          "id": "content-13",
-          "type": "still",
-          "thumb": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
-          "views": 29000,
-          "caption": "I've been building a little world around this portrait, one colour at a time.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 690
-        },
-        {
-          "provenance": "reference",
-          "id": "content-from-jade-05",
-          "type": "still",
-          "thumb": "assets/talent/uploads/jade-harrison-05-20261001.webp",
-          "aspectRatio": "4/5",
-          "original": "assets/talent/uploads/jade-harrison-05-20261001.webp",
-          "views": 45600,
-          "caption": "I kept this look soft and simple, right down to the little gold hoops.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 2860
-        },
-        {
-          "provenance": "reference",
-          "id": "content-from-jade-06",
-          "type": "still",
-          "thumb": "assets/talent/uploads/jade-harrison-06-20261001.webp",
-          "original": "assets/talent/uploads/jade-harrison-06-20261001.webp",
-          "views": 102700,
-          "caption": "Taking a break from the screen to spend a little time at the canvas.",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo",
-          "engagements": 5600
-        }
-      ]
-    },
-    {
-      "provenance": "reference",
       "id": "gina-turner",
       "displayName": "Gina Turner",
       "age": 0,
@@ -4306,6 +4026,270 @@
           },
           "platform": "tiktok",
           "strongKind": "photo"
+        }
+      ]
+    },
+    {
+      "provenance": "reference",
+      "id": "felicia-mansel",
+      "displayName": "Felicia Mansel",
+      "age": 0,
+      "location": "",
+      "bio": "Felicia shares colourful portrait illustrations, drawing sessions and the small details of a working studio. Her content moves between tablet sketches and time at the easel, with a relaxed look at the creative process. Fictional creator; audience figures are illustrative.",
+      "verticals": [
+        "Art & Illustration",
+        "Creative Process",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@feliciamansel.demo",
+          "followers": 84300
+        },
+        {
+          "network": "tiktok",
+          "handle": "@feliciamansel.demo",
+          "followers": 126700
+        },
+        {
+          "network": "youtube",
+          "handle": "@feliciamansel.demo",
+          "followers": 28400
+        }
+      ],
+      "totalAudience": 239400,
+      "portrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+      "originalPortrait": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+      "creativeDirection": {
+        "summary": "Owner-supplied fictional creator collection. Demo biography, handles, platform audiences and post metrics were written for Talent Lab.",
+        "identityNotes": [
+          "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
+          "Source folder name: Felicia Mansel. Images and creator grouping supplied by the owner.",
+          "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "reference",
+          "id": "content-01",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-01-20261001.webp",
+          "views": 36300,
+          "caption": "I said a quick studio tour, then started talking about every picture on the wall.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 1340
+        },
+        {
+          "provenance": "reference",
+          "id": "content-02",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-02-20261001.webp",
+          "views": 10600,
+          "caption": "My favourite corner: a little art, a lot of daylight and somewhere to stop for a chat.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 450
+        },
+        {
+          "provenance": "reference",
+          "id": "content-03",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-03-20261001.webp",
+          "views": 10500,
+          "caption": "Keeping my portrait simple today: a black knit and soft window light.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 330
+        },
+        {
+          "provenance": "reference",
+          "id": "content-04",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-04-20261001.webp",
+          "views": 24400,
+          "caption": "Back at my easel, deciding whether this really is the final brushstroke.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 1340
+        },
+        {
+          "provenance": "reference",
+          "id": "content-05",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-05-20261001.webp",
+          "views": 18800,
+          "caption": "I've been playing with bold shapes and softer colours in this tablet portrait.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 980
+        },
+        {
+          "provenance": "reference",
+          "id": "content-06",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-06-20261001.webp",
+          "views": 52700,
+          "caption": "A closer look at the portraits keeping me company on the studio wall.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 3130
+        },
+        {
+          "provenance": "reference",
+          "id": "content-07",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-07-20261001.webp",
+          "views": 47700,
+          "caption": "My desk is half brushes, half pixels. I like having both within reach.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 2720
+        },
+        {
+          "provenance": "reference",
+          "id": "content-08",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-08-20261001.webp",
+          "views": 42400,
+          "caption": "I kept the outfit simple and let the light do the rest.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 2100
+        },
+        {
+          "provenance": "reference",
+          "id": "content-09",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-09-20261001.webp",
+          "views": 16000,
+          "caption": "Headphones ready, drawing open, plants taking over my desk as usual.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 770
+        },
+        {
+          "provenance": "reference",
+          "id": "content-10",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-10-20261001.webp",
+          "views": 13500,
+          "caption": "Ask me about a painting and suddenly I'm explaining the whole process with my hands.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 920
+        },
+        {
+          "provenance": "reference",
+          "id": "content-11",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
+          "original": "assets/talent/uploads/felicia-mansel-11-20261001.webp",
+          "views": 10500,
+          "caption": "A quiet moment at my desk before I get back to the portrait on screen.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 640
+        },
+        {
+          "provenance": "reference",
+          "id": "content-12",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-12-20261001.webp",
+          "views": 35800,
+          "caption": "I leaned into purple shadows for this one. Here's the portrait up close.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 800
+        },
+        {
+          "provenance": "reference",
+          "id": "content-13",
+          "type": "still",
+          "thumb": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
+          "aspectRatio": "4/5",
+          "original": "assets/talent/uploads/felicia-mansel-13-20261001.webp",
+          "views": 29000,
+          "caption": "I've been building a little world around this portrait, one colour at a time.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 690
+        },
+        {
+          "provenance": "reference",
+          "id": "content-from-jade-06",
+          "type": "still",
+          "thumb": "assets/talent/uploads/jade-harrison-06-20261001.webp",
+          "original": "assets/talent/uploads/jade-harrison-06-20261001.webp",
+          "views": 102700,
+          "caption": "Taking a break from the screen to spend a little time at the canvas.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 5600
         }
       ]
     }
