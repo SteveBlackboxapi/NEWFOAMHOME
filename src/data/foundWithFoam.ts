@@ -13,11 +13,14 @@ export type FoundResult = {
   id: string;
   talent: StagedTalent;
   tile: TalentContentTile;
+  /** Illustrative product match signals, not an analysis of the generated media. */
+  evidence: ("visual" | "audio" | "hashtag")[];
 };
 
 function resultFor(
   talent: StagedTalent,
   filename: string,
+  evidence: FoundResult["evidence"] = ["visual"],
   useOriginal = false,
 ): FoundResult {
   // Match the pictured asset, including the selected video's poster.
@@ -29,21 +32,21 @@ function resultFor(
   if (useOriginal && !source.original)
     throw new Error(`Missing original asset: ${filename}`);
   const tile = useOriginal ? { ...source, thumb: source.original! } : source;
-  return { id: `${talent.id}:${tile.id ?? index}`, talent, tile };
+  return { id: `${talent.id}:${tile.id ?? index}`, talent, tile, evidence };
 }
 
 /** Skincare first, with related beauty posts; retain each post’s demo metadata. */
 export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteNia, "nia-brooks-skincare.webp"),
-  resultFor(websiteMira, "mira-vale-paused-makeup.webp"), // Candid makeup frame
-  resultFor(websiteAria, "aria-quen-v2-c1.webp"), // Lipstick application
+  resultFor(websiteMira, "mira-vale-paused-makeup.webp", ["visual", "audio"]), // Candid makeup frame
+  resultFor(websiteAria, "aria-quen-v2-c1.webp", ["visual", "audio", "hashtag"]), // Lipstick application
   resultFor(websiteElise, "elise-morgan-hotel-selfie.webp"), // Hotel getting-ready moment
-  resultFor(websiteLena, "lena-croft-grwm.webp"), // Refreshed getting-ready skincare
+  resultFor(websiteLena, "lena-croft-grwm.webp", ["visual", "audio"]), // Refreshed getting-ready skincare
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
-  resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp"), // One Samantha appearance
+  resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp", ["visual", "audio"]), // One Samantha appearance
   resultFor(websiteLena, "lena-croft-outfit.webp"), // Outfit check
-  resultFor(websiteAria, "aria-quen-v2-c3.webp"), // Evening routine
-  resultFor(websiteAria, "aria-quen-v2-c5.webp"), // Packing essentials
+  resultFor(websiteAria, "aria-quen-v2-c3.webp", ["visual", "audio", "hashtag"]), // Evening routine
+  resultFor(websiteAria, "aria-quen-v2-c5.webp", ["visual", "hashtag"]), // Packing essentials
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];

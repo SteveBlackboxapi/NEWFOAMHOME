@@ -824,6 +824,8 @@ export const stagedTalent: StagedTalent[] = [
       { type: "clip", thumb: tile("mira-vale", 5), views: 156_000, caption: "grocery prep list", platform: "tiktok", strongKind: "link", engagements: 11_100 },
       {
         id: "paused-makeup-v2",
+        views: 183_700,
+        engagements: 7_600,
         type: "still",
         thumb: `${T}/mira-vale-v2/mira-vale-paused-makeup.webp`,
         original: `${T}/mira-vale-v2/masters/mira-vale-paused-makeup.png`,
@@ -857,7 +859,7 @@ export const stagedTalent: StagedTalent[] = [
       identityNotes: [
         "Elise is a new fictional adult aged 27. The hotel selfie defines her identity; her avatar preserves the same face, hair and outfit.",
         "Keep warm bathroom lighting, natural skin and hair texture, realistic hands and a coherent mirror reflection.",
-        "These are generated still photographs. No video, audience, views or engagement figures have been generated for Elise.",
+        "These are generated still photographs. No video or audience figures have been generated for Elise. Post views are illustrative demo data.",
       ],
       promptFile: `${T}/elise-morgan/creative-brief.md`,
     },
@@ -866,6 +868,7 @@ export const stagedTalent: StagedTalent[] = [
     content: [
       {
         id: "hotel-mirror-v1",
+        views: 142_800,
         type: "still",
         thumb: `${T}/elise-morgan/elise-morgan-hotel-selfie.webp`,
         original: `${T}/elise-morgan/masters/elise-morgan-hotel-selfie.png`,

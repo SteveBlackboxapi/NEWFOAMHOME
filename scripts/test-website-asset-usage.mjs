@@ -166,6 +166,18 @@ test("dynamic discovery, product content, videos and extension roster states are
   assert.equal(websiteUsageFor("/assets/talent/nonexistent.webp"), undefined);
 });
 
+test("discovery results have post figures for the demonstrated platform", () => {
+  for (const { id, tile } of FOUND_RESULTS) {
+    assert.ok(Number.isFinite(tile.views) && tile.views > 0, `${id}: views`);
+    if (tile.platform === "tiktok")
+      assert.ok(
+        Number.isFinite(tile.engagements) &&
+          tile.engagements > 0 && tile.engagements < tile.views,
+        `${id}: TikTok engagements`,
+      );
+  }
+});
+
 test("lookup supports the GitHub Pages base, absolute URLs and query strings without basename collisions", () => {
   const src =
     "/assets/people-colour/original-portraits-v1/blue-portrait-original-v1.webp";
