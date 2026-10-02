@@ -252,7 +252,10 @@ function SearchFilters() {
         {["Any", "Instagram", "TikTok", "YouTube"].map((name, i) => (
           <span className="fs-check-row" key={name}>
             <i className={i === 0 ? "is-checked" : ""}>{i === 0 ? "✓" : ""}</i>
-            {name}
+            {i > 0 && (
+              <ContentPlatformIcon network={name.toLowerCase() as "instagram" | "tiktok" | "youtube"} />
+            )}
+            {i === 0 ? "Any platform" : name}
           </span>
         ))}
       </div>
@@ -268,8 +271,8 @@ function SearchFilters() {
         ))}
       </div>
       <div className="fs-filter-actions">
-        <span>Reset all filters</span>
-        <span>Apply</span>
+        <span>Reset all</span>
+        <span>Apply filters</span>
       </div>
     </aside>
   );
