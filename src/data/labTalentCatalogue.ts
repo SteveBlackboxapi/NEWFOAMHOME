@@ -4,6 +4,7 @@ import { creatorWorkKeywords, creatorWorkTalent } from "./creatorWorkTalent";
 import { websitePhotoTalent } from "./websitePhotoTalent";
 import { websiteMatcha } from "./matchaTalent";
 import { campaignKeywords, campaignTalent } from "./campaignTalent";
+import { websiteCamille, websiteAngelina } from "./skincareReviewTalent";
 
 const D = `${A}/talent/discovery-v1`;
 
@@ -64,7 +65,7 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
       })),
     ],
   };
-}).concat(creatorWorkTalent, websitePhotoTalent, campaignTalent, [websiteMatcha]);
+}).concat(creatorWorkTalent, websitePhotoTalent, campaignTalent, [websiteMatcha, websiteCamille, websiteAngelina]);
 
 /** Mix new candid imagery with existing content, rather than grouping one creator repeatedly. */
 export const discoveryFeedOrder = [

@@ -1,5 +1,6 @@
 import { A } from "../lib/assets";
 import type { StagedTalent, TalentContentTile } from "./stagedTalent";
+import { websiteCamille, websiteAngelina } from "./skincareReviewTalent";
 import {
   websiteAria,
   websiteElise,
@@ -45,8 +46,8 @@ export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp", ["visual", "audio"]), // One Samantha appearance
   resultFor(websiteLena, "lena-croft-outfit.webp"), // Outfit check
-  resultFor(websiteAria, "aria-quen-v2-c3.webp", ["visual", "audio", "hashtag"]), // Evening routine
-  resultFor(websiteAria, "aria-quen-v2-c5.webp", ["visual", "hashtag"]), // Packing essentials
+  resultFor(websiteCamille, "evening.webp", ["visual", "audio", "hashtag"]),
+  resultFor(websiteAngelina, "cleanser.webp", ["visual", "hashtag"]),
 ];
 
 export const FOUND_SELECTED = FOUND_RESULTS[0];

@@ -1,5 +1,5 @@
 {
-  "revision": "541bac42cf8df89f",
+  "revision": "22b18a76b2db48e3",
   "images": {
     "assets/agency-logos.webp": {
       "src": "assets/agency-logos.webp",
@@ -397,6 +397,48 @@
         }
       ]
     },
+    "assets/talent/angelina-skincare-v1/cleanser.webp": {
+      "src": "assets/talent/angelina-skincare-v1/cleanser.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/a8b9d409f86cc2280933/96/talent/angelina-skincare-v1/cleanser.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/a8b9d409f86cc2280933/256/talent/angelina-skincare-v1/cleanser.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/a8b9d409f86cc2280933/480/talent/angelina-skincare-v1/cleanser.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/a8b9d409f86cc2280933/768/talent/angelina-skincare-v1/cleanser.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/angelina-skincare-v1/portrait.webp": {
+      "src": "assets/talent/angelina-skincare-v1/portrait.webp",
+      "width": 736,
+      "height": 1312,
+      "variants": [
+        {
+          "src": "assets/responsive/5e1c175fa05dbe3acd7b/96/talent/angelina-skincare-v1/portrait.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/5e1c175fa05dbe3acd7b/256/talent/angelina-skincare-v1/portrait.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/5e1c175fa05dbe3acd7b/480/talent/angelina-skincare-v1/portrait.webp.webp",
+          "width": 480
+        }
+      ]
+    },
     "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp": {
       "src": "assets/talent/aria-quen-v2/aria-quen-v2-c1.webp",
       "width": 941,
@@ -420,29 +462,6 @@
         }
       ]
     },
-    "assets/talent/aria-quen-v2/aria-quen-v2-c3.webp": {
-      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c3.webp",
-      "width": 941,
-      "height": 1672,
-      "variants": [
-        {
-          "src": "assets/responsive/b939346a6bb15834c218/96/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
-          "width": 96
-        },
-        {
-          "src": "assets/responsive/b939346a6bb15834c218/256/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
-          "width": 256
-        },
-        {
-          "src": "assets/responsive/b939346a6bb15834c218/480/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
-          "width": 480
-        },
-        {
-          "src": "assets/responsive/b939346a6bb15834c218/768/talent/aria-quen-v2/aria-quen-v2-c3.webp.webp",
-          "width": 768
-        }
-      ]
-    },
     "assets/talent/aria-quen-v2/aria-quen-v2-c4.webp": {
       "src": "assets/talent/aria-quen-v2/aria-quen-v2-c4.webp",
       "width": 1122,
@@ -462,29 +481,6 @@
         },
         {
           "src": "assets/responsive/9f5986e7fa70f7109429/768/talent/aria-quen-v2/aria-quen-v2-c4.webp.webp",
-          "width": 768
-        }
-      ]
-    },
-    "assets/talent/aria-quen-v2/aria-quen-v2-c5.webp": {
-      "src": "assets/talent/aria-quen-v2/aria-quen-v2-c5.webp",
-      "width": 941,
-      "height": 1672,
-      "variants": [
-        {
-          "src": "assets/responsive/756a857233b4a33db7bf/96/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
-          "width": 96
-        },
-        {
-          "src": "assets/responsive/756a857233b4a33db7bf/256/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
-          "width": 256
-        },
-        {
-          "src": "assets/responsive/756a857233b4a33db7bf/480/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
-          "width": 480
-        },
-        {
-          "src": "assets/responsive/756a857233b4a33db7bf/768/talent/aria-quen-v2/aria-quen-v2-c5.webp.webp",
           "width": 768
         }
       ]
@@ -531,6 +527,52 @@
         },
         {
           "src": "assets/responsive/f35e4ecb28e71fed4b10/768/talent/bode-niles-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/camille-skincare-v1/evening.webp": {
+      "src": "assets/talent/camille-skincare-v1/evening.webp",
+      "width": 940,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/7b65412ef029315f65ba/96/talent/camille-skincare-v1/evening.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/7b65412ef029315f65ba/256/talent/camille-skincare-v1/evening.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/7b65412ef029315f65ba/480/talent/camille-skincare-v1/evening.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/7b65412ef029315f65ba/768/talent/camille-skincare-v1/evening.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/camille-skincare-v1/portrait.webp": {
+      "src": "assets/talent/camille-skincare-v1/portrait.webp",
+      "width": 1024,
+      "height": 1024,
+      "variants": [
+        {
+          "src": "assets/responsive/2b90f11b9428a7be0e09/96/talent/camille-skincare-v1/portrait.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/2b90f11b9428a7be0e09/256/talent/camille-skincare-v1/portrait.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/2b90f11b9428a7be0e09/480/talent/camille-skincare-v1/portrait.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/2b90f11b9428a7be0e09/768/talent/camille-skincare-v1/portrait.webp.webp",
           "width": 768
         }
       ]
