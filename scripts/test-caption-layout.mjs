@@ -228,6 +228,8 @@ async function simulateCaptionExport(value, rejectFont = false) {
       fontBoundingBoxDescent: metrics.descent,
     }),
     drawImage() {},
+    save() {},
+    restore() {},
     translate() {},
     strokeText() {},
     fillText() {},
@@ -323,4 +325,24 @@ test("PNG export retains the preview's fallback when a webfont cannot load", asy
   await assert.doesNotReject(
     simulateCaptionExport(settings({ text: "first line\nsecond line" }), true),
   );
+});
+
+
+test("extra text blocks keep independent styles and reject nesting", () => {
+  const value = settings({ blocks: [settings({text: "SECOND LINE", background: "box", blocks: [settings()]})] });
+  const clean = cleanCaption(value, settings());
+  assert.equal(clean.blocks[0].text, "SECOND LINE");
+  assert.equal(clean.blocks[0].background, "box");
+  assert.equal(clean.blocks[0].blocks, undefined);
+  assert.equal(cleanCaption(settings({blocks: Array(8).fill(settings())}), settings()).blocks.length, 5);
+});
+test("caption width and line spacing alter wrapping without changing text", () => {
+  const value = settings({text: "a long headline with many words repeated a long headline with many words", width: 25, lineSpacing: 1});
+  const layout = captionLayout(value, measure, metrics);
+  assert.ok(layout.lines.length > 1);
+  assert.equal(layout.lineHeight, value.size * 3.6);
+});
+test("shadow colour and offsets are validated separately from outline", () => {
+  const value = cleanCaption(settings({shadowColor: "#123456", shadowBlur: 50, shadowX: -50, shadowY: 3, strokeWidth: 2}), settings());
+  assert.equal(value.shadowColor, "#123456");assert.equal(value.shadowBlur, 12);assert.equal(value.shadowX, -10);assert.equal(value.shadowY, 3);assert.equal(value.strokeWidth, 2);
 });

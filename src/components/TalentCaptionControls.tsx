@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   CAPTION_COLOR_SWATCHES,
   CAPTION_FONT_OPTIONS,
@@ -11,6 +11,8 @@ type Props = {
   settings: TileCaptionSettings;
   onChange: (settings: TileCaptionSettings) => void;
   onReset: () => void;
+  selectedBlock?: number;
+  onSelectBlock?: (index: number) => void;
 };
 
 function ColorPicker({
@@ -80,7 +82,35 @@ function AlignmentIcon({ align }: { align: TileCaptionSettings["align"] }) {
   );
 }
 
-export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
+export function TalentCaptionControls({ settings, onChange, onReset, selectedBlock, onSelectBlock }: Props) {
+  const [localSelected, setLocalSelected] = useState(0);
+  const selected = selectedBlock ?? localSelected;
+  const setSelected = (index: number) => { setLocalSelected(index); onSelectBlock?.(index); };
+  const blocks = [settings, ...(settings.blocks ?? [])];
+  const index = Math.min(selected, blocks.length - 1);
+  const updateBlock = (next: TileCaptionSettings) => {
+    if (index === 0) onChange({ ...next, blocks: settings.blocks });
+    else onChange({ ...settings, blocks: settings.blocks?.map((block, i) => i === index - 1 ? next : block) });
+  };
+  return <>
+    <div className="tl-caption-blocks">
+      <label>Text block<select aria-label="Text block" value={index} onChange={e => setSelected(Number(e.target.value))}>
+        {blocks.map((_, i) => <option key={i} value={i}>{i === 0 ? "Main caption" : `Extra text ${i}`}</option>)}
+      </select></label>
+      <button type="button" className="tl-button" disabled={blocks.length >= 6} onClick={() => {
+        const { blocks: _blocks, ...base } = settings;
+        onChange({ ...settings, blocks: [...(settings.blocks ?? []), { ...base, text: "", visible: true, y: Math.min(85, settings.y + 12) }] });
+        setSelected(blocks.length);
+      }}>Add text block</button>
+      {index > 0 && <button type="button" className="tl-text-button" onClick={() => {
+        onChange({ ...settings, blocks: settings.blocks?.filter((_, i) => i !== index - 1) }); setSelected(0);
+      }}>Remove this block</button>}
+    </div>
+    <CaptionBlockControls settings={blocks[index]} onChange={updateBlock} onReset={index === 0 ? onReset : () => updateBlock({ ...blocks[index], text: "" })} />
+  </>;
+}
+
+function CaptionBlockControls({ settings, onChange, onReset }: Props) {
   const update = (patch: Partial<TileCaptionSettings>) =>
     onChange({ ...settings, ...patch });
   const hasBackground = settings.background !== "none";
@@ -97,7 +127,7 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
       <div className="tl-control-heading">
         <div>
           <h3>Caption studio</h3>
-          <p>Give your words a little character.</p>
+          <p>Click text in the preview to select it, then drag to move it.</p>
         </div>
         <label className="tl-switch">
           <input
@@ -197,13 +227,13 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
           <input
             type="number"
             min={10}
-            max={36}
+            max={60}
             step={1}
             value={settings.size}
             onChange={(event) => {
               const value = event.target.valueAsNumber;
               if (Number.isFinite(value))
-                update({ size: Math.min(36, Math.max(10, value)) });
+                update({ size: Math.min(60, Math.max(10, value)) });
             }}
           />
         </label>
@@ -304,7 +334,7 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
           onChange={(backgroundColor) => update({ backgroundColor })}
         />
       )}
-      <details className="tl-caption-advanced">
+      <details className="tl-caption-advanced" open>
         <summary>
           <span>Position & finishing touches</span>
           <LabIcon name="chevron" size={14} />
@@ -312,6 +342,21 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
         <div>
           {(
             [
+              {
+                key: "width", label: "Text width", min: 20, max: 88, unit: "%",
+              },
+              {
+                key: "lineSpacing", label: "Line spacing", min: 1, max: 2, step: 0.05, unit: "",
+              },
+              {
+                key: "shadowBlur", label: "Shadow softness", min: 0, max: 12, unit: "",
+              },
+              {
+                key: "shadowX", label: "Shadow horizontal offset", min: -10, max: 10, unit: "",
+              },
+              {
+                key: "shadowY", label: "Shadow vertical offset", min: -10, max: 10, unit: "",
+              },
               {
                 key: "x",
                 label: "Horizontal position",
@@ -365,7 +410,7 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
               <span>
                 {control.label}
                 <output>
-                  {settings[control.key]}
+                  {settings[control.key] ?? (control.key === "width" ? 88 : control.key === "lineSpacing" ? 1.3 : 0)}
                   {control.unit}
                 </output>
               </span>
@@ -375,13 +420,17 @@ export function TalentCaptionControls({ settings, onChange, onReset }: Props) {
                 min={control.min}
                 max={control.max}
                 step={"step" in control ? control.step : 1}
-                value={settings[control.key]}
+                value={settings[control.key] ?? (control.key === "width" ? 88 : control.key === "lineSpacing" ? 1.3 : 0)}
                 onChange={(event) =>
                   update({ [control.key]: Number(event.target.value) })
                 }
               />
             </label>
           ))}
+          <label className="tl-caption-outline-colour">
+            Shadow colour
+            <input type="color" value={settings.shadowColor ?? "#000000"} onChange={event => update({ shadowColor: event.target.value })} />
+          </label>
           <label className="tl-caption-outline-colour">
             Outline colour
             <input

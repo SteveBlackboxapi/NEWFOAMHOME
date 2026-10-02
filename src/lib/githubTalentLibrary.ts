@@ -234,26 +234,7 @@ function mapSources(
       original: tile.original ? convert(tile.original) : undefined,
       video: tile.video ? convert(tile.video) : undefined,
       captionSettings: tile.captionSettings
-        ? fields(tile.captionSettings, [
-            "visible",
-            "text",
-            "y",
-            "x",
-            "font",
-            "size",
-            "fill",
-            "stroke",
-            "strokeWidth",
-            "weight",
-            "italic",
-            "uppercase",
-            "align",
-            "background",
-            "backgroundColor",
-            "backgroundOpacity",
-            "padding",
-            "radius",
-          ])
+        ? canonicalCaption(tile.captionSettings)
         : undefined,
       generation: tile.generation
         ? {
@@ -274,7 +255,33 @@ const optionalString = (value: unknown) =>
 const validProvenance = (value: unknown) =>
   value === undefined ||
   ["ai-generated", "uploaded", "reference"].includes(value as string);
-function validCaption(input: unknown): boolean {
+function canonicalCaption(settings: Partial<TileCaptionSettings>): Partial<TileCaptionSettings> {
+  return {
+    ...fields(settings, [
+            "visible",
+            "text",
+            "y",
+            "x",
+            "font",
+            "size",
+            "fill",
+            "stroke",
+            "strokeWidth",
+            "weight",
+            "italic",
+            "uppercase",
+            "align",
+            "background",
+            "backgroundColor",
+            "backgroundOpacity",
+            "padding",
+            "radius",
+            "width", "lineSpacing", "shadowColor", "shadowBlur", "shadowX", "shadowY",
+          ]),
+    ...(settings.blocks ? { blocks: settings.blocks.map(({ blocks: _nested, ...block }) => canonicalCaption(block)) } : {}),
+  } as TileCaptionSettings;
+}
+function validCaption(input: unknown, depth = 0): boolean {
   if (input === undefined) return true;
   if (!input || typeof input !== "object" || Array.isArray(input)) return false;
   const caption = input as Record<string, unknown>;
@@ -293,13 +300,15 @@ function validCaption(input: unknown): boolean {
       "backgroundOpacity",
       "padding",
       "radius",
+      "width", "lineSpacing", "shadowBlur", "shadowX", "shadowY",
     ].every((key) =>
       optional(
         key,
         (value) => typeof value === "number" && Number.isFinite(value),
       ),
     ) &&
-    ["fill", "stroke", "backgroundColor"].every((key) =>
+    optional("blocks", value => depth === 0 && Array.isArray(value) && value.length <= 5 && value.every(block => validCaption(block, 1))) &&
+    ["fill", "stroke", "backgroundColor", "shadowColor"].every((key) =>
       optional(
         key,
         (value) => typeof value === "string" && /^#[\da-f]{6}$/i.test(value),
