@@ -4218,5 +4218,33 @@
     "assets/talent/lena-croft-portrait.jpg": "assets/talent/uploads/f91872dc-3fba-4bdd-984d-df7c2a971139.webp",
     "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": "assets/talent/uploads/bf38dd82-258d-44fc-a56d-4850de8e1431.webp"
   },
-  "websitePlacementReplacements": {}
+  "websitePlacementCaptions": {
+    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": {
+      "assetId": "samantha-pikka:dance-solo-v3",
+      "rendered": "assets/talent/uploads/4be69d62-3a7d-4e37-8034-7f7eaca984b1.webp",
+      "settings": {
+        "visible": true,
+        "text": "a quick dance break...",
+        "x": 50,
+        "y": 40,
+        "size": 16,
+        "strokeWidth": 0,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "weight": 600,
+        "italic": false,
+        "uppercase": false,
+        "align": "center",
+        "background": "box",
+        "backgroundColor": "#101828",
+        "backgroundOpacity": 100,
+        "padding": 6,
+        "radius": 5,
+        "font": "sf"
+      }
+    }
+  },
+  "websitePlacementReplacements": {
+    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/4be69d62-3a7d-4e37-8034-7f7eaca984b1.webp"
+  }
 }
