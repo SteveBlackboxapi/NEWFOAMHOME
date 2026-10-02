@@ -156,7 +156,7 @@ async function authenticated(request, env) {
       Number.isInteger(parsed.exp) &&
       parsed.exp > now() &&
       parsed.exp <= now() + SESSION_SECONDS + 60
-    );
+    ) ? parsed.exp : false;
   } catch {
     return false;
   }
@@ -555,7 +555,8 @@ export async function handleRequest(
         ? json({ ok: true }, 200, headers)
         : redirect("/lab/talent/?view=content", headers);
     }
-    if (!(await authenticated(request, env))) {
+    const sessionExpiry = await authenticated(request, env);
+    if (!sessionExpiry) {
       if (
         read &&
         (url.pathname === "/" ||
@@ -568,7 +569,7 @@ export async function handleRequest(
     if (url.pathname === "/api/logout" && request.method === "POST")
       return json({ ok: true }, 200, { "Set-Cookie": sessionCookie("", 0) });
     if (url.pathname === "/api/status" && request.method === "GET")
-      return json({ connected: Boolean(await readToken(env)) });
+      return json({ connected: Boolean(await readToken(env)), sessionRemainingSeconds: Math.max(0, sessionExpiry - now()) });
     if (url.pathname === "/api/publish" && request.method === "POST") {
       const body = await readJson(request, 256);
       if (!keysOnly(body, ["revision"]) || !SHA.test(body.revision || ""))

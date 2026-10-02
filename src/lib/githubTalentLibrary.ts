@@ -62,6 +62,8 @@ async function request(
       ...(body ? { body: JSON.stringify(body) } : {}),
     },
   );
+  if (PRIVATE_LIBRARY && response.status === 401 && typeof window !== "undefined")
+    window.dispatchEvent(new Event("foam:session-expired"));
   if (!response.ok) {
     const message =
       response.status === 401
@@ -93,6 +95,8 @@ async function privateSessionRequest(
         }
       : {}),
   });
+  if (response.status === 401 && typeof window !== "undefined")
+    window.dispatchEvent(new Event("foam:session-expired"));
   if (!response.ok)
     throw new LibraryError(
       response.status === 401

@@ -1,0 +1,13 @@
+.lab-session-gate { position: fixed; inset: 0; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; border: 0; padding: 24px; background: #f5f7fa; color: #202b3b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; box-sizing: border-box; }
+.lab-session-gate[open] { display: grid; place-items: center; }
+.lab-session-gate::backdrop { background: #f5f7fa; }
+body:has(.lab-session-gate[open]) dialog:not(.lab-session-gate) { visibility: hidden; }
+.lab-session-card { width: min(100%, 420px); margin: auto; }
+.lab-session-brand { font-weight: 700; margin-bottom: 36px; }
+.lab-session-card h1 { font-size: 30px; line-height: 1.15; margin: 0 0 16px; }
+.lab-session-card p { line-height: 1.6; }
+.lab-session-card form { display: grid; gap: 12px; margin-top: 28px; }
+.lab-session-card input { width: 100%; box-sizing: border-box; border: 1px solid #b9c4d5; border-radius: 10px; padding: 14px; font: inherit; background: white; color: #202b3b; }
+.lab-session-card button { cursor: pointer; border: 0; border-radius: 10px; padding: 15px 20px; color: white; background: #195cff; font: inherit; font-weight: 600; }
+.lab-session-card button:disabled { opacity: .6; cursor: wait; }
+.lab-session-card [role="alert"] { color: #9c2234; }

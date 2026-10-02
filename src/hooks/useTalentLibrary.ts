@@ -70,7 +70,7 @@ export function useTalentLibrary() {
     if (PRIVATE_LIBRARY)
       void githubLibraryConnection().then((connected) => {
         if (active) setServerConnected(connected);
-      });
+      }).catch(() => { /* The session gate handles unavailable authentication. */ });
     readGithubLibrary()
       .then((next) => {
         if (active) applySnapshot(next);

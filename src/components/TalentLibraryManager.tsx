@@ -1,3 +1,4 @@
+import { LabIcon } from "./TalentLabIcon";
 import { useEffect, useRef, useState } from "react";
 import { labTalent } from "../data/labTalentCatalogue";
 import type { StagedTalent, TalentContentTile } from "../data/stagedTalent";
@@ -254,8 +255,8 @@ export function TalentLibraryManager({
             Talent, images & where they’re used
           </h2>
         </div>
-        <button className="tl-button" onClick={onClose}>
-          Close
+        <button className="tl-library-close" aria-label="Close manage images" title="Close" onClick={onClose}>
+          <LabIcon name="close" />
         </button>
       </header>
       <div className="tl-library-connection">

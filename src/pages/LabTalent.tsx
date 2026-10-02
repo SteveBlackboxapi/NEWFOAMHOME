@@ -1,3 +1,4 @@
+import { TalentSessionGate } from "../components/TalentSessionGate";
 import {
   useEffect,
   useMemo,
@@ -83,6 +84,10 @@ const navItems: { view: View; icon: LabIconName; label: string }[] = [
 ];
 
 export function LabTalent() {
+  return <TalentSessionGate><LabTalentContent /></TalentSessionGate>;
+}
+
+function LabTalentContent() {
   const library = useTalentLibrary();
   const stagedTalent = library.profiles;
   const allAssets = useMemo(
