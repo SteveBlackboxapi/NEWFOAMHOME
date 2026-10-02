@@ -97,11 +97,12 @@
       "displayName": "Camille Aubert",
       "age": 0,
       "location": "Illustrative profile",
-      "bio": "Fictional AI-generated travel and lifestyle creator. Mediterranean hotel mornings, seaside lunches and sun-care moments, supplied in the Camille Aubert collection. No real account, audience or campaign results are claimed.",
+      "bio": "Camille shares relaxed travel, hotel mornings and practical skincare rituals, from daily moisturiser to sun-care on the go. Fictional creator; new skincare posts and figures are illustrative.",
       "verticals": [
         "Travel",
         "Lifestyle",
-        "Beauty"
+        "Beauty",
+        "Skincare"
       ],
       "platforms": [],
       "totalAudience": 0,
@@ -115,7 +116,8 @@
           "Retain the supplied collection identity; do not merge this person into a different existing creator.",
           "Age is unassigned because the source does not consistently specify a numeric age for a single persona.",
           "Original WebPs are retained unchanged. Optimized previews preserve the full frame with a maximum 1600px long edge. Source UUIDs remain stable content IDs.",
-          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned."
+          "Instagram, TikTok photo posts and YouTube community images are fictional demo placements for library filtering. These do not represent published posts or connected accounts; audience and performance remain unassigned.",
+          "Three identity-preserving skincare review stills added 2 October 2026 using the built-in image tool. Existing supplied photographs are retained. New post figures are illustrative; no recorded video, endorsement or measured performance is claimed."
         ]
       },
       "motion": null,
@@ -426,6 +428,67 @@
           },
           "platform": "instagram",
           "strongKind": "photo"
+        },
+        {
+          "id": "skincare-moisturiser-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/camille-skincare-moisturiser-20261002.webp",
+          "original": "assets/talent/uploads/camille-skincare-moisturiser-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "A quick moisturiser texture check",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "views": 219400,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Camille Aubert — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## moisturiser\n\nUse case: identity-preserve. Create ONE vertical 9:16 natural smartphone skincare product review photograph of Camille Aubert, the same fictional adult woman in both supplied identity references. Preserve her recognizable face, hazel eyes, thick brows, nose and lips, chestnut hair, facial proportions and adult age. A candid paused review in a simple lived-in hotel bathroom: wearing a plain cream cotton tee with chestnut hair loosely tucked behind an ear, talking toward a phone propped on a shelf while dabbing a small dot of white moisturizer onto one cheek with two fingertips. Other hand holds a small plain unbranded cream jar. Normal unretouched skin, slight asymmetry, ordinary daylight mixed with room light, reasonably legible tiled wall and towel behind her. Chest-up portrait with entire head and working hands visible, face in upper half, comfortable headroom, clear skincare action. Believable conversational expression, mouth slightly parted. Correct anatomy and natural fingers. No fashion editorial styling, airbrushing, glam makeup, cinematic bokeh or posed stock photo smile. No text, caption, logos, watermarks, collage or interface. Input1 is the identity anchor; input2 supports same identity. Keep her exact likeness across the new scene.\n\nEdit: Edit this photograph only to remove the visible smartphone and its shelf mount from the lower-left foreground. We are viewing this scene THROUGH the recording phone, so no phone, camera, filming rig, device reflection or interface should be visible anywhere. Fill the removed phone and mount area naturally with the continuation of the hotel bathroom and vanity. Keep everything else exactly the same: the same woman's exact recognizable identity, face, expression, skin, hair, clothing, hands and moisturizer jar, white moisturizer dab, lighting, perspective and vertical framing. Photorealistic seamless removal, no text or logos.\n\n## spf\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, the fictional adult in references, chestnut longhair,hazeleyes,goldsmallhoops. Scene: daylight hotelbalcony, wearingpaleblue loose linen shirtbuttonedcasually; holds a plainunbrandedwhiteSPFtube besideherface andlooks towardthephone whileexplaining itwithfriendlymidspeech expression, otherhandnaturallygesture nearbottle. Framedwaistup, sunhatrestingonchairandsoft coastalhotelrailingbehind, indirectlate-morninglight, no sunglasses. Recognizable sameCamille, realisticproductgrip.\n\n## evening\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, samefictionaladultidentity,chestnuthairlooselytiedback,hazeleyes,goldhoops. Scene: eveninghotelbathroom, simple navycottontee; talkinginmirrorwhilegentlypattingmoisturizerintocheekwithfingertips, tinyplaincreamjarheldinotherhandat chestheight. Conversationalsoftsmile, warmordinarybathroomlight,cooldarkwindowreflection, smalltowelandshelfbehind. Chestupportrait, samefaceandproportions, freshnaturalmoisturesheen,noheavyglammakeup.\n"
+          }
+        },
+        {
+          "id": "skincare-spf-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/camille-skincare-spf-20261002.webp",
+          "original": "assets/talent/uploads/camille-skincare-spf-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "The SPF that comes with me",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "views": 163800,
+          "engagements": 8700,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Camille Aubert — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## moisturiser\n\nUse case: identity-preserve. Create ONE vertical 9:16 natural smartphone skincare product review photograph of Camille Aubert, the same fictional adult woman in both supplied identity references. Preserve her recognizable face, hazel eyes, thick brows, nose and lips, chestnut hair, facial proportions and adult age. A candid paused review in a simple lived-in hotel bathroom: wearing a plain cream cotton tee with chestnut hair loosely tucked behind an ear, talking toward a phone propped on a shelf while dabbing a small dot of white moisturizer onto one cheek with two fingertips. Other hand holds a small plain unbranded cream jar. Normal unretouched skin, slight asymmetry, ordinary daylight mixed with room light, reasonably legible tiled wall and towel behind her. Chest-up portrait with entire head and working hands visible, face in upper half, comfortable headroom, clear skincare action. Believable conversational expression, mouth slightly parted. Correct anatomy and natural fingers. No fashion editorial styling, airbrushing, glam makeup, cinematic bokeh or posed stock photo smile. No text, caption, logos, watermarks, collage or interface. Input1 is the identity anchor; input2 supports same identity. Keep her exact likeness across the new scene.\n\nEdit: Edit this photograph only to remove the visible smartphone and its shelf mount from the lower-left foreground. We are viewing this scene THROUGH the recording phone, so no phone, camera, filming rig, device reflection or interface should be visible anywhere. Fill the removed phone and mount area naturally with the continuation of the hotel bathroom and vanity. Keep everything else exactly the same: the same woman's exact recognizable identity, face, expression, skin, hair, clothing, hands and moisturizer jar, white moisturizer dab, lighting, perspective and vertical framing. Photorealistic seamless removal, no text or logos.\n\n## spf\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, the fictional adult in references, chestnut longhair,hazeleyes,goldsmallhoops. Scene: daylight hotelbalcony, wearingpaleblue loose linen shirtbuttonedcasually; holds a plainunbrandedwhiteSPFtube besideherface andlooks towardthephone whileexplaining itwithfriendlymidspeech expression, otherhandnaturallygesture nearbottle. Framedwaistup, sunhatrestingonchairandsoft coastalhotelrailingbehind, indirectlate-morninglight, no sunglasses. Recognizable sameCamille, realisticproductgrip.\n\n## evening\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, samefictionaladultidentity,chestnuthairlooselytiedback,hazeleyes,goldhoops. Scene: eveninghotelbathroom, simple navycottontee; talkinginmirrorwhilegentlypattingmoisturizerintocheekwithfingertips, tinyplaincreamjarheldinotherhandat chestheight. Conversationalsoftsmile, warmordinarybathroomlight,cooldarkwindowreflection, smalltowelandshelfbehind. Chestupportrait, samefaceandproportions, freshnaturalmoisturesheen,noheavyglammakeup.\n"
+          }
+        },
+        {
+          "id": "skincare-evening-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/camille-skincare-evening-20261002.webp",
+          "original": "assets/talent/uploads/camille-skincare-evening-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "Keeping the evening routine simple",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "views": 94700,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Camille Aubert — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## moisturiser\n\nUse case: identity-preserve. Create ONE vertical 9:16 natural smartphone skincare product review photograph of Camille Aubert, the same fictional adult woman in both supplied identity references. Preserve her recognizable face, hazel eyes, thick brows, nose and lips, chestnut hair, facial proportions and adult age. A candid paused review in a simple lived-in hotel bathroom: wearing a plain cream cotton tee with chestnut hair loosely tucked behind an ear, talking toward a phone propped on a shelf while dabbing a small dot of white moisturizer onto one cheek with two fingertips. Other hand holds a small plain unbranded cream jar. Normal unretouched skin, slight asymmetry, ordinary daylight mixed with room light, reasonably legible tiled wall and towel behind her. Chest-up portrait with entire head and working hands visible, face in upper half, comfortable headroom, clear skincare action. Believable conversational expression, mouth slightly parted. Correct anatomy and natural fingers. No fashion editorial styling, airbrushing, glam makeup, cinematic bokeh or posed stock photo smile. No text, caption, logos, watermarks, collage or interface. Input1 is the identity anchor; input2 supports same identity. Keep her exact likeness across the new scene.\n\nEdit: Edit this photograph only to remove the visible smartphone and its shelf mount from the lower-left foreground. We are viewing this scene THROUGH the recording phone, so no phone, camera, filming rig, device reflection or interface should be visible anywhere. Fill the removed phone and mount area naturally with the continuation of the hotel bathroom and vanity. Keep everything else exactly the same: the same woman's exact recognizable identity, face, expression, skin, hair, clothing, hands and moisturizer jar, white moisturizer dab, lighting, perspective and vertical framing. Photorealistic seamless removal, no text or logos.\n\n## spf\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, the fictional adult in references, chestnut longhair,hazeleyes,goldsmallhoops. Scene: daylight hotelbalcony, wearingpaleblue loose linen shirtbuttonedcasually; holds a plainunbrandedwhiteSPFtube besideherface andlooks towardthephone whileexplaining itwithfriendlymidspeech expression, otherhandnaturallygesture nearbottle. Framedwaistup, sunhatrestingonchairandsoft coastalhotelrailingbehind, indirectlate-morninglight, no sunglasses. Recognizable sameCamille, realisticproductgrip.\n\n## evening\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, samefictionaladultidentity,chestnuthairlooselytiedback,hazeleyes,goldhoops. Scene: eveninghotelbathroom, simple navycottontee; talkinginmirrorwhilegentlypattingmoisturizerintocheekwithfingertips, tinyplaincreamjarheldinotherhandat chestheight. Conversationalsoftsmile, warmordinarybathroomlight,cooldarkwindowreflection, smalltowelandshelfbehind. Chestupportrait, samefaceandproportions, freshnaturalmoisturesheen,noheavyglammakeup.\n"
+          }
         }
       ]
     },
@@ -1936,11 +1999,12 @@
       "displayName": "Angelina Lemon",
       "age": 0,
       "location": "",
-      "bio": "Angelina brings a relaxed, encouraging voice to everyday movement and casual style. Her content centres on comfortable layers, small routines and making space for a little fresh air. Fictional creator; audience figures are illustrative.",
+      "bio": "Angelina brings a relaxed, encouraging voice to everyday movement, casual style and approachable skincare. Gentle cleansing, honest texture checks and small routines that fit an ordinary day. Fictional creator; audiences and post figures are illustrative.",
       "verticals": [
         "Lifestyle",
         "Fitness",
-        "Everyday style"
+        "Everyday style",
+        "Skincare"
       ],
       "platforms": [
         {
@@ -1963,7 +2027,8 @@
           "Source: the owner’s Google Drive “Fake people” folder, imported 1 October 2026.",
           "Source folder name: Angelina Lemon. Images and creator grouping supplied by the owner.",
           "Profiles, handles, audiences, views and engagements are fictional/illustrative, not measured platform data. No age or location has been inferred.",
-          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing."
+          "Original images retained in the source Drive folder and local import archive. WebP copies preserve original dimensions and framing.",
+          "Three identity-preserving skincare review stills added 2 October 2026 using the built-in image tool. Existing supplied photographs are retained. New post figures are illustrative; no recorded video, endorsement or measured performance is claimed."
         ]
       },
       "motion": null,
@@ -2000,6 +2065,68 @@
           "platform": "instagram",
           "strongKind": "photo",
           "engagements": 560
+        },
+        {
+          "id": "skincare-cleanser-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/angelina-skincare-cleanser-20261002.webp",
+          "original": "assets/talent/uploads/angelina-skincare-cleanser-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "A gentle cleanse before the day starts",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "views": 318700,
+          "engagements": 12900,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Angelina Lemon — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## cleanser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,theadultwomaninreferences, preserveherrecognizablelightbrownshoulderlengthbob,strongbrows,warmbrown/hazeleyes,softroundcheeks,smilelines,andage. Scene: ordinaryhomebathroom,plainwhitecottontee, bobclippedbackononeside. Midreviewwhileapplyingalittlegentlewhitecleanserfoamtoonecheekwithfingertips; holdsplainunbrandedpalebluepumpbottlewithotherhand, glancestowardphonewithengagedmidspeechhalfsmile. Fullfaceandworkinghandclearintheupperhalfofverticalportrait. Cooldaylight, creamtilewall,cottontowelandsmallordinaryclutter. Livedinphonecapture,relaxednaturalconfidence.\n\n## serum\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultidentityinreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: seatedathomevanityinsoftsagecottonlongsleevetop,showinganunbrandedamberserumbottleclosetoherfacewhileholdingadropperoverherotheropenpalm. Sheisexplainingthetexturewithnaturalcuriousexpression,eyeslookingbetweencameraandpalm. Waistupverticalframe,entireheadandhandsvisible. Plainmirror,simplewoodendresser,afewbottlesinbackground,ordinaryovercastwindowlight. Exactlikeness,plausiblefingergripanddropper.\n\n## moisturiser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultwomanfromreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: afterskincareathome,wearingatealziphoodieopenoverwhitecottonteeasintheidentityreference, nowshowingaplainunbrandedwhitemoisturizertubeinthehandatshoulderheight,gentlytouchingcheekwithotherhandwhilecheckingthefinishandtalkingwithasmallcrookedsmile. Faceandshouldersfullyclear, bathroomdoor andhandtowelbehind,normalmixedindirectdaylightandweakwarmroomlight. Relaxedhonestreview, ordinarynaturalskintextureandfainthydrationsheen.\n"
+          }
+        },
+        {
+          "id": "skincare-serum-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/angelina-skincare-serum-20261002.webp",
+          "original": "assets/talent/uploads/angelina-skincare-serum-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "Trying the serum texture on my hand",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "views": 128600,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Angelina Lemon — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## cleanser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,theadultwomaninreferences, preserveherrecognizablelightbrownshoulderlengthbob,strongbrows,warmbrown/hazeleyes,softroundcheeks,smilelines,andage. Scene: ordinaryhomebathroom,plainwhitecottontee, bobclippedbackononeside. Midreviewwhileapplyingalittlegentlewhitecleanserfoamtoonecheekwithfingertips; holdsplainunbrandedpalebluepumpbottlewithotherhand, glancestowardphonewithengagedmidspeechhalfsmile. Fullfaceandworkinghandclearintheupperhalfofverticalportrait. Cooldaylight, creamtilewall,cottontowelandsmallordinaryclutter. Livedinphonecapture,relaxednaturalconfidence.\n\n## serum\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultidentityinreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: seatedathomevanityinsoftsagecottonlongsleevetop,showinganunbrandedamberserumbottleclosetoherfacewhileholdingadropperoverherotheropenpalm. Sheisexplainingthetexturewithnaturalcuriousexpression,eyeslookingbetweencameraandpalm. Waistupverticalframe,entireheadandhandsvisible. Plainmirror,simplewoodendresser,afewbottlesinbackground,ordinaryovercastwindowlight. Exactlikeness,plausiblefingergripanddropper.\n\n## moisturiser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultwomanfromreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: afterskincareathome,wearingatealziphoodieopenoverwhitecottonteeasintheidentityreference, nowshowingaplainunbrandedwhitemoisturizertubeinthehandatshoulderheight,gentlytouchingcheekwithotherhandwhilecheckingthefinishandtalkingwithasmallcrookedsmile. Faceandshouldersfullyclear, bathroomdoor andhandtowelbehind,normalmixedindirectdaylightandweakwarmroomlight. Relaxedhonestreview, ordinarynaturalskintextureandfainthydrationsheen.\n"
+          }
+        },
+        {
+          "id": "skincare-moisturiser-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/angelina-skincare-moisturiser-20261002.webp",
+          "original": "assets/talent/uploads/angelina-skincare-moisturiser-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "Checking the finish after moisturiser",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "views": 207300,
+          "engagements": 16400,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "# Angelina Lemon — skincare review stills\n\nGenerated with the built-in image tool using existing owner-supplied identity references. WebP previews retain the full vertical frame; PNG masters are preserved. Captions remain editable interface elements. Post figures are illustrative.\n\n## cleanser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,theadultwomaninreferences, preserveherrecognizablelightbrownshoulderlengthbob,strongbrows,warmbrown/hazeleyes,softroundcheeks,smilelines,andage. Scene: ordinaryhomebathroom,plainwhitecottontee, bobclippedbackononeside. Midreviewwhileapplyingalittlegentlewhitecleanserfoamtoonecheekwithfingertips; holdsplainunbrandedpalebluepumpbottlewithotherhand, glancestowardphonewithengagedmidspeechhalfsmile. Fullfaceandworkinghandclearintheupperhalfofverticalportrait. Cooldaylight, creamtilewall,cottontowelandsmallordinaryclutter. Livedinphonecapture,relaxednaturalconfidence.\n\n## serum\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultidentityinreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: seatedathomevanityinsoftsagecottonlongsleevetop,showinganunbrandedamberserumbottleclosetoherfacewhileholdingadropperoverherotheropenpalm. Sheisexplainingthetexturewithnaturalcuriousexpression,eyeslookingbetweencameraandpalm. Waistupverticalframe,entireheadandhandsvisible. Plainmirror,simplewoodendresser,afewbottlesinbackground,ordinaryovercastwindowlight. Exactlikeness,plausiblefingergripanddropper.\n\n## moisturiser\n\nUse case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultwomanfromreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: afterskincareathome,wearingatealziphoodieopenoverwhitecottonteeasintheidentityreference, nowshowingaplainunbrandedwhitemoisturizertubeinthehandatshoulderheight,gentlytouchingcheekwithotherhandwhilecheckingthefinishandtalkingwithasmallcrookedsmile. Faceandshouldersfullyclear, bathroomdoor andhandtowelbehind,normalmixedindirectdaylightandweakwarmroomlight. Relaxedhonestreview, ordinarynaturalskintextureandfainthydrationsheen.\n"
+          }
         }
       ]
     },
