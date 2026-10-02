@@ -34,7 +34,8 @@ export const KIT_AGE_DISTRIBUTION = [
 
 export const KIT_GENDER_DISTRIBUTION = [
   { label: "Female", percent: 60 },
-  { label: "Male", percent: 40 },
+  { label: "Male", percent: 38 },
+  { label: "Other", percent: 2 },
 ];
 
 const MONTHS = [
