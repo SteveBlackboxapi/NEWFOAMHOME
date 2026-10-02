@@ -1,0 +1,42 @@
+{
+  "tool": "Built-in image generation",
+  "created": "2026-10-02",
+  "identityReferences": [
+    "output/skincare-review-references/angelina-portrait.webp"
+  ],
+  "assets": [
+    {
+      "key": "angelinaImage1",
+      "prompt": "Use case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,theadultwomaninreferences, preserveherrecognizablelightbrownshoulderlengthbob,strongbrows,warmbrown/hazeleyes,softroundcheeks,smilelines,andage. Scene: ordinaryhomebathroom,plainwhitecottontee, bobclippedbackononeside. Midreviewwhileapplyingalittlegentlewhitecleanserfoamtoonecheekwithfingertips; holdsplainunbrandedpalebluepumpbottlewithotherhand, glancestowardphonewithengagedmidspeechhalfsmile. Fullfaceandworkinghandclearintheupperhalfofverticalportrait. Cooldaylight, creamtilewall,cottontowelandsmallordinaryclutter. Livedinphonecapture,relaxednaturalconfidence.",
+      "refs": [
+        "angelina-portrait.webp",
+        "angelina-casual.webp"
+      ],
+      "creator": "angelina",
+      "name": "cleanser",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-eeadc861-6b7a-432e-8ff2-4fbe7a9c35b8.png"
+    },
+    {
+      "key": "angelinaImage2",
+      "prompt": "Use case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultidentityinreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: seatedathomevanityinsoftsagecottonlongsleevetop,showinganunbrandedamberserumbottleclosetoherfacewhileholdingadropperoverherotheropenpalm. Sheisexplainingthetexturewithnaturalcuriousexpression,eyeslookingbetweencameraandpalm. Waistupverticalframe,entireheadandhandsvisible. Plainmirror,simplewoodendresser,afewbottlesinbackground,ordinaryovercastwindowlight. Exactlikeness,plausiblefingergripanddropper.",
+      "refs": [
+        "angelina-portrait.webp",
+        "angelina-casual.webp"
+      ],
+      "creator": "angelina",
+      "name": "serum",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-cab5500c-1e7a-4ef3-93ec-8d3cf495b4bb.png"
+    },
+    {
+      "key": "angelinaImage3",
+      "prompt": "Use case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Angelina Lemon,sameadultwomanfromreferences,shoulderlengthlightbrownbob,strongbrows,warmeyes,softcheeks,smilelines. Scene: afterskincareathome,wearingatealziphoodieopenoverwhitecottonteeasintheidentityreference, nowshowingaplainunbrandedwhitemoisturizertubeinthehandatshoulderheight,gentlytouchingcheekwithotherhandwhilecheckingthefinishandtalkingwithasmallcrookedsmile. Faceandshouldersfullyclear, bathroomdoor andhandtowelbehind,normalmixedindirectdaylightandweakwarmroomlight. Relaxedhonestreview, ordinarynaturalskintextureandfainthydrationsheen.",
+      "refs": [
+        "angelina-portrait.webp",
+        "angelina-casual.webp"
+      ],
+      "creator": "angelina",
+      "name": "moisturiser",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-0d1ea30f-1bd9-4608-ac68-bb77cfa29f6c.png"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "tool": "Built-in image generation",
+  "created": "2026-10-02",
+  "identityReferences": [
+    "output/skincare-review-references/camille-portrait.webp"
+  ],
+  "assets": [
+    {
+      "key": "camilleImage1Fixed",
+      "creator": "camille",
+      "name": "moisturiser",
+      "prompt": "Use case: identity-preserve. Create ONE vertical 9:16 natural smartphone skincare product review photograph of Camille Aubert, the same fictional adult woman in both supplied identity references. Preserve her recognizable face, hazel eyes, thick brows, nose and lips, chestnut hair, facial proportions and adult age. A candid paused review in a simple lived-in hotel bathroom: wearing a plain cream cotton tee with chestnut hair loosely tucked behind an ear, talking toward a phone propped on a shelf while dabbing a small dot of white moisturizer onto one cheek with two fingertips. Other hand holds a small plain unbranded cream jar. Normal unretouched skin, slight asymmetry, ordinary daylight mixed with room light, reasonably legible tiled wall and towel behind her. Chest-up portrait with entire head and working hands visible, face in upper half, comfortable headroom, clear skincare action. Believable conversational expression, mouth slightly parted. Correct anatomy and natural fingers. No fashion editorial styling, airbrushing, glam makeup, cinematic bokeh or posed stock photo smile. No text, caption, logos, watermarks, collage or interface. Input1 is the identity anchor; input2 supports same identity. Keep her exact likeness across the new scene.",
+      "editPrompt": "Edit this photograph only to remove the visible smartphone and its shelf mount from the lower-left foreground. We are viewing this scene THROUGH the recording phone, so no phone, camera, filming rig, device reflection or interface should be visible anywhere. Fill the removed phone and mount area naturally with the continuation of the hotel bathroom and vanity. Keep everything else exactly the same: the same woman's exact recognizable identity, face, expression, skin, hair, clothing, hands and moisturizer jar, white moisturizer dab, lighting, perspective and vertical framing. Photorealistic seamless removal, no text or logos.",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-ec2ac343-6a65-47d2-835a-dc324a4f5963.png"
+    },
+    {
+      "key": "camilleImage2",
+      "prompt": "Use case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, the fictional adult in references, chestnut longhair,hazeleyes,goldsmallhoops. Scene: daylight hotelbalcony, wearingpaleblue loose linen shirtbuttonedcasually; holds a plainunbrandedwhiteSPFtube besideherface andlooks towardthephone whileexplaining itwithfriendlymidspeech expression, otherhandnaturallygesture nearbottle. Framedwaistup, sunhatrestingonchairandsoft coastalhotelrailingbehind, indirectlate-morninglight, no sunglasses. Recognizable sameCamille, realisticproductgrip.",
+      "refs": [
+        "camille-portrait.webp",
+        "camille-suncare.webp"
+      ],
+      "creator": "camille",
+      "name": "spf",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-c6286495-f455-4cf8-9da2-0ce64ce957e4.png"
+    },
+    {
+      "key": "camilleImage3",
+      "prompt": "Use case: identity-preserve. Generate ONE vertical9:16 natural smartphone skincare-review photograph, not a collage. Both supplied images are identity references for the SAME adult woman; preserve exact recognizable face, eye shape/spacing, nose,lips,brows,haircolour and adultage. Normal believable unretouchedskin, slight facialasymmetry, ordinaryphoneexposure with legible domesticbackground, anatomicallycorrecthands. Conversational candidpausedreview, not modelpose. Headandproduct/actionfullyvisible, head inupperhalf withcomfortableroom aroundit, lowerpartavailableforcardfooter. No text,captions,logos,watermarks,UI,stockbeautyretouching,cinematicgrading or exaggeratedpores. Subject: Camille Aubert, samefictionaladultidentity,chestnuthairlooselytiedback,hazeleyes,goldhoops. Scene: eveninghotelbathroom, simple navycottontee; talkinginmirrorwhilegentlypattingmoisturizerintocheekwithfingertips, tinyplaincreamjarheldinotherhandat chestheight. Conversationalsoftsmile, warmordinarybathroomlight,cooldarkwindowreflection, smalltowelandshelfbehind. Chestupportrait, samefaceandproportions, freshnaturalmoisturesheen,noheavyglammakeup.",
+      "refs": [
+        "camille-portrait.webp",
+        "camille-suncare.webp"
+      ],
+      "creator": "camille",
+      "name": "evening",
+      "source": "/Users/stevenlewis/.codex/generated_images/01a0c47f-6b9c-7861-b492-7dfdb129fbc5/exec-14a64442-9045-4ec5-ad2c-af404ebfdb3e.png"
+    }
+  ]
+}

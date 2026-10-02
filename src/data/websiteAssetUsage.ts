@@ -76,6 +76,7 @@ for (const talent of labTalent) {
     const assetId = `${talent.id}:${tile.id ?? index}`;
     const tileOwner = {
       ...owner,
+      ...(tile.provenance === "ai-generated" ? { kind: "person" as const, provenance: "ai-generated" as const } : {}),
       label: `${talent.displayName} · ${tile.caption || "Content"}`,
     };
     own(tile.thumb, tileOwner, assetId);

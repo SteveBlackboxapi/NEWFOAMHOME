@@ -89,7 +89,11 @@ test("every public placement points to a real file and a truthful catalogue owne
       assert.ok(asset.assetIds.length, asset.src);
       assert.equal(
         asset.provenance === "supplied-reference",
-        owner.provenance === "reference",
+        owner.provenance === "reference" && !owner.content.some((tile, index) =>
+          tile.provenance === "ai-generated" &&
+          asset.assetIds.includes(`${owner.id}:${tile.id ?? index}`),
+        ),
+        asset.src,
       );
       assert.ok(websiteUsageForTalent(owner.id).includes(asset));
       assert.ok(websiteLocationsForTalent(owner.id).length);
@@ -99,7 +103,9 @@ test("every public placement points to a real file and a truthful catalogue owne
 
 test("website photo records preserve provenance and masters, including retired photography", () => {
   assert.equal(websitePhotoTalent.length, 7);
-  assert.equal(usage.websiteReferencePhotos.length, 3);
+  assert.equal(usage.websiteReferencePhotos.filter(asset =>
+    asset.talentId !== "angelina-lemon",
+  ).length, 3);
   for (const talent of websitePhotoTalent) {
     assert.ok(!stagedTalent.some((original) => original.id === talent.id));
     assert.equal(talent.totalAudience, 0);
@@ -175,6 +181,23 @@ test("discovery results have post figures for the demonstrated platform", () => 
           tile.engagements > 0 && tile.engagements < tile.views,
         `${id}: TikTok engagements`,
       );
+  }
+});
+
+test("skincare search additions keep stable profile identities, generated provenance and editable masters", () => {
+  for (const id of ["camille-aubert", "angelina-lemon"]) {
+    const talent = labTalent.find(t => t.id === id);
+    assert.ok(talent, id);
+    assert.equal(talent.content.length, 3);
+    for (const tile of talent.content) {
+      assert.equal(tile.provenance, "ai-generated");
+      assert.ok(tile.thumb.endsWith(".webp"));
+      assert.ok(existsSync(path.join(root, "public", tile.original)), tile.original);
+    }
+    const result = FOUND_RESULTS.find(r => r.talent.id === id);
+    assert.ok(result, id);
+    assert.equal(websiteUsageFor(result.tile.thumb).provenance, "ai-generated");
+    assert.ok(websiteUsageFor(result.tile.thumb).assetIds.includes(`${id}:${result.tile.id}`));
   }
 });
 
