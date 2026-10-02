@@ -4366,6 +4366,60 @@
           "engagements": 5600
         }
       ]
+    },
+    {
+      "id": "tessa-marlow",
+      "displayName": "Tessa Marlow",
+      "provenance": "ai-generated",
+      "age": 27,
+      "location": "Leeds",
+      "bio": "Everyday makeup texture checks and straightforward getting-ready routines. Fictional demo creator; audience and post figures are illustrative.",
+      "verticals": [
+        "Beauty",
+        "Makeup",
+        "Skincare"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@tessa.marlow.fake",
+          "followers": 124700
+        }
+      ],
+      "totalAudience": 124700,
+      "portrait": "assets/talent/uploads/tessa-marlow-palette-review-20261002.webp",
+      "originalPortrait": "assets/talent/uploads/tessa-marlow-palette-review-20261002-original.png",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "creativeDirection": {
+        "summary": "Candid makeup review with a neutral eyeshadow palette, brush and harsh mixed bathroom light.",
+        "identityNotes": [
+          "New fictional adult aged 27 with long wavy chestnut hair, brown eyes and olive skin. AI-generated still; no real endorsement or recorded video."
+        ],
+        "promptFile": "assets/talent/tessa-marlow-v1/creative-brief.md"
+      },
+      "content": [
+        {
+          "id": "palette-review-v1",
+          "type": "still",
+          "provenance": "ai-generated",
+          "thumb": "assets/talent/uploads/tessa-marlow-palette-review-20261002.webp",
+          "original": "assets/talent/uploads/tessa-marlow-palette-review-20261002-original.png",
+          "aspectRatio": "9/16",
+          "caption": "Trying the everyday eyeshadow palette",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "views": 186400,
+          "strongKind": "photo",
+          "generation": {
+            "version": "Makeup review v1",
+            "approach": "Original fictional adult generated in harsh mixed bathroom light. Illustrative post figures; no baked captions.",
+            "prompt": "# Tessa Marlow — palette review\n\nBuilt-in image generation. New fictional adult aged 27; no existing person recreated. WebP preview with PNG master. No baked captions. Post figures are illustrative.\n\nCreate a photorealistic vertical 9:16 still from an informal beauty creator video. A NEW fictional adult woman age 27, visibly different from the short-blonde-bob creator: long thick wavy dark chestnut hair, brown eyes, olive skin, rounded face, strong dark eyebrows, natural skin texture. She sits at a bathroom vanity holding an open neutral-tone eyeshadow palette upright beside her face with one hand, tapping a fluffy makeup brush into one pan with her other hand; she glances sideways at the mirror mid-task. Dark charcoal casual cardigan. Candid wide-angle smartphone perspective from the mirror area, head and upper torso in lower two thirds, a plain mirror/wall and ordinary small bathroom visible above. Harsh cool overhead light combined with bright daylight from one side: uneven exposure, hard cheek shadows, no flattering beauty illumination or studio retouching, subtle phone-camera grain. Believable makeup-review frame, realistic hands and palette geometry. No visible phone/camera. NO writing on mirror, captions, words, brand marks, UI, badges, numbers, logos or watermark. Full image edge-to-edge, no card border. Maintain an original fictional face, do not recreate the person in any screenshot.\n"
+          }
+        }
+      ]
     }
   ],
   "removedTalentIds": [
