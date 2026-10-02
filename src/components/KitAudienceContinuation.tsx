@@ -40,10 +40,10 @@ export function KitAudienceContinuation() {
                 <div className="ka-distribution-row" key={label}>
                   <dt>{label}</dt>
                   <dd>
-                    <span className="ka-bar-track" aria-hidden="true">
+                    <span className="ka-bar-track" aria-hidden="true" style={{ width: `calc((100% - 52px) * ${percent / 100})` }}>
                       <span
                         className="ka-bar-value"
-                        style={{ width: `${percent}%` }}
+                        style={{ width: "100%" }}
                       />
                     </span>
                     <span className="ka-percentage">{percent}%</span>
