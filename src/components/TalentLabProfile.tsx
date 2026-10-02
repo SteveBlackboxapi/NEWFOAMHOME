@@ -30,6 +30,7 @@ type Props = {
   talent: StagedTalent;
   initialAsset: string | null;
   captions: Record<string, TileCaptionSettings>;
+  captionPublication?: { pending: boolean; saving: boolean; save: () => Promise<void> };
   onCaption: (asset: LabAsset, settings: TileCaptionSettings) => void;
   saved: string[];
   onSave: (id: string) => void;
@@ -46,6 +47,7 @@ export function TalentLabProfile({
   initialAsset,
   captions,
   onCaption,
+  captionPublication,
   saved,
   onSave,
   onClose,
@@ -645,6 +647,10 @@ export function TalentLabProfile({
                   }
                 />
               )}
+              {captionPublication?.pending && <div className="tl-editor-downloads">
+                <p>Save to replace captioned images in your checked website placements.</p>
+                <button className="tl-button tl-primary" disabled={captionPublication.saving} onClick={() => action(captionPublication.save)}>{captionPublication.saving ? "Saving…" : "Save library changes"}</button>
+              </div>}
               <div className="tl-editor-downloads">
                 {active.tile?.video && (
                   <button

@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { labTalent } from "../data/labTalentCatalogue";
 import type { StagedTalent, TalentContentTile } from "../data/stagedTalent";
 import { websiteUsageFor, websiteArtwork } from "../data/websiteAssetUsage";
-import { assetsFor, type LabAsset } from "../lib/talentLab";
+import { assetsFor, readCaption, renderCaptioned, type LabAsset } from "../lib/talentLab";
 import {
   PRIVATE_LIBRARY,
   LIBRARY_REPO,
   LIBRARY_REVIEW_URL,
   prepareLibraryImage,
+  websitePlacementKey,
 } from "../lib/githubTalentLibrary";
 import type { TalentLibraryController } from "../hooks/useTalentLibrary";
 import { websiteReplacementSource } from "../lib/websiteImageReplacement";
@@ -27,7 +28,7 @@ export function placementsForAsset(asset: LabAsset) {
   ];
   return [...new Map(uses.map((u) => [`${u.route}:${u.section}`, u])).values()];
 }
-export function AssetUsage({ asset, collapsible = false }: { asset: LabAsset; collapsible?: boolean }) {
+export function AssetUsage({ asset, collapsible = false, library }: { asset: LabAsset; collapsible?: boolean; library?: TalentLibraryController }) {
   const uses = placementsForAsset(asset);
   const label = uses.length
     ? `Website · ${uses.length} ${uses.length === 1 ? "placement" : "placements"}`
@@ -39,6 +40,7 @@ export function AssetUsage({ asset, collapsible = false }: { asset: LabAsset; co
           <a href={websiteUrl(u.route)} target="_blank" rel="noopener">
             {u.section} ↗
           </a>
+          {library && asset.tile && !asset.tile.video && <PlacementCaptionControl asset={asset} route={u.route} section={u.section} library={library} />}
         </li>
       ))}
     </ul>
@@ -60,6 +62,38 @@ export function AssetUsage({ asset, collapsible = false }: { asset: LabAsset; co
     </div>
   );
 }
+function PlacementCaptionControl({ asset, route, section, library }: { asset: LabAsset; route: string; section: string; library: TalentLibraryController }) {
+  const [working, setWorking] = useState(false);
+  const [error, setError] = useState("");
+  const source = websiteReplacementSource(asset.id);
+  if (!source) return null;
+  const key = websitePlacementKey(source, route, section);
+  const entry = library.placementCaptions[key];
+  const enabled = Boolean(entry && library.placementReplacements[key] === entry.rendered);
+  const caption = readCaption(asset);
+  async function toggle(checked: boolean) {
+    setError("");
+    if (!checked) { library.clearPlacementCaption(key); return; }
+    if (!caption?.text.trim()) { setError("Add the caption in Caption studio first."); return; }
+    setWorking(true);
+    try {
+      const settings = { ...caption, visible: true };
+      const clean = { ...asset, src: library.captionSource(key, asset.src) };
+      const blob = await renderCaptioned(clean, settings, "image/webp");
+      const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }));
+      library.addUpload(prepared.upload, prepared.preview);
+      library.setPlacementCaption(key, prepared.src, settings, asset.id);
+    } catch (error) { setError(error instanceof Error ? error.message : "Could not prepare this caption."); }
+    finally { setWorking(false); }
+  }
+  return <div className="tl-placement-caption">
+    <label><input type="checkbox" checked={enabled} disabled={working || library.saving || !library.ready} onChange={event => void toggle(event.target.checked)} /> Show caption here</label>
+    {working && <span role="status">Preparing caption…</span>}
+    {enabled && <details><summary>Preview caption</summary><img src={library.websitePlacementImages[key]} alt={`${asset.title} — caption preview for ${section}`} /><p>{entry.needsRender ? "Updated caption will be rendered when you save." : "Caption and image scale together. Save changes to update this placement."}</p></details>}
+    {error && <p role="alert">{error}</p>}
+  </div>;
+}
+
 export function TalentLibraryManager({
   library,
   initialId,
@@ -591,7 +625,7 @@ export function TalentLibraryManager({
               <article key={asset.id}>
                 <img src={asset.src} alt={asset.title} />
                 <h3>{asset.tile ? asset.title : "Profile portrait"}</h3>
-                <AssetUsage asset={asset} />
+                <AssetUsage asset={asset} library={library} />
                 <div className="tl-library-image-actions">
                   <button
                     className="tl-button"

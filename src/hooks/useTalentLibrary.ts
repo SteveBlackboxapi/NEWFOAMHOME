@@ -1,8 +1,13 @@
+import { assetsFor, renderCaptioned } from "../lib/talentLab";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { labTalent } from "../data/labTalentCatalogue";
 import type { StagedTalent } from "../data/stagedTalent";
 import {
   PRIVATE_LIBRARY,
+  withPlacementCaption,
+  withoutPlacementCaption,
+  type PlacementCaption,
+  prepareLibraryImage,
   githubLibraryConnection,
   canonicalProfile,
   emptyLibrary,
@@ -134,11 +139,24 @@ export function useTalentLibrary() {
     setSaving(true);
     setError("");
     try {
+      let preparedManifest = manifest;
+      const preparedUploads = [...Object.values(uploads)];
+      const currentAssets = materializeLibrary(labTalent, manifest, snapshot.revision, previews).flatMap(assetsFor);
+      for (const [key, entry] of Object.entries(manifest.websitePlacementCaptions || {})) {
+        if (!entry.needsRender || manifest.websitePlacementReplacements?.[key] !== entry.rendered) continue;
+        const asset = currentAssets.find(asset => asset.id === entry.assetId);
+        if (!asset) throw new Error("A caption’s original image is missing. Refresh the library before saving.");
+        const src = entry.original ? materializeLibraryImage(entry.original, snapshot.revision, previews) : asset.src;
+        const blob = await renderCaptioned({ ...asset, src }, { ...entry.settings, visible: true }, "image/webp");
+        const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }));
+        preparedUploads.push(prepared.upload);
+        preparedManifest = withPlacementCaption(preparedManifest, key, prepared.src, entry.settings, entry.assetId);
+      }
       const next = await saveGithubLibrary(
         token,
         snapshot,
-        manifest,
-        Object.values(uploads),
+        preparedManifest,
+        preparedUploads,
       );
       applySnapshot(next);
       return next;
@@ -234,6 +252,31 @@ export function useTalentLibrary() {
     websiteImages,
     changedWebsiteImages,
     websitePlacementImages,
+    placementCaptions: manifest.websitePlacementCaptions || {},
+    placementReplacements: manifest.websitePlacementReplacements || {},
+    captionSource: (key: string, fallback: string) => {
+      const entry = manifest.websitePlacementCaptions?.[key];
+      const current = manifest.websitePlacementReplacements?.[key];
+      const original = entry && current === entry.rendered ? entry.original : current;
+      return original ? materializeLibraryImage(original, snapshot.revision, previews) : fallback;
+    },
+    setPlacementCaption: (key: string, rendered: string, settings: PlacementCaption["settings"], assetId: string) =>
+      setManifest(previous => withPlacementCaption(previous, key, rendered, settings, assetId)),
+    updatePlacementCaptions: (assetId: string, settings: PlacementCaption["settings"]) => setManifest(previous => {
+      const entries = Object.entries(previous.websitePlacementCaptions || {});
+      if (!entries.some(([, entry]) => entry.assetId === assetId)) return previous;
+      const profile = rawProfiles.find(profile => assetsFor(profile).some(asset => asset.id === assetId));
+      const updatedProfile = profile && { ...profile, content: profile.content.map((tile, index) =>
+        assetsFor(profile).find(asset => asset.tile && asset.index === index)?.id === assetId
+          ? { ...tile, captionSettings: settings } : tile) };
+      return { ...previous,
+        profiles: updatedProfile ? [...previous.profiles.filter(profile => profile.id !== updatedProfile.id), updatedProfile] : previous.profiles,
+        websitePlacementCaptions: Object.fromEntries(entries.map(([key, entry]) => [key,
+          entry.assetId === assetId ? { ...entry, settings: { ...settings, visible: true }, needsRender: previous.websitePlacementReplacements?.[key] === entry.rendered } : entry,
+        ])),
+      };
+    }),
+    clearPlacementCaption: (key: string) => setManifest(previous => withoutPlacementCaption(previous, key)),
     changedWebsitePlacements,
     loading,
     saving,

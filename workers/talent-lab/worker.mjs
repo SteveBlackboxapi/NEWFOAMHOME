@@ -45,6 +45,17 @@ function validWebsitePlacementReplacements(value) {
         typeof upload === "string" && UPLOAD.exec(`public/${upload}`)?.[0] === `public/${upload}`;
     });
 }
+function validPlacementCaptions(value) {
+  if (value === undefined) return true;
+  if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).length > 3000) return false;
+  return Object.entries(value).every(([key, entry]) => entry && typeof entry === "object" &&
+    typeof entry.assetId === "string" && entry.assetId.length <= 200 &&
+    validWebsitePlacementReplacements({ [key]: entry.rendered }) &&
+    (entry.original === undefined || validWebsitePlacementReplacements({ [key]: entry.original })) &&
+    (entry.needsRender === undefined || typeof entry.needsRender === "boolean") &&
+    entry.settings && typeof entry.settings === "object" && !Array.isArray(entry.settings) &&
+    typeof entry.settings.text === "string" && entry.settings.text.length <= 2000);
+}
 const REVIEWED_WEBM = new Set([
   "/assets/talent/aria-quen-v2/aria-quen-v2-makeup.webm",
   "/assets/talent/lena-croft-v2/lena-croft-grwm.webm",
@@ -442,7 +453,8 @@ async function proxyGithub(request, url, env, fetcher) {
           manifest.profiles.length > 500 ||
           !Array.isArray(manifest.removedTalentIds) ||
           !validWebsiteReplacements(manifest.websiteReplacements) ||
-          !validWebsitePlacementReplacements(manifest.websitePlacementReplacements)
+          !validWebsitePlacementReplacements(manifest.websitePlacementReplacements) ||
+          !validPlacementCaptions(manifest.websitePlacementCaptions)
         )
           fail(400, "Invalid library catalogue.");
       } else {

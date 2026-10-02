@@ -417,11 +417,13 @@ export async function downloadPack(
 }
 
 /** Render the asset editor's crop and caption at 1080px wide. */
-export async function downloadCaptioned(
+export async function renderCaptioned(
   asset: LabAsset,
   caption: TileCaptionSettings,
+  format: "image/png" | "image/webp" = "image/png",
 ) {
   const image = new Image();
+  image.crossOrigin = "anonymous";
   image.src = asset.src;
   await image.decode();
   await document.fonts.ready;
@@ -487,8 +489,13 @@ export async function downloadCaptioned(
   }
 
   const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, "image/png"),
+    canvas.toBlob(resolve, format, 0.98),
   );
   if (!blob) throw new Error("The captioned image could not be created.");
-  saveBlob(blob, assetFilename(asset).replace(/\.[^.]+$/, "-captioned.png"));
+  if (blob.type !== format) throw new Error("This browser cannot create the requested image format. Please use a browser with WebP export support.");
+  return blob;
+}
+
+export async function downloadCaptioned(asset: LabAsset, caption: TileCaptionSettings) {
+  saveBlob(await renderCaptioned(asset, caption), assetFilename(asset).replace(/\.[^.]+$/, "-captioned.png"));
 }

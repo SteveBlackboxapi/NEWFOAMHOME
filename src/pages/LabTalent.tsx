@@ -260,6 +260,7 @@ function LabTalentContent() {
   };
   const updateCaption = (asset: LabAsset, caption: TileCaptionSettings) => {
     setCaptions((prev) => ({ ...prev, [asset.id]: caption }));
+    library.updatePlacementCaptions(asset.id, caption);
     if (!writeCaption(asset, caption))
       setToast(
         "The edit is visible, but browser storage is unavailable. Download the image before leaving.",
@@ -1005,6 +1006,11 @@ function LabTalentContent() {
           initialAsset={params.get("asset")}
           captions={captions}
           onCaption={updateCaption}
+          captionPublication={{
+            pending: Object.entries(library.placementCaptions).some(([key, entry]) => entry.needsRender && library.placementReplacements[key] === entry.rendered),
+            saving: library.saving,
+            save: async () => { await library.save(); setToast("Caption changes saved. Website update queued."); },
+          }}
           saved={saved}
           onSave={toggleSaved}
           onClose={closeProfile}

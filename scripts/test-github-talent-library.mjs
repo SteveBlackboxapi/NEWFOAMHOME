@@ -48,6 +48,8 @@ const {
   websitePlacementKey,
   withWebsiteImageReplacement,
   withWebsitePlacementReplacement,
+  withPlacementCaption,
+  withoutPlacementCaption,
 } = loadLibrary();
 const catalogueModules = new Map();
 function loadCatalogueModule(filename) {
@@ -1004,3 +1006,50 @@ if (!("createImageBitmap" in globalThis))
   globalThis.createImageBitmap = async () => {
     throw new Error("Unmocked bitmap decoding");
   };
+
+ test("flattened captions stay per placement and unticking restores the clean override", () => {
+  const source = "assets/talent/june-c1.webp";
+  const a = websitePlacementKey(source, "/kit-story", "Featured content");
+  const b = websitePlacementKey(source, "/", "Opening collage");
+  const settings = { text: "A quick dance break", visible: true };
+  const clean = withWebsitePlacementReplacement(manifest([]), source, "/kit-story", "Featured content", src("clean"));
+  const enabled = withPlacementCaption(clean, a, src("caption-one"), settings, "june:0");
+  assert.equal(enabled.websitePlacementReplacements[a], src("caption-one"));
+  assert.equal(enabled.websitePlacementReplacements[b], undefined);
+  assert.equal(enabled.websitePlacementCaptions[a].original, src("clean"));
+  const updated = withPlacementCaption(enabled, a, src("caption-two"), {...settings,text:"New words"}, "june:0");
+  assert.equal(updated.websitePlacementCaptions[a].original, src("clean"));
+  assert.equal(updated.websitePlacementReplacements[a], src("caption-two"));
+  assert.deepEqual(parseLibrary(updated).websitePlacementCaptions, updated.websitePlacementCaptions);
+  assert.equal(withoutPlacementCaption(updated,a).websitePlacementReplacements[a], src("clean"));
+  const defaultImage = withPlacementCaption(manifest([]), b, src("caption-one"), settings, "june:0");
+  assert.equal(withoutPlacementCaption(defaultImage,b).websitePlacementReplacements[b], undefined);
+  const changed = withWebsitePlacementReplacement(updated, source, "/kit-story", "Featured content", src("other"));
+  assert.equal(withoutPlacementCaption(changed,a).websitePlacementReplacements[a], src("other"));
+});
+test("caption metadata rejects malformed paths and settings", () => {
+ const key = websitePlacementKey("assets/talent/june-c1.webp", "/kit-story", "Featured content");
+ for(const entry of [null, {assetId:"june:0",rendered:"https://bad.example/a.webp",settings:{text:"hey"}},
+  {assetId:"june:0",rendered:src("a"),original:"../../secret",settings:{text:"hey"}},
+  {assetId:"june:0",rendered:src("a"),settings:{text:"hey",size:Infinity}},
+  {assetId:"june:0",rendered:src("a"),settings:{text:"x".repeat(2001)}}]) {
+  assert.throws(()=>parseLibrary({...manifest([]),websitePlacementCaptions:{[key]:entry}}),LibraryError);
+ }
+});
+
+test("saving an edited caption replaces its raster but retains the clean image for unticking", async (t) => {
+  const key = websitePlacementKey("assets/talent/june-c1.webp", "/kit-story", "Featured content");
+  const clean = withWebsitePlacementReplacement(manifest([]), "assets/talent/june-c1.webp", "/kit-story", "Featured content", src("clean"));
+  const current = withPlacementCaption(clean, key, src("old"), { text: "Before", visible: true }, "june:0");
+  const input = withPlacementCaption(current, key, src("new"), { text: "After", visible: true }, "june:0");
+  const steps = saveSteps(input, [
+    { path: image("new").path, mode: "100644", type: "blob", sha: "new-image" },
+    { path: image("old").path, mode: "100644", type: "blob", sha: null },
+  ], BEFORE, current);
+  steps.splice(3, 0, { path: "/git/blobs", method: "POST", value: { sha: "new-image" } });
+  const api = mockGithub(t, steps);
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, input, [image("new")]);
+  assert.equal(saved.manifest.websitePlacementCaptions[key].settings.text, "After");
+  assert.equal(withoutPlacementCaption(saved.manifest, key).websitePlacementReplacements[key], src("clean"));
+  api.done();
+});
