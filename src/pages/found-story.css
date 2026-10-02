@@ -309,6 +309,7 @@
 }
 .fs-check-row .content-platform-icon {
   display: inline-flex;
+  margin-left: 0;
   width: 16px;
   height: 16px;
   color: #1d2939;
