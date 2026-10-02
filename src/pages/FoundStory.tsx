@@ -123,12 +123,21 @@ function SearchExampleText({
   );
 }
 
-/** Product evidence glyphs: camera means a visual match, not an audio claim. */
+/** Product glyphs for the illustrative search-match examples. */
 function EvidenceCamera() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M3 7h4l2-3h6l2 3h4v14H3V7Z" />
       <circle cx="12" cy="13" r="4" />
+    </svg>
+  );
+}
+
+function EvidenceAudio() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 10a5 5 0 1 1 10 0c0 3-3 3.5-3 6a3 3 0 0 1-6 0" />
+      <path d="M10 10a2 2 0 1 1 4 0c0 1.5-2 1.5-2 3M5 5a8 8 0 0 1 14 5" />
     </svg>
   );
 }
@@ -180,13 +189,25 @@ function ResultCard({
         <OptimizedImage section="Found with Foam · Search results" src={tile.thumb} alt="" sizes="(max-width: 700px) 45vw, 280px" loading="lazy" />
         <span className="content-card-fade" />
         <div className="fs-result-meta">
-          <span className="fs-result-strong" aria-label="Strong visual match">
-            Strong: <EvidenceCamera />
-            {tile.strongKind === "hashtag" && <span aria-label="Hashtag match">#</span>}
+          <span
+            className="fs-result-strong"
+            aria-label={`Strong ${result.evidence.join(", ")} match (illustrative)`}
+            title="Illustrative match signals"
+          >
+            Strong:
+            {result.evidence.map((signal) =>
+              signal === "visual" ? <EvidenceCamera key={signal} /> :
+              signal === "audio" ? <EvidenceAudio key={signal} /> :
+              <span key={signal} aria-hidden="true">#</span>,
+            )}
           </span>
           <div className="fs-result-footer">
             <OptimizedImage sizes="48px" section="Found with Foam · Result avatars" src={talent.portrait} alt={talent.displayName} loading="lazy" />
-            <ContentMetrics tile={tile} className="fs-result-metrics" uppercaseSuffix />
+            <ContentMetrics
+              tile={{ ...tile, engagements: tile.platform === "instagram" ? undefined : tile.engagements }}
+              className="fs-result-metrics"
+              uppercaseSuffix
+            />
             <ContentPlatformIcon network={tile.platform} />
           </div>
         </div>
