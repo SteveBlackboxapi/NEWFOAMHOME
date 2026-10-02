@@ -26,6 +26,14 @@ export type CaptionFontFamily =
  * Rendered as DOM/CSS (not baked into the image).
  */
 export type TileCaptionSettings = {
+  /** Extra independently styled text blocks; nested blocks are not supported. */
+  blocks?: TileCaptionSettings[];
+  width?: number;
+  lineSpacing?: number;
+  shadowColor?: string;
+  shadowBlur?: number;
+  shadowX?: number;
+  shadowY?: number;
   /** Show or hide the overlay text */
   visible: boolean;
   /** Caption / slogan string */
@@ -141,6 +149,12 @@ export const CAPTION_PRESETS: {
   sample: string;
   settings: Omit<TileCaptionSettings, "text" | "visible" | "x" | "y">;
 }[] = [
+  { id: "bold-white", label: "Bold white strip", sample: "THE BIG MOMENT", settings: { ...captionStyleDefaults, font: "sf", weight: 800, italic: true, uppercase: true, fill: "#101828", background: "highlight", backgroundColor: "#ffffff", size: 20, radius: 4, padding: 4 } },
+  { id: "bold-black", label: "Black title strip", sample: "ONE MORE TAKE", settings: { ...captionStyleDefaults, font: "anton", weight: 400, uppercase: true, background: "highlight", backgroundColor: "#101828", size: 26, radius: 0, padding: 4 } },
+  { id: "light-upper", label: "Light uppercase", sample: "A LITTLE LIFE UPDATE", settings: { ...captionStyleDefaults, font: "sf", weight: 400, uppercase: true, size: 18 } },
+  { id: "serif-quote", label: "Serif quote", sample: "Make room for the little things.", settings: { ...captionStyleDefaults, font: "dm-serif", weight: 400, fill: "#101828", size: 34, lineSpacing: 1.05, width: 72 } },
+  { id: "quote-highlight", label: "Lime quote line", sample: "the little things.", settings: { ...captionStyleDefaults, font: "dm-serif", weight: 400, fill: "#101828", background: "highlight", backgroundColor: "#d5f26a", size: 32, radius: 0, padding: 1 } },
+  { id: "shadow-headline", label: "Shadow headline", sample: "THE STORY CONTINUES", settings: { ...captionStyleDefaults, font: "anton", weight: 400, uppercase: true, size: 28, strokeWidth: 1, shadowColor: "#000000", shadowBlur: 3, shadowX: 1, shadowY: 3 } },
   {
     id: "subtitle",
     label: "Subtitle",

@@ -86,6 +86,7 @@ export function TalentLabProfile({
   const [activeId, setActiveId] = useState(initialAsset || assets[0].id);
   const active = assets.find((a) => a.id === activeId) || assets[0];
   const caption = captions[active.id];
+  const [selectedCaptionBlock, setSelectedCaptionBlock] = useState(0);
   const [version, setVersion] = useState<"current" | "original">("current");
   const showingOriginal = version === "original" && Boolean(active.original);
   const previewRatio = showingOriginal
@@ -545,7 +546,10 @@ export function TalentLabProfile({
                     <img src={active.src} alt={active.title} />
                   )}
                   {!showingOriginal && !active.tile?.video && (
-                    <Caption settings={caption} />
+                    <Caption settings={caption} selectedBlock={selectedCaptionBlock} onSelect={setSelectedCaptionBlock} onMove={(index, x, y) => {
+                      if (!caption) return;
+                      onCaption(active, index === 0 ? { ...caption, x, y } : { ...caption, blocks: caption.blocks?.map((block, i) => i === index - 1 ? { ...block, x, y } : block) });
+                    }} />
                   )}
                 </div>
                 <AIDisclosure
@@ -640,6 +644,8 @@ export function TalentLabProfile({
               )}
               {caption && !showingOriginal && !active.tile?.video && (
                 <TalentCaptionControls
+                  selectedBlock={selectedCaptionBlock}
+                  onSelectBlock={setSelectedCaptionBlock}
                   settings={caption}
                   onChange={(settings) => onCaption(active, settings)}
                   onReset={() =>

@@ -14,7 +14,7 @@ export function captionLayout(
   metrics: { ascent: number; descent: number },
 ) {
   const padding = settings.background === "none" ? 0 : settings.padding * 3.6;
-  const maxWidth = CAPTION_CANVAS_WIDTH * 0.88 - padding * 2;
+  const maxWidth = CAPTION_CANVAS_WIDTH * ((settings.width ?? 88) / 100) - padding * 2;
   const text = settings.uppercase
     ? settings.text.toLocaleUpperCase()
     : settings.text;
@@ -39,7 +39,7 @@ export function captionLayout(
   }
   const widths = lines.map(measure);
   const contentWidth = Math.max(1, ...widths);
-  const lineHeight = settings.size * 3.6 * 1.3;
+  const lineHeight = settings.size * 3.6 * (settings.lineSpacing ?? 1.3);
   const width = contentWidth + padding * 2;
   const height = lines.length * lineHeight + padding * 2;
   const baseline =

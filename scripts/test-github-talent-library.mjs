@@ -1053,3 +1053,14 @@ test("saving an edited caption replaces its raster but retains the clean image f
   assert.equal(withoutPlacementCaption(saved.manifest, key).websitePlacementReplacements[key], src("clean"));
   api.done();
 });
+
+ test("caption blocks retain styling and strip unrelated imported metadata", () => {
+  const p = profile();
+  p.content[0].captionSettings = { text: "Title", width: 72, shadowBlur: 3, blocks: [{ text: "Subtitle", fill: "#ffffff", y: 65, unrelated: "discard" }] };
+  const clean = parseLibrary(manifest([p])).profiles[0].content[0].captionSettings;
+  assert.equal(clean.width, 72);
+  assert.equal(clean.shadowBlur, 3);
+  assert.deepEqual(clean.blocks, [{ text: "Subtitle", fill: "#ffffff", y: 65 }]);
+  p.content[0].captionSettings.blocks[0].blocks = [{ text: "Nested" }];
+  assert.throws(() => parseLibrary(manifest([p])), LibraryError);
+ });

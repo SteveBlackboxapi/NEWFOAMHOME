@@ -2026,6 +2026,7 @@
   font-size: 17px;
 }
 .tl-caption-custom-colour input {
+  z-index: 1;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2037,6 +2038,10 @@
   outline: 3px solid #7ca6fa;
   outline-offset: 3px;
 }
+.tl-caption-custom-colour span { pointer-events: none; line-height: 1; }
+.tl-caption-blocks { display: flex; flex-wrap: wrap; gap: 10px; padding: 20px 24px 0; align-items: end; }
+.tl-caption-blocks label { display: grid; gap: 6px; font-size: 12px; }
+.tl-caption-blocks select { border: 1px solid #dce3ed; border-radius: 8px; padding: 9px; background: white; }
 .tl-caption-advanced {
   border-top: 1px solid #e9edf3;
   border-bottom: 1px solid #e9edf3;

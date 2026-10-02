@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   captionBackgrounds,
   captionFont,
@@ -34,7 +34,14 @@ export function AIDisclosure({
   );
 }
 
-export function Caption({ settings }: { settings?: TileCaptionSettings }) {
+type CaptionProps = { settings?: TileCaptionSettings; onMove?: (index: number, x: number, y: number) => void; onSelect?: (index: number) => void; selectedBlock?: number };
+export function Caption({ settings, onMove, onSelect, selectedBlock }: CaptionProps) {
+  if (!settings) return null;
+  return <>{[settings, ...(settings.blocks ?? [])].map((block, index) => <CaptionBlock key={index} settings={block} onMove={onMove ? (_, x, y) => onMove(index, x, y) : undefined} onSelect={() => onSelect?.(index)} selectedBlock={selectedBlock === index ? 0 : undefined} />)}</>;
+}
+
+function CaptionBlock({ settings, onMove, onSelect, selectedBlock }: CaptionProps) {
+  const drag = useRef<{ x: number; y: number; startX: number; startY: number; width: number; height: number } | null>(null);
   const [fontRevision, setFontRevision] = useState(0);
   const font = settings ? captionFont(settings) : "";
   const text = settings?.text || "";
@@ -60,6 +67,10 @@ export function Caption({ settings }: { settings?: TileCaptionSettings }) {
   }, [settings, fontRevision]);
   if (!settings || !layout) return null;
   const style: CSSProperties = {
+    pointerEvents: onMove ? "auto" : "none",
+    cursor: onMove ? "grab" : undefined,
+    touchAction: onMove ? "none" : undefined,
+    outline: onMove && selectedBlock === 0 ? "1px dashed #155eef" : undefined,
     left: `clamp(${layout.width / 21.6}cqw, ${settings.x}%, calc(100% - ${layout.width / 21.6}cqw))`,
     top: `clamp(${layout.height / 21.6}cqw, ${settings.y}%, calc(100% - ${layout.height / 21.6}cqw))`,
     width: `${layout.width / 10.8}cqw`,
@@ -72,6 +83,25 @@ export function Caption({ settings }: { settings?: TileCaptionSettings }) {
       viewBox={`0 0 ${layout.width} ${layout.height}`}
       role="img"
       aria-label={settings.text}
+      tabIndex={onMove ? 0 : undefined}
+      onPointerDown={onMove ? event => {
+        const rect = event.currentTarget.parentElement!.getBoundingClientRect();
+        drag.current = { x: settings.x, y: settings.y, startX: event.clientX, startY: event.clientY, width: rect.width, height: rect.height };
+        onSelect?.(0); event.currentTarget.focus(); event.currentTarget.setPointerCapture(event.pointerId); event.preventDefault();
+      } : undefined}
+      onPointerMove={onMove ? event => {
+        if (!drag.current) return;
+        const d = drag.current;
+        onMove(0, Math.max(10, Math.min(90, d.x + (event.clientX - d.startX) / d.width * 100)), Math.max(10, Math.min(90, d.y + (event.clientY - d.startY) / d.height * 100)));
+      } : undefined}
+      onPointerUp={() => { drag.current = null; }}
+      onPointerCancel={() => { drag.current = null; }}
+      onKeyDown={onMove ? event => {
+        const delta = event.shiftKey ? 5 : 1;
+        const moves: Record<string, [number, number]> = { ArrowLeft: [-delta, 0], ArrowRight: [delta, 0], ArrowUp: [0, -delta], ArrowDown: [0, delta] };
+        if (moves[event.key]) { event.preventDefault(); onSelect?.(0); onMove(0, Math.max(10, Math.min(90, settings.x + moves[event.key][0])), Math.max(10, Math.min(90, settings.y + moves[event.key][1]))); }
+      } : undefined}
+      data-selected={onMove && selectedBlock === 0 ? "true" : undefined}
     >
       <g
         fill={settings.backgroundColor}
@@ -102,7 +132,9 @@ export function Caption({ settings }: { settings?: TileCaptionSettings }) {
           fontWeight: settings.weight,
           fontStyle: settings.italic ? "italic" : "normal",
           filter:
-            !settings.strokeWidth && settings.background === "none"
+            settings.shadowBlur !== undefined || settings.shadowX !== undefined || settings.shadowY !== undefined
+              ? `drop-shadow(${(settings.shadowX ?? 0) * 3.6}px ${(settings.shadowY ?? 0) * 3.6}px ${(settings.shadowBlur ?? 0) * 3.6}px ${settings.shadowColor ?? "#000000"})`
+              : !settings.strokeWidth && settings.background === "none"
               ? "drop-shadow(0 2px 4px #0008)"
               : undefined,
         }}

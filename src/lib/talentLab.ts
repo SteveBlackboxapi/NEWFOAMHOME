@@ -2,6 +2,7 @@ import { strToU8, zipSync } from "fflate";
 import {
   CAPTION_FONT_OPTIONS,
   resolveCaptionSettings,
+  DEFAULT_CAPTION_SETTINGS,
   type StagedTalent,
   type TalentContentTile,
   type TileCaptionSettings,
@@ -91,6 +92,7 @@ export function readyVideoSources(talent: StagedTalent): string[] {
 export function cleanCaption(
   input: unknown,
   fallback: TileCaptionSettings,
+  depth = 0,
 ): TileCaptionSettings {
   const p =
     input && typeof input === "object"
@@ -100,16 +102,25 @@ export function cleanCaption(
     typeof p[key] === "number" && Number.isFinite(p[key])
       ? Math.min(max, Math.max(min, p[key] as number))
       : (fallback[key] as number);
-  const color = (key: "fill" | "stroke" | "backgroundColor") =>
+  const color = <K extends "fill" | "stroke" | "backgroundColor" | "shadowColor">(key: K): TileCaptionSettings[K] =>
     typeof p[key] === "string" && /^#[\da-f]{6}$/i.test(p[key] as string)
-      ? (p[key] as string)
+      ? (p[key] as TileCaptionSettings[K])
       : fallback[key];
   return {
     visible: typeof p.visible === "boolean" ? p.visible : fallback.visible,
     text: typeof p.text === "string" ? p.text.slice(0, 1000) : fallback.text,
     x: number("x", 10, 90),
     y: number("y", 10, 90),
-    size: number("size", 10, 36),
+    size: number("size", 10, 60),
+    ...(p.width !== undefined || fallback.width !== undefined ? { width: number("width", 20, 88) ?? 88 } : {}),
+    ...(p.lineSpacing !== undefined || fallback.lineSpacing !== undefined ? { lineSpacing: number("lineSpacing", 1, 2) ?? 1.3 } : {}),
+    ...(p.shadowBlur !== undefined || p.shadowX !== undefined || p.shadowY !== undefined || fallback.shadowBlur !== undefined ? {
+      shadowBlur: number("shadowBlur", 0, 12) ?? 0,
+      shadowX: number("shadowX", -10, 10) ?? 0,
+      shadowY: number("shadowY", -10, 10) ?? 0,
+      shadowColor: color("shadowColor") ?? "#000000",
+    } : {}),
+    ...(depth === 0 && (Array.isArray(p.blocks) || fallback.blocks) ? { blocks: (Array.isArray(p.blocks) ? p.blocks : fallback.blocks ?? []).slice(0, 5).map(block => cleanCaption(block, { ...DEFAULT_CAPTION_SETTINGS, visible: true, text: "" }, 1)) } : {}),
     strokeWidth: number("strokeWidth", 0, 6),
     fill: color("fill"),
     stroke: color("stroke"),
@@ -446,7 +457,9 @@ export async function renderCaptioned(
     image.width * scale,
     image.height * scale,
   );
-  if (caption.visible && caption.text.trim()) {
+  const captions = [caption, ...(caption.blocks ?? [])];
+  for (const caption of captions) if (caption.visible && caption.text.trim()) {
+    ctx.save();
     // Explicitly load the selected face, even when exporting before it has appeared in a preview.
     await document.fonts.load(captionFont(caption), caption.text).catch(() => {
       // Match the preview's declared fallback if a font request fails.
@@ -477,7 +490,12 @@ export async function renderCaptioned(
     ctx.lineJoin = "round";
     ctx.textAlign = "left";
     ctx.textBaseline = "alphabetic";
-    if (!caption.strokeWidth && caption.background === "none") {
+    if (caption.shadowBlur !== undefined || caption.shadowX !== undefined || caption.shadowY !== undefined) {
+      ctx.shadowColor = caption.shadowColor ?? "#000000";
+      ctx.shadowBlur = (caption.shadowBlur ?? 0) * 3.6;
+      ctx.shadowOffsetX = (caption.shadowX ?? 0) * 3.6;
+      ctx.shadowOffsetY = (caption.shadowY ?? 0) * 3.6;
+    } else if (!caption.strokeWidth && caption.background === "none") {
       ctx.shadowColor = "rgba(0,0,0,.5)";
       ctx.shadowBlur = 8;
       ctx.shadowOffsetY = 2;
@@ -486,6 +504,7 @@ export async function renderCaptioned(
       if (caption.strokeWidth) ctx.strokeText(line.text, line.x, line.y);
       ctx.fillText(line.text, line.x, line.y);
     }
+    ctx.restore();
   }
 
   const blob = await new Promise<Blob | null>((resolve) =>
