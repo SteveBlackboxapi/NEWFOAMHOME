@@ -1,5 +1,5 @@
 {
-  "revision": "0b494ac5b4e257a7",
+  "revision": "33b448677defead7",
   "images": {
     "assets/agency-logos.webp": {
       "src": "assets/agency-logos.webp",
@@ -980,29 +980,6 @@
         }
       ]
     },
-    "assets/talent/lena-croft-skincare-v3/serum-review.webp": {
-      "src": "assets/talent/lena-croft-skincare-v3/serum-review.webp",
-      "width": 941,
-      "height": 1672,
-      "variants": [
-        {
-          "src": "assets/responsive/f007837c16b8fc2f8723/96/talent/lena-croft-skincare-v3/serum-review.webp.webp",
-          "width": 96
-        },
-        {
-          "src": "assets/responsive/f007837c16b8fc2f8723/256/talent/lena-croft-skincare-v3/serum-review.webp.webp",
-          "width": 256
-        },
-        {
-          "src": "assets/responsive/f007837c16b8fc2f8723/480/talent/lena-croft-skincare-v3/serum-review.webp.webp",
-          "width": 480
-        },
-        {
-          "src": "assets/responsive/f007837c16b8fc2f8723/768/talent/lena-croft-skincare-v3/serum-review.webp.webp",
-          "width": 768
-        }
-      ]
-    },
     "assets/talent/lena-croft-v2/lena-croft-grwm.webp": {
       "src": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
       "width": 941,
@@ -1382,6 +1359,29 @@
         },
         {
           "src": "assets/responsive/67353e7a059748d2f997/768/talent/suki-prent-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/tessa-marlow-v1/palette-review.webp": {
+      "src": "assets/talent/tessa-marlow-v1/palette-review.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/38e47370f68967a2bd55/96/talent/tessa-marlow-v1/palette-review.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/38e47370f68967a2bd55/256/talent/tessa-marlow-v1/palette-review.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/38e47370f68967a2bd55/480/talent/tessa-marlow-v1/palette-review.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/38e47370f68967a2bd55/768/talent/tessa-marlow-v1/palette-review.webp.webp",
           "width": 768
         }
       ]
