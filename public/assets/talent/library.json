@@ -430,65 +430,65 @@
           "strongKind": "photo"
         },
         {
+          "provenance": "ai-generated",
           "id": "skincare-moisturiser-v1",
           "type": "still",
-          "provenance": "ai-generated",
           "thumb": "assets/talent/uploads/camille-skincare-moisturiser-20261002.webp",
-          "original": "assets/talent/uploads/camille-skincare-moisturiser-20261002-original.png",
           "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/camille-skincare-moisturiser-20261002-original.png",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "assets/talent/uploads/camille-aubert-skincare-moisturiser-v1-generation.md"
+          },
+          "views": 219400,
           "caption": "A quick moisturiser texture check",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "views": 219400,
-          "strongKind": "photo",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-spf-v1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/camille-skincare-spf-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/camille-skincare-spf-20261002-original.png",
           "generation": {
             "version": "Skincare review v1 · 2 October 2026",
             "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/camille-aubert-skincare-moisturiser-v1-generation.md"
-          }
-        },
-        {
-          "id": "skincare-spf-v1",
-          "type": "still",
-          "provenance": "ai-generated",
-          "thumb": "assets/talent/uploads/camille-skincare-spf-20261002.webp",
-          "original": "assets/talent/uploads/camille-skincare-spf-20261002-original.png",
-          "aspectRatio": "9/16",
+            "prompt": "assets/talent/uploads/camille-aubert-skincare-spf-v1-generation.md"
+          },
+          "views": 163800,
           "caption": "The SPF that comes with me",
           "captionSettings": {
             "visible": false
           },
           "platform": "tiktok",
-          "views": 163800,
-          "engagements": 8700,
           "strongKind": "photo",
+          "engagements": 8700
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-evening-v1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/camille-skincare-evening-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/camille-skincare-evening-20261002-original.png",
           "generation": {
             "version": "Skincare review v1 · 2 October 2026",
             "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/camille-aubert-skincare-spf-v1-generation.md"
-          }
-        },
-        {
-          "id": "skincare-evening-v1",
-          "type": "still",
-          "provenance": "ai-generated",
-          "thumb": "assets/talent/uploads/camille-skincare-evening-20261002.webp",
-          "original": "assets/talent/uploads/camille-skincare-evening-20261002-original.png",
-          "aspectRatio": "9/16",
+            "prompt": "assets/talent/uploads/camille-aubert-skincare-evening-v1-generation.md"
+          },
+          "views": 94700,
           "caption": "Keeping the evening routine simple",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "views": 94700,
-          "strongKind": "photo",
-          "generation": {
-            "version": "Skincare review v1 · 2 October 2026",
-            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/camille-aubert-skincare-evening-v1-generation.md"
-          }
+          "strongKind": "photo"
         }
       ]
     },
@@ -2067,66 +2067,66 @@
           "engagements": 560
         },
         {
+          "provenance": "ai-generated",
           "id": "skincare-cleanser-v1",
           "type": "still",
-          "provenance": "ai-generated",
           "thumb": "assets/talent/uploads/angelina-skincare-cleanser-20261002.webp",
-          "original": "assets/talent/uploads/angelina-skincare-cleanser-20261002-original.png",
           "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/angelina-skincare-cleanser-20261002-original.png",
+          "generation": {
+            "version": "Skincare review v1 · 2 October 2026",
+            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
+            "prompt": "assets/talent/uploads/angelina-lemon-skincare-cleanser-v1-generation.md"
+          },
+          "views": 318700,
           "caption": "A gentle cleanse before the day starts",
           "captionSettings": {
             "visible": false
           },
           "platform": "tiktok",
-          "views": 318700,
-          "engagements": 12900,
           "strongKind": "photo",
+          "engagements": 12900
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-serum-v1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/angelina-skincare-serum-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/angelina-skincare-serum-20261002-original.png",
           "generation": {
             "version": "Skincare review v1 · 2 October 2026",
             "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/angelina-lemon-skincare-cleanser-v1-generation.md"
-          }
-        },
-        {
-          "id": "skincare-serum-v1",
-          "type": "still",
-          "provenance": "ai-generated",
-          "thumb": "assets/talent/uploads/angelina-skincare-serum-20261002.webp",
-          "original": "assets/talent/uploads/angelina-skincare-serum-20261002-original.png",
-          "aspectRatio": "9/16",
+            "prompt": "assets/talent/uploads/angelina-lemon-skincare-serum-v1-generation.md"
+          },
+          "views": 128600,
           "caption": "Trying the serum texture on my hand",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "views": 128600,
-          "strongKind": "photo",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-moisturiser-v1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/angelina-skincare-moisturiser-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/angelina-skincare-moisturiser-20261002-original.png",
           "generation": {
             "version": "Skincare review v1 · 2 October 2026",
             "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/angelina-lemon-skincare-serum-v1-generation.md"
-          }
-        },
-        {
-          "id": "skincare-moisturiser-v1",
-          "type": "still",
-          "provenance": "ai-generated",
-          "thumb": "assets/talent/uploads/angelina-skincare-moisturiser-20261002.webp",
-          "original": "assets/talent/uploads/angelina-skincare-moisturiser-20261002-original.png",
-          "aspectRatio": "9/16",
+            "prompt": "assets/talent/uploads/angelina-lemon-skincare-moisturiser-v1-generation.md"
+          },
+          "views": 207300,
           "caption": "Checking the finish after moisturiser",
           "captionSettings": {
             "visible": false
           },
           "platform": "tiktok",
-          "views": 207300,
-          "engagements": 16400,
           "strongKind": "photo",
-          "generation": {
-            "version": "Skincare review v1 · 2 October 2026",
-            "approach": "Identity-preserving AI-generated skincare review photograph. Fictional product, creator post and illustrative figures; no real account or measured result.",
-            "prompt": "assets/talent/uploads/angelina-lemon-skincare-moisturiser-v1-generation.md"
-          }
+          "engagements": 16400
         }
       ]
     },
@@ -3964,45 +3964,45 @@
           "strongKind": "photo"
         },
         {
+          "provenance": "ai-generated",
           "id": "skincare-serum-closeup-v3",
           "type": "still",
-          "provenance": "ai-generated",
           "thumb": "assets/talent/uploads/lena-skincare-serum-closeup-20261002.webp",
-          "original": "assets/talent/uploads/lena-skincare-serum-closeup-20261002-original.png",
           "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/lena-skincare-serum-closeup-20261002-original.png",
+          "generation": {
+            "version": "Skincare angle variation v3",
+            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
+            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-closeup-v3-generation.md"
+          },
+          "views": 231600,
           "caption": "A closer look at the serum pump",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "views": 231600,
-          "strongKind": "photo",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-serum-review-v3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/lena-skincare-serum-review-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/lena-skincare-serum-review-20261002-original.png",
           "generation": {
             "version": "Skincare angle variation v3",
             "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
-            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-closeup-v3-generation.md"
-          }
-        },
-        {
-          "id": "skincare-serum-review-v3",
-          "type": "still",
-          "provenance": "ai-generated",
-          "thumb": "assets/talent/uploads/lena-skincare-serum-review-20261002.webp",
-          "original": "assets/talent/uploads/lena-skincare-serum-review-20261002-original.png",
-          "aspectRatio": "9/16",
+            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-review-v3-generation.md"
+          },
+          "views": 394800,
           "caption": "A serum texture check while getting ready",
           "captionSettings": {
             "visible": false
           },
           "platform": "tiktok",
-          "views": 394800,
-          "engagements": 17300,
           "strongKind": "photo",
-          "generation": {
-            "version": "Skincare angle variation v3",
-            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
-            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-review-v3-generation.md"
-          }
+          "engagements": 17300
         }
       ]
     },
@@ -4368,9 +4368,9 @@
       ]
     },
     {
+      "provenance": "ai-generated",
       "id": "tessa-marlow",
       "displayName": "Tessa Marlow",
-      "provenance": "ai-generated",
       "age": 27,
       "location": "Leeds",
       "bio": "Everyday makeup texture checks and straightforward getting-ready routines. Fictional demo creator; audience and post figures are illustrative.",
@@ -4389,8 +4389,6 @@
       "totalAudience": 124700,
       "portrait": "assets/talent/uploads/tessa-marlow-palette-review-20261002.webp",
       "originalPortrait": "assets/talent/uploads/tessa-marlow-palette-review-20261002-original.png",
-      "motion": null,
-      "motionStatus": "placeholder",
       "creativeDirection": {
         "summary": "Candid makeup review with a neutral eyeshadow palette, brush and harsh mixed bathroom light.",
         "identityNotes": [
@@ -4398,26 +4396,28 @@
         ],
         "promptFile": "assets/talent/tessa-marlow-v1/creative-brief.md"
       },
+      "motion": null,
+      "motionStatus": "placeholder",
       "content": [
         {
+          "provenance": "ai-generated",
           "id": "palette-review-v1",
           "type": "still",
-          "provenance": "ai-generated",
           "thumb": "assets/talent/uploads/tessa-marlow-palette-review-20261002.webp",
-          "original": "assets/talent/uploads/tessa-marlow-palette-review-20261002-original.png",
           "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/tessa-marlow-palette-review-20261002-original.png",
+          "generation": {
+            "version": "Makeup review v1",
+            "approach": "Original fictional adult generated in harsh mixed bathroom light. Illustrative post figures; no baked captions.",
+            "prompt": "assets/talent/uploads/tessa-marlow-palette-review-v1-generation.md"
+          },
+          "views": 186400,
           "caption": "Trying the everyday eyeshadow palette",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "views": 186400,
-          "strongKind": "photo",
-          "generation": {
-            "version": "Makeup review v1",
-            "approach": "Original fictional adult generated in harsh mixed bathroom light. Illustrative post figures; no baked captions.",
-            "prompt": "assets/talent/uploads/tessa-marlow-palette-review-v1-generation.md"
-          }
+          "strongKind": "photo"
         }
       ]
     }
@@ -4464,9 +4464,34 @@
         "radius": 5,
         "font": "sf"
       }
+    },
+    "[\"assets/talent/aria-quen-v2/aria-quen-v2-c1.webp\",\"/kit-story\",\"Found with Foam · Search results\"]": {
+      "assetId": "aria-quen:0",
+      "rendered": "assets/talent/uploads/42d64dfd-8445-4b26-a39c-770a2f204da6.webp",
+      "settings": {
+        "visible": true,
+        "text": "five-minute face before coffee",
+        "x": 50,
+        "y": 59,
+        "size": 36,
+        "strokeWidth": 0,
+        "fill": "#fff29a",
+        "stroke": "#ffffff",
+        "weight": 400,
+        "italic": false,
+        "uppercase": false,
+        "align": "center",
+        "background": "none",
+        "backgroundColor": "#ffffff",
+        "backgroundOpacity": 100,
+        "padding": 6,
+        "radius": 5,
+        "font": "mono"
+      }
     }
   },
   "websitePlacementReplacements": {
-    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/4be69d62-3a7d-4e37-8034-7f7eaca984b1.webp"
+    "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/4be69d62-3a7d-4e37-8034-7f7eaca984b1.webp",
+    "[\"assets/talent/aria-quen-v2/aria-quen-v2-c1.webp\",\"/kit-story\",\"Found with Foam · Search results\"]": "assets/talent/uploads/42d64dfd-8445-4b26-a39c-770a2f204da6.webp"
   }
 }
