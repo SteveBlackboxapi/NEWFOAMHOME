@@ -1,0 +1,23 @@
+{
+  "tool": "Built-in image generation",
+  "created": "2026-10-02",
+  "identityReferences": [
+    "assets/talent/lena-croft-portrait.jpg",
+    "assets/talent/lena-croft-v2/lena-croft-grwm.webp"
+  ],
+  "assets": [
+    {
+      "name": "serum-closeup",
+      "prompt": "Create one photorealistic vertical 9:16 skincare creator photo. Reference images show the SAME fictional adult Lena Croft, age 29: preserve her face, grey-green eyes, softly angular jaw, nose, skin tone and short tousled dark-blonde bob faithfully. Natural pores and small imperfections, candid frame from a normal phone video, ordinary mixed bathroom light, no glamour retouching. Camera is our viewpoint: no phone, camera or filming equipment visible. No captions, words, logos, badges, metrics or watermark. Tight slightly tilted selfie close-up, her face fills most of frame, looking at lens mid-explanation. Tiny translucent serum dots just below one eye. One hand holds an unbranded frosted pale-blue serum bottle with white pump near lower-left cheek, finger resting naturally on pump; other hand lightly lifts hair away from temple. Cream tiled bathroom, faint towel in background. Casual grey tee visible only at neckline. Product and her eyes readable, believable hands and anatomy.",
+      "preview": "serum-closeup.webp",
+      "master": "masters/serum-closeup.png",
+      "editPrompt": "Edit this generated photo of fictional adult Lena, preserving her identity, short dark-blonde bob, grey-green eyes, skin texture and grey tee. Make it feel like a very close front-facing smartphone WIDE-ANGLE selfie (24mm equivalent, arm's-length camera very close, gently exaggerated foreground pump and fingers, slightly tilted head, informal edge crop), rather than a portrait lens. Her face fills frame and leans towards camera, forehead visible. Replace the three transparent drops on the cheek with a neat small arc of tiny pale-pink and pale-yellow eye-serum dots immediately BELOW EACH eye along the under-eye area, not down the cheek. Soft light from below/front creates subtle catchlights in the lower part of eyes; realistic bathroom ambient light, no studio ring light. Keep the pale-blue white-pump bottle near the lens at left edge and hair-lifting hand by temple. Natural believable anatomy. No phone, captions, lettering, graphics, logos or watermark. Portrait9:16."
+    },
+    {
+      "name": "serum-review",
+      "prompt": "Create one photorealistic vertical 9:16 skincare creator photo. Reference images show the SAME fictional adult Lena Croft, age 29: preserve her face, grey-green eyes, softly angular jaw, nose, skin tone and short tousled dark-blonde bob faithfully. Natural pores and small imperfections, candid frame from a normal phone video, ordinary mixed bathroom light, no glamour retouching. Camera is our viewpoint: no phone, camera or filming equipment visible. No captions, words, logos, badges, metrics or watermark. Angled chest-up casual selfie from slightly above eye level, more room and torso visible than a face close-up. Wearing a plain white ribbed tee, short blonde bob casually tucked behind one ear, speaking mid-sentence with relaxed expression. Holding a small unbranded translucent dusty-pink serum bottle at chest height in one hand, other hand turning its white pump cap mid-demonstration. Muted teal painted bathroom wall and hanging white towel, natural window light. Unposed mid-task framing, believable fingers, no mirror and no phone.",
+      "preview": "serum-review.webp",
+      "master": "masters/serum-review.png"
+    }
+  ]
+}

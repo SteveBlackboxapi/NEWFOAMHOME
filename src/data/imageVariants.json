@@ -1,5 +1,5 @@
 {
-  "revision": "22b18a76b2db48e3",
+  "revision": "0b494ac5b4e257a7",
   "images": {
     "assets/agency-logos.webp": {
       "src": "assets/agency-logos.webp",
@@ -953,6 +953,52 @@
         },
         {
           "src": "assets/responsive/cda1bda32c594496316b/768/talent/lena-croft-portrait.jpg.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/lena-croft-skincare-v3/serum-closeup.webp": {
+      "src": "assets/talent/lena-croft-skincare-v3/serum-closeup.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/067418455dfe04dcd59f/96/talent/lena-croft-skincare-v3/serum-closeup.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/067418455dfe04dcd59f/256/talent/lena-croft-skincare-v3/serum-closeup.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/067418455dfe04dcd59f/480/talent/lena-croft-skincare-v3/serum-closeup.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/067418455dfe04dcd59f/768/talent/lena-croft-skincare-v3/serum-closeup.webp.webp",
+          "width": 768
+        }
+      ]
+    },
+    "assets/talent/lena-croft-skincare-v3/serum-review.webp": {
+      "src": "assets/talent/lena-croft-skincare-v3/serum-review.webp",
+      "width": 941,
+      "height": 1672,
+      "variants": [
+        {
+          "src": "assets/responsive/f007837c16b8fc2f8723/96/talent/lena-croft-skincare-v3/serum-review.webp.webp",
+          "width": 96
+        },
+        {
+          "src": "assets/responsive/f007837c16b8fc2f8723/256/talent/lena-croft-skincare-v3/serum-review.webp.webp",
+          "width": 256
+        },
+        {
+          "src": "assets/responsive/f007837c16b8fc2f8723/480/talent/lena-croft-skincare-v3/serum-review.webp.webp",
+          "width": 480
+        },
+        {
+          "src": "assets/responsive/f007837c16b8fc2f8723/768/talent/lena-croft-skincare-v3/serum-review.webp.webp",
           "width": 768
         }
       ]

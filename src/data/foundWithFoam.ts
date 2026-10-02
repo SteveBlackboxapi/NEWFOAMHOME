@@ -42,10 +42,10 @@ export const FOUND_RESULTS: FoundResult[] = [
   resultFor(websiteMira, "mira-vale-paused-makeup.webp", ["visual", "audio"]), // Candid makeup frame
   resultFor(websiteAria, "aria-quen-v2-c1.webp", ["visual", "audio", "hashtag"]), // Lipstick application
   resultFor(websiteElise, "elise-morgan-hotel-selfie.webp"), // Hotel getting-ready moment
-  resultFor(websiteLena, "lena-croft-grwm.webp", ["visual", "audio"]), // Refreshed getting-ready skincare
+  resultFor(websiteLena, "serum-closeup.webp", ["visual", "audio"]), // Tight serum close-up
   resultFor(websiteAria, "aria-quen-v2-c4.webp"), // Makeup flatlay
   resultFor(websiteSamantha, "samantha-pikka-v2-c1.webp", ["visual", "audio"]), // One Samantha appearance
-  resultFor(websiteLena, "lena-croft-outfit.webp"), // Outfit check
+  resultFor(websiteLena, "serum-review.webp"), // Angled product review
   resultFor(websiteCamille, "evening.webp", ["visual", "audio", "hashtag"]),
   resultFor(websiteAngelina, "cleanser.webp", ["visual", "hashtag"]),
 ];
