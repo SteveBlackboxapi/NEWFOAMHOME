@@ -340,7 +340,9 @@ test("login rejects wrong password and sets a twelve-hour secure HttpOnly host c
   assert.match(cookie, /^__Host-foam_lab=/);
   assert.match(cookie, /Secure; HttpOnly; SameSite=Strict; Max-Age=43200/);
   const status = await f.send("/api/status", { cookie: cookie.split(";")[0] });
-  assert.deepEqual(await status.json(), { connected: false });
+  const session = await status.json();
+  assert.equal(session.connected, false);
+  assert.ok(session.sessionRemainingSeconds > 43190 && session.sessionRemainingSeconds <= 43200);
 });
 test("forged, expired, and password-rotation sessions cannot read private assets", async () => {
   const f = await fixture();
@@ -484,9 +486,7 @@ test("GitHub token is verified, encrypted in KV, never echoed, and never needed 
   });
   assert.deepEqual(await connect.json(), { connected: true });
   assert.ok(!f.store.get("github-token-v1").includes(TOKEN));
-  assert.deepEqual(await (await f.send("/api/status", { cookie })).json(), {
-    connected: true,
-  });
+  assert.equal((await (await f.send("/api/status", { cookie })).json()).connected, true);
   await f.send("/api/github/git/ref/heads/main", {
     cookie,
     headers: { Authorization: "Bearer attacker-token" },
@@ -919,4 +919,20 @@ test("streaming body limit applies even without a Content-Length header", async 
     ).status,
     413,
   );
+});
+
+ test("status lifetime decreases and expired sessions cannot check status", async () => {
+  const f = await fixture();
+  const originalNow = Date.now;
+  const start = originalNow();
+  try {
+    Date.now = () => start;
+    const cookie = await f.login();
+    Date.now = () => start + 60000;
+    const status = await (await f.send("/api/status", { cookie })).json();
+    assert.equal(status.sessionRemainingSeconds, 43140);
+    Date.now = () => start + 43200000;
+    assert.equal((await f.send("/api/status", { cookie })).status, 401);
+    assert.equal((await f.send("/assets/private.js", { cookie })).status, 401);
+  } finally { Date.now = originalNow; }
 });

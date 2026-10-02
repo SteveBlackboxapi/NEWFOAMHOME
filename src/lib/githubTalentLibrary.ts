@@ -1,5 +1,5 @@
 import { A } from "./assets";
-import type { StagedTalent } from "../data/stagedTalent";
+import type { StagedTalent, TileCaptionSettings } from "../data/stagedTalent";
 
 export const LIBRARY_REPO = "SteveBlackboxapi/NEWFOAMHOME";
 export const LIBRARY_BRANCH = "content/talent-library";
@@ -9,6 +9,7 @@ const API = `https://api.github.com/repos/${LIBRARY_REPO}`;
 export const PRIVATE_LIBRARY = import.meta.env.VITE_PRIVATE_LAB === "true";
 const SITE_ROOT = import.meta.env.BASE_URL.replace(/\/$/, "");
 const UPLOAD_PATH = "public/assets/talent/uploads/";
+export type PlacementCaption = { assetId: string; rendered: string; original?: string; settings: TileCaptionSettings; needsRender?: boolean };
 export type LibraryManifest = {
   version: 1;
   profiles: StagedTalent[];
@@ -17,6 +18,7 @@ export type LibraryManifest = {
   websiteReplacements?: Record<string, string>;
   /** One exact source/page/section placement; takes precedence over a global replacement. */
   websitePlacementReplacements?: Record<string, string>;
+  websitePlacementCaptions?: Record<string, PlacementCaption>;
 };
 export type WebsitePublication = { revision: string; queued: boolean; published?: boolean; error?: string };
 export type LibrarySnapshot = {
@@ -62,6 +64,8 @@ async function request(
       ...(body ? { body: JSON.stringify(body) } : {}),
     },
   );
+  if (PRIVATE_LIBRARY && response.status === 401 && typeof window !== "undefined")
+    window.dispatchEvent(new Event("foam:session-expired"));
   if (!response.ok) {
     const message =
       response.status === 401
@@ -93,6 +97,8 @@ async function privateSessionRequest(
         }
       : {}),
   });
+  if (response.status === 401 && typeof window !== "undefined")
+    window.dispatchEvent(new Event("foam:session-expired"));
   if (!response.ok)
     throw new LibraryError(
       response.status === 401
@@ -359,6 +365,40 @@ export function parseWebsitePlacementReplacements(input: unknown): Record<string
   }
   return Object.fromEntries(entries) as Record<string, string>;
 }
+export function parsePlacementCaptions(input: unknown): Record<string, PlacementCaption> {
+  if (!input || typeof input !== "object" || Array.isArray(input) || Object.keys(input).length > 3000)
+    throw new LibraryError("Unsupported placement captions.");
+  for (const [key, value] of Object.entries(input)) {
+    const entry = value as PlacementCaption;
+    if (!entry || typeof entry !== "object" || !entry.settings || !validCaption(entry.settings) ||
+      typeof entry.settings.text !== "string" || entry.settings.text.length > 2000 ||
+      typeof entry.assetId !== "string" || entry.assetId.length > 200 ||
+      (entry.needsRender !== undefined && typeof entry.needsRender !== "boolean"))
+      throw new LibraryError("Invalid placement caption.");
+    parseWebsitePlacementReplacements({ [key]: entry.rendered });
+    if (entry.original !== undefined) parseWebsitePlacementReplacements({ [key]: entry.original });
+  }
+  return input as Record<string, PlacementCaption>;
+}
+export function withPlacementCaption(manifest: LibraryManifest, key: string, rendered: string, settings: TileCaptionSettings, assetId: string): LibraryManifest {
+  const old = manifest.websitePlacementCaptions?.[key];
+  const current = manifest.websitePlacementReplacements?.[key];
+  const original = old && current === old.rendered ? old.original : current;
+  const entry = { assetId, rendered, settings, ...(original ? { original } : {}) };
+  parsePlacementCaptions({ [key]: entry });
+  return { ...manifest,
+    websitePlacementReplacements: { ...manifest.websitePlacementReplacements, [key]: rendered },
+    websitePlacementCaptions: { ...manifest.websitePlacementCaptions, [key]: entry },
+  };
+}
+export function withoutPlacementCaption(manifest: LibraryManifest, key: string): LibraryManifest {
+  const entry = manifest.websitePlacementCaptions?.[key];
+  if (!entry || manifest.websitePlacementReplacements?.[key] !== entry.rendered) return manifest;
+  const replacements = { ...manifest.websitePlacementReplacements };
+  if (entry.original) replacements[key] = entry.original;
+  else delete replacements[key];
+  return { ...manifest, websitePlacementReplacements: replacements };
+}
 export function withWebsiteImageReplacement(manifest: LibraryManifest, source: string, replacement: string): LibraryManifest {
   const canonical = assetPath(source);
   const global = parseWebsiteReplacements({ [canonical]: replacement });
@@ -495,6 +535,7 @@ export function parseLibrary(input: unknown): LibraryManifest {
     ...(value.websiteReplacements === undefined ? {} : {
       websiteReplacements: parseWebsiteReplacements(value.websiteReplacements),
     }),
+    ...(value.websitePlacementCaptions === undefined ? {} : { websitePlacementCaptions: parsePlacementCaptions(value.websitePlacementCaptions) }),
     ...(value.websitePlacementReplacements === undefined ? {} : {
       websitePlacementReplacements: parseWebsitePlacementReplacements(value.websitePlacementReplacements),
     }),
@@ -580,6 +621,10 @@ function uploadedPaths(manifest: LibraryManifest): Set<string> {
   Object.values(manifest.websitePlacementReplacements || {}).forEach((src) =>
     paths.add(`public/${src}`),
   );
+  Object.values(manifest.websitePlacementCaptions || {}).forEach(({ rendered, original }) => {
+    paths.add(`public/${rendered}`);
+    if (original) paths.add(`public/${original}`);
+  });
   manifest.profiles
     .filter((p) => !manifest.removedTalentIds.includes(p.id))
     .forEach((p) =>

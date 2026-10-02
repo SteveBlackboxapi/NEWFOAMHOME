@@ -1,13 +1,15 @@
+import { LabIcon } from "./TalentLabIcon";
 import { useEffect, useRef, useState } from "react";
 import { labTalent } from "../data/labTalentCatalogue";
 import type { StagedTalent, TalentContentTile } from "../data/stagedTalent";
 import { websiteUsageFor, websiteArtwork } from "../data/websiteAssetUsage";
-import { assetsFor, type LabAsset } from "../lib/talentLab";
+import { assetsFor, readCaption, renderCaptioned, type LabAsset } from "../lib/talentLab";
 import {
   PRIVATE_LIBRARY,
   LIBRARY_REPO,
   LIBRARY_REVIEW_URL,
   prepareLibraryImage,
+  websitePlacementKey,
 } from "../lib/githubTalentLibrary";
 import type { TalentLibraryController } from "../hooks/useTalentLibrary";
 import { websiteReplacementSource } from "../lib/websiteImageReplacement";
@@ -26,29 +28,72 @@ export function placementsForAsset(asset: LabAsset) {
   ];
   return [...new Map(uses.map((u) => [`${u.route}:${u.section}`, u])).values()];
 }
-export function AssetUsage({ asset }: { asset: LabAsset }) {
+export function AssetUsage({ asset, collapsible = false, library }: { asset: LabAsset; collapsible?: boolean; library?: TalentLibraryController }) {
   const uses = placementsForAsset(asset);
+  const label = uses.length
+    ? `Website · ${uses.length} ${uses.length === 1 ? "placement" : "placements"}`
+    : "Library only";
+  const placements = uses.length > 0 && (
+    <ul className={collapsible ? "tl-usage-links" : undefined} tabIndex={collapsible ? 0 : undefined} aria-label="Website placements">
+      {uses.map((u) => (
+        <li key={`${u.route}:${u.section}`}>
+          <a href={websiteUrl(u.route)} target="_blank" rel="noopener">
+            {u.section} ↗
+          </a>
+          {library && asset.tile && !asset.tile.video && <PlacementCaptionControl asset={asset} route={u.route} section={u.section} library={library} />}
+        </li>
+      ))}
+    </ul>
+  );
+  if (collapsible && uses.length > 0) return (
+    <details className="tl-usage tl-usage-disclosure">
+      <summary>
+        <strong>{label}</strong>
+        <span className="tl-usage-show">Show placements</span>
+        <span className="tl-usage-hide">Hide placements</span>
+      </summary>
+      {placements}
+    </details>
+  );
   return (
     <div className="tl-usage">
-      <strong>
-        {uses.length
-          ? `Website · ${uses.length} ${uses.length === 1 ? "placement" : "placements"}`
-          : "Library only"}
-      </strong>
-      {uses.length > 0 && (
-        <ul>
-          {uses.map((u) => (
-            <li key={`${u.route}:${u.section}`}>
-              <a href={websiteUrl(u.route)} target="_blank" rel="noopener">
-                {u.section} ↗
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <strong>{label}</strong>
+      {placements}
     </div>
   );
 }
+function PlacementCaptionControl({ asset, route, section, library }: { asset: LabAsset; route: string; section: string; library: TalentLibraryController }) {
+  const [working, setWorking] = useState(false);
+  const [error, setError] = useState("");
+  const source = websiteReplacementSource(asset.id);
+  if (!source) return null;
+  const key = websitePlacementKey(source, route, section);
+  const entry = library.placementCaptions[key];
+  const enabled = Boolean(entry && library.placementReplacements[key] === entry.rendered);
+  const caption = readCaption(asset);
+  async function toggle(checked: boolean) {
+    setError("");
+    if (!checked) { library.clearPlacementCaption(key); return; }
+    if (!caption?.text.trim()) { setError("Add the caption in Caption studio first."); return; }
+    setWorking(true);
+    try {
+      const settings = { ...caption, visible: true };
+      const clean = { ...asset, src: library.captionSource(key, asset.src) };
+      const blob = await renderCaptioned(clean, settings, "image/webp");
+      const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }));
+      library.addUpload(prepared.upload, prepared.preview);
+      library.setPlacementCaption(key, prepared.src, settings, asset.id);
+    } catch (error) { setError(error instanceof Error ? error.message : "Could not prepare this caption."); }
+    finally { setWorking(false); }
+  }
+  return <div className="tl-placement-caption">
+    <label><input type="checkbox" checked={enabled} disabled={working || library.saving || !library.ready} onChange={event => void toggle(event.target.checked)} /> Show caption here</label>
+    {working && <span role="status">Preparing caption…</span>}
+    {enabled && <details><summary>Preview caption</summary><img src={library.websitePlacementImages[key]} alt={`${asset.title} — caption preview for ${section}`} /><p>{entry.needsRender ? "Updated caption will be rendered when you save." : "Caption and image scale together. Save changes to update this placement."}</p></details>}
+    {error && <p role="alert">{error}</p>}
+  </div>;
+}
+
 export function TalentLibraryManager({
   library,
   initialId,
@@ -59,6 +104,7 @@ export function TalentLibraryManager({
   onClose: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const confirmation = useRef<HTMLDivElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const replaceInput = useRef<HTMLInputElement>(null);
   const [selectedId, setSelectedId] = useState(initialId || "");
@@ -74,6 +120,11 @@ export function TalentLibraryManager({
     run: () => void;
   } | null>(null);
   const [artwork, setArtwork] = useState(false);
+  useEffect(() => {
+    if (!confirm) return;
+    confirmation.current?.focus({ preventScroll: true });
+    confirmation.current?.scrollIntoView({ block: "center" });
+  }, [confirm]);
   const profile = library.rawProfiles.find((p) => p.id === selectedId);
   const rendered = library.profiles.find((p) => p.id === selectedId);
   const activeAssets = rendered ? assetsFor(rendered) : [];
@@ -85,6 +136,8 @@ export function TalentLibraryManager({
   useEffect(() => {
     const d = dialog.current!;
     const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     d.showModal();
     const cancel = (e: Event) => {
       e.preventDefault();
@@ -94,6 +147,7 @@ export function TalentLibraryManager({
     return () => {
       d.removeEventListener("cancel", cancel);
       d.close();
+      document.body.style.overflow = overflow;
       previous?.focus();
     };
   }, []);
@@ -235,8 +289,8 @@ export function TalentLibraryManager({
             Talent, images & where they’re used
           </h2>
         </div>
-        <button className="tl-button" onClick={onClose}>
-          Close
+        <button className="tl-library-close" aria-label="Close manage images" title="Close" onClick={onClose}>
+          <LabIcon name="close" />
         </button>
       </header>
       <div className="tl-library-connection">
@@ -404,7 +458,7 @@ export function TalentLibraryManager({
         </button>
       </div>
       {confirm && (
-        <div className="tl-library-confirm" role="alert">
+        <div ref={confirmation} className="tl-library-confirm" role="alert" tabIndex={-1}>
           <p>{confirm.label}</p>
           <button className="tl-button" onClick={() => setConfirm(null)}>
             Keep it
@@ -571,7 +625,7 @@ export function TalentLibraryManager({
               <article key={asset.id}>
                 <img src={asset.src} alt={asset.title} />
                 <h3>{asset.tile ? asset.title : "Profile portrait"}</h3>
-                <AssetUsage asset={asset} />
+                <AssetUsage asset={asset} library={library} />
                 <div className="tl-library-image-actions">
                   <button
                     className="tl-button"
@@ -646,6 +700,8 @@ export function TalentLibraryManager({
                     run: () => {
                       library.remove(profile.id);
                       pick("");
+                      setMessage(`${profile.displayName} removed from this draft. Save changes to finish, or discard the draft to undo.`);
+                      dialog.current?.scrollTo({ top: 0 });
                     },
                   })
                 }

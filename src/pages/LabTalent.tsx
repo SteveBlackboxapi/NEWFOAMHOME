@@ -1,3 +1,4 @@
+import { TalentSessionGate } from "../components/TalentSessionGate";
 import {
   useEffect,
   useMemo,
@@ -83,6 +84,10 @@ const navItems: { view: View; icon: LabIconName; label: string }[] = [
 ];
 
 export function LabTalent() {
+  return <TalentSessionGate><LabTalentContent /></TalentSessionGate>;
+}
+
+function LabTalentContent() {
   const library = useTalentLibrary();
   const stagedTalent = library.profiles;
   const allAssets = useMemo(
@@ -255,6 +260,7 @@ export function LabTalent() {
   };
   const updateCaption = (asset: LabAsset, caption: TileCaptionSettings) => {
     setCaptions((prev) => ({ ...prev, [asset.id]: caption }));
+    library.updatePlacementCaptions(asset.id, caption);
     if (!writeCaption(asset, caption))
       setToast(
         "The edit is visible, but browser storage is unavailable. Download the image before leaving.",
@@ -993,13 +999,18 @@ export function LabTalent() {
         </footer>
         </>}
       </div>
-      {selected && view !== "settings" && (
+      {selected && managing === null && view !== "settings" && (
         <TalentLabProfile
           key={selected.id}
           talent={selected}
           initialAsset={params.get("asset")}
           captions={captions}
           onCaption={updateCaption}
+          captionPublication={{
+            pending: Object.entries(library.placementCaptions).some(([key, entry]) => entry.needsRender && library.placementReplacements[key] === entry.rendered),
+            saving: library.saving,
+            save: async () => { await library.save(); setToast("Caption changes saved. Website update queued."); },
+          }}
           saved={saved}
           onSave={toggleSaved}
           onClose={closeProfile}
