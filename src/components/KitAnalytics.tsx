@@ -285,12 +285,11 @@ function Distribution({
             <div className="ka-distribution-row" key={row.label}>
               <dt>{row.label}</dt>
               <dd>
-                <span className="ka-bar-track" aria-hidden="true">
+                <span className="ka-bar-track" aria-hidden="true" style={{ width: `calc((100% - 52px) * ${row.percent * p / 100})` }}>
                   <span
                     className="ka-bar-value"
                     style={{
-                      width: `${row.percent}%`,
-                      transform: `scaleX(${p})`,
+                      width: "100%",
                     }}
                   />
                 </span>

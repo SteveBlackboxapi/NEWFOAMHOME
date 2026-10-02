@@ -125,7 +125,7 @@
   stroke: var(--kit-line);
 }
 :is(.ks-kit, .ks-mobile-kit) .ka-bar-track {
-  background: #d8b8e829;
+  background: transparent;
 }
 :is(.ks-kit, .ks-mobile-kit) .ka-metric-shield > path:last-child {
   stroke: var(--kit-surface);
