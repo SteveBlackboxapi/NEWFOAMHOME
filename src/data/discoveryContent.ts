@@ -24,7 +24,7 @@ export const discoverySearches: DiscoverySearchExample[] = [
   {
     id: "nike", query: "Posts talking about Nike", assets: [
       { id: "zane-holt:discovery-zane-shoe-chat", src: `${D}/zane-shoe-chat.webp`, alt: "Fictional runner talking about a well-used Nike shoe", caption: "the pair I keep by the door" },
-      { id: "zane-holt:discovery-nike-lacing", src: `${D}/nike-lacing.webp`, alt: "Illustrative runner tying Nike trainers by a park bench", caption: "five minutes before leaving" },
+      { id: "zane-holt:discovery-nike-lacing", src: `${D}/nike-lacing.webp`, alt: "Illustrative runner tying Nike trainers by a park bench", caption: "My other trusty pair" },
       { id: "zane-holt:discovery-nike-after-run", src: `${D}/nike-after-run.webp`, alt: "Illustrative worn Nike trainers after a rainy run" },
     ],
   },
