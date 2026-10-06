@@ -1,3 +1,4 @@
+import { ContentSearchSection } from "../components/ContentSearchSection";
 import { PeopleTiles } from "../components/PeopleColour";
 import { MarketingImage } from "../components/MarketingImage";
 import { AIDisclosure } from "../components/AIDisclosure";
@@ -62,6 +63,7 @@ export function Brands() {
       </PageIntro>
 
       <TalentSearchSection />
+      <ContentSearchSection />
 
       <section className="mp-section">
         <div className="mp-container">

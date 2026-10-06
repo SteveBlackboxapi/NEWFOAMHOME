@@ -1,3 +1,4 @@
+import { ContentSearchSection } from "../components/ContentSearchSection";
 import { Link } from "react-router";
 import { WebsiteImageRoute } from "../components/WebsiteImageScope";
 import { ManagersWorkflowSections } from "../components/ManagersWorkflowSections";
@@ -50,6 +51,7 @@ export function ManagersLanding() {
         <ManagersWorkflowSections />
         <OverviewFilm />
         <TalentSearchSection />
+        <ContentSearchSection />
         <ProductFamily miniatures />
         <section
           className="pc-perspectives pc-shell"
