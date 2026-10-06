@@ -4535,6 +4535,89 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "theo-lane",
+      "displayName": "Theo Lane",
+      "age": 30,
+      "gender": "Male",
+      "location": "Illustrative profile",
+      "bio": "A fictional lifestyle creator with an eye for slow mornings, local cafés and little everyday rituals. Created for Foam website examples; no real account or partnership is represented.",
+      "verticals": [
+        "Lifestyle",
+        "Food & drink",
+        "Everyday rituals"
+      ],
+      "platforms": [],
+      "totalAudience": 0,
+      "portrait": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
+      "originalPortrait": "assets/talent/theo-lane/matcha-master.png",
+      "creativeDirection": {
+        "summary": "A relaxed, brand-free iced matcha moment in a softly lit café. Natural texture, navy clothing and a sage-green drink.",
+        "identityNotes": [
+          "Fictional adult created with AI.",
+          "No real social account, product endorsement or performance figures are claimed."
+        ],
+        "promptFile": "assets/talent/theo-lane/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "uploaded",
+          "id": "matcha-moment",
+          "type": "still",
+          "thumb": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/theo-lane/matcha-master.png",
+          "caption": "a little pause in the day",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "upload-07447132-8f37-45c2-9931-84b27344bd44",
+          "type": "still",
+          "thumb": "assets/talent/uploads/0b935f9d-0988-4a66-b5fe-96791ce52e44.png",
+          "aspectRatio": "4/5",
+          "caption": "matcha-master",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "upload-b6534fcf-ee41-4ce8-8de9-db1f6afc5c66",
+          "type": "still",
+          "thumb": "assets/talent/uploads/07844ed5-bc00-4bbf-90b3-767894c36136.png",
+          "aspectRatio": "9/16",
+          "caption": "exec-69bc2d25-722b-45bd-9d3d-8331dc04dd3b",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "upload-8744b778-1a04-42cc-9b9c-e2bb0acfd3a3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/8c4502b9-6adf-49c3-8463-02ae17543bda.png",
+          "aspectRatio": "9/16",
+          "caption": "exec-4fcb71dd-5ab1-4387-a889-303e84316bf0",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [
@@ -4555,7 +4638,8 @@
     "assets/talent/lena-croft-portrait.jpg": "assets/talent/uploads/f91872dc-3fba-4bdd-984d-df7c2a971139.webp",
     "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": "assets/talent/uploads/bf38dd82-258d-44fc-a56d-4850de8e1431.webp",
     "assets/talent/jax-orin-portrait.jpg": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
-    "assets/talent/discovery-v1/jax-live-set.webp": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png"
+    "assets/talent/discovery-v1/jax-live-set.webp": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png",
+    "assets/talent/theo-lane/matcha.webp": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png"
   },
   "websitePlacementCaptions": {
     "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": {
