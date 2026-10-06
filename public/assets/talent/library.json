@@ -4763,6 +4763,7 @@
       ]
     },
     {
+      "provenance": "uploaded",
       "id": "zane-holt",
       "displayName": "Zane Holt",
       "age": 45,
@@ -4791,11 +4792,12 @@
         }
       ],
       "totalAudience": 400600,
-      "portrait": "assets/talent/zane-holt-portrait.jpg",
+      "portrait": "assets/talent/uploads/e8ae7d74-a614-4920-b0a1-41ddd1c78c69.png",
       "motion": null,
       "motionStatus": "placeholder",
       "content": [
         {
+          "provenance": "ai-generated",
           "id": "0",
           "type": "clip",
           "thumb": "assets/talent/zane-holt-c1.jpg",
@@ -4806,6 +4808,7 @@
           "engagements": 14600
         },
         {
+          "provenance": "ai-generated",
           "id": "1",
           "type": "still",
           "thumb": "assets/talent/zane-holt-c2.jpg",
@@ -4823,6 +4826,7 @@
           "engagements": 5100
         },
         {
+          "provenance": "ai-generated",
           "id": "2",
           "type": "still",
           "thumb": "assets/talent/zane-holt-c3.jpg",
@@ -4832,6 +4836,7 @@
           "strongKind": "hashtag"
         },
         {
+          "provenance": "ai-generated",
           "id": "3",
           "type": "clip",
           "thumb": "assets/talent/zane-holt-c4.jpg",
@@ -4842,6 +4847,7 @@
           "engagements": 8300
         },
         {
+          "provenance": "ai-generated",
           "id": "4",
           "type": "still",
           "thumb": "assets/talent/zane-holt-c5.jpg",
@@ -4869,6 +4875,7 @@
           "strongKind": "photo"
         },
         {
+          "provenance": "ai-generated",
           "id": "discovery-nike-lacing",
           "type": "still",
           "thumb": "assets/talent/discovery-v1/nike-lacing.webp",
@@ -5027,12 +5034,37 @@
         "radius": 5,
         "font": "sf"
       }
+    },
+    "[\"assets/talent/discovery-v1/nike-lacing.webp\",\"/\",\"Content discovery · Posts talking about Nike\"]": {
+      "assetId": "zane-holt:discovery-nike-lacing",
+      "rendered": "assets/talent/uploads/172f84ed-62cc-4b27-b77b-270e3e564419.webp",
+      "settings": {
+        "visible": true,
+        "text": "My other trusty pair",
+        "x": 50.26809334845049,
+        "y": 48.275217899659864,
+        "size": 16,
+        "strokeWidth": 0,
+        "fill": "#ffffff",
+        "stroke": "#000000",
+        "weight": 600,
+        "italic": false,
+        "uppercase": false,
+        "align": "center",
+        "background": "box",
+        "backgroundColor": "#101828",
+        "backgroundOpacity": 100,
+        "padding": 6,
+        "radius": 5,
+        "font": "sf"
+      }
     }
   },
   "websitePlacementReplacements": {
     "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": "assets/talent/uploads/4be69d62-3a7d-4e37-8034-7f7eaca984b1.webp",
     "[\"assets/talent/aria-quen-v2/aria-quen-v2-c1.webp\",\"/kit-story\",\"Found with Foam · Search results\"]": "assets/talent/uploads/42d64dfd-8445-4b26-a39c-770a2f204da6.webp",
     "[\"assets/talent/theo-lane/matcha.webp\",\"/brands\",\"Opening collage\"]": "assets/talent/uploads/2d8405c2-2f2e-4315-ac7a-73d888e5e458.webp",
-    "[\"assets/talent/theo-lane/matcha.webp\",\"/brands\",\"Start with the work · Content examples\"]": "assets/talent/uploads/6046eeb4-1253-420e-94de-1c13c15d5e1b.webp"
+    "[\"assets/talent/theo-lane/matcha.webp\",\"/brands\",\"Start with the work · Content examples\"]": "assets/talent/uploads/6046eeb4-1253-420e-94de-1c13c15d5e1b.webp",
+    "[\"assets/talent/discovery-v1/nike-lacing.webp\",\"/\",\"Content discovery · Posts talking about Nike\"]": "assets/talent/uploads/172f84ed-62cc-4b27-b77b-270e3e564419.webp"
   }
 }
