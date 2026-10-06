@@ -3820,194 +3820,6 @@
     },
     {
       "provenance": "uploaded",
-      "id": "lena-croft",
-      "displayName": "Lena Croft",
-      "age": 29,
-      "location": "Manchester",
-      "bio": "Secondhand outfit checks, packing edits, and mend-first styling notes. Catalogue placeholder with fake handles.",
-      "verticals": [
-        "Fashion",
-        "Packing",
-        "Sustainability"
-      ],
-      "platforms": [
-        {
-          "network": "instagram",
-          "handle": "@lena.croft.fake",
-          "followers": 143000
-        },
-        {
-          "network": "tiktok",
-          "handle": "@lenacroft.fake",
-          "followers": 507000
-        },
-        {
-          "network": "youtube",
-          "handle": "@lena.croft.fake",
-          "followers": 39200
-        }
-      ],
-      "totalAudience": 689200,
-      "portrait": "assets/talent/uploads/f91872dc-3fba-4bdd-984d-df7c2a971139.webp",
-      "originalPortrait": "assets/talent/lena-croft-portrait.jpg",
-      "creativeDirection": {
-        "summary": "Secondhand outfits and everyday getting-ready moments in Manchester. Relaxed phone photographs in lived-in surroundings, with Lena's existing portrait kept as her identity reference.",
-        "identityNotes": [
-          "Lena is a fictional adult, aged 29. Preserve her facial proportions, features, skin tone and short blonde bob from her existing portrait.",
-          "Keep natural skin texture, small asymmetries and ordinary mixed light. Photograph her mid-task with casual framing rather than a posed fashion-shoot expression.",
-          "The refreshed outfit and getting-ready images are still photographs. Existing audience and engagement figures remain illustrative demo data."
-        ],
-        "motionBrief": "A 10-second silent getting-ready video, generated from Lena's refreshed bathroom photograph, is available as a separate clip. The source still and earlier photographs remain available; no audience or engagement figures are assigned to the new video.",
-        "promptFile": "assets/talent/lena-croft-v2/creative-brief.md"
-      },
-      "motion": null,
-      "motionStatus": "placeholder",
-      "content": [
-        {
-          "provenance": "ai-generated",
-          "id": "0",
-          "type": "still",
-          "thumb": "assets/talent/lena-croft-v2/lena-croft-outfit.webp",
-          "aspectRatio": "9/16",
-          "original": "assets/talent/lena-croft-c1.jpg",
-          "generation": {
-            "version": "Realism v2",
-            "approach": "A casual phone-camera outfit check in everyday surroundings, preserving Lena's fictional identity from her existing portrait."
-          },
-          "views": 276000,
-          "caption": "mirror outfit check",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "tiktok",
-          "strongKind": "photo",
-          "engagements": 32400
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "1",
-          "type": "still",
-          "thumb": "assets/talent/lena-croft-c2.jpg",
-          "views": 148900,
-          "caption": "PACKING FOR WEEKEND",
-          "captionSettings": {
-            "y": 65,
-            "font": "dm-serif",
-            "size": 21,
-            "weight": 400,
-            "italic": true
-          },
-          "platform": "instagram",
-          "strongKind": "hashtag",
-          "engagements": 10200
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "2",
-          "type": "still",
-          "thumb": "assets/talent/lena-croft-c3.jpg",
-          "views": 58400,
-          "caption": "thrift haul flatlay",
-          "platform": "instagram",
-          "strongKind": "photo"
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "3",
-          "type": "clip",
-          "thumb": "assets/talent/lena-croft-c4.jpg",
-          "views": 121000,
-          "caption": "mend kit close-up",
-          "platform": "tiktok",
-          "strongKind": "photo",
-          "engagements": 9800
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "4",
-          "type": "still",
-          "thumb": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
-          "aspectRatio": "9/16",
-          "original": "assets/talent/lena-croft-c5.jpg",
-          "generation": {
-            "version": "Realism v2",
-            "approach": "A candid getting-ready photograph with natural skin texture and ordinary bathroom light, anchored to Lena's existing fictional portrait."
-          },
-          "views": 87600,
-          "caption": "getting ready glow",
-          "captionSettings": {
-            "y": 72,
-            "font": "sf",
-            "size": 15,
-            "strokeWidth": 1
-          },
-          "platform": "instagram",
-          "strongKind": "question",
-          "engagements": 6400
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "grwm-motion-v2",
-          "type": "clip",
-          "thumb": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
-          "aspectRatio": "9/16",
-          "generation": {
-            "version": "Realism v2 · video",
-            "approach": "A 10-second silent video generated from Lena's refreshed getting-ready photograph, with the source still retained separately and no invented performance metrics."
-          },
-          "video": "assets/talent/lena-croft-v2/lena-croft-grwm.mp4",
-          "caption": "Lena · getting ready in motion",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo"
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "skincare-serum-closeup-v3",
-          "type": "still",
-          "thumb": "assets/talent/uploads/lena-skincare-serum-closeup-20261002.webp",
-          "aspectRatio": "9/16",
-          "original": "assets/talent/uploads/lena-skincare-serum-closeup-20261002-original.png",
-          "generation": {
-            "version": "Skincare angle variation v3",
-            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
-            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-closeup-v3-generation.md"
-          },
-          "views": 231600,
-          "caption": "A closer look at the serum pump",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "instagram",
-          "strongKind": "photo"
-        },
-        {
-          "provenance": "ai-generated",
-          "id": "skincare-serum-review-v3",
-          "type": "still",
-          "thumb": "assets/talent/uploads/lena-skincare-serum-review-20261002.webp",
-          "aspectRatio": "9/16",
-          "original": "assets/talent/uploads/lena-skincare-serum-review-20261002-original.png",
-          "generation": {
-            "version": "Skincare angle variation v3",
-            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
-            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-review-v3-generation.md"
-          },
-          "views": 394800,
-          "caption": "A serum texture check while getting ready",
-          "captionSettings": {
-            "visible": false
-          },
-          "platform": "tiktok",
-          "strongKind": "photo",
-          "engagements": 17300
-        }
-      ]
-    },
-    {
-      "provenance": "uploaded",
       "id": "mira-vale",
       "displayName": "Mira Vale",
       "age": 27,
@@ -4618,6 +4430,188 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "lena-croft",
+      "displayName": "Lena Croft",
+      "age": 29,
+      "location": "Manchester",
+      "bio": "Secondhand outfit checks, packing edits, and mend-first styling notes. Catalogue placeholder with fake handles.",
+      "verticals": [
+        "Fashion",
+        "Packing",
+        "Sustainability"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@lena.croft.fake",
+          "followers": 143000
+        },
+        {
+          "network": "tiktok",
+          "handle": "@lenacroft.fake",
+          "followers": 507000
+        },
+        {
+          "network": "youtube",
+          "handle": "@lena.croft.fake",
+          "followers": 39200
+        }
+      ],
+      "totalAudience": 689200,
+      "portrait": "assets/talent/uploads/f91872dc-3fba-4bdd-984d-df7c2a971139.webp",
+      "originalPortrait": "assets/talent/lena-croft-portrait.jpg",
+      "creativeDirection": {
+        "summary": "Secondhand outfits and everyday getting-ready moments in Manchester. Relaxed phone photographs in lived-in surroundings, with Lena's existing portrait kept as her identity reference.",
+        "identityNotes": [
+          "Lena is a fictional adult, aged 29. Preserve her facial proportions, features, skin tone and short blonde bob from her existing portrait.",
+          "Keep natural skin texture, small asymmetries and ordinary mixed light. Photograph her mid-task with casual framing rather than a posed fashion-shoot expression.",
+          "The refreshed outfit and getting-ready images are still photographs. Existing audience and engagement figures remain illustrative demo data."
+        ],
+        "motionBrief": "A 10-second silent getting-ready video, generated from Lena's refreshed bathroom photograph, is available as a separate clip. The source still and earlier photographs remain available; no audience or engagement figures are assigned to the new video.",
+        "promptFile": "assets/talent/lena-croft-v2/creative-brief.md"
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "uploaded",
+          "id": "0",
+          "type": "still",
+          "thumb": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/lena-croft-c1.jpg",
+          "caption": "mirror outfit check",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "1",
+          "type": "still",
+          "thumb": "assets/talent/lena-croft-c2.jpg",
+          "views": 148900,
+          "caption": "PACKING FOR WEEKEND",
+          "captionSettings": {
+            "y": 65,
+            "font": "dm-serif",
+            "size": 21,
+            "weight": 400,
+            "italic": true
+          },
+          "platform": "instagram",
+          "strongKind": "hashtag",
+          "engagements": 10200
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "2",
+          "type": "still",
+          "thumb": "assets/talent/lena-croft-c3.jpg",
+          "views": 58400,
+          "caption": "thrift haul flatlay",
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "3",
+          "type": "clip",
+          "thumb": "assets/talent/lena-croft-c4.jpg",
+          "views": 121000,
+          "caption": "mend kit close-up",
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 9800
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "4",
+          "type": "still",
+          "thumb": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/lena-croft-c5.jpg",
+          "generation": {
+            "version": "Realism v2",
+            "approach": "A candid getting-ready photograph with natural skin texture and ordinary bathroom light, anchored to Lena's existing fictional portrait."
+          },
+          "views": 87600,
+          "caption": "getting ready glow",
+          "captionSettings": {
+            "y": 72,
+            "font": "sf",
+            "size": 15,
+            "strokeWidth": 1
+          },
+          "platform": "instagram",
+          "strongKind": "question",
+          "engagements": 6400
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "grwm-motion-v2",
+          "type": "clip",
+          "thumb": "assets/talent/lena-croft-v2/lena-croft-grwm.webp",
+          "aspectRatio": "9/16",
+          "generation": {
+            "version": "Realism v2 · video",
+            "approach": "A 10-second silent video generated from Lena's refreshed getting-ready photograph, with the source still retained separately and no invented performance metrics."
+          },
+          "video": "assets/talent/lena-croft-v2/lena-croft-grwm.mp4",
+          "caption": "Lena · getting ready in motion",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-serum-closeup-v3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/lena-skincare-serum-closeup-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/lena-skincare-serum-closeup-20261002-original.png",
+          "generation": {
+            "version": "Skincare angle variation v3",
+            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
+            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-closeup-v3-generation.md"
+          },
+          "views": 231600,
+          "caption": "A closer look at the serum pump",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "skincare-serum-review-v3",
+          "type": "still",
+          "thumb": "assets/talent/uploads/lena-skincare-serum-review-20261002.webp",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/uploads/lena-skincare-serum-review-20261002-original.png",
+          "generation": {
+            "version": "Skincare angle variation v3",
+            "approach": "Identity-preserving generated skincare still. Fictional product and illustrative post figures.",
+            "prompt": "assets/talent/uploads/lena-croft-skincare-serum-review-v3-generation.md"
+          },
+          "views": 394800,
+          "caption": "A serum texture check while getting ready",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "engagements": 17300
+        }
+      ]
     }
   ],
   "removedTalentIds": [
@@ -4639,7 +4633,8 @@
     "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": "assets/talent/uploads/bf38dd82-258d-44fc-a56d-4850de8e1431.webp",
     "assets/talent/jax-orin-portrait.jpg": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
     "assets/talent/discovery-v1/jax-live-set.webp": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png",
-    "assets/talent/theo-lane/matcha.webp": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png"
+    "assets/talent/theo-lane/matcha.webp": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
+    "assets/talent/lena-croft-v2/lena-croft-outfit.webp": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5.png"
   },
   "websitePlacementCaptions": {
     "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": {
