@@ -8,7 +8,6 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useTalentSearchSequence } from "../hooks/useTalentSearchSequence";
 import { KitPlatformIcon } from "./KitDetails";
 import { Reveal } from "./Marketing";
-import { img } from "../lib/assets";
 import "./talent-search-demo.css";
 
 export function PlatformPresence() {
@@ -62,7 +61,7 @@ export function TalentSearchPreview() {
   return (
     <div className="td-demo" ref={frame} data-search-phase={phase}>
       <div className="td-demo-toolbar">
-        <span className="td-demo-title"><img src={img.foamSymbol} alt="" width="30" height="30" /> Talent Directory</span>
+        <span className="td-demo-title"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true" style={{ flexShrink: 0, padding: 4, borderRadius: 9, background: "#e0e8f9", color: "#1760f5" }}><circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="2.6" /><path d="M2.5 28c2.3-4 5.5-6 9.5-6s7.2 2 9.5 6M21 5.2a7 7 0 0 1 2 13.7M23 22c3 .6 5.2 2.6 7 6" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg> Talent Directory</span>
         <span className="td-demo-badge">Interactive preview</span>
       </div>
       <div className={`td-demo-search ${choosing ? "is-composing" : ""}`} role="group" aria-label={phase === "suggestions" ? "Suggested talent searches" : `Search: ${example.query}`}>
