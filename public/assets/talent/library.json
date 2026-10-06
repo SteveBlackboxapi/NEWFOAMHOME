@@ -4420,6 +4420,121 @@
           "strongKind": "photo"
         }
       ]
+    },
+    {
+      "provenance": "uploaded",
+      "id": "jax-orin",
+      "displayName": "Jax Orin",
+      "age": 31,
+      "location": "Berlin",
+      "bio": "Modular synth demos, vinyl nights, and late studio walkthroughs. Fake profile for internal catalogue reuse.",
+      "verticals": [
+        "Music",
+        "Culture",
+        "Gear"
+      ],
+      "platforms": [
+        {
+          "network": "youtube",
+          "handle": "@jaxorin.fake",
+          "followers": 402000
+        },
+        {
+          "network": "instagram",
+          "handle": "@jax.orin.fake",
+          "followers": 96500
+        },
+        {
+          "network": "tiktok",
+          "handle": "@jaxorin.fake",
+          "followers": 148200
+        }
+      ],
+      "totalAudience": 646700,
+      "portrait": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
+      "originalPortrait": "assets/talent/jax-orin-portrait.jpg",
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "provenance": "uploaded",
+          "id": "0",
+          "type": "still",
+          "thumb": "assets/talent/uploads/ce4f2b84-2d35-42c9-b789-b926f052ab82.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/jax-orin-c1.jpg",
+          "caption": "patch notes live",
+          "platform": "youtube",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/851780d1-5c35-456c-b378-5890ec8f92db.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/jax-orin-c2.jpg",
+          "caption": "cable rack glow",
+          "platform": "instagram",
+          "strongKind": "hashtag"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "2",
+          "type": "still",
+          "thumb": "assets/talent/uploads/1a054006-7f83-4a4b-98f4-2d64c83087d6.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/jax-orin-c3.jpg",
+          "caption": "headphones late mix",
+          "platform": "tiktok",
+          "strongKind": "photo"
+        },
+        {
+          "provenance": "ai-generated",
+          "id": "3",
+          "type": "clip",
+          "thumb": "assets/talent/jax-orin-c4.jpg",
+          "views": 197600,
+          "caption": "vinyl loft night",
+          "captionSettings": {
+            "y": 68,
+            "font": "caveat",
+            "size": 27,
+            "fill": "#fff29a"
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "engagements": 17900
+        },
+        {
+          "provenance": "uploaded",
+          "id": "4",
+          "type": "still",
+          "thumb": "assets/talent/uploads/81caecd8-d5e4-4d94-9ab8-5f9e5882cf59.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/jax-orin-c5.jpg",
+          "caption": "module patch close",
+          "platform": "youtube",
+          "strongKind": "link"
+        },
+        {
+          "provenance": "uploaded",
+          "id": "discovery-jax-live-set",
+          "type": "still",
+          "thumb": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png",
+          "aspectRatio": "9/16",
+          "original": "assets/talent/discovery-v1/masters/jax-live-set.png",
+          "caption": "one more track before we go",
+          "captionSettings": {
+            "y": 70,
+            "font": "sf",
+            "size": 15,
+            "strokeWidth": 1
+          },
+          "platform": "instagram",
+          "strongKind": "photo"
+        }
+      ]
     }
   ],
   "removedTalentIds": [
@@ -4438,7 +4553,9 @@
     "assets/talent/aria-quen-v2/aria-quen-v2-portrait.webp": "assets/talent/uploads/a7b7dad1-56c0-42f5-a0f4-592de5dc1dd5.webp",
     "assets/talent/mira-vale-portrait.jpg": "assets/talent/uploads/f78644ba-0a3c-4fb7-90c9-c77b65275284.webp",
     "assets/talent/lena-croft-portrait.jpg": "assets/talent/uploads/f91872dc-3fba-4bdd-984d-df7c2a971139.webp",
-    "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": "assets/talent/uploads/bf38dd82-258d-44fc-a56d-4850de8e1431.webp"
+    "assets/talent/mira-vale-v2/mira-vale-paused-makeup.webp": "assets/talent/uploads/bf38dd82-258d-44fc-a56d-4850de8e1431.webp",
+    "assets/talent/jax-orin-portrait.jpg": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
+    "assets/talent/discovery-v1/jax-live-set.webp": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png"
   },
   "websitePlacementCaptions": {
     "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": {
