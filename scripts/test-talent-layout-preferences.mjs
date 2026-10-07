@@ -30,25 +30,68 @@ test("switching between content, directory and saved restores independent choice
   assert.equal(directory.toString(), "view=talent&layout=table");
   const restored = paramsForTalentView(directory, "content", preferences);
   assert.equal(restored.toString(), "view=content&layout=compact");
-  assert.equal(paramsForTalentView(restored, "saved", preferences).toString(), "view=saved");
+  assert.equal(paramsForTalentView(restored, "saved", preferences).toString(), "view=saved&layout=gallery");
   assert.equal(content.get("q"), "fitness");
   assert.deepEqual(preferences, { content: "compact", talent: "table", saved: "gallery" });
 });
 
 test("direct links and browser history retain their own layout even with other remembered choices", () => {
   const preferences = { talent: "table", content: "compact" };
-  const galleryHistoryEntry = new URLSearchParams("view=talent");
+  const galleryHistoryEntry = new URLSearchParams("view=talent&layout=gallery");
   const compactDirectLink = new URLSearchParams("view=talent&layout=compact");
-  assert.equal(talentLayoutFromParams(galleryHistoryEntry), "gallery");
-  assert.equal(talentLayoutFromParams(compactDirectLink), "compact");
+  assert.equal(talentLayoutFromParams(galleryHistoryEntry, preferences), "gallery");
+  assert.equal(talentLayoutFromParams(compactDirectLink, preferences), "compact");
   assert.equal(talentLayoutFromParams(paramsForTalentView(compactDirectLink, "content", preferences)), "compact");
-  assert.equal(talentLayoutFromParams(new URLSearchParams("layout=invalid")), "gallery");
+  assert.equal(talentLayoutFromParams(new URLSearchParams("layout=invalid"), preferences), "table");
 });
 
-test("new views retain the existing gallery default rather than inherit the previous view", () => {
-  const params = paramsForTalentView(new URLSearchParams("view=talent&layout=table"), "content", { talent: "table" });
-  assert.equal(params.get("layout"), null);
-  assert.equal(talentLayoutFromParams(params), "gallery");
+test("new sections default to Talent table, Content compact and Saved gallery", () => {
+  for (const [view, expected] of Object.entries({ talent: "table", content: "compact", saved: "gallery" })) {
+    const plainEntry = new URLSearchParams({ view });
+    assert.equal(talentLayoutFromParams(plainEntry), expected);
+    plainEntry.set("layout", "invalid");
+    assert.equal(talentLayoutFromParams(plainEntry), expected);
+    const switched = paramsForTalentView(new URLSearchParams("view=content&layout=gallery"), view, {});
+    assert.equal(switched.get("layout"), expected);
+    assert.equal(talentLayoutFromParams(switched), expected);
+  }
+  assert.equal(talentLayoutFromParams(new URLSearchParams()), "table");
+});
+
+test("reopening and login without a layout restore each browser choice before defaults", () => {
+  const previousStorage = Object.getOwnPropertyDescriptor(globalThis, "localStorage");
+  const storage = new Map();
+  Object.defineProperty(globalThis, "localStorage", { configurable: true, value: {
+    getItem: key => storage.get(key) ?? null,
+    setItem: (key, value) => storage.set(key, value),
+  } });
+  try {
+    const choices = { talent: "compact", content: "table", saved: "compact" };
+    writeTalentLayoutPreferences(choices);
+    const reopened = readTalentLayoutPreferences();
+    for (const [view, layout] of Object.entries(choices)) {
+      assert.equal(talentLayoutFromParams(new URLSearchParams({ view }), reopened), layout);
+      assert.equal(talentLayoutFromParams(new URLSearchParams({ view, layout: "invalid" }), reopened), layout);
+    }
+    // The Worker sign-in redirect is /lab/talent/?view=content, with no layout.
+    assert.equal(talentLayoutFromParams(new URLSearchParams("view=content"), reopened), "table");
+    assert.deepEqual(reopened, choices);
+    assert.deepEqual(readTalentLayoutPreferences(), choices);
+  } finally {
+    if (previousStorage) Object.defineProperty(globalThis, "localStorage", previousStorage);
+    else delete globalThis.localStorage;
+  }
+});
+
+test("gallery remains an explicit remembered choice and history entry", () => {
+  const preferences = { talent: "gallery", content: "gallery" };
+  for (const view of ["talent", "content"]) {
+    const entry = new URLSearchParams({ view });
+    assert.equal(talentLayoutFromParams(entry, preferences), "gallery");
+    const historyEntry = paramsForTalentView(entry, view, preferences);
+    assert.equal(historyEntry.get("layout"), "gallery");
+    assert.equal(talentLayoutFromParams(historyEntry, { talent: "table", content: "compact" }), "gallery");
+  }
 });
 
 test("stored choices survive serialization and reject malformed or unsupported settings", () => {
@@ -70,7 +113,7 @@ test("Settings Back preserves the current URL layout and selection", () => {
   for (const view of ["talent", "content", "saved"]) {
     for (const layout of ["gallery", "compact", "table"]) {
       const original = new URLSearchParams(`view=${view}&q=skin+care&talent=nia-brooks&asset=skincare&custom=one&custom=two`);
-      if (layout !== "gallery") original.set("layout", layout);
+      original.set("layout", layout);
       const before = original.toString();
       const settings = enterLabSettings(original);
       settings.set("settingsPage", "/about");
@@ -81,6 +124,21 @@ test("Settings Back preserves the current URL layout and selection", () => {
       assert.equal(original.toString(), before);
     }
   }
+});
+
+test("Settings without a layout resolves its return section without inventing a Settings preference", () => {
+  const preferences = { talent: "compact", content: "table", saved: "compact" };
+  for (const view of ["talent", "content", "saved"]) {
+    const settings = enterLabSettings(new URLSearchParams({ view }));
+    assert.equal(talentLayoutFromParams(settings, preferences), preferences[view]);
+    assert.equal(talentLayoutFromParams(exitLabSettings(settings), preferences), preferences[view]);
+  }
+  for (const from of ["", "invalid", "settings"]) {
+    const directSettings = new URLSearchParams({ view: "settings", from });
+    assert.equal(talentLayoutFromParams(directSettings, preferences), "table");
+    assert.equal(talentLayoutFromParams(directSettings), "compact");
+  }
+  assert.deepEqual(preferences, { talent: "compact", content: "table", saved: "compact" });
 });
 
 test("leaving Settings for a library section restores that section and clears Settings navigation", () => {

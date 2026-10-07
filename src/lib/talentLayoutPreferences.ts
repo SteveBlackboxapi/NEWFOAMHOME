@@ -3,6 +3,11 @@ import type { TalentLayout } from "../components/TalentLabTables";
 export type TalentLabView = "talent" | "content" | "saved";
 export type TalentLayoutPreferences = Partial<Record<TalentLabView, TalentLayout>>;
 export const TALENT_LAYOUTS_KEY = "foam-lab-view-layouts:v1";
+export const DEFAULT_TALENT_LAYOUTS: Record<TalentLabView, TalentLayout> = {
+  talent: "table",
+  content: "compact",
+  saved: "gallery",
+};
 
 const views: TalentLabView[] = ["talent", "content", "saved"];
 const isLayout = (value: unknown): value is TalentLayout =>
@@ -37,13 +42,23 @@ export function writeTalentLayoutPreferences(preferences: TalentLayoutPreference
   }
 }
 
-/** The URL controls the current view, including an omitted layout = gallery. */
-export function talentLayoutFromParams(params: URLSearchParams): TalentLayout {
+/** Explicit links win; ordinary entry restores this section's saved choice or default. */
+export function talentLayoutFromParams(
+  params: URLSearchParams,
+  preferences: TalentLayoutPreferences = {},
+): TalentLayout {
   const value = params.get("layout");
-  return value === "table" || value === "compact" ? value : "gallery";
+  if (isLayout(value)) return value;
+  const requestedView = params.get("view") === "settings"
+    ? params.get("from") || "content"
+    : params.get("view") || "talent";
+  const view: TalentLabView = views.includes(requestedView as TalentLabView)
+    ? requestedView as TalentLabView
+    : params.get("view") === "settings" ? "content" : "talent";
+  return preferences[view] || DEFAULT_TALENT_LAYOUTS[view];
 }
 
-/** Only an intentional view switch restores that view's last layout choice. */
+/** Switch sections with their own layout and without selection or Settings state. */
 export function paramsForTalentView(
   params: URLSearchParams,
   view: TalentLabView,
@@ -57,8 +72,7 @@ export function paramsForTalentView(
   updated.delete("from");
   updated.delete("settingsPage");
   updated.delete("settingsTab");
-  const layout = preferences[view] || "gallery";
-  if (layout === "gallery") updated.delete("layout");
-  else updated.set("layout", layout);
+  // Keep every selected layout explicit so history can restore gallery too.
+  updated.set("layout", preferences[view] || DEFAULT_TALENT_LAYOUTS[view]);
   return updated;
 }
