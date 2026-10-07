@@ -151,9 +151,6 @@ export function TrustClosing({
         </div>
         <div className="tl-actions">
           <TrustAction to="/demo">Get a demo</TrustAction>
-          <TrustAction to="mailto:hello@foam.io" secondary>
-            Ask about your setup
-          </TrustAction>
         </div>
       </div>
       <div className="tl-legal">

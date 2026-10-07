@@ -103,7 +103,7 @@ export function CreatorFirst() {
               what it means for your talent and your team.
             </p>
             <div className="tl-actions">
-              <TrustAction to="/demo">Talk through your setup</TrustAction>
+              <TrustAction to="/demo">Get a demo</TrustAction>
             </div>
           </div>
           <div className="tc-access-art">
