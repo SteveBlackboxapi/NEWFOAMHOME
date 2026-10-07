@@ -8,6 +8,33 @@ import { websiteCamille, websiteAngelina } from "./skincareReviewTalent";
 import { websiteTessa } from "./makeupReviewTalent";
 
 const D = `${A}/talent/discovery-v1`;
+const YOUTUBE_LANDSCAPES = `${A}/talent/youtube-landscape-v1`;
+
+/** Replace only the Lab presentation; shared Kit/website images stay unchanged. */
+const youtubeLandscapePreviews: Record<string, string> = {
+  "bode-niles:0": "bode-shelf-install",
+  "jax-orin:0": "jax-synth-session",
+  "suki-prent:2": "suki-earbud-review",
+};
+
+function labContent(talent: StagedTalent): TalentContentTile[] {
+  return talent.content.map((tile, index) => {
+    const name = youtubeLandscapePreviews[`${talent.id}:${tile.id ?? index}`];
+    if (!name || tile.platform !== "youtube") return tile;
+    return {
+      ...tile,
+      thumb: `${YOUTUBE_LANDSCAPES}/${name}.webp`,
+      original: `${YOUTUBE_LANDSCAPES}/masters/${name}.png`,
+      aspectRatio: "16/9",
+      provenance: "ai-generated",
+      generation: {
+        version: "YouTube landscapes v1 · illustrative thumbnail",
+        approach: "AI-generated landscape thumbnail using the existing fictional creator identity. Illustrative content for the private Lab; the original creator accounts and demo post metadata are preserved.",
+        prompt: `${YOUTUBE_LANDSCAPES}/creative-brief.md`,
+      },
+    };
+  });
+}
 
 type Addition = {
   talentId: string;
@@ -42,12 +69,13 @@ export const discoveryKeywords: Record<string, string[]> = {
 /** Lab-only extension: original talent records, tile order and Kit selections remain untouched. */
 export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
   const additions = discoveryAdditions.filter((item) => item.talentId === talent.id);
-  if (!additions.length) return talent;
+  const content = labContent(talent);
+  if (!additions.length) return { ...talent, content };
   return {
     ...talent,
     verticals: talent.id === "rue-dante" ? [...talent.verticals, "Pets"] : [...talent.verticals],
     content: [
-      ...talent.content,
+      ...content,
       ...additions.map((item): TalentContentTile => ({
         id: `discovery-${item.name}`,
         type: "still",

@@ -573,6 +573,7 @@ export async function handleRequest(
         read &&
         (url.pathname === "/" ||
           url.pathname === "/login" ||
+          url.pathname === "/lab" ||
           url.pathname.startsWith("/lab/"))
       )
         return loginPage();
@@ -666,8 +667,8 @@ export async function handleRequest(
       return await proxyGithub(request, url, env, fetcher);
     if (url.pathname.startsWith("/api/")) fail(404, "Not found.");
     if (!read) fail(405, "Method not allowed.");
-    if (url.pathname === "/" || url.pathname === "/login")
-      return redirect("/lab/talent/?view=content");
+    if (["/", "/login", "/lab", "/lab/"].includes(url.pathname))
+      return redirect(`/lab/talent/${url.search || "?view=content"}`);
     const asset = Object.hasOwn(assets, url.pathname)
       ? assets[url.pathname]
       : url.pathname === "/lab/talent/" || url.pathname === "/lab/talent"
