@@ -1,5 +1,5 @@
 import { OptimizedImage } from "../components/OptimizedImage";
-import { useWebsiteImage } from "../components/WebsiteImageScope";
+import { WebsiteBackgroundImage } from "../components/WebsiteImageScope";
 import { PC, PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
@@ -41,7 +41,6 @@ const relationships = [
 ];
 
 export function About() {
-  const beliefImage = useWebsiteImage(`${PC}/studio-moment.webp`, "Our belief · Creative collaboration");
   return (
     <MarketingPage className="ep-page ep-about">
       <PageIntro
@@ -62,7 +61,14 @@ export function About() {
           See the story
         </ActionLink>
       </PageIntro>
-      <section className="mp-section mp-dark ep-belief" style={{ backgroundImage: `url("${beliefImage}")` }}>
+      <section className="mp-section mp-dark ep-belief">
+        <WebsiteBackgroundImage
+          className="ep-belief-image"
+          background={`url("${PC}/studio-moment.webp")`}
+          section="Our belief · Creative collaboration"
+          media="(max-width: 760px)"
+          sizes="calc(100vw - 36px)"
+        />
         <div className="mp-container">
           <Reveal>
             <div className="ep-belief-top">

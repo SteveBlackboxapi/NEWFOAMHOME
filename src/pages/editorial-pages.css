@@ -9,6 +9,14 @@
 .ep-page img {
   display: block;
 }
+.ep-belief-image {
+  z-index: -2;
+}
+@media (max-width: 760px) {
+  .ep-belief-image > img {
+    object-position: 65% center;
+  }
+}
 .ep-page .ep-button-ink {
   background: var(--ep-ink);
   color: #fff6eb;

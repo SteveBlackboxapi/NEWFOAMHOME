@@ -808,13 +808,46 @@ export async function readWebsitePublication(): Promise<string | null> {
   const value = await privateSessionRequest("publication");
   return /^[a-f0-9]{40}$/.test(value.revision || "") ? value.revision : null;
 }
-export async function prepareLibraryImage(file: File): Promise<{
+type PreparedImageSource = {
   upload: LibraryUpload;
   src: string;
   preview: string;
+};
+export type PreparedLibraryImage = PreparedImageSource & {
   ratio: "9/16" | "4/5" | "16/9";
   name: string;
-}> {
+  /** The untouched upload, retained only when the display image is optimized. */
+  original?: PreparedImageSource;
+};
+
+async function prepareImageSource(blob: Blob, path: string): Promise<PreparedImageSource> {
+  const buffer = new Uint8Array(await blob.arrayBuffer());
+  let binary = "";
+  for (let i = 0; i < buffer.length; i += 8192)
+    binary += String.fromCharCode(...buffer.subarray(i, i + 8192));
+  const base64 = btoa(binary);
+  validateUploads([{ path, base64 }]);
+  return { upload: { path, base64 }, src: path.slice("public/".length), preview: `data:${blob.type};base64,${base64}` };
+}
+
+function hasImageAnimation(type: string, base64: string): boolean {
+  if (type === "image/jpeg") return false;
+  const bytes = atob(base64);
+  if (type === "image/webp")
+    return bytes.slice(12, 16) === "VP8X" && Boolean(bytes.charCodeAt(20) & 2);
+  // APNG's animation control chunk precedes its first image data chunk.
+  for (let at = 8; at + 12 <= bytes.length;) {
+    const kind = bytes.slice(at + 4, at + 8);
+    if (kind === "acTL") return true;
+    if (kind === "IDAT" || kind === "IEND") break;
+    const size = ((bytes.charCodeAt(at) << 24) | (bytes.charCodeAt(at + 1) << 16) | (bytes.charCodeAt(at + 2) << 8) | bytes.charCodeAt(at + 3)) >>> 0;
+    at += size + 12;
+  }
+  return false;
+}
+
+/** Photo previews only: artwork and already-rendered captions must opt out. */
+export async function prepareLibraryImage(file: File, { optimize = true }: { optimize?: boolean } = {}): Promise<PreparedLibraryImage> {
   const ext = (
     { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" } as Record<
       string,
@@ -823,29 +856,76 @@ export async function prepareLibraryImage(file: File): Promise<{
   )[file.type];
   if (!ext || !file.size || file.size > 10 * 1024 * 1024)
     throw new LibraryError("Choose PNG, JPEG or WebP images up to 10 MB each.");
-  const bitmap = await createImageBitmap(file);
-  const ratio = bitmap.width / bitmap.height;
-  if (
-    !bitmap.width ||
-    !bitmap.height ||
-    bitmap.width * bitmap.height > 60_000_000
-  ) {
+  let bitmap: ImageBitmap;
+  try { bitmap = await createImageBitmap(file); }
+  catch { throw new LibraryError("That image could not be opened. Choose another PNG, JPEG or WebP image."); }
+  try {
+    const ratio = bitmap.width / bitmap.height;
+    if (!bitmap.width || !bitmap.height || bitmap.width * bitmap.height > 60_000_000)
+      throw new LibraryError("Choose an image smaller than 60 megapixels.");
+    const id = crypto.randomUUID();
+    const original = await prepareImageSource(file, `${UPLOAD_PATH}${id}.${ext}`);
+    const result: PreparedLibraryImage = {
+      ...original,
+      ratio: ratio > 1.2 ? "16/9" : ratio < 0.68 ? "9/16" : "4/5",
+      name: file.name.replace(/\.[^.]+$/, ""),
+    };
+    if (!optimize || ((file.type === "image/webp" || file.type === "image/jpeg") && file.size <= 256 * 1024))
+      return result;
+    if (hasImageAnimation(file.type, original.upload.base64)) return result;
+    try {
+      const canvas = document.createElement("canvas");
+      const scale = Math.min(1, 1280 / Math.max(bitmap.width, bitmap.height));
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) return result;
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      // An RGBA file can still be an opaque photo. Preserve artwork with actual transparency.
+      const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+      for (let i = 3; i < pixels.length; i += 4)
+        if (pixels[i] !== 255) return result;
+      const preview = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", 0.62));
+      // Unsupported browsers may silently encode PNG; never mislabel that output as WebP.
+      if (!preview || preview.type !== "image/webp" || !preview.size || preview.size >= file.size)
+        return result;
+      const display = await prepareImageSource(preview, `${UPLOAD_PATH}${id}-preview.webp`);
+      return { ...result, ...display, original };
+    } catch {
+      // Canvas/codec limits must not prevent an otherwise valid original from being uploaded.
+      return result;
+    }
+  } finally {
     bitmap.close();
-    throw new LibraryError("Choose an image smaller than 60 megapixels.");
   }
-  bitmap.close();
-  const buffer = new Uint8Array(await file.arrayBuffer());
-  let binary = "";
-  for (let i = 0; i < buffer.length; i += 8192)
-    binary += String.fromCharCode(...buffer.subarray(i, i + 8192));
-  const base64 = btoa(binary);
-  const path = `${UPLOAD_PATH}${crypto.randomUUID()}.${ext}`;
-  validateUploads([{ path, base64 }]);
-  return {
-    upload: { path, base64 },
-    src: path.slice("public/".length),
-    preview: `data:${file.type};base64,${base64}`,
-    ratio: ratio > 1.2 ? "16/9" : ratio < 0.68 ? "9/16" : "4/5",
-    name: file.name.replace(/\.[^.]+$/, ""),
-  };
+}
+
+/** Keep stable asset IDs and archive an earlier source when the new photo has its own master. */
+export function replaceLibraryProfileImage(profile: StagedTalent, image: PreparedLibraryImage, contentIndex?: number): StagedTalent {
+  const next = { ...profile, content: [...profile.content] };
+  const tile = contentIndex === undefined ? undefined : next.content[contentIndex];
+  if (contentIndex !== undefined && !tile) throw new LibraryError("This image is no longer available.");
+  const previousDisplay = tile ? tile.thumb : profile.portrait;
+  const previousOriginal = tile ? tile.original : profile.originalPortrait;
+  const original = image.original?.src || image.src;
+  const references = [...(profile.referenceImages || [])];
+  // Old uploads may themselves be full-resolution masters, even when an earlier character source exists.
+  const sources = [previousOriginal || previousDisplay];
+  if (assetPath(previousDisplay).startsWith("assets/talent/uploads/") && !/-preview\.webp$/.test(previousDisplay))
+    sources.push(previousDisplay);
+  for (const src of sources)
+    if (src !== original && !references.some((ref) => ref.src === src))
+      references.push({ label: tile ? `Earlier ${tile.caption || "content image"}` : "Earlier portrait", src });
+  if (references.length) next.referenceImages = references;
+  if (tile && contentIndex !== undefined) {
+    next.content[contentIndex] = { ...tile, thumb: image.src, original, aspectRatio: image.ratio, type: "still", video: undefined, views: undefined, engagements: undefined, generation: undefined, provenance: "uploaded" };
+  } else {
+    next.portrait = image.src;
+    next.originalPortrait = original;
+    next.motion = null;
+    next.motionStatus = "placeholder";
+    next.content = next.content.map((entry) => ({ ...entry, provenance: entry.provenance || profile.provenance || "ai-generated" }));
+    next.provenance = "uploaded";
+  }
+  return next;
 }

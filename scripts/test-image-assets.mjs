@@ -90,3 +90,30 @@ test("the private Lab keeps its protected source URLs even for known public imag
     assert.equal(imageSources(source), undefined);
   }
 });
+
+test("decorative pictures accept single image URLs and preserve CSS background layers", () => {
+  const { backgroundImageSource } = loadImages("/assets");
+  for (const background of [
+    'url("/assets/talent/portrait.webp")',
+    "url('/assets/talent/portrait.webp')",
+    " url( /assets/talent/portrait.webp ) ",
+  ]) assert.equal(backgroundImageSource(background), "/assets/talent/portrait.webp");
+  for (const background of [
+    "none", "", "url()", "linear-gradient(red, blue)",
+    'linear-gradient(red, transparent), url("/assets/photo.webp")',
+    'url("/assets/one.webp"), url("/assets/two.webp")',
+  ]) assert.equal(backgroundImageSource(background), undefined, background);
+});
+
+test("decorative backgrounds retain custom uploads and unregistered sources", () => {
+  const { backgroundImageSource, imageSources } = loadImages("/assets");
+  for (const src of [
+    "data:image/png;base64,aGVsbG8=",
+    "blob:https://example.test/custom-wallpaper",
+    "https://example.test/wallpaper.jpg",
+    "/assets/unregistered.webp",
+  ]) {
+    assert.equal(backgroundImageSource(`url("${src}")`), src);
+    assert.equal(imageSources(src), undefined);
+  }
+});

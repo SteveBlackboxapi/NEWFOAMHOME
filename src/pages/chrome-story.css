@@ -247,10 +247,15 @@
     sans-serif;
 }
 .cs-mobile-desktop {
+  position: relative;
+  isolation: isolate;
   padding: 27px 14px;
   border-radius: 14px;
   background-size: cover;
   background-position: center;
+}
+.cs-mobile-desktop > .website-background-image {
+  z-index: -1;
 }
 .cs-mobile-email-window {
   max-width: 680px;
