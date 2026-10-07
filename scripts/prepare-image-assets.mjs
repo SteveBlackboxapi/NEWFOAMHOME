@@ -19,7 +19,12 @@ for (const source of Object.values(placements.replacements || {})) {
 for (const file of await readdir(path.join(publicDir, 'assets/video-previews-v2')).catch(() => []))
   if (/\.(mp4|webm)$/.test(file)) sources.add(`assets/video-previews-v2/${file}`);
 const files = new Map();
-const hash = createHash('sha256').update('foam-responsive-images-v2-q82');
+const resizeOptions = { withoutEnlargement: true };
+const webpOptions = { quality: 82, effort: 5 };
+// Shared thumbnail caches need encoding changes to change each image's fingerprint,
+// not just the overall release directory. Orientation is applied before resizing.
+const imageRecipe = JSON.stringify({ version: 3, autoOrient: true, resize: resizeOptions, webp: webpOptions, sharp: sharp.versions.sharp, vips: sharp.versions.vips, webpEncoder: sharp.versions.webp });
+const hash = createHash('sha256').update(imageRecipe);
 for (const source of [...sources].sort()) {
   const bytes = await readFile(path.join(publicDir, source));
   files.set(source, bytes);
@@ -38,11 +43,11 @@ for (const [source, bytes] of files) {
   const metadata = await sharp(bytes, { limitInputPixels: 60_000_000 }).metadata();
   if (!metadata.width || !metadata.height || (metadata.pages || 1) > 1) continue;
   const variants = [];
-  const fingerprint = createHash('sha256').update(bytes).digest('hex').slice(0, 20);
+  const fingerprint = createHash('sha256').update(imageRecipe).update(bytes).digest('hex').slice(0, 20);
   for (const width of [96, 256, 480, 768, 1280]) {
     if (width >= metadata.width || bytes.length < 12000) continue;
-    const output = await sharp(bytes).rotate().resize({ width, withoutEnlargement: true })
-      .webp({ quality: 82, effort: 5 }).toBuffer();
+    const output = await sharp(bytes).rotate().resize({ width, ...resizeOptions })
+      .webp(webpOptions).toBuffer();
     if (output.length >= bytes.length) continue;
     const src = `assets/responsive/${fingerprint}/${width}/${source.slice('assets/'.length)}.webp`;
     await mkdir(path.dirname(path.join(directory, src)), { recursive: true });

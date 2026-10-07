@@ -31,6 +31,17 @@ function cacheEligible(request, media) {
   return false;
 }
 
+function reusableVariantURL(request, media, cachedRevision) {
+  if (request.destination !== "image") return null;
+  const url = new URL(request.url);
+  const rawPath = url.pathname.slice(`${mediaPath}${media.revision}/assets/`.length);
+  // The fingerprint covers source bytes AND encoding recipe. Require its exact
+  // generated spelling; encoded aliases and non-fingerprinted originals are not shared.
+  if (rawPath !== media.path || !/^responsive\/[a-f0-9]{20}\/[1-9][0-9]{0,4}\/.+\.(?:webp|jpe?g|png)\.webp$/.test(rawPath)) return null;
+  url.pathname = `${mediaPath}${cachedRevision}/assets/${rawPath}`;
+  return url.href; // Retain the complete query: different query strings never alias.
+}
+
 function oldPlaybackRequest(request, media) {
   return media.revision !== revision &&
     (request.destination === "audio" || request.destination === "video") &&
@@ -132,10 +143,27 @@ self.addEventListener("fetch", (event) => {
   event.respondWith((async () => {
     try {
       try {
-        if ((await caches.keys()).includes(media.cache)) {
+        const names = await caches.keys();
+        if (names.includes(media.cache)) {
           const cache = await caches.open(media.cache);
           const cached = await cache.match(event.request);
           if (cached) return cached;
+        }
+        for (const name of names.slice().reverse()) {
+          if (name === media.cache || !name.startsWith(cachePrefix)) continue;
+          const cachedRevision = name.slice(cachePrefix.length);
+          if (!revisionPattern.test(cachedRevision)) continue;
+          const url = reusableVariantURL(event.request, media, cachedRevision);
+          if (!url) break;
+          const cache = await caches.open(name);
+          const cached = await cache.match(new Request(url, event.request));
+          if (cached && cacheable(event.request, cached)) {
+            // Carry this unchanged image forward before its older release cache is pruned.
+            const write = remember(event.request, cached.clone(), media.cache);
+            void write.finally(finish);
+            finish = () => undefined;
+            return cached;
+          }
         }
       } catch { /* Fall back to the network if cache storage is unavailable. */ }
       const response = await fetch(event.request);

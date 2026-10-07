@@ -7,11 +7,16 @@ import { websiteMatcha } from "../data/matchaTalent";
 import "./mini-ui/mini-product-cards.css";
 import { Link } from "react-router";
 import { DiscoveryArtwork, DiscoverySearch } from "./DiscoverySearch";
+import { featureDiscoveryAssets } from "../data/discoveryContent";
 import { A } from "../lib/assets";
 import "./people-colour.css";
 import "./home-creative-polish.css";
 
 export const PC = `${A}/people-colour`;
+// Match the wall's four/seven columns, gaps, overscan and 1750px maximum width.
+const WALL_IMAGE_SIZES = "(max-width: 760px) calc((100vw + 73px) / 4), (max-width: 1080px) calc((100vw + 154px) / 7), (max-width: 1670px) calc((100vw - 10px) / 7), 238px";
+// The nested artwork also sits inside the tile message's 38px horizontal padding.
+const WALL_ARTWORK_IMAGE_SIZES = "(max-width: 1080px) calc((90vw - 324.8px) / 21), (max-width: 1670px) calc((90vw - 472.4px) / 21), 50px";
 
 /** Artwork and palette from the approved second direction. No shared story styles. */
 export function CreatorWall() {
@@ -26,7 +31,8 @@ export function CreatorWall() {
                 alt="Fictional creator Elise taking a hotel mirror selfie"
                 width="941"
                 height="1672"
-                loading="lazy"
+                sizes={WALL_IMAGE_SIZES}
+                loading="eager"
                 decoding="async"
               />
               <figcaption>Your talent.</figcaption>
@@ -60,7 +66,8 @@ export function CreatorWall() {
                 alt="Fictional creator Nia sharing her skincare routine"
                 width="941"
                 height="1672"
-                loading="lazy"
+                sizes={WALL_IMAGE_SIZES}
+                loading="eager"
                 decoding="async"
               />
             </figure>
@@ -70,9 +77,11 @@ export function CreatorWall() {
               <OptimizedImage section="A world of talent · Creator wall"
                 src={`${PC}/story-refresh-v1/music-creator.webp`}
                 alt="AI-generated fictional musician Nico having coffee at his home-studio desk"
+                fetchPriority="high"
                 width="1024"
                 height="1536"
-                loading="lazy"
+                sizes={WALL_IMAGE_SIZES}
+                loading="eager"
                 decoding="async"
               />
             </figure>
@@ -82,7 +91,8 @@ export function CreatorWall() {
                 alt="Fictional creator Jax playing a live synth set, made with AI"
                 width="1122"
                 height="1402"
-                loading="lazy"
+                sizes={WALL_IMAGE_SIZES}
+                loading="eager"
                 decoding="async"
               />
               <figcaption>In the making.</figcaption>
@@ -95,7 +105,8 @@ export function CreatorWall() {
                 alt="AI-generated fictional creator Iris wearing sunglasses beneath a bright blue sky"
                 width="1024"
                 height="1536"
-                loading="lazy"
+                sizes={WALL_IMAGE_SIZES}
+                loading="eager"
                 decoding="async"
               />
             </figure>
@@ -114,7 +125,7 @@ export function CreatorWall() {
           <div className="pc-wall-column pc-col-five">
             <figure className="pc-creator-tile pc-colour-tile pc-blue">
               <div className="pc-tile-message">
-                <DiscoveryArtwork section="A world of talent · Found preview" resultLabel="(3) Strong matches" />
+                <DiscoveryArtwork section="A world of talent · Found preview" resultLabel="(3) Strong matches" sizes={WALL_ARTWORK_IMAGE_SIZES} />
                 <p>Found with Foam</p>
               </div>
             </figure>
@@ -124,6 +135,7 @@ export function CreatorWall() {
                 alt="Fictional creator Samantha sharing a dance moment"
                 width="941"
                 height="1672"
+                sizes={WALL_IMAGE_SIZES}
                 loading="lazy"
                 decoding="async"
               />
@@ -136,6 +148,7 @@ export function CreatorWall() {
                 alt="AI-generated fictional creative Ada at her studio desk, photographed with direct flash"
                 width="1024"
                 height="1536"
+                sizes={WALL_IMAGE_SIZES}
                 loading="lazy"
                 decoding="async"
               />
@@ -158,6 +171,7 @@ export function CreatorWall() {
                 alt="AI-generated fictional creative laughing against a vivid blue backdrop"
                 width="1448"
                 height="1086"
+                sizes={WALL_IMAGE_SIZES}
                 loading="lazy"
                 decoding="async"
               />
@@ -168,6 +182,7 @@ export function CreatorWall() {
                 alt="Avery Cole’s fictional fitness profile, using supplied waterfront imagery"
                 width="1800"
                 height="1282"
+                sizes={WALL_IMAGE_SIZES}
                 loading="lazy"
                 decoding="async"
               />
@@ -384,6 +399,8 @@ export function ProductFamily({
 }) {
   const { pathname } = useLocation();
   const miniatureSection = pathname === "/" ? "Product family" : "Product preview";
+  const features = pathname.replace(/\/$/, "") === "/features";
+  const imageLoading = features ? "eager" : "lazy";
   return (
     <section
       className={`pc-design pc-product-family pc-shell${miniatures ? " pc-product-miniatures" : ""}`}
@@ -408,10 +425,11 @@ export function ProductFamily({
             <div className="pc-tool-image pc-cream">
               <OptimizedImage
                 section="Product family · Media Kit" src={`${A}/foam-media-kit.webp`}
+                sizes="(max-width: 760px) 205px, (max-width: 1080px) 180px, 210px"
                 alt="Foam Media Kit icon"
                 width="300"
                 height="300"
-                loading="lazy"
+                loading={imageLoading}
                 decoding="async"
               />
             </div>
@@ -438,7 +456,7 @@ export function ProductFamily({
             <MiniIllustration section={`${miniatureSection} · Content search miniature`} kind="search" />
           ) : (
             <div className="pc-tool-image pc-ice">
-              <DiscoveryArtwork section="Product family · Found with Foam" />
+              <DiscoveryArtwork section="Product family · Found with Foam" assets={features ? featureDiscoveryAssets : undefined} loading={imageLoading} />
             </div>
           )}
           <div className="pc-tool-info">
@@ -466,10 +484,11 @@ export function ProductFamily({
               <OptimizedImage
                 className="pc-chrome-tool"
                 section="Product family · Foam for Chrome" src={`${A}/chrome-store-transparent.webp`}
+                sizes="140px"
                 alt="Chrome Web Store logo"
                 width="300"
                 height="300"
-                loading="lazy"
+                loading={imageLoading}
                 decoding="async"
               />
             </div>
