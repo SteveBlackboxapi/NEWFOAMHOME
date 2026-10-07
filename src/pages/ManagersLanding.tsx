@@ -9,7 +9,7 @@ import { CreatorWall } from "../components/PeopleColour";
 import "./managers-landing.css";
 
 /** Shared landing page; both existing addresses retain their links and image placements. */
-export function ManagersLanding({ previewOrder = false }: { previewOrder?: boolean } = {}) {
+export function ManagersLanding({ filmFirst = false }: { filmFirst?: boolean } = {}) {
   return (
     <WebsiteImageRoute route="/">
       <MarketingPage className="pc-home pc-design audience-page ap-managers managers-landing">
@@ -32,11 +32,11 @@ export function ManagersLanding({ previewOrder = false }: { previewOrder?: boole
           </div>
           <CreatorWall />
         </section>
-        {!previewOrder && <ManagersWorkflowSections />}
+        {!filmFirst && <ManagersWorkflowSections />}
         <OverviewFilm />
         <TalentSearchSection />
         <ContentSearchSection />
-        {previewOrder && <ManagersWorkflowSections />}
+        {filmFirst && <ManagersWorkflowSections />}
         <ClosingCTA
           headline="For the talent. And everyone behind them."
           sub="Bring your people, your questions or your next big idea. Let’s see what’s possible."

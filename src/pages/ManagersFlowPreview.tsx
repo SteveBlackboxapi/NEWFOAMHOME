@@ -23,7 +23,7 @@ export function ManagersFlowPreview() {
       <div className="pc-site min-h-screen bg-surface managers-flow-preview">
         <Nav managersLanding={PREVIEW_PATH} />
         <main id="main-content" tabIndex={-1}>
-          <ManagersLanding previewOrder={proposed} />
+          <ManagersLanding filmFirst={proposed} />
         </main>
         <Footer managersLanding={PREVIEW_PATH} />
         <aside className="mfp-comparison" aria-label="Managers page comparison">
