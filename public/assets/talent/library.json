@@ -4263,8 +4263,8 @@
         }
       ],
       "totalAudience": 646700,
-      "portrait": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
-      "originalPortrait": "assets/talent/jax-orin-portrait.jpg",
+      "portrait": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af-preview.webp",
+      "originalPortrait": "assets/talent/uploads/3214fe44-3c60-4ed1-ac57-400827bfa0af.png",
       "motion": null,
       "motionStatus": "placeholder",
       "content": [
@@ -4272,9 +4272,9 @@
           "provenance": "uploaded",
           "id": "0",
           "type": "still",
-          "thumb": "assets/talent/uploads/ce4f2b84-2d35-42c9-b789-b926f052ab82.png",
+          "thumb": "assets/talent/uploads/ce4f2b84-2d35-42c9-b789-b926f052ab82-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/jax-orin-c1.jpg",
+          "original": "assets/talent/uploads/ce4f2b84-2d35-42c9-b789-b926f052ab82.png",
           "caption": "patch notes live",
           "platform": "youtube",
           "strongKind": "photo"
@@ -4283,9 +4283,9 @@
           "provenance": "uploaded",
           "id": "1",
           "type": "still",
-          "thumb": "assets/talent/uploads/851780d1-5c35-456c-b378-5890ec8f92db.png",
+          "thumb": "assets/talent/uploads/851780d1-5c35-456c-b378-5890ec8f92db-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/jax-orin-c2.jpg",
+          "original": "assets/talent/uploads/851780d1-5c35-456c-b378-5890ec8f92db.png",
           "caption": "cable rack glow",
           "platform": "instagram",
           "strongKind": "hashtag"
@@ -4294,9 +4294,9 @@
           "provenance": "uploaded",
           "id": "2",
           "type": "still",
-          "thumb": "assets/talent/uploads/1a054006-7f83-4a4b-98f4-2d64c83087d6.png",
+          "thumb": "assets/talent/uploads/1a054006-7f83-4a4b-98f4-2d64c83087d6-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/jax-orin-c3.jpg",
+          "original": "assets/talent/uploads/1a054006-7f83-4a4b-98f4-2d64c83087d6.png",
           "caption": "headphones late mix",
           "platform": "tiktok",
           "strongKind": "photo"
@@ -4322,9 +4322,9 @@
           "provenance": "uploaded",
           "id": "4",
           "type": "still",
-          "thumb": "assets/talent/uploads/81caecd8-d5e4-4d94-9ab8-5f9e5882cf59.png",
+          "thumb": "assets/talent/uploads/81caecd8-d5e4-4d94-9ab8-5f9e5882cf59-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/jax-orin-c5.jpg",
+          "original": "assets/talent/uploads/81caecd8-d5e4-4d94-9ab8-5f9e5882cf59.png",
           "caption": "module patch close",
           "platform": "youtube",
           "strongKind": "link"
@@ -4333,9 +4333,9 @@
           "provenance": "uploaded",
           "id": "discovery-jax-live-set",
           "type": "still",
-          "thumb": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png",
+          "thumb": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/discovery-v1/masters/jax-live-set.png",
+          "original": "assets/talent/uploads/1308bd20-c71b-4538-b611-e11620f72a4e.png",
           "caption": "one more track before we go",
           "captionSettings": {
             "y": 70,
@@ -4345,6 +4345,32 @@
           },
           "platform": "instagram",
           "strongKind": "photo"
+        }
+      ],
+      "referenceImages": [
+        {
+          "label": "Portrait · earlier original",
+          "src": "assets/talent/jax-orin-portrait.jpg"
+        },
+        {
+          "label": "patch notes live · earlier original",
+          "src": "assets/talent/jax-orin-c1.jpg"
+        },
+        {
+          "label": "cable rack glow · earlier original",
+          "src": "assets/talent/jax-orin-c2.jpg"
+        },
+        {
+          "label": "headphones late mix · earlier original",
+          "src": "assets/talent/jax-orin-c3.jpg"
+        },
+        {
+          "label": "module patch close · earlier original",
+          "src": "assets/talent/jax-orin-c5.jpg"
+        },
+        {
+          "label": "one more track before we go · earlier original",
+          "src": "assets/talent/discovery-v1/masters/jax-live-set.png"
         }
       ]
     },
@@ -4363,8 +4389,8 @@
       ],
       "platforms": [],
       "totalAudience": 0,
-      "portrait": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
-      "originalPortrait": "assets/talent/theo-lane/matcha-master.png",
+      "portrait": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4-preview.webp",
+      "originalPortrait": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
       "creativeDirection": {
         "summary": "A relaxed, brand-free iced matcha moment in a softly lit café. Natural texture, navy clothing and a sage-green drink.",
         "identityNotes": [
@@ -4380,9 +4406,9 @@
           "provenance": "uploaded",
           "id": "matcha-moment",
           "type": "still",
-          "thumb": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
+          "thumb": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/theo-lane/matcha-master.png",
+          "original": "assets/talent/uploads/7a2fefee-e6d1-49de-9821-00d8960985b4.png",
           "caption": "a little pause in the day",
           "captionSettings": {
             "visible": false
@@ -4394,40 +4420,49 @@
           "provenance": "uploaded",
           "id": "upload-07447132-8f37-45c2-9931-84b27344bd44",
           "type": "still",
-          "thumb": "assets/talent/uploads/0b935f9d-0988-4a66-b5fe-96791ce52e44.png",
+          "thumb": "assets/talent/uploads/0b935f9d-0988-4a66-b5fe-96791ce52e44-preview.webp",
           "aspectRatio": "4/5",
           "caption": "matcha-master",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "strongKind": "photo"
+          "strongKind": "photo",
+          "original": "assets/talent/uploads/0b935f9d-0988-4a66-b5fe-96791ce52e44.png"
         },
         {
           "provenance": "uploaded",
           "id": "upload-b6534fcf-ee41-4ce8-8de9-db1f6afc5c66",
           "type": "still",
-          "thumb": "assets/talent/uploads/07844ed5-bc00-4bbf-90b3-767894c36136.png",
+          "thumb": "assets/talent/uploads/07844ed5-bc00-4bbf-90b3-767894c36136-preview.webp",
           "aspectRatio": "9/16",
           "caption": "exec-69bc2d25-722b-45bd-9d3d-8331dc04dd3b",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "strongKind": "photo"
+          "strongKind": "photo",
+          "original": "assets/talent/uploads/07844ed5-bc00-4bbf-90b3-767894c36136.png"
         },
         {
           "provenance": "uploaded",
           "id": "upload-8744b778-1a04-42cc-9b9c-e2bb0acfd3a3",
           "type": "still",
-          "thumb": "assets/talent/uploads/8c4502b9-6adf-49c3-8463-02ae17543bda.png",
+          "thumb": "assets/talent/uploads/8c4502b9-6adf-49c3-8463-02ae17543bda-preview.webp",
           "aspectRatio": "9/16",
           "caption": "exec-4fcb71dd-5ab1-4387-a889-303e84316bf0",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "strongKind": "photo"
+          "strongKind": "photo",
+          "original": "assets/talent/uploads/8c4502b9-6adf-49c3-8463-02ae17543bda.png"
+        }
+      ],
+      "referenceImages": [
+        {
+          "label": "Portrait · earlier original",
+          "src": "assets/talent/theo-lane/matcha-master.png"
         }
       ]
     },
@@ -4480,9 +4515,9 @@
           "provenance": "uploaded",
           "id": "0",
           "type": "still",
-          "thumb": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5.png",
+          "thumb": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/lena-croft-c1.jpg",
+          "original": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5.png",
           "caption": "mirror outfit check",
           "captionSettings": {
             "visible": false
@@ -4611,6 +4646,12 @@
           "strongKind": "photo",
           "engagements": 17300
         }
+      ],
+      "referenceImages": [
+        {
+          "label": "mirror outfit check · earlier original",
+          "src": "assets/talent/lena-croft-c1.jpg"
+        }
       ]
     },
     {
@@ -4727,9 +4768,9 @@
           "provenance": "uploaded",
           "id": "discovery-cat-laundry",
           "type": "still",
-          "thumb": "assets/talent/uploads/674052db-cfd8-4824-8824-8267de6519c8.png",
+          "thumb": "assets/talent/uploads/674052db-cfd8-4824-8824-8267de6519c8-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/discovery-v1/masters/cat-laundry.png",
+          "original": "assets/talent/uploads/674052db-cfd8-4824-8824-8267de6519c8.png",
           "caption": "someone else had laundry plans",
           "captionSettings": {
             "y": 24,
@@ -4759,6 +4800,12 @@
           },
           "platform": "instagram",
           "strongKind": "photo"
+        }
+      ],
+      "referenceImages": [
+        {
+          "label": "someone else had laundry plans · earlier original",
+          "src": "assets/talent/discovery-v1/masters/cat-laundry.png"
         }
       ]
     },
@@ -4901,15 +4948,21 @@
           "provenance": "uploaded",
           "id": "discovery-nike-after-run",
           "type": "still",
-          "thumb": "assets/talent/uploads/68d53c16-7a51-4a46-8c09-c7d8caa2ba1e.png",
+          "thumb": "assets/talent/uploads/68d53c16-7a51-4a46-8c09-c7d8caa2ba1e-preview.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/discovery-v1/masters/nike-after-run.png",
+          "original": "assets/talent/uploads/68d53c16-7a51-4a46-8c09-c7d8caa2ba1e.png",
           "caption": "back from the morning run",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
           "strongKind": "photo"
+        }
+      ],
+      "referenceImages": [
+        {
+          "label": "back from the morning run · earlier original",
+          "src": "assets/talent/discovery-v1/masters/nike-after-run.png"
         }
       ]
     }
