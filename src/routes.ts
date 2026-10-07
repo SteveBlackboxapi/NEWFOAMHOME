@@ -12,11 +12,13 @@ import { KitStory } from "./pages/KitStory";
 import { ChromeStory } from "./pages/ChromeStory";
 import { LabInspo } from "./pages/LabInspo";
 import { NotFound } from "./pages/NotFound";
+import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 
 export const router = createBrowserRouter(
   [
     {
       Component: NavigationLayout,
+      ErrorBoundary: RouteErrorBoundary,
       children: [
         ...(import.meta.env.DEV
           ? [{
