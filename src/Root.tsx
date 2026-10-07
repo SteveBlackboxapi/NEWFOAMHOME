@@ -3,6 +3,7 @@ import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { FooterSongProvider } from "./components/FooterSong";
 import { SiteMetadata } from "./components/SiteMetadata";
+import { usePageImageWarmup } from "./hooks/usePageImageWarmup";
 import "./components/people-colour-theme.css";
 
 /** Keep history and deep links working across both marketing and story routes. */
@@ -17,6 +18,7 @@ export function NavigationLayout() {
 }
 
 export function Root() {
+  usePageImageWarmup();
   return (
     <div className="pc-site min-h-screen bg-surface">
       <Nav />

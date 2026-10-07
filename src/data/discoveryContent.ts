@@ -36,3 +36,11 @@ export const discoverySearches: DiscoverySearchExample[] = [
     ],
   },
 ];
+
+/** The Features card introduces Samantha, who appears in the linked kit story. */
+export const featureDiscoveryAssets: DiscoveryAsset[] = [
+  discoverySearches[0].assets[0],
+  { id: "samantha-pikka:0", src: `${T}/samantha-pikka-v2/samantha-pikka-v2-c1.webp`, alt: "Fictional creator Samantha Pikka refreshing her curls" },
+  // Keep this source stable: the saved Features placement supplies Milo's photo.
+  discoverySearches[0].assets[2],
+];

@@ -13,11 +13,13 @@ const root = path.resolve(new URL("../", import.meta.url).pathname);
 const key = (source, route, section) => JSON.stringify([source, route, section]);
 const ZANE = "assets/talent/zane-holt-portrait.jpg";
 const NIA = "assets/talent/nia-brooks/nia-brooks-skincare.webp";
+const NOVA = "assets/talent/nova-reed-v2/nova-reed-walk.webp";
 const replacements = {
   [key(ZANE, "/kit-story", "Foam for Chrome · Extension roster")]: "assets/website-placements/zane-kit.webp",
   [key(NIA, "/", "A world of talent · Creator wall")]: "assets/website-placements/nia-wall.webp",
   [key(NIA, "/", "Content discovery · Skincare product reviews")]: "assets/website-placements/nia-discovery.webp",
   [key(NIA, "/", "Product family · Content search miniature")]: "assets/website-placements/nia-miniature.webp",
+  [key(NOVA, "/features", "Product family · Found with Foam")]: "assets/website-placements/milo-cans.webp",
 };
 
 function fixture(base, privateLab = false) {
@@ -49,6 +51,27 @@ function fixture(base, privateLab = false) {
     ...load(path.join(root, "src/components/WebsiteImageScope.tsx")),
     ...load(path.join(root, "src/lib/websitePlacementImages.ts")),
   };
+}
+
+for (const base of ["/assets", "/NEWFOAMHOME/media/revision/assets"]) {
+  test(`Features artwork uses Samantha while retaining the exact Milo placement (${base})`, () => {
+    const f = fixture(base);
+    const { DiscoveryArtwork } = f.component("DiscoverySearch");
+    const { ProductFamily } = f.component("PeopleColour");
+    const markup = render("/features/", React.createElement(ProductFamily));
+    const artwork = markup.match(/<div class="pc-discovery-art-results">([\s\S]*?)<\/div>/)?.[1] || "";
+    const sources = [...artwork.matchAll(/<img[^>]* src="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(sources, [
+      `${base}/talent/lena-croft-v2/lena-croft-outfit.webp`,
+      `${base}/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp`,
+      `${base}/website-placements/milo-cans.webp`,
+    ]);
+    const original = render("/", React.createElement(DiscoveryArtwork, { section: "A world of talent · Found preview" }));
+    assert.ok(original.includes(`${base}/talent/elise-morgan/elise-morgan-hotel-selfie.webp`));
+    assert.ok(original.includes(`${base}/${NOVA.slice(7)}`));
+    assert.ok(!original.includes("samantha-pikka-v2-c1.webp"));
+    assert.ok(!original.includes("milo-cans.webp"));
+  });
 }
 function render(route, children) {
   return renderToStaticMarkup(React.createElement(MemoryRouter, { initialEntries: [route] }, children));

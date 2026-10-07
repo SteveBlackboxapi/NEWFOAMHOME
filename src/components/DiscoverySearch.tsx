@@ -1,13 +1,16 @@
 import { useWebsiteImageResolver } from "./WebsiteImageScope";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { discoverySearches } from "../data/discoveryContent";
+import { discoverySearches, type DiscoveryAsset } from "../data/discoveryContent";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { imageSources } from "../lib/imageAssets";
+import { warmImageQueue } from "../lib/imageWarmup";
 import { OptimizedImage } from "./OptimizedImage";
 import "./discovery-search.css";
 
 const DISCOVERY_IMAGE_SIZES = "(max-width: 700px) 28vw, (max-width: 1100px) 22vw, 200px";
+// Product card: 82% of each card (capped at 310px), less padding and three-column gaps.
+const ARTWORK_IMAGE_SIZES = "(max-width: 414px) calc((82vw - 69.52px) / 3), (max-width: 760px) 90px, (max-width: 1080px) calc((82vw - 193.8px) / 9), (max-width: 1278px) calc((82vw - 238.08px) / 9), 90px";
 
 function SearchIcon() {
   return (
@@ -22,11 +25,16 @@ function SearchIcon() {
 export function DiscoveryArtwork({
   resultLabel = "Found with Foam",
   section,
+  assets = discoverySearches[0].assets,
+  sizes = ARTWORK_IMAGE_SIZES,
+  loading = "lazy",
 }: {
   resultLabel?: string;
   section?: string;
+  assets?: readonly DiscoveryAsset[];
+  sizes?: string;
+  loading?: "eager" | "lazy";
 }) {
-  const search = discoverySearches[0];
   return (
     <div className="pc-discovery-art" aria-hidden="true">
       <div className="pc-discovery-art-search">
@@ -34,13 +42,13 @@ export function DiscoveryArtwork({
         <span>Find your next good thing</span>
       </div>
       <div className="pc-discovery-art-results">
-        {search.assets.slice(0, 3).map((asset) => (
+        {assets.slice(0, 3).map((asset) => (
           <OptimizedImage section={section}
             key={asset.id}
             src={asset.src}
-            sizes={DISCOVERY_IMAGE_SIZES}
+            sizes={sizes}
             alt=""
-            loading="lazy"
+            loading={loading}
             decoding="async"
           />
         ))}
@@ -61,6 +69,7 @@ export function DiscoverySearch() {
   const [typing, setTyping] = useState(false);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [preparedNext, setPreparedNext] = useState<number | null>(null);
   const [pageVisible, setPageVisible] = useState(true);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const running = visible && pageVisible && !paused && reducedMotion === false;
@@ -82,25 +91,31 @@ export function DiscoverySearch() {
   }, []);
 
   useEffect(() => {
-    // Preload the next result set only when this section enters the viewport.
+    // Decode the next result set before the automatic transition can expose it.
+    setPreparedNext(null);
     if (!visible) return;
-    const next = discoverySearches[(active + 1) % discoverySearches.length];
-    next.assets.forEach(({ src: original }) => {
+    const controller = new AbortController();
+    const nextIndex = (active + 1) % discoverySearches.length;
+    const next = discoverySearches[nextIndex];
+    const images = next.assets.slice(0, 3).map(({ src: original }) => {
       const src = resolve(original, `Content discovery · ${next.query}`);
-      const image = new Image();
-      image.sizes = DISCOVERY_IMAGE_SIZES;
-      const sources = imageSources(src);
-      if (sources) image.srcset = sources;
-      image.src = src;
+      return { src, sizes: DISCOVERY_IMAGE_SIZES, srcSet: imageSources(src) };
     });
+    const finish = () => {
+      if (!controller.signal.aborted) setPreparedNext(nextIndex);
+    };
+    // The queue settles failed/time-limited requests too, so a missing photo
+    // cannot stop the sequence indefinitely. Manual controls remain immediate.
+    void warmImageQueue(images, controller.signal).then(finish, finish);
+    return () => controller.abort();
   }, [active, visible]);
 
   useEffect(() => {
     setQuery(discoverySearches[active].query);
     setTyping(false);
-    if (!running) return;
-    let typingTimer: number | undefined;
     const nextIndex = (active + 1) % discoverySearches.length;
+    if (!running || preparedNext !== nextIndex) return;
+    let typingTimer: number | undefined;
     const nextQuery = discoverySearches[nextIndex].query;
     const holdTimer = window.setTimeout(() => {
       setTyping(true);
@@ -119,7 +134,7 @@ export function DiscoverySearch() {
       window.clearTimeout(holdTimer);
       window.clearInterval(typingTimer);
     };
-  }, [active, running]);
+  }, [active, running, preparedNext]);
 
   return (
     <article

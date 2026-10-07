@@ -7,7 +7,7 @@ import test from "node:test";
 const source = readFileSync(new URL("../public/foam-media-sw.js", import.meta.url), "utf8");
 const scope = "https://example.test/NEWFOAMHOME/";
 
-function environment({ revision = "abc123", network, denyStorage = false } = {}) {
+function environment({ revision = "abc123", network, denyStorage = false, denyWrites = false } = {}) {
   const handlers = new Map();
   const stores = new Map();
   const requests = [];
@@ -19,7 +19,10 @@ function environment({ revision = "abc123", network, denyStorage = false } = {})
       const store = stores.get(name);
       return {
         async match(request) { return store.get(request.url)?.clone(); },
-        async put(request, response) { store.set(request.url, response.clone()); },
+        async put(request, response) {
+          if (denyWrites) throw new Error("Quota exceeded");
+          store.set(request.url, response.clone());
+        },
         async keys() { return [...store.keys()].map((url) => ({ url })); },
         async delete(request) { return store.delete(request.url); },
       };
@@ -75,6 +78,99 @@ test("current revision images are cached once and served without another fetch",
   assert.equal(await (await env.request()).text(), "image bytes");
   assert.equal(await (await env.request()).text(), "image bytes");
   assert.equal(env.requests.length, 1);
+});
+
+const unchangedVariant = "responsive/aabbccdd001122334455/256/talent/portrait.png.webp";
+const previousCache = "foam-media-v1:/NEWFOAMHOME/:old123";
+const currentCache = "foam-media-v1:/NEWFOAMHOME/:abc123";
+const imageResponse = (text = "unchanged thumbnail") => new Response(text, { headers: { "content-type": "image/webp" } });
+
+test("an unchanged fingerprinted thumbnail survives a new release without fetching and is copied forward", async () => {
+  const env = environment();
+  env.stores.set(previousCache, new Map([[`${scope}media/old123/assets/${unchangedVariant}`, imageResponse()]]));
+  await env.activate();
+  assert.equal(await (await env.request(unchangedVariant)).text(), "unchanged thumbnail");
+  assert.equal(env.requests.length, 0);
+  assert.ok(env.stores.get(currentCache).has(`${scope}media/abc123/assets/${unchangedVariant}`));
+  env.stores.delete(previousCache);
+  assert.equal(await (await env.request(unchangedVariant)).text(), "unchanged thumbnail");
+  assert.equal(env.requests.length, 0);
+});
+
+test("source/recipe fingerprints, widths and source filenames must all match across releases", async () => {
+  const env = environment();
+  env.stores.set(previousCache, new Map([[`${scope}media/old123/assets/${unchangedVariant}`, imageResponse()]]));
+  for (const path of [
+    unchangedVariant.replace("aabbccdd001122334455", "11223344556677889900"),
+    unchangedVariant.replace("/256/", "/480/"),
+    unchangedVariant.replace("portrait.png", "different.png"),
+  ]) assert.equal(await (await env.request(path)).text(), "image bytes");
+  assert.equal(env.requests.length, 3);
+});
+
+test("original images and fonts never reuse another release by filename", async () => {
+  const env = environment();
+  env.stores.set(previousCache, new Map([
+    [`${scope}media/old123/assets/photo.webp`, imageResponse("old full-size photo")],
+    [`${scope}media/old123/assets/founders.woff2`, new Response("old font", { headers: { "content-type": "font/woff2" } })],
+  ]));
+  assert.equal(await (await env.request("photo.webp")).text(), "image bytes");
+  await env.request("founders.woff2", { destination: "font" });
+  assert.equal(env.requests.length, 2);
+});
+
+test("cross-release thumbnail reuse preserves the exact query string", async () => {
+  const env = environment();
+  const query = "?view=small&crop=1";
+  env.stores.set(previousCache, new Map([[`${scope}media/old123/assets/${unchangedVariant}${query}`, imageResponse()]]));
+  assert.equal(await (await env.request(unchangedVariant + query)).text(), "unchanged thumbnail");
+  for (const other of ["", "?view=large&crop=1", "?crop=1&view=small", "?view=small&crop=%31"])
+    assert.equal(await (await env.request(unchangedVariant + other)).text(), "image bytes");
+  assert.equal(env.requests.length, 4);
+});
+
+test("encoded aliases and malformed variant spellings cannot reuse cross-release entries", async () => {
+  const env = environment();
+  const paths = [
+    unchangedVariant.replace("aabb", "%61abb"),
+    unchangedVariant.replace("portrait", "%70ortrait"),
+    unchangedVariant.replace("aabbccdd001122334455", "AABBCCDD001122334455"),
+    unchangedVariant.replace("aabbccdd001122334455", "aabbccdd"),
+    unchangedVariant.replace("/256/", "/0256/"),
+    unchangedVariant.replace("/256/", "/0/"),
+    unchangedVariant.replace("portrait.png.webp", "portrait.svg.webp"),
+  ];
+  env.stores.set(previousCache, new Map([
+    [`${scope}media/old123/assets/${unchangedVariant}`, imageResponse()],
+    ...paths.map((path) => [`${scope}media/old123/assets/${path}`, imageResponse("noncanonical old image")]),
+  ]));
+  for (const path of paths) assert.equal(await (await env.request(path)).text(), "image bytes");
+  assert.equal(env.requests.length, paths.length);
+});
+
+test("cross-release matching ignores other sites and rejects non-image cached responses", async () => {
+  const env = environment();
+  env.stores.set("foam-media-v1:/OTHER/:old123", new Map([[`${scope}media/old123/assets/${unchangedVariant}`, imageResponse("wrong scope")]]));
+  env.stores.set(previousCache, new Map([[`${scope}media/old123/assets/${unchangedVariant}`, new Response("HTML fallback", { headers: { "content-type": "text/html" } })]]));
+  assert.equal(await (await env.request(unchangedVariant)).text(), "image bytes");
+  assert.equal(env.requests.length, 1);
+});
+
+test("a copied thumbnail remains readable when storage quota prevents copying it forward", async () => {
+  const env = environment({ denyWrites: true });
+  env.stores.set(previousCache, new Map([[`${scope}media/old123/assets/${unchangedVariant}`, imageResponse()]]));
+  assert.equal(await (await env.request(unchangedVariant)).text(), "unchanged thumbnail");
+  assert.equal(env.requests.length, 0);
+});
+
+test("copying shared thumbnails is bounded by the same 180-entry limit", async () => {
+  const env = environment();
+  const paths = Array.from({ length: 184 }, (_, i) => unchangedVariant.replace("portrait.png", `portrait-${i}.png`));
+  env.stores.set(previousCache, new Map(paths.map((path) => [`${scope}media/old123/assets/${path}`, imageResponse()])));
+  await Promise.all(paths.map((path) => env.request(path)));
+  assert.equal(env.requests.length, 0);
+  assert.equal(env.stores.get(currentCache).size, 180);
+  assert.equal(env.stores.size, 2);
 });
 
 test("HTML, app code, API, media, ranges, cross-origin and malformed paths bypass worker", async () => {

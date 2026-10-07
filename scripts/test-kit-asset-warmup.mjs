@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import ts from "typescript";
 
-const filename = new URL("../src/hooks/useKitAssetWarmup.ts", import.meta.url);
+const filename = new URL("../src/lib/imageWarmup.ts", import.meta.url);
 const { outputText } = ts.transpileModule(readFileSync(filename, "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
   fileName: filename.pathname,

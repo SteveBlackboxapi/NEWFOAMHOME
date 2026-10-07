@@ -5,7 +5,7 @@ import { labTalent } from "./labTalentCatalogue";
 import { stagedTalent } from "./stagedTalent";
 import { websiteAria, websiteNia, websiteSamantha } from "./websiteTalent";
 import { creatorLiveExamples } from "./creatorLiveExamples";
-import { discoverySearches } from "./discoveryContent";
+import { discoverySearches, featureDiscoveryAssets } from "./discoveryContent";
 import { KIT_FEATURED_CONTENT } from "./kitFeaturedContent";
 import { websiteFitness } from "./campaignTalent";
 import { websiteMatcha } from "./matchaTalent";
@@ -261,7 +261,7 @@ artwork(
   "/features",
   "Product family · Foam for Chrome",
 );
-discoverySearches[0].assets.forEach(({ src }) =>
+featureDiscoveryAssets.forEach(({ src }) =>
   use(src, "/features", "Product family · Found with Foam"),
 );
 const peopleTiles: Record<string, string[]> = {
