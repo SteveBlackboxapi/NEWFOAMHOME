@@ -1845,16 +1845,28 @@
       "originalPortrait": "assets/io-portrait-poster.webp",
       "referenceImages": [
         {
-          "label": "Earlier content and family images",
+          "label": "Historical pre-tattoo content and family images — not authoritative for ink",
           "src": "assets/talent/samantha-pikka-v2/references/earlier-content.png"
         },
         {
-          "label": "Original portrait reference",
+          "label": "Original portrait — face anchor only; historical pre-tattoo view",
           "src": "assets/talent/samantha-pikka-v2/references/portrait-reference.png"
         },
         {
-          "label": "Original profile and audience data",
+          "label": "Original profile — face anchor and demo data only; not tattoo guidance",
           "src": "assets/talent/samantha-pikka-v2/references/original-profile.png"
+        },
+        {
+          "label": "Previous accepted curl-refresh image — current sleeve reference",
+          "src": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp"
+        },
+        {
+          "label": "Historical pre-tattoo curl-refresh original — not authoritative for ink",
+          "src": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp"
+        },
+        {
+          "label": "Samantha character sheet — current identity and photo-based sleeve references, 2026-10-07",
+          "src": "assets/talent/uploads/samantha-character-sheet-20261007.webp"
         }
       ],
       "creativeDirection": {
@@ -1863,7 +1875,14 @@
           "Samantha is a fictional adult aged 26. Her original portrait and existing portrait video are the identity references.",
           "Preserve her face shape, brown eyes, brows, nose, lips and shoulder-length dark curls. The earlier content sheet used a different highlighted hairstyle.",
           "The solo and duo dance images revisit the first two scenes from the earlier content sheet. The companion in the duo is an adult; preserve the casual home setting and natural movement.",
-          "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics."
+          "The source screenshots are retained below. Their audience and engagement figures are demo data, not verified live metrics.",
+          "Current accepted portrait, curl-refresh and coffee photos preserve Samantha's warm skin, brown eyes, strong brows, facial proportions and shoulder-length black curls. Keep the candid phone-video feel and everyday light.",
+          "In the accepted tattoo references the sleeve appears on IMAGE LEFT. Mirroring is unknown; do not infer an anatomical left or right arm from image orientation alone.",
+          "The current upper-arm motif has an open sun/disc and fine rays just below the tee, with a small swallow-like bird beneath the sun. Do not place a separate bird on the forearm.",
+          "The forearm uses broad flowing black/grey wave or ribbon bands with skin gaps, ending before a clear wrist and hand. The opposite visible arm is bare. A raised forearm may hide the upper-arm bird; do not move the bird merely to make it visible.",
+          "Fine linework varies a little across accepted photos. Match their visible motifs, placement and proportions without inventing unseen views or claiming an exact tattoo stencil.",
+          "The earlier highlighted-hair content sheet and retained pre-tattoo solo-dance, duo-dance, curl-refresh, between-takes and coffee originals are historical composition references, not authoritative for current ink. Original portrait screenshots remain face anchors only.",
+          "Use the source-backed Samantha character sheet and existing accepted photos for tattoo continuity. New straightener outputs, including the corrected image, are correction targets rather than independent tattoo evidence."
         ],
         "motionBrief": "The original portrait video and the 10-second silent curl-refresh video remain available in the content collection and download pack. The dance images are stills; no dance video has been generated.",
         "promptFile": "assets/talent/samantha-pikka-v3/creative-brief.md"
@@ -1900,18 +1919,22 @@
           "strongKind": "photo"
         },
         {
-          "provenance": "uploaded",
+          "provenance": "ai-generated",
           "id": "0",
           "type": "still",
-          "thumb": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
+          "thumb": "assets/talent/uploads/samantha-straightener-20261007-v3.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp",
-          "caption": "a quick curl refresh",
+          "original": "assets/talent/uploads/samantha-straightener-20261007-v3-original.png",
+          "caption": "a quick hair-styling demo",
           "captionSettings": {
             "visible": false
           },
           "platform": "instagram",
-          "strongKind": "photo"
+          "strongKind": "photo",
+          "generation": {
+            "version": "Candid hair-styling v3",
+            "approach": "Approved candid phone-video-style hair-styling pose, with tattoo placement corrected using the existing accepted Samantha photos and their character sheet. The foreground forearm carries flowing black/grey bands; the small bird stays on the upper arm and may be occluded by the raised forearm. A photo-based continuity correction, not an exact tattoo stencil."
+          }
         },
         {
           "provenance": "uploaded",
@@ -5062,7 +5085,7 @@
     "assets/talent/samantha-pikka-v3/samantha-pikka-dance-duo.webp": "assets/talent/uploads/283e31ed-eec6-48f2-8182-ee47281e015d.webp",
     "assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp": "assets/talent/uploads/87b07825-c226-4c21-8ca6-58c6d7fa8eff.webp",
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c2.webp": "assets/talent/uploads/a29979dd-3a93-4eec-b093-629c14bc3163.webp",
-    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": "assets/talent/uploads/7be2ed88-dabc-41f0-b0cb-198a3b45abbd.webp",
+    "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp": "assets/talent/uploads/samantha-straightener-20261007-v3.webp",
     "assets/talent/samantha-pikka-v2/samantha-pikka-v2-portrait.webp": "assets/talent/uploads/ab61d3f8-cd0b-4d09-b047-1b366437ceea.webp",
     "assets/talent/nova-reed-portrait.jpg": "assets/talent/uploads/d7f1ffbe-6498-47a3-b95e-4de5cfcdd54d.webp",
     "assets/talent/nia-brooks/nia-brooks-profile.webp": "assets/talent/uploads/78900a23-dd65-4eaa-b312-1d884442109d.webp",
