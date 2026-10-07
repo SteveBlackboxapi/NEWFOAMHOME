@@ -134,10 +134,10 @@ function LabTalentContent() {
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [draft, setDraft] = useState<Filters>(EMPTY);
   const [filterOpen, setFilterOpen] = useState(false);
-  const layout = talentLayoutFromParams(params);
   const layoutPreferences = useRef<TalentLayoutPreferences | null>(null);
   if (layoutPreferences.current === null)
     layoutPreferences.current = readTalentLayoutPreferences();
+  const layout = talentLayoutFromParams(params, layoutPreferences.current);
   const rememberLayout = (targetView: View, next: TalentLayout) => {
     // Settings carries the previous library URL; it has no layout of its own.
     if (targetView === "settings") return;
@@ -149,8 +149,7 @@ function LabTalentContent() {
     rememberLayout(view, next);
     setParams((prev) => {
       const updated = new URLSearchParams(prev);
-      if (next === "gallery") updated.delete("layout");
-      else updated.set("layout", next);
+      updated.set("layout", next);
       return updated;
     }, { replace: true });
   };
@@ -190,8 +189,18 @@ function LabTalentContent() {
     document.title = `${title} · Foam Lab`;
   }, [title]);
   useEffect(() => {
+    if (view === "settings") return;
     rememberLayout(view, layout);
-  }, [view, layout]);
+    // Pin the entry view/layout for history and Settings Back after preferences change.
+    if (params.get("view") !== view || params.get("layout") !== layout) {
+      setParams((prev) => {
+        const updated = new URLSearchParams(prev);
+        updated.set("view", view);
+        updated.set("layout", layout);
+        return updated;
+      }, { replace: true });
+    }
+  }, [view, layout, params, setParams]);
   useEffect(() => {
     const updateWidth = () => setViewportWidth(window.innerWidth);
     window.addEventListener("resize", updateWidth);
