@@ -4965,6 +4965,93 @@
           "src": "assets/talent/discovery-v1/masters/nike-after-run.png"
         }
       ]
+    },
+    {
+      "id": "milo-venn",
+      "displayName": "Milo Venn",
+      "age": 28,
+      "gender": "Male",
+      "location": "Brighton, UK",
+      "bio": "Brighton-based prankster turning everyday moments into playful product sketches and mock-serious taste tests. Fictional AI-generated demo creator; handles, audience and post figures are invented for the Foam library.",
+      "verticals": [
+        "Comedy",
+        "Food & drink",
+        "Lifestyle"
+      ],
+      "platforms": [
+        {
+          "network": "instagram",
+          "handle": "@milo.venn.fake",
+          "followers": 184600
+        },
+        {
+          "network": "tiktok",
+          "handle": "@milovenn.fake",
+          "followers": 312400
+        },
+        {
+          "network": "youtube",
+          "handle": "@milovenn.fake",
+          "followers": 42800
+        }
+      ],
+      "totalAudience": 539800,
+      "provenance": "ai-generated",
+      "portrait": "assets/talent/uploads/milo-venn-portrait-20261007-preview.webp",
+      "originalPortrait": "assets/talent/uploads/milo-venn-portrait-20261007-original.png",
+      "creativeDirection": {
+        "summary": "A cheeky, offbeat prankster with a friendly deadpan delivery. Playful product sketches, mock-serious taste tests and a little everyday chaos. LOOP SIP pear soda is an invented brand used to illustrate a potential creator partnership.",
+        "identityNotes": [
+          "Fictional adult made with AI; all audience and engagement figures are illustrative demo data.",
+          "Medium-brown skin, dark loose curls, dark brown eyes, a light moustache and short patchy stubble. Keep the same face across his portrait and content.",
+          "Natural phone photography, direct flash or ordinary daylight, visible skin texture and gently imperfect social-photo compression.",
+          "LOOP SIP and its partnership with Milo are fictional, with no real sponsorship or endorsement represented."
+        ]
+      },
+      "motion": null,
+      "motionStatus": "placeholder",
+      "content": [
+        {
+          "id": "loopsip-pear-v1",
+          "type": "still",
+          "thumb": "assets/talent/uploads/milo-venn-loopsip-flash-20261007-preview.webp",
+          "original": "assets/talent/uploads/milo-venn-loopsip-flash-20261007-original.png",
+          "aspectRatio": "9/16",
+          "caption": "Taking product research very seriously.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "instagram",
+          "strongKind": "photo",
+          "provenance": "ai-generated",
+          "views": 268400,
+          "engagements": 17600,
+          "generation": {
+            "version": "LOOP SIP v1 · flash photo",
+            "approach": "Created with built-in OpenAI image generation as a fictional creator and made-up soda partnership. Two-can visual joke, direct flash and natural phone-photo texture; source original preserved. Performance figures are invented demo values."
+          }
+        },
+        {
+          "id": "loopsip-pear-v2",
+          "type": "still",
+          "thumb": "assets/talent/uploads/milo-venn-loopsip-kitchen-20261007-preview.webp",
+          "original": "assets/talent/uploads/milo-venn-loopsip-kitchen-20261007-original.png",
+          "aspectRatio": "4/5",
+          "caption": "The focus group is me. The verdict is more pear.",
+          "captionSettings": {
+            "visible": false
+          },
+          "platform": "tiktok",
+          "strongKind": "photo",
+          "provenance": "ai-generated",
+          "views": 412700,
+          "engagements": 28100,
+          "generation": {
+            "version": "LOOP SIP v2 · kitchen photo",
+            "approach": "Created with built-in OpenAI image generation using Milo’s generated portrait and first can image to preserve his fictional identity and packaging. Natural-light product sketch; source original preserved. Performance figures are invented demo values."
+          }
+        }
+      ]
     }
   ],
   "removedTalentIds": [
@@ -5120,6 +5207,7 @@
     "[\"assets/talent/aria-quen-v2/aria-quen-v2-c1.webp\",\"/kit-story\",\"Found with Foam · Search results\"]": "assets/talent/uploads/42d64dfd-8445-4b26-a39c-770a2f204da6.webp",
     "[\"assets/talent/theo-lane/matcha.webp\",\"/brands\",\"Opening collage\"]": "assets/talent/uploads/2d8405c2-2f2e-4315-ac7a-73d888e5e458.webp",
     "[\"assets/talent/theo-lane/matcha.webp\",\"/brands\",\"Start with the work · Content examples\"]": "assets/talent/uploads/6046eeb4-1253-420e-94de-1c13c15d5e1b.webp",
-    "[\"assets/talent/discovery-v1/nike-lacing.webp\",\"/\",\"Content discovery · Posts talking about Nike\"]": "assets/talent/uploads/172f84ed-62cc-4b27-b77b-270e3e564419.webp"
+    "[\"assets/talent/discovery-v1/nike-lacing.webp\",\"/\",\"Content discovery · Posts talking about Nike\"]": "assets/talent/uploads/172f84ed-62cc-4b27-b77b-270e3e564419.webp",
+    "[\"assets/talent/nova-reed-v2/nova-reed-walk.webp\",\"/features\",\"Product family · Found with Foam\"]": "assets/talent/uploads/milo-venn-loopsip-flash-20261007-preview.webp"
   }
 }
