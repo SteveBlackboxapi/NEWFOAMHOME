@@ -4792,7 +4792,8 @@
         }
       ],
       "totalAudience": 400600,
-      "portrait": "assets/talent/uploads/e8ae7d74-a614-4920-b0a1-41ddd1c78c69.png",
+      "portrait": "assets/talent/uploads/6868cb7e-0364-49aa-b9af-6f341ebbf49e.webp",
+      "originalPortrait": "assets/talent/uploads/e8ae7d74-a614-4920-b0a1-41ddd1c78c69.png",
       "motion": null,
       "motionStatus": "placeholder",
       "content": [
@@ -4936,7 +4937,8 @@
     "assets/talent/lena-croft-v2/lena-croft-outfit.webp": "assets/talent/uploads/ba2e876f-bb37-4f39-94d3-fb9f4d2becb5.png",
     "assets/talent/discovery-v1/cat-laundry.webp": "assets/talent/uploads/674052db-cfd8-4824-8824-8267de6519c8.png",
     "assets/talent/discovery-v1/zane-shoe-chat.webp": "assets/talent/uploads/e8ae7d74-a614-4920-b0a1-41ddd1c78c69.png",
-    "assets/talent/discovery-v1/nike-after-run.webp": "assets/talent/uploads/68d53c16-7a51-4a46-8c09-c7d8caa2ba1e.png"
+    "assets/talent/discovery-v1/nike-after-run.webp": "assets/talent/uploads/68d53c16-7a51-4a46-8c09-c7d8caa2ba1e.png",
+    "assets/talent/zane-holt-portrait.jpg": "assets/talent/uploads/6868cb7e-0364-49aa-b9af-6f341ebbf49e.webp"
   },
   "websitePlacementCaptions": {
     "[\"assets/talent/samantha-pikka-v3/samantha-pikka-dance-solo.webp\",\"/kit-story\",\"Media Kit · Featured content\"]": {
