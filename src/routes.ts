@@ -20,6 +20,12 @@ export const router = createBrowserRouter(
       children: [
         ...(import.meta.env.DEV
           ? [{
+              path: "managers-flow-preview",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/ManagersFlowPreview")).ManagersFlowPreview,
+              }),
+            }, {
               path: "managers-home-preview",
               HydrateFallback: () => null,
               lazy: async () => ({

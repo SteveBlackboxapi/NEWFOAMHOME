@@ -1,1 +1,5 @@
-export { ManagersLanding as Managers } from "./ManagersLanding";
+import { ManagersLanding } from "./ManagersLanding";
+
+export function Managers() {
+  return <ManagersLanding filmFirst />;
+}
