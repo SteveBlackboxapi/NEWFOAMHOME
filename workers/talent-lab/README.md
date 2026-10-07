@@ -51,6 +51,8 @@ All mutations require an exact same-origin `Origin` header. Login attempts are l
 
 `/api/asset?path=assets/talent/uploads/<filename>&ref=<40-character-commit>` serves an authenticated image from an immutable revision. **The underlying repository is public: images and catalogue data saved there remain publicly accessible through GitHub.** The password protects the editing workspace and server-held key, not the public repository itself.
 
+New Talent library photo uploads receive a WebP display preview at quality 62, capped at 1280 pixels on the longest edge without upscaling, only when it is smaller. The untouched upload remains available through the original-image download; earlier originals are kept in profile references. Transparent or animated images, Settings artwork/replacements and already-rendered captions bypass this photo compression, as do JPEG/WebP files no larger than 256 KiB. If the browser cannot produce a valid WebP, the original remains the display image. Website publication still creates its own delivery variants.
+
 All responses disable caching and indexing. The Content Security Policy restricts application scripts to this origin; media and source downloads may also use the existing Foam GitHub Pages origin. No passwords or keys are logged by the Worker.
 
 ## Publishing website image replacements

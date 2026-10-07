@@ -44,6 +44,8 @@ const {
   readGithubLibrary,
   saveGithubLibrary,
   prepareLibraryImage,
+  replaceLibraryProfileImage,
+  promoteLibraryProfileImage,
   verifyGithubAccess,
   websitePlacementKey,
   withWebsiteImageReplacement,
@@ -716,6 +718,199 @@ test("rejects unsupported/empty/too-large images and oversized decoded dimension
     ),
   );
   assert.equal(closes, 1);
+});
+
+const PREVIEW_WEBP = Buffer.from("RIFF0000WEBPVP8 test preview bytes");
+function uploadPhoto(type = "image/png", size = 2048) {
+  const signature = type === "image/webp" ? PREVIEW_WEBP : type === "image/jpeg" ? Buffer.from([255, 216, 255]) : Buffer.from(PNG, "base64");
+  return new File([signature, Buffer.alloc(Math.max(0, size - signature.length))], "Camera photo.png", { type });
+}
+function mockPhotoCanvas(t, { width = 2400, height = 3600, alpha = 255, blob = new Blob([PREVIEW_WEBP], { type: "image/webp" }), encodeError = false } = {}) {
+  let closes = 0;
+  const encodes = [];
+  const draws = [];
+  const canvas = {
+    width: 0, height: 0,
+    getContext: () => ({
+      drawImage: (...args) => draws.push(args),
+      getImageData: () => ({ data: new Uint8ClampedArray([20, 30, 40, alpha]) }),
+    }),
+    toBlob: (callback, type, quality) => {
+      encodes.push({ type, quality });
+      if (encodeError) throw new Error("Encoder unavailable");
+      callback(blob);
+    },
+  };
+  const previous = Object.getOwnPropertyDescriptor(globalThis, "document");
+  Object.defineProperty(globalThis, "document", { configurable: true, value: { createElement: (tag) => { assert.equal(tag, "canvas"); return canvas; } } });
+  t.after(() => {
+    if (previous) Object.defineProperty(globalThis, "document", previous);
+    else delete globalThis.document;
+  });
+  t.mock.method(globalThis, "createImageBitmap", async () => ({ width, height, close: () => closes++ }));
+  return { canvas, encodes, draws, closes: () => closes };
+}
+
+test("photo previews cap the longest edge at 1280 and retain every original byte", async (t) => {
+  const pipeline = mockPhotoCanvas(t);
+  const file = uploadPhoto();
+  const prepared = await prepareLibraryImage(file);
+  assert.deepEqual([pipeline.canvas.width, pipeline.canvas.height], [853, 1280]);
+  assert.deepEqual(pipeline.encodes, [{ type: "image/webp", quality: 0.62 }]);
+  assert.equal(pipeline.draws.length, 1);
+  assert.equal(pipeline.closes(), 1);
+  assert.match(prepared.src, /-preview\.webp$/);
+  assert.equal(prepared.upload.base64, PREVIEW_WEBP.toString("base64"));
+  assert.equal(prepared.preview, `data:image/webp;base64,${PREVIEW_WEBP.toString("base64")}`);
+  assert.equal(prepared.original.upload.base64, Buffer.from(await file.arrayBuffer()).toString("base64"));
+  assert.match(prepared.original.src, /\.png$/);
+  assert.equal(prepared.original.preview, `data:image/png;base64,${prepared.original.upload.base64}`);
+  assert.equal(prepared.ratio, "9/16");
+});
+
+test("small PNG previews never upscale", async (t) => {
+  const pipeline = mockPhotoCanvas(t, { width: 360, height: 480 });
+  const prepared = await prepareLibraryImage(uploadPhoto());
+  assert.ok(prepared.original);
+  assert.deepEqual([pipeline.canvas.width, pipeline.canvas.height], [360, 480]);
+});
+
+test("transparent artwork keeps its untouched alpha image without lossy encoding", async (t) => {
+  const pipeline = mockPhotoCanvas(t, { alpha: 254 });
+  const file = uploadPhoto();
+  const prepared = await prepareLibraryImage(file);
+  assert.equal(prepared.original, undefined);
+  assert.equal(prepared.upload.base64, Buffer.from(await file.arrayBuffer()).toString("base64"));
+  assert.deepEqual(pipeline.encodes, []);
+  assert.equal(pipeline.closes(), 1);
+});
+
+test("animated PNG and large animated WebP keep their animation instead of becoming a still", async (t) => {
+  const pipeline = mockPhotoCanvas(t);
+  const png = Buffer.from(PNG, "base64");
+  const animation = Buffer.alloc(20);
+  animation.writeUInt32BE(8, 0);
+  animation.write("acTL", 4);
+  const animatedPng = new File([png.subarray(0, 33), animation, png.subarray(33)], "animated.png", { type: "image/png" });
+  const webp = Buffer.alloc(300 * 1024);
+  webp.write("RIFF", 0);
+  webp.writeUInt32LE(webp.length - 8, 4);
+  webp.write("WEBPVP8X", 8);
+  webp.writeUInt32LE(10, 16);
+  webp[20] = 2;
+  const animatedWebp = new File([webp], "animated.webp", { type: "image/webp" });
+  for (const file of [animatedPng, animatedWebp]) {
+    const prepared = await prepareLibraryImage(file);
+    assert.equal(prepared.original, undefined);
+    assert.equal(prepared.upload.base64, Buffer.from(await file.arrayBuffer()).toString("base64"));
+  }
+  assert.deepEqual(pipeline.draws, []);
+  assert.equal(pipeline.closes(), 2);
+});
+
+test("efficient JPEG/WebP and opted-out captions/artwork avoid another encoding pass", async (t) => {
+  const pipeline = mockPhotoCanvas(t);
+  for (const type of ["image/webp", "image/jpeg"]) {
+    const file = uploadPhoto(type, 256 * 1024);
+    const prepared = await prepareLibraryImage(file);
+    assert.equal(prepared.original, undefined);
+    assert.equal(prepared.upload.base64, Buffer.from(await file.arrayBuffer()).toString("base64"));
+  }
+  const caption = await prepareLibraryImage(uploadPhoto("image/webp", 300 * 1024), { optimize: false });
+  const artwork = await prepareLibraryImage(uploadPhoto(), { optimize: false });
+  assert.equal(caption.original, undefined);
+  assert.equal(artwork.original, undefined);
+  assert.deepEqual(pipeline.draws, []);
+  assert.deepEqual(pipeline.encodes, []);
+  assert.equal(pipeline.closes(), 4);
+});
+
+test("unavailable, mislabeled, corrupt or larger WebP output safely reuses the original", async (t) => {
+  for (const [name, options] of [
+    ["null", { blob: null }],
+    ["unsupported WebP", { blob: new Blob([Buffer.from(PNG, "base64")], { type: "image/png" }) }],
+    ["invalid signature", { blob: new Blob(["not a WebP"], { type: "image/webp" }) }],
+    ["larger output", { blob: new Blob([PREVIEW_WEBP, Buffer.alloc(3000)], { type: "image/webp" }) }],
+    ["encoder throws", { encodeError: true }],
+  ]) await t.test(name, async (t) => {
+    const pipeline = mockPhotoCanvas(t, options);
+    const file = uploadPhoto();
+    const prepared = await prepareLibraryImage(file);
+    assert.equal(prepared.original, undefined);
+    assert.equal(prepared.upload.base64, Buffer.from(await file.arrayBuffer()).toString("base64"));
+    assert.equal(pipeline.closes(), 1);
+  });
+});
+
+test("optimized replacements retain IDs and previous originals without duplicating references", async (t) => {
+  mockPhotoCanvas(t);
+  const prepared = await prepareLibraryImage(uploadPhoto());
+  const before = profile({ portrait: src("portrait"), originalPortrait: src("portrait-archive") });
+  before.content[0].original = src("content-archive");
+  before.referenceImages = [{ label: "Existing reference", src: src("content-archive") }];
+  const tile = replaceLibraryProfileImage(before, prepared, 0);
+  assert.equal(tile.id, before.id);
+  assert.equal(tile.content[0].id, before.content[0].id);
+  assert.equal(tile.content[0].thumb, prepared.src);
+  assert.equal(tile.content[0].original, prepared.original.src);
+  assert.deepEqual(tile.referenceImages, before.referenceImages);
+  assert.equal(before.content[0].original, src("content-archive"));
+  const portrait = replaceLibraryProfileImage(before, prepared);
+  assert.equal(portrait.portrait, prepared.src);
+  assert.equal(portrait.originalPortrait, prepared.original.src);
+  assert.deepEqual(portrait.referenceImages, [...before.referenceImages, { label: "Earlier portrait", src: src("portrait-archive") }, { label: "Earlier portrait", src: src("portrait") }]);
+  assert.equal(portrait.content[0].id, "first");
+  assert.throws(() => replaceLibraryProfileImage(before, prepared, 100), LibraryError);
+});
+
+test("replacing an unoptimized upload retains both its master and an earlier character original", async (t) => {
+  mockPhotoCanvas(t);
+  const prepared = await prepareLibraryImage(uploadPhoto("image/jpeg"));
+  assert.equal(prepared.original, undefined);
+  const before = profile({ portrait: src("large-upload"), originalPortrait: src("earlier-character") });
+  const next = replaceLibraryProfileImage(before, prepared);
+  assert.equal(next.originalPortrait, prepared.src);
+  assert.deepEqual(next.referenceImages.map((ref) => ref.src), [src("earlier-character"), src("large-upload")]);
+  const repeated = replaceLibraryProfileImage(next, prepared);
+  assert.deepEqual(repeated.referenceImages, next.referenceImages);
+});
+
+test("using an optimized content image as portrait carries its own master and retains prior portrait sources", () => {
+  const before = profile({ portrait: src("portrait-upload"), originalPortrait: src("portrait-history"), provenance: "ai-generated" });
+  before.content[0] = { ...before.content[0], thumb: "assets/talent/uploads/photo-preview.webp", original: src("photo-master"), provenance: "uploaded" };
+  const next = promoteLibraryProfileImage(before, 0);
+  assert.equal(next.id, before.id);
+  assert.equal(next.portrait, before.content[0].thumb);
+  assert.equal(next.originalPortrait, src("photo-master"));
+  assert.equal(next.provenance, "uploaded");
+  assert.equal(next.content[0].id, "first");
+  assert.deepEqual(next.referenceImages.map((ref) => ref.src), [src("portrait-history"), src("portrait-upload")]);
+  assert.equal(before.originalPortrait, src("portrait-history"));
+  assert.throws(() => promoteLibraryProfileImage(before, 9), LibraryError);
+});
+
+test("saving a photo replacement uploads preview and full original while retaining its earlier archive", async (t) => {
+  mockPhotoCanvas(t);
+  const prepared = await prepareLibraryImage(uploadPhoto());
+  const before = profile();
+  before.content[0].thumb = "assets/talent/uploads/old-preview.webp";
+  before.content[0].original = src("earlier-original");
+  const current = manifest([before]);
+  const input = manifest([replaceLibraryProfileImage(before, prepared, 0)]);
+  const steps = saveSteps(input, [
+    { path: prepared.upload.path, mode: "100644", type: "blob", sha: "preview-blob" },
+    { path: prepared.original.upload.path, mode: "100644", type: "blob", sha: "original-blob" },
+    { path: "public/assets/talent/uploads/old-preview.webp", mode: "100644", type: "blob", sha: null },
+  ], BEFORE, current);
+  steps.splice(3, 0,
+    { path: "/git/blobs", method: "POST", value: { sha: "preview-blob" }, check: ({ body }) => assert.equal(body.content, prepared.upload.base64) },
+    { path: "/git/blobs", method: "POST", value: { sha: "original-blob" }, check: ({ body }) => assert.equal(body.content, prepared.original.upload.base64) },
+  );
+  const api = mockGithub(t, steps);
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: current }, input, [prepared.upload, prepared.original.upload]);
+  assert.equal(saved.manifest.profiles[0].content[0].original, prepared.original.src);
+  assert.equal(saved.manifest.profiles[0].referenceImages[0].src, src("earlier-original"));
+  api.done();
 });
 
 test("credentials stay in request headers and unknown metadata cannot enter exports or committed data", async (t) => {

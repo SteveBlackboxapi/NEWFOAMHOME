@@ -636,8 +636,7 @@ export function TalentLabProfile({
               {showingOriginal && (
                 <div className="tl-original-note">
                   <p>
-                    This earlier image is kept as part of the character’s
-                    history.
+                    This preserved source image remains available to view and download.
                   </p>
                   {caption && <p>Switch to Current to edit the caption.</p>}
                 </div>

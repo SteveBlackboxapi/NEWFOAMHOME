@@ -1,5 +1,5 @@
 import { OptimizedImage } from "../components/OptimizedImage";
-import { useWebsiteBackground } from "../components/WebsiteImageScope";
+import { WebsiteBackgroundImage } from "../components/WebsiteImageScope";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import {
@@ -26,7 +26,7 @@ export function ChromeStoryMobile({
 }: { embedded?: boolean } = {}) {
   const Heading = embedded ? "h2" : "h1";
   const wallpaper = useChromeWallpaper();
-  const desktopBackground = useWebsiteBackground(embedded ? KIT_STORY_CHROME_BACKGROUND : chromeWallpaperBackground(wallpaper), "Foam for Chrome · Desktop background");
+  const desktopBackground = embedded ? KIT_STORY_CHROME_BACKGROUND : chromeWallpaperBackground(wallpaper);
   const reduced = usePrefersReducedMotion();
   const [sent, setSent] = useState(false);
   const finale = useRef<HTMLDivElement>(null);
@@ -40,9 +40,14 @@ export function ChromeStoryMobile({
   const preview = useRef<HTMLElement>(null);
   useChromePreviewEntry(preview);
   const [panelStage, setPanelStage] = useState<ChromeStage>(2);
-  const background = {
-    backgroundImage: desktopBackground,
-  };
+  const background = (
+    <WebsiteBackgroundImage
+      background={desktopBackground}
+      section="Foam for Chrome · Desktop background"
+      media="(max-width: 1023px)"
+      sizes="(max-width: 900px) calc(100vw - 40px), 860px"
+    />
+  );
   return (
     <div className="cs-story cs-mobile-story">
       {!embedded && (
@@ -72,7 +77,8 @@ export function ChromeStoryMobile({
               <span>01</span>
               <h3>A brand asks. You’re on it.</h3>
             </div>
-            <div className="cs-mobile-desktop" style={background}>
+            <div className="cs-mobile-desktop">
+              {background}
               <div className="cs-mobile-email-window">
                 <div className="cs-mobile-window-bar">
                   <span>● ● ●</span> mail.google.com
@@ -95,10 +101,8 @@ export function ChromeStoryMobile({
               Open Samantha’s profile in Foam. Choose Detail to copy her
               biography, audience figures and media kit.
             </p>
-            <div
-              className="cs-mobile-desktop cs-mobile-extension-stage"
-              style={background}
-            >
+            <div className="cs-mobile-desktop cs-mobile-extension-stage">
+              {background}
               <ChromeExtensionPanel
                 stage={panelStage}
                 onStage={setPanelStage}
@@ -112,7 +116,8 @@ export function ChromeStoryMobile({
               <span>03</span>
               <h3>Paste. Send. You’re done.</h3>
             </div>
-            <div className="cs-mobile-desktop" style={background}>
+            <div className="cs-mobile-desktop">
+              {background}
               <div className="cs-mobile-email-window">
                 <div className="cs-mobile-window-bar">
                   <span>● ● ●</span> Your reply

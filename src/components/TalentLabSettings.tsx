@@ -58,7 +58,8 @@ export function TalentLabSettings({ library, onBack, onManage }: {
     setError("");
     setMessage("");
     try {
-      const prepared = await prepareLibraryImage(file);
+      // This artwork/replacement flow has no separate master reference; the publisher creates its website variants.
+      const prepared = await prepareLibraryImage(file, { optimize: false });
       library.addUpload(prepared.upload, prepared.preview);
       if (placement) {
         library.replaceWebsitePlacement(canonical(asset.src), placement.route, placement.section, prepared.src);

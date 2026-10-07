@@ -1,0 +1,19 @@
+.website-background-image,
+.website-background-image > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.website-background-image {
+  display: block;
+  background-position: center;
+  background-size: cover;
+}
+.website-background-image > img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}

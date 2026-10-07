@@ -24,3 +24,9 @@ export function imageSources(src: string): string | undefined {
   return [...image.variants, { src: image.src, width: image.width }]
     .map((variant) => `${url(variant.src)} ${variant.width}w`).join(', ');
 }
+
+/** A single photographic background can use picture selection; CSS layers stay intact. */
+export function backgroundImageSource(background: string): string | undefined {
+  const match = /^url\(\s*(?:"([^"]*)"|'([^']*)'|([^"'()]*))\s*\)$/i.exec(background.trim());
+  return match?.slice(1).find((value) => value !== undefined)?.trim() || undefined;
+}

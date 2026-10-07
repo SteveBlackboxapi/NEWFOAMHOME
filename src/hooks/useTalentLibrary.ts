@@ -148,7 +148,7 @@ export function useTalentLibrary() {
         if (!asset) throw new Error("A caption’s original image is missing. Refresh the library before saving.");
         const src = entry.original ? materializeLibraryImage(entry.original, snapshot.revision, previews) : asset.src;
         const blob = await renderCaptioned({ ...asset, src }, { ...entry.settings, visible: true }, "image/webp");
-        const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }));
+        const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }), { optimize: false });
         preparedUploads.push(prepared.upload);
         preparedManifest = withPlacementCaption(preparedManifest, key, prepared.src, entry.settings, entry.assetId);
       }

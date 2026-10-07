@@ -9,7 +9,10 @@ import {
   LIBRARY_REPO,
   LIBRARY_REVIEW_URL,
   prepareLibraryImage,
+  replaceLibraryProfileImage,
+  promoteLibraryProfileImage,
   websitePlacementKey,
+  type PreparedLibraryImage,
 } from "../lib/githubTalentLibrary";
 import type { TalentLibraryController } from "../hooks/useTalentLibrary";
 import { websiteReplacementSource } from "../lib/websiteImageReplacement";
@@ -80,7 +83,7 @@ function PlacementCaptionControl({ asset, route, section, library }: { asset: La
       const settings = { ...caption, visible: true };
       const clean = { ...asset, src: library.captionSource(key, asset.src) };
       const blob = await renderCaptioned(clean, settings, "image/webp");
-      const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }));
+      const prepared = await prepareLibraryImage(new File([blob], "caption.webp", { type: "image/webp" }), { optimize: false });
       library.addUpload(prepared.upload, prepared.preview);
       library.setPlacementCaption(key, prepared.src, settings, asset.id);
     } catch (error) { setError(error instanceof Error ? error.message : "Could not prepare this caption."); }
@@ -179,9 +182,11 @@ export function TalentLibraryManager({
     setError("");
     setMessage("");
     try {
-      const prepared = await Promise.all(files.map(prepareLibraryImage));
+      // Decode one full-resolution photo at a time to bound memory for large batches.
+      const prepared: PreparedLibraryImage[] = [];
+      for (const file of files) prepared.push(await prepareLibraryImage(file));
       const id = profile?.id || `upload-${crypto.randomUUID()}`;
-      const next: StagedTalent = profile
+      let next: StagedTalent = profile
         ? { ...profile, content: [...profile.content] }
         : {
             id,
@@ -193,43 +198,21 @@ export function TalentLibraryManager({
             platforms: [],
             totalAudience: 0,
             portrait: prepared[0].src,
+            originalPortrait: prepared[0].original?.src,
             provenance: "uploaded",
             motion: null,
             motionStatus: "placeholder",
             content: [],
           };
-      prepared.forEach((item) => library.addUpload(item.upload, item.preview));
+      prepared.forEach((item) => {
+        library.addUpload(item.upload, item.preview);
+        if (item.original) library.addUpload(item.original.upload, item.original.preview);
+      });
       if (replaceId) {
         const target = activeAssets.find((a) => a.id === replaceId);
         if (!target) throw new Error("This image is no longer available.");
         const websiteSource = websiteReplacementSource(target.id);
-        if (!target.tile) {
-          next.portrait = prepared[0].src;
-          next.originalPortrait =
-            profile?.originalPortrait || profile?.portrait;
-          next.motion = null;
-          next.motionStatus = "placeholder";
-          next.content = next.content.map((t) => ({
-            ...t,
-            provenance: t.provenance || profile?.provenance || "ai-generated",
-          }));
-          next.provenance = "uploaded";
-        } else {
-          next.content[target.index] = {
-            ...next.content[target.index],
-            thumb: prepared[0].src,
-            original:
-              next.content[target.index].original ||
-              next.content[target.index].thumb,
-            aspectRatio: prepared[0].ratio,
-            type: "still",
-            video: undefined,
-            views: undefined,
-            engagements: undefined,
-            generation: undefined,
-            provenance: "uploaded",
-          };
-        }
+        next = replaceLibraryProfileImage(next, prepared[0], target.tile ? target.index : undefined);
         if (websiteSource) library.replaceWebsiteImage(websiteSource, prepared[0].src);
       } else {
         next.content.push(
@@ -237,6 +220,7 @@ export function TalentLibraryManager({
             id: `upload-${crypto.randomUUID()}`,
             type: "still",
             thumb: item.src,
+            original: item.original?.src,
             caption: item.name,
             captionSettings: { visible: false },
             aspectRatio: item.ratio,
@@ -644,21 +628,7 @@ export function TalentLibraryManager({
                         disabled={!editable}
                         onClick={() => {
                           if (profile)
-                            library.upsert({
-                              ...profile,
-                              portrait: profile.content[asset.index].thumb,
-                              provenance:
-                                profile.content[asset.index].provenance,
-                              motion: null,
-                              motionStatus: "placeholder",
-                              content: profile.content.map((t) => ({
-                                ...t,
-                                provenance:
-                                  t.provenance ||
-                                  profile.provenance ||
-                                  "ai-generated",
-                              })),
-                            });
+                            library.upsert(promoteLibraryProfileImage(profile, asset.index));
                         }}
                       >
                         Use as portrait
