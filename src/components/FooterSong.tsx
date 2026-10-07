@@ -8,7 +8,10 @@ type SongContextValue = { cardAvailable: boolean; open: boolean; playing: boolea
 const SongContext = createContext<SongContextValue>({ cardAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
 const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/kit-story", "/kit-transition-preview", "/chrome-story", "/home-film-preview", "/inside-foam-preview"]);
 const SONG_END_DELAY_MS = 6500;
-if (import.meta.env.DEV) SONG_CARD_ROUTES.add("/kit-hero-preview");
+if (import.meta.env.DEV) {
+  SONG_CARD_ROUTES.add("/kit-hero-preview");
+  SONG_CARD_ROUTES.add("/managers-flow-preview");
+}
 const SONG_FADE_MS = 200;
 
 export function useStopFooterSong() { return useContext(SongContext).stop; }
