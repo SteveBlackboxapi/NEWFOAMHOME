@@ -6,9 +6,9 @@ import test from "node:test";
 import ts from "typescript";
 
 const filename = new URL("../src/lib/githubTalentLibrary.ts", import.meta.url);
-function loadLibrary(privateMode = false) {
+function loadLibrary(privateMode = false, base = "/NEWFOAMHOME/") {
   const { outputText } = ts.transpileModule(
-    readFileSync(filename, "utf8").replaceAll("import.meta.env.BASE_URL", JSON.stringify("/NEWFOAMHOME/")).replaceAll(
+    readFileSync(filename, "utf8").replaceAll("import.meta.env.BASE_URL", JSON.stringify(base)).replaceAll(
       "import.meta.env.VITE_PRIVATE_LAB",
       JSON.stringify(privateMode ? "true" : "false"),
     ),
@@ -339,6 +339,42 @@ test("the complete website catalogue round-trips, including preserved ideas-two 
     "/unrelated/assets/portrait.png",
   ])
     assert.throws(() => assetPath(path), LibraryError);
+});
+
+test("character sheets round-trip through public and private image URLs without entering content", () => {
+  const sheet = src("character-reference");
+  const parsed = parseLibrary(manifest([profile({ characterSheet: `/NEWFOAMHOME/${sheet}` })]));
+  assert.equal(parsed.profiles[0].characterSheet, sheet);
+  assert.deepEqual(parsed.profiles[0].content, canonicalProfile(profile()).content);
+  const publicProfile = materializeLibrary([], parsed, BEFORE)[0];
+  assert.equal(publicProfile.characterSheet, `https://raw.githubusercontent.com/${LIBRARY_REPO}/${BEFORE}/public/${sheet}`);
+  assert.deepEqual(canonicalProfile(publicProfile), parsed.profiles[0]);
+  const privateProfile = loadLibrary(true).materializeLibrary([], parsed, BEFORE)[0];
+  assert.equal(privateProfile.characterSheet, `/api/asset?path=${encodeURIComponent(sheet)}&ref=${BEFORE}`);
+  assert.deepEqual(parseLibrary(manifest([privateProfile])), parsed);
+  const bundledPath = "assets/private-references/june-character.webp";
+  const bundled = parseLibrary(manifest([profile({ characterSheet: bundledPath })]));
+  const localProfile = loadLibrary(true, "/").materializeLibrary([], bundled, BEFORE)[0];
+  assert.equal(localProfile.characterSheet, `/${bundledPath}`);
+  assert.equal(canonicalProfile(localProfile).characterSheet, bundledPath);
+  assert.equal(parseLibrary(manifest([profile()])).profiles[0].characterSheet, undefined);
+  for (const invalid of [null, 42, false, [], {}, "", "https://attacker.test/sheet.webp", "//attacker.test/sheet.webp", "javascript:alert(1)", "data:image/png;base64,AAAA", "assets/../sheet.webp"]) {
+    assert.throws(() => parseLibrary(manifest([profile({ characterSheet: invalid })])), LibraryError, String(invalid));
+  }
+});
+
+test("saving a character-sheet-only upload keeps it reachable on subsequent profile saves", async (t) => {
+  const sheet = image("character-reference");
+  const input = manifest([profile({ characterSheet: src("character-reference") })]);
+  const initialSteps = saveSteps(input, [{ path: sheet.path, mode: "100644", type: "blob", sha: "sheet-blob" }]);
+  initialSteps.splice(3, 0, { path: "/git/blobs", method: "POST", value: { sha: "sheet-blob" } });
+  const changed = manifest([profile({ characterSheet: src("character-reference"), bio: "Updated profile bio." })]);
+  const api = mockGithub(t, [...initialSteps, ...saveSteps(changed, [], AFTER, input)]);
+  const saved = await saveGithubLibrary(KEY, { revision: BEFORE, manifest: emptyLibrary() }, input, [sheet]);
+  assert.equal(saved.manifest.profiles[0].characterSheet, src("character-reference"));
+  const updated = await saveGithubLibrary(KEY, saved, changed, []);
+  assert.equal(updated.manifest.profiles[0].characterSheet, src("character-reference"));
+  api.done();
 });
 
 test("rejects malformed identities, platforms and tile records instead of accepting corrupt data", () => {

@@ -56,6 +56,10 @@ async function fixture() {
       contentType: "text/javascript",
       encoding: "gzip",
     },
+    "/assets/private-references/character.webp": {
+      body: btoa("private-reference-bytes"),
+      contentType: "image/webp",
+    },
   };
   const fetcher = async (url, options = {}) => {
     // Match workerd: Node also accepts "error", masking a production exception.
@@ -170,6 +174,7 @@ test("all private pages, bundles, APIs and image routes require authentication",
   }
   for (const path of [
     "/assets/private.js",
+    "/assets/private-references/character.webp",
     "/assets/talent/photo.webp",
     "/ideas-two/source.png",
     "/fonts/founders.woff2",
@@ -179,6 +184,22 @@ test("all private pages, bundles, APIs and image routes require authentication",
   ])
     assert.equal((await f.send(path)).status, 401);
   assert.equal(f.calls.length, 0);
+});
+test("character references stay authenticated and missing private files never use the public fallback", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  for (const method of ["GET", "HEAD"]) {
+    const served = await f.send("/assets/private-references/character.webp", { cookie, method });
+    assert.equal(served.status, 200);
+    assert.equal(served.headers.get("Content-Type"), "image/webp");
+    assert.equal(served.headers.get("Cache-Control"), "no-store, private");
+    assert.equal(await served.text(), method === "GET" ? "private-reference-bytes" : "");
+    for (const pathname of ["/assets/private-references", "/assets/private-references/", "/assets/private-references/missing.webp", "/assets/private-references/missing.webp?download=1"]) {
+      assert.equal((await f.send(pathname, { cookie, method })).status, 404);
+      assert.equal((await f.send(pathname, { method })).status, 401);
+    }
+  }
+  assert.equal(f.calls.length, 0, "neither GitHub nor the public site receives a private reference request");
 });
 test("missing configuration fails closed", async () => {
   const f = await fixture();

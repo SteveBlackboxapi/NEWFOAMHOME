@@ -683,6 +683,9 @@ export async function handleRequest(
           ...(asset.encoding === "gzip" ? { "Content-Encoding": "gzip" } : {}),
         },
       );
+    // Private reference files must never fall back to an unrelated public image.
+    if (url.pathname === "/assets/private-references" || url.pathname.startsWith("/assets/private-references/"))
+      fail(404, "Private reference not found.");
     if (
       /^\/(?:assets|ideas-two|fonts)\/[a-zA-Z0-9_./ -]+$/.test(url.pathname) &&
       !url.pathname.split("/").some((part) => part === "." || part === "..")

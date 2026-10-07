@@ -181,6 +181,7 @@ function mapSources(
       "portrait",
       "originalPortrait",
       "referenceImages",
+      "characterSheet",
       "creativeDirection",
       "motion",
       "motionStatus",
@@ -198,6 +199,9 @@ function mapSources(
       ...fields(r, ["label", "src"]),
       src: convert(r.src),
     })),
+    characterSheet: profile.characterSheet !== undefined
+      ? convert(profile.characterSheet)
+      : undefined,
     creativeDirection: profile.creativeDirection
       ? {
           ...fields(profile.creativeDirection, [
@@ -459,6 +463,7 @@ export function parseLibrary(input: unknown): LibraryManifest {
       typeof profile.portrait !== "string" ||
       !optionalString(profile.gender) ||
       !optionalString(profile.originalPortrait) ||
+      !optionalString(profile.characterSheet) ||
       !validProvenance(profile.provenance) ||
       !["placeholder", "ready"].includes(profile.motionStatus) ||
       (profile.motion !== null && typeof profile.motion !== "string") ||
