@@ -2,6 +2,7 @@ import { build } from "vite";
 import { readFile, readdir, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { gzipSync } from "node:zlib";
+import { privateReferenceAssets } from "./private-lab-references.mjs";
 process.env.VITE_PRIVATE_LAB = "true";
 await build();
 const assets = {};
@@ -51,6 +52,7 @@ for (const [assetPath, contentType] of bundledPublicAssets) {
     encoding: "gzip",
   };
 }
+Object.assign(assets, await privateReferenceAssets());
 await mkdir("workers/talent-lab", { recursive: true });
 await writeFile(
   "workers/talent-lab/site-assets.mjs",

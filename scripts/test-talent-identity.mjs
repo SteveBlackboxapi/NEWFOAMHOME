@@ -197,7 +197,7 @@ test("creators without explicit tile IDs retain all numeric IDs and caption keys
   }
 });
 
-test("profile JSON and ZIP metadata export stable identities with their matching saved drafts", async (t) => {
+test("profile JSON and ZIP export character references and stable identities with matching saved drafts", async (t) => {
   const values = storage(t);
   values.set(key("0"), JSON.stringify({ text: "Export these curls" }));
   values.set(
@@ -239,10 +239,13 @@ test("profile JSON and ZIP metadata export stable identities with their matching
         },
       }),
   );
-  const assets = assetsFor(samantha).filter((asset) =>
+  const withSheet = { ...samantha, characterSheet: "/assets/talent/uploads/character-reference.webp" };
+  const assets = assetsFor(withSheet).filter((asset) =>
     ["samantha-pikka:0", "samantha-pikka:dance-solo-v3"].includes(asset.id),
   );
-  const profile = profileData(samantha);
+  const profile = profileData(withSheet);
+  assert.equal(profile.characterSheet, "https://example.test/assets/talent/uploads/character-reference.webp");
+  assert.equal(profileData(samantha).characterSheet, undefined);
   assert.equal(
     profile.content.find((tile) => tile.id === "samantha-pikka:0")
       .captionSettings.text,
@@ -256,6 +259,7 @@ test("profile JSON and ZIP metadata export stable identities with their matching
   await downloadPack(assets, "identity-check.zip", () => {});
   const files = unzipSync(new Uint8Array(await downloaded.arrayBuffer()));
   const exported = JSON.parse(strFromU8(files["talent-data.json"]));
+  assert.equal(strFromU8(files["samantha-pikka/references/character-reference.webp"]), withSheet.characterSheet);
   assert.deepEqual(
     exported.includedAssetIds,
     assets.map((asset) => asset.id),
@@ -266,6 +270,13 @@ test("profile JSON and ZIP metadata export stable identities with their matching
       ["samantha-pikka:2", "samantha-pikka:3"].includes(tile.id),
     ),
   );
+  const archivedSheet = { ...samantha, characterSheet: samantha.referenceImages[0].src };
+  await downloadPack([assetsFor(archivedSheet)[0]], "archived-reference-check.zip", () => {});
+  const archiveFiles = unzipSync(new Uint8Array(await downloaded.arrayBuffer()));
+  assert.equal(Object.values(archiveFiles).filter((bytes) => strFromU8(bytes) === archivedSheet.characterSheet).length, 1,
+    "an existing archived reference is included only once");
+  assert.equal(JSON.parse(strFromU8(archiveFiles["talent-data.json"])).talent[0].characterSheet,
+    `https://example.test${archivedSheet.characterSheet}`);
 });
 
 test("Nia's optimized image keeps the same saved post and caption draft as its PNG master", (t) => {

@@ -322,6 +322,8 @@ export type StagedTalent = {
   originalPortrait?: string;
   /** Supplied source material retained alongside the current character assets. */
   referenceImages?: { label: string; src: string }[];
+  /** Character consistency sheet for the Lab profile and exported model references. */
+  characterSheet?: string;
   creativeDirection?: {
     summary: string;
     identityNotes: string[];

@@ -201,6 +201,9 @@ export function profileData(talent: StagedTalent) {
       ...reference,
       src: absolute(reference.src),
     })),
+    characterSheet: talent.characterSheet
+      ? absolute(talent.characterSheet)
+      : undefined,
     portrait: absolute(talent.portrait),
     originalPortrait: talent.originalPortrait
       ? absolute(talent.originalPortrait)
@@ -380,6 +383,11 @@ export async function downloadPack(
         src: reference.src,
       });
     }
+    if (talent.characterSheet && !jobs.some((job) => absolute(job.src) === absolute(talent.characterSheet!)))
+      jobs.push({
+        path: `${talent.id}/references/character-reference.${extension(talent.characterSheet)}`,
+        src: talent.characterSheet,
+      });
     if (
       talent.motion &&
       talent.motionStatus === "ready" &&

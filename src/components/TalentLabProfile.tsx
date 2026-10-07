@@ -264,6 +264,16 @@ export function TalentLabProfile({
                   : "Age not assigned"}
               </p>
               <p className="tl-bio">{talent.bio}</p>
+              {talent.characterSheet && (
+                <a
+                  className="tl-reference-link"
+                  href={talent.characterSheet}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Character reference <span aria-hidden="true">↗</span>
+                </a>
+              )}
               {talent.creativeDirection && (
                 <section
                   className="tl-creative-direction"
