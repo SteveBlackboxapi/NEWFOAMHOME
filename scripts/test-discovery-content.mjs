@@ -41,6 +41,11 @@ const { matchesDiscoveryQuery, readDiscoveryQuery, discoveryRank } = loadApplica
 const { talentContentColumns, distributeTalentContent } = loadApplication("src/lib/talentLabLayout.ts");
 const assets = labTalent.flatMap(assetsFor).filter((asset) => asset.tile);
 const results = (query) => assets.filter((asset) => matchesDiscoveryQuery(asset, query)).sort((a,b) => discoveryRank(a, query) - discoveryRank(b, query));
+const landscapePreviews = new Map([
+  ["bode-niles:0", "bode-shelf-install"],
+  ["jax-orin:0", "jax-synth-session"],
+  ["suki-prent:2", "suki-earbud-review"],
+]);
 
 test("internal Lab queries return the same three curated discovery images", () => {
   assert.deepEqual(discoverySearches.map((item) => item.id), ["outfits", "skincare", "nike", "cats"]);
@@ -76,7 +81,17 @@ test("new Lab content preserves Kit data and has no fabricated post metrics", ()
   assert.equal(discoveryAdditions.length, 8);
   for (const original of stagedTalent) {
     const extended = labTalent.find((talent) => talent.id === original.id);
-    assert.deepEqual(extended.content.slice(0, original.content.length), original.content);
+    extended.content.slice(0, original.content.length).forEach((tile, index) => {
+      const assetId = `${original.id}:${original.content[index].id ?? index}`;
+      if (!landscapePreviews.has(assetId)) {
+        assert.deepEqual(tile, original.content[index]);
+        return;
+      }
+      // These three Lab images are replaced, but captions, accounts, media kind,
+      // saved-asset identities and existing demo metrics must remain unchanged.
+      const metadata = ({ thumb, original, aspectRatio, provenance, generation, ...rest }) => rest;
+      assert.deepEqual(metadata(tile), metadata(original.content[index]));
+    });
     assert.deepEqual(extended.platforms, original.platforms);
     assert.equal(extended.totalAudience, original.totalAudience);
     assert.deepEqual(
@@ -90,6 +105,23 @@ test("new Lab content preserves Kit data and has no fabricated post metrics", ()
       assert.equal(tile.video, undefined);
       assert.ok(existsSync(path.join(root, "public", tile.original)));
     }
+  }
+});
+
+test("YouTube landscape previews retain creator identity and provide optimized and original images", () => {
+  for (const [id, filename] of landscapePreviews) {
+    const asset = assets.find((candidate) => candidate.id === id);
+    assert.ok(asset, id);
+    assert.equal(asset.tile.platform, "youtube");
+    assert.equal(asset.tile.aspectRatio, "16/9");
+    assert.equal(asset.tile.provenance, "ai-generated");
+    assert.match(asset.tile.generation.approach, /existing fictional creator identity/);
+    assert.equal(asset.src, `/assets/talent/youtube-landscape-v1/${filename}.webp`);
+    assert.equal(asset.original, `/assets/talent/youtube-landscape-v1/masters/${filename}.png`);
+    assert.ok(existsSync(path.join(root, "public", asset.src)), asset.src);
+    assert.ok(existsSync(path.join(root, "public", asset.original)), asset.original);
+    for (const network of ["instagram", "tiktok", "youtube"])
+      assert.ok(asset.talent.platforms.some((account) => account.network === network), `${id}: ${network}`);
   }
 });
 

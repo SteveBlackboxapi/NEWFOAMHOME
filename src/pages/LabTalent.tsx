@@ -27,6 +27,14 @@ import {
   distributeTalentContent,
   talentContentColumns,
 } from "../lib/talentLabLayout";
+import {
+  paramsForTalentView,
+  readTalentLayoutPreferences,
+  talentLayoutFromParams,
+  writeTalentLayoutPreferences,
+  type TalentLabView,
+  type TalentLayoutPreferences,
+} from "../lib/talentLayoutPreferences";
 import { img } from "../lib/assets";
 import { PRIVATE_LIBRARY } from "../lib/githubTalentLibrary";
 import {
@@ -53,14 +61,14 @@ import {
   TalentNetworkIcon,
   type TalentLayout,
 } from "../components/TalentLabTables";
-import { matchesTalentPlatforms, talentNetworks } from "../lib/talentPlatforms";
+import { matchesTalentPlatforms, mixFeaturedPlatforms, talentNetworks } from "../lib/talentPlatforms";
 import { TalentLabAccountMenu } from "../components/TalentLabAccountMenu";
 import { TalentLabSettings } from "../components/TalentLabSettings";
 import { enterLabSettings, exitLabSettings } from "../lib/websiteImageSettings";
 import "./talent-lab.css";
 import "./lab-marketing.css";
 
-type View = "talent" | "content" | "saved" | "settings";
+type View = TalentLabView | "settings";
 type Filters = {
   talent: string;
   platforms: TalentNetwork[];
@@ -77,7 +85,7 @@ const EMPTY: Filters = {
   audience: "",
   views: "",
 };
-const navItems: { view: View; icon: LabIconName; label: string }[] = [
+const navItems: { view: TalentLabView; icon: LabIconName; label: string }[] = [
   { view: "talent", icon: "people", label: "Talent directory" },
   { view: "content", icon: "explore", label: "Explore content" },
   { view: "saved", icon: "bookmark", label: "Saved assets" },
@@ -126,18 +134,26 @@ function LabTalentContent() {
   const [filters, setFilters] = useState<Filters>(EMPTY);
   const [draft, setDraft] = useState<Filters>(EMPTY);
   const [filterOpen, setFilterOpen] = useState(false);
-  const layout: TalentLayout = params.get("layout") === "table"
-    ? "table"
-    : params.get("layout") === "compact"
-      ? "compact"
-      : "gallery";
+  const layout = talentLayoutFromParams(params);
+  const layoutPreferences = useRef<TalentLayoutPreferences | null>(null);
+  if (layoutPreferences.current === null)
+    layoutPreferences.current = readTalentLayoutPreferences();
+  const rememberLayout = (targetView: View, next: TalentLayout) => {
+    // Settings carries the previous library URL; it has no layout of its own.
+    if (targetView === "settings") return;
+    layoutPreferences.current = { ...layoutPreferences.current, [targetView]: next };
+    writeTalentLayoutPreferences(layoutPreferences.current);
+  };
   const compact = layout === "compact";
-  const setLayout = (next: TalentLayout) => setParams((prev) => {
-    const updated = new URLSearchParams(prev);
-    if (next === "gallery") updated.delete("layout");
-    else updated.set("layout", next);
-    return updated;
-  }, { replace: true });
+  const setLayout = (next: TalentLayout) => {
+    rememberLayout(view, next);
+    setParams((prev) => {
+      const updated = new URLSearchParams(prev);
+      if (next === "gallery") updated.delete("layout");
+      else updated.set("layout", next);
+      return updated;
+    }, { replace: true });
+  };
   const directoryNetworks = useMemo<TalentNetwork[]>(() => [
     "instagram", "tiktok", "youtube",
     ...(["twitch", "linkedin"] as const).filter((network) =>
@@ -165,6 +181,7 @@ function LabTalentContent() {
   );
   const title = view === "settings" ? "Settings" : navItems.find((n) => n.view === view)!.label;
   const openSettings = () => {
+    rememberLayout(view, layout);
     setFilterOpen(false);
     setParams(enterLabSettings);
   };
@@ -172,6 +189,9 @@ function LabTalentContent() {
   useEffect(() => {
     document.title = `${title} · Foam Lab`;
   }, [title]);
+  useEffect(() => {
+    rememberLayout(view, layout);
+  }, [view, layout]);
   useEffect(() => {
     const updateWidth = () => setViewportWidth(window.innerWidth);
     window.addEventListener("resize", updateWidth);
@@ -212,18 +232,9 @@ function LabTalentContent() {
     return () => window.removeEventListener("keydown", close);
   }, [filterOpen]);
 
-  const changeView = (next: View) => {
-    setParams((prev) => {
-      const p = new URLSearchParams(prev);
-      p.set("view", next);
-      p.delete("talent");
-      p.delete("asset");
-      p.delete("q");
-      p.delete("from");
-      p.delete("settingsPage");
-      p.delete("settingsTab");
-      return p;
-    });
+  const changeView = (next: TalentLabView) => {
+    rememberLayout(view, layout);
+    setParams((prev) => paramsForTalentView(prev, next, layoutPreferences.current || {}));
     setFilters(EMPTY);
     setDraft(EMPTY);
     setSort("curated");
@@ -328,7 +339,7 @@ function LabTalentContent() {
         ? b.totalAudience - a.totalAudience
         : 0,
   );
-  const visibleAssets = (
+  const sortedAssets = (
     view === "saved"
       ? allAssets.filter((a) => saved.includes(a.id))
       : contentAssets
@@ -353,6 +364,9 @@ function LabTalentContent() {
               a.index - b.index ||
               stagedTalent.indexOf(a.talent) - stagedTalent.indexOf(b.talent),
     );
+  const visibleAssets = view === "content" && sort === "curated" && !query.trim()
+    ? mixFeaturedPlatforms(sortedAssets)
+    : sortedAssets;
   const visibleProfiles =
     view === "talent"
       ? visibleTalent

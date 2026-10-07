@@ -471,6 +471,54 @@ test("ordinary login form redirects after sign-in and public source assets need 
     assert.deepEqual(f.calls.at(-1).options.headers, {});
   }
 });
+test("short Lab addresses show sign-in and preserve authenticated view links", async () => {
+  const f = await fixture();
+  for (const method of ["GET", "HEAD"]) {
+    for (const path of ["/lab", "/lab/"]) {
+      const locked = await f.send(`${path}?view=talent&layout=table`, { method });
+      assert.equal(locked.status, 200, `${method} ${path}`);
+      assert.equal(locked.headers.get("Referrer-Policy"), "same-origin");
+      assert.equal(locked.headers.get("Location"), null);
+      if (method === "GET") assert.match(await locked.text(), /Open the Lab/);
+    }
+  }
+  const cookie = await f.login();
+  for (const method of ["GET", "HEAD"]) {
+    for (const path of ["/", "/login", "/lab", "/lab/"]) {
+      for (const query of [
+        "",
+        "?view=talent&layout=table",
+        "?view=saved&q=home%20%26%20garden&asset=bode%3A0&tag=a&tag=b",
+        "?layout=compact",
+      ]) {
+        const result = await f.send(`${path}${query}`, { method, cookie });
+        assert.equal(result.status, 303, `${method} ${path}${query}`);
+        assert.equal(result.headers.get("Location"), `/lab/talent/${query || "?view=content"}`);
+      }
+    }
+  }
+  assert.equal(f.calls.length, 0, "short addresses never contact upstream services");
+});
+test("short Lab redirects apply only to exact read routes", async () => {
+  const f = await fixture();
+  const cookie = await f.login();
+  for (const path of ["/lab", "/lab/"]) {
+    for (const session of [undefined, cookie]) {
+      const result = await f.send(path, { method: "POST", cookie: session });
+      assert.equal(result.status, session ? 405 : 401);
+      assert.equal(result.headers.get("Location"), null);
+    }
+    const foreign = await f.send(path, { method: "POST", cookie, origin: "https://elsewhere.example" });
+    assert.equal(foreign.status, 403);
+    assert.equal(foreign.headers.get("Location"), null);
+  }
+  for (const path of ["/lab/unknown", "/login/"]) {
+    const result = await f.send(path, { cookie });
+    assert.equal(result.status, 404);
+    assert.equal(result.headers.get("Location"), null);
+  }
+  assert.equal(f.calls.length, 0);
+});
 test("GitHub token is verified, encrypted in KV, never echoed, and never needed for public reads", async () => {
   const f = await fixture();
   const cookie = await f.login();

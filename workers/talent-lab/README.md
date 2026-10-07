@@ -5,6 +5,8 @@ Worker name: `foam-talent-lab`
 Repository: `SteveBlackboxapi/NEWFOAMHOME`
 Library branch: `content/talent-library`
 
+Bookmark `/lab/` or `/lab/talent/`. When already signed in, `/`, `/login`, `/lab` and `/lab/` redirect to the full Lab address and preserve any query parameters, including view and layout. Without a session, these addresses show the password form; submitting it opens the default content view.
+
 The Worker protects the Lab HTML, JavaScript, assets and API behind one shared password. The public marketing build must omit the Lab route. This is a separate deployment; deploying the marketing site does not update this Worker.
 
 ## Deployment inputs
