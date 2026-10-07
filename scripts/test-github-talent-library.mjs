@@ -45,6 +45,7 @@ const {
   saveGithubLibrary,
   prepareLibraryImage,
   replaceLibraryProfileImage,
+  promoteLibraryProfileImage,
   verifyGithubAccess,
   websitePlacementKey,
   withWebsiteImageReplacement,
@@ -872,6 +873,20 @@ test("replacing an unoptimized upload retains both its master and an earlier cha
   assert.deepEqual(next.referenceImages.map((ref) => ref.src), [src("earlier-character"), src("large-upload")]);
   const repeated = replaceLibraryProfileImage(next, prepared);
   assert.deepEqual(repeated.referenceImages, next.referenceImages);
+});
+
+test("using an optimized content image as portrait carries its own master and retains prior portrait sources", () => {
+  const before = profile({ portrait: src("portrait-upload"), originalPortrait: src("portrait-history"), provenance: "ai-generated" });
+  before.content[0] = { ...before.content[0], thumb: "assets/talent/uploads/photo-preview.webp", original: src("photo-master"), provenance: "uploaded" };
+  const next = promoteLibraryProfileImage(before, 0);
+  assert.equal(next.id, before.id);
+  assert.equal(next.portrait, before.content[0].thumb);
+  assert.equal(next.originalPortrait, src("photo-master"));
+  assert.equal(next.provenance, "uploaded");
+  assert.equal(next.content[0].id, "first");
+  assert.deepEqual(next.referenceImages.map((ref) => ref.src), [src("portrait-history"), src("portrait-upload")]);
+  assert.equal(before.originalPortrait, src("portrait-history"));
+  assert.throws(() => promoteLibraryProfileImage(before, 9), LibraryError);
 });
 
 test("saving a photo replacement uploads preview and full original while retaining its earlier archive", async (t) => {

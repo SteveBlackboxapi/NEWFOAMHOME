@@ -901,7 +901,7 @@ export async function prepareLibraryImage(file: File, { optimize = true }: { opt
 }
 
 /** Keep stable asset IDs and archive an earlier source when the new photo has its own master. */
-export function replaceLibraryProfileImage(profile: StagedTalent, image: PreparedLibraryImage, contentIndex?: number): StagedTalent {
+export function replaceLibraryProfileImage(profile: StagedTalent, image: { src: string; original?: { src: string }; ratio: PreparedLibraryImage["ratio"] }, contentIndex?: number): StagedTalent {
   const next = { ...profile, content: [...profile.content] };
   const tile = contentIndex === undefined ? undefined : next.content[contentIndex];
   if (contentIndex !== undefined && !tile) throw new LibraryError("This image is no longer available.");
@@ -927,5 +927,13 @@ export function replaceLibraryProfileImage(profile: StagedTalent, image: Prepare
     next.content = next.content.map((entry) => ({ ...entry, provenance: entry.provenance || profile.provenance || "ai-generated" }));
     next.provenance = "uploaded";
   }
+  return next;
+}
+
+export function promoteLibraryProfileImage(profile: StagedTalent, contentIndex: number): StagedTalent {
+  const tile = profile.content[contentIndex];
+  if (!tile) throw new LibraryError("This image is no longer available.");
+  const next = replaceLibraryProfileImage(profile, { src: tile.thumb, original: tile.original ? { src: tile.original } : undefined, ratio: tile.aspectRatio || "4/5" });
+  next.provenance = tile.provenance;
   return next;
 }

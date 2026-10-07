@@ -10,6 +10,7 @@ import {
   LIBRARY_REVIEW_URL,
   prepareLibraryImage,
   replaceLibraryProfileImage,
+  promoteLibraryProfileImage,
   websitePlacementKey,
   type PreparedLibraryImage,
 } from "../lib/githubTalentLibrary";
@@ -627,21 +628,7 @@ export function TalentLibraryManager({
                         disabled={!editable}
                         onClick={() => {
                           if (profile)
-                            library.upsert({
-                              ...profile,
-                              portrait: profile.content[asset.index].thumb,
-                              provenance:
-                                profile.content[asset.index].provenance,
-                              motion: null,
-                              motionStatus: "placeholder",
-                              content: profile.content.map((t) => ({
-                                ...t,
-                                provenance:
-                                  t.provenance ||
-                                  profile.provenance ||
-                                  "ai-generated",
-                              })),
-                            });
+                            library.upsert(promoteLibraryProfileImage(profile, asset.index));
                         }}
                       >
                         Use as portrait
