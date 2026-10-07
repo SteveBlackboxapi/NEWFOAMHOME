@@ -1865,8 +1865,8 @@
           "src": "assets/talent/samantha-pikka-v2/samantha-pikka-v2-c1.webp"
         },
         {
-          "label": "Samantha character sheet — current identity and photo-based sleeve references, 2026-10-07",
-          "src": "assets/talent/uploads/samantha-character-sheet-20261007.webp"
+          "label": "Character reference — identity, expressions and current sleeve; production reference",
+          "src": "assets/private-references/samantha-character-reference.webp"
         }
       ],
       "creativeDirection": {
@@ -2014,7 +2014,8 @@
           "platform": "instagram",
           "strongKind": "photo"
         }
-      ]
+      ],
+      "characterSheet": "assets/private-references/samantha-character-reference.webp"
     },
     {
       "provenance": "reference",
