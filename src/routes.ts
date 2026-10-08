@@ -34,6 +34,12 @@ export const router = createBrowserRouter(
                 Component: (await import("./pages/ManagersHomePreview")).ManagersHomePreview,
               }),
             }, {
+              path: "mobile-hero-lab",
+              HydrateFallback: () => null,
+              lazy: async () => ({
+                Component: (await import("./pages/MobileHeroLab")).MobileHeroLab,
+              }),
+            }, {
               path: "kit-hero-preview",
               HydrateFallback: () => null,
               lazy: async () => ({

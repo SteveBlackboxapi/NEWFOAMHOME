@@ -53,63 +53,6 @@
   line-height: 1.5;
   color: #ffffffeb;
 }
-/* Phones give the film its own frame so copy never covers the creator. */
-@media (max-width: 767px) {
-  .ks-mobile-story-shell .story-nav-mobile-hero {
-    display: block;
-    min-height: 0;
-    padding: 0;
-    background: #181c1f;
-  }
-  .ks-mobile-story-shell .story-nav-mobile-hero > .story-nav {
-    position: relative;
-    inset: auto;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-media {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    max-height: 400px;
-    overflow: hidden;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-media > :is(video, img) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    opacity: 1;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-shade,
-  .ks-mobile-story-shell .story-nav-mobile-hero > .story-scroll-cue {
-    display: none;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-copy {
-    padding: 32px 24px 48px;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-copy > p:first-child {
-    max-width: 30em;
-    margin-bottom: 20px;
-    font-size: 10px;
-    letter-spacing: .12em;
-  }
-  .ks-mobile-story-shell .story-nav-mobile-hero .ks-hero-title-mobile {
-    font-size: clamp(40px, 12vw, 64px);
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-copy h1 + p {
-    margin-top: 24px;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-copy > div {
-    margin-top: 24px;
-  }
-  .ks-mobile-story-shell .ks-mobile-hero-copy a {
-    max-width: 100%;
-    height: auto;
-    min-height: 48px;
-    padding: 12px 24px;
-  }
-}
 @media (max-height: 680px) and (min-width: 1024px) {
   :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy .ks-hero-title { font-size: min(8vw, 18vh); }
   :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > p:first-child { margin-bottom: 12px; }
