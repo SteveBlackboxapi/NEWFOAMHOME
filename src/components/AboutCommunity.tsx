@@ -1,4 +1,5 @@
 import { OptimizedImage } from "./OptimizedImage";
+import { aboutInterviewThumbnails } from "../data/aboutEditorialPhotos";
 import "./about-community.css";
 
 const interviews = [
@@ -24,15 +25,25 @@ export function AboutListening() {
         <div className="ac-interviews">
           {interviews.map((interview, index) => (
             <article className="ac-interview" key={interview.title}>
-              <div className={`ac-interview-placeholder ac-interview-placeholder--${index + 1}`}
-                role="img" aria-label={`Placeholder for a talent manager interview: ${interview.title}`}>
+              <div className="ac-interview-thumbnail">
+                <OptimizedImage
+                  src={aboutInterviewThumbnails[index].src}
+                  section={aboutInterviewThumbnails[index].section}
+                  width={aboutInterviewThumbnails[index].width}
+                  height={aboutInterviewThumbnails[index].height}
+                  alt={aboutInterviewThumbnails[index].alt}
+                  sizes="(max-width: 760px) calc(100vw - 44px), 33vw"
+                  loading="lazy"
+                />
                 <span className="ac-interview-play" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 5v14l11-7Z" /></svg>
                 </span>
-                <span className="ac-interview-status">Interview clip to follow</span>
               </div>
               <div className="ac-interview-copy">
-                <p className="ac-small-label">Talent manager conversations</p>
+                <p className="ac-small-label">
+                  Talent manager conversations
+                  <span className="ac-interview-status">Preview only</span>
+                </p>
                 <h3>{interview.title}</h3>
                 <p>{interview.description}</p>
               </div>

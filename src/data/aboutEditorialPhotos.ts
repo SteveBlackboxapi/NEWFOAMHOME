@@ -94,4 +94,39 @@ export const aboutCandidPhotos = [
   },
 ] as const;
 
-export const aboutEditorialPhotos = [aboutCeoPhoto, ...aboutCandidPhotos] as const;
+/** Supplied still previews only; permission for playable interviews is pending. */
+export const aboutInterviewThumbnails = [
+  {
+    id: "interview-01-thumbnail",
+    src: `${A}/about/interview-01-thumbnail.jpg`,
+    width: 1206,
+    height: 673,
+    section: "Manager interviews",
+    label: "Talent manager interview thumbnail 01",
+    alt: "Static interview thumbnail showing a talent manager beside Foam talent-search results and the Illuminate Social logo.",
+  },
+  {
+    id: "interview-02-thumbnail",
+    src: `${A}/about/interview-02-thumbnail.jpg`,
+    width: 1206,
+    height: 669,
+    section: "Manager interviews",
+    label: "Talent manager interview thumbnail 02",
+    alt: "Static interview thumbnail showing a talent manager beside Foam’s media-kit editor and the ACM Talent logo.",
+  },
+  {
+    id: "interview-03-thumbnail",
+    src: `${A}/about/interview-03-thumbnail.webp`,
+    width: 1206,
+    height: 672,
+    section: "Manager interviews",
+    label: "Talent manager interview thumbnail 03",
+    alt: "Static interview thumbnail showing a talent manager beside Foam content-search results and the Honey and Ivory Talent logo.",
+  },
+] as const;
+
+export const aboutEditorialPhotos = [
+  aboutCeoPhoto,
+  ...aboutCandidPhotos,
+  ...aboutInterviewThumbnails,
+] as const;
