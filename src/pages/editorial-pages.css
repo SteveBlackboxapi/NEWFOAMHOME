@@ -74,7 +74,10 @@
   scroll-margin-top: 100px;
 }
 .ep-team-heading {
-  padding-block: clamp(64px, 7vw, 104px) 40px;
+  padding-block: clamp(164px, 14vw, 204px) 40px;
+}
+@media (max-width: 760px) {
+  .ep-team-heading { padding-block: 130px 32px; }
 }
 .ep-team-scroll {
   width: 100%;

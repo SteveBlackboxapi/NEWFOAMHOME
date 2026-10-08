@@ -127,6 +127,5 @@ export const aboutInterviewThumbnails = [
 
 export const aboutEditorialPhotos = [
   aboutCeoPhoto,
-  ...aboutCandidPhotos,
   ...aboutInterviewThumbnails,
 ] as const;

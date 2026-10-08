@@ -1,88 +1,10 @@
 .ae-editorial {
   --ae-placeholder: #dedfe1;
-  --ae-placeholder-soft: #e8e9ea;
   color: var(--theme-ink, #1c2128);
   background: var(--theme-page, #fff);
   font-family: inherit;
 }
 
-.ae-candid-intro {
-  padding-block: clamp(112px, 10vw, 152px) clamp(80px, 8vw, 128px);
-}
-.ae-candid-intro .ae-candid-collage {
-  width: min(1560px, calc(100% - 48px));
-  margin-inline: auto;
-}
-.ae-candid-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-rows: clamp(120px, 14vw, 208px);
-  gap: clamp(10px, 1.15vw, 18px);
-}
-.ae-candid-tile {
-  min-width: 0;
-  min-height: 0;
-  border-radius: clamp(15px, 1.7vw, 26px);
-  overflow: hidden;
-  background: var(--ae-placeholder);
-}
-.ae-candid-tile img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.ae-candid-tile--one,
-.ae-candid-tile--four,
-.ae-candid-tile--seven,
-.ae-candid-tile--eight { grid-column: span 3; }
-.ae-candid-tile--two,
-.ae-candid-tile--five { grid-column: span 2; }
-.ae-candid-tile--three,
-.ae-candid-tile--six { grid-column: span 4; }
-.ae-candid-collage figcaption {
-  margin-top: 14px;
-  color: var(--theme-muted, #626a70);
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: right;
-}
-.ae-intro-copy {
-  width: min(100%, 1080px);
-  margin: clamp(52px, 5vw, 80px) auto 0;
-  padding-inline: 24px;
-  text-align: center;
-}
-.ae-eyebrow {
-  margin: 0 0 24px;
-  color: var(--theme-muted, #626a70);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-.ae-intro-copy h1 {
-  margin: 0;
-  font-size: clamp(44px, 6.7vw, 96px);
-  font-weight: 500;
-  letter-spacing: -.045em;
-  line-height: .98;
-  text-wrap: balance;
-}
-.ae-intro-copy h1 > span { display: block; }
-.ae-intro-copy h1 em {
-  color: var(--theme-accent, #7a0036);
-  font-style: normal;
-}
-.ae-intro-description {
-  max-width: 31em;
-  margin: 28px auto 30px;
-  color: var(--theme-muted, #626a70);
-  font-size: clamp(18px, 1.7vw, 22px);
-  line-height: 1.45;
-  text-wrap: pretty;
-}
 .ae-editorial .ae-action.mp-button {
   color: var(--theme-page, #fff);
   background: var(--theme-ink, #1c2128);
@@ -157,22 +79,9 @@
 
 html[data-theme="dark"] .ae-editorial {
   --ae-placeholder: #33383e;
-  --ae-placeholder-soft: #292e34;
 }
 
 @media (max-width: 760px) {
-  .ae-candid-intro { padding-block: 108px 76px; }
-  .ae-candid-intro .ae-candid-collage { width: calc(100% - 32px); }
-  .ae-candid-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-auto-rows: clamp(74px, 19vw, 132px);
-    gap: 8px;
-  }
-  .ae-candid-grid .ae-candid-tile { grid-column: span 1; border-radius: 13px; }
-  .ae-candid-collage figcaption { margin-top: 11px; font-size: 12px; }
-  .ae-intro-copy { margin-top: 46px; padding-inline: 22px; }
-  .ae-eyebrow { margin-bottom: 22px; }
-  .ae-intro-description { margin-block: 24px 28px; }
   .ae-ceo-note { padding-block: 72px; }
   .ae-ceo-layout { grid-template-columns: 1fr; gap: 38px; padding-inline: 24px; }
   .ae-ceo-copy blockquote p { max-width: 22em; font-size: clamp(28px, 5.8vw, 34px); }

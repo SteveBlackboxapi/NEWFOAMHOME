@@ -1,49 +1,7 @@
 import { ActionLink } from "./Marketing";
 import { OptimizedImage } from "./OptimizedImage";
-import { aboutCandidPhotos, aboutCeoPhoto } from "../data/aboutEditorialPhotos";
+import { aboutCeoPhoto } from "../data/aboutEditorialPhotos";
 import "./about-editorial.css";
-
-const candidSlots = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
-
-export function AboutCandidIntro() {
-  return (
-    <section className="ae-editorial ae-candid-intro" aria-labelledby="about-candid-title">
-      <figure className="ae-candid-collage">
-        <div className="ae-candid-grid">
-          {aboutCandidPhotos.map((photo, index) => (
-            <div className={`ae-candid-tile ae-candid-tile--${candidSlots[index]}`} key={photo.id}>
-              <OptimizedImage
-                src={photo.src}
-                section={photo.section}
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                style={{ objectPosition: photo.objectPosition }}
-                sizes={`(max-width: 760px) 25vw, ${[25, 16.67, 33.34, 25, 16.67, 33.34, 25, 25][index]}vw`}
-                loading="eager"
-                fetchPriority={index === 2 ? "high" : "auto"}
-              />
-            </div>
-          ))}
-        </div>
-        <figcaption>A few moments from the Foam community.</figcaption>
-      </figure>
-
-      <div className="ae-intro-copy">
-        <p className="ae-eyebrow">About Foam</p>
-        <h1 id="about-candid-title">
-          <span>For the people</span>
-          <span>behind <em>the talent.</em></span>
-        </h1>
-        <p className="ae-intro-description">
-          Big ideas need someone in their corner. Foam gives talent managers the tools to turn a
-          creator’s potential into a conversation that matters.
-        </p>
-        <ActionLink to="/kit-story" className="ae-action">See the story</ActionLink>
-      </div>
-    </section>
-  );
-}
 
 export function AboutCeoNote() {
   return (
