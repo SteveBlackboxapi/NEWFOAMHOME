@@ -1356,3 +1356,21 @@
     margin-top: 5px;
   }
 }
+
+/* Keep phone search examples readable without widening the app preview. */
+@media (max-width: 767px) {
+  .found-story .fs-search {
+    top: 48px;
+    height: 56px;
+    padding-block: 6px;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+  .found-story .fs-search > span:first-of-type {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .found-story .fs-search > .fs-placeholder {
+    font-size: clamp(11px, 3.333vw, 13px);
+  }
+}

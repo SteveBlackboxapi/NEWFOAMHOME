@@ -354,7 +354,7 @@ function MobileRoles() {
                 {card.headline}
               </p>
               <p
-                className={`ks-mobile-role-cta ${FG_M} text-[15px] text-[#6a7282] mt-5 flex items-center justify-between`}
+                className={`ks-role-cta ks-mobile-role-cta ${FG_M} text-[15px] text-[#6a7282] mt-5 flex items-center justify-between`}
               >
                 {card.cta}
                 <span>↗</span>

@@ -479,7 +479,7 @@ function AfterShare() {
                       {card.headline}
                     </p>
                     <p
-                      className={`${FG_M} text-[15px] mt-auto pt-6 flex items-center justify-between ${on ? "text-[#101828]" : "text-[#6a7282]"}`}
+                      className={`ks-role-cta ${FG_M} text-[15px] mt-auto pt-6 flex items-center justify-between ${on ? "text-[#101828]" : "text-[#6a7282]"}`}
                     >
                       {card.cta}
                       <span>↗</span>
