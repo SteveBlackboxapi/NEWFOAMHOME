@@ -70,13 +70,14 @@ const previews: Record<string, string> = {
   "/live-study": "A little more live — Concept preview | Foam",
   "/managers-home-preview": "Managers · Combined page test | Foam",
   "/kit-hero-preview": "Foam · Larger headline dev preview",
+  "/mobile-hero-lab": "Foam · Mobile hero options",
   "/lab/inspo": "Inspiration | Foam Lab",
   "/lab/mini-ui": "The Foam miniatures | Foam",
   "/lab/data-trust": "Data & trust concepts | Foam",
 };
 
 export const PUBLIC_PAGE_PATHS = Object.keys(pages);
-export const STATIC_PAGE_PATHS = [...PUBLIC_PAGE_PATHS, ...Object.keys(previews).filter(path => !["/managers-home-preview", "/kit-hero-preview"].includes(path))];
+export const STATIC_PAGE_PATHS = [...PUBLIC_PAGE_PATHS, ...Object.keys(previews).filter(path => !["/managers-home-preview", "/kit-hero-preview", "/mobile-hero-lab"].includes(path))];
 
 export function normalizeSiteUrl(input: string) {
   const url = new URL(input);

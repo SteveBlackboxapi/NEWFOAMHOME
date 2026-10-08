@@ -59,3 +59,130 @@
   :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > h1 + p { margin-top: 16px; }
   :is(.ks-story-shell, .ks-mobile-story-shell) .ks-intro-copy > div { margin-top: 20px; }
 }
+
+/* Phone composition: the bright film sits above the approved themed copy.
+   KitStoryMobile also serves tablets and short desktops, so keep every
+   override below 768px to preserve their original image-overlay layout. */
+@media (max-width: 767px) {
+  .ks-mobile-story-shell .story-nav-mobile-hero {
+    --ks-phone-cta: #edfa80;
+    --ks-phone-copy: #f8f7f2;
+    --ks-phone-ink: #181c1f;
+    --ks-phone-description: #424e55;
+    --ks-phone-talent: #7a0036;
+    --ks-phone-admin: #181c1f;
+    --ks-phone-admin-decoration: underline;
+    display: block;
+    min-height: 0;
+    padding: 0;
+    background: #181c1f;
+  }
+
+  html[data-theme="dark"] .ks-mobile-story-shell .story-nav-mobile-hero {
+    --ks-phone-copy: #181c1f;
+    --ks-phone-ink: #fff;
+    --ks-phone-description: #d0d5d8;
+    --ks-phone-talent: #c4e6fc;
+    --ks-phone-admin: #edfa80;
+    --ks-phone-admin-decoration: none;
+  }
+
+  .ks-mobile-story-shell .story-nav-mobile-hero > .story-nav {
+    position: relative;
+    inset: auto;
+    background: #181c1f;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-media > :is(video, img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-shade,
+  .ks-mobile-story-shell .story-nav-mobile-hero > .story-scroll-cue {
+    display: none;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy {
+    padding: 30px clamp(20px, 6.2vw, 24px) 36px;
+    background: var(--ks-phone-copy);
+    color: var(--ks-phone-ink);
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy > p:first-child {
+    max-width: 30em;
+    margin: 0 0 24px;
+    color: var(--ks-phone-ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    line-height: 1.45;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy .ks-hero-title-mobile {
+    margin: 0;
+    color: var(--ks-phone-ink);
+    font-size: clamp(32px, 12vw, 46px);
+    font-weight: 500;
+    letter-spacing: -.025em;
+    line-height: 1.02;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-talent { color: var(--ks-phone-talent); }
+  .ks-mobile-story-shell .ks-mobile-hero-admin {
+    color: var(--ks-phone-admin);
+    text-decoration-line: var(--ks-phone-admin-decoration);
+    text-decoration-color: #d9ed69;
+    text-decoration-thickness: .1em;
+    text-underline-offset: .04em;
+    text-decoration-skip-ink: none;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy h1 + p {
+    margin: 24px 0 0;
+    color: var(--ks-phone-description);
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy h1 + p > br { display: none; }
+  .ks-mobile-story-shell .ks-mobile-hero-copy h1 + p > span { display: block; }
+  .ks-mobile-story-shell .ks-mobile-hero-copy h1 + p > span:last-child { margin-top: 8px; }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy > div { margin-top: 28px; }
+  .ks-mobile-story-shell .ks-mobile-hero-copy > div > a {
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    min-height: 50px;
+    padding: 14px 18px;
+    color: #181c1f;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy > div > a svg {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .ks-mobile-story-shell .ks-mobile-hero-copy > div > a:focus-visible {
+    outline: 3px solid var(--ks-phone-talent);
+    outline-offset: 4px;
+  }
+}

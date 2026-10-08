@@ -17,8 +17,9 @@ import {
   type ChromeStage,
 } from "../lib/chromeDemo";
 import { A } from "../lib/assets";
-import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { useMediaQuery, usePrefersReducedMotion } from "../hooks/useMediaQuery";
 import { StoryBenefits } from "../components/StoryBenefits";
+import { ChromeMobileCopyPaste } from "../components/ChromeMobileCopyPaste";
 import "./chrome-story.css";
 
 /** The same inbox workflow in readable, naturally scrolling frames. */
@@ -29,25 +30,32 @@ export function ChromeStoryMobile({
   const wallpaper = useChromeWallpaper();
   const desktopBackground = embedded ? KIT_STORY_CHROME_BACKGROUND : chromeWallpaperBackground(wallpaper);
   const reduced = usePrefersReducedMotion();
+  const phone = useMediaQuery("(max-width: 767px)") === true;
   const [sent, setSent] = useState(false);
   const finale = useRef<HTMLDivElement>(null);
+  const finaleBenefits = useRef<HTMLDivElement>(null);
   const [finaleVisible, setFinaleVisible] = useState(false);
   useEffect(() => {
     if (reduced) {
       setFinaleVisible(true);
       return;
     }
-    const element = finale.current;
+    // On phones, wait for the checklist itself rather than the earlier logo/title.
+    const element = phone ? finaleBenefits.current : finale.current;
     if (!element) return;
+    if (phone) setFinaleVisible(false);
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && (!phone || entry.intersectionRatio >= 1)) {
         setFinaleVisible(true);
-        observer.disconnect();
+        if (!phone) observer.disconnect();
+      } else if (phone && !entry.isIntersecting) {
+        // Re-entering the phone recap should write and check the rows again.
+        setFinaleVisible(false);
       }
-    }, { threshold: 0.25 });
+    }, { threshold: phone ? [0, 1] : 0.25 });
     observer.observe(element);
     return () => observer.disconnect();
-  }, [reduced]);
+  }, [phone, reduced]);
   const send = () => {
     setSent(true);
     finale.current?.scrollIntoView({
@@ -129,7 +137,14 @@ export function ChromeStoryMobile({
             </div>
           </MobileFade>
         </section>
-        <section>
+        {phone ? (
+          <ChromeMobileCopyPaste
+            background={background}
+            alreadyCopied={panelStage >= 4}
+            sent={sent}
+            onSend={send}
+          />
+        ) : <section>
           <MobileFade>
             <div className="cs-mobile-step-title">
               <span>03</span>
@@ -147,7 +162,7 @@ export function ChromeStoryMobile({
               </div>
             </div>
           </MobileFade>
-        </section>
+        </section>}
       </div>
       <div ref={finale} className="cs-mobile-finale-anchor">
         <MobileFade className="cs-mobile-finale">
@@ -168,7 +183,7 @@ export function ChromeStoryMobile({
               </div>
               <h2>That’s the Chrome Extension.</h2>
             </a>
-            <div className="cs-finale-benefits">
+            <div ref={finaleBenefits} className="cs-finale-benefits">
               <StoryBenefits variant="chrome" active={finaleVisible || reduced} />
             </div>
           </div>
