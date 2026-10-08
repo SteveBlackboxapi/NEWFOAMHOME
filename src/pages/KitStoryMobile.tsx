@@ -292,7 +292,7 @@ function MobileShareCard() {
           <span
             className={`${FG_R} text-[12px] truncate flex-1 text-[#101828]`}
           >
-            https://foam.io//n/28b7385t
+            https://foam.io/n/28b7385t
           </span>
           <span
             className={`${FG_M} text-[12px] rounded-full px-3 py-1 bg-[#185abc] text-white`}
@@ -634,7 +634,7 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
             </div>
             <div className="ks-mobile-share-strip px-4 py-3 flex items-center justify-between bg-[#000] text-[#dfedfc]">
               <span className={`${FG_R} text-[12px] truncate`}>
-                foam.io//n/28b7385t
+                foam.io/n/28b7385t
               </span>
               <span
                 className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}
