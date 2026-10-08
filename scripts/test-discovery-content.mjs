@@ -133,9 +133,9 @@ test("the unfiltered opening feed contains varied new content from different cre
     assert.ok(first.some((asset) => asset.id.endsWith(subject)));
 });
 
-test("Creators images have their own metric-free Lab identities and lead the feed", () => {
-  assert.equal(creatorWorkTalent.length, 2);
-  assert.deepEqual(results("").slice(0, 2).map((asset) => asset.id), creatorWorkPosts.map((post) => post.assetId));
+test("new Creators identities preserve the original profiles and opening feed without assigning metrics", () => {
+  assert.deepEqual(creatorWorkTalent.map((talent) => talent.id), ["tessa-quinn", "luca-marin", "maya-ellis", "theo-bennett"]);
+  assert.deepEqual(results("").slice(0, 2).map((asset) => asset.id), creatorWorkPosts.slice(0, 2).map((post) => post.assetId));
   for (const [index, talent] of creatorWorkTalent.entries()) {
     assert.ok(!stagedTalent.some((original) => original.id === talent.id));
     assert.equal(hasAssignedAudience(talent), false);
@@ -154,6 +154,8 @@ test("Creators images have their own metric-free Lab identities and lead the fee
   }
   assert.ok(results("pink workout").some((asset) => asset.talent.id === "tessa-quinn"));
   assert.ok(results("purple beach").some((asset) => asset.talent.id === "luca-marin"));
+  assert.ok(results("garden workout").some((asset) => asset.talent.id === "maya-ellis"));
+  assert.ok(results("lavender coffee").some((asset) => asset.talent.id === "theo-bennett"));
 });
 
 test("responsive masonry exposes the leading curated cards across its top row", () => {

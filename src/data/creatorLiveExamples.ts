@@ -1,5 +1,4 @@
-import { A } from "../lib/assets";
-const ASSETS = `${A}/people-colour/story-refresh-v1`;
+import { creatorWorkPosts } from "./creatorWorkTalent";
 
 type Platform = "tiktok" | "instagram";
 type Comment = { name: string; text: string; colour: string };
@@ -18,12 +17,12 @@ export type LiveExample = {
 
 export const creatorLiveExamples: LiveExample[] = [
   {
-    talentId: "tessa-quinn",
+    talentId: "maya-ellis",
     platform: "tiktok",
-    name: "Tessa Quinn",
-    handle: "tessaquinn",
-    image: `${ASSETS}/tessa-live.webp`,
-    alt: "Fictional creator Tessa Quinn chatting to the camera after an outdoor workout.",
+    name: "Maya Ellis",
+    handle: "mayaellis",
+    image: creatorWorkPosts[2].src,
+    alt: creatorWorkPosts[2].alt,
     title: "The everyday moments.",
     description: "A post-workout catch-up. A few familiar faces.",
     viewers: 1248,
@@ -37,12 +36,12 @@ export const creatorLiveExamples: LiveExample[] = [
     ],
   },
   {
-    talentId: "luca-marin",
+    talentId: "theo-bennett",
     platform: "instagram",
-    name: "Luca Marin",
-    handle: "lucamarin",
-    image: `${ASSETS}/luca-live.webp`,
-    alt: "Fictional creator Luca Marin talking to the camera from a sunny outdoor café.",
+    name: "Theo Bennett",
+    handle: "theobennett",
+    image: creatorWorkPosts[3].src,
+    alt: creatorWorkPosts[3].alt,
     title: "The things you know.",
     description: "Coffee, a good view, and the conversation in between.",
     viewers: 862,
@@ -56,4 +55,3 @@ export const creatorLiveExamples: LiveExample[] = [
     ],
   },
 ];
-
