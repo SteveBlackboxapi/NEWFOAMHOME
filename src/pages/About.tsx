@@ -13,6 +13,11 @@ import {
 
 import "./editorial-pages.css";
 
+const teamPlaceholderShades = [
+  "#dedede", "#858585", "#c6c6c6", "#a1a1a1",
+  "#eeeeee", "#737373", "#d2d2d2", "#939393",
+];
+
 const relationships = [
   {
     number: "01",
@@ -61,6 +66,21 @@ export function About() {
           See the story
         </ActionLink>
       </PageIntro>
+      <section id="team" className="ep-team" aria-labelledby="team-heading">
+        <div className="mp-container ep-team-heading">
+          <h2 id="team-heading" className="mp-heading">The people behind Foam.</h2>
+        </div>
+        <div className="ep-team-grid" role="img" aria-label="54 grey placeholders for team photographs">
+          {Array.from({ length: 54 }, (_, index) => (
+            <div
+              key={index}
+              className="ep-team-square"
+              aria-hidden="true"
+              style={{ backgroundColor: teamPlaceholderShades[(index * 5 + Math.floor(index / 9) * 2) % teamPlaceholderShades.length] }}
+            />
+          ))}
+        </div>
+      </section>
       <section className="mp-section mp-dark ep-belief">
         <WebsiteBackgroundImage
           className="ep-belief-image"

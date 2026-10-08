@@ -69,6 +69,31 @@
 .ep-about .mp-intro .mp-display {
   font-size: clamp(60px, 7.4vw, 105px);
 }
+.ep-team {
+  padding: 0;
+  scroll-margin-top: 100px;
+}
+.ep-team-heading {
+  padding-block: 24px 40px;
+}
+.ep-team-grid {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.ep-team-square {
+  aspect-ratio: 1;
+  min-width: 0;
+}
+@media (max-width: 1000px) {
+  .ep-team-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .ep-team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 .ep-people {
   padding-top: 12px;
 }
