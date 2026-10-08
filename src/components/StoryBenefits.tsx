@@ -45,7 +45,9 @@ export function StoryBenefits({ variant, active, collapse }: StoryBenefitsProps)
           className="story-benefits-row"
           key={label}
           style={{ "--benefit-index": index } as CSSProperties}
-          aria-hidden={settling && index < benefits.kit.length - 1 && collapsed === 1 ? true : undefined}
+          aria-hidden={settling && (
+            index === benefits.kit.length - 1 ? collapsed === 0 : collapsed === 1
+          ) ? true : undefined}
         >
           <span className="story-benefits-entry">
             <span className="story-benefits-label">{label}</span>

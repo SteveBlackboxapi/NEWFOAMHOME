@@ -34,6 +34,9 @@
   overflow: hidden;
   opacity: clamp(0, calc(1 - var(--benefits-collapse) * 2), 1);
 }
+.story-benefits--settling .story-benefits-row:last-child {
+  opacity: var(--benefits-collapse);
+}
 .story-benefits--settling .story-benefits-row:last-child .story-benefits-entry {
   min-height: calc(var(--benefit-row-height) * (1 - var(--benefits-collapse)) + 1.3em * var(--benefits-collapse));
   padding-block: calc(var(--benefit-row-padding) * (1 - var(--benefits-collapse)));
@@ -63,6 +66,11 @@
   .story-benefits.is-active .story-benefits-tick .kit-share-tick-mark {
     animation: story-benefit-tick 320ms ease-out both;
     animation-delay: calc(100ms + var(--benefit-index) * 90ms);
+  }
+  /* The closing confirmation enters with the scroll, including direct jumps. */
+  .story-benefits--settling.is-active .story-benefits-row:last-child .story-benefits-entry,
+  .story-benefits--settling.is-active .story-benefits-row:last-child .kit-share-tick-mark {
+    animation: none;
   }
 }
 
