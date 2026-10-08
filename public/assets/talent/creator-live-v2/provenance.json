@@ -8,28 +8,35 @@
       "id": "maya-ellis",
       "source": "fitness-a-clean.jpg",
       "master": "../uploads/maya-ellis-live-v1-original.jpg",
-      "delivery": "../uploads/maya-ellis-live-v1.webp",
+      "delivery": "../uploads/maya-ellis-live-v2.webp",
       "crop": {
-        "left": 144,
+        "left": 102,
         "top": 0,
-        "width": 1188,
-        "height": 2112
+        "width": 1332,
+        "height": 2368
       },
       "size": [
         720,
         1280
-      ]
+      ],
+      "revision_note": "Wider crop requested after preview, reducing subject scale by approximately 11%; crotch excluded."
     },
     {
       "id": "theo-bennett",
       "source": "beach-a-v2.jpg",
       "master": "../uploads/theo-bennett-live-v1-original.jpg",
-      "delivery": "../uploads/theo-bennett-live-v1.webp",
-      "crop": "Centered 9:16 fit",
+      "delivery": "../uploads/theo-bennett-live-v2.webp",
+      "crop": {
+        "left": 48,
+        "top": 192,
+        "width": 1440,
+        "height": 2560
+      },
       "size": [
         720,
         1280
-      ]
+      ],
+      "revision_note": "Slightly tighter crop requested to balance the pair, reducing top umbrella space; original retained."
     }
   ],
   "options": [
