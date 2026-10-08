@@ -331,6 +331,12 @@
     system-ui,
     sans-serif;
 }
+@media (max-width: 767px) {
+  /* Keep the roster preview fixed so gestures continue scrolling the page. */
+  .cs-mobile-story .cs-extension-grid-scroll {
+    overflow: clip;
+  }
+}
 .cs-mobile-story .cs-extension-profile {
   padding: 22px 20px 15px;
 }
