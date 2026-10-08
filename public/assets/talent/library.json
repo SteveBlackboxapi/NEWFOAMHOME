@@ -5153,13 +5153,13 @@
       ],
       "platforms": [],
       "totalAudience": 0,
-      "portrait": "assets/talent/uploads/theo-bennett-live-v2.webp",
+      "portrait": "assets/talent/uploads/theo-bennett-live-v1.webp",
       "originalPortrait": "assets/talent/uploads/theo-bennett-live-v1-original.jpg",
       "creativeDirection": {
         "summary": "A spontaneous beach-café catch-up beneath a lavender umbrella, with iced coffee, pale tousled hair and sunglasses resting on his head. Generated with Google gemini-3-pro-image (Nano Banana Pro), retaining natural sunlight and realistic skin texture.",
         "identityNotes": [
           "Theo is a new fictional adult aged 32. This approved image defines his identity; preserve Luca Marin as a separate existing creator.",
-          "The display uses a 9:16 crop at left 48, top 192, width 1440 and height 2560, trimming excess umbrella headroom. Retain the untouched 1536 × 2752 JPG master and the approved face, hair and botanical chest tattoos.",
+          "The display uses the original centred 9:16 framing, restored after user comparison. Retain the untouched 1536 × 2752 JPG master and the approved face, hair and botanical chest tattoos.",
           "Preserve natural stubble, skin texture and casual phone-camera framing; avoid smoothing or glamour retouching.",
           "This is an AI-generated still, not a real live broadcast or social post. No audience or performance figures have been assigned."
         ]
@@ -5171,7 +5171,7 @@
           "provenance": "ai-generated",
           "id": "beach-live-v1",
           "type": "still",
-          "thumb": "assets/talent/uploads/theo-bennett-live-v2.webp",
+          "thumb": "assets/talent/uploads/theo-bennett-live-v1.webp",
           "aspectRatio": "9/16",
           "original": "assets/talent/uploads/theo-bennett-live-v1-original.jpg",
           "generation": {
@@ -5188,8 +5188,8 @@
       ],
       "referenceImages": [
         {
-          "label": "Earlier live portrait crop (v1)",
-          "src": "assets/talent/uploads/theo-bennett-live-v1.webp"
+          "label": "Earlier tighter live portrait crop (v2)",
+          "src": "assets/talent/uploads/theo-bennett-live-v2.webp"
         }
       ]
     }

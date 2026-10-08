@@ -29,18 +29,13 @@
       "id": "theo-bennett",
       "source": "beach-a-v2.jpg",
       "master": "../uploads/theo-bennett-live-v1-original.jpg",
-      "delivery": "../uploads/theo-bennett-live-v2.webp",
-      "crop": {
-        "left": 48,
-        "top": 192,
-        "width": 1440,
-        "height": 2560
-      },
+      "delivery": "../uploads/theo-bennett-live-v1.webp",
+      "crop": "Original centred 9:16 fit",
       "size": [
         720,
         1280
       ],
-      "revision_note": "Slightly tighter crop requested to balance the pair, reducing top umbrella space; original retained."
+      "revision_note": "Original wider framing restored at user request; tighter v2 kept as an archive."
     }
   ],
   "options": [
