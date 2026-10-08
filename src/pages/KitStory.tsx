@@ -82,7 +82,7 @@ const BURGUNDY = "#7a0036";
 const STAGE = {
   ...websiteProfile(websiteSamantha),
   kitName: "Samantha Pikka Haircare 26",
-  shareUrl: "https://foam.io/m/StaPiaHe26",
+  shareUrl: "https://foam.io//n/28b7385t",
 };
 
 // Count timing follows the first actual figure; section headers can enter much earlier.
