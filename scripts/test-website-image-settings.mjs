@@ -34,7 +34,7 @@ test("Settings keeps every public page in catalogue order with readable labels",
 test("raster artwork and all current raster placements are editable, while icons, videos and masters are excluded", () => {
   const pages = websiteSettingsPages();
   const displayed = pages.flatMap((page) => page.sections.flatMap((section) => section.assets));
-  assert.ok(displayed.some((asset) => asset.kind === "artwork" && asset.src.endsWith("/campaigns/found-with-foam-skincare-v4.webp")));
+  assert.ok(displayed.some((asset) => asset.kind === "artwork" && asset.src.endsWith("/campaigns/found-with-foam-skincare-v5.webp")));
   assert.ok(displayed.some((asset) => asset.kind === "artwork" && asset.src.endsWith("/music/feed-the-feed-v1/cover.webp")));
   for (const asset of displayed) {
     assert.match(normalizeWebsiteAssetSrc(asset.src), /\.(?:png|jpe?g|webp)$/i);

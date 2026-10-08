@@ -12,6 +12,9 @@ import { websiteMatcha } from "./matchaTalent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "./foundWithFoam";
 import { overviewFilm } from "./overviewFilm";
 import { footerSong } from "./footerSong";
+import { aboutTeamPortraits } from "./aboutTeam";
+import { aboutEditorialPhotos } from "./aboutEditorialPhotos";
+import { aboutSocialPosts } from "./aboutSocialPosts";
 
 export type WebsiteLocation = { route: string; section: string };
 export type WebsiteAssetUsage = {
@@ -275,15 +278,31 @@ const peopleTiles: Record<string, string[]> = {
     "elise-morgan/elise-morgan-hotel-selfie.webp",
     "lena-croft-v2/lena-croft-outfit.webp",
   ],
-  "/about": [
-    "lena-croft-v2/lena-croft-outfit.webp",
-    "samantha-pikka-v3/samantha-pikka-dance-solo.webp",
-    "nia-brooks/nia-brooks-skincare.webp",
-  ],
 };
 peopleTiles["/demo"] = peopleTiles["/creators"];
 Object.entries(peopleTiles).forEach(([route, paths]) =>
   paths.forEach((path) => photo(`talent/${path}`, route, "Opening collage")),
+);
+aboutTeamPortraits.forEach(({ src }, index) =>
+  use(src, "/about", "Our team", {
+    kind: "reference-photo",
+    provenance: "supplied-reference",
+    label: `Foam team portrait ${String(index + 1).padStart(2, "0")}`,
+  }),
+);
+aboutEditorialPhotos.forEach(({ src, section, label }) =>
+  use(src, "/about", section, {
+    kind: "reference-photo",
+    provenance: "supplied-reference",
+    label,
+  }),
+);
+aboutSocialPosts.forEach(({ image, platform }, index) =>
+  use(image.src, "/about", "Foam on social", {
+    kind: "reference-photo",
+    provenance: "supplied-reference",
+    label: `Foam on ${platform} · Post ${index + 1}`,
+  }),
 );
 
 // The merged landing page retains its two original placement scopes so saved
@@ -352,21 +371,6 @@ miniature("/features", "Product preview · Shortlist miniature", [
   websiteNia,
 ]);
 
-photo(
-  "people-colour/studio-moment.webp",
-  "/about",
-  "Our belief · Creative collaboration",
-);
-photo(
-  "people-colour/story-refresh-v1/ada-flash.webp",
-  "/about",
-  "Invitation · Original studio portrait",
-);
-photo(
-  "people-colour/story-refresh-v1/outdoor-creator.webp",
-  "/about",
-  "Invitation · Outdoor portrait",
-);
 miniature(
   "/data-trust",
   "The person behind the profile · Connections miniature",
@@ -516,7 +520,7 @@ artwork(
   "Found with Foam · Workspace",
 );
 artwork(
-  "campaigns/found-with-foam-skincare-v4.webp",
+  "campaigns/found-with-foam-skincare-v5.webp",
   "Found with Foam · Illustrative skincare campaign",
   "/kit-story",
   "From a search to your next campaign",

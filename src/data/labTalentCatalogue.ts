@@ -6,6 +6,7 @@ import { websiteMatcha } from "./matchaTalent";
 import { campaignKeywords, campaignTalent } from "./campaignTalent";
 import { websiteCamille, websiteAngelina } from "./skincareReviewTalent";
 import { websiteTessa } from "./makeupReviewTalent";
+import { zaneShoeChatImage, zaneShoeChatReferences } from "./zaneShoeChat";
 
 const D = `${A}/talent/discovery-v1`;
 const YOUTUBE_LANDSCAPES = `${A}/talent/youtube-landscape-v1`;
@@ -73,6 +74,12 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
   if (!additions.length) return { ...talent, content };
   return {
     ...talent,
+    ...(talent.id === "zane-holt" ? {
+      referenceImages: [
+        ...(talent.referenceImages || []),
+        ...zaneShoeChatReferences.filter(({ src }) => !talent.referenceImages?.some((reference) => reference.src === src)),
+      ],
+    } : {}),
     verticals: talent.id === "rue-dante" ? [...talent.verticals, "Pets"] : [...talent.verticals],
     content: [
       ...content,
@@ -91,6 +98,7 @@ export const labTalent: StagedTalent[] = stagedTalent.map((talent) => {
           approach: "AI-generated illustrative social post. Original fictional identity references used for people; no sponsorship, real post or performance figures claimed.",
           prompt: `${D}/creative-brief.md`,
         },
+        ...(item.talentId === "zane-holt" && item.name === "zane-shoe-chat" ? zaneShoeChatImage : {}),
       })),
     ],
   };

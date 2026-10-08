@@ -1,10 +1,12 @@
-// Three and a half viewport heights of travel, plus the final sticky viewport.
-export const KIT_STORY_HEIGHT_VH = 450;
+// Keep the existing demo and flight pace; append room for the post-flight recap.
+export const KIT_STORY_SCROLL_VH = 350;
+export const KIT_STORY_END = 1.32;
+export const KIT_STORY_HEIGHT_VH = 100 + KIT_STORY_SCROLL_VH * KIT_STORY_END;
 // Reuse the outgoing sticky viewport for the next story rather than scrolling
 // an empty full screen after the plane has gone. Earlier kit timing is unchanged.
 export const KIT_CHROME_OVERLAP_VH = 100;
 export const KIT_COUNT_SCROLL_VH = 24;
-const COUNT_SPAN = KIT_COUNT_SCROLL_VH / (KIT_STORY_HEIGHT_VH - 100);
+const COUNT_SPAN = KIT_COUNT_SCROLL_VH / KIT_STORY_SCROLL_VH;
 
 export const clampProgress = (value: number) =>
   Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
@@ -45,6 +47,7 @@ export function kitStoryTimeline(
   revealStarts?: Partial<KitRevealStarts>,
 ) {
   const p = clampProgress(value);
+  const recap = Number.isFinite(value) ? Math.max(0, Math.min(KIT_STORY_END, value)) : 0;
   const reveal = (section: keyof KitRevealStarts) => {
     const latestEnd = REVEAL_ENDS[section];
     const supplied = revealStarts?.[section];
@@ -72,12 +75,15 @@ export function kitStoryTimeline(
     fold: progressBetween(p, 0.815, 0.85),
     planeIn: smoothProgress(progressBetween(p, 0.858, 0.87)),
     planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
+    // The per-row space, text and tick phases supply their own easing.
+    benefitsReveal: progressBetween(recap, 1.02, 1.24),
+    benefitsCollapse: smoothProgress(progressBetween(recap, 1.27, 1.29)),
+    benefitsConfirmationTick: smoothProgress(progressBetween(recap, 1.295, 1.31)),
     fly: smoothProgress(progressBetween(p, 0.94, 1)),
     sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
-    // Clear the outgoing lettering before the next headline arrives. The
-    // airplane bridges this short handoff, avoiding two ghosted titles.
-    sharedOut: progressBetween(p, 0.94, 0.965),
-    chromeIn: smoothProgress(progressBetween(p, 0.965, 1)),
+    // Legacy overlapping chapters wait until the final confirmation tick is complete.
+    sharedOut: progressBetween(recap, 1.31, 1.315),
+    chromeIn: smoothProgress(progressBetween(recap, 1.315, KIT_STORY_END)),
     headlineOpacity: 1 - progressBetween(p, 0.015, 0.105),
   };
 }
@@ -194,6 +200,17 @@ export function kitShareCursor(
 /** Complete natural-scroll counts in roughly a quarter of a viewport. */
 export const kitMobileCountProgress = (progress: number) =>
   clampProgress(clampProgress(progress) * 2.6);
+
+/** Undo the centred summary's downward shift as recap rows disappear. */
+export function kitSendoffLogoAnchor(logo: KitRect, removedHeight: number): KitRect {
+  const removed = Number.isFinite(removedHeight) ? Math.max(0, removedHeight) : 0;
+  return {
+    left: logo.left,
+    top: logo.top - removed / 2,
+    width: logo.width,
+    height: logo.height,
+  };
+}
 
 /** Start inside the rendered logo, emerge behind its silhouette, then fly away. */
 export function kitPlanePose(

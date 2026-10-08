@@ -4,10 +4,11 @@ import type { ChromeStage } from "./chromeDemo";
 export const CHROME_STAGE_STOPS = [
   0, 0.14, 0.32, 0.49, 0.66, 0.88, 1.02,
 ] as const;
-// Preserve the inbox workflow’s pace, then give Send and the flight one compact
-// beat. The Chrome lockup finishes inside the pin, so there is no second finale.
-export const CHROME_STORY_END = 1.38;
-export const CHROME_STORY_HEIGHT_VH = 315;
+// Preserve the inbox workflow’s pace, then hold the expanded recap and its
+// final confirmation before the pinned scene releases into natural scroll.
+export const CHROME_STORY_SCROLL_VH = 240 / 1.54;
+export const CHROME_STORY_END = 1.98;
+export const CHROME_STORY_HEIGHT_VH = 100 + CHROME_STORY_SCROLL_VH * CHROME_STORY_END;
 export const SHOW_CHROME_STEP_NAV = false;
 
 export type ChromeTarget =
@@ -97,6 +98,24 @@ export function chromeSendoffAt(progress: number) {
     finaleOffset: (1 - reveal) * 18,
     finaleInteractive: reveal === 1,
   };
+}
+
+/** Begin after the plane has left; individual row phases supply their own easing. */
+export function chromeBenefitsRevealAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return clamp((p - 1.4) / (1.8 - 1.4));
+}
+
+/** Settle into the closing confirmation with a reading hold before release. */
+export function chromeBenefitsCollapseAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.86) / (1.905 - 1.86));
+}
+
+/** Draw the final tick only after the confirmation text has settled into place. */
+export function chromeBenefitsConfirmationTickAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.915) / (1.95 - 1.915));
 }
 
 export type ChromeFlightGeometry = {

@@ -4,8 +4,8 @@ import { useLocation } from "react-router";
 import { footerSong } from "../data/footerSong";
 import "./footer-song.css";
 
-type SongContextValue = { cardAvailable: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
-const SongContext = createContext<SongContextValue>({ cardAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
+type SongContextValue = { cardAvailable: boolean; playbackAvailable: boolean; open: boolean; playing: boolean; pending: boolean; toggle: () => void; stop: () => void };
+const SongContext = createContext<SongContextValue>({ cardAvailable: false, playbackAvailable: false, open: false, playing: false, pending: false, toggle: () => {}, stop: () => {} });
 const SONG_CARD_ROUTES = new Set(["/", "/managers", "/brands", "/creators", "/features", "/about", "/data-trust", "/updates", "/demo", "/kit-story", "/kit-transition-preview", "/chrome-story", "/home-film-preview", "/inside-foam-preview"]);
 const SONG_END_DELAY_MS = 6500;
 if (import.meta.env.DEV) {
@@ -15,6 +15,7 @@ if (import.meta.env.DEV) {
 const SONG_FADE_MS = 200;
 
 export function useStopFooterSong() { return useContext(SongContext).stop; }
+export function useFooterSongControl() { return useContext(SongContext); }
 
 function timeLabel(seconds: number) {
   const whole = Math.floor(Number.isFinite(seconds) ? seconds : 0);
@@ -139,7 +140,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
     restorePageFocus();
   }
 
-  return <SongContext.Provider value={{ cardAvailable, open, playing, pending, toggle, stop }}>
+  return <SongContext.Provider value={{ cardAvailable, playbackAvailable, open, playing, pending, toggle, stop }}>
     {children}
     <audio ref={audio} preload="none" aria-hidden="true"
       onPlay={() => { setPlaying(true); setEnded(false); setFading(false); }} onPause={() => setPlaying(false)}
@@ -151,7 +152,7 @@ export function FooterSongProvider({ children }: { children: ReactNode }) {
     />
     {playbackAvailable && open && <>
       <div className="song-player-space" aria-hidden="true" />
-      <section className={`song-player${fading ? " is-fading" : ""}`} style={{ transitionDuration: `${SONG_FADE_MS}ms` }} aria-label="Feed the Feed music player">
+      <section id="foam-song-player" className={`song-player${fading ? " is-fading" : ""}`} style={{ transitionDuration: `${SONG_FADE_MS}ms` }} aria-label="Feed the Feed music player">
         <div className="song-player-inner">
           <div className="song-player-track">
             <OptimizedImage section="Footer · A song from Foam" sizes="52px" src={footerSong.thumbnail} alt="" width="52" height="52" />

@@ -25,11 +25,14 @@ const {
   kitRevealStarts,
   KIT_CHAPTERS,
   KIT_STORY_HEIGHT_VH,
+  KIT_STORY_SCROLL_VH,
+  KIT_STORY_END,
   KIT_CHROME_OVERLAP_VH,
   KIT_JUMP_POINTS,
   kitShareCursor,
   KIT_COUNT_SCROLL_VH,
   kitMobileCountProgress,
+  kitSendoffLogoAnchor,
   kitPlanePose,
   kitFeaturedOpacity,
 } = module.exports;
@@ -73,7 +76,7 @@ test("out-of-range and invalid scroll values resolve to finite, bounded states",
     assert.ok(Number.isFinite(kitPan(input, targets)));
   }
   assert.deepEqual(kitStoryTimeline(-1), kitStoryTimeline(0));
-  assert.deepEqual(kitStoryTimeline(2), kitStoryTimeline(1));
+  assert.deepEqual(kitStoryTimeline(2), kitStoryTimeline(KIT_STORY_END));
   for (const input of [NaN, Infinity, -Infinity]) {
     assert.equal(clampProgress(input), 0);
     assert.deepEqual(kitStoryTimeline(input), kitStoryTimeline(0));
@@ -114,7 +117,7 @@ test("every count reaches its final result within 24vh of scroll rather than the
     audience: 0.4,
   };
   assert.equal(KIT_COUNT_SCROLL_VH, 24);
-  const span = 24 / (KIT_STORY_HEIGHT_VH - 100);
+  const span = 24 / KIT_STORY_SCROLL_VH;
   for (const [field, start] of Object.entries(starts)) {
     assert.equal(kitStoryTimeline(start)[field], 0);
     nearly(kitStoryTimeline(start + span / 2)[field], 0.5, `${field} halfway`);
@@ -238,10 +241,10 @@ test("measured reveal starts eliminate visible zero exposure across viewport geo
       // Counts rise continuously through one short interval and then settle.
       const finish = Math.min(
         ends[field],
-        starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100),
+        starts[field] + 24 / KIT_STORY_SCROLL_VH,
       );
       assert.ok(
-        (finish - starts[field]) * (KIT_STORY_HEIGHT_VH - 100) <= 24.000001,
+        (finish - starts[field]) * KIT_STORY_SCROLL_VH <= 24.000001,
       );
       assert.equal(kitStoryTimeline(finish + 0.000001, starts)[field], 1);
       let previous = -1;
@@ -270,7 +273,7 @@ test("growth starts counting while visible below metrics, before its own pan", (
   assert.ok(starts.growth < duringMetrics);
   assert.ok(kitStoryTimeline(duringMetrics, starts).growth > 0);
   nearly(
-    kitStoryTimeline(starts.growth + 12 / (KIT_STORY_HEIGHT_VH - 100), starts)
+    kitStoryTimeline(starts.growth + 12 / KIT_STORY_SCROLL_VH, starts)
       .growth,
     0.5,
     "visible growth halfway",
@@ -415,7 +418,8 @@ test("pan and timeline remain continuous at every chapter and sharing boundary",
   const boundaries = [
     0.015, 0.105, 0.14, 0.15, 0.205, 0.22, 0.3, 0.31, 0.375, 0.385, 0.445,
     0.455, 0.515, 0.535, 0.58, 0.62, 0.66, 0.71, 0.75, 0.765, 0.78, 0.8, 0.815,
-    0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 0.965, 0.985, 1,
+    0.83, 0.85, 0.858, 0.87, 0.872, 0.94, 1, 1.02, 1.24, 1.27, 1.29,
+    1.295, 1.31, 1.315, KIT_STORY_END,
   ];
   const epsilon = 1e-7;
   for (const boundary of boundaries) {
@@ -450,8 +454,8 @@ test("normalised easing settles at endpoints and preserves the middle position",
 });
 
 test("profile and panel reading beats are brief instead of consuming whole gestures", () => {
-  const travelVh = KIT_STORY_HEIGHT_VH - 100;
-  assert.ok(KIT_STORY_HEIGHT_VH >= 430 && KIT_STORY_HEIGHT_VH <= 460);
+  const travelVh = KIT_STORY_SCROLL_VH;
+  assert.equal(KIT_STORY_SCROLL_VH, 350, "the original chapters retain their scroll pace");
   assert.ok(
     travelVh <= (700 - 100) * 0.6,
     "at least 40% less travel than the previous story",
@@ -477,7 +481,7 @@ test("profile and panel reading beats are brief instead of consuming whole gestu
 });
 
 test("a short 8vh scroll gesture always advances the profile-to-analytics sequence", () => {
-  const gesture = 8 / (KIT_STORY_HEIGHT_VH - 100);
+  const gesture = 8 / KIT_STORY_SCROLL_VH;
   for (const start of samples(0.14, 0.51, 500)) {
     const end = start + gesture;
     const panDistance = kitPan(end, targets) - kitPan(start, targets);
@@ -518,114 +522,117 @@ test("logo and title stay fully readable while the plane emerges, before its fli
   assert.equal(kitStoryTimeline(0.94).planeEmerge, 1);
   assert.ok(kitStoryTimeline(0.96).fly > 0);
   assert.equal(kitStoryTimeline(1).fly, 1);
-  assert.equal(kitStoryTimeline(1).sharedOut, 1);
+  assert.equal(kitStoryTimeline(1).sharedOut, 0, "the post-flight recap is still ahead");
 });
 
-test("the old lockup clears before Chrome enters while the plane bridges the handoff", () => {
-  for (const p of samples(0, 0.965, 193)) {
-    assert.equal(
-      kitStoryTimeline(p).chromeIn,
-      0,
-      `Chrome must stay hidden during kit content, sharing and plane emergence at ${p}`,
-    );
+test("Kit benefits wait for the entire flight and use equal scroll distance for each row", () => {
+  assert.equal(kitStoryTimeline(0.85).sharedIn, 1);
+  for (const p of samples(0, 1.02, 102))
+    assert.equal(kitStoryTimeline(p).benefitsReveal, 0, "no row space while the plane is flying");
+  for (const [fraction, expected] of [[0, 0], [0.25, 0.25], [0.5, 0.5], [0.75, 0.75], [1, 1]])
+    nearly(kitStoryTimeline(1.02 + fraction * (1.24 - 1.02)).benefitsReveal, expected, "linear sequence input");
+  nearly((1.24 - 1.02) * KIT_STORY_SCROLL_VH / 5, 15.4, "scroll distance for each complete row");
+  for (const p of samples(1.02, KIT_STORY_END, 300)) {
+    const state = kitStoryTimeline(p);
+    assert.equal(state.fly, 1, "all benefit text follows the completed flight");
+    assert.equal(state.planeEmerge, 1);
+    for (const [width, height] of [[1024, 600], [1440, 900], [1920, 1080]]) {
+      const stage = { left: 0, top: 0, width, height };
+      const logo = { left: width / 2 - 110, top: height / 2 - 180, width: 220, height: 220 };
+      const plane = kitPlanePose(stage, logo, state.planeEmerge, state.fly);
+      assert.ok(plane.x - plane.width / 2 > width && plane.y + plane.width / 2 < 0);
+    }
   }
-  const boundary = kitStoryTimeline(0.965);
+  const points = samples(1.02, 1.24, 100);
+  const forward = points.map(p => kitStoryTimeline(p).benefitsReveal);
+  assert.deepEqual(points.toReversed().map(p => kitStoryTimeline(p).benefitsReveal).toReversed(), forward);
+  for (const index of [100, 30, 70, 0, 50])
+    assert.equal(kitStoryTimeline(points[index]).benefitsReveal, forward[index]);
+});
+
+test("the kit recap has separate expanded and final reading beats before the pin releases", () => {
+  for (const p of [1.24, 1.25, 1.27]) {
+    assert.equal(kitStoryTimeline(p).benefitsReveal, 1);
+    assert.equal(kitStoryTimeline(p).benefitsCollapse, 0);
+  }
+  nearly(kitStoryTimeline(1.28).benefitsCollapse, 0.5, "closing halfway");
+  for (const p of [1.29, 1.3, KIT_STORY_END]) assert.equal(kitStoryTimeline(p).benefitsCollapse, 1);
+  nearly((1.27 - 1.24) * KIT_STORY_SCROLL_VH, 10.5, "expanded reading hold");
+  nearly((KIT_STORY_END - 1.29) * KIT_STORY_SCROLL_VH, 10.5, "final confirmation hold");
+  const points = [0.85, 1, 1.02, 1.13, 1.24, 1.27, 1.28, 1.29, KIT_STORY_END];
+  const recorded = points.map(p => [kitStoryTimeline(p).benefitsReveal, kitStoryTimeline(p).benefitsCollapse]);
+  for (const index of [8, 6, 4, 1, 5, 2, 0, 3, 7])
+    assert.deepEqual([kitStoryTimeline(points[index]).benefitsReveal, kitStoryTimeline(points[index]).benefitsCollapse], recorded[index]);
+});
+
+test("the final Kit tick waits for settled text, draws separately, then remains complete", () => {
+  for (const p of samples(0, 1.295, 1295))
+    assert.equal(kitStoryTimeline(p).benefitsConfirmationTick, 0, `no early tick at ${p}`);
+  nearly((1.295 - 1.29) * KIT_STORY_SCROLL_VH, 1.75, "short breath after the text settles");
+  nearly(kitStoryTimeline(1.3025).benefitsConfirmationTick, 0.5, "tick halfway");
+  let previous = 0;
+  for (const p of samples(1.295, 1.31, 100)) {
+    const state = kitStoryTimeline(p);
+    assert.equal(state.benefitsCollapse, 1, "text and layout are fully settled during the flourish");
+    assert.equal(state.sharedOut, 0, "keep the complete lockup visible while its tick draws");
+    assert.ok(state.benefitsConfirmationTick >= previous && state.benefitsConfirmationTick - previous < 0.016);
+    previous = state.benefitsConfirmationTick;
+  }
+  for (const p of samples(1.31, KIT_STORY_END, 20))
+    assert.equal(kitStoryTimeline(p).benefitsConfirmationTick, 1);
+  nearly((KIT_STORY_END - 1.31) * KIT_STORY_SCROLL_VH, 3.5, "completed tick has a hold before release");
+  const points = [1.27, 1.29, 1.295, 1.3025, 1.31, KIT_STORY_END];
+  const forward = points.map(p => kitStoryTimeline(p).benefitsConfirmationTick);
+  assert.deepEqual(points.toReversed().map(p => kitStoryTimeline(p).benefitsConfirmationTick).toReversed(), forward);
+  for (const index of [5, 2, 4, 0, 3, 1])
+    assert.equal(kitStoryTimeline(points[index]).benefitsConfirmationTick, forward[index]);
+});
+
+test("the legacy overlapping handoff waits for the final tick and clears its title before Chrome enters", () => {
+  for (const p of samples(0, 1.315, 263)) {
+    assert.equal(kitStoryTimeline(p).chromeIn, 0, `Chrome remains hidden until the recap ends at ${p}`);
+    if (p <= 1.31) assert.equal(kitStoryTimeline(p).sharedOut, 0);
+  }
+  const boundary = kitStoryTimeline(1.315);
   assert.equal(boundary.sharedOut, 1, "outgoing title has cleared");
   assert.equal(boundary.chromeIn, 0, "incoming title has not appeared yet");
-  assert.equal(boundary.planeIn, 1);
-  assert.equal(boundary.planeEmerge, 1);
-  assert.ok(boundary.fly > 0 && boundary.fly < 1, "plane is still midflight");
-  const crossing = kitStoryTimeline(0.975);
+  assert.equal(boundary.benefitsCollapse, 1);
+  assert.equal(boundary.benefitsConfirmationTick, 1);
+  assert.equal(boundary.fly, 1);
+  const crossing = kitStoryTimeline(1.3175);
   assert.ok(crossing.chromeIn > 0 && crossing.chromeIn < 1);
   assert.equal(crossing.sharedOut, 1);
-  assert.ok(crossing.fly > 0 && crossing.fly < 1);
   let previous = 0;
-  for (const p of samples(0.965, 1, 100)) {
+  for (const p of samples(1.315, KIT_STORY_END, 100)) {
     const state = kitStoryTimeline(p);
     assert.ok(state.chromeIn >= previous, "handoff does not fade backward");
-    assert.equal(
-      state.sharedOut,
-      1,
-      `outgoing and incoming text must never overlap at ${p}`,
-    );
+    assert.equal(state.sharedOut, 1, `outgoing and incoming text must never overlap at ${p}`);
     previous = state.chromeIn;
   }
-  const complete = kitStoryTimeline(1);
+  const complete = kitStoryTimeline(KIT_STORY_END);
   assert.equal(complete.sharedOut, 1);
-  assert.equal(complete.fly, 1);
   assert.equal(complete.chromeIn, 1);
-  const checkpoints = [0.94, 0.965, 0.975, 0.985, 1];
+  const checkpoints = [1, 1.24, 1.27, 1.29, 1.31, 1.315, 1.3175, KIT_STORY_END];
   const forward = checkpoints.map((p) => kitStoryTimeline(p).chromeIn);
-  assert.deepEqual(
-    checkpoints
-      .toReversed()
-      .map((p) => kitStoryTimeline(p).chromeIn)
-      .toReversed(),
-    forward,
-    "reverse scrolling reconstructs the same handoff",
-  );
+  assert.deepEqual(checkpoints.toReversed().map((p) => kitStoryTimeline(p).chromeIn).toReversed(), forward);
 });
 
-test("the overlapping Chrome intro occupies the released viewport without changing earlier kit travel", () => {
-  assert.equal(KIT_STORY_HEIGHT_VH, 450, "keep the existing kit track length");
-  const travelVh = KIT_STORY_HEIGHT_VH - 100;
-  for (const [chapter, expectedVh] of [
-    ["profile", 50.75],
-    ["audience", 187.25],
-    ["share", 224],
-  ])
-    nearly(
-      KIT_JUMP_POINTS[chapter] * travelVh,
-      expectedVh,
-      `${chapter} scroll distance is unchanged`,
-    );
-
+test("the added recap travel preserves every earlier chapter and the released-viewport handoff", () => {
+  assert.equal(KIT_STORY_HEIGHT_VH, 562);
+  assert.equal(KIT_STORY_SCROLL_VH, 350);
+  nearly(KIT_STORY_HEIGHT_VH - 100, KIT_STORY_SCROLL_VH * KIT_STORY_END, "track ends at raw extended progress");
+  for (const [chapter, expectedVh] of [["profile", 50.75], ["audience", 187.25], ["share", 224]])
+    nearly(KIT_JUMP_POINTS[chapter] * KIT_STORY_SCROLL_VH, expectedVh, `${chapter} scroll distance is unchanged`);
+  nearly((1 - 0.94) * KIT_STORY_SCROLL_VH, 21, "flight retains its existing scroll duration");
   for (const height of [640, 720, 960]) {
-    const kitTrackHeight = (KIT_STORY_HEIGHT_VH * height) / 100;
-    const kitTravel = kitTrackHeight - height;
-    const chromeDocumentTop =
-      kitTrackHeight - (KIT_CHROME_OVERLAP_VH * height) / 100;
-    const introTop = (progress) => chromeDocumentTop - kitTravel * progress;
-    // This is the flow geometry; browser checks verify the wrapper and its 40px intro padding.
-    nearly(
-      introTop(1),
-      0,
-      `Chrome intro starts at the viewport top at ${height}px`,
-    );
-    assert.ok(
-      introTop(0.975) >= 0 && introTop(0.975) + 40 < height,
-      `intro copy is inside the viewport during its reveal at ${height}px`,
-    );
-    nearly(
-      kitTrackHeight - kitTravel,
-      height,
-      "without overlap the intro would still be below the viewport",
-    );
-    const state = kitStoryTimeline(1);
-    const stage = { left: 0, top: 0, width: 1440, height };
-    const logo = { left: 610, top: height / 2 - 150, width: 220, height: 220 };
-    const crossing = kitStoryTimeline(0.965);
-    const bridgingPlane = kitPlanePose(
-      stage,
-      logo,
-      crossing.planeEmerge,
-      crossing.fly,
-    );
-    assert.ok(bridgingPlane.x - bridgingPlane.width / 2 < stage.width);
-    assert.ok(
-      bridgingPlane.y + bridgingPlane.width / 2 > 0,
-      "plane remains in view between the two titles",
-    );
-    const plane = kitPlanePose(stage, logo, state.planeEmerge, state.fly);
-    assert.ok(
-      plane.x - plane.width / 2 > stage.width,
-      "plane has fully departed",
-    );
-    assert.equal(
-      state.chromeIn,
-      1,
-      "Chrome fills the viewport as the plane departs",
-    );
+    const kitTrackHeight = KIT_STORY_HEIGHT_VH * height / 100;
+    const scrollUnit = KIT_STORY_SCROLL_VH * height / 100;
+    const chromeDocumentTop = kitTrackHeight - KIT_CHROME_OVERLAP_VH * height / 100;
+    const introTop = (progress) => chromeDocumentTop - scrollUnit * progress;
+    nearly(introTop(KIT_STORY_END), 0, `Chrome reaches the viewport top at ${height}px`);
+    assert.ok(introTop(1.3175) >= 0 && introTop(1.3175) + 40 < height,
+      `intro copy is visible during the final handoff at ${height}px`);
+    nearly(kitTrackHeight - scrollUnit * KIT_STORY_END, height, "without overlap the intro stays below the viewport");
   }
 });
 
@@ -742,6 +749,35 @@ test("plane begins within the actual logo and emerges upward away from the title
   }
 });
 
+test("recentring the summary cannot change the plane's expanded-layout flight, including resize and direct jumps", () => {
+  for (const [width, height, offsetX, offsetY, logoSize, rowHeight] of [
+    [1024, 600, 0, 0, 168, 32],
+    [1440, 900, 37, -20, 220, 38],
+    [1920, 1080, 0, 80, 220, 38],
+  ]) {
+    const stage = { left: offsetX, top: offsetY, width, height };
+    const expanded = { left: offsetX + width / 2 - logoSize / 2,
+      top: offsetY + height / 2 - 250, width: logoSize, height: logoSize };
+    for (const [p, removal] of [[1, 1], [0.985, 0.7], [0.96, 0.4], [0.94, 0], [0.975, 0.8], [0.86, 0], [1, 1]]) {
+      const state = kitStoryTimeline(p);
+      const removedHeight = 5 * rowHeight * removal;
+      const recentred = { ...expanded, top: expanded.top + removedHeight / 2 };
+      const anchor = kitSendoffLogoAnchor(recentred, removedHeight);
+      const expected = kitPlanePose(stage, expanded, state.planeEmerge, state.fly);
+      const actual = kitPlanePose(stage, anchor, state.planeEmerge, state.fly);
+      for (const key of Object.keys(expected)) nearly(actual[key], expected[key], `${key} at ${width}×${height}, p=${p}`);
+      assert.equal(recentred.top, expanded.top + removedHeight / 2, "measurement is not mutated");
+    }
+  }
+});
+
+test("sendoff anchor supports DOMRect getters and ignores invalid or negative removed heights", () => {
+  const measured = Object.create({ left: 300, top: 210, width: 220, height: 220 });
+  assert.deepEqual(kitSendoffLogoAnchor(measured, 190), { left: 300, top: 115, width: 220, height: 220 });
+  for (const removed of [0, -1, NaN, Infinity, -Infinity])
+    assert.deepEqual(kitSendoffLogoAnchor(measured, removed), { left: 300, top: 210, width: 220, height: 220 });
+});
+
 test("mobile numbers finish in a fraction of the original natural-scroll span and rewind", () => {
   assert.equal(kitMobileCountProgress(0), 0);
   assert.equal(kitMobileCountProgress(0.1), 0.26);
@@ -779,7 +815,7 @@ test("a visible panel edge or header cannot spend the count before the numbers a
     );
     assert.equal(
       kitStoryTimeline(
-        starts[field] + 24 / (KIT_STORY_HEIGHT_VH - 100) + 0.000001,
+        starts[field] + 24 / KIT_STORY_SCROLL_VH + 0.000001,
         starts,
       )[field],
       1,

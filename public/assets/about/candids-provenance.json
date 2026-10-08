@@ -1,0 +1,186 @@
+{
+  "collected": "2026-10-08",
+  "context": "Foam and Streak gathering at Elsie Rooftop, NYC. Attendees include guests; these are community photographs, not a staff roster.",
+  "processing": "JPEG masters retained byte-for-byte. Delivery files use WebP quality65, maximum edge1280px, EXIF orientation applied, no enlargement or retouching. Cropping is presentation-only CSS.",
+  "originalBytes": 2206142,
+  "displayBytes": 491848,
+  "savingPercent": 77.71,
+  "files": [
+    {
+      "id": "candid-01",
+      "src": "assets/about/candid-01.webp",
+      "width": 1280,
+      "height": 1121,
+      "bytes": 37542,
+      "objectPosition": "50% 28%",
+      "section": "Candid moments",
+      "alt": "Four attendees posing together at Foam and Streak’s Elsie Rooftop gathering.",
+      "source": {
+        "id": "rooftop-02",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": null,
+        "downloadedFilename": "1785430454624.jpeg",
+        "width": 1754,
+        "height": 1536,
+        "bytes": 223717,
+        "sha256": "06d3243699a2938302adfbe91e24140da052f69ab3504809634111f5eabfffb7",
+        "master": "masters/candid-01-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-02",
+      "src": "assets/about/candid-02.webp",
+      "width": 853,
+      "height": 1280,
+      "bytes": 41498,
+      "objectPosition": "50% 55%",
+      "section": "Candid moments",
+      "alt": "Two attendees posing behind the DJ decks at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-04",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQEXq-UQi76b0Q/feedshare-shrink_1280/B56Z.z8xYRGgAM-/0/1785430481191?e=1793232000&v=beta&t=I2m1t62WrsPOnoxw-MFT-Op0aducH2cO45jZEUyn_a0",
+        "downloadedFilename": "1785430481191.jpeg",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 232548,
+        "sha256": "98e667e19c94bc4d9b98d85db915d3059a9f01ef8ba87b78140cb2b7300afed5",
+        "master": "masters/candid-02-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-03",
+      "src": "assets/about/candid-03.webp",
+      "width": 853,
+      "height": 1280,
+      "bytes": 76196,
+      "objectPosition": "50% 64%",
+      "section": "Candid moments",
+      "alt": "Guests chatting beneath string lights at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-03",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQHsjC_DeAo_zA/feedshare-shrink_1280/B56Z.z8xQAK0AM-/0/1785430480708?e=1793232000&v=beta&t=8kclrW348pmjxMcjkVC1B5w-ksxzXMtpsze49ChRuzM",
+        "downloadedFilename": "1785430480708.jpeg",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 295995,
+        "sha256": "9d508952ec0cd5b9403c1ba521528c623244ff3632afdba8a21c4dda9c71b069",
+        "master": "masters/candid-03-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-04",
+      "src": "assets/about/candid-04.webp",
+      "width": 1280,
+      "height": 1108,
+      "bytes": 93114,
+      "objectPosition": "50% 30%",
+      "section": "Candid moments",
+      "alt": "Two attendees smiling on a sofa at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-09",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQEfZAcwnqJGzA/feedshare-image-high-res/B56Z.z8rmgG4AY-/0/1785430457496?e=1793232000&v=beta&t=UXySl8SYrm8PjZbWFZsyKXbBdiGfj2x1chLhaTRX1HA",
+        "downloadedFilename": "1785430457496.jpeg",
+        "width": 1775,
+        "height": 1536,
+        "bytes": 339087,
+        "sha256": "a4edd85d5c4dd3c6cc1815e1316f3c02689b43da903b92dc110c0774010a3b91",
+        "master": "masters/candid-04-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-05",
+      "src": "assets/about/candid-05.webp",
+      "width": 853,
+      "height": 1280,
+      "bytes": 55204,
+      "objectPosition": "50% 25%",
+      "section": "Candid moments",
+      "alt": "Three attendees standing together at Foam and Streak’s Elsie Rooftop gathering.",
+      "source": {
+        "id": "rooftop-01",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQExWh9KYiAfCw/feedshare-shrink_1280/B56Z.z8xkTGcAM-/0/1785430481944?e=1793232000&v=beta&t=RDmpw7xFVyPip2pVbH2IkXhFoU-OrYpQn6D-ULHJziw",
+        "downloadedFilename": "1785430481944.jpeg",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 272024,
+        "sha256": "7eca95c9ccc6ceec6524cf072946a1e9186b974e54f3da19898ebb8f78992ccb",
+        "master": "masters/candid-05-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-06",
+      "src": "assets/about/candid-06.webp",
+      "width": 853,
+      "height": 1280,
+      "bytes": 59684,
+      "objectPosition": "50% 70%",
+      "section": "Candid moments",
+      "alt": "Guests in conversation at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-08",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQE1MrGSn7-Shw/feedshare-shrink_1280/B56Z.z8xqCLAAM-/0/1785430482351?e=1793232000&v=beta&t=Y0wX0HOa98kac_zVmsqHEWvqRwR0HQeM4XX0AF2Hxqg",
+        "downloadedFilename": "1785430482351.jpeg",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 270020,
+        "sha256": "20eb3da89a38213f12af295597f4c88143a11710d923273f663105759747d16e",
+        "master": "masters/candid-06-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-07",
+      "src": "assets/about/candid-07.webp",
+      "width": 853,
+      "height": 1280,
+      "bytes": 71742,
+      "objectPosition": "50% 38%",
+      "section": "Candid moments",
+      "alt": "Three attendees smiling together at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-05",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQFa9xTwA42plQ/feedshare-shrink_1280/B56Z.z8xroKYAM-/0/1785430482447?e=1793232000&v=beta&t=-sWFoYXS0DaCZM4TU_bjlT3Nw4x6RzZRwduZI6Q2ESU",
+        "downloadedFilename": "1785430482447.jpeg",
+        "width": 1280,
+        "height": 1920,
+        "bytes": 299797,
+        "sha256": "0a7a314b35382b18d28a71f50cad69d3908e46c9fe88f7c62d44af57a5a199aa",
+        "master": "masters/candid-07-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    },
+    {
+      "id": "candid-08",
+      "src": "assets/about/candid-08.webp",
+      "width": 848,
+      "height": 1280,
+      "bytes": 56868,
+      "objectPosition": "50% 32%",
+      "section": "Candid moments",
+      "alt": "Two attendees beside a flower display at Foam and Streak’s gathering.",
+      "source": {
+        "id": "rooftop-06",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5622AQEr1TO0GnWCNg/feedshare-shrink_1280/B56Z.z8sk3GcAM-/0/1785430461255?e=1793232000&v=beta&t=FINuOUZ0AEl_4HHQzKCFO9Inp8eZPuMPdMYFct0UooE",
+        "downloadedFilename": "1785430461255.jpeg",
+        "width": 1280,
+        "height": 1933,
+        "bytes": 272954,
+        "sha256": "c12ab28a4664dd5342570b8c0751550f17327515451eb0296fa750cda7225c48",
+        "master": "masters/candid-08-original.jpg",
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests."
+      }
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type CSSProperties,
 } from "react";
 import { Link } from "react-router";
 import { Nav } from "../components/Nav";
@@ -28,17 +29,21 @@ import {
   CHROME_STAGE_STOPS,
   CHROME_STORY_END,
   CHROME_STORY_HEIGHT_VH,
+  CHROME_STORY_SCROLL_VH,
   SHOW_CHROME_STEP_NAV,
   chromeStageAt,
   chromeEntryScale,
   chromeSendoffAt,
+  chromeBenefitsRevealAt,
+  chromeBenefitsCollapseAt,
+  chromeBenefitsConfirmationTickAt,
   chromePlanePose,
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
+import { StoryBenefits } from "../components/StoryBenefits";
+import { storyBenefitsEntryShift, storyBenefitsSequenceAt } from "../lib/storyBenefitsMotion";
 import "./chrome-story.css";
-
-const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
 function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const track = useRef<HTMLElement>(null);
@@ -61,8 +66,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         String(chromeEntryScale(top, window.innerHeight)),
       );
       setProgress(
-        clamp(-top / Math.max(element.offsetHeight - window.innerHeight, 1)) *
-          CHROME_STORY_END,
+        Math.max(0, Math.min(CHROME_STORY_END,
+          -top / Math.max(window.innerHeight * CHROME_STORY_SCROLL_VH / 100, 1),
+        )),
       );
     };
     const schedule = () => {
@@ -90,6 +96,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   }, []);
   const current = chromeStageAt(progress);
   const sendoff = chromeSendoffAt(progress);
+  const benefitsReveal = chromeBenefitsRevealAt(progress);
+  const benefitsSpace = storyBenefitsSequenceAt(benefitsReveal, 4).space;
+  const benefitsCollapse = chromeBenefitsCollapseAt(progress);
   const plane = chromePlanePose(progress, flightGeometry);
   useLayoutEffect(() => {
     const root = reveal.current;
@@ -131,10 +140,10 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
     window.scrollTo({
       top:
         start +
-        (element.offsetHeight - window.innerHeight) *
+        (window.innerHeight * CHROME_STORY_SCROLL_VH / 100) *
           (next === 6
-            ? 1
-            : (CHROME_STAGE_STOPS[next] + 0.005) / CHROME_STORY_END),
+            ? CHROME_STORY_END
+            : CHROME_STAGE_STOPS[next] + 0.005),
       behavior: "smooth",
     });
   }, []);
@@ -155,7 +164,8 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         </h1>
         <p>
           Find the right creator, copy their details and paste a complete
-          profile into your reply. All without leaving your inbox.
+          profile into your reply.
+          <br />All without leaving your inbox.
         </p>
       </section>
       <section
@@ -200,21 +210,31 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                 pointerEvents: sendoff.finaleInteractive ? "auto" : "none",
               }}
             >
-              <a href={CHROME_STORE} target="_blank" rel="noreferrer">
-                <div className="cs-store-mark">
-                  <OptimizedImage section="Foam for Chrome · Send finale"
-                    src={`${A}/chrome-store-transparent.webp`}
-                    alt=""
-                    width={180}
-                    height={157}
+              <div
+                className="cs-finale-content story-recap"
+                style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsSpace), "--benefits-collapse": benefitsCollapse } as CSSProperties}
+              >
+                <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+                  <div className="cs-store-mark">
+                    <OptimizedImage section="Foam for Chrome · Send finale"
+                      src={`${A}/chrome-store-transparent.webp`}
+                      alt=""
+                      width={180}
+                      height={157}
+                    />
+                  </div>
+                  <h2>That’s the Chrome Extension.</h2>
+                </a>
+                <div className="cs-finale-benefits" style={{ "--chrome-recap-reveal": benefitsSpace } as CSSProperties}>
+                  <StoryBenefits
+                    variant="chrome"
+                    active={sendoff.finaleInteractive}
+                    reveal={benefitsReveal}
+                    collapse={benefitsCollapse}
+                    confirmationTick={chromeBenefitsConfirmationTickAt(progress)}
                   />
                 </div>
-                <h2>That’s the Chrome Extension.</h2>
-                <span>
-                  Bring your roster to your inbox{" "}
-                  <span aria-hidden="true">↗</span>
-                </span>
-              </a>
+              </div>
             </section>
 
             {plane && (

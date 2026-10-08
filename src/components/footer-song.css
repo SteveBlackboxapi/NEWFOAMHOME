@@ -25,7 +25,7 @@
 .song-player button:hover { background: #ffffff17; }
 .song-player button.song-player-toggle { background: #e8f87e; color: #17201b; }
 .song-player button.song-player-toggle:hover { background: #f1ffaa; }
-.song-player button.song-player-close { border: 1px solid #ffffff2b; }
+.song-player button.song-player-close { padding: 0; border: 1px solid #ffffff2b; }
 .song-player svg { display: block; width: 20px; height: 20px; }
 .song-player-progress { display: flex; align-items: center; gap: 12px; }
 .song-player-progress span { font-size: 11px; color: #b1bac2; font-variant-numeric: tabular-nums; min-width: 28px; }

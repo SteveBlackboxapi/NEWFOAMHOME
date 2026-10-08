@@ -59,7 +59,13 @@
   max-width: 28em;
 }
 
-/* About: a portrait, a belief, then the people in the partnership. */
+/* About: team, leadership, conversations and community. */
+.ep-about {
+  --about-section-space: clamp(72px, 7.8vw, 112px);
+  --about-content-gap: clamp(128px, 12.5vw, 180px);
+  --about-section-edge: calc(var(--about-content-gap) / 2);
+}
+.pc-site .ep-about .site-cta { padding-top: var(--about-content-gap); }
 .ep-about .mp-intro {
   padding-bottom: 85px;
 }
@@ -68,6 +74,46 @@
 }
 .ep-about .mp-intro .mp-display {
   font-size: clamp(60px, 7.4vw, 105px);
+}
+.ep-team {
+  padding: 0;
+  scroll-margin-top: 100px;
+}
+.ep-team-heading {
+  /* 112px of breathing room below the 101px desktop header. */
+  padding-block: 213px 48px;
+}
+@media (max-width: 760px) {
+  .ep-about { --about-content-gap: 72px; --about-section-edge: 72px; }
+  .ep-team-heading { padding-block: 153px 32px; }
+}
+.ep-team-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+.ep-team-scroll:focus-visible {
+  outline: 3px solid var(--theme-accent, #7a0036);
+  outline-offset: -3px;
+}
+.ep-team-grid {
+  display: grid;
+  grid-template-columns: repeat(27, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  min-width: 1296px;
+  margin: 0;
+  padding: 0;
+}
+.ep-team-square {
+  aspect-ratio: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.ep-team-square > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .ep-people {
   padding-top: 12px;

@@ -586,7 +586,7 @@ function CampaignReveal({ reducedMotion }: { reducedMotion: boolean }) {
         <div ref={artwork} className="fs-campaign-art">
           <OptimizedImage
             sizes="(max-width: 700px) 100vw, 1200px"
-            section="From a search to your next campaign" src={`${A}/campaigns/found-with-foam-skincare-v4.webp`}
+            section="From a search to your next campaign" src={`${A}/campaigns/found-with-foam-skincare-v5.webp`}
             width={2824}
             height={2232}
             loading="lazy"
@@ -737,7 +737,7 @@ export function FoundStory({ stableDetail = false }: { stableDetail?: boolean } 
           >
             <span className="fs-eyebrow">FOUND WITH FOAM</span>
             <h2>
-              Type it the way
+              Ask it the way
               <br />
               you’d say it.
             </h2>

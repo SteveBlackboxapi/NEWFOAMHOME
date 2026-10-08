@@ -61,6 +61,42 @@
   margin-bottom: clamp(16px, 3vh, 26px);
 }
 
+.ks-sendoff-summary {
+  --kit-recap-gap: 26px;
+  --recap-expanded-height: calc(5 * var(--benefit-row-height) + var(--kit-recap-gap));
+  --recap-final-height: calc(var(--benefit-confirmation-height) + 16px);
+  width: min(100%, 560px);
+  /* Rise gently as rows appear, then cancel the downward flex shift as they close. */
+  transform: translateY(calc(var(--recap-expanded-height) * var(--benefits-entry-shift, 0) - (var(--recap-expanded-height) - var(--recap-final-height)) * var(--benefits-collapse, 0) / 2));
+}
+.ks-sendoff-benefits {
+  width: min(100%, 360px);
+  margin-top: calc((var(--kit-recap-gap) * (1 - var(--kit-recap-collapse, 0)) + 16px * var(--kit-recap-collapse, 0)) * var(--kit-recap-reveal, 1));
+}
+.ks-mobile-sendoff-benefits { width: min(100%, 360px); margin: 24px auto 0; }
+
+.ks-role-card .ks-role-audience {
+  margin: 0 0 20px;
+  font-size: clamp(30px, 2.9vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  color: #101828;
+}
+.ks-role-card .ks-role-description {
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: #53606e;
+}
+html[data-theme="dark"] .ks-role-card.is-active .ks-role-audience { color: #1c2128; }
+@media (max-width: 767px) {
+  .ks-role-card .ks-role-audience { font-size: 30px; margin-bottom: 12px; }
+  .ks-role-card .ks-role-description { font-size: 17px; }
+}
+@media (max-height: 700px) {
+  .ks-sendoff-summary { --kit-recap-gap: 18px; }
+}
+
 .ks-rail {
   width: 54px;
   flex-shrink: 0;

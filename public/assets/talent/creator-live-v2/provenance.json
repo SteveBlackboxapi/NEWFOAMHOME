@@ -1,0 +1,77 @@
+{
+  "provider": "Google Gemini API",
+  "model": "gemini-3-pro-image",
+  "model_name": "Nano Banana Pro",
+  "purpose": "User-selected fictional creator identities; distinct from Tessa Quinn and Luca Marin.",
+  "profiles": [
+    {
+      "id": "maya-ellis",
+      "source": "fitness-a-clean.jpg",
+      "master": "../uploads/maya-ellis-live-v3-original.png",
+      "delivery": "../uploads/maya-ellis-live-v3.webp",
+      "size": [
+        720,
+        1280
+      ],
+      "revision_note": "User approved wider garden outpainting with built-in image editor after two deterministic crop reviews. Original Nano Banana photograph and all earlier crops retained.",
+      "source_master": "../uploads/maya-ellis-live-v1-original.jpg",
+      "reframe": {
+        "provider": "Built-in OpenAI image generator",
+        "input": "Deterministic crop of fitness-a-clean.jpg, left102 top0 width1332 height2368",
+        "prompt": "Precise OUTPAINT ONLY of the supplied approved photograph. Keep the original photograph content intact and extend its canvas ONLY upwards and sideways. Target composition: a vertical 9:16 image made by placing the supplied image at 89% of final width, aligned to the BOTTOM edge, centred horizontally, then filling the exposed top and side margins with matching garden background. The person will consequently be about 11% smaller. The supplied BOTTOM CROP IS LOCKED: do not extend downwards, do not invent or show any additional legs, lap or crotch below the supplied bottom edge. Add approximately 12% more height ABOVE her ponytail and 6% width on each side. Fill new areas only with continuation of the same hedge, garden and lawn at the same exposure. Preserve the exact woman's face, facial geometry, freckles and mole, eyes, nose, smile, headphones, hair, clothing, arms, hand gesture and all original photographic details. Do not beautify, redraw or smooth her skin. No extra trees, objects or pose changes. The source image is the edit target, not loose inspiration. Clean photo only, no text, UI or border.",
+        "output_dimensions": [
+          940,
+          1672
+        ]
+      }
+    },
+    {
+      "id": "theo-bennett",
+      "source": "beach-a-v2.jpg",
+      "master": "../uploads/theo-bennett-live-v1-original.jpg",
+      "delivery": "../uploads/theo-bennett-live-v1.webp",
+      "crop": "Original centred 9:16 fit",
+      "size": [
+        720,
+        1280
+      ],
+      "revision_note": "Original wider framing restored at user request; tighter v2 kept as an archive."
+    }
+  ],
+  "options": [
+    {
+      "label": "Fitness A",
+      "file": "fitness-a-clean.jpg",
+      "dimensions": [
+        1536,
+        2752
+      ],
+      "prompt_sequence": [
+        {
+          "id": "fitness-a",
+          "reference": "tessa-live.webp",
+          "prompt": "Use case: photorealistic-natural. Create one vertical 9:16 candid smartphone photograph for a fictional creator's outdoor post-workout livestream. The reference supplies scene, pose, framing and photographic style, NOT facial identity. Keep the sunny lawn, hedge and pale low wall, seated athletic adult woman in her late twenties, pink long-sleeve workout outfit, lavender over-ear headphones, relaxed talking gesture and arm-length selfie perspective. Give her a clearly different, coherent fictional face: softly squared jaw, fuller cheeks, wide-set warm brown eyes, straighter lower eyebrows, a shorter nose with a gently rounded tip, a broad asymmetric smile with a small cheek dimple, realistic scattered freckles. Dark chestnut hair with sun-lightened ends in a messy high ponytail. Natural skin pores, slight post-workout flush, flyaway hairs and authentic phone-camera detail. Friendly mid-conversation expression, not a polished stock-photo pose. Preserve enough headroom and clear lower portion for separately rendered website live-chat UI. Only the photograph: no text, graphics, logos, watermark or interface. One person, one image. Do not reproduce the reference face or a celebrity likeness; avoid beauty filtering, excessive symmetry, airbrushed skin and distorted hands."
+        },
+        {
+          "id": "fitness-a-clean",
+          "reference": "fitness-a.jpg",
+          "prompt": "Precise photograph cleanup. Remove ONLY the graphics at the bottom: the Send message wording, rounded input outline, paper-plane icon, heart icon and the semi-transparent dark gradient behind them. Reconstruct normal photographic pixels where they were, matching the pink leggings and chair underneath. Preserve this exact woman's face, identity, expression, hair, headphones, clothing, pose, hand, skin texture, entire scene, framing and original dimensions. The face must remain unchanged. Return a completely clean photograph, edge to edge, with no lettering, symbols, graphics or interface anywhere. Do not add any new marks."
+        }
+      ]
+    },
+    {
+      "label": "Beach A",
+      "file": "beach-a-v2.jpg",
+      "dimensions": [
+        1536,
+        2752
+      ],
+      "prompt_sequence": [
+        {
+          "id": "beach-a-v2",
+          "prompt": "A single photorealistic vertical 9:16 unretouched phone selfie photograph. An entirely fictional athletic adult man, age 29, sits shirtless at a beachside cafe underneath a large lavender-purple sun umbrella, chatting warmly with the camera. His distinctive face is broad and compact with full cheeks, a blunt square jaw, a broad rounded nose, deep-set dark brown eyes spaced slightly wide apart, heavy horizontal eyebrows, short light scruffy beard, a small chin dimple and an asymmetric closed-lip half-smile. Short messy platinum-blond hair with visible dark roots; dark sunglasses pushed up on his head. Sun-tanned skin with pores and a few freckles, natural small imperfections. A white wireless earbud, thin silver chain, sparse fine-line botanical tattoos across one shoulder and upper chest, and a takeaway iced coffee held at lower left. Eye-level arm-length camera viewpoint, not a studio shot; head, shoulders and upper torso in frame, face in upper-middle with generous purple umbrella above. Background palms, pale stone beach promenade, blue sky and ocean visible over one shoulder; believable holiday cafe activity softly behind him. Bright midday sunlight softened under umbrella, normal smartphone dynamic range and minor lens distortion. He should look like a real approachable young man, not a model or celebrity. Photograph only, from edge to edge. No typography, letters, interface, badges, counters, icons, logos, watermarks or collage. Anatomically natural hands and authentic facial asymmetry."
+        }
+      ]
+    }
+  ]
+}

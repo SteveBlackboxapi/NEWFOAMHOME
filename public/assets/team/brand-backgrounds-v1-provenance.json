@@ -1,0 +1,287 @@
+{
+  "created": "2026-10-08",
+  "intent": "Scatter eight background recolours from the supplied lime, pale blue, cyan and sage palette through the existing54-person strip.",
+  "tool": "Codex built-in image-generation/editing tool",
+  "delivery": "Generated square masters resized to72×72 with Sharp Lanczos3, then encoded as lossless WebP. No code-based background masking, recolouring or retouching.",
+  "generatedMasterBytes": 10986869,
+  "deliveryBytes": 45716,
+  "files": [
+    {
+      "id": "team-03",
+      "targetBackground": "#E8F87E",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Image 1 is the edit target: an existing small square team avatar. Replace ONLY the flat background behind the person with a solid soft bright lime background, hex #E8F87E, edge to edge. Preserve the person's exact identity, face, expression, eyes, hairstyle, skin tone, clothes, body shape, pose, silhouette, existing illustrative/photographic treatment, and exact square framing/scale. This is a minimal background colour replacement, NOT a redraw, beautification, style transfer or a new portrait. Preserve all foreground detail and existing soft raster character. No gradients, shadows, halos, border, text, new objects or changes to the person. The final asset is a tiny team-grid avatar; keep the same composition as the source.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-03.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 8170,
+        "sha256": "1121f2128b430171bf26a38065faa891466da6b2cbee23fa75ec7b6d083b4453"
+      },
+      "generated": {
+        "path": "masters/team-03-brand-v1-generated.png",
+        "originalFilename": "exec-8dda3091-7b0d-4cb3-a8f2-3b995208ad6e.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1403888,
+        "sha256": "87a9a7d8b1dd32aab31c64ad321d759f085901ed3156858a4b1f0a768f055ddf"
+      },
+      "delivery": {
+        "path": "team-03-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5550,
+        "sha256": "e04f1a8795a09809ef87479278346cf46c4cbe449ce741d1eba74a0e27304b78"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-10",
+      "targetBackground": "#C1E5FF",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Image 1 is the edit target: an existing small square team avatar. Replace ONLY the flat background behind the person with a solid pale blue background, hex #C1E5FF, edge to edge. Preserve the person's exact identity, face, expression, eyes, hairstyle, skin tone, clothes, body shape, pose, silhouette, existing illustrative/photographic treatment, and exact square framing/scale. This is a minimal background colour replacement, NOT a redraw, beautification, style transfer or a new portrait. Preserve all foreground detail and existing soft raster character. No gradients, shadows, halos, border, text, new objects or changes to the person. The final asset is a tiny team-grid avatar; keep the same composition as the source.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-10.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 8298,
+        "sha256": "70a36400c159c03d8197bbebadba240ed4d3319032995bf770a9adfcd67af316"
+      },
+      "generated": {
+        "path": "masters/team-10-brand-v1-generated.png",
+        "originalFilename": "exec-25d6572d-091c-4329-b691-588b34ad9abd.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1416580,
+        "sha256": "efb93cc9ffd01cf0ea8f197fa6308eb53f23c0a87340c4964d88560231ab29ed"
+      },
+      "delivery": {
+        "path": "team-10-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 6434,
+        "sha256": "46c071f38357134887c9e81a29a6061e2ccc8a27bbd6d8cead950762c7c1f143"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-16",
+      "targetBackground": "#E2E5D4",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Image 1 is the edit target: an existing small square team avatar. Replace ONLY the flat background behind the person with a solid pale sage background, hex #E2E5D4, edge to edge. Preserve the person's exact identity, face, expression, eyes, hairstyle, skin tone, clothes, body shape, pose, silhouette, existing illustrative/photographic treatment, and exact square framing/scale. This is a minimal background colour replacement, NOT a redraw, beautification, style transfer or a new portrait. Preserve all foreground detail and existing soft raster character. No gradients, shadows, halos, border, text, new objects or changes to the person. The final asset is a tiny team-grid avatar; keep the same composition as the source.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-16.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 6918,
+        "sha256": "1519251ac400888aecd3fae5f0227767db74d2832a5d81a6da75ec13c5f628f7"
+      },
+      "generated": {
+        "path": "masters/team-16-brand-v1-generated.png",
+        "originalFilename": "exec-51fd0278-c195-411d-b6ad-31b39ad0506e.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1324127,
+        "sha256": "51522198ca105afa978bd61784d8b3de58c51832d301b09c81e9cd3666109720"
+      },
+      "delivery": {
+        "path": "team-16-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5122,
+        "sha256": "ab3610070c6619c849ce46ef415535e21871a8d2f46b749527edf73d2ceff5d5"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-23",
+      "targetBackground": "#6DDCEF",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Image 1 is the edit target: an existing small square team avatar. Replace ONLY the flat background behind the person with a solid clear light cyan background, hex #6DDCEF, edge to edge. Preserve the person's exact identity, face, expression, eyes, hairstyle, skin tone, clothes, body shape, pose, silhouette, existing illustrative/photographic treatment, and exact square framing/scale. This is a minimal background colour replacement, NOT a redraw, beautification, style transfer or a new portrait. Preserve all foreground detail and existing soft raster character. No gradients, shadows, halos, border, text, new objects or changes to the person. The final asset is a tiny team-grid avatar; keep the same composition as the source.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-23.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 8831,
+        "sha256": "00cbd6290435fa0e143cdc71d628cd767da11628e135ac7cc7b106eacbd0cd2e"
+      },
+      "generated": {
+        "path": "masters/team-23-brand-v1-generated.png",
+        "originalFilename": "exec-468637f1-2f35-4ff4-a3a7-d63711821291.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1405485,
+        "sha256": "4444f860cbae53e409f4b71218c54d7708b9fa1dce0985aee73c4a8ee2800518"
+      },
+      "delivery": {
+        "path": "team-23-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 6428,
+        "sha256": "28feb67b245695508842347a3c0ee67e56b890a20f0ca334126c9252b661f2d1"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-29",
+      "targetBackground": "#C1E5FF",
+      "prompt": "Use case: identity-preserve. Edit target: the attached small square illustrated team portrait. Change ONLY the background behind the existing person to one completely flat, opaque pale blue color #C1E5FF. Preserve the face, eyes, hair, facial hair, skin tone, expression, clothing, pose, body proportions, exact subject placement and square framing, and the existing simple illustrated style exactly as supplied. Keep all existing person details and edges; do not redraw, reinterpret, beautify, relight, sharpen, stylize, enlarge the person, or invent detail. The person must remain visually identical. Solid background only: no gradient, shadows, texture, objects, text, or border. Output a single square portrait matching the source composition.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-29.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 8061,
+        "sha256": "f0eb4fa4d9da39e9bdd5e683a6d112d64ee7362856823716c7fd410b15afd824"
+      },
+      "generated": {
+        "path": "masters/team-29-brand-v1-generated.png",
+        "originalFilename": "exec-d4074bd4-0ad4-47e3-b022-f95e11a999c3.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1366557,
+        "sha256": "85f8406f750f7da5ac1b47de372f956e9211c4050b435416aa044b140b46927f"
+      },
+      "delivery": {
+        "path": "team-29-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5554,
+        "sha256": "9396d7b596b122d8ee5ac62451739cf55a5ffab2091b2936d614e76aaa923c5a"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-36",
+      "targetBackground": "#E8F87E",
+      "prompt": "Use case: identity-preserve. Edit target: the attached small square illustrated team portrait. Change ONLY the background behind the existing person to one completely flat, opaque lime color #E8F87E. Preserve the face, eyes, hair, facial hair, skin tone, expression, clothing, pose, body proportions, exact subject placement and square framing, and the existing simple illustrated style exactly as supplied. Keep all existing person details and edges; do not redraw, reinterpret, beautify, relight, sharpen, stylize, enlarge the person, or invent detail. The person must remain visually identical. Solid background only: no gradient, shadows, texture, objects, text, or border. Output a single square portrait matching the source composition.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-36.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 7073,
+        "sha256": "b680a8388ed57b2ea3a9e7e9612d8442be52691814934ba95d141bfbb9b6c82e"
+      },
+      "generated": {
+        "path": "masters/team-36-brand-v1-generated.png",
+        "originalFilename": "exec-9220d289-3714-4700-a661-80e4855e6413.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1345246,
+        "sha256": "e8a3ef289883ac34b97db3fbd0678fef77224529233baf8a3555603eb67d21e8"
+      },
+      "delivery": {
+        "path": "team-36-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5776,
+        "sha256": "fdaac200c81b363afe57c01fa2b7832b8e0bcb5143fe6a3e5602469de8e94987"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-42",
+      "targetBackground": "#6DDCEF",
+      "prompt": "Use case: identity-preserve. Edit target: the attached small square illustrated team portrait. Change ONLY the background behind the existing person to one completely flat, opaque cyan color #6DDCEF. Preserve the face, eyes, hair, facial hair, skin tone, expression, clothing, pose, body proportions, exact subject placement and square framing, and the existing simple illustrated style exactly as supplied. Keep all existing person details and edges; do not redraw, reinterpret, beautify, relight, sharpen, stylize, enlarge the person, or invent detail. The person must remain visually identical. Solid background only: no gradient, shadows, texture, objects, text, or border. Output a single square portrait matching the source composition.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-42.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 7251,
+        "sha256": "4237a745cb89d32d94a6d5c76d252c6702d94ce22a48f1c1306a0857c6c33b1f"
+      },
+      "generated": {
+        "path": "masters/team-42-brand-v1-generated.png",
+        "originalFilename": "exec-d8c4d91f-9a5c-4ba1-a19f-349044acb719.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1333270,
+        "sha256": "dedbe4440686eb3e5ca672f3764769eab67f6a583c17e3c64ee2075705932ce7"
+      },
+      "delivery": {
+        "path": "team-42-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5006,
+        "sha256": "2ae5229663530e65231b4918de5a6825f7fbc06eb6a3193e370031dd3477e182"
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    },
+    {
+      "id": "team-49",
+      "targetBackground": "#E2E5D4",
+      "prompt": "Use case: identity-preserve. Edit this supplied 72px square team portrait. Change ONLY the background to a very light, almost off-white pale sage, precise target RGB 226, 229, 212 / hex #E2E5D4. It must be much paler than a medium green or olive: think near-white ivory with a faint green tint. Uniform matte flat background, no gradients, texture, shadows or added objects. Preserve the source person's face, dark shoulder-length hair, moustache and goatee, skin, expression, dark olive clothing, exact framing and pose, and existing low-resolution illustrated appearance. Do not reinterpret or improve any person detail. Keep every person feature in the same position and the same color. Single square image.",
+      "tool": "Codex built-in image-generation/editing tool",
+      "source": {
+        "path": "masters/team-49.png",
+        "width": 72,
+        "height": 72,
+        "bytes": 9072,
+        "sha256": "153372f4fc0a6eb8eab1d7b6f1387885938ca68dba83192e345257ac8aaf5bcb"
+      },
+      "generated": {
+        "path": "masters/team-49-brand-v1-generated.png",
+        "originalFilename": "exec-1b7b7b30-7df0-4b8a-890e-15bcc8ea258d.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1391716,
+        "sha256": "e2ce6672bba243d6ca3491ae2f8a4a906292363464aa0be461c4fbedf32acf12"
+      },
+      "delivery": {
+        "path": "team-49-brand-v1.webp",
+        "width": 72,
+        "height": 72,
+        "bytes": 5846,
+        "sha256": "ab1b69da82000f51bce9376e3dd2ab5be162c7ac55d5d09fe5a730f9417e84c0"
+      },
+      "rejectedAttempt": {
+        "originalFilename": "exec-393b4e6f-77ad-46b9-ac3d-363e16acec19.png",
+        "prompt": "Use case: identity-preserve. Edit target: the attached small square illustrated team portrait. Change ONLY the background behind the existing person to one completely flat, opaque sage color #E2E5D4. Preserve the face, eyes, hair, facial hair, skin tone, expression, clothing, pose, body proportions, exact subject placement and square framing, and the existing simple illustrated style exactly as supplied. Keep all existing person details and edges; do not redraw, reinterpret, beautify, relight, sharpen, stylize, enlarge the person, or invent detail. The person must remain visually identical. Solid background only: no gradient, shadows, texture, objects, text, or border. Output a single square portrait matching the source composition.",
+        "reason": "Background significantly darker than requested pale sage."
+      },
+      "validation": {
+        "sourceMasterUnchanged": true,
+        "generatedMasterUnchanged": true,
+        "losslessPixelsEqualResizedGenerated": true,
+        "visualReview": "Compared against original at72px: recognizable portrait, clothing and framing remain consistent; generated edits and background colors are not pixel-identical to the source or requested hex."
+      }
+    }
+  ]
+}

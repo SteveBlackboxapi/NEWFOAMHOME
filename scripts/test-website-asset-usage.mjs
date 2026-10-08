@@ -47,6 +47,19 @@ const { websitePhotoTalent } = loadApplication(
   "src/data/websitePhotoTalent.ts",
 );
 const { discoverySearches } = loadApplication("src/data/discoveryContent.ts");
+const { aboutTeamPortraits } = loadApplication("src/data/aboutTeam.ts");
+const { aboutEditorialPhotos } = loadApplication("src/data/aboutEditorialPhotos.ts");
+const { aboutSocialPosts } = loadApplication("src/data/aboutSocialPosts.ts");
+const suppliedPhotoPlacements = new Map([
+  ...aboutTeamPortraits.map(({ src }) => [src, [{ route: "/about", section: "Our team" }]]),
+  ...aboutEditorialPhotos.map(({ src, section }) => [src, [{ route: "/about", section }]]),
+]);
+for (const { image } of aboutSocialPosts) {
+  const placements = suppliedPhotoPlacements.get(image.src) || [];
+  if (!placements.some(({ section }) => section === "Foam on social"))
+    placements.push({ route: "/about", section: "Foam on social" });
+  suppliedPhotoPlacements.set(image.src, placements);
+}
 const { FOUND_RESULTS, FOUND_SELECTED, FOUND_SEEN } = loadApplication(
   "src/data/foundWithFoam.ts",
 );
@@ -62,7 +75,7 @@ const {
 const hasRoute = (src, route) =>
   websiteUsageFor(src)?.uses.some((location) => location.route === route);
 
-test("every public placement points to a real file and a truthful catalogue owner or artwork record", () => {
+test("every public placement points to a real file and a truthful catalogue owner, supplied photograph or artwork record", () => {
   assert.equal(
     new Set(websiteAssetUsage.map((asset) => asset.src)).size,
     websiteAssetUsage.length,
@@ -83,6 +96,12 @@ test("every public placement points to a real file and a truthful catalogue owne
       );
     if (asset.kind === "artwork") {
       assert.equal(asset.talentId, undefined, asset.src);
+    } else if (asset.kind === "reference-photo" && asset.talentId === undefined) {
+      const expectedPlacements = suppliedPhotoPlacements.get(asset.src);
+      assert.ok(expectedPlacements, asset.src);
+      assert.equal(asset.provenance, "supplied-reference", asset.src);
+      assert.deepEqual(asset.assetIds, [], asset.src);
+      assert.deepEqual(asset.uses, expectedPlacements, asset.src);
     } else {
       const owner = labTalent.find((talent) => talent.id === asset.talentId);
       assert.ok(owner, asset.src);
@@ -104,8 +123,13 @@ test("every public placement points to a real file and a truthful catalogue owne
 test("website photo records preserve provenance and masters, including retired photography", () => {
   assert.equal(websitePhotoTalent.length, 7);
   assert.equal(usage.websiteReferencePhotos.filter(asset =>
-    asset.talentId !== "angelina-lemon",
+    asset.talentId !== undefined && asset.talentId !== "angelina-lemon",
   ).length, 3);
+  assert.deepEqual(
+    usage.websiteReferencePhotos.filter(asset => asset.talentId === undefined).map(({ src }) => src),
+    [...suppliedPhotoPlacements.keys()],
+    "supplied team, editorial and social photographs retain their order without creating talent profiles",
+  );
   for (const talent of websitePhotoTalent) {
     assert.ok(!stagedTalent.some((original) => original.id === talent.id));
     assert.equal(talent.totalAudience, 0);
