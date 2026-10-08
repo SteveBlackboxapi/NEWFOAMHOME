@@ -22,7 +22,6 @@ const {
   chromeCursorPose,
   chromeEntryScale,
   chromeSendoffAt,
-  chromeBenefitsCollapseAt,
   chromePlanePose,
 } = module.exports;
 
@@ -110,7 +109,6 @@ test("reverse scrolling and direct jumps reproduce identical states and position
     chromeStageAt(p),
     chromeCursorPose(p, targets),
     chromeSendoffAt(p),
-    chromeBenefitsCollapseAt(p),
     chromePlanePose(p, flightGeometry),
   ];
   const forward = points.map(sample);
@@ -173,27 +171,10 @@ test("the recap gets its own reading space without slowing the existing workflow
   assert.ok(throughPasteVh >= 136 && throughPasteVh <= 138);
   assert.ok(pasteToSendVh > 0 && pasteToSendVh < 23);
   assert.ok(throughFlightVh > 0 && throughFlightVh < 57);
-  assert.ok((1.4 - 1.28) * pace >= 18, "full recap has a reading beat before collapse");
-  assert.ok((CHROME_STORY_END - 1.5) * pace >= 6, "final status has a settled hold before release");
+  assert.ok((CHROME_STORY_END - 1.28) * pace >= 40, "full recap has a reading beat before natural release");
+  assert.equal(chromeSendoffAt(CHROME_STORY_END).finaleInteractive, true);
+  assert.equal(chromePlanePose(CHROME_STORY_END, flightGeometry), null);
   assert.equal(chromeStageAt(CHROME_STORY_END), 6);
-});
-
-test("benefits remain expanded through the plane and reading beat, collapse smoothly, then hold the final status", () => {
-  for (const p of [-1, 0, 1.02, 1.28, 1.36, 1.4])
-    assert.equal(chromeBenefitsCollapseAt(p), 0);
-  close(chromeBenefitsCollapseAt(1.45), 0.5);
-  let previous = 0;
-  for (let step = 1; step <= 100; step++) {
-    const value = chromeBenefitsCollapseAt(1.4 + step / 1000);
-    assert.ok(value >= previous && value - previous < 0.016, "no abrupt or backward collapse step");
-    previous = value;
-  }
-  for (const p of [1.5, CHROME_STORY_END, 2]) {
-    assert.equal(chromeBenefitsCollapseAt(p), 1);
-    assert.equal(chromeSendoffAt(p).finaleInteractive, true);
-    assert.equal(chromePlanePose(p, flightGeometry), null);
-  }
-  for (const p of [NaN, Infinity, -Infinity]) assert.equal(chromeBenefitsCollapseAt(p), 0);
 });
 
 test("every increment through Send produces visible travel, a click or a fade", () => {

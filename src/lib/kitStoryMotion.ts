@@ -73,7 +73,6 @@ export function kitStoryTimeline(
     planeIn: smoothProgress(progressBetween(p, 0.858, 0.87)),
     planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
     fly: smoothProgress(progressBetween(p, 0.94, 1)),
-    benefitsCollapse: smoothProgress(progressBetween(p, 0.94, 0.985)),
     sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
     // Clear the outgoing lettering before the next headline arrives. The
     // airplane bridges this short handoff, avoiding two ghosted titles.

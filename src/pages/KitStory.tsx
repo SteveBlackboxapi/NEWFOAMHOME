@@ -16,6 +16,7 @@ import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { StoryBenefits } from "../components/StoryBenefits";
+import { storyBenefitsCollapseAt } from "../lib/storyBenefitsMotion";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
 import { Footer } from "../components/Footer";
@@ -517,6 +518,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
   const sendoffBenefits = useRef<HTMLDivElement | null>(null);
   const paperPlane = useRef<SVGSVGElement | null>(null);
   const [p, setProg] = useState(0);
+  const [benefitsCollapse, setBenefitsCollapse] = useState(0);
   const [slot, setSlot] = useState({
     l: 60,
     t: 22,
@@ -556,6 +558,11 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
       if (!active) return;
       const total = Math.max(1, el.offsetHeight - window.innerHeight);
       setProg(clamp(-el.getBoundingClientRect().top / total));
+      // Keep following the outgoing stage after the pinned story has finished.
+      setBenefitsCollapse(storyBenefitsCollapseAt(
+        stage.current?.getBoundingClientRect().top ?? 0,
+        window.innerHeight,
+      ));
       const bodyRect = body.getBoundingClientRect();
       // Continue the kit below the editor without moving the established
       // audience reading position or the scroll-driven handoff to Share.
@@ -727,7 +734,6 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     planeEmerge,
     sharedIn,
     sharedOut,
-    benefitsCollapse,
     headlineOpacity: headlineOp,
   } = timeline;
   const pan = kitPan(p, targets);
