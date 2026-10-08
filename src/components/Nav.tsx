@@ -3,6 +3,7 @@ import { Link, matchPath, useLocation } from "react-router";
 import { A, img } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
 import { ThemeControl } from "./SiteTheme";
+import { NavSongControl } from "./NavSongControl";
 import "./site-shell.css";
 import "./foam-brand.css";
 import "./marketing-header-layout.css";
@@ -130,6 +131,7 @@ export function Nav({ managersLanding }: { managersLanding?: string } = {}) {
         </nav>
         <div className="site-nav-actions">
           <ThemeControl />
+          <NavSongControl />
           <a href={DEMO_URL} className="site-nav-demo">
             Get a demo <span aria-hidden="true">↗</span>
           </a>

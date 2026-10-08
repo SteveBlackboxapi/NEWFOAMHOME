@@ -1,6 +1,6 @@
 import { OptimizedImage } from "../components/OptimizedImage";
 import { WebsiteBackgroundImage } from "../components/WebsiteImageScope";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import {
   ChromeBrandBrief,
@@ -18,6 +18,7 @@ import {
 } from "../lib/chromeDemo";
 import { A } from "../lib/assets";
 import { usePrefersReducedMotion } from "../hooks/useMediaQuery";
+import { StoryBenefits } from "../components/StoryBenefits";
 import "./chrome-story.css";
 
 /** The same inbox workflow in readable, naturally scrolling frames. */
@@ -30,6 +31,23 @@ export function ChromeStoryMobile({
   const reduced = usePrefersReducedMotion();
   const [sent, setSent] = useState(false);
   const finale = useRef<HTMLDivElement>(null);
+  const [finaleVisible, setFinaleVisible] = useState(false);
+  useEffect(() => {
+    if (reduced) {
+      setFinaleVisible(true);
+      return;
+    }
+    const element = finale.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setFinaleVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.25 });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [reduced]);
   const send = () => {
     setSent(true);
     finale.current?.scrollIntoView({
@@ -66,7 +84,8 @@ export function ChromeStoryMobile({
           </Heading>
           <p>
             Find the right creator, copy their details and paste a complete
-            profile into your reply. All without leaving your inbox.
+            profile into your reply.
+            <br />All without leaving your inbox.
           </p>
         </MobileFade>
       </section>
@@ -84,7 +103,7 @@ export function ChromeStoryMobile({
                   <span>● ● ●</span> mail.google.com
                 </div>
                 <div className="cs-mobile-email-content">
-                  <h4>A creator for our curl-care launch</h4>
+                  <h4>A creator for our Curl Care launch</h4>
                   <ChromeBrandBrief />
                 </div>
               </div>
@@ -137,7 +156,7 @@ export function ChromeStoryMobile({
               ✓ Message sent
             </p>
           )}
-          <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+          <div className="cs-finale-content">
             <div className="cs-store-mark">
               <OptimizedImage section="Foam for Chrome · Send finale"
                 src={`${A}/chrome-store-transparent.webp`}
@@ -146,9 +165,17 @@ export function ChromeStoryMobile({
                 height={131}
               />
             </div>
-            <h2>That’s the Chrome Extension.</h2>
-            <span>Bring your roster to your inbox ↗</span>
-          </a>
+            <div className="cs-finale-copy">
+              <p className="cs-finale-eyebrow">Foam for Chrome</p>
+              <h2>Your roster is in your inbox.</h2>
+              <div className="cs-finale-benefits">
+                <StoryBenefits variant="chrome" active={finaleVisible || reduced} />
+              </div>
+              <a className="cs-store-cta" href={CHROME_STORE} target="_blank" rel="noreferrer">
+                Get Foam for Chrome <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </MobileFade>
       </div>
     </div>

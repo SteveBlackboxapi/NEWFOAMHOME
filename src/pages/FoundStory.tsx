@@ -737,7 +737,7 @@ export function FoundStory({ stableDetail = false }: { stableDetail?: boolean } 
           >
             <span className="fs-eyebrow">FOUND WITH FOAM</span>
             <h2>
-              Type it the way
+              Ask it the way
               <br />
               you’d say it.
             </h2>

@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
-import { KitShareStatus } from "../components/KitShareStatus";
+import { StoryBenefits } from "../components/StoryBenefits";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import {
   KitEditHandle,
@@ -42,7 +42,7 @@ const FG_SB = "font-founders font-semibold";
 /** Staged demo talent (same kit as desktop kit-story). Not a real person. */
 const TALENT = {
   ...websiteProfile(websiteSamantha),
-  kitName: "Samantha-Pikka-haircare'26",
+  kitName: "Samantha Pikka Haircare 26",
 };
 const PLATFORM_LABELS = {
   instagram: "Instagram",
@@ -292,7 +292,7 @@ function MobileShareCard() {
           <span
             className={`${FG_R} text-[12px] truncate flex-1 text-[#101828]`}
           >
-            https://foam.io/m/samantha-pikka
+            https://foam.io/m/StaPiaHe26
           </span>
           <span
             className={`${FG_M} text-[12px] rounded-full px-3 py-1 bg-[#185abc] text-white`}
@@ -308,19 +308,19 @@ function MobileShareCard() {
 function MobileRoles() {
   const CARDS = [
     {
-      kicker: "I manage talent",
+      kicker: "Talent managers",
       headline: "Pitch your roster with numbers a brand can believe.",
       cta: "For managers",
       to: "/managers",
     },
     {
-      kicker: "I'm a creator",
+      kicker: "Creators",
       headline: "Connect your accounts. Help your manager make the case.",
       cta: "For creators",
       to: "/creators",
     },
     {
-      kicker: "I'm a brand or agency",
+      kicker: "Brands & agencies",
       headline: "Someone sent you a Foam link. Here's what's behind it.",
       cta: "For brands",
       to: "/brands",
@@ -347,14 +347,10 @@ function MobileRoles() {
               to={card.to}
               className="ks-role-card block rounded-[20px] border border-[#e8e8e8] bg-white p-6 min-h-[140px] flex flex-col active:border-[#c6f31e] active:bg-[#c6f31e]"
             >
-              <p
-                className={`${FG_M} text-[11px] uppercase tracking-[0.8px] text-[#6a7282] mb-3`}
-              >
+              <h3 className={`ks-role-audience ks-role-headline ${FG_SB}`}>
                 {card.kicker}
-              </p>
-              <p
-                className={`ks-role-headline ${FG_SB} text-[20px] leading-7 tracking-[-0.4px] text-[#101828] flex-1`}
-              >
+              </h3>
+              <p className={`ks-role-description ${FG_R} flex-1`}>
                 {card.headline}
               </p>
               <p
@@ -375,10 +371,10 @@ function MobileNetwork() {
   const STATS = [
     { val: "1,300+", label: "talent managers active every month" },
     { val: "800+", label: "creator agencies active every month" },
-    { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
+    { val: "~6,000", label: "media kits, lists, rosters and embeds shared a week" },
     {
-      val: "440,000+",
-      label: "brand and agency opens of kits, lists and rosters",
+      val: "500,000+",
+      label: "brand and agency opens of media kits, lists and rosters in last year alone",
     },
   ];
   return (
@@ -423,6 +419,7 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
   useKitAssetWarmup();
   const reducedMotion = usePrefersReducedMotion();
   const platformReveal = useScrollRevealProgress(reducedMotion);
+  const sendoffReveal = useScrollRevealProgress(reducedMotion);
   const [motionPreferenceReady, setMotionPreferenceReady] = useState(false);
   useEffect(() => {
     setMotionPreferenceReady(true);
@@ -468,9 +465,9 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
           <p
             className={`${FG_R} mt-5 max-w-[34em] text-[16px] leading-7 text-white/85`}
           >
-            Give every creator a stronger introduction. Bring the roster,
+            Give every creator a stronger introduction.
             <br />
-            the numbers and the pitch together in Foam.
+            Bring the roster, the numbers and the pitch together in Foam.
           </p>
           <div className="mt-8 flex items-center gap-5 flex-wrap">
             <a
@@ -605,11 +602,9 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
           >
             Media Kit
           </p>
-          <p
-            className={`${FG_R} mt-3 text-[15px] text-[#6a7282] max-w-[28em] mx-auto`}
-          >
-            <KitShareStatus />
-          </p>
+          <div ref={sendoffReveal.ref} className="ks-mobile-sendoff-benefits">
+            <StoryBenefits variant="kit" active={sendoffReveal.progress > 0.1} />
+          </div>
           <div className="ks-mobile-share-kit mt-6 mx-auto w-full max-w-[360px] rounded-[18px] overflow-hidden border border-[#e2e4e8] bg-white text-left shadow-[0_18px_50px_rgba(16,24,40,0.14)]">
             <div className="px-4 pt-4 pb-3 flex items-center gap-3">
               <div className="ks-mobile-kit-avatar size-12 rounded-[10px] overflow-hidden bg-[#eeefe8] shrink-0">
@@ -639,7 +634,7 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
             </div>
             <div className="ks-mobile-share-strip px-4 py-3 flex items-center justify-between bg-[#000] text-[#dfedfc]">
               <span className={`${FG_R} text-[12px] truncate`}>
-                foam.io/m/samantha-pikka
+                foam.io/m/StaPiaHe26
               </span>
               <span
                 className={`${FG_M} text-[11px] rounded-full bg-white/15 px-2.5 py-1`}

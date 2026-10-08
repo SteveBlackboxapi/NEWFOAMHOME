@@ -61,6 +61,40 @@
   margin-bottom: clamp(16px, 3vh, 26px);
 }
 
+.ks-sendoff-summary { width: min(100%, 420px); }
+.ks-sendoff-summary .ks-sendoff-logo {
+  width: clamp(112px, 18vh, 156px);
+  margin-bottom: 14px;
+}
+.ks-sendoff-summary .ks-sendoff-title {
+  font-size: clamp(44px, 8vh, 68px);
+  letter-spacing: -.035em;
+}
+.ks-sendoff-benefits { width: min(100%, 360px); margin-top: 26px; }
+.ks-mobile-sendoff-benefits { width: min(100%, 360px); margin: 24px auto 0; }
+
+.ks-role-card .ks-role-audience {
+  margin: 0 0 20px;
+  font-size: clamp(30px, 2.9vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  color: #101828;
+}
+.ks-role-card .ks-role-description {
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: #53606e;
+}
+html[data-theme="dark"] .ks-role-card.is-active .ks-role-audience { color: #1c2128; }
+@media (max-width: 767px) {
+  .ks-role-card .ks-role-audience { font-size: 30px; margin-bottom: 12px; }
+  .ks-role-card .ks-role-description { font-size: 17px; }
+}
+@media (max-height: 700px) {
+  .ks-sendoff-benefits { margin-top: 18px; }
+}
+
 .ks-rail {
   width: 54px;
   flex-shrink: 0;

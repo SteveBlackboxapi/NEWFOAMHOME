@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router";
 import { A } from "../lib/assets";
 import { DEMO_URL } from "../lib/siteLinks";
 import { ThemeControl } from "./SiteTheme";
+import { NavSongControl } from "./NavSongControl";
 import "./story-nav.css";
 
 const LINKS = [
@@ -80,6 +81,7 @@ export function StoryNav() {
         </nav>
         <div className="story-nav-actions">
           <ThemeControl />
+          <NavSongControl />
           <a className="story-nav-demo" href={DEMO_URL}>
             Get a demo <span aria-hidden="true">↗</span>
           </a>

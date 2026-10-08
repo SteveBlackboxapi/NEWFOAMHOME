@@ -82,8 +82,8 @@ export function ChromeBrandBrief({
       <div className="cs-email-copy">
         <p>Hi Alex,</p>
         <p>
-          We’re launching our everyday curl-care range and looking for an
-          LA-based beauty creator with natural curls and a warm, relatable
+          We’re launching our everyday Curl Care range and looking for a
+          beauty creator in LA with natural curls and a warm, relatable
           style.
         </p>
         <p>
@@ -187,7 +187,7 @@ export function ChromeReply({
       <div className="cs-reply-body">
         <p>Hi Rose,</p>
         <p>
-          Samantha Pikka feels like a great fit. She makes everyday curl-care
+          Samantha Pikka feels like a great fit. She makes everyday Curl Care
           routines feel simple and approachable. Here’s her profile and media
           kit:
         </p>
@@ -455,7 +455,7 @@ export function ChromeDemoWindow({
           <i />
         </span>
         <span className="cs-browser-tab">
-          M&nbsp; Curl-care launch — Inbox <span>×</span>
+          M&nbsp; Curl Care launch — Inbox <span>×</span>
         </span>
         <span className="cs-chrome-profile">A</span>
       </div>
@@ -510,7 +510,7 @@ export function ChromeDemoWindow({
                 <span>1 of 24 &nbsp; ‹ &nbsp; ›</span>
               </div>
               <h3>
-                A creator for our curl-care launch <span>Inbox</span>
+                A creator for our Curl Care launch <span>Inbox</span>
               </h3>
               <div className="cs-thread-pages">
                 <div

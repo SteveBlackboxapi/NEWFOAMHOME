@@ -36,6 +36,7 @@ import {
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
+import { StoryBenefits } from "../components/StoryBenefits";
 import "./chrome-story.css";
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -155,7 +156,8 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         </h1>
         <p>
           Find the right creator, copy their details and paste a complete
-          profile into your reply. All without leaving your inbox.
+          profile into your reply.
+          <br />All without leaving your inbox.
         </p>
       </section>
       <section
@@ -200,7 +202,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                 pointerEvents: sendoff.finaleInteractive ? "auto" : "none",
               }}
             >
-              <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+              <div className="cs-finale-content">
                 <div className="cs-store-mark">
                   <OptimizedImage section="Foam for Chrome · Send finale"
                     src={`${A}/chrome-store-transparent.webp`}
@@ -209,12 +211,17 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                     height={157}
                   />
                 </div>
-                <h2>That’s the Chrome Extension.</h2>
-                <span>
-                  Bring your roster to your inbox{" "}
-                  <span aria-hidden="true">↗</span>
-                </span>
-              </a>
+                <div className="cs-finale-copy">
+                  <p className="cs-finale-eyebrow">Foam for Chrome</p>
+                  <h2>Your roster is in your inbox.</h2>
+                  <div className="cs-finale-benefits">
+                    <StoryBenefits variant="chrome" active={sendoff.finaleInteractive} />
+                  </div>
+                  <a className="cs-store-cta" href={CHROME_STORE} target="_blank" rel="noreferrer">
+                    Get Foam for Chrome <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
             </section>
 
             {plane && (

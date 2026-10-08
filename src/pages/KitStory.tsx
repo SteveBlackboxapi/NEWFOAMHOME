@@ -14,7 +14,7 @@ import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
-import { KitShareStatus } from "../components/KitShareStatus";
+import { StoryBenefits } from "../components/StoryBenefits";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
 import { Footer } from "../components/Footer";
@@ -77,8 +77,8 @@ const BURGUNDY = "#7a0036";
 /** The same approved fictional profile used throughout the website examples. */
 const STAGE = {
   ...websiteProfile(websiteSamantha),
-  kitName: "Samantha-Pikka-haircare'26",
-  shareUrl: "https://foam.io/m/samantha-pikka",
+  kitName: "Samantha Pikka Haircare 26",
+  shareUrl: "https://foam.io/m/StaPiaHe26",
 };
 
 // Count timing follows the first actual figure; section headers can enter much earlier.
@@ -348,19 +348,19 @@ function AfterShare() {
   const sheet = useWebsiteImage(`${A}/agency-logos.webp`, "In good company · Agency ticker");
   const CARDS = [
     {
-      kicker: "I manage talent",
+      kicker: "Talent managers",
       headline: "Pitch your roster with numbers a brand can believe.",
       cta: "For managers",
       to: "/managers",
     },
     {
-      kicker: "I'm a creator",
+      kicker: "Creators",
       headline: "Connect your accounts. Help your manager make the case.",
       cta: "For creators",
       to: "/creators",
     },
     {
-      kicker: "I'm a brand or agency",
+      kicker: "Brands & agencies",
       headline: "Someone sent you a Foam link. Here's what's behind it.",
       cta: "For brands",
       to: "/brands",
@@ -369,17 +369,17 @@ function AfterShare() {
   const STATS = [
     { val: "1,300+", label: "talent managers active every month" },
     { val: "800+", label: "creator agencies active every month" },
-    { val: "~6,000", label: "kits, lists, rosters and embeds shared a week" },
+    { val: "~6,000", label: "media kits, lists, rosters and embeds shared a week" },
     {
-      val: "440,000+",
-      label: "brand and agency opens of kits, lists and rosters",
+      val: "500,000+",
+      label: "brand and agency opens of media kits, lists and rosters in last year alone",
     },
   ];
   return (
     <div className="bg-white" id="after-share">
       <section className="ks-agency-ticker pt-16 pb-6">
         <p className={`${FG_R} text-sm text-[#6a7282] text-center mb-8`}>
-          In good company. Across 800+ creator agencies.
+          You're in good company. Trusted by 800+ creator agencies.
         </p>
         <div
           className="overflow-hidden"
@@ -468,14 +468,10 @@ function AfterShare() {
                         "transform 280ms ease, background-color 220ms ease, border-color 220ms ease",
                     }}
                   >
-                    <p
-                      className={`${FG_M} text-[11px] uppercase tracking-[0.8px] mb-5 ${on ? "text-[#3d4a08]" : "text-[#6a7282]"}`}
-                    >
+                    <h3 className={`ks-role-audience ks-role-headline ${FG_SB}`}>
                       {card.kicker}
-                    </p>
-                    <p
-                      className={`ks-role-headline ${FG_SB} text-[22px] md:text-[26px] leading-8 tracking-[-0.5px] text-[#101828] flex-1`}
-                    >
+                    </h3>
+                    <p className={`ks-role-description ${FG_R} flex-1`}>
                       {card.headline}
                     </p>
                     <p
@@ -816,9 +812,9 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
           <p
             className={`${FG_R} mt-6 max-w-[34em] text-[17px] md:text-[19px] leading-7 text-white/85`}
           >
-            Give every creator a stronger introduction. Bring the roster,
+            Give every creator a stronger introduction.
             <br />
-            the numbers and the pitch together in Foam.
+            Bring the roster, the numbers and the pitch together in Foam.
           </p>
           <div className="mt-10 flex items-center gap-6 flex-wrap pointer-events-auto">
             <a
@@ -1158,7 +1154,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
               transform: `translateY(${(1 - sharedIn) * 14}px)`,
             }}
           >
-            <div className="relative flex flex-col items-center">
+            <div className="ks-sendoff-summary relative flex flex-col items-center">
               <div
                 ref={sendoffLogo}
                 className="ks-sendoff-logo"
@@ -1171,9 +1167,9 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
               >
                 Media Kit
               </p>
-              <p className={`${FG_R} mt-4 text-[18px] text-[#6a7282]`}>
-                <KitShareStatus />
-              </p>
+              <div className="ks-sendoff-benefits">
+                <StoryBenefits variant="kit" active={planeIn > 0.1} />
+              </div>
             </div>
           </div>
 

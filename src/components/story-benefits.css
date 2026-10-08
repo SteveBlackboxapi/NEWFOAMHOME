@@ -1,0 +1,77 @@
+.story-benefits {
+  width: min(100%, 400px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  color: var(--story-benefits-ink, var(--theme-ink, #1c2128));
+  font-family: var(--font-sans, "Founders Grotesk", system-ui, sans-serif);
+  visibility: hidden;
+}
+
+.story-benefits.is-active { visibility: visible; }
+
+.story-benefits-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 38px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--story-benefits-line, var(--theme-line, #d8dcdf));
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.story-benefits-row:last-child { border-bottom: 0; }
+
+.story-benefits-tick {
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--story-benefits-lime, #e8f97e);
+  color: #26332c;
+}
+
+.story-benefits-tick svg { width: 18px; height: 18px; }
+.story-benefits-tick path {
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.story-benefits-label { min-width: 0; }
+.story-benefits-sendoff { font-weight: 600; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .story-benefits.is-active .story-benefits-row {
+    animation: story-benefit-arrive 420ms cubic-bezier(.22, .65, .3, 1) both;
+    animation-delay: calc(var(--benefit-index) * 90ms);
+  }
+  .story-benefits.is-active .story-benefits-tick path {
+    animation: story-benefit-tick 320ms ease-out both;
+    animation-delay: calc(100ms + var(--benefit-index) * 90ms);
+  }
+}
+
+@keyframes story-benefit-arrive {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes story-benefit-tick {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@media (max-width: 600px), (max-height: 700px) {
+  .story-benefits-row { min-height: 32px; padding: 5px 0; gap: 10px; font-size: 16px; }
+  .story-benefits-tick { flex-basis: 20px; width: 20px; height: 20px; }
+  .story-benefits-tick svg { width: 17px; height: 17px; }
+}
