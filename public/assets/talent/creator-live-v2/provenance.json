@@ -1,0 +1,71 @@
+{
+  "provider": "Google Gemini API",
+  "model": "gemini-3-pro-image",
+  "model_name": "Nano Banana Pro",
+  "purpose": "User-selected fictional creator identities; distinct from Tessa Quinn and Luca Marin.",
+  "profiles": [
+    {
+      "id": "maya-ellis",
+      "source": "fitness-a-clean.jpg",
+      "master": "../uploads/maya-ellis-live-v1-original.jpg",
+      "delivery": "../uploads/maya-ellis-live-v1.webp",
+      "crop": {
+        "left": 144,
+        "top": 0,
+        "width": 1188,
+        "height": 2112
+      },
+      "size": [
+        720,
+        1280
+      ]
+    },
+    {
+      "id": "theo-bennett",
+      "source": "beach-a-v2.jpg",
+      "master": "../uploads/theo-bennett-live-v1-original.jpg",
+      "delivery": "../uploads/theo-bennett-live-v1.webp",
+      "crop": "Centered 9:16 fit",
+      "size": [
+        720,
+        1280
+      ]
+    }
+  ],
+  "options": [
+    {
+      "label": "Fitness A",
+      "file": "fitness-a-clean.jpg",
+      "dimensions": [
+        1536,
+        2752
+      ],
+      "prompt_sequence": [
+        {
+          "id": "fitness-a",
+          "reference": "tessa-live.webp",
+          "prompt": "Use case: photorealistic-natural. Create one vertical 9:16 candid smartphone photograph for a fictional creator's outdoor post-workout livestream. The reference supplies scene, pose, framing and photographic style, NOT facial identity. Keep the sunny lawn, hedge and pale low wall, seated athletic adult woman in her late twenties, pink long-sleeve workout outfit, lavender over-ear headphones, relaxed talking gesture and arm-length selfie perspective. Give her a clearly different, coherent fictional face: softly squared jaw, fuller cheeks, wide-set warm brown eyes, straighter lower eyebrows, a shorter nose with a gently rounded tip, a broad asymmetric smile with a small cheek dimple, realistic scattered freckles. Dark chestnut hair with sun-lightened ends in a messy high ponytail. Natural skin pores, slight post-workout flush, flyaway hairs and authentic phone-camera detail. Friendly mid-conversation expression, not a polished stock-photo pose. Preserve enough headroom and clear lower portion for separately rendered website live-chat UI. Only the photograph: no text, graphics, logos, watermark or interface. One person, one image. Do not reproduce the reference face or a celebrity likeness; avoid beauty filtering, excessive symmetry, airbrushed skin and distorted hands."
+        },
+        {
+          "id": "fitness-a-clean",
+          "reference": "fitness-a.jpg",
+          "prompt": "Precise photograph cleanup. Remove ONLY the graphics at the bottom: the Send message wording, rounded input outline, paper-plane icon, heart icon and the semi-transparent dark gradient behind them. Reconstruct normal photographic pixels where they were, matching the pink leggings and chair underneath. Preserve this exact woman's face, identity, expression, hair, headphones, clothing, pose, hand, skin texture, entire scene, framing and original dimensions. The face must remain unchanged. Return a completely clean photograph, edge to edge, with no lettering, symbols, graphics or interface anywhere. Do not add any new marks."
+        }
+      ]
+    },
+    {
+      "label": "Beach A",
+      "file": "beach-a-v2.jpg",
+      "dimensions": [
+        1536,
+        2752
+      ],
+      "prompt_sequence": [
+        {
+          "id": "beach-a-v2",
+          "prompt": "A single photorealistic vertical 9:16 unretouched phone selfie photograph. An entirely fictional athletic adult man, age 29, sits shirtless at a beachside cafe underneath a large lavender-purple sun umbrella, chatting warmly with the camera. His distinctive face is broad and compact with full cheeks, a blunt square jaw, a broad rounded nose, deep-set dark brown eyes spaced slightly wide apart, heavy horizontal eyebrows, short light scruffy beard, a small chin dimple and an asymmetric closed-lip half-smile. Short messy platinum-blond hair with visible dark roots; dark sunglasses pushed up on his head. Sun-tanned skin with pores and a few freckles, natural small imperfections. A white wireless earbud, thin silver chain, sparse fine-line botanical tattoos across one shoulder and upper chest, and a takeaway iced coffee held at lower left. Eye-level arm-length camera viewpoint, not a studio shot; head, shoulders and upper torso in frame, face in upper-middle with generous purple umbrella above. Background palms, pale stone beach promenade, blue sky and ocean visible over one shoulder; believable holiday cafe activity softly behind him. Bright midday sunlight softened under umbrella, normal smartphone dynamic range and minor lens distortion. He should look like a real approachable young man, not a model or celebrity. Photograph only, from edge to edge. No typography, letters, interface, badges, counters, icons, logos, watermarks or collage. Anatomically natural hands and authentic facial asymmetry."
+        }
+      ]
+    }
+  ]
+}
