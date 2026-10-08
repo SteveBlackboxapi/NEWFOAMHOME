@@ -30,6 +30,7 @@ const {
   kitShareCursor,
   KIT_COUNT_SCROLL_VH,
   kitMobileCountProgress,
+  kitSendoffLogoAnchor,
   kitPlanePose,
   kitFeaturedOpacity,
 } = module.exports;
@@ -521,6 +522,25 @@ test("logo and title stay fully readable while the plane emerges, before its fli
   assert.equal(kitStoryTimeline(1).sharedOut, 1);
 });
 
+test("benefits stay expanded until flight, then settle before the end and restore on reverse or direct jumps", () => {
+  for (const p of samples(0, 0.94, 94))
+    assert.equal(kitStoryTimeline(p).benefitsCollapse, 0, `full recap retained at ${p}`);
+  let previous = 0;
+  for (const p of samples(0.94, 0.985, 100)) {
+    const state = kitStoryTimeline(p);
+    assert.ok(state.benefitsCollapse >= previous, "collapse advances continuously with scroll");
+    assert.ok(state.benefitsCollapse - previous < 0.016, "no abrupt collapse step");
+    previous = state.benefitsCollapse;
+  }
+  assert.equal(kitStoryTimeline(0.985).benefitsCollapse, 1);
+  assert.ok(kitStoryTimeline(0.985).fly < 1, "final status settles before flight ends");
+  for (const p of samples(0.985, 1)) assert.equal(kitStoryTimeline(p).benefitsCollapse, 1);
+  const checkpoints = [0.86, 0.94, 0.95, 0.9625, 0.975, 0.985, 1];
+  const recorded = new Map(checkpoints.map(p => [p, kitStoryTimeline(p).benefitsCollapse]));
+  for (const p of [1, 0.975, 0.9625, 0.95, 0.94, 0.985, 0.86, 1])
+    assert.equal(kitStoryTimeline(p).benefitsCollapse, recorded.get(p), "scroll history cannot affect recap visibility");
+});
+
 test("the old lockup clears before Chrome enters while the plane bridges the handoff", () => {
   for (const p of samples(0, 0.965, 193)) {
     assert.equal(
@@ -740,6 +760,35 @@ test("plane begins within the actual logo and emerges upward away from the title
       "jumping recreates launch",
     );
   }
+});
+
+test("recentring the summary cannot change the plane's expanded-layout flight, including resize and direct jumps", () => {
+  for (const [width, height, offsetX, offsetY, logoSize, rowHeight] of [
+    [1024, 600, 0, 0, 168, 32],
+    [1440, 900, 37, -20, 220, 38],
+    [1920, 1080, 0, 80, 220, 38],
+  ]) {
+    const stage = { left: offsetX, top: offsetY, width, height };
+    const expanded = { left: offsetX + width / 2 - logoSize / 2,
+      top: offsetY + height / 2 - 250, width: logoSize, height: logoSize };
+    for (const p of [1, 0.985, 0.96, 0.94, 0.975, 0.86, 1]) {
+      const state = kitStoryTimeline(p);
+      const removedHeight = 5 * rowHeight * state.benefitsCollapse;
+      const recentred = { ...expanded, top: expanded.top + removedHeight / 2 };
+      const anchor = kitSendoffLogoAnchor(recentred, removedHeight);
+      const expected = kitPlanePose(stage, expanded, state.planeEmerge, state.fly);
+      const actual = kitPlanePose(stage, anchor, state.planeEmerge, state.fly);
+      for (const key of Object.keys(expected)) nearly(actual[key], expected[key], `${key} at ${width}×${height}, p=${p}`);
+      assert.equal(recentred.top, expanded.top + removedHeight / 2, "measurement is not mutated");
+    }
+  }
+});
+
+test("sendoff anchor supports DOMRect getters and ignores invalid or negative removed heights", () => {
+  const measured = Object.create({ left: 300, top: 210, width: 220, height: 220 });
+  assert.deepEqual(kitSendoffLogoAnchor(measured, 190), { left: 300, top: 115, width: 220, height: 220 });
+  for (const removed of [0, -1, NaN, Infinity, -Infinity])
+    assert.deepEqual(kitSendoffLogoAnchor(measured, removed), { left: 300, top: 210, width: 220, height: 220 });
 });
 
 test("mobile numbers finish in a fraction of the original natural-scroll span and rewind", () => {

@@ -73,6 +73,7 @@ export function kitStoryTimeline(
     planeIn: smoothProgress(progressBetween(p, 0.858, 0.87)),
     planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
     fly: smoothProgress(progressBetween(p, 0.94, 1)),
+    benefitsCollapse: smoothProgress(progressBetween(p, 0.94, 0.985)),
     sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
     // Clear the outgoing lettering before the next headline arrives. The
     // airplane bridges this short handoff, avoiding two ghosted titles.
@@ -194,6 +195,17 @@ export function kitShareCursor(
 /** Complete natural-scroll counts in roughly a quarter of a viewport. */
 export const kitMobileCountProgress = (progress: number) =>
   clampProgress(clampProgress(progress) * 2.6);
+
+/** Undo the centred summary's downward shift as recap rows disappear. */
+export function kitSendoffLogoAnchor(logo: KitRect, removedHeight: number): KitRect {
+  const removed = Number.isFinite(removedHeight) ? Math.max(0, removedHeight) : 0;
+  return {
+    left: logo.left,
+    top: logo.top - removed / 2,
+    width: logo.width,
+    height: logo.height,
+  };
+}
 
 /** Start inside the rendered logo, emerge behind its silhouette, then fly away. */
 export function kitPlanePose(

@@ -62,7 +62,11 @@
 }
 
 .ks-sendoff-summary { width: min(100%, 560px); }
-.ks-sendoff-benefits { width: min(100%, 360px); margin-top: 26px; }
+.ks-sendoff-benefits {
+  --kit-recap-gap: 26px;
+  width: min(100%, 360px);
+  margin-top: calc(var(--kit-recap-gap) * (1 - var(--kit-recap-collapse, 0)) + 16px * var(--kit-recap-collapse, 0));
+}
 .ks-mobile-sendoff-benefits { width: min(100%, 360px); margin: 24px auto 0; }
 
 .ks-role-card .ks-role-audience {
@@ -84,7 +88,7 @@ html[data-theme="dark"] .ks-role-card.is-active .ks-role-audience { color: #1c21
   .ks-role-card .ks-role-description { font-size: 17px; }
 }
 @media (max-height: 700px) {
-  .ks-sendoff-benefits { margin-top: 18px; }
+  .ks-sendoff-benefits { --kit-recap-gap: 18px; }
 }
 
 .ks-rail {

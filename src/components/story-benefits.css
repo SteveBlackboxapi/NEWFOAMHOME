@@ -1,4 +1,6 @@
 .story-benefits {
+  --benefit-row-height: 38px;
+  --benefit-row-padding: 7px;
   width: min(100%, 400px);
   margin: 0;
   padding: 0;
@@ -12,15 +14,29 @@
 .story-benefits.is-active { visibility: visible; }
 
 .story-benefits-row {
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.story-benefits-entry {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 38px;
-  padding: 7px 0;
-  font-size: 18px;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  min-height: var(--benefit-row-height);
+  padding: var(--benefit-row-padding) 0;
+}
+
+/* The outer row follows scroll; the inner entry keeps its independent arrival. */
+.story-benefits--settling .story-benefits-row:not(:last-child) {
+  height: calc(var(--benefit-row-height) * (1 - var(--benefits-collapse)));
+  overflow: hidden;
+  opacity: clamp(0, calc(1 - var(--benefits-collapse) * 2), 1);
+}
+.story-benefits--settling .story-benefits-row:last-child .story-benefits-entry {
+  min-height: calc(var(--benefit-row-height) * (1 - var(--benefits-collapse)) + 1.3em * var(--benefits-collapse));
+  padding-block: calc(var(--benefit-row-padding) * (1 - var(--benefits-collapse)));
 }
 
 .story-benefits-tick {
@@ -40,7 +56,7 @@
 .story-benefits-label { min-width: 0; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .story-benefits.is-active .story-benefits-row {
+  .story-benefits.is-active .story-benefits-entry {
     animation: story-benefit-arrive 420ms cubic-bezier(.22, .65, .3, 1) both;
     animation-delay: calc(var(--benefit-index) * 90ms);
   }
@@ -61,5 +77,6 @@
 }
 
 @media (max-width: 600px), (max-height: 700px) {
-  .story-benefits-row { min-height: 32px; padding: 5px 0; font-size: 16px; }
+  .story-benefits { --benefit-row-height: 32px; --benefit-row-padding: 5px; }
+  .story-benefits-row { font-size: 16px; }
 }

@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type CSSProperties,
   type Ref,
 } from "react";
 import { Link } from "react-router";
@@ -48,6 +49,7 @@ import {
   kitStoryTimeline,
   kitShareCursor,
   kitPlanePose,
+  kitSendoffLogoAnchor,
   kitFeaturedOpacity,
   KIT_STORY_HEIGHT_VH,
   KIT_CHROME_OVERLAP_VH,
@@ -512,6 +514,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
   const copyButton = useRef<HTMLSpanElement | null>(null);
   const shareCursor = useRef<HTMLDivElement | null>(null);
   const sendoffLogo = useRef<HTMLDivElement | null>(null);
+  const sendoffBenefits = useRef<HTMLDivElement | null>(null);
   const paperPlane = useRef<SVGSVGElement | null>(null);
   const [p, setProg] = useState(0);
   const [slot, setSlot] = useState({
@@ -724,6 +727,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     planeEmerge,
     sharedIn,
     sharedOut,
+    benefitsCollapse,
     headlineOpacity: headlineOp,
   } = timeline;
   const pan = kitPan(p, targets);
@@ -769,7 +773,20 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     const stageRect = stage.current?.getBoundingClientRect();
     const logoRect = sendoffLogo.current?.getBoundingClientRect();
     if (!plane || !stageRect || !logoRect) return;
-    const pose = kitPlanePose(stageRect, logoRect, planeEmerge, fly);
+    const recap = sendoffBenefits.current;
+    const list = recap?.querySelector<HTMLElement>(".story-benefits");
+    let removedHeight = 0;
+    if (recap && list) {
+      const listStyle = getComputedStyle(list);
+      const recapStyle = getComputedStyle(recap);
+      const rowHeight = parseFloat(listStyle.getPropertyValue("--benefit-row-height"));
+      const expandedGap = parseFloat(recapStyle.getPropertyValue("--kit-recap-gap"));
+      removedHeight = rowHeight * list.childElementCount - list.getBoundingClientRect().height
+        + expandedGap - parseFloat(recapStyle.marginTop);
+    }
+    // The summary recentres as its list folds away; the plane keeps its launch path.
+    const anchor = kitSendoffLogoAnchor(logoRect, removedHeight);
+    const pose = kitPlanePose(stageRect, anchor, planeEmerge, fly);
     plane.style.left = `${pose.x}px`;
     plane.style.top = `${pose.y}px`;
     plane.style.width = `${pose.width}px`;
@@ -1167,8 +1184,12 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
               >
                 Media Kit
               </p>
-              <div className="ks-sendoff-benefits">
-                <StoryBenefits variant="kit" active={planeIn > 0.1} />
+              <div
+                ref={sendoffBenefits}
+                className="ks-sendoff-benefits"
+                style={{ "--kit-recap-collapse": benefitsCollapse } as CSSProperties}
+              >
+                <StoryBenefits variant="kit" active={planeIn > 0.1} collapse={benefitsCollapse} />
               </div>
             </div>
           </div>
