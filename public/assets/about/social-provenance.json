@@ -1,0 +1,82 @@
+{
+  "collected": "2026-10-08",
+  "processing": "Byte-identical JPEG masters retained. WebP quality75 preserves the source typography and photo edges; maximum edge1280px, EXIF orientation applied, no enlargement, cropping, retouching or generative editing.",
+  "originalBytes": 525541,
+  "displayBytes": 172440,
+  "savingPercent": 67.19,
+  "files": [
+    {
+      "id": "social-01",
+      "src": "assets/about/candid-01.webp",
+      "reuse": true,
+      "source": {
+        "id": "rooftop",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488638222164500480/",
+        "height": 1536,
+        "url": "https://media.licdn.com/dms/image/v2/D5622AQHM9O8KSEVDPg/feedshare-image-high-res/B56Z.z8q.oKIAU-/0/1785430454624?e=1793232000&v=beta&t=7sfWYeK_4rwut3Df5xYmtXPj9AvaFQpEaOlTsaWOZ4o",
+        "width": 1754,
+        "context": "Foam and Streak event at Elsie Rooftop, NYC; attendees may include guests.",
+        "bytes": 223717,
+        "alt": "Four attendees posing together at Foam and Streak’s Elsie Rooftop gathering.",
+        "sha256": "06d3243699a2938302adfbe91e24140da052f69ab3504809634111f5eabfffb7",
+        "downloadedFrom": "LinkedIn image viewer download; bytes unchanged",
+        "accessedDate": "2026-10-08",
+        "reuse": "candid-01",
+        "author": "Foam",
+        "platform": "LinkedIn",
+        "caption": "Last night we brought together some of the best people in the creator economy at Elsie Rooftop in NYC",
+        "captionType": "verbatim post opening; final emoji omitted"
+      }
+    },
+    {
+      "id": "social-02",
+      "src": "assets/about/social-02.webp",
+      "width": 1024,
+      "height": 1280,
+      "bytes": 107208,
+      "section": "Foam on social",
+      "alt": "Foam’s NYFW post showing three event attendees beneath The Sociable Society title.",
+      "master": "masters/social-02-original.jpg",
+      "source": {
+        "id": "nyfw",
+        "author": "Foam",
+        "platform": "LinkedIn",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7505708096963522560/",
+        "caption": "Thank you to our friends at The Sociable Society for having our team to your NYFW event last week!",
+        "captionType": "verbatim post opening",
+        "height": 1600,
+        "url": "https://media.licdn.com/dms/image/v2/D5622AQEG4bS7M_Nryg/feedshare-shrink_1280/B56aCmhvMHGQAM-/0/1789500257951?e=1793232000&v=beta&t=brSEPzyF9qGPELsUP6oOwu0hOAiWn5amOBbTLQRPkCA",
+        "width": 1280,
+        "alt": "Foam’s NYFW post showing three event attendees beneath The Sociable Society title.",
+        "bytes": 328813,
+        "sha256": "50a231003e6b371c25f7f7473ca502e41b3adf02d69c6fa3edc7f79d97f2df85",
+        "accessedDate": "2026-10-08"
+      }
+    },
+    {
+      "id": "social-03",
+      "src": "assets/about/social-03.webp",
+      "width": 1024,
+      "height": 1280,
+      "bytes": 65232,
+      "section": "Foam on social",
+      "alt": "Foam’s post showing two team attendees at Creator Economy Live East in New York.",
+      "master": "masters/social-03-original.jpg",
+      "source": {
+        "id": "creator-economy-live",
+        "author": "Foam",
+        "platform": "LinkedIn",
+        "postUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7488951728831307776/",
+        "caption": "The Foam team spent this week at Creator Economy Live in NYC, and left with plenty to think about.",
+        "captionType": "verbatim post opening",
+        "height": 1600,
+        "url": "https://media.licdn.com/dms/image/v2/D5622AQHsObNyR3ieMA/feedshare-shrink_1280/B56Z.4ZrVvHUAM-/0/1785505167432?e=1793232000&v=beta&t=BDV6ZiSV7ycYhCdyalBIRRCvwL_3zgLikZ3eazJhQwY",
+        "width": 1280,
+        "alt": "Foam’s post showing two team attendees at Creator Economy Live East in New York.",
+        "bytes": 196728,
+        "sha256": "c7b502051e1f8a9a6e89833563e6c8dff3970d68e2d64efeaf1e1f8485cdb1bf",
+        "accessedDate": "2026-10-08"
+      }
+    }
+  ]
+}
