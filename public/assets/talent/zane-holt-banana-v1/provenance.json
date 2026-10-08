@@ -1,0 +1,12 @@
+{
+  "provider": "Google Gemini API",
+  "model": "gemini-3-pro-image",
+  "model_name": "Nano Banana Pro",
+  "selection": "Runner A, selected by the user as the new Zane Holt Nike post",
+  "assetId": "zane-holt:discovery-zane-shoe-chat",
+  "master": "../uploads/zane-holt-shoe-chat-banana-v1-original.jpg",
+  "display": "../uploads/zane-holt-shoe-chat-banana-v1.webp",
+  "canonical_website_path": "../discovery-v1/zane-shoe-chat.webp",
+  "previous_preview": "previous-preview.webp",
+  "prompt": "Use case: photorealistic-natural. One vertical 9:16 candid smartphone selfie photograph of a fictional adult male recreational runner in his late forties, standing at his front door, casually talking about his everyday running shoes. Ordinary navy short-sleeved running T-shirt, one arm extended towards the phone and the other holding one genuinely worn grey mesh Nike running trainer upright beside his chest. The whole shoe and natural gripping fingers are visible: dirty scuffed pale sole, loosely tied grey laces, white swoosh on the side. A believable lived-in pale hallway with a wooden coat rack, navy jacket and grey coat, doorway and daylight behind. Chest-up to waist framing, whole head with some headroom, no studio styling. Honest phone-camera detail, natural uneven skin texture, forehead and eye creases, slight post-run flush, normal asymmetry and subtle skin marks. Casual open-mouth mid-sentence expression, friendly and a bit breathless, looking at the phone. Natural window light with mild exposure variation, realistic unretouched smartphone photograph. This must look like a real ordinary person, not an actor, fashion model or stock-image salesman. No UI, subtitles, lettering, badges, watermarks, borders or social icons; clean photograph edge to edge. No malformed hands, warped shoe, excessively smooth skin or beauty filtering. Distinctive fictional identity A: a slightly broad round face, full cheeks, a sturdy softly squared jaw, warm brown eyes with slightly uneven lids, a short broad nose with a rounded tip, thick gently angled eyebrows, an uneven warm smile, short salt-and-pepper brown hair with a modest receding hairline and slightly untidy crown, three-day dark-and-grey beard. Normal lean recreational-runner build, not hyper-muscular. No likeness to a named actor or public figure."
+}
