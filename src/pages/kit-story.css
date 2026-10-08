@@ -92,6 +92,14 @@ html[data-theme="dark"] .ks-role-card.is-active .ks-role-audience { color: #1c21
 @media (max-width: 767px) {
   .ks-role-card .ks-role-audience { font-size: 30px; margin-bottom: 12px; }
   .ks-role-card .ks-role-description { font-size: 17px; }
+  .ks-mobile-story-shell .ks-role-card .ks-mobile-role-cta {
+    justify-content: flex-end;
+    gap: 8px;
+    color: #7a0036;
+  }
+  html[data-theme="dark"] .ks-mobile-story-shell .ks-role-card .ks-mobile-role-cta {
+    color: #e8f87e;
+  }
 }
 @media (max-height: 700px) {
   .ks-sendoff-summary { --kit-recap-gap: 18px; }

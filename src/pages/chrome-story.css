@@ -336,6 +336,14 @@
   .cs-mobile-story .cs-extension-grid-scroll {
     overflow: clip;
   }
+  /* Identify the creator to pick without changing the roster's dimensions. */
+  .cs-mobile-story .cs-talent-choice[data-chrome-target="talent"] img {
+    outline: 4px solid #e8f87e;
+    outline-offset: -4px;
+  }
+  .cs-mobile-story .cs-talent-choice[data-chrome-target="talent"] strong {
+    font-weight: 600;
+  }
 }
 .cs-mobile-story .cs-extension-profile {
   padding: 22px 20px 15px;
