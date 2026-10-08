@@ -12,6 +12,7 @@ import { websiteMatcha } from "./matchaTalent";
 import { FOUND_RESULTS, FOUND_SEEN, FOUND_SELECTED } from "./foundWithFoam";
 import { overviewFilm } from "./overviewFilm";
 import { footerSong } from "./footerSong";
+import { aboutTeamPortraits } from "./aboutTeam";
 
 export type WebsiteLocation = { route: string; section: string };
 export type WebsiteAssetUsage = {
@@ -284,6 +285,13 @@ const peopleTiles: Record<string, string[]> = {
 peopleTiles["/demo"] = peopleTiles["/creators"];
 Object.entries(peopleTiles).forEach(([route, paths]) =>
   paths.forEach((path) => photo(`talent/${path}`, route, "Opening collage")),
+);
+aboutTeamPortraits.forEach(({ src }, index) =>
+  use(src, "/about", "Our team", {
+    kind: "reference-photo",
+    provenance: "supplied-reference",
+    label: `Foam team portrait ${String(index + 1).padStart(2, "0")}`,
+  }),
 );
 
 // The merged landing page retains its two original placement scopes so saved

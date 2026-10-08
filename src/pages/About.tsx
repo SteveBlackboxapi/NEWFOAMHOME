@@ -3,6 +3,7 @@ import { WebsiteBackgroundImage } from "../components/WebsiteImageScope";
 import { PC, PeopleTiles } from "../components/PeopleColour";
 import { Link } from "react-router";
 import { ClosingCTA } from "../components/ClosingCTA";
+import { aboutTeamPortraits } from "../data/aboutTeam";
 import {
   ActionLink,
   FoamGlyph,
@@ -12,11 +13,6 @@ import {
 } from "../components/Marketing";
 
 import "./editorial-pages.css";
-
-const teamPlaceholderShades = [
-  "#dedede", "#858585", "#c6c6c6", "#a1a1a1",
-  "#eeeeee", "#737373", "#d2d2d2", "#939393",
-];
 
 const relationships = [
   {
@@ -70,14 +66,19 @@ export function About() {
         <div className="mp-container ep-team-heading">
           <h2 id="team-heading" className="mp-heading">The people behind Foam.</h2>
         </div>
-        <div className="ep-team-grid" role="img" aria-label="54 grey placeholders for team photographs">
-          {Array.from({ length: 54 }, (_, index) => (
-            <div
-              key={index}
-              className="ep-team-square"
-              aria-hidden="true"
-              style={{ backgroundColor: teamPlaceholderShades[(index * 5 + Math.floor(index / 9) * 2) % teamPlaceholderShades.length] }}
-            />
+        <div className="ep-team-grid" role="img" aria-label="Foam team portraits">
+          {aboutTeamPortraits.map((portrait) => (
+            <div key={portrait.id} className="ep-team-square" data-team-portrait={portrait.id}>
+              <OptimizedImage
+                section="Our team"
+                src={portrait.src}
+                width={portrait.width}
+                height={portrait.height}
+                alt=""
+                sizes="(max-width: 600px) 33.34vw, (max-width: 1000px) 16.67vw, 11.12vw"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </section>
