@@ -22,6 +22,7 @@ const {
   chromeCursorPose,
   chromeEntryScale,
   chromeSendoffAt,
+  chromeBenefitsCollapseAt,
   chromePlanePose,
 } = module.exports;
 
@@ -104,17 +105,18 @@ test("ring travels continuously through the workflow and from the pasted reply t
 });
 
 test("reverse scrolling and direct jumps reproduce identical states and positions", () => {
-  const points = Array.from({ length: 139 }, (_, index) => index / 100);
+  const points = Array.from({ length: Math.round(CHROME_STORY_END * 100) + 1 }, (_, index) => index / 100);
   const sample = (p) => [
     chromeStageAt(p),
     chromeCursorPose(p, targets),
     chromeSendoffAt(p),
+    chromeBenefitsCollapseAt(p),
     chromePlanePose(p, flightGeometry),
   ];
   const forward = points.map(sample);
   const backward = points.toReversed().map(sample).toReversed();
   assert.deepEqual(backward, forward);
-  for (const index of [76, 94, 101, 108, 124, 138])
+  for (const index of [76, 94, 101, 108, 124, 140, 145, 150, 154])
     assert.deepEqual(sample(index / 100), forward[index]);
 });
 
@@ -158,19 +160,40 @@ test("the cursor reaches Send, clicks, then fades as the message is sent", () =>
   assert.equal(chromeStageAt(1.02), 6);
 });
 
-test("Send and its flight add a compact ending without slowing the original paste workflow", () => {
+test("the recap gets its own reading space without slowing the existing workflow or plane flight", () => {
   const paste = CHROME_STAGE_STOPS[5];
   const send = CHROME_STAGE_STOPS[6];
   const travel = CHROME_STORY_HEIGHT_VH - 100;
   const throughPasteVh = (travel * paste) / CHROME_STORY_END;
   const pasteToSendVh = (travel * (send - paste)) / CHROME_STORY_END;
-  const flightAndFinaleVh = travel * (1 - send / CHROME_STORY_END);
+  const throughFlightVh = travel * (1.36 - send) / CHROME_STORY_END;
+  const oldPace = (315 - 100) / 1.38;
+  const pace = travel / CHROME_STORY_END;
+  assert.ok(Math.abs(pace / oldPace - 1) < 0.001, "existing scroll pace stays within 0.1%");
   assert.ok(throughPasteVh >= 136 && throughPasteVh <= 138);
   assert.ok(pasteToSendVh > 0 && pasteToSendVh < 23);
-  assert.ok(flightAndFinaleVh > 0 && flightAndFinaleVh < 57);
-  assert.equal(CHROME_STORY_END, 1.38);
-  assert.equal(CHROME_STORY_HEIGHT_VH, 315);
+  assert.ok(throughFlightVh > 0 && throughFlightVh < 57);
+  assert.ok((1.4 - 1.28) * pace >= 18, "full recap has a reading beat before collapse");
+  assert.ok((CHROME_STORY_END - 1.5) * pace >= 6, "final status has a settled hold before release");
   assert.equal(chromeStageAt(CHROME_STORY_END), 6);
+});
+
+test("benefits remain expanded through the plane and reading beat, collapse smoothly, then hold the final status", () => {
+  for (const p of [-1, 0, 1.02, 1.28, 1.36, 1.4])
+    assert.equal(chromeBenefitsCollapseAt(p), 0);
+  close(chromeBenefitsCollapseAt(1.45), 0.5);
+  let previous = 0;
+  for (let step = 1; step <= 100; step++) {
+    const value = chromeBenefitsCollapseAt(1.4 + step / 1000);
+    assert.ok(value >= previous && value - previous < 0.016, "no abrupt or backward collapse step");
+    previous = value;
+  }
+  for (const p of [1.5, CHROME_STORY_END, 2]) {
+    assert.equal(chromeBenefitsCollapseAt(p), 1);
+    assert.equal(chromeSendoffAt(p).finaleInteractive, true);
+    assert.equal(chromePlanePose(p, flightGeometry), null);
+  }
+  for (const p of [NaN, Infinity, -Infinity]) assert.equal(chromeBenefitsCollapseAt(p), 0);
 });
 
 test("every increment through Send produces visible travel, a click or a fade", () => {

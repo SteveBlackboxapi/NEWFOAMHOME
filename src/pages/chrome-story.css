@@ -171,9 +171,7 @@
   display: block;
 }
 .cs-finale h2,
-.cs-mobile-finale h2,
-.cs-finale a > span,
-.cs-mobile-finale a > span {
+.cs-mobile-finale h2 {
   position: relative;
 }
 .cs-finale img {
@@ -188,12 +186,6 @@
   letter-spacing: -1.6px;
   margin: 25px 0 18px;
 }
-.cs-finale a > span,
-.cs-mobile-finale a > span {
-  color: #66748a;
-  font-size: 15px;
-}
-
 .cs-finale-content {
   display: flex;
   flex-direction: column;

@@ -32,6 +32,7 @@ import {
   chromeStageAt,
   chromeEntryScale,
   chromeSendoffAt,
+  chromeBenefitsCollapseAt,
   chromePlanePose,
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
@@ -213,13 +214,13 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                     />
                   </div>
                   <h2>That’s the Chrome Extension.</h2>
-                  <span>
-                    Your roster is in your inbox{" "}
-                    <span aria-hidden="true">↗</span>
-                  </span>
                 </a>
                 <div className="cs-finale-benefits">
-                  <StoryBenefits variant="chrome" active={sendoff.finaleInteractive} />
+                  <StoryBenefits
+                    variant="chrome"
+                    active={sendoff.finaleInteractive}
+                    collapse={chromeBenefitsCollapseAt(progress)}
+                  />
                 </div>
               </div>
             </section>

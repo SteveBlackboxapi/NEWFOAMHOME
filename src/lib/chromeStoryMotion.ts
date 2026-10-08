@@ -4,10 +4,10 @@ import type { ChromeStage } from "./chromeDemo";
 export const CHROME_STAGE_STOPS = [
   0, 0.14, 0.32, 0.49, 0.66, 0.88, 1.02,
 ] as const;
-// Preserve the inbox workflow’s pace, then give Send and the flight one compact
-// beat. The Chrome lockup finishes inside the pin, so there is no second finale.
-export const CHROME_STORY_END = 1.38;
-export const CHROME_STORY_HEIGHT_VH = 315;
+// Preserve the inbox workflow’s pace, then leave room to read the benefits and
+// fold them into the final status before the same pinned scene releases.
+export const CHROME_STORY_END = 1.54;
+export const CHROME_STORY_HEIGHT_VH = 340;
 export const SHOW_CHROME_STEP_NAV = false;
 
 export type ChromeTarget =
@@ -97,6 +97,12 @@ export function chromeSendoffAt(progress: number) {
     finaleOffset: (1 - reveal) * 18,
     finaleInteractive: reveal === 1,
   };
+}
+
+/** Reversible recap collapse after the fully revealed finale's reading beat. */
+export function chromeBenefitsCollapseAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.4) / 0.1);
 }
 
 export type ChromeFlightGeometry = {

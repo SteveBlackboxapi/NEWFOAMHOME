@@ -24,13 +24,13 @@ export type StoryBenefitsProps = {
   variant: keyof typeof benefits;
   /** Start the recap once its story scene is visible. Inactive keeps its layout space. */
   active: boolean;
-  /** Scroll progress from the full kit recap to its final confirmation. */
+  /** Scroll progress from the full recap to its final confirmation. */
   collapse?: number;
 };
 
 /** A presentation list, with a single calm reveal and no interactive checkboxes. */
 export function StoryBenefits({ variant, active, collapse }: StoryBenefitsProps) {
-  const settling = variant === "kit" && collapse !== undefined;
+  const settling = collapse !== undefined;
   const collapsed = Math.max(0, Math.min(1, typeof collapse === "number" && Number.isFinite(collapse) ? collapse : 0));
   return (
     <ul
@@ -46,7 +46,7 @@ export function StoryBenefits({ variant, active, collapse }: StoryBenefitsProps)
           key={label}
           style={{ "--benefit-index": index } as CSSProperties}
           aria-hidden={settling && (
-            index === benefits.kit.length - 1 ? collapsed === 0 : collapsed === 1
+            index === benefits[variant].length - 1 ? collapsed === 0 : collapsed === 1
           ) ? true : undefined}
         >
           <span className="story-benefits-entry">
