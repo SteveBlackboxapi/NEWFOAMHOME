@@ -429,7 +429,7 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
       {/* 1. Truth layer */}
       <section className="story-nav-mobile-hero relative min-h-[88vh] bg-black text-white flex flex-col justify-end px-5 pb-12 pt-10 overflow-hidden">
         <StoryNav />
-        <div className="absolute inset-0">
+        <div className="ks-mobile-hero-media absolute inset-0">
           {motionPreferenceReady && !reducedMotion ? (
             <video
               className="size-full object-cover object-[center_20%] opacity-55"
@@ -447,9 +447,9 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
               alt=""
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
+          <div className="ks-mobile-hero-shade absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
         </div>
-        <MobileFade className="relative z-10">
+        <MobileFade className="ks-mobile-hero-copy relative z-10">
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-5`}
           >
