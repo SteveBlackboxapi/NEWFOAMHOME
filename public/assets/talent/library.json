@@ -4930,12 +4930,12 @@
           "engagements": 7200
         },
         {
-          "provenance": "uploaded",
+          "provenance": "ai-generated",
           "id": "discovery-zane-shoe-chat",
           "type": "still",
-          "thumb": "assets/talent/uploads/13f4f388-45a6-4af2-bfa4-7f396b93b977.webp",
+          "thumb": "assets/talent/uploads/zane-holt-shoe-chat-banana-v1.webp",
           "aspectRatio": "9/16",
-          "original": "assets/talent/discovery-v1/masters/zane-shoe-chat.png",
+          "original": "assets/talent/uploads/zane-holt-shoe-chat-banana-v1-original.jpg",
           "caption": "the pair I keep by the door",
           "captionSettings": {
             "y": 70,
@@ -4944,7 +4944,11 @@
             "strokeWidth": 1
           },
           "platform": "tiktok",
-          "strongKind": "photo"
+          "strongKind": "photo",
+          "generation": {
+            "version": "Nike shoe chat · Nano Banana Pro v1",
+            "approach": "User-approved Runner A selected as the replacement image for Zane Holt’s existing Nike shoe-chat demo post. Generated with Google Gemini API gemini-3-pro-image (Nano Banana Pro). This is a fictional AI-generated still; the untouched master and both earlier post images are retained."
+          }
         },
         {
           "provenance": "ai-generated",
@@ -4987,6 +4991,14 @@
         {
           "label": "back from the morning run · earlier original",
           "src": "assets/talent/discovery-v1/masters/nike-after-run.png"
+        },
+        {
+          "label": "Nike shoe chat · earlier original",
+          "src": "assets/talent/discovery-v1/masters/zane-shoe-chat.png"
+        },
+        {
+          "label": "Nike shoe chat · earlier preview",
+          "src": "assets/talent/uploads/13f4f388-45a6-4af2-bfa4-7f396b93b977.webp"
         }
       ]
     },
