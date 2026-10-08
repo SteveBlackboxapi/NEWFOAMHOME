@@ -187,12 +187,14 @@
   margin: 25px 0 18px;
 }
 .cs-finale-content {
+  --recap-expanded-height: calc(4 * var(--benefit-row-height) + 8px);
+  --recap-final-height: calc(var(--benefit-confirmation-height) + 8px);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: min(100%, 900px);
   margin-inline: auto;
-  transform: translateY(calc((5 * var(--benefit-row-height) + 8px) * var(--benefits-entry-shift, 0)));
+  transform: translateY(calc(var(--recap-expanded-height) * var(--benefits-entry-shift, 0) - (var(--recap-expanded-height) - var(--recap-final-height)) * var(--benefits-collapse, 0) / 2));
 }
 .cs-finale-content > a { width: 100%; }
 .cs-finale-benefits {

@@ -29,21 +29,21 @@ import {
   CHROME_STAGE_STOPS,
   CHROME_STORY_END,
   CHROME_STORY_HEIGHT_VH,
+  CHROME_STORY_SCROLL_VH,
   SHOW_CHROME_STEP_NAV,
   chromeStageAt,
   chromeEntryScale,
   chromeSendoffAt,
   chromeBenefitsRevealAt,
   chromeBenefitsCollapseAt,
+  chromeBenefitsConfirmationTickAt,
   chromePlanePose,
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { StoryBenefits } from "../components/StoryBenefits";
-import { storyBenefitsEntryShift } from "../lib/storyBenefitsMotion";
+import { storyBenefitsEntryShift, storyBenefitsSequenceAt } from "../lib/storyBenefitsMotion";
 import "./chrome-story.css";
-
-const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
 function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const track = useRef<HTMLElement>(null);
@@ -66,8 +66,9 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         String(chromeEntryScale(top, window.innerHeight)),
       );
       setProgress(
-        clamp(-top / Math.max(element.offsetHeight - window.innerHeight, 1)) *
-          CHROME_STORY_END,
+        Math.max(0, Math.min(CHROME_STORY_END,
+          -top / Math.max(window.innerHeight * CHROME_STORY_SCROLL_VH / 100, 1),
+        )),
       );
     };
     const schedule = () => {
@@ -96,6 +97,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const current = chromeStageAt(progress);
   const sendoff = chromeSendoffAt(progress);
   const benefitsReveal = chromeBenefitsRevealAt(progress);
+  const benefitsSpace = storyBenefitsSequenceAt(benefitsReveal, 4).space;
   const benefitsCollapse = chromeBenefitsCollapseAt(progress);
   const plane = chromePlanePose(progress, flightGeometry);
   useLayoutEffect(() => {
@@ -138,10 +140,10 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
     window.scrollTo({
       top:
         start +
-        (element.offsetHeight - window.innerHeight) *
+        (window.innerHeight * CHROME_STORY_SCROLL_VH / 100) *
           (next === 6
-            ? 1
-            : (CHROME_STAGE_STOPS[next] + 0.005) / CHROME_STORY_END),
+            ? CHROME_STORY_END
+            : CHROME_STAGE_STOPS[next] + 0.005),
       behavior: "smooth",
     });
   }, []);
@@ -210,7 +212,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
             >
               <div
                 className="cs-finale-content story-recap"
-                style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsReveal) } as CSSProperties}
+                style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsSpace), "--benefits-collapse": benefitsCollapse } as CSSProperties}
               >
                 <a href={CHROME_STORE} target="_blank" rel="noreferrer">
                   <div className="cs-store-mark">
@@ -223,12 +225,13 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                   </div>
                   <h2>That’s the Chrome Extension.</h2>
                 </a>
-                <div className="cs-finale-benefits" style={{ "--chrome-recap-reveal": benefitsReveal } as CSSProperties}>
+                <div className="cs-finale-benefits" style={{ "--chrome-recap-reveal": benefitsSpace } as CSSProperties}>
                   <StoryBenefits
                     variant="chrome"
                     active={sendoff.finaleInteractive}
                     reveal={benefitsReveal}
                     collapse={benefitsCollapse}
+                    confirmationTick={chromeBenefitsConfirmationTickAt(progress)}
                   />
                 </div>
               </div>

@@ -6,8 +6,9 @@ export const CHROME_STAGE_STOPS = [
 ] as const;
 // Preserve the inbox workflow’s pace, then hold the expanded recap and its
 // final confirmation before the pinned scene releases into natural scroll.
-export const CHROME_STORY_END = 1.54;
-export const CHROME_STORY_HEIGHT_VH = 340;
+export const CHROME_STORY_SCROLL_VH = 240 / 1.54;
+export const CHROME_STORY_END = 1.98;
+export const CHROME_STORY_HEIGHT_VH = 100 + CHROME_STORY_SCROLL_VH * CHROME_STORY_END;
 export const SHOW_CHROME_STEP_NAV = false;
 
 export type ChromeTarget =
@@ -99,16 +100,22 @@ export function chromeSendoffAt(progress: number) {
   };
 }
 
-/** Open the recap after the icon and title have reached their centred reading beat. */
+/** Begin after the plane has left; individual row phases supply their own easing. */
 export function chromeBenefitsRevealAt(progress: number) {
   const p = Number.isFinite(progress) ? progress : 0;
-  return smooth((p - 1.3) / (1.4 - 1.3));
+  return clamp((p - 1.4) / (1.8 - 1.4));
 }
 
 /** Settle into the closing confirmation with a reading hold before release. */
 export function chromeBenefitsCollapseAt(progress: number) {
   const p = Number.isFinite(progress) ? progress : 0;
-  return smooth((p - 1.45) / (1.49 - 1.45));
+  return smooth((p - 1.86) / (1.905 - 1.86));
+}
+
+/** Draw the final tick only after the confirmation text has settled into place. */
+export function chromeBenefitsConfirmationTickAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.915) / (1.95 - 1.915));
 }
 
 export type ChromeFlightGeometry = {

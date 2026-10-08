@@ -16,7 +16,7 @@ import { AIDisclosure } from "../components/AIDisclosure";
 import { KitFeaturedMedia } from "../components/KitFeaturedMedia";
 import { KIT_FEATURED_CONTENT } from "../data/kitFeaturedContent";
 import { StoryBenefits } from "../components/StoryBenefits";
-import { storyBenefitsEntryShift } from "../lib/storyBenefitsMotion";
+import { storyBenefitsEntryShift, storyBenefitsSequenceAt } from "../lib/storyBenefitsMotion";
 import { MediaKitLogo } from "../components/MediaKitLogo";
 import { StoryNav } from "../components/StoryNav";
 import { Footer } from "../components/Footer";
@@ -50,9 +50,10 @@ import {
   kitStoryTimeline,
   kitShareCursor,
   kitPlanePose,
-  kitSendoffLogoAnchor,
   kitFeaturedOpacity,
   KIT_STORY_HEIGHT_VH,
+  KIT_STORY_SCROLL_VH,
+  KIT_STORY_END,
   KIT_CHROME_OVERLAP_VH,
   KIT_JUMP_POINTS,
   type KitPanTargets,
@@ -515,7 +516,6 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
   const copyButton = useRef<HTMLSpanElement | null>(null);
   const shareCursor = useRef<HTMLDivElement | null>(null);
   const sendoffLogo = useRef<HTMLDivElement | null>(null);
-  const sendoffBenefits = useRef<HTMLDivElement | null>(null);
   const paperPlane = useRef<SVGSVGElement | null>(null);
   const [p, setProg] = useState(0);
   const [slot, setSlot] = useState({
@@ -555,8 +555,8 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     const measure = () => {
       frame = 0;
       if (!active) return;
-      const total = Math.max(1, el.offsetHeight - window.innerHeight);
-      setProg(clamp(-el.getBoundingClientRect().top / total));
+      const total = Math.max(1, window.innerHeight * KIT_STORY_SCROLL_VH / 100);
+      setProg(clamp(-el.getBoundingClientRect().top / total, 0, KIT_STORY_END));
       const bodyRect = body.getBoundingClientRect();
       // Continue the kit below the editor without moving the established
       // audience reading position or the scroll-driven handoff to Share.
@@ -702,7 +702,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
       top: Math.ceil(
         window.scrollY +
           el.getBoundingClientRect().top +
-          progress * (el.offsetHeight - window.innerHeight),
+          progress * window.innerHeight * KIT_STORY_SCROLL_VH / 100,
       ),
       behavior: "instant",
     });
@@ -730,8 +730,10 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     sharedOut,
     benefitsReveal,
     benefitsCollapse,
+    benefitsConfirmationTick,
     headlineOpacity: headlineOp,
   } = timeline;
+  const benefitsSpace = storyBenefitsSequenceAt(benefitsReveal, 5).space;
   const pan = kitPan(p, targets);
   const kitIn = clamp((pack - 0.68) / 0.32);
   const landed = pack === 1;
@@ -775,20 +777,8 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     const stageRect = stage.current?.getBoundingClientRect();
     const logoRect = sendoffLogo.current?.getBoundingClientRect();
     if (!plane || !stageRect || !logoRect) return;
-    const recap = sendoffBenefits.current;
-    const list = recap?.querySelector<HTMLElement>(".story-benefits");
-    let removedHeight = 0;
-    if (benefitsCollapse > 0 && recap && list) {
-      const listStyle = getComputedStyle(list);
-      const recapStyle = getComputedStyle(recap);
-      const rowHeight = parseFloat(listStyle.getPropertyValue("--benefit-row-height"));
-      const expandedGap = parseFloat(recapStyle.getPropertyValue("--kit-recap-gap"));
-      removedHeight = rowHeight * list.childElementCount - list.getBoundingClientRect().height
-        + expandedGap - parseFloat(recapStyle.marginTop);
-    }
-    // The summary recentres as its list folds away; the plane keeps its launch path.
-    const anchor = kitSendoffLogoAnchor(logoRect, removedHeight);
-    const pose = kitPlanePose(stageRect, anchor, planeEmerge, fly);
+    // The logo now holds its position throughout the closing recap.
+    const pose = kitPlanePose(stageRect, logoRect, planeEmerge, fly);
     plane.style.left = `${pose.x}px`;
     plane.style.top = `${pose.y}px`;
     plane.style.width = `${pose.width}px`;
@@ -1175,7 +1165,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
           >
             <div
               className="ks-sendoff-summary story-recap relative flex flex-col items-center"
-              style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsReveal) } as CSSProperties}
+              style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsSpace), "--benefits-collapse": benefitsCollapse } as CSSProperties}
             >
               <div
                 ref={sendoffLogo}
@@ -1190,11 +1180,10 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
                 Media Kit
               </p>
               <div
-                ref={sendoffBenefits}
                 className="ks-sendoff-benefits"
-                style={{ "--kit-recap-collapse": benefitsCollapse, "--kit-recap-reveal": benefitsReveal } as CSSProperties}
+                style={{ "--kit-recap-collapse": benefitsCollapse, "--kit-recap-reveal": benefitsSpace } as CSSProperties}
               >
-                <StoryBenefits variant="kit" active={planeIn > 0.1} reveal={benefitsReveal} collapse={benefitsCollapse} />
+                <StoryBenefits variant="kit" active={planeIn > 0.1} reveal={benefitsReveal} collapse={benefitsCollapse} confirmationTick={benefitsConfirmationTick} />
               </div>
             </div>
           </div>

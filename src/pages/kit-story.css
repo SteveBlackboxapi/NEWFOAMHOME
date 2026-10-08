@@ -63,9 +63,11 @@
 
 .ks-sendoff-summary {
   --kit-recap-gap: 26px;
+  --recap-expanded-height: calc(5 * var(--benefit-row-height) + var(--kit-recap-gap));
+  --recap-final-height: calc(var(--benefit-confirmation-height) + 16px);
   width: min(100%, 560px);
-  /* Let the first rows grow below the logo before centring the expanded group. */
-  transform: translateY(calc((6 * var(--benefit-row-height) + var(--kit-recap-gap)) * var(--benefits-entry-shift, 0)));
+  /* Rise gently as rows appear, then cancel the downward flex shift as they close. */
+  transform: translateY(calc(var(--recap-expanded-height) * var(--benefits-entry-shift, 0) - (var(--recap-expanded-height) - var(--recap-final-height)) * var(--benefits-collapse, 0) / 2));
 }
 .ks-sendoff-benefits {
   width: min(100%, 360px);

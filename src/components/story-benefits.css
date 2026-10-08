@@ -2,6 +2,7 @@
 .story-recap {
   --benefit-row-height: 38px;
   --benefit-row-padding: 7px;
+  --benefit-confirmation-height: 23.4px;
 }
 
 .story-benefits {
@@ -16,10 +17,6 @@
 }
 
 .story-benefits.is-active { visibility: visible; }
-
-/* The first lockup centres without reserving room for an invisible recap. */
-.story-benefits-reveal { display: grid; width: 100%; }
-.story-benefits-clip { min-height: 0; overflow: hidden; }
 
 .story-benefits-row {
   font-size: 18px;
@@ -36,18 +33,24 @@
   padding: var(--benefit-row-padding) 0;
 }
 
-/* The outer row follows scroll; the inner entry keeps its independent arrival. */
+/* Create the complete row before writing across it, without clipping the words vertically. */
+.story-benefits--revealing .story-benefits-row {
+  height: calc(var(--benefit-row-height) * var(--benefit-space, 1));
+  overflow: hidden;
+}
 .story-benefits--settling .story-benefits-row:not(:last-child) {
-  height: calc(var(--benefit-row-height) * (1 - var(--benefits-collapse)));
+  height: calc(var(--benefit-row-height) * var(--benefit-space, 1) * (1 - var(--benefits-collapse)));
   overflow: hidden;
   opacity: clamp(0, calc(1 - var(--benefits-collapse) * 2), 1);
 }
 .story-benefits--settling .story-benefits-row:last-child {
+  height: calc(var(--benefit-confirmation-height) * var(--benefits-collapse));
+  overflow: visible;
   opacity: var(--benefits-collapse);
 }
 .story-benefits--settling .story-benefits-row:last-child .story-benefits-entry {
-  min-height: calc(var(--benefit-row-height) * (1 - var(--benefits-collapse)) + 1.3em * var(--benefits-collapse));
-  padding-block: calc(var(--benefit-row-padding) * (1 - var(--benefits-collapse)));
+  min-height: var(--benefit-confirmation-height);
+  padding-block: 0;
 }
 
 .story-benefits-tick {
@@ -65,28 +68,45 @@
 }
 
 .story-benefits-label { min-width: 0; }
+.story-benefits--revealing .story-benefits-label {
+  clip-path: inset(0 calc((1 - var(--benefit-text, 1)) * 100%) 0 0);
+}
+.story-benefits--revealing .story-benefits-tick {
+  opacity: var(--benefit-tick-visible, 1);
+}
+.story-benefits--revealing .kit-share-tick-mark {
+  stroke-dashoffset: calc(1 - var(--benefit-tick, 1));
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .story-benefits.is-active .story-benefits-entry {
-    animation: story-benefit-arrive 420ms cubic-bezier(.22, .65, .3, 1) both;
-    animation-delay: calc(var(--benefit-index) * 90ms);
+  .story-benefits.is-active .story-benefits-label {
+    animation: story-benefit-write 380ms ease-out both;
+    animation-delay: calc(var(--benefit-index) * 700ms);
+  }
+  .story-benefits.is-active .story-benefits-tick {
+    animation: story-benefit-show-tick 1ms linear both;
+    animation-delay: calc(400ms + var(--benefit-index) * 700ms);
   }
   .story-benefits.is-active .story-benefits-tick .kit-share-tick-mark {
-    animation: story-benefit-tick 320ms ease-out both;
-    animation-delay: calc(100ms + var(--benefit-index) * 90ms);
+    animation: story-benefit-tick 300ms ease-out both;
+    animation-delay: calc(400ms + var(--benefit-index) * 700ms);
   }
   /* Scroll-driven entrances and confirmations also work on reverse/direct jumps. */
-  .story-benefits--revealing.is-active .story-benefits-entry,
-  .story-benefits--revealing.is-active .kit-share-tick-mark,
-  .story-benefits--settling.is-active .story-benefits-row:last-child .story-benefits-entry,
-  .story-benefits--settling.is-active .story-benefits-row:last-child .kit-share-tick-mark {
+  .story-benefits--revealing.is-active .story-benefits-label,
+  .story-benefits--revealing.is-active .story-benefits-tick,
+  .story-benefits--revealing.is-active .story-benefits-tick .kit-share-tick-mark {
     animation: none;
   }
 }
 
-@keyframes story-benefit-arrive {
-  from { opacity: 0; transform: translateY(7px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes story-benefit-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes story-benefit-show-tick {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes story-benefit-tick {
@@ -95,6 +115,6 @@
 }
 
 @media (max-width: 600px), (max-height: 700px) {
-  .story-benefits, .story-recap { --benefit-row-height: 32px; --benefit-row-padding: 5px; }
+  .story-benefits, .story-recap { --benefit-row-height: 32px; --benefit-row-padding: 5px; --benefit-confirmation-height: 20.8px; }
   .story-benefits-row { font-size: 16px; }
 }

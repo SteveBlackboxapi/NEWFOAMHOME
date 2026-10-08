@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { KitShareTick } from "./KitShareStatus";
+import { storyBenefitsSequenceAt } from "../lib/storyBenefitsMotion";
 import "./story-benefits.css";
 
 const benefits = {
@@ -28,16 +29,22 @@ export type StoryBenefitsProps = {
   collapse?: number;
   /** Grow the recap into the centred desktop ending as the user scrolls. */
   reveal?: number;
+  /** Draw the final tick only after the confirmation has reached its resting place. */
+  confirmationTick?: number;
 };
 
-/** A presentation list, with a single calm reveal and no interactive checkboxes. */
-export function StoryBenefits({ variant, active, collapse, reveal }: StoryBenefitsProps) {
+/** Write each benefit, check it off, then begin the next row. */
+export function StoryBenefits({ variant, active, collapse, reveal, confirmationTick }: StoryBenefitsProps) {
   const settling = collapse !== undefined;
   const collapsed = Math.max(0, Math.min(1, typeof collapse === "number" && Number.isFinite(collapse) ? collapse : 0));
   const revealing = reveal !== undefined;
   const revealed = Math.max(0, Math.min(1, typeof reveal === "number" && Number.isFinite(reveal) ? reveal : 1));
+  const confirmed = Math.max(0, Math.min(1, typeof confirmationTick === "number" && Number.isFinite(confirmationTick) ? confirmationTick : 0));
   const visible = active && revealed > 0;
-  const list = (
+  const sequence = revealing
+    ? storyBenefitsSequenceAt(revealed, benefits[variant].length - (settling ? 1 : 0))
+    : undefined;
+  return (
     <ul
       className={`story-benefits story-benefits--${variant}${visible ? " is-active" : ""}${settling ? " story-benefits--settling" : ""}${revealing ? " story-benefits--revealing" : ""}`}
       style={settling ? { "--benefits-collapse": collapsed } as CSSProperties : undefined}
@@ -45,30 +52,32 @@ export function StoryBenefits({ variant, active, collapse, reveal }: StoryBenefi
       aria-hidden={!visible}
       role="list"
     >
-      {benefits[variant].map((label, index) => (
-        <li
+      {benefits[variant].map((label, index) => {
+        const closing = settling && index === benefits[variant].length - 1;
+        const phase = closing
+          ? { space: 1, text: 1, tick: collapsed === 1 ? confirmed : 0 }
+          : sequence?.rows[index];
+        const hidden = closing ? collapsed === 0 : collapsed === 1 || phase?.text === 0;
+        return <li
           className="story-benefits-row"
           key={label}
-          style={{ "--benefit-index": index } as CSSProperties}
-          aria-hidden={settling && (
-            index === benefits[variant].length - 1 ? collapsed === 0 : collapsed === 1
-          ) ? true : undefined}
+          style={{
+            "--benefit-index": index,
+            ...(revealing && phase ? {
+              "--benefit-space": phase.space,
+              "--benefit-text": phase.text,
+              "--benefit-tick": phase.tick,
+              "--benefit-tick-visible": phase.tick > 0 ? 1 : 0,
+            } : {}),
+          } as CSSProperties}
+          aria-hidden={hidden ? true : undefined}
         >
           <span className="story-benefits-entry">
             <span className="story-benefits-label">{label}</span>
             <span className="story-benefits-tick" aria-hidden="true"><KitShareTick /></span>
           </span>
-        </li>
-      ))}
+        </li>;
+      })}
     </ul>
-  );
-  if (!revealing) return list;
-  return (
-    <div
-      className="story-benefits-reveal"
-      style={{ gridTemplateRows: `${revealed}fr`, opacity: revealed }}
-    >
-      <div className="story-benefits-clip">{list}</div>
-    </div>
   );
 }
