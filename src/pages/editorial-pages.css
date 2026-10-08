@@ -59,7 +59,13 @@
   max-width: 28em;
 }
 
-/* About: a portrait, a belief, then the people in the partnership. */
+/* About: team, leadership, conversations and community. */
+.ep-about {
+  --about-section-space: clamp(72px, 7.8vw, 112px);
+  --about-content-gap: clamp(128px, 12.5vw, 180px);
+  --about-section-edge: calc(var(--about-content-gap) / 2);
+}
+.pc-site .ep-about .site-cta { padding-top: var(--about-content-gap); }
 .ep-about .mp-intro {
   padding-bottom: 85px;
 }
@@ -74,10 +80,12 @@
   scroll-margin-top: 100px;
 }
 .ep-team-heading {
-  padding-block: clamp(164px, 14vw, 204px) 40px;
+  /* 112px of breathing room below the 101px desktop header. */
+  padding-block: 213px 48px;
 }
 @media (max-width: 760px) {
-  .ep-team-heading { padding-block: 130px 32px; }
+  .ep-about { --about-content-gap: 72px; --about-section-edge: 72px; }
+  .ep-team-heading { padding-block: 153px 32px; }
 }
 .ep-team-scroll {
   width: 100%;

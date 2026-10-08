@@ -83,7 +83,25 @@ export function AboutSocialFeed({ posts }: { posts: readonly AboutSocialPost[] }
             A few moments from our community, out in the world and in the feed.
           </p>
         </div>
-        <div className="ac-social-feed">
+        <div
+          className="ac-social-feed"
+          role="region"
+          aria-label="Foam posts and more on LinkedIn"
+          tabIndex={0}
+          onFocusCapture={(event) => {
+            const rail = event.currentTarget;
+            const card = event.target.closest<HTMLElement>(".ac-social-card, .ac-social-continuation");
+            if (!card || rail.scrollWidth <= rail.clientWidth) return;
+            // Reveal the whole focused card without moving the page vertically.
+            const railBounds = rail.getBoundingClientRect();
+            const cardBounds = card.getBoundingClientRect();
+            const left = cardBounds.left - railBounds.left - 6;
+            const right = cardBounds.right - railBounds.right + 6;
+            if (left < 0 || right > 0) {
+              rail.scrollBy({ left: left < 0 ? left : right, behavior: "instant" });
+            }
+          }}
+        >
           {posts.map((post) => (
             <article className="ac-social-card" key={post.id}>
               <div className="ac-social-author">
@@ -99,7 +117,7 @@ export function AboutSocialFeed({ posts }: { posts: readonly AboutSocialPost[] }
                   height={post.image.height}
                   alt={post.image.alt}
                   style={{ objectPosition: post.image.objectPosition ?? "50% 50%" }}
-                  sizes="(max-width: 760px) calc(100vw - 44px), 33vw"
+                  sizes="(max-width: 760px) 310px, (max-width: 1100px) 340px, 25vw"
                   loading="lazy"
                 />
               </div>
@@ -108,6 +126,22 @@ export function AboutSocialFeed({ posts }: { posts: readonly AboutSocialPost[] }
               </a>
             </article>
           ))}
+          <div className="ac-social-continuation">
+            <div className="ac-social-ghost ac-social-ghost--back" aria-hidden="true" />
+            <div className="ac-social-ghost ac-social-ghost--front" aria-hidden="true" />
+            <a
+              className="ac-social-more-link"
+              href="https://www.linkedin.com/company/foam-io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="ac-social-more-eyebrow">Keep up with Foam</span>
+              <strong>And there’s more.</strong>
+              <span className="ac-social-more-action">
+                See the latest on LinkedIn<span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

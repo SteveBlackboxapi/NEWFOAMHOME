@@ -19,7 +19,8 @@
 }
 
 .ae-ceo-note {
-  padding-block: clamp(80px, 9vw, 128px);
+  /* The interviews continue on this surface and supply the shared gap. */
+  padding-block: var(--about-section-space, 100px) 0;
   background: var(--theme-surface, #f5f7f6);
 }
 .ae-ceo-layout {
@@ -82,7 +83,6 @@ html[data-theme="dark"] .ae-editorial {
 }
 
 @media (max-width: 760px) {
-  .ae-ceo-note { padding-block: 72px; }
   .ae-ceo-layout { grid-template-columns: 1fr; gap: 38px; padding-inline: 24px; }
   .ae-ceo-copy blockquote p { max-width: 22em; font-size: clamp(28px, 5.8vw, 34px); }
   .ae-ceo-photo { max-width: 520px; aspect-ratio: 5 / 4; border-radius: 20px; }
