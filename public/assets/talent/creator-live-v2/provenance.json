@@ -7,19 +7,23 @@
     {
       "id": "maya-ellis",
       "source": "fitness-a-clean.jpg",
-      "master": "../uploads/maya-ellis-live-v1-original.jpg",
-      "delivery": "../uploads/maya-ellis-live-v2.webp",
-      "crop": {
-        "left": 102,
-        "top": 0,
-        "width": 1332,
-        "height": 2368
-      },
+      "master": "../uploads/maya-ellis-live-v3-original.png",
+      "delivery": "../uploads/maya-ellis-live-v3.webp",
       "size": [
         720,
         1280
       ],
-      "revision_note": "Wider crop requested after preview, reducing subject scale by approximately 11%; crotch excluded."
+      "revision_note": "User approved wider garden outpainting with built-in image editor after two deterministic crop reviews. Original Nano Banana photograph and all earlier crops retained.",
+      "source_master": "../uploads/maya-ellis-live-v1-original.jpg",
+      "reframe": {
+        "provider": "Built-in OpenAI image generator",
+        "input": "Deterministic crop of fitness-a-clean.jpg, left102 top0 width1332 height2368",
+        "prompt": "Precise OUTPAINT ONLY of the supplied approved photograph. Keep the original photograph content intact and extend its canvas ONLY upwards and sideways. Target composition: a vertical 9:16 image made by placing the supplied image at 89% of final width, aligned to the BOTTOM edge, centred horizontally, then filling the exposed top and side margins with matching garden background. The person will consequently be about 11% smaller. The supplied BOTTOM CROP IS LOCKED: do not extend downwards, do not invent or show any additional legs, lap or crotch below the supplied bottom edge. Add approximately 12% more height ABOVE her ponytail and 6% width on each side. Fill new areas only with continuation of the same hedge, garden and lawn at the same exposure. Preserve the exact woman's face, facial geometry, freckles and mole, eyes, nose, smile, headphones, hair, clothing, arms, hand gesture and all original photographic details. Do not beautify, redraw or smooth her skin. No extra trees, objects or pose changes. The source image is the edit target, not loose inspiration. Clean photo only, no text, UI or border.",
+        "output_dimensions": [
+          940,
+          1672
+        ]
+      }
     },
     {
       "id": "theo-bennett",
