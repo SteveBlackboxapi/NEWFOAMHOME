@@ -51,7 +51,7 @@ export function ChromeStoryMobile({
   const send = () => {
     setSent(true);
     finale.current?.scrollIntoView({
-      block: "center",
+      block: "start",
       behavior: reduced ? "instant" : "smooth",
     });
   };
@@ -149,7 +149,7 @@ export function ChromeStoryMobile({
           </MobileFade>
         </section>
       </div>
-      <div ref={finale}>
+      <div ref={finale} className="cs-mobile-finale-anchor">
         <MobileFade className="cs-mobile-finale">
           {sent && (
             <p className="cs-mobile-sent" role="status">
@@ -157,23 +157,23 @@ export function ChromeStoryMobile({
             </p>
           )}
           <div className="cs-finale-content">
-            <div className="cs-store-mark">
-              <OptimizedImage section="Foam for Chrome · Send finale"
-                src={`${A}/chrome-store-transparent.webp`}
-                alt=""
-                width={150}
-                height={131}
-              />
-            </div>
-            <div className="cs-finale-copy">
-              <p className="cs-finale-eyebrow">Foam for Chrome</p>
-              <h2>Your roster is in your inbox.</h2>
-              <div className="cs-finale-benefits">
-                <StoryBenefits variant="chrome" active={finaleVisible || reduced} />
+            <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+              <div className="cs-store-mark">
+                <OptimizedImage section="Foam for Chrome · Send finale"
+                  src={`${A}/chrome-store-transparent.webp`}
+                  alt=""
+                  width={150}
+                  height={131}
+                />
               </div>
-              <a className="cs-store-cta" href={CHROME_STORE} target="_blank" rel="noreferrer">
-                Get Foam for Chrome <span aria-hidden="true">↗</span>
-              </a>
+              <h2>That’s the Chrome Extension.</h2>
+              <span>
+                Your roster is in your inbox{" "}
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+            <div className="cs-finale-benefits">
+              <StoryBenefits variant="chrome" active={finaleVisible || reduced} />
             </div>
           </div>
         </MobileFade>

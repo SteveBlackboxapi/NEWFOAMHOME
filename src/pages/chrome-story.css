@@ -150,79 +150,69 @@
   display: grid;
   place-items: center;
   min-height: 70vh;
-  padding: 32px 24px;
+  padding: 100px 20px 28px;
   background: #f4f5f7;
 }
-.cs-finale-content {
-  width: min(100%, 720px);
-  display: grid;
-  grid-template-columns: 130px minmax(0, 1fr);
-  gap: 32px;
-  align-items: start;
-  margin-inline: auto;
-}
-.cs-finale-copy {
-  min-width: 0;
+.cs-finale a,
+.cs-mobile-finale a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
 }
 .cs-store-mark {
   position: relative;
   isolation: isolate;
   flex-shrink: 0;
-  padding-top: 9px;
 }
 .cs-store-mark img {
   position: relative;
   display: block;
 }
 .cs-finale h2,
-.cs-mobile-finale h2 {
+.cs-mobile-finale h2,
+.cs-finale a > span,
+.cs-mobile-finale a > span {
   position: relative;
 }
 .cs-finale img {
-  width: 130px;
-  height: auto;
+  width: 180px;
+  height: 157px;
   object-fit: contain;
 }
 .cs-finale h2 {
   font:
-    600 clamp(36px, 3.8vw, 48px)/1.04 "Founders Grotesk",
+    600 clamp(36px, 4.5vw, 60px)/1 "Founders Grotesk",
     sans-serif;
-  letter-spacing: -1.5px;
-  margin: 0;
-  max-width: 18ch;
+  letter-spacing: -1.6px;
+  margin: 25px 0 18px;
 }
-.cs-finale-eyebrow {
-  margin: 0 0 12px;
-  color: var(--theme-muted, #66748a);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+.cs-finale a > span,
+.cs-mobile-finale a > span {
+  color: #66748a;
+  font-size: 15px;
 }
-.cs-finale-benefits {
-  margin: 22px 0 24px;
-}
-.cs-store-cta {
-  display: inline-flex;
+
+.cs-finale-content {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 22px;
-  min-height: 44px;
-  padding: 12px 20px;
-  border: 1px solid #1d2a36;
-  border-radius: 999px;
-  background: #1d2a36;
-  color: #fff;
-  font-size: 14px;
-  line-height: 1.25;
-  text-decoration: none;
+  width: min(100%, 900px);
+  margin-inline: auto;
 }
-.cs-store-cta:hover {
-  background: #304854;
+.cs-finale-content > a { width: 100%; }
+.cs-finale-benefits {
+  width: min(100%, 400px);
+  margin: 8px auto 0;
 }
-.cs-store-cta:focus-visible {
+.cs-finale a:focus-visible,
+.cs-mobile-finale a:focus-visible {
   outline: 3px solid #155eef;
   outline-offset: 4px;
 }
+.cs-mobile-finale-anchor { scroll-margin-top: 90px; }
+
 .cs-mobile-back {
   display: flex;
   align-items: center;
@@ -419,19 +409,11 @@
   display: none;
 }
 .cs-mobile-finale {
-  padding: 24px 24px 48px;
-}
-.cs-mobile-finale .cs-finale-content {
-  display: block;
-  max-width: 400px;
-}
-.cs-mobile-finale .cs-store-mark {
-  padding-top: 0;
-  margin-bottom: 14px;
+  padding: 30px 20px 65px;
 }
 .cs-mobile-finale img {
-  width: 76px;
-  height: auto;
+  width: 150px;
+  height: 131px;
   object-fit: contain;
 }
 .cs-mobile-finale h2 {
@@ -439,27 +421,7 @@
     600 32px/1.05 "Founders Grotesk",
     sans-serif;
   letter-spacing: -1px;
-  max-width: 18ch;
-  margin: 0;
-}
-.cs-mobile-finale .cs-finale-eyebrow {
-  margin-bottom: 10px;
-}
-.cs-mobile-finale .cs-finale-benefits {
-  margin: 18px 0 22px;
-}
-@media (min-width: 1024px) and (max-height: 760px) {
-  .cs-finale {
-    padding-block: 22px;
-  }
-  .cs-finale-content {
-    grid-template-columns: 105px minmax(0, 1fr);
-    gap: 24px;
-    max-width: 650px;
-  }
-  .cs-finale img { width: 105px; }
-  .cs-finale h2 { font-size: 38px; }
-  .cs-finale-benefits { margin-block: 16px 20px; }
+  margin: 24px 0 15px;
 }
 @media (prefers-reduced-motion: reduce) {
   .cs-insertion-point {
@@ -489,16 +451,6 @@
   color: #56716c;
   margin-bottom: 20px;
   font-size: 14px;
-}
-
-@media (max-width: 360px), (max-height: 700px) {
-  .cs-mobile-finale { padding: 16px 24px 32px; }
-  .cs-mobile-finale img { width: 56px; }
-  .cs-mobile-finale .cs-store-mark { margin-bottom: 10px; }
-  .cs-mobile-finale h2 { font-size: 28px; }
-  .cs-mobile-finale .cs-finale-eyebrow { margin-bottom: 8px; }
-  .cs-mobile-finale .cs-finale-benefits { margin: 14px 0 16px; }
-  .cs-mobile-story .cs-mobile-sent { margin-bottom: 12px; font-size: 13px; }
 }
 
 .cs-desktop-scene {

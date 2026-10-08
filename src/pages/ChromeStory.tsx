@@ -203,23 +203,23 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
               }}
             >
               <div className="cs-finale-content">
-                <div className="cs-store-mark">
-                  <OptimizedImage section="Foam for Chrome · Send finale"
-                    src={`${A}/chrome-store-transparent.webp`}
-                    alt=""
-                    width={180}
-                    height={157}
-                  />
-                </div>
-                <div className="cs-finale-copy">
-                  <p className="cs-finale-eyebrow">Foam for Chrome</p>
-                  <h2>Your roster is in your inbox.</h2>
-                  <div className="cs-finale-benefits">
-                    <StoryBenefits variant="chrome" active={sendoff.finaleInteractive} />
+                <a href={CHROME_STORE} target="_blank" rel="noreferrer">
+                  <div className="cs-store-mark">
+                    <OptimizedImage section="Foam for Chrome · Send finale"
+                      src={`${A}/chrome-store-transparent.webp`}
+                      alt=""
+                      width={180}
+                      height={157}
+                    />
                   </div>
-                  <a className="cs-store-cta" href={CHROME_STORE} target="_blank" rel="noreferrer">
-                    Get Foam for Chrome <span aria-hidden="true">↗</span>
-                  </a>
+                  <h2>That’s the Chrome Extension.</h2>
+                  <span>
+                    Your roster is in your inbox{" "}
+                    <span aria-hidden="true">↗</span>
+                  </span>
+                </a>
+                <div className="cs-finale-benefits">
+                  <StoryBenefits variant="chrome" active={sendoff.finaleInteractive} />
                 </div>
               </div>
             </section>

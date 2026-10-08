@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { KitShareTick } from "./KitShareStatus";
 import "./story-benefits.css";
 
 const benefits = {
@@ -36,16 +37,12 @@ export function StoryBenefits({ variant, active }: StoryBenefitsProps) {
     >
       {benefits[variant].map((label, index) => (
         <li
-          className={`story-benefits-row${variant === "kit" && index === benefits.kit.length - 1 ? " story-benefits-sendoff" : ""}`}
+          className="story-benefits-row"
           key={label}
           style={{ "--benefit-index": index } as CSSProperties}
         >
-          <span className="story-benefits-tick" aria-hidden="true">
-            <svg viewBox="0 0 20 20" fill="none">
-              <path d="m5 10 3.2 3.2L15 6.5" pathLength="1" />
-            </svg>
-          </span>
           <span className="story-benefits-label">{label}</span>
+          <span className="story-benefits-tick" aria-hidden="true"><KitShareTick /></span>
         </li>
       ))}
     </ul>
