@@ -34,22 +34,21 @@ import {
   chromeEntryScale,
   chromeSendoffAt,
   chromeBenefitsRevealAt,
+  chromeBenefitsCollapseAt,
   chromePlanePose,
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
 import { ChromeStoryMobile } from "./ChromeStoryMobile";
 import { StoryBenefits } from "../components/StoryBenefits";
-import { storyBenefitsCollapseAt } from "../lib/storyBenefitsMotion";
+import { storyBenefitsEntryShift } from "../lib/storyBenefitsMotion";
 import "./chrome-story.css";
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
 function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const track = useRef<HTMLElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
   const reveal = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
-  const [benefitsCollapse, setBenefitsCollapse] = useState(0);
   const [flightGeometry, setFlightGeometry] =
     useState<ChromeFlightGeometry | null>(null);
   const wallpaper = useChromeWallpaper();
@@ -70,11 +69,6 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         clamp(-top / Math.max(element.offsetHeight - window.innerHeight, 1)) *
           CHROME_STORY_END,
       );
-      // The recap closes during natural page travel, after sticky releases.
-      setBenefitsCollapse(storyBenefitsCollapseAt(
-        stage.current?.getBoundingClientRect().top ?? 0,
-        window.innerHeight,
-      ));
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(measure);
@@ -102,6 +96,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   const current = chromeStageAt(progress);
   const sendoff = chromeSendoffAt(progress);
   const benefitsReveal = chromeBenefitsRevealAt(progress);
+  const benefitsCollapse = chromeBenefitsCollapseAt(progress);
   const plane = chromePlanePose(progress, flightGeometry);
   useLayoutEffect(() => {
     const root = reveal.current;
@@ -177,7 +172,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
         style={{ height: `${CHROME_STORY_HEIGHT_VH}vh` }}
         aria-label="From a brand brief to a creator recommendation"
       >
-        <div ref={stage} className="cs-sticky-stage">
+        <div className="cs-sticky-stage">
           <div className="cs-stage-reveal" ref={reveal}>
             <div
               className="cs-desktop-scene"
@@ -213,7 +208,10 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                 pointerEvents: sendoff.finaleInteractive ? "auto" : "none",
               }}
             >
-              <div className="cs-finale-content">
+              <div
+                className="cs-finale-content story-recap"
+                style={{ "--benefits-entry-shift": storyBenefitsEntryShift(benefitsReveal) } as CSSProperties}
+              >
                 <a href={CHROME_STORE} target="_blank" rel="noreferrer">
                   <div className="cs-store-mark">
                     <OptimizedImage section="Foam for Chrome · Send finale"

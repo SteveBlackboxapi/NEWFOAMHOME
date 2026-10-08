@@ -73,6 +73,7 @@ export function kitStoryTimeline(
     planeIn: smoothProgress(progressBetween(p, 0.858, 0.87)),
     planeEmerge: smoothProgress(progressBetween(p, 0.872, 0.94)),
     benefitsReveal: smoothProgress(progressBetween(p, 0.87, 0.925)),
+    benefitsCollapse: smoothProgress(progressBetween(p, 0.95, 0.975)),
     fly: smoothProgress(progressBetween(p, 0.94, 1)),
     sharedIn: smoothProgress(progressBetween(p, 0.815, 0.85)),
     // Clear the outgoing lettering before the next headline arrives. The

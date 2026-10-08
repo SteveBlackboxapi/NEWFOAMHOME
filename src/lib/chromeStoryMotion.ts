@@ -4,8 +4,8 @@ import type { ChromeStage } from "./chromeDemo";
 export const CHROME_STAGE_STOPS = [
   0, 0.14, 0.32, 0.49, 0.66, 0.88, 1.02,
 ] as const;
-// Preserve the inbox workflow’s pace, then leave room to read the benefits
-// before the pinned scene releases into the page's natural scroll.
+// Preserve the inbox workflow’s pace, then hold the expanded recap and its
+// final confirmation before the pinned scene releases into natural scroll.
 export const CHROME_STORY_END = 1.54;
 export const CHROME_STORY_HEIGHT_VH = 340;
 export const SHOW_CHROME_STEP_NAV = false;
@@ -102,7 +102,13 @@ export function chromeSendoffAt(progress: number) {
 /** Open the recap after the icon and title have reached their centred reading beat. */
 export function chromeBenefitsRevealAt(progress: number) {
   const p = Number.isFinite(progress) ? progress : 0;
-  return smooth((p - 1.3) / (1.43 - 1.3));
+  return smooth((p - 1.3) / (1.4 - 1.3));
+}
+
+/** Settle into the closing confirmation with a reading hold before release. */
+export function chromeBenefitsCollapseAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.45) / (1.49 - 1.45));
 }
 
 export type ChromeFlightGeometry = {

@@ -192,6 +192,7 @@
   align-items: center;
   width: min(100%, 900px);
   margin-inline: auto;
+  transform: translateY(calc((5 * var(--benefit-row-height) + 8px) * var(--benefits-entry-shift, 0)));
 }
 .cs-finale-content > a { width: 100%; }
 .cs-finale-benefits {
@@ -427,6 +428,7 @@
   inset: 0;
   z-index: 2;
   min-height: 0;
+  padding-block: 64px;
   background: transparent;
 }
 .cs-paper-plane {

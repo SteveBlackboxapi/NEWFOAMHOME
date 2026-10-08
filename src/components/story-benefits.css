@@ -1,6 +1,10 @@
-.story-benefits {
+.story-benefits,
+.story-recap {
   --benefit-row-height: 38px;
   --benefit-row-padding: 7px;
+}
+
+.story-benefits {
   width: min(100%, 400px);
   margin: 0;
   padding: 0;
@@ -91,6 +95,6 @@
 }
 
 @media (max-width: 600px), (max-height: 700px) {
-  .story-benefits { --benefit-row-height: 32px; --benefit-row-padding: 5px; }
+  .story-benefits, .story-recap { --benefit-row-height: 32px; --benefit-row-padding: 5px; }
   .story-benefits-row { font-size: 16px; }
 }

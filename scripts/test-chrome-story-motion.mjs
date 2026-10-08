@@ -23,6 +23,7 @@ const {
   chromeEntryScale,
   chromeSendoffAt,
   chromeBenefitsRevealAt,
+  chromeBenefitsCollapseAt,
   chromePlanePose,
 } = module.exports;
 
@@ -111,6 +112,7 @@ test("reverse scrolling and direct jumps reproduce identical states and position
     chromeCursorPose(p, targets),
     chromeSendoffAt(p),
     chromeBenefitsRevealAt(p),
+    chromeBenefitsCollapseAt(p),
     chromePlanePose(p, flightGeometry),
   ];
   const forward = points.map(sample);
@@ -173,7 +175,8 @@ test("the recap gets its own reading space without slowing the existing workflow
   assert.ok(throughPasteVh >= 136 && throughPasteVh <= 138);
   assert.ok(pasteToSendVh > 0 && pasteToSendVh < 23);
   assert.ok(throughFlightVh > 0 && throughFlightVh < 57);
-  assert.ok((CHROME_STORY_END - 1.43) * pace >= 17, "full recap has a reading beat before natural release");
+  assert.ok((1.45 - 1.4) * pace >= 7, "full recap has a reading beat before closing");
+  assert.ok((CHROME_STORY_END - 1.49) * pace >= 7, "final confirmation has a reading beat before release");
   assert.equal(chromeSendoffAt(CHROME_STORY_END).finaleInteractive, true);
   assert.equal(chromePlanePose(CHROME_STORY_END, flightGeometry), null);
   assert.equal(chromeStageAt(CHROME_STORY_END), 6);
@@ -182,15 +185,31 @@ test("the recap gets its own reading space without slowing the existing workflow
 test("Chrome benefits open after the centred lockup and finish before natural release", () => {
   assert.equal(chromeSendoffAt(1.3).finaleInteractive, true);
   for (const p of [-1, 0, 1.12, 1.28, 1.3]) assert.equal(chromeBenefitsRevealAt(p), 0);
-  close(chromeBenefitsRevealAt(1.365), 0.5);
-  for (const p of [1.43, CHROME_STORY_END, 2]) assert.equal(chromeBenefitsRevealAt(p), 1);
+  close(chromeBenefitsRevealAt(1.35), 0.5);
+  for (const p of [1.4, CHROME_STORY_END, 2]) assert.equal(chromeBenefitsRevealAt(p), 1);
   let previous = 0;
   for (let step = 1; step <= 100; step++) {
-    const reveal = chromeBenefitsRevealAt(1.3 + (1.43 - 1.3) * step / 100);
+    const reveal = chromeBenefitsRevealAt(1.3 + (1.4 - 1.3) * step / 100);
     assert.ok(reveal >= previous && reveal - previous < 0.016, "no snap or backward reveal");
     previous = reveal;
   }
   for (const p of [NaN, Infinity, -Infinity]) assert.equal(chromeBenefitsRevealAt(p), 0);
+});
+
+test("Chrome holds the expanded recap, closes quickly, then holds its final confirmation", () => {
+  for (const p of [1.4, 1.425, 1.45]) {
+    assert.equal(chromeBenefitsRevealAt(p), 1);
+    assert.equal(chromeBenefitsCollapseAt(p), 0);
+  }
+  close(chromeBenefitsCollapseAt(1.47), 0.5);
+  for (const p of [1.49, CHROME_STORY_END, 2]) assert.equal(chromeBenefitsCollapseAt(p), 1);
+  let previous = 0;
+  for (let step = 1; step <= 100; step++) {
+    const collapse = chromeBenefitsCollapseAt(1.45 + (1.49 - 1.45) * step / 100);
+    assert.ok(collapse >= previous && collapse - previous < 0.016, "no snap or backward collapse");
+    previous = collapse;
+  }
+  for (const p of [NaN, Infinity, -Infinity]) assert.equal(chromeBenefitsCollapseAt(p), 0);
 });
 
 test("every increment through Send produces visible travel, a click or a fade", () => {

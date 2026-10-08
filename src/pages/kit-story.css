@@ -61,9 +61,13 @@
   margin-bottom: clamp(16px, 3vh, 26px);
 }
 
-.ks-sendoff-summary { width: min(100%, 560px); }
-.ks-sendoff-benefits {
+.ks-sendoff-summary {
   --kit-recap-gap: 26px;
+  width: min(100%, 560px);
+  /* Let the first rows grow below the logo before centring the expanded group. */
+  transform: translateY(calc((6 * var(--benefit-row-height) + var(--kit-recap-gap)) * var(--benefits-entry-shift, 0)));
+}
+.ks-sendoff-benefits {
   width: min(100%, 360px);
   margin-top: calc((var(--kit-recap-gap) * (1 - var(--kit-recap-collapse, 0)) + 16px * var(--kit-recap-collapse, 0)) * var(--kit-recap-reveal, 1));
 }
@@ -88,7 +92,7 @@ html[data-theme="dark"] .ks-role-card.is-active .ks-role-audience { color: #1c21
   .ks-role-card .ks-role-description { font-size: 17px; }
 }
 @media (max-height: 700px) {
-  .ks-sendoff-benefits { --kit-recap-gap: 18px; }
+  .ks-sendoff-summary { --kit-recap-gap: 18px; }
 }
 
 .ks-rail {

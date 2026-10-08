@@ -1,5 +1,5 @@
 // Run with: node --test scripts/test-story-benefits-motion.mjs
-// Exercises exit geometry; browser checks still verify actual sticky layout.
+// Exercises the geometry of centred recap growth; browser checks verify layout.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
@@ -12,63 +12,44 @@ const { outputText } = ts.transpileModule(readFileSync(filename, "utf8"), {
 });
 const module = { exports: {} };
 new Function("module", "exports", outputText)(module, module.exports);
-const { storyBenefitsCollapseAt } = module.exports;
-const heights = [600, 640, 700, 701, 720, 900, 1080];
+const { storyBenefitsEntryShift } = module.exports;
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-9, `${actual} ≠ ${expected}`);
 
-test("both recaps stay fully open while pinned and through the first 2vh of upward page travel", () => {
-  for (const height of heights)
-    for (const top of [height, 50, 0, -height * 0.01, -height * 0.02])
-      assert.equal(storyBenefitsCollapseAt(top, height), 0);
+// Expanded recap heights, including the gap, at compact and regular breakpoints.
+const recapHeights = [6 * 32 + 18, 6 * 38 + 26, 5 * 32 + 8, 5 * 38 + 8];
+
+test("icon and title stay centred while the first 20 percent of the list grows below", () => {
+  for (const height of recapHeights) for (const reveal of [0, 0.05, 0.1, 0.2]) {
+    const naturalShift = -height * reveal / 2;
+    close(naturalShift + height * storyBenefitsEntryShift(reveal), 0);
+  }
 });
 
-test("continued upward travel smoothly collapses the recap by 25vh, at every desktop height", () => {
-  for (const height of heights) {
-    close(storyBenefitsCollapseAt(-height * 0.135, height), 0.5);
-    for (const travel of [0.25, 0.7, 1.5])
-      assert.equal(storyBenefitsCollapseAt(-height * travel, height), 1);
+test("the expanded group then recentres smoothly without a downward rebound", () => {
+  for (const height of recapHeights) {
     let previous = 0;
-    for (let step = 1; step <= 100; step++) {
-      const collapse = storyBenefitsCollapseAt(-height * (0.02 + 0.23 * step / 100), height);
-      assert.ok(collapse >= previous && collapse - previous < 0.016, "no snap or backward collapse");
-      previous = collapse;
+    for (let step = 1; step <= 1000; step++) {
+      const reveal = step / 1000;
+      const titleShift = height * (storyBenefitsEntryShift(reveal) - reveal / 2);
+      assert.ok(titleShift <= previous + 1e-9, "the title must stay still, then move upward");
+      assert.ok(previous - titleShift < height * 0.002, "no vertical snap during centring");
+      previous = titleShift;
     }
+    close(previous, -height / 2);
   }
+  assert.equal(storyBenefitsEntryShift(1), 0, "full recap uses ordinary group centring");
 });
 
-test("reverse scrolling and direct entry restore the same list without playback state", () => {
-  const positions = [0.2, 0, -0.01, -0.02, -0.08, -0.135, -0.2, -0.25, -0.6];
-  for (const height of heights) {
-    const forward = positions.map(top => storyBenefitsCollapseAt(top * height, height));
-    assert.deepEqual(positions.toReversed().map(top => storyBenefitsCollapseAt(top * height, height)).toReversed(), forward);
-    for (const index of [8, 4, 6, 1, 7, 0, 3])
-      assert.equal(storyBenefitsCollapseAt(positions[index] * height, height), forward[index]);
-  }
+test("reverse scroll and direct jumps recreate exactly the same entry position", () => {
+  const reveals = [0, 0.1, 0.2, 0.35, 0.6, 0.85, 1];
+  const forward = reveals.map(storyBenefitsEntryShift);
+  assert.deepEqual(reveals.toReversed().map(storyBenefitsEntryShift).toReversed(), forward);
+  for (const index of [6, 3, 0, 5, 1, 4, 2])
+    assert.equal(storyBenefitsEntryShift(reveals[index]), forward[index]);
 });
 
-test("natural upward travel remains stronger than the centred recap's downward recentring", () => {
-  for (const height of heights) {
-    // Match the 700px breakpoint, including final-row padding and the kit's margin change.
-    const rowHeight = height <= 700 ? 32 : 38;
-    const finalRowHeight = height <= 700 ? 20.8 : 23.4;
-    const kitGapRemoved = height <= 700 ? 2 : 10;
-    const removedHeights = [
-      5 * rowHeight + rowHeight - finalRowHeight + kitGapRemoved,
-      4 * rowHeight + rowHeight - finalRowHeight,
-    ];
-    for (const removedHeight of removedHeights) {
-      let previous = 0;
-      for (let step = 1; step <= 1000; step++) {
-        const stageTop = -height * step / 2000;
-        const logoShift = stageTop + removedHeight / 2 * storyBenefitsCollapseAt(stageTop, height);
-        assert.ok(logoShift < previous, `the lockup must keep moving upward at ${height}px height`);
-        previous = logoShift;
-      }
-    }
-  }
-});
-
-test("missing or invalid geometry leaves the full benefits readable", () => {
-  for (const top of [NaN, Infinity, -Infinity]) assert.equal(storyBenefitsCollapseAt(top, 900), 0);
-  for (const height of [0, -1, NaN, Infinity, -Infinity]) assert.equal(storyBenefitsCollapseAt(-300, height), 0);
+test("invalid and out-of-range reveal values retain finite endpoint geometry", () => {
+  for (const reveal of [NaN, Infinity, -Infinity, -1, 0, 1, 2])
+    assert.equal(storyBenefitsEntryShift(reveal), 0);
+  close(storyBenefitsEntryShift(0.6), 0.15);
 });

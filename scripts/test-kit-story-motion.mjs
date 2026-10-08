@@ -537,6 +537,19 @@ test("benefits open after the centred kit title and finish before its plane flie
     assert.equal(kitStoryTimeline(points[index]).benefitsReveal, forward[index]);
 });
 
+test("the kit recap has separate expanded and final reading beats before the pin releases", () => {
+  for (const p of [0.925, 0.94, 0.95]) {
+    assert.equal(kitStoryTimeline(p).benefitsReveal, 1);
+    assert.equal(kitStoryTimeline(p).benefitsCollapse, 0);
+  }
+  nearly(kitStoryTimeline(0.9625).benefitsCollapse, 0.5, "closing halfway");
+  for (const p of [0.975, 0.99, 1]) assert.equal(kitStoryTimeline(p).benefitsCollapse, 1);
+  const points = [0.85, 0.9, 0.925, 0.95, 0.9625, 0.975, 1];
+  const recorded = points.map(p => [kitStoryTimeline(p).benefitsReveal, kitStoryTimeline(p).benefitsCollapse]);
+  for (const index of [6, 4, 1, 5, 2, 0, 3])
+    assert.deepEqual([kitStoryTimeline(points[index]).benefitsReveal, kitStoryTimeline(points[index]).benefitsCollapse], recorded[index]);
+});
+
 test("the old lockup clears before Chrome enters while the plane bridges the handoff", () => {
   for (const p of samples(0, 0.965, 193)) {
     assert.equal(
