@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type CSSProperties,
 } from "react";
 import { Link } from "react-router";
 import { Nav } from "../components/Nav";
@@ -32,6 +33,7 @@ import {
   chromeStageAt,
   chromeEntryScale,
   chromeSendoffAt,
+  chromeBenefitsRevealAt,
   chromePlanePose,
   type ChromeFlightGeometry,
 } from "../lib/chromeStoryMotion";
@@ -99,6 +101,7 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
   }, []);
   const current = chromeStageAt(progress);
   const sendoff = chromeSendoffAt(progress);
+  const benefitsReveal = chromeBenefitsRevealAt(progress);
   const plane = chromePlanePose(progress, flightGeometry);
   useLayoutEffect(() => {
     const root = reveal.current;
@@ -222,10 +225,11 @@ function ChromeStoryDesktop({ embedded = false }: { embedded?: boolean }) {
                   </div>
                   <h2>That’s the Chrome Extension.</h2>
                 </a>
-                <div className="cs-finale-benefits">
+                <div className="cs-finale-benefits" style={{ "--chrome-recap-reveal": benefitsReveal } as CSSProperties}>
                   <StoryBenefits
                     variant="chrome"
                     active={sendoff.finaleInteractive}
+                    reveal={benefitsReveal}
                     collapse={benefitsCollapse}
                   />
                 </div>

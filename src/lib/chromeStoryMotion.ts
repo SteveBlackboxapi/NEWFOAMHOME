@@ -99,6 +99,12 @@ export function chromeSendoffAt(progress: number) {
   };
 }
 
+/** Open the recap after the icon and title have reached their centred reading beat. */
+export function chromeBenefitsRevealAt(progress: number) {
+  const p = Number.isFinite(progress) ? progress : 0;
+  return smooth((p - 1.3) / (1.43 - 1.3));
+}
+
 export type ChromeFlightGeometry = {
   start: ChromePoint;
   width: number;

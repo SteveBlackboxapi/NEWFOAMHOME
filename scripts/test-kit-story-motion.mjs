@@ -522,6 +522,21 @@ test("logo and title stay fully readable while the plane emerges, before its fli
   assert.equal(kitStoryTimeline(1).sharedOut, 1);
 });
 
+test("benefits open after the centred kit title and finish before its plane flies away", () => {
+  assert.equal(kitStoryTimeline(0.85).sharedIn, 1);
+  for (const p of [0, 0.815, 0.85, 0.86, 0.87])
+    assert.equal(kitStoryTimeline(p).benefitsReveal, 0, "the first lockup has no recap height");
+  nearly(kitStoryTimeline(0.8975).benefitsReveal, 0.5, "half-open recap");
+  for (const p of [0.925, 0.94, 1]) assert.equal(kitStoryTimeline(p).benefitsReveal, 1);
+  assert.equal(kitStoryTimeline(0.925).fly, 0);
+  const points = samples(0.87, 0.925, 100);
+  const forward = points.map(p => kitStoryTimeline(p).benefitsReveal);
+  assert.ok(forward.every((value, index) => !index || value >= forward[index - 1] && value - forward[index - 1] < 0.016));
+  assert.deepEqual(points.toReversed().map(p => kitStoryTimeline(p).benefitsReveal).toReversed(), forward);
+  for (const index of [100, 30, 70, 0, 50])
+    assert.equal(kitStoryTimeline(points[index]).benefitsReveal, forward[index]);
+});
+
 test("the old lockup clears before Chrome enters while the plane bridges the handoff", () => {
   for (const p of samples(0, 0.965, 193)) {
     assert.equal(

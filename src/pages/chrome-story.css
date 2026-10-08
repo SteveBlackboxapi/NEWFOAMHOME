@@ -196,7 +196,7 @@
 .cs-finale-content > a { width: 100%; }
 .cs-finale-benefits {
   width: min(100%, 400px);
-  margin: 8px auto 0;
+  margin: calc(8px * var(--chrome-recap-reveal, 1)) auto 0;
 }
 .cs-finale a:focus-visible,
 .cs-mobile-finale a:focus-visible {

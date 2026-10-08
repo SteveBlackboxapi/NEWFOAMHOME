@@ -13,6 +13,10 @@
 
 .story-benefits.is-active { visibility: visible; }
 
+/* The first lockup centres without reserving room for an invisible recap. */
+.story-benefits-reveal { display: grid; width: 100%; }
+.story-benefits-clip { min-height: 0; overflow: hidden; }
+
 .story-benefits-row {
   font-size: 18px;
   line-height: 1.2;
@@ -67,7 +71,9 @@
     animation: story-benefit-tick 320ms ease-out both;
     animation-delay: calc(100ms + var(--benefit-index) * 90ms);
   }
-  /* The closing confirmation enters with the scroll, including direct jumps. */
+  /* Scroll-driven entrances and confirmations also work on reverse/direct jumps. */
+  .story-benefits--revealing.is-active .story-benefits-entry,
+  .story-benefits--revealing.is-active .kit-share-tick-mark,
   .story-benefits--settling.is-active .story-benefits-row:last-child .story-benefits-entry,
   .story-benefits--settling.is-active .story-benefits-row:last-child .kit-share-tick-mark {
     animation: none;

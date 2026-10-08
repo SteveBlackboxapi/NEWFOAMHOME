@@ -65,7 +65,7 @@
 .ks-sendoff-benefits {
   --kit-recap-gap: 26px;
   width: min(100%, 360px);
-  margin-top: calc(var(--kit-recap-gap) * (1 - var(--kit-recap-collapse, 0)) + 16px * var(--kit-recap-collapse, 0));
+  margin-top: calc((var(--kit-recap-gap) * (1 - var(--kit-recap-collapse, 0)) + 16px * var(--kit-recap-collapse, 0)) * var(--kit-recap-reveal, 1));
 }
 .ks-mobile-sendoff-benefits { width: min(100%, 360px); margin: 24px auto 0; }
 

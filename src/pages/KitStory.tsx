@@ -734,6 +734,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     planeEmerge,
     sharedIn,
     sharedOut,
+    benefitsReveal,
     headlineOpacity: headlineOp,
   } = timeline;
   const pan = kitPan(p, targets);
@@ -782,7 +783,7 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
     const recap = sendoffBenefits.current;
     const list = recap?.querySelector<HTMLElement>(".story-benefits");
     let removedHeight = 0;
-    if (recap && list) {
+    if (benefitsCollapse > 0 && recap && list) {
       const listStyle = getComputedStyle(list);
       const recapStyle = getComputedStyle(recap);
       const rowHeight = parseFloat(listStyle.getPropertyValue("--benefit-row-height"));
@@ -1193,9 +1194,9 @@ function KitStoryDesktop({ separateChapters = false, stabilizeDiscovery = false 
               <div
                 ref={sendoffBenefits}
                 className="ks-sendoff-benefits"
-                style={{ "--kit-recap-collapse": benefitsCollapse } as CSSProperties}
+                style={{ "--kit-recap-collapse": benefitsCollapse, "--kit-recap-reveal": benefitsReveal } as CSSProperties}
               >
-                <StoryBenefits variant="kit" active={planeIn > 0.1} collapse={benefitsCollapse} />
+                <StoryBenefits variant="kit" active={planeIn > 0.1} reveal={benefitsReveal} collapse={benefitsCollapse} />
               </div>
             </div>
           </div>
