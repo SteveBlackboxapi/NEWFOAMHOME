@@ -18,6 +18,10 @@ for (const source of Object.values(placements.replacements || {})) {
 // Public video players choose these smaller alternates; masters remain available.
 for (const file of await readdir(path.join(publicDir, 'assets/video-previews-v2')).catch(() => []))
   if (/\.(mp4|webm)$/.test(file)) sources.add(`assets/video-previews-v2/${file}`);
+// Keep the song master address valid and preserve playback in tabs open before the replacement.
+const { footerSong } = load('src/data/footerSong.ts');
+sources.add(footerSong.originalAudio.replace(/^\//, ''));
+sources.add('assets/music/feed-the-feed-v2/feed-the-feed-playback.m4a');
 const files = new Map();
 const resizeOptions = { withoutEnlargement: true };
 const webpOptions = { quality: 82, effort: 5 };
