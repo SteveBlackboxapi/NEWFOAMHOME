@@ -1,7 +1,7 @@
 import { useWebsiteImage } from "../components/WebsiteImageScope";
 import { OptimizedImage } from "../components/OptimizedImage";
 import { DEMO_URL } from "../lib/siteLinks";
-import { KIT_STORY_EYEBROW, KitStoryHeroTitle } from "../components/KitStoryHeroTitle";
+import { KIT_STORY_EYEBROW } from "../components/KitStoryHeroTitle";
 import { useEffect, useState, type ComponentType } from "react";
 import { Link } from "react-router";
 import { AIDisclosure } from "../components/AIDisclosure";
@@ -429,7 +429,7 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
       {/* 1. Truth layer */}
       <section className="story-nav-mobile-hero relative min-h-[88vh] bg-black text-white flex flex-col justify-end px-5 pb-12 pt-10 overflow-hidden">
         <StoryNav />
-        <div className="absolute inset-0">
+        <div className="ks-mobile-hero-media absolute inset-0">
           {motionPreferenceReady && !reducedMotion ? (
             <video
               className="size-full object-cover object-[center_20%] opacity-55"
@@ -447,9 +447,9 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
               alt=""
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
+          <div className="ks-mobile-hero-shade absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
         </div>
-        <MobileFade className="relative z-10">
+        <MobileFade className="ks-mobile-hero-copy relative z-10">
           <p
             className={`${FG_M} text-[11px] uppercase tracking-[2px] text-white/70 mb-5`}
           >
@@ -460,20 +460,21 @@ export function KitStoryMobile({ stabilizeDiscovery = false }: { stabilizeDiscov
             tabIndex={-1}
             className={`${FG_SB} ks-hero-title ks-hero-title-mobile text-white`}
           >
-            <KitStoryHeroTitle />
+            <span>Big <span className="ks-mobile-hero-talent">talent</span><span className="ks-hero-full-stop">.</span></span>{" "}
+            <span>Small <span className="ks-mobile-hero-admin">admin</span><span className="ks-hero-full-stop">.</span></span>
           </h1>
           <p
             className={`${FG_R} mt-5 max-w-[34em] text-[16px] leading-7 text-white/85`}
           >
-            Give every creator a stronger introduction.
+            <span>Give every creator a stronger introduction.</span>
             <br />
-            Bring the roster, the numbers and the pitch together in Foam.
+            <span>Bring the roster, the numbers and the pitch together in Foam.</span>
           </p>
           <div className="mt-8 flex items-center gap-5 flex-wrap">
             <a
               href={DEMO_URL}
               className={`${FG_SB} text-[#101828] text-[16px] px-7 h-12 rounded-full inline-flex items-center gap-2`}
-              style={{ background: "#c6f31e" }}
+              style={{ background: "var(--ks-phone-cta, #c6f31e)" }}
             >
               Let's talk about your roster
               <svg
