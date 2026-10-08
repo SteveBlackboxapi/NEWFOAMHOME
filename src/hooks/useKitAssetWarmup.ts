@@ -36,7 +36,7 @@ function kitImages() {
     ]),
     responsive(FOUND_SELECTED.tile.thumb, "(max-width: 700px) 90vw, 400px", "Found with Foam · Review video poster"),
     ...FOUND_SEEN.map((moment) => responsive(moment.image, "(max-width: 700px) 42vw, 240px", `Found with Foam · Evidence: ${moment.label}`)),
-    responsive(`${A}/campaigns/found-with-foam-skincare-v4.webp`, "(max-width: 700px) 100vw, 1200px", "From a search to your next campaign"),
+    responsive(`${A}/campaigns/found-with-foam-skincare-v5.webp`, "(max-width: 700px) 100vw, 1200px", "From a search to your next campaign"),
     imageSource(kitImage(`${A}/agency-logos.webp`, "In good company · Agency ticker")),
   ];
 }
